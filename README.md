@@ -23,7 +23,7 @@ As usual please start by
 ___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
 
 ## Focus for this challenge
-The focus for this challenge is to write high-quality code. 
+The focus for this challenge is to write high-quality code.
 
 In order to do this, you may pay particular attention to the following:
 * Using diagramming to plan your approach to the challenge
@@ -61,3 +61,5 @@ A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 str
 In the image below you can find some score examples.
 
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
+
+![Ten Pin Score Example](images/example_ten_pin_scoring.png)
