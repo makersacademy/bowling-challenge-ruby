@@ -132,4 +132,70 @@ describe Frame do
       expect(frame.score(next_frame_1, next_frame_2)).to eq 17
     end
   end
+
+  describe ".complete?" do
+    context "for normal frame" do
+      before { frame = Frame.new(number: 1) }
+      context "after one roll" do
+        before { frame.roll(4) }
+        it "returns false" do
+          expect(frame).not_to be_complete
+        end
+      end
+      context "after two rolls" do
+        before do
+          frame.roll(4)
+          frame.roll(3)
+        end
+        it "returns true" do
+          expect(frame).to be_complete
+        end
+      end
+    end
+    context "for the tenth frame" do
+      let(:frame) { Frame.new(number: 10) }
+      context "after 2 rolls, no strike or spare" do
+        before do
+          frame.roll(3)
+          frame.roll(4)
+        end
+        it "returns true" do
+          expect(frame).to be_complete
+        end
+      end
+      context "after a spare" do
+        before do
+          frame.roll(3)
+          frame.roll(7)
+        end
+        it "returns false" do
+          expect(frame).not_to be_complete
+        end
+        context "and then one more roll" do
+          before { frame.roll(5) }
+          it "returns true" do
+            expect(frame).to be_complete
+          end
+        end
+      end
+      context "after a strike" do
+        before { frame.roll(10) }
+        it "returns false" do
+          expect(frame).not_to be_complete
+        end
+        context "and then one more roll" do
+          before { frame.roll(4) }
+          it "returns false" do
+            expect(frame).not_to be_complete
+          end
+          context "and then one more roll" do
+            before { frame.roll(3) }
+            it "returns true" do
+              expect(frame).to be_complete
+            end
+          end
+        end
+      end
+    end
+  end
 end

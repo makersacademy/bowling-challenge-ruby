@@ -1,7 +1,7 @@
 class Frame
   attr_accessor :number
 
-  def initialize(rolls: [], bonus_rolls: [], number:)
+  def initialize(rolls: [], bonus_rolls: [], number: nil)
     @rolls = rolls
     @bonus_rolls = bonus_rolls
     @number = number
@@ -33,6 +33,14 @@ class Frame
 
   def spare?
     pins == 10 && !strike?
+  end
+
+  def complete?
+    return true if number != 10 && @rolls.length == 2
+    return true if strike? && @bonus_rolls.length == 2
+    return true if spare? && @bonus_rolls.length == 1
+    return true if !strike? && !spare? && @rolls.length == 2
+    false
   end
 
   def score(next_frame_1 = nil, next_frame_2 = nil)
