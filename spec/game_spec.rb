@@ -23,16 +23,18 @@ describe Game do
 
  describe "#raw_running_score" do
    it "retrieves the current score from the current frame" do
-     allow(game).to receive(:current_frame).and_return(frame)
-     expect(frame).to receive(:raw_score)
+     allow(Frame).to receive(:new).and_return(frame)
+     expect(frame).to receive(:raw_score).and_return(9)
      expect(game.raw_running_score).to eq(9)
    end
    it "adds the current frame to the score of the previous frames" do
      allow(Frame).to receive(:new).and_return(frame)
+     allow(frame).to receive(:record_roll)
      allow(frame).to receive(:raw_score).and_return(9)
      allow(frame).to receive(:rolls).and_return(2)
      allow(frame).to receive(:strike?).and_return(false)
      allow(frame).to receive(:contents).and_return([2,7])
+     game.record_roll(9)
 
      expect(game.raw_running_score).to eq(18)
    end
