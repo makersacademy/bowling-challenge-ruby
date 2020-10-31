@@ -17,13 +17,12 @@ describe Game do
      game.record_roll(2)
      expect(game.running_score).to eq(9)
    end
- end
 
- describe "#current_frame" do
-   it "passes its contents to @completed_frames after two rolls" do
+  describe "#check_current_frame"
+   it "empties @current_frame into @completed_frames if it is full" do
      game.record_roll(7)
      game.record_roll(2)
-     expect(game.current_frame).to eq([])
+     expect(game.check_current_frame).to eq([])
      expect(game.completed_frames).to eq([[7,2]])
    end
  end
