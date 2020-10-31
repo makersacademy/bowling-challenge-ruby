@@ -15,4 +15,8 @@ class Frame
   def strike?
     @rolls.first == 10
   end
+
+  def spare?
+    pins == 10 && !strike?
+  end
 end
