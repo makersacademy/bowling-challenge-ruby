@@ -11,4 +11,8 @@ class Frame
   def pins
     @rolls.sum
   end
+
+  def strike?
+    @rolls.first == 10
+  end
 end
