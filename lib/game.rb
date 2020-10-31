@@ -1,7 +1,7 @@
 class Game
 
   def initialize
-    @frames = []
+    @completed_frames = []
     @current_frame = []
   end
 
@@ -11,6 +11,10 @@ class Game
 
   def record_roll(roll)
     @current_frame << roll
+  end
+
+  def running_score
+    @current_frame.sum + @completed_frames.sum
   end
 
 end
