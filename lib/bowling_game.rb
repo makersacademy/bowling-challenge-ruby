@@ -31,7 +31,11 @@ class BowlingGame
         if frame.bonus_frame? 
           score_bonus_frame(frame)
         else
-          @score += frame.total + @rolls[index + 1].total
+          if @rolls[index + 1].first_roll == 10 && @rolls[index + 1]
+            @score += 10 + @rolls[index + 1].first_roll + @rolls[index + 1].first_roll
+          else
+            @score += frame.total + @rolls[index + 1].first_two
+          end
         end
       elsif frame.spare?
           @score += frame.total + @rolls[index + 1].first_roll
