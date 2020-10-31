@@ -123,4 +123,13 @@ describe Frame do
       end
     end
   end
+  describe ".score" do
+    let(:next_frame_1) { double(:frame) }
+    let(:next_frame_2) { double(:frame) }
+    it "returns the sum of the pins and the bonus" do
+      allow(frame).to receive(:pins) { 10 }
+      allow(frame).to receive(:bonus) { 7 }
+      expect(frame.score(next_frame_1, next_frame_2)).to eq 17
+    end
+  end
 end

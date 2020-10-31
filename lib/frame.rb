@@ -27,6 +27,10 @@ class Frame
     pins == 10 && !strike?
   end
 
+  def score(next_frame_1, next_frame_2)
+    pins + bonus(next_frame_1, next_frame_2)
+  end
+
   def bonus(next_frame_1, next_frame_2)
     if strike?
       next_roll_1(next_frame_1) + next_roll_2(next_frame_1, next_frame_2)
