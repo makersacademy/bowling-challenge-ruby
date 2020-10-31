@@ -12,7 +12,14 @@ describe BowlingScore do
     it 'gives the total score for 10 gutter rolls' do
       20.times {subject.roll(0)}
       expect(subject.total_score).to eq 0
+    end
   end
-end
 
+  context 'calculates correct score with strikes' do
+    it 'gives the total score of all rolls with one strike' do
+      subject.roll(10)
+      18.times {subject.roll(5)}
+      expect(subject.total_score).to eq 110
+    end
+  end
 end
