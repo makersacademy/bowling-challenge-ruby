@@ -27,6 +27,16 @@ class Frame
     pins == 10 && !strike?
   end
 
+  def bonus(next_frame_1, next_frame_2)
+    if strike?
+      next_roll_1(next_frame_1) + next_roll_2(next_frame_1, next_frame_2)
+    elsif spare?
+      next_roll_1(next_frame_1)
+    else
+      0
+    end
+  end
+
   def next_roll_1(next_frame_1 = nil)
     if @number == 10
       @bonus_rolls[0]

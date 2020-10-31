@@ -94,4 +94,33 @@ describe Frame do
       end
     end
   end
+
+  describe ".bonus" do
+    let(:next_frame_1) { double(:frame) }
+    let(:next_frame_2) { double(:frame) }
+    before :each do
+      allow(frame).to receive(:next_roll_1) { 3 }
+      allow(frame).to receive(:next_roll_2) { 4 }
+    end
+    context "strike" do
+      it "sums next two rolls" do
+        frame.roll(10)
+        expect(frame.bonus(next_frame_1, next_frame_2)).to eq 7
+      end
+    end
+    context "spare" do
+      it "returns value of next roll" do
+        frame.roll(8)
+        frame.roll(2)
+        expect(frame.bonus(next_frame_1, next_frame_2)).to eq 3
+      end
+    end
+    context "other" do
+      it "returns 0" do
+        frame.roll(3)
+        frame.roll(2)
+        expect(frame.bonus(next_frame_1, next_frame_2)).to eq 0
+      end
+    end
+  end
 end
