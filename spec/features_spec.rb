@@ -1,3 +1,5 @@
+require 'game'
+
 describe 'Add score' do
   it 'User can add the score of a single roll and see it displayed' do
     game = Game.new
