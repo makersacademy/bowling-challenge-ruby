@@ -29,4 +29,14 @@ class Game
     @current_frame.sum + completed_frames_with_spares.flatten.sum
   end
 
+  def completed_frames_with_spares
+    completed_frames_with_spares = @completed_frames.each_with_index do |frame, index|
+      if frame.sum == 10
+        frame[-1] += @completed_frames[index+1][0]
+      end
+      completed_frames_with_spares
+    end
+
+  end
+
 end
