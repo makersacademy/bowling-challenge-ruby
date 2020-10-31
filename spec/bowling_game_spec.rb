@@ -52,4 +52,36 @@ describe BowlingGame do
     12.times { game.bowl(10) }
     expect(game.score).to eq 300
   end
+
+  it 'can score a complicated game with spares and strikes' do
+    subject.bowl(1)
+    subject.bowl(4)
+  
+    subject.bowl(4)
+    subject.bowl(5)
+  
+    subject.bowl(6)
+    subject.bowl(4)
+  
+    subject.bowl(5)
+    subject.bowl(5)
+  
+    subject.bowl(10)
+  
+    subject.bowl(0)
+    subject.bowl(1)
+  
+    subject.bowl(7)
+    subject.bowl(3)
+  
+    subject.bowl(6)
+    subject.bowl(4)
+  
+    subject.bowl(10)
+  
+    subject.bowl(2)
+    subject.bowl(8)
+    subject.bowl(6)
+    expect(subject.score).to eq 133
+  end
 end

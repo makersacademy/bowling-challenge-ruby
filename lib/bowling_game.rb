@@ -2,27 +2,46 @@ require_relative 'frame'
 
 class BowlingGame
   def initialize
-    @score = 0
+    @score, @roll_number = 0, 0
     @rolls = []
-    @roll_number = 0
   end
 
   def bowl(pins, frame = Frame)
     if regular_strike(pins)
-      @frame = frame.new
-      complete_frame(pins)
-      @roll_number += 2
-    elsif @roll_number == 20
-      @rolls.last.add_bonus(pins)
+      create_strike_frame(pins, frame)
+    elsif final_frame?
+      create_bonus_frame(pins)
     elsif first_roll?
-      @frame = frame.new
-      @frame.add_to_frame(pins)
-      @roll_number += 1
+      create_new_frame(pins, frame)
     else
-      @frame.add_to_frame(pins)
-      @rolls << @frame
-      @roll_number += 1
+      close_frame(pins, frame)
     end
+  end
+
+  def close_frame(pins, frame)
+    @frame.add_to_frame(pins)
+    @rolls << @frame
+    @roll_number += 1
+  end
+ 
+  def create_new_frame(pins, frame)
+    @frame = frame.new
+    @frame.add_to_frame(pins)
+    @roll_number += 1
+  end
+
+  def create_strike_frame(pins, frame)
+    @frame = frame.new
+    complete_frame(pins)
+    @roll_number += 2
+  end
+
+  def create_bonus_frame(pins)
+    @rolls.last.add_bonus(pins)
+  end
+
+  def final_frame?
+    @roll_number == 20
   end
 
   def score
@@ -31,11 +50,7 @@ class BowlingGame
         if frame.bonus_frame? 
           score_bonus_frame(frame)
         else
-          if @rolls[index + 1].first_roll == 10 && @rolls[index + 1]
-            @score += 10 + @rolls[index + 1].first_roll + @rolls[index + 1].first_roll
-          else
-            @score += frame.total + @rolls[index + 1].first_two
-          end
+          score_regular_strike(frame, index)
         end
       elsif frame.spare?
           @score += frame.total + @rolls[index + 1].first_roll
@@ -46,7 +61,18 @@ class BowlingGame
     @score
   end
 
+
+
   private 
+
+  def score_regular_strike(frame, index)
+    bonus = followed_by_strike?(index) ? @rolls[index + 1].first_roll + @rolls[index + 2].first_roll : @rolls[index + 1].first_two
+    @score += 10 + bonus
+  end
+
+  def followed_by_strike?(index)
+    @rolls[index + 1].first_roll == 10 && @rolls[index + 2]
+  end
 
   def score_bonus_frame(frame)
     @score += frame.total
