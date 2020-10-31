@@ -18,6 +18,7 @@ class Game
   end
 
   def record_roll(roll)
+    roll_limiter
     @current_frame.record_roll(roll)
     check_current_frame
   end
@@ -38,6 +39,8 @@ class Game
     end
   end
 
+  private
+
   def spare?(frame)
     if (frame.sum == 10) && (frame.length == 2)
       true
@@ -56,5 +59,11 @@ class Game
 
   def bonus_roll_correction(array)
     array.delete_if.with_index { |_num, idx| idx > 9 }
+  end
+
+  def roll_limiter
+    if (@completed_frames.length == 10 && @completed_frames[-1].sum != 10) || @completed_frames.length >= 12
+      raise "That was the last frame, kid. You want to roll again, start a new game"
+    end
   end
 end

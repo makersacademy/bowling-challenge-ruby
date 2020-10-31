@@ -55,7 +55,7 @@ describe 'Bowling scorecard features' do
     expect(game.calculate_score).to eq(56)
   end
 
-  it 'can correctly score a ten-frame game (no strike on final frame)' do
+  it 'can correctly score a ten-frame game (no strike or spare on final frame)' do
     game.record_roll(5)
     game.record_roll(2)
     game.record_roll(7)
@@ -107,8 +107,103 @@ describe 'Bowling scorecard features' do
     expect(game.calculate_score).to eq(0)
   end
 
-  it 'can correctly score a gutter game' do
+  it 'can correctly score a perfect game' do
     12.times { game.record_roll(10) }
     expect(game.calculate_score).to eq(300)
+  end
+
+  it 'does not allow bonus rolls if no strike or spare is rolled' do
+    game.record_roll(5)
+    game.record_roll(2)
+    game.record_roll(7)
+    game.record_roll(3)
+    game.record_roll(3)
+    game.record_roll(7)
+    game.record_roll(10)
+    game.record_roll(2)
+    game.record_roll(1)
+    game.record_roll(6)
+    game.record_roll(1)
+    game.record_roll(2)
+    game.record_roll(4)
+    game.record_roll(3)
+    game.record_roll(7)
+    game.record_roll(10)
+    game.record_roll(2)
+    game.record_roll(1)
+    expect{game.record_roll(2)}.to raise_error("That was the last frame, kid. You want to roll again, start a new game")
+  end
+
+  it 'does not allow more than one bonus roll if a spare is rolled' do
+    game.record_roll(5)
+    game.record_roll(2)
+    game.record_roll(7)
+    game.record_roll(3)
+    game.record_roll(3)
+    game.record_roll(7)
+    game.record_roll(10)
+    game.record_roll(2)
+    game.record_roll(1)
+    game.record_roll(6)
+    game.record_roll(1)
+    game.record_roll(2)
+    game.record_roll(4)
+    game.record_roll(3)
+    game.record_roll(7)
+    game.record_roll(10)
+    game.record_roll(2)
+    game.record_roll(8)
+    game.record_roll(10)
+    expect(game.calculate_score).to eq(129)
+    expect{game.record_roll(2)}.to raise_error("That was the last frame, kid. You want to roll again, start a new game")
+  end
+
+  it 'does not allow more than two bonus rolls if a strike is rolled' do
+    game.record_roll(5)
+    game.record_roll(2)
+    game.record_roll(7)
+    game.record_roll(3)
+    game.record_roll(3)
+    game.record_roll(7)
+    game.record_roll(10)
+    game.record_roll(2)
+    game.record_roll(1)
+    game.record_roll(6)
+    game.record_roll(1)
+    game.record_roll(2)
+    game.record_roll(4)
+    game.record_roll(3)
+    game.record_roll(7)
+    game.record_roll(10)
+    game.record_roll(2)
+    game.record_roll(1)
+    expect{game.record_roll(2)}.to raise_error("That was the last frame, kid. You want to roll again, start a new game")
+  end
+  it 'does not allow more than one bonus roll if a spare is rolled' do
+    game.record_roll(5)
+    game.record_roll(2)
+    game.record_roll(7)
+    game.record_roll(3)
+    game.record_roll(3)
+    game.record_roll(7)
+    game.record_roll(10)
+    game.record_roll(2)
+    game.record_roll(1)
+    game.record_roll(6)
+    game.record_roll(1)
+    game.record_roll(2)
+    game.record_roll(4)
+    game.record_roll(3)
+    game.record_roll(7)
+    game.record_roll(10)
+    game.record_roll(2)
+    game.record_roll(8)
+    game.record_roll(10)
+    expect(game.calculate_score).to eq(129)
+    expect{game.record_roll(2)}.to raise_error("That was the last frame, kid. You want to roll again, start a new game")
+  end
+
+  it 'does not allow more than two bonus rolls if a strike is rolled' do
+    expect{ 13.times{game.record_roll(10)} }.to raise_error("That was the last frame, kid. You want to roll again, start a new game")
   end
 end
