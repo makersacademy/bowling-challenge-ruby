@@ -35,11 +35,15 @@ describe Game do
  end
 
   describe "#check_current_frame" do
-   it "empties @current_frame into @completed_frames if it is full" do
+   it "empties @current_frame into @completed_frames if it contains two rolls" do
      game.record_roll(7)
      game.record_roll(2)
      expect(game.check_current_frame).to eq([])
      expect(game.completed_frames).to eq([[7,2]])
+   end
+   it "empties @current_frame into @completed_frames if it contains a strike" do
+     game.record_roll(10)
+     expect(game.check_current_frame).to eq([])
    end
  end
 end
