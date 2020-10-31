@@ -12,13 +12,29 @@ describe Game do
  end
 
  describe "#running_score" do
-   it "calculates and returns the current score" do
+   it "calculates and returns the current score (single frame)" do
      game.record_roll(7)
      game.record_roll(2)
      expect(game.running_score).to eq(9)
    end
+   it "calculates and returns the current score (multiple frames)" do
+     game.record_roll(7)
+     game.record_roll(2)
+     game.record_roll(6)
+     game.record_roll(1)
+     expect(game.running_score).to eq(16)
+   end
+   it "calculates and returns the current score (including a spare)" do
+     game.record_roll(7)
+     game.record_roll(3)
+     game.record_roll(6)
+     game.record_roll(1)
+     expect(game.running_score).to eq(23)
+   end
 
-  describe "#check_current_frame"
+ end
+
+  describe "#check_current_frame" do
    it "empties @current_frame into @completed_frames if it is full" do
      game.record_roll(7)
      game.record_roll(2)

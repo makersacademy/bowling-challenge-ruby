@@ -16,12 +16,17 @@ class Game
   end
 
   def record_roll(roll)
-    check_current_frame
     @current_frame << roll
+    check_current_frame
   end
 
   def running_score
-    @current_frame.sum + @completed_frames.flatten.sum
+    completed_frames_with_spares = @completed_frames.each_with_index do |frame, index|
+      if frame.sum == 10
+        @completed_frames[index+1][0] *= 2
+      end
+    end
+    @current_frame.sum + completed_frames_with_spares.flatten.sum
   end
 
 end
