@@ -7,20 +7,6 @@ class BowlingGame
     @roll_number = 0
   end
 
-  def regular_strike(pins)
-    ## If the first roll was a strike and pre-final-frame
-    @roll_number.even? && pins == 10 && @roll_number < 18
-  end
-  def complete_frame(pins)
-      @frame.add_to_frame(pins)
-      @frame.add_to_frame(0)
-      @rolls << @frame
-  end
-
-  def first_roll?
-   @roll_number.even?
-  end
-
   def bowl(pins, frame = Frame)
     if regular_strike(pins)
       @frame = frame.new
@@ -42,7 +28,11 @@ class BowlingGame
   def score
     @rolls.each_with_index do |frame, index|
       if frame.strike?
-        @score += frame.total + @rolls[index + 1].total
+        if frame.bonus_frame? 
+          score_bonus_frame(frame)
+        else
+          @score += frame.total + @rolls[index + 1].total
+        end
       elsif frame.spare?
           @score += frame.total + @rolls[index + 1].first_roll
       else # spare bonuses now calculated below as they no longer equal 10 (bonus score has been added to frame)
@@ -50,5 +40,26 @@ class BowlingGame
       end
     end
     @score
+  end
+
+  private 
+
+  def score_bonus_frame(frame)
+    @score += frame.total
+  end
+
+  def regular_strike(pins)
+    ## If the first roll was a strike and pre-final-frame
+    @roll_number.even? && pins == 10 && @roll_number < 18
+  end
+
+  def complete_frame(pins)
+      @frame.add_to_frame(pins)
+      @frame.add_to_frame(0)
+      @rolls << @frame
+  end
+
+  def first_roll?
+   @roll_number.even?
   end
 end

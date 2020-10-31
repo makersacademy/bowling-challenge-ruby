@@ -41,4 +41,10 @@ describe BowlingGame do
     game.bowl(2)
     expect(game.score).to eq 12
   end
+
+  it 'correctly scores three strikes in final frame' do
+    18.times { game.bowl(0) }
+    3.times { game.bowl(10) }
+    expect(game.score).to eq 30
+  end
 end

@@ -32,4 +32,8 @@ class Frame
     self.current_frame.length
   end
 
+  def bonus_frame?
+    self.current_frame.length == 3
+  end
+
 end
