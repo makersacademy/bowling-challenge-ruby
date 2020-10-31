@@ -1,4 +1,6 @@
 class Frame
+  attr_accessor :number
+
   def initialize(rolls: [], bonus_rolls: [], number:)
     @rolls = rolls
     @bonus_rolls = bonus_rolls
