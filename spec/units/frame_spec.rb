@@ -57,4 +57,41 @@ describe Frame do
       end
     end
   end
+
+  describe ".next_roll_2" do
+    context "On standard frame, next frame isn't a strike" do
+      it "gets second roll from next frame" do
+        standard_frame = Frame.new(rolls: [10], number: 4)
+        next_frame_1 = Frame.new(rolls: [4, 5], number: 5)
+        next_frame_2 = Frame.new(rolls: [3, 2], number: 6)
+        expect(standard_frame.next_roll_2(next_frame_1, next_frame_2)).to eq 5
+      end
+    end
+
+    context "On standard frame, next frame is a strike" do
+      it "gets the first roll from the frame after next" do
+        standard_frame = Frame.new(rolls: [10], number: 4)
+        next_frame_1 = Frame.new(rolls: [10], number: 5)
+        next_frame_2 = Frame.new(rolls: [3, 2], number: 6)
+        expect(standard_frame.next_roll_2(next_frame_1, next_frame_2)).to eq 3
+      end
+    end
+
+    context "On 9th frame, when 10th frame is a strike" do
+      it "gets first bonus roll from 10th frame" do
+        ninth_frame = Frame.new(rolls: [10], number: 9)
+        tenth_frame = Frame.new(rolls: [10], bonus_rolls: [4, 6], number: 10)
+        expect(ninth_frame.next_roll_2(tenth_frame)).to eq 4
+      end
+    end
+
+    context "On 10th frame" do
+      it "gets the second bonus roll" do
+        last_frame = Frame.new(rolls: [10], number: 10)
+        last_frame.roll(3)
+        last_frame.roll(6)
+        expect(last_frame.next_roll_2).to eq 6
+      end
+    end
+  end
 end
