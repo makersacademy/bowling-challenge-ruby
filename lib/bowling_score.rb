@@ -44,7 +44,6 @@ class BowlingScore
   end
 
   def spare_score(roll_number)
-    roll_number
     10 + @rolls[roll_number + 2]
   end
 end
