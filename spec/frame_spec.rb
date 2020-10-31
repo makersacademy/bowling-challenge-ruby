@@ -75,6 +75,15 @@ describe Frame do
       expect(frame).to be_bonus_frame
     end
   end
+
+  describe '#first_two' do
+    it 'sums only the first two rolls of a frame' do
+      frame.add_to_frame(3)
+      frame.add_to_frame(7)
+      frame.add_to_frame(2)
+      expect(frame.first_two).to eq(10)
+    end
+  end
 end  
 
 
