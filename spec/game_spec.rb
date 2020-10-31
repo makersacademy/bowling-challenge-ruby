@@ -42,13 +42,13 @@ describe Game do
 
  describe "#completed_frames_with_bonuses" do
    it "correctly applies bonus after a spare" do
-     expect(game.completed_frames_with_bonuses( [spare, high_roll] )).to eq(23)
+     expect(game.completed_frames_with_bonuses( [[4,6], [7,2]] )).to eq(26)
    end
    it "correctly applies bonus after a strike" do
-     expect(game.completed_frames_with_bonuses([strike, high_roll, low_roll] )).to eq(29)
+     expect(game.completed_frames_with_bonuses([[10], [8,3], [2,1]] )).to eq(35)
    end
    it "correctly applies bonus after multiple strikes" do
-     expect(game.completed_frames_with_bonuses( [strike, strike, strike] )).to eq(30)
+     expect(game.completed_frames_with_bonuses([[10], [10], [10]])).to eq(50)
    end
 
  end
@@ -57,9 +57,9 @@ describe Game do
    it "empties @current_frame into @completed_frames if it contains two rolls" do
      allow(Frame).to receive(:new).and_return(frame)
      allow(frame).to receive(:rolls).and_return(2)
-     allow(frame).to receive(:contents)
+     allow(frame).to receive(:contents).and_return([2,7])
      game.check_current_frame
-     expect(game.completed_frames).to eq([frame])
+     expect(game.completed_frames).to eq([[2,7]])
    end
    it "empties @current_frame into @completed_frames if it contains a strike" do
     allow(game).to receive(:current_frame).and_return(frame)
