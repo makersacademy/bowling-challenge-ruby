@@ -1,5 +1,6 @@
-class Frame
+# frozen_string_literal: true
 
+class Frame
   attr_reader :contents
 
   def initialize
@@ -33,5 +34,4 @@ class Frame
       false
     end
   end
-
 end
