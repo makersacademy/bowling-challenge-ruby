@@ -1,39 +1,58 @@
+
+require_relative 'frame'
 class Game
 
   attr_reader :completed_frames, :current_frame
 
   def initialize
     @completed_frames = []
-    @current_frame = []
+    @current_frame = Frame.new
   end
 
   def check_current_frame
-    if @current_frame.length == 2 || @current_frame[0] == 10
-      @completed_frames << @current_frame
-      @current_frame = []
+    if @current_frame.rolls == 2 || @current_frame.strike?
+      @completed_frames << @current_frame.contents
+      @current_frame = Frame.new
     end
-    @current_frame
+    @current_frame.contents
   end
 
   def record_roll(roll)
-    @current_frame << roll
+    @current_frame.record_roll(roll)
     check_current_frame
   end
 
-  def running_score
-    @current_frame.sum + completed_frames_with_bonuses.flatten.sum
+  def calculate_score
+    apply_bonuses
   end
 
-  def completed_frames_with_bonuses
-    completed_frames_with_bonuses = @completed_frames.each_with_index do |frame, index|
-      if frame.sum == 10 && frame.length == 2
-        frame[-1] += @completed_frames[index+1][0]
-      elsif frame.sum == 10 && frame.length == 1
-        frame[-1] += @completed_frames[index+1][0]
-        frame[-1] += @completed_frames[index+1][1]
+  def apply_bonuses(frames = @completed_frames)
+    apply_bonuses = frames.each_with_index do |frame, index|
+      if spare?(frame) && (frames[index+1])
+        frame[-1] += frames[index+1][0]
+      elsif strike?(frame) && (frames[index+1]) && (frames[index+1].length == 2)
+        frame[-1] += (frames[index+1][0] + frames[index+1][1])
+      elsif strike?(frame) && (frames[index+1]) && (frames[index+2])
+        frame[-1] += (frames[index+1][0] + frames[index+2][0])
       end
     end
-    completed_frames_with_bonuses
+    apply_bonuses.flatten.sum
+  end
+
+  def spare?(frame)
+    if (frame.sum == 10) && (frame.length == 2)
+      true
+    else
+      false
+    end
+  end
+
+  def strike?(frame)
+    if (frame.sum == 10) && (frame.length == 1)
+      true
+    else
+      false
+    end
   end
 
 end

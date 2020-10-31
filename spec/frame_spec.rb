@@ -1,4 +1,4 @@
-require '../lib/frame'
+require 'frame'
 
 describe Frame do
 
