@@ -100,4 +100,14 @@ describe 'Bowling scorecard features' do
       game.record_roll(6)
       expect(game.calculate_score).to eq(52)
     end
+
+    it "can correctly score a gutter game" do
+      20.times{game.record_roll(0)}
+      expect(game.calculate_score).to eq(0)
+    end
+
+    it "can correctly score a gutter game" do
+      12.times{game.record_roll(10)}
+      expect(game.calculate_score).to eq(300)
+    end
   end
