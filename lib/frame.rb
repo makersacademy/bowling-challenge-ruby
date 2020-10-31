@@ -23,4 +23,17 @@ class Frame
   def strike?
     self.current_frame.include?(10)
   end
+
+  def add_bonus(pins)
+    self.current_frame.push(pins)
+  end
+
+  def bonus_frame
+    self.current_frame.length == 3
+  end
+
+  def length 
+    self.current_frame.length
+  end
+
 end
