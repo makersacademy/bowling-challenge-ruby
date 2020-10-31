@@ -18,13 +18,13 @@ describe Game do
 
  describe "#apply_bonuses" do
    it "correctly applies bonus after a spare" do
-     expect(game.apply_bonuses( [[4,6], [7,2]] )).to eq(26)
+     expect(game.apply_bonuses( [[4,6], [7,2]] )).to eq([[4, 13], [7, 2]])
    end
    it "correctly applies bonus after a strike" do
-     expect(game.apply_bonuses([[10], [8,3], [2,1]] )).to eq(35)
+     expect(game.apply_bonuses([[10], [8,3], [2,1]] )).to eq([[21], [8, 3], [2, 1]])
    end
    it "correctly applies bonus after multiple strikes" do
-     expect(game.apply_bonuses([[10], [10], [10]])).to eq(50)
+     expect(game.apply_bonuses([[10], [10], [10]])).to eq([[30], [10], [10]])
    end
 
  end

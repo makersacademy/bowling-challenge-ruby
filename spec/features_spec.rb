@@ -75,4 +75,29 @@ describe 'Bowling scorecard features' do
       game.record_roll(1)
       expect(game.calculate_score).to eq(105)
     end
+
+    it "can correctly score a full game with spare on final frame" do
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(2)
+      game.record_roll(9)
+      game.record_roll(1)
+      game.record_roll(6)
+      expect(game.calculate_score).to eq(52)
+    end
   end
