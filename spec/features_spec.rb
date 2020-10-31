@@ -19,7 +19,7 @@ describe 'Bowling scorecard features' do
       expect(game.running_score).to eq(21)
     end
 
-    it 'can display the correct score over multiple frames (including spares)' do
+    it 'can display the correct score over multiple frames (including a spares)' do
       game.record_roll(5)
       game.record_roll(2)
       game.record_roll(7)
@@ -27,5 +27,17 @@ describe 'Bowling scorecard features' do
       game.record_roll(3)
       game.record_roll(6)
       expect(game.running_score).to eq(29)
+    end
+
+    it 'can display the correct score over multiple frames (including multiple spares)' do
+      game.record_roll(5)
+      game.record_roll(2)
+      game.record_roll(7)
+      game.record_roll(3)
+      game.record_roll(3)
+      game.record_roll(7)
+      game.record_roll(2)
+      game.record_roll(1)
+      expect(game.running_score).to eq(35)
     end
   end

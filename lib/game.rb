@@ -23,7 +23,7 @@ class Game
   def running_score
     completed_frames_with_spares = @completed_frames.each_with_index do |frame, index|
       if frame.sum == 10
-        @completed_frames[index+1][0] *= 2
+        frame[-1] += @completed_frames[index+1][0]
       end
     end
     @current_frame.sum + completed_frames_with_spares.flatten.sum
