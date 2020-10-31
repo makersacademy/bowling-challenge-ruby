@@ -39,20 +39,26 @@ describe Bowling do
     it 'gives the total score of one spare frame' do
       subject.roll(5)
       subject.roll(5)
-      subject.roll(5)
-      17.times {subject.roll(4)}
-      expect(subject.total_score).to eq 88
+      18.times {subject.roll(4)}
+      expect(subject.total_score).to eq 86
     end 
   end 
 
-  it 'gives the total score of two spare frames' do
-    subject.roll(5)
-    subject.roll(5)
-    subject.roll(5)
-    subject.roll(5)
-    16.times {subject.roll(4)}
-    expect(subject.total_score).to eq 93
-  end 
+    it 'gives the total score of two spare frames' do
+      subject.roll(5)
+      subject.roll(5)
+      subject.roll(5)
+      subject.roll(5)
+      16.times {subject.roll(4)}
+      expect(subject.total_score).to eq 93
+    end 
 
+  context 'perfect game' do 
+    it ' returns the score of a perfect game where the player is not human or really good at it which is almost impossible in real life' do
+     12.times {subject.roll(10)}
+     expect(subject.total_score).to eq 300
+    end 
+  end 
+      
 
 end
