@@ -28,4 +28,10 @@ describe BowlingGame do
     game.bowl(0)
     expect(game.score).to eq 14
   end
+
+  it 'can score a strike, followed by a double 2' do
+    game.bowl(10)
+    2.times { game.bowl(2) }
+    expect(game.score).to eq 18
+  end
 end
