@@ -5,7 +5,7 @@ Bowling score card built for the Week 5 weekend challenge at Makers.
 ## Installation
 
 ```
-$ git clone 
+$ git clone https://github.com/dan-holmes/bowling-challenge-ruby.git
 $ bundle install
 ```
 
