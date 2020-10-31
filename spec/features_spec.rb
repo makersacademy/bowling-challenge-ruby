@@ -54,5 +54,25 @@ describe 'Bowling scorecard features' do
       expect(game.calculate_score).to eq(56)
     end
 
-
+    it "can correctly score a ten-frame game (no strike on final frame)" do
+      game.record_roll(5)
+      game.record_roll(2)
+      game.record_roll(7)
+      game.record_roll(3)
+      game.record_roll(3)
+      game.record_roll(7)
+      game.record_roll(10)
+      game.record_roll(2)
+      game.record_roll(1)
+      game.record_roll(6)
+      game.record_roll(1)
+      game.record_roll(2)
+      game.record_roll(4)
+      game.record_roll(3)
+      game.record_roll(7)
+      game.record_roll(10)
+      game.record_roll(2)
+      game.record_roll(1)
+      expect(game.calculate_score).to eq(105)
+    end
   end
