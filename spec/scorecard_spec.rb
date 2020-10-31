@@ -25,7 +25,7 @@ describe Scorecard do
 
     end
     
-    xit 'knows that there are a max two rolls per frame' do
+    it 'knows that there are a max two rolls per frame' do
       subject.add_score(5)
       subject.add_score(5)
       subject.add_score(5)

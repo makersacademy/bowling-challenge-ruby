@@ -12,18 +12,25 @@ class Scorecard
   def add_score(score)
     @current_score += score
     @current_roll += 1
-    @current_score_
     @current_frame['frame_roll'] += 1
+    reset_frame?
   end
+
 
   def frame?
     @game.length + 1
   end
 
 
-  def reset_frame
-    @frame_roll_count = 0
+  def reset_frame?
+    if @current_frame['frame_roll'] == 2
+      @game << @current_frame
+      reset
+    end
   end
 
+  def reset
+    @current_frame = Hash.new(0)
+  end
 
 end
