@@ -24,12 +24,20 @@ describe Game do
      game.record_roll(1)
      expect(game.running_score).to eq(16)
    end
-   it "calculates and returns the current score (including a spare)" do
+   it "correctly applies bonus after a spare" do
      game.record_roll(7)
      game.record_roll(3)
      game.record_roll(6)
      game.record_roll(1)
      expect(game.running_score).to eq(23)
+   end
+   it "correctly applies bonus after a strike" do
+     game.record_roll(10)
+     game.record_roll(3)
+     game.record_roll(6)
+     game.record_roll(1)
+     game.record_roll(0)
+     expect(game.running_score).to eq(29)
    end
 
  end

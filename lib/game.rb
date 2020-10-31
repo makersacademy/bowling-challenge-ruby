@@ -21,17 +21,19 @@ class Game
   end
 
   def running_score
-    @current_frame.sum + completed_frames_with_spares.flatten.sum
+    @current_frame.sum + completed_frames_with_bonuses.flatten.sum
   end
 
-  def completed_frames_with_spares
-    completed_frames_with_spares = @completed_frames.each_with_index do |frame, index|
-      if frame.sum == 10
+  def completed_frames_with_bonuses
+    completed_frames_with_bonuses = @completed_frames.each_with_index do |frame, index|
+      if frame.sum == 10 && frame.length == 2
         frame[-1] += @completed_frames[index+1][0]
+      elsif frame.sum == 10 && frame.length == 1
+        frame[-1] += @completed_frames[index+1][0]
+        frame[-1] += @completed_frames[index+1][1]
       end
-      completed_frames_with_spares
     end
-
+    completed_frames_with_bonuses
   end
 
 end
