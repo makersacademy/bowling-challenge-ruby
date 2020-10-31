@@ -36,11 +36,15 @@ class Frame
   end
 
   def complete?
-    return true if number != 10 && @rolls.length == 2
-    return true if strike? && @bonus_rolls.length == 2
-    return true if spare? && @bonus_rolls.length == 1
-    return true if !strike? && !spare? && @rolls.length == 2
-    false
+    if number != 10
+      @rolls.length == 2 || strike?
+    elsif strike?
+      @bonus_rolls.length == 2
+    elsif spare?
+      @bonus_rolls.length == 1
+    else
+      @rolls.length == 2
+    end
   end
 
   def score(next_frame_1 = nil, next_frame_2 = nil)
@@ -60,6 +64,8 @@ class Frame
   def next_roll_1(next_frame_1 = nil)
     if @number == 10
       bonus_rolls(0)
+    elsif next_frame_1 == nil
+      0
     else
       next_frame_1.rolls(0)
     end
@@ -68,9 +74,12 @@ class Frame
   def next_roll_2(next_frame_1 = nil, next_frame_2 = nil)
     if @number == 10
       bonus_rolls(1)
+    elsif next_frame_1.nil?
+      0
     elsif @number == 9 && next_frame_1.strike?
       next_frame_1.bonus_rolls(0)
     elsif next_frame_1.strike?
+      return 0 if next_frame_2.nil?
       next_frame_2.rolls(0)
     else
       next_frame_1.rolls(1)
