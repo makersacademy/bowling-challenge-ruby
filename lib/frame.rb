@@ -28,10 +28,6 @@ class Frame
     self.current_frame.push(pins)
   end
 
-  def bonus_frame
-    self.current_frame.length == 3
-  end
-
   def length 
     self.current_frame.length
   end
