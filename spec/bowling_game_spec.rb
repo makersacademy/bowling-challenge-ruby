@@ -6,4 +6,9 @@ describe BowlingGame do
     2.times { game.bowl(0) }
     expect(game.score).to eq 0
   end
+
+  it 'can score a single frame of 2s' do
+    2.times { game.bowl(2) }
+    expect(game.score).to eq 4
+  end
 end
