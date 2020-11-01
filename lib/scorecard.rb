@@ -38,8 +38,7 @@ attr_reader :score
   end
 
   def tenth_frame
-    return 1 if @score[@team][10.1]+@score[@team][10.2] == 10
-    return 2 if @score[@team][10.1]+@score[@team][10.2] >= 9
+     @score[@team][10.1]+@score[@team][10.2] == 10 || @score[@team][10.1]+@score[@team][10.2] == 20
   end
 
   def total(frame)
@@ -47,21 +46,19 @@ attr_reader :score
     while frame > 0 do
       this_frame_roll1, this_frame_roll2 = @score[@team][frame+0.1], @score[@team][frame+0.2]
       next_frame_roll1, next_frame_roll2 = @score[@team][frame+1.1], @score[@team][frame+1.2]
-      tenth_roll1, tenth_roll2, tenth_roll3 = @score[@team][10.1], @score[@team][10.2], @score[@team][10.3]
         score += sum_a_frame(this_frame_roll1, this_frame_roll2)
           if strike?(this_frame_roll1, this_frame_roll2)
             unless next_frame_nil?(next_frame_roll1, next_frame_roll2)
               score += sum_a_frame(next_frame_roll1, next_frame_roll2)
-              score += tenth_roll3 if tenth_frame == 1
             end
           elsif spare?(this_frame_roll1, this_frame_roll2)
             unless next_frame_roll1 == nil
               score += next_frame_roll1
-              score += tenth_roll3 if tenth_frame == 1
             end
           end
           frame -= 1
     end
+    score += @score[@team][10.3] if tenth_frame
     score
   end
 
