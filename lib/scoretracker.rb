@@ -11,6 +11,7 @@ class ScoreTracker
   def add_roll(roll)
     if new_frame?
       @scores[@frame_num] = [roll.to_i]
+      update_frame if strike?(roll)
     else
       @scores[@frame_num] << roll.to_i
       update_frame
@@ -22,6 +23,10 @@ class ScoreTracker
   end
 
   private
+
+  def strike?(roll)
+    roll == '10'
+  end
 
   def last_frame?
     @frame_num == 10

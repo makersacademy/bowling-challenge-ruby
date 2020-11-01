@@ -37,6 +37,12 @@ describe ScoreTracker do
       @tracker.add_roll('2')
       expect(@tracker.frame_num).to eq 2
     end
+
+    it "updates the @frame_num if first roll of frame == 10" do 
+      expect(@tracker.frame_num).to eq 1
+      @tracker.add_roll('10')
+      expect(@tracker.frame_num).to eq 2
+    end
   end
 
   describe '#update_frame' do 
