@@ -1,4 +1,4 @@
-require "scoretracker.rb"
+require_relative "../../lib/scoretracker.rb"
 
 describe ScoreTracker do
 
