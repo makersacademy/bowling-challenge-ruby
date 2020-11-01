@@ -20,6 +20,7 @@ class ScoreTracker
   end
 
   def add_frame_total(frame = @frame_num)
+    add_bonuses(frame) if spare?(frame)
     @totals[frame] = @scores[frame].sum
   end
 
@@ -28,6 +29,14 @@ class ScoreTracker
   end
 
   private
+
+  def add_bonuses(frame)
+    @totals[frame - 1] += @scores[frame].sum
+  end
+
+  def spare?(frame)
+    @totals[frame - 1] == 10
+  end
 
   def strike?(roll)
     roll == '10'

@@ -76,5 +76,20 @@ describe ScoreTracker do
 
       expect(@totals[1]).to eq 7
     end
+
+    it 'adds roll sum to the previous frame score if there was a spare' do
+      @tracker.add_roll('5')
+      @tracker.add_roll('5')
+      @tracker.add_frame_total(1)
+
+      expect(@totals[1]).to eq 10
+
+      @tracker.add_roll('5')
+      @tracker.add_roll('3')
+      @tracker.add_frame_total(2)
+
+      expect(@totals[1]).to eq 18
+      expect(@totals[2]).to eq 8
+    end
   end
 end
