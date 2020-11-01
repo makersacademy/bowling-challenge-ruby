@@ -30,7 +30,7 @@ class BowlingGame
       if frame.strike?
         frame.bonus_frame? ? score_frame(frame) : score_regular_strike(frame, index)
       elsif frame.spare?
-        score_regular_spare(frame, index)
+        score_spare(frame, index)
       else 
         score_frame(frame)
       end
@@ -63,7 +63,7 @@ class BowlingGame
     @score += frame.total
   end
 
-  def score_regular_spare(frame, index)
+  def score_spare(frame, index)
     @score += frame.total + @rolls[index + 1].first_roll
   end
 
