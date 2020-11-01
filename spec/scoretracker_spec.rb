@@ -21,5 +21,13 @@ describe ScoreTracker do
       expect(@scores[1].count).to eq 1
       expect(@scores[1]).to eq [5]
     end
+
+    it 'adds a second roll into an existing array within the @scores Hash' do
+      @tracker.add_roll('5')
+      @tracker.add_roll('2')
+      expect(@scores[1]).to be_a Array
+      expect(@scores[1].count).to eq 2
+      expect(@scores[1]).to eq [5, 2]
+    end
   end
 end
