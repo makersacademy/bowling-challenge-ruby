@@ -35,7 +35,11 @@ class ScoreTracker
   end
 
   def spare?(frame)
-    @totals[frame - 1] == 10
+    @totals[frame - 1] == 10 && spare_not_strike(frame)
+  end
+
+  def spare_not_strike(frame)
+    @scores[frame - 1].count == 2
   end
 
   def strike?(roll)

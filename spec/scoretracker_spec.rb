@@ -91,5 +91,19 @@ describe ScoreTracker do
       expect(@totals[1]).to eq 18
       expect(@totals[2]).to eq 8
     end
+
+    it "doesn't add bonus to previous frame if it was a strike" do
+      @tracker.add_roll('10')
+      @tracker.add_frame_total(1)
+
+      expect(@totals[1]).to eq 10
+
+      @tracker.add_roll('5')
+      @tracker.add_roll('3')
+      @tracker.add_frame_total(2)
+
+      expect(@totals[1]).to eq 10
+      expect(@totals[2]).to eq 8
+    end
   end
 end
