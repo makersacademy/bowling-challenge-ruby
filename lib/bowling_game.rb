@@ -54,16 +54,16 @@ class BowlingGame
   def calculate_score
     @rolls.each_with_index do |frame, index|
       if frame.strike?
-        frame.bonus_frame? ? score_bonus_frame(frame) : score_regular_strike(frame, index)
+        frame.bonus_frame? ? score_frame(frame) : score_regular_strike(frame, index)
       elsif frame.spare?
         score_regular_spare(frame, index)
       else 
-        score_regular_frame(frame)
+        score_frame(frame)
       end
     end
   end
 
-  def score_regular_frame(frame)
+  def score_frame(frame)
     @score += frame.total
   end
 
@@ -79,11 +79,7 @@ class BowlingGame
   def followed_by_strike?(index)
     @rolls[index + 1].first_roll == 10 && @rolls[index + 2]
   end
-
-  def score_bonus_frame(frame)
-    @score += frame.total
-  end
-
+  
   def regular_strike(pins)
     @roll_number.even? && pins == 10 && @roll_number < 18
   end
