@@ -19,6 +19,10 @@ class ScoreTracker
     end
   end
 
+  def add_frame_total(frame = @frame_num)
+    @totals[frame] = @scores[frame].sum
+  end
+
   def update_frame
     @frame_num += 1 unless last_frame?
   end

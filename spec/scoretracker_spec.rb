@@ -67,4 +67,14 @@ describe ScoreTracker do
       expect(@tracker.frame_num).to eq 10
     end
   end
+
+  describe '#add_frame_total' do 
+    it 'totals together the rolls within a frame' do
+      @tracker.add_roll('5')
+      @tracker.add_roll('2')
+      @tracker.add_frame_total(1)
+
+      expect(@totals[1]).to eq 7
+    end
+  end
 end
