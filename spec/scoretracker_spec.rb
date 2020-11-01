@@ -3,9 +3,7 @@ require "scoretracker.rb"
 describe ScoreTracker do
 
   before :each do
-    @tracker = ScoreTracker.new
-    @scores = @tracker.scores
-    @totals = @tracker.totals
+    set_up_score_tracker
   end
 
   describe "#initialize" do
@@ -33,8 +31,7 @@ describe ScoreTracker do
     end
 
     it 'adds a second roll into an existing array within the @scores Hash' do
-      @tracker.add_roll('5')
-      @tracker.add_roll('2')
+      add_two_rolls
       expect(@scores[1]).to be_a Array
       expect(@scores[1].count).to eq 2
       expect(@scores[1]).to eq [5, 2]
@@ -53,6 +50,16 @@ describe ScoreTracker do
       @tracker.add_roll('10')
       expect(@tracker.frame_num).to eq 2
     end
+
+    it "allows 3 rolls in the 10th frame if the first rolls is a strike" do 
+      9.times { add_two_rolls }
+
+      @tracker.add_roll('10')
+      add_two_rolls
+
+      expect(@scores[10].count).to eq 3
+      expect(@scores[10]).to eq [10, 5, 2]
+    end
   end
 
   describe '#update_frame' do 
@@ -70,8 +77,7 @@ describe ScoreTracker do
 
   describe '#add_frame_total' do 
     it 'totals together the rolls within a frame' do
-      @tracker.add_roll('5')
-      @tracker.add_roll('2')
+      add_two_rolls
       @tracker.add_frame_total(1)
 
       expect(@totals[1]).to eq 7
@@ -84,12 +90,12 @@ describe ScoreTracker do
 
       expect(@totals[1]).to eq 10
 
-      @tracker.add_roll('5')
-      @tracker.add_roll('3')
+      add_two_rolls
+
       @tracker.add_frame_total(2)
 
-      expect(@totals[1]).to eq 18
-      expect(@totals[2]).to eq 8
+      expect(@totals[1]).to eq 17
+      expect(@totals[2]).to eq 7
     end
 
     it "doesn't add bonus to previous frame if it was a strike" do
@@ -98,12 +104,12 @@ describe ScoreTracker do
 
       expect(@totals[1]).to eq 10
 
-      @tracker.add_roll('5')
-      @tracker.add_roll('3')
+      add_two_rolls
+
       @tracker.add_frame_total(2)
 
       expect(@totals[1]).to eq 10
-      expect(@totals[2]).to eq 8
+      expect(@totals[2]).to eq 7
     end
   end
 end
