@@ -106,5 +106,8 @@ ScoreTracker will:
 - if the 10th frame is a strike, it will take in two more rolls from the player
 - It will show if a game was a gutter game or a perfect game
 
+- Each game will be within a hash, and pushed as an array if it's the first roll of the frame. key will be frame # and value will be the array of rolls.
+            {1 => [5, 9], 2 => [4, 5]} (etc...)
+
 ScoreCard will:
 -Print the scorecard to the terminal as the games goes. 
