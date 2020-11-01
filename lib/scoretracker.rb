@@ -1,10 +1,11 @@
 
 class ScoreTracker
 
-  attr_reader :scores, :frame_num
+  attr_reader :scores, :frame_num, :totals
 
   def initialize 
     @scores = Hash.new(0)
+    @totals = Hash.new(0)
     @frame_num = 1
   end
 

@@ -5,12 +5,22 @@ describe ScoreTracker do
   before :each do
     @tracker = ScoreTracker.new
     @scores = @tracker.scores
+    @totals = @tracker.totals
   end
 
   describe "#initialize" do
-    it 'creates a new Hash' do 
+    it 'creates a new @scores Hash' do 
       expect(@scores).to be_a Hash
       expect(@scores).to be_empty
+    end
+
+    it 'creates a new @totals Hash' do 
+      expect(@totals).to be_a Hash
+      expect(@totals).to be_empty
+    end
+
+    it 'starts @frame_num at 1' do 
+      expect(@tracker.frame_num).to eq 1
     end
   end
 
