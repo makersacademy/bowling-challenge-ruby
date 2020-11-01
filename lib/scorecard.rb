@@ -10,7 +10,7 @@ class ScoreCard
 
   def request_roll
     puts "Input your roll:"
-    roll = gets.chomp
+    @scores.add_roll(gets.chomp)
   end
 
 
