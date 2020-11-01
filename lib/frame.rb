@@ -16,6 +16,10 @@ class Frame
     @frame['score']
   end
 
+  def add_bonus_score(score)
+    @frame['score'] += score
+  end
+
   def frame_roll
     @frame['frame_roll']
   end
