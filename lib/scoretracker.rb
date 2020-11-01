@@ -20,10 +20,14 @@ class ScoreTracker
   end
 
   def update_frame
-    @frame_num += 1
+    @frame_num += 1 unless last_frame?
   end
 
   private
+
+  def last_frame?
+    @frame_num == 10
+  end
 
   def update_roll
     @roll_num += 1

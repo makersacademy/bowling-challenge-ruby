@@ -52,5 +52,10 @@ describe ScoreTracker do
       @tracker.update_frame
       expect(@tracker.frame_num).to eq 2
     end
+
+    it "doesn't update @frame_num if @frame_num == 10" do
+      15.times { @tracker.update_frame }
+      expect(@tracker.frame_num).to eq 10
+    end
   end
 end
