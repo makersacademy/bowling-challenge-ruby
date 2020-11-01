@@ -37,7 +37,6 @@ class Frame
   end
 
   def first_two
-    # Sum first two rolls of next frame in case of a strike right before bonus final frame
     self.current_frame[0] + self.current_frame[1]
   end
 
