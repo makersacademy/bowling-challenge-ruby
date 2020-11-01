@@ -29,5 +29,11 @@ describe ScoreTracker do
       expect(@scores[1].count).to eq 2
       expect(@scores[1]).to eq [5, 2]
     end
+
+    it 'updates @roll_num' do
+      expect(@tracker.roll_num).to eq 0
+      @tracker.add_roll('5')
+      expect(@tracker.roll_num).to eq 1
+    end
   end
 end

@@ -1,7 +1,7 @@
 
 class ScoreTracker
 
-  attr_reader :scores
+  attr_reader :scores, :roll_num, :frame_num
 
   def initialize 
     @scores = Hash.new(0)
@@ -15,9 +15,14 @@ class ScoreTracker
     else
       @scores[@frame_num] << roll.to_i
     end
+    update_roll
   end
 
   private
+
+  def update_roll
+    @roll_num += 1
+  end
 
   def new_frame?
     !@scores.has_key?(@frame_num)
