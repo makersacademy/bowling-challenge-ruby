@@ -1,4 +1,3 @@
-
 def set_up_score_tracker
   @tracker = ScoreTracker.new
   @scores = @tracker.scores

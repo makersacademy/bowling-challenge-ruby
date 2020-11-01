@@ -64,14 +64,14 @@ describe ScoreTracker do
 
       @tracker.add_roll('9')
       
-      expect{ add_two_rolls }.to raise_error 'Only two rolls allowed!'
+      expect { add_two_rolls }.to raise_error 'Only two rolls allowed!'
     end
 
     it 'raises an error if trying to roll a 4th time after a strike on the 10th frame' do
       strike_on_10th_frame
       add_two_rolls
 
-      expect{ @tracker.add_roll('5') }.to raise_error 'A max of three rolls are allowed!'
+      expect { @tracker.add_roll('5') }.to raise_error 'A max of three rolls are allowed!'
     end
   end
 
@@ -127,5 +127,10 @@ describe ScoreTracker do
   end
 
   describe '#see_current_total' do
+    it "adds together current total of @totals values" do 
+      2.times { add_two_rolls }
+
+      expect(@tracker.see_current_total).to eq 14
+    end
   end
 end

@@ -14,6 +14,7 @@ class ScoreTracker
       update_frame if strike?(roll)
     else
       add_roll_to_frame(roll)
+      add_frame_total
       update_frame
     end
   end
@@ -25,6 +26,12 @@ class ScoreTracker
 
   def update_frame
     @frame_num += 1 unless last_frame?
+  end
+
+  def see_current_total
+    total = 0
+    @totals.each_value { |score| total += score }
+    total
   end
 
   private
