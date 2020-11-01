@@ -30,12 +30,6 @@ describe ScoreTracker do
       expect(@scores[1]).to eq [5, 2]
     end
 
-    it 'updates @roll_num' do
-      expect(@tracker.roll_num).to eq 0
-      @tracker.add_roll('5')
-      expect(@tracker.roll_num).to eq 1
-    end
-
     it "updates @frame_num at the end of the second roll" do 
       expect(@tracker.frame_num).to eq 1
       @tracker.add_roll('5')
@@ -46,7 +40,6 @@ describe ScoreTracker do
   end
 
   describe '#update_frame' do 
-
     it "updates @frame_num by 1" do
       expect(@tracker.frame_num).to eq 1
       @tracker.update_frame
