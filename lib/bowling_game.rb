@@ -18,28 +18,6 @@ class BowlingGame
     end
   end
 
-  def close_frame(pins, frame)
-    @frame.add_to_frame(pins)
-    @rolls << @frame
-    @roll_number += 1
-  end
- 
-  def create_new_frame(pins, frame)
-    @frame = frame.new
-    @frame.add_to_frame(pins)
-    @roll_number += 1
-  end
-
-  def create_strike_frame(pins, frame)
-    @frame = frame.new
-    complete_frame(pins)
-    @roll_number += 2
-  end
-
-  def final_frame?
-    @roll_number == 20
-  end
-
   def score
     calculate_score
     @score
@@ -57,6 +35,28 @@ class BowlingGame
         score_frame(frame)
       end
     end
+  end
+
+  def close_frame(pins, frame)
+    @frame.add_to_frame(pins)
+    @rolls << @frame
+    @roll_number += 1
+  end
+
+  def create_new_frame(pins, frame)
+    @frame = frame.new
+    @frame.add_to_frame(pins)
+    @roll_number += 1
+  end
+
+  def create_strike_frame(pins, frame)
+    @frame = frame.new
+    complete_frame(pins)
+    @roll_number += 2
+  end
+
+  def final_frame?
+    @roll_number == 20
   end
 
   def score_frame(frame)
