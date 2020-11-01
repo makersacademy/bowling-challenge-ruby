@@ -19,11 +19,11 @@ class ScoreTracker
     update_roll
   end
 
-  private
-
   def update_frame
     @frame_num += 1
   end
+
+  private
 
   def update_roll
     @roll_num += 1

@@ -37,8 +37,19 @@ describe ScoreTracker do
     end
 
     it "updates @frame_num at the end of the second roll" do 
+      expect(@tracker.frame_num).to eq 1
       @tracker.add_roll('5')
+      expect(@tracker.frame_num).to eq 1
       @tracker.add_roll('2')
+      expect(@tracker.frame_num).to eq 2
+    end
+  end
+
+  describe '#update_frame' do 
+
+    it "updates @frame_num by 1" do
+      expect(@tracker.frame_num).to eq 1
+      @tracker.update_frame
       expect(@tracker.frame_num).to eq 2
     end
   end
