@@ -8,7 +8,8 @@ attr_reader :score
   end
 
   def scorecard
-    {@team => {} }
+    {@team => {1.1=>0, 1.2=>0, 2.1=>0, 2.2=>0, 3.1=>0, 3.2=>0, 4.1=>0, 4.2=>0, 5.1=>0,
+      5.2=>0, 6.1=>0, 6.2=>0, 7.1=>0, 7.2=>0, 8.1=>0, 8.2=>0, 9.1=>0, 9.2=>0, 10.1=>0, 10.2=>0, 10.3=>0} }
   end
 
   def reset_scorecard
@@ -16,6 +17,7 @@ attr_reader :score
   end
 
   def add_roll(turn, pins)
+    @turn = turn
     @score[@team][turn] = pins
   end
 
@@ -24,7 +26,7 @@ attr_reader :score
   end
 
   def spare?(input1, input2)
-    input1 + input2 == 10 && (input1 != 0 || input2 != 0)
+    input1 + input2 == 10 && (input1 != 10 || input2 != 10)
   end
 
   def next_frame_nil?(input1, input2)
@@ -35,23 +37,30 @@ attr_reader :score
     next_roll_1 + next_roll_2
   end
 
+  def tenth_frame
+    return 1 if @score[@team][10.1]+@score[@team][10.2] == 10
+    return 2 if @score[@team][10.1]+@score[@team][10.2] >= 9
+  end
+
   def total(frame)
     score = 0
     while frame > 0 do
       this_frame_roll1, this_frame_roll2 = @score[@team][frame+0.1], @score[@team][frame+0.2]
       next_frame_roll1, next_frame_roll2 = @score[@team][frame+1.1], @score[@team][frame+1.2]
-      score += sum_a_frame(this_frame_roll1, this_frame_roll2)
-        if strike?(this_frame_roll1, this_frame_roll2)
-          unless next_frame_nil?(next_frame_roll1, next_frame_roll2)
-            score += sum_a_frame(next_frame_roll1, next_frame_roll2)
+      tenth_roll1, tenth_roll2, tenth_roll3 = @score[@team][10.1], @score[@team][10.2], @score[@team][10.3]
+        score += sum_a_frame(this_frame_roll1, this_frame_roll2)
+          if strike?(this_frame_roll1, this_frame_roll2)
+            unless next_frame_nil?(next_frame_roll1, next_frame_roll2)
+              score += sum_a_frame(next_frame_roll1, next_frame_roll2)
+              score += tenth_roll3 if tenth_frame == 1
+            end
+          elsif spare?(this_frame_roll1, this_frame_roll2)
+            unless next_frame_roll1 == nil
+              score += next_frame_roll1
+              score += tenth_roll3 if tenth_frame == 1
+            end
           end
-        elsif
-          spare?(this_frame_roll1, this_frame_roll2)
-          unless next_frame_roll1 == nil
-            score += next_frame_roll1
-          end
-        end
-        frame -= 1
+          frame -= 1
     end
     score
   end
