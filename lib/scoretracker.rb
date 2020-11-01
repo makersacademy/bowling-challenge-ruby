@@ -32,6 +32,7 @@ class ScoreTracker
   def add_roll_to_frame(roll)
     if last_frame?
       raise 'Only two rolls allowed!' if third_roll? && !first_roll_strike?
+      raise 'A max of three rolls are allowed!' if fourth_roll?
     end
 
     @scores[@frame_num] << roll.to_i
@@ -63,6 +64,10 @@ class ScoreTracker
 
   def third_roll?
     @scores[@frame_num].count == 2
+  end
+
+  def fourth_roll?
+    @scores[@frame_num].count == 3
   end
 
   def new_frame?
