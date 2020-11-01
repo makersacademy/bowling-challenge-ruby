@@ -10,7 +10,7 @@ class BowlingGame
     if regular_strike(pins)
       create_strike_frame(pins, frame)
     elsif final_frame?
-      create_bonus_frame(pins)
+      @rolls.last.add_bonus(pins)
     elsif first_roll?
       create_new_frame(pins, frame)
     else
@@ -34,10 +34,6 @@ class BowlingGame
     @frame = frame.new
     complete_frame(pins)
     @roll_number += 2
-  end
-
-  def create_bonus_frame(pins)
-    @rolls.last.add_bonus(pins)
   end
 
   def final_frame?
@@ -79,7 +75,7 @@ class BowlingGame
   def followed_by_strike?(index)
     @rolls[index + 1].first_roll == 10 && @rolls[index + 2]
   end
-  
+
   def regular_strike(pins)
     @roll_number.even? && pins == 10 && @roll_number < 18
   end
