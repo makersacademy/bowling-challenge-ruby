@@ -63,3 +63,48 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+
+Notes: 
+
+This is for the scorecard. NOT the game. Don't generate random rolls-- this is User Input only
+
+Count and sum the scores of a bowling game for one player.
+
+A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. 
+
+In every frame the player can roll one or two times. The actual number depends on strikes and spares. 
+
+The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
+
+___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
+
+---The player has a strike if he knocks down all 10 pins with the first roll in a frame. The frame ends immediately (since there are no pins left for a second roll). The bonus for that frame is the number of pins knocked down by the next two rolls. That would be the next frame, unless the player rolls another strike.
+
+If 10 pins are knocked down on the first go, the player's turn ends immediately. Bonus added is the sum of the pins knocked down in the next two rolls. (Unless it's another strike)
+
+
+-----------
+
+Planning
+
+Strikes = 30 pts
+Spares = 10 pts
+
+Bonus added to strikes (the number of pins knocked down in the next frame, UNLESS it's another strike)
+Bonus added to spares (the number of pins knocked down in the first roll of the next frame)
+
+
+ScoreTracker will:
+- keep track of which frame the game is on
+- take in a roll from the player (between 1 and 10)
+- if the first roll of a frame is 10:
+    - Add the num of pins from the next two rolls (next full frame) as a bonus
+    - If the next frame is a strike, it will not add this bonus
+- if the two rolls in a fram result in a spare:
+    - Add the num of pins from the next roll as a bonus
+- if the 10th frame is a strike, it will take in two more rolls from the player
+- It will show if a game was a gutter game or a perfect game
+
+ScoreCard will:
+-Print the scorecard to the terminal as the games goes. 
