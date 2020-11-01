@@ -33,5 +33,33 @@ describe Scorecard do
       expect(subject.frame?).to eq 2
     end
   end
+
+  context 'understanding strikes and spares' do
+    it 'understands when a stike has been rolled' do
+    
+      subject.add_score(10)
+      
+      expect(subject.current_frame['score']).to eq 10
+      expect(subject.current_frame['strike']).to eq true
+      
+    end
+
+    it 'understands when a spare has been rolled' do
+      subject.add_score(5)
+      subject.add_score(5)
+
+      expect(subject.current_frame['score']).to eq 10
+      expect(subject.current_frame['strike']).to be 0
+      expect(subject.current_frame['spare']).to eq true
+
+    end
+
+    xit 'understands how to add a bonus to a strike' do
+
+    end
+
+    xit 'understands how to add a bonus to a spare' do
+    end
+  end
 end
 
