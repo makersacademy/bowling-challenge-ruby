@@ -59,7 +59,7 @@ describe ScoreTracker do
       expect(@scores[10]).to eq [10, 5, 2]
     end
 
-    it "raises an error if trying to roll 3 times when the first wasn't a strike" do
+    it "returns an error if trying to roll 3 times when the first wasn't a strike" do
       9.times { add_two_rolls }
 
       @tracker.add_roll('9')
@@ -67,7 +67,7 @@ describe ScoreTracker do
       expect { add_two_rolls }.to raise_error 'Only two rolls allowed!'
     end
 
-    it 'raises an error if trying to roll a 4th time after a strike on the 10th frame' do
+    it 'returns an error if trying to roll a 4th time after a strike on the 10th frame' do
       strike_on_10th_frame
       add_two_rolls
 
