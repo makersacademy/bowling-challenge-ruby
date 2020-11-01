@@ -14,11 +14,16 @@ class ScoreTracker
       @scores[@frame_num] = [roll.to_i]
     else
       @scores[@frame_num] << roll.to_i
+      update_frame
     end
     update_roll
   end
 
   private
+
+  def update_frame
+    @frame_num += 1
+  end
 
   def update_roll
     @roll_num += 1
