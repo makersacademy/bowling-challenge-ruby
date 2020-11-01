@@ -1,4 +1,3 @@
-
 class ScoreTracker
 
   attr_reader :scores, :frame_num, :totals
