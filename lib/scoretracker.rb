@@ -13,7 +13,7 @@ class ScoreTracker
       @scores[@frame_num] = [roll.to_i]
       update_frame if strike?(roll)
     else
-      @scores[@frame_num] << roll.to_i
+      add_roll_to_frame(roll)
       update_frame
     end
   end
@@ -28,6 +28,18 @@ class ScoreTracker
   end
 
   private
+
+  def add_roll_to_frame(roll)
+    if last_frame?
+      raise 'Only two rolls allowed!' if third_roll? && !first_roll_strike?
+    end
+
+    @scores[@frame_num] << roll.to_i
+  end
+
+  def first_roll_strike?
+    @scores[@frame_num][0] == 10
+  end
 
   def add_bonuses(frame)
     @totals[frame - 1] += @scores[frame].sum
@@ -47,6 +59,10 @@ class ScoreTracker
 
   def last_frame?
     @frame_num == 10
+  end
+
+  def third_roll?
+    @scores[@frame_num].count == 2
   end
 
   def new_frame?
