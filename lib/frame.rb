@@ -1,5 +1,7 @@
 class Frame
 
+  attr_reader :frame
+
   def initialize
     @frame = Hash.new(0)
   end
