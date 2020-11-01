@@ -12,14 +12,23 @@ Run the project using irb:
 ```
 $ irb
 $ require './lib/bowling_game.rb'
+```
+Create a new game:
+```
 $ game = BowlingGame.new
-$ game.roll(3)
-$ game.roll(6)
+```
+Bowl:
+```
+$ game.bowl(3)
+$ game.bowl(6)
+```
+Retrieve score:
+```
 $ game.score
  => 9
 ```
 
-Run apps with rspec.
+Run tests with rspec.
 
 ## Goal:
 - Create a Bowling class capable of counting and summing the scores of a single player's bowling game.
