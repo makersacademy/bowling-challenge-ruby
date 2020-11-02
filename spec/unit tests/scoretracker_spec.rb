@@ -24,7 +24,7 @@ describe ScoreTracker do
 
   describe "#add_roll" do
     it 'adds a roll into an array within the @scores Hash' do
-      @tracker.add_roll('5')
+      @tracker.add_roll(5)
       expect(@scores[1]).to be_a Array
       expect(@scores[1].count).to eq 1
       expect(@scores[1]).to eq [5]
@@ -39,15 +39,15 @@ describe ScoreTracker do
 
     it "updates @frame_num at the end of the second roll" do 
       expect(@tracker.frame_num).to eq 1
-      @tracker.add_roll('5')
+      @tracker.add_roll(5)
       expect(@tracker.frame_num).to eq 1
-      @tracker.add_roll('2')
+      @tracker.add_roll(2)
       expect(@tracker.frame_num).to eq 2
     end
 
     it "updates the @frame_num if first roll of frame == 10" do 
       expect(@tracker.frame_num).to eq 1
-      @tracker.add_roll('10')
+      @tracker.add_roll(10)
       expect(@tracker.frame_num).to eq 2
     end
 
@@ -62,7 +62,7 @@ describe ScoreTracker do
     it "returns an error if trying to roll 3 times when the first wasn't a strike" do
       9.times { add_two_rolls }
 
-      @tracker.add_roll('9')
+      @tracker.add_roll(9)
       
       expect { add_two_rolls }.to raise_error 'Only two rolls allowed!'
     end
@@ -97,8 +97,7 @@ describe ScoreTracker do
     end
 
     it 'adds roll sum to the previous frame score if there was a spare' do
-      @tracker.add_roll('5')
-      @tracker.add_roll('5')
+      2.times { @tracker.add_roll(5) }
       @tracker.add_frame_total(1)
 
       expect(@totals[1]).to eq 10
@@ -111,18 +110,20 @@ describe ScoreTracker do
       expect(@totals[2]).to eq 7
     end
 
-    it "doesn't add bonus to previous frame if it was a strike" do
-      @tracker.add_roll('10')
-      @tracker.add_frame_total(1)
-
+    it "adds bonus after two rolls to the frame where a strike was made" do
+      @tracker.add_roll(10)
       expect(@totals[1]).to eq 10
-
       add_two_rolls
 
-      @tracker.add_frame_total(2)
-
-      expect(@totals[1]).to eq 10
+      expect(@totals[1]).to eq 17
       expect(@totals[2]).to eq 7
+    end
+
+    it "doesn't call '#add_bonuses or #add_strike_bonuses if it's the first frame" do
+      expect(@tracker).to_not receive(:add_bonuses)
+      expect(@tracker).to_not receive(:add_strike_bonuses)
+
+      @tracker.add_roll(10)
     end
   end
 

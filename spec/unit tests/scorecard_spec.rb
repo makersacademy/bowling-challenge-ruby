@@ -20,16 +20,10 @@ describe ScoreCard do
     end
   end
 
-  describe "#request_roll" do
-    it "asks the player to input their roll" do
-      expect(card).to receive(:gets) { '5' }
-      expect{ card.request_roll }.to output("Input your roll:\n").to_stdout
-    end
-
-    it 'adds the roll to the ScoreTracker' do
-      expect(tracker).to receive(:add_roll)
-      allow(card).to receive(:gets) { '5' }
-      card.request_roll
+  describe "#enter_roll" do
+    it "adds a roll to @scores" do
+      expect(tracker).to receive(:add_roll) { '5' }
+      card.enter_roll('5')
     end
   end
 

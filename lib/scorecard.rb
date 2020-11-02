@@ -8,9 +8,8 @@ class ScoreCard
     @scores = scoretracker.new
   end
 
-  def request_roll
-    puts "Input your roll:"
-    @scores.add_roll(gets.chomp)
+  def enter_roll(roll)
+    @scores.add_roll(roll.to_i)
   end
 
   def current_total
