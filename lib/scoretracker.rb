@@ -13,8 +13,7 @@ class ScoreTracker
       @scores[@frame_num] = [roll]
       add_frame_total if strike?(roll)
       update_frame if strike?(roll)
-
-    elsif !strike?(roll)
+    else
       add_roll_to_frame(roll)
       add_frame_total
       update_frame
@@ -22,12 +21,13 @@ class ScoreTracker
   end
 
   def add_frame_total(frame = @frame_num)
-    unless frame == 1
-      add_bonuses(frame) if spare?(frame)
+    p @scores
+    p @totals
+    @totals[frame] = @scores[frame].sum
+    if frame > 1
+      add_bonuses(frame) if spare?(frame) && !last_frame?(frame)
       add_strike_bonuses(frame) if previous_strike?(frame)
     end
-
-    @totals[frame] = @scores[frame].sum
   end
 
   def update_frame
@@ -42,17 +42,17 @@ class ScoreTracker
     total
   end
 
-  def last_frame?
-    @frame_num == 10
+  def last_frame?(frame = @frame_num)
+    frame == 10
   end
 
   def first_roll_strike?
     @scores[@frame_num][0] == 10
   end
 
-  def third_roll?
-    return false unless @scores.has_key?(@frame_num)
-    @scores[@frame_num].count == 2
+  def third_roll?(frame = @frame_num)
+    return false unless @scores.has_key?(frame)
+    @scores[frame].count == 2
   end
 
   def fourth_roll?
@@ -64,9 +64,8 @@ class ScoreTracker
 
   def previous_strike?(frame)
     unless frame == 1
-      first_roll = @scores[frame - 2][0]
-      second_roll = @scores[frame - 1][0]
-      return strike?(first_roll) || strike?(second_roll)
+      first_roll = @scores[frame - 1][0]
+      return strike?(first_roll)
     end
     false
   end
@@ -86,10 +85,15 @@ class ScoreTracker
   def add_strike_bonuses(frame)
     two_frames_ago = @scores[frame - 2][0]
     one_frame_ago = @scores[frame - 1][0]
-    if strike?(two_frames_ago) && strike?(one_frame_ago)
-      @totals[frame - 2] += 20 
+
+    if last_frame?(frame) && third_roll?(frame)
+      @totals[9] += @scores[10][0..1].sum
+    elsif last_frame?(frame) && second_roll?(9)
+      @totals[8] += (@scores[9][0] + @scores[10][0])
+    elsif !last_frame?(frame) && strike?(one_frame_ago)
+      @totals[frame - 2] += @totals[frame]
     elsif strike?(one_frame_ago)
-      @totals[frame - 1] += @scores[frame].sum
+      @totals[frame - 1] += @totals[frame]
     end
   end
 
@@ -107,6 +111,11 @@ class ScoreTracker
 
   def new_frame?
     return true unless @scores.has_key?(@frame_num)
+  end
+
+  def second_roll?(frame)
+    return false unless @scores.has_key?(@frame_num)
+    @scores[@frame_num].count == 1
   end
 
 end
