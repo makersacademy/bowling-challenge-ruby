@@ -13,6 +13,10 @@ class ScoreCard
     @scores.add_roll(gets.chomp)
   end
 
+  def current_total
+    @scores.see_current_total
+  end
+
   def game_end_type
     puts "Gutter Game!" if gutter_game?
     puts "Perfect Game!" if perfect_game?

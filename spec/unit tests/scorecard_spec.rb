@@ -13,6 +13,13 @@ describe ScoreCard do
     end
   end
 
+  describe '#current_total' do
+    it 'returns the current total' do
+      allow(tracker).to receive(:see_current_total) { 10 }
+      expect(card.current_total).to eq 10
+    end
+  end
+
   describe "#request_roll" do
     it "asks the player to input their roll" do
       expect(card).to receive(:gets) { '5' }
