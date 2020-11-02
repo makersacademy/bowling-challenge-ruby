@@ -26,6 +26,15 @@ class ScoreCard
     game_over? && gutter_total?
   end
 
+  def game_over?
+    if @scores.last_frame? && @scores.third_roll?
+      return !@scores.first_roll_strike?
+    elsif @scores.last_frame? && @scores.fourth_roll?
+      return @scores.first_roll_strike?
+    end
+    false
+  end
+
   private
 
   def perfect_total?
@@ -34,13 +43,5 @@ class ScoreCard
 
   def gutter_total?
     @scores.see_current_total == 0
-  end
-
-  def game_over?
-    if @scores.last_frame? && @scores.third_roll?
-      !@scores.first_roll_strike?
-    elsif @scores.last_frame? && @scores.fourth_roll?
-      @scores.first_roll_strike?
-    end
   end
 end

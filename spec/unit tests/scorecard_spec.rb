@@ -87,4 +87,50 @@ describe ScoreCard do
       expect(card.gutter_game?).to be false
     end
   end
+
+  describe '#game_over?' do
+    it "returns true if first roll of frame wasn't a strike, and it's the last frame" do
+      allow(tracker).to receive(:last_frame?) { true }
+      allow(tracker).to receive(:third_roll?) { true }
+      allow(tracker).to receive(:fourth_roll?) { false }
+      allow(tracker).to receive(:first_roll_strike?) { false }
+
+      expect(card.game_over?).to be true
+    end
+
+    it "returns false if first roll of frame was a strike, it's the last frame, but not past the 3rd roll" do
+      allow(tracker).to receive(:last_frame?) { true }
+      allow(tracker).to receive(:third_roll?) { true }
+      allow(tracker).to receive(:fourth_roll?) { false }
+      allow(tracker).to receive(:first_roll_strike?) { true }
+
+      expect(card.game_over?).to be false
+    end
+
+    it "returns true if first roll of frame was a strike, it's the last frame, and past the 3rd roll" do
+      allow(tracker).to receive(:last_frame?) { true }
+      allow(tracker).to receive(:third_roll?) { false }
+      allow(tracker).to receive(:fourth_roll?) { true }
+      allow(tracker).to receive(:first_roll_strike?) { true }
+
+      expect(card.game_over?).to be true
+    end
+
+    it "returns false if first roll of frame wasn't a strike, it's the last frame, and past the 3rd roll" do
+      allow(tracker).to receive(:last_frame?) { true }
+      allow(tracker).to receive(:third_roll?) { false }
+      allow(tracker).to receive(:fourth_roll?) { true }
+      allow(tracker).to receive(:first_roll_strike?) { false }
+
+      expect(card.game_over?).to be false
+    end
+
+    it "returns false if it's not the last frame" do
+      allow(tracker).to receive(:last_frame?) { false }
+      allow(tracker).to receive(:third_roll?) { false }
+      allow(tracker).to receive(:fourth_roll?) { false }
+
+      expect(card.game_over?).to be false
+    end
+  end
 end
