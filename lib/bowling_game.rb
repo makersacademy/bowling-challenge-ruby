@@ -1,16 +1,18 @@
 require_relative 'frame'
 
 class BowlingGame
+  attr_reader :rolls
   def initialize
     @score, @roll_number = 0, 0
     @rolls = []
   end
 
   def bowl(pins, frame = Frame)
+    raise "The game is over." if game_over
     if regular_strike(pins)
       create_strike_frame(pins, frame)
     elsif final_frame?
-      @rolls.last.add_bonus(pins)
+      create_bonus_frame(pins)
     elsif first_roll?
       create_new_frame(pins, frame)
     else
@@ -24,6 +26,15 @@ class BowlingGame
   end
 
   private 
+
+  def create_bonus_frame(pins)
+    @rolls.last.add_bonus(pins)
+    @roll_number += 1
+  end
+
+  def game_over
+    @roll_number > 20
+  end
 
   def calculate_score
     @rolls.each_with_index do |frame, index|
@@ -90,3 +101,4 @@ class BowlingGame
    @roll_number.even?
   end
 end
+

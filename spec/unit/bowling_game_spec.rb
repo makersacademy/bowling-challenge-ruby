@@ -25,6 +25,12 @@ describe BowlingGame do
       game.bowl(2, frame)
       game.bowl(3, frame)
     end
+    
+    it 'will raise an error if the user tries to bowl after perfect game' do
+      12.times { game.bowl(10) }
+      expect { game.bowl(10) }.to raise_error("The game is over.")
+    end
+
   end
 
   describe '#score' do
