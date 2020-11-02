@@ -11,3 +11,5 @@ To run Bowling Game:
 6. to find out current score - game.current_score
 
 Unfortunately Jesus Quintana wouldn't be happy with my scorecard as all his strikes wont get extra points.
+
+All commits for this challange are here: https://github.com/jotkafomat/bowling-challenge
