@@ -25,6 +25,66 @@ describe ScoreCard do
       card.request_roll
     end
   end
-  #it will present score after each roll
-  #it will say whether a game was perfect or a gutter game
+
+  describe "#game_end_type" do
+    it "says whether a game has been a 'gutter game'" do
+      allow(card).to receive(:game_over?) { true }
+      allow(card).to receive(:gutter_game?) { true }
+      allow(card).to receive(:perfect_game?) { false }
+
+      expect{ card.game_end_type }.to output("Gutter Game!\n").to_stdout
+    end
+
+    it "says whether a game has been a 'perfect game'" do
+      allow(card).to receive(:game_over?) { true }
+      allow(card).to receive(:gutter_game?) { false }
+      allow(card).to receive(:perfect_game?) { true }
+
+      expect{ card.game_end_type }.to output("Perfect Game!\n").to_stdout
+    end
+  end
+
+  describe "#perfect_game?" do
+    it "returns true if the game is over and the score == 300" do
+      allow(tracker).to receive(:last_frame?) { true }
+      allow(tracker).to receive(:third_roll?) { false }
+      allow(tracker).to receive(:fourth_roll?) { true }
+      allow(tracker).to receive(:first_roll_strike?) { true }
+      allow(tracker).to receive(:see_current_total) { 300 }
+
+      expect(card.perfect_game?).to be true
+    end
+
+    it "returns false if the game if over and the score < 300" do
+      allow(tracker).to receive(:last_frame?) { true }
+      allow(tracker).to receive(:third_roll?) { true }
+      allow(tracker).to receive(:fourth_roll?) { false }
+      allow(tracker).to receive(:first_roll_strike?) { false }
+      allow(tracker).to receive(:see_current_total) { 250 }
+
+      expect(card.perfect_game?).to be false
+    end
+  end
+
+  describe '#gutter_game?' do
+    it "returns true if the game is over and the score == 0" do
+      allow(tracker).to receive(:last_frame?) { true }
+      allow(tracker).to receive(:third_roll?) { true }
+      allow(tracker).to receive(:fourth_roll?) { false }
+      allow(tracker).to receive(:first_roll_strike?) { false }
+      allow(tracker).to receive(:see_current_total) { 0 }
+
+      expect(card.gutter_game?).to be true
+    end
+
+    it "returns false if the game if over and the score > 0" do
+      allow(tracker).to receive(:last_frame?) { true }
+      allow(tracker).to receive(:third_roll?) { true }
+      allow(tracker).to receive(:fourth_roll?) { false }
+      allow(tracker).to receive(:first_roll_strike?) { false }
+      allow(tracker).to receive(:see_current_total) { 1 }
+
+      expect(card.gutter_game?).to be false
+    end
+  end
 end

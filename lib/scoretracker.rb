@@ -34,6 +34,22 @@ class ScoreTracker
     total
   end
 
+  def last_frame?
+    @frame_num == 10
+  end
+
+  def first_roll_strike?
+    @scores[@frame_num][0] == 10
+  end
+
+  def third_roll?
+    @scores[@frame_num].count == 2
+  end
+
+  def fourth_roll?
+    @scores[@frame_num].count == 3
+  end
+
   private
 
   def add_roll_to_frame(roll)
@@ -43,10 +59,6 @@ class ScoreTracker
     end
 
     @scores[@frame_num] << roll.to_i
-  end
-
-  def first_roll_strike?
-    @scores[@frame_num][0] == 10
   end
 
   def add_bonuses(frame)
@@ -63,18 +75,6 @@ class ScoreTracker
 
   def strike?(roll)
     roll == '10'
-  end
-
-  def last_frame?
-    @frame_num == 10
-  end
-
-  def third_roll?
-    @scores[@frame_num].count == 2
-  end
-
-  def fourth_roll?
-    @scores[@frame_num].count == 3
   end
 
   def new_frame?
