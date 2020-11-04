@@ -46,7 +46,7 @@ attr_reader :score
     while frame > 0 do
       this_frame_roll1, this_frame_roll2 = @score[@team][frame+0.1], @score[@team][frame+0.2]
       next_frame_roll1, next_frame_roll2 = @score[@team][frame+1.1], @score[@team][frame+1.2]
-        score += sum_a_frame(this_frame_roll1, this_frame_roll2)
+      score += sum_a_frame(this_frame_roll1, this_frame_roll2)
           if strike?(this_frame_roll1, this_frame_roll2)
             unless next_frame_nil?(next_frame_roll1, next_frame_roll2)
               score += sum_a_frame(next_frame_roll1, next_frame_roll2)
