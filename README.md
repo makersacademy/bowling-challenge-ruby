@@ -2,8 +2,9 @@ Bowling Challenge in Ruby
 =================
 
 ## Set Up
+Clone the repository:
 ```
-$ git clone
+$ git clone https://github.com/emilyalice2708/bowling-challenge-ruby
 ```
 
 ## How To Use
