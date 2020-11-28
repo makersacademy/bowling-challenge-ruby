@@ -12,4 +12,12 @@ describe 'A game of bowling' do
     20.times { game.roll(1) }
     expect(game.score).to eq 20
   end
+
+  it 'can calculate a spare' do
+    game.roll(5)
+    game.roll(5)
+    game.roll(2)
+    17.times { game.roll(0) }
+    expect(game.score).to eq 14
+  end
 end
