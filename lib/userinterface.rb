@@ -2,7 +2,6 @@ require_relative './frame'
 require_relative './game'
 
 class UserInterface
-
   def initialize
     @game = Game.new
     @name = ""

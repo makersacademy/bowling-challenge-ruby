@@ -33,6 +33,7 @@ class Game
   end
 
   private
+
   def normal_update
     current_frame_object.add_score(current_frame_object.pins_knocked)
   end
@@ -46,6 +47,8 @@ class Game
   end
 
   def triple_update
-    @frames[@frames.length - 3].add_score(10) if current_frame_object.strike? && @frames[@frames.length - 2].strike? && @frames[@frames.length - 3].strike?
+    if current_frame_object.strike? && @frames[@frames.length - 2].strike? && @frames[@frames.length - 3].strike?
+      @frames[@frames.length - 3].add_score(10)
+    end
   end
 end

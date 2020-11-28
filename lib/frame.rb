@@ -7,7 +7,7 @@ class Frame
   end
 
   def current_roll_number
-    @rolls.length+1
+    @rolls.length + 1
   end
 
   def pins_knocked
@@ -20,13 +20,16 @@ class Frame
 
   def strike?
     return true if @rolls[0] == 10
-    return false
+
+    false
   end
 
   def spare?
     return false if strike?
+
     return true if @rolls.sum == 10
-    return false
+
+    false
   end
 
   def points_for_strike
@@ -40,5 +43,4 @@ class Frame
   def add_score(amount)
     @total_score += amount
   end
-
 end
