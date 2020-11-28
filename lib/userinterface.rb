@@ -99,10 +99,4 @@ class UserInterface
   def game_over
     puts "Thank you for playing #{@name}, your final score is #{@game.running_score}."
   end
-
 end
-
-# the below are there to start the run
-
-ui = UserInterface.new
-ui.start

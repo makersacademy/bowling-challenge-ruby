@@ -22,3 +22,12 @@ There are special rules to consider when:
 ### Example game
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+## Instructions for use
+
+Open a terminal and navigate to a directory in which this can be saved, then follow the below to run the program.  
+
+```
+$ git clone https://github.com/AdamusBG/bowling-challenge-ruby.git
+$ ruby bowling-challenge-ruby/run.rb
+```
