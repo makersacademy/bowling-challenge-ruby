@@ -71,4 +71,4 @@ If Frame 1, roll 1 + roll 2 = 10
 Get the result of roll 3
 Frame 1 total = roll 1 + roll 2 + roll 3
 ```
-![diagram](https://user-images.githubusercontent.com/71432715/100518357-f2938700-3188-11eb-9a57-02ace704f0b4.png")
+![basic](https://user-images.githubusercontent.com/71432715/100518357-f2938700-3188-11eb-9a57-02ace704f0b4.png")
