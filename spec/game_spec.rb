@@ -35,6 +35,14 @@ describe Game do
     end
   end
 
+  context 'play_frame' do
+    let(:testgame) {Game.new}
+    it 'returns the current score for the frame' do
+      allow_any_instance_of(Game).to receive(:gets).and_return('4','5')
+      testgame.play_frame
+    end
+  end
+
   context 'roll 1' do
     it "saves the player's first roll to frame_rolls" do
       allow_any_instance_of(Game).to receive(:gets).and_return('4')
@@ -89,9 +97,29 @@ describe Game do
 
   context 'calculates the score' do
     let(:testgame) {Game.new}
-    it 'calculates the current score' do
+    it 'defers calculation of current score if latest frame included a spare' do
       testgame.game_rolls = [[4,5],[5,5]]
       expect(testgame.current_score).to eq 'score depends on next frame'
+    end
+
+    it 'defers calculation of current score if latest frame included a strike' do
+      testgame.game_rolls = [[4,5],[10,0]]
+      expect(testgame.current_score).to eq 'score depends on next frame'
+    end
+
+    it 'refers to the next frame to calculate the score after a spare' do
+      testgame.game_rolls = [[4,5],[5,5],[3,2]]
+      expect(testgame.frames_scores).to eq [9,13,5]
+    end
+
+    it 'refers to the next frame to calculate the score after a strike' do
+      testgame.game_rolls = [[4,5],[10,0],[3,2]]
+      expect(testgame.frames_scores).to eq [9,15,5]
+    end
+
+    it 'sums the frames so far where the last frame not spare or strike' do
+      testgame.game_rolls = [[4,5],[10,0],[3,2]]
+      expect(testgame.current_score).to eq 29
     end
   end
 end

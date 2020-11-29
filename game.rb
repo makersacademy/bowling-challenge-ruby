@@ -22,6 +22,7 @@ class Game
     play_roll_1
     play_roll_2 if @roll_1 < 10
     reset_frame
+    current_score
   end
 
   def reset_frame
@@ -72,14 +73,22 @@ class Game
   end
 
   def current_score
-    if @game_rolls[-1][0] + @game_rolls[-1][1] = 10
+    if @game_rolls[-1][0] + @game_rolls[-1][1] == 10
       return 'score depends on next frame'
     else
-      # need to evaluate each array within the array.
+      frames_scores.sum
+    end
+  end
 
-      # if [i][0] = 10, add (10 + [i+1][0] + [i+1][1]) to score
-      # elsif [i][0] + [i][1] = 10, add 10 + [i+1][0] to score
-      # else sum [i][0] & [i][1] <10 sum them and add to score
+  def frames_scores
+    @game_rolls.map.with_index do |frame_rolls, index|
+      if @game_rolls[index][0] == 10
+        (10 + @game_rolls[index + 1].sum)
+      elsif @game_rolls[index].sum == 10
+        (10 + @game_rolls[index + 1][0])
+      else
+        frame_rolls.sum
+      end
     end
   end
 end
