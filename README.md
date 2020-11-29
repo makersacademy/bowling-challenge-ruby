@@ -3,15 +3,16 @@ Bowling Challenge in Ruby
 ## Approach
 
 * This bowling scorecard was written in Ruby, in a test driven manner using RSpec.
+* I allocated most of my time to planning (~50 mins), my plan was iterated 3 times, the most recent is below!  
 
 ## Planning
 
-* This was briefly planned in a notepad, as shown below!
+* I roughly planned this out in a notepad, as shown below!
 ![128151518_1259207611113689_7582779584981036972_n](https://user-images.githubusercontent.com/71882258/100553723-500dfd80-3287-11eb-9081-9257cd8ed252.jpg)
 
 ## Method
 
-* I broke it down into 1 main method, add_roll() and stored bonus, total, frame, and current_frame in instance variables.
+* I broke it down into 1 main method, add_roll() and stored: bonus, total, frame, and current_frame in instance variables.
 
 ## Results
 
