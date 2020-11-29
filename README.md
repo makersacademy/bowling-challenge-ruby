@@ -4,6 +4,8 @@ Bowling Challenge in Ruby
 
 * This bowling scorecard was written in Ruby, in a test driven manner using RSpec.
 * I allocated most of my time to planning (~50 mins), my plan was iterated 3 times, the most recent is below!  
+* I calculated the scores for the RSpec using an online bowling score calculater. 
+* A decent bulk of this challenge was figuring out how to attach a picture to the readme! 
 
 ## Planning
 
