@@ -48,4 +48,23 @@ describe Bowling do
     new_game.add_roll(5)
     expect(new_game.total).to eq 45
   end
+
+  it 'scoring 3 strikes then 4 3s gives you a score of 81' do
+    new_game = Bowling.new
+    3.times { new_game.add_roll(10) }
+    4.times { new_game.add_roll(3) }
+    expect(new_game.total).to eq 81
+  end
+
+  it 'gutter game gives you 0 points' do
+    new_game = Bowling.new
+    20.times { new_game.add_roll(0) }
+    expect(new_game.total).to eq 0
+  end
+
+  it 'rolling after the game is over gives you an error' do
+    new_game = Bowling.new
+    20.times { new_game.add_roll(0) }
+    expect { new_game.add_roll(0) }.to raise_error 'The game is over!'
+  end
 end
