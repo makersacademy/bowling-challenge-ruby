@@ -57,10 +57,23 @@ describe 'A game of bowling' do
     expect { game.roll(6) }.to raise_error "You can't knock down more than ten pins in a frame"
   end
 
-  xit 'gives a bonus frame if strike or spare in 10th frame' do
+  it 'gives a bonus frame if strike or spare in 10th frame' do
     rolls
-    4.times { game.roll(10) }
-    expect(game.score).to eq 50
+    game.roll(0)
+    game.roll(10)
+    game.roll(10)
+    game.roll(10)
+    expect(game.score).to eq 30
+  end
+
+  it 'stops after the bonus rolls' do
+    rolls
+    game.roll(0)
+    game.roll(10)
+    game.roll(10)
+    game.roll(10)
+    expect { game.roll(10) }.to raise_error('Your game is now complete')
+    expect(game.score).to eq 30
   end
 
   it 'stops bonus frame if game doesnt end with spare or strike' do

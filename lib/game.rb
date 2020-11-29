@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class Game
-  attr_reader :strike_count, :frame, :bonus
+  attr_accessor :score, :frame
 
+  TP = 10
+  TF = 10
   def initialize
     @score = []
     @frame = 0
-    @bonus = 0
   end
 
   def roll(pins)
@@ -19,19 +20,17 @@ class Game
     result = 0
     index = 0
     10.times do
+      @frame += 1
       if strike?(index)
-        result += strike_score(index)
+        result += last_frame ? bonus(index) : strike_score(index)
         index += 1
-        # strike_bonus if @frame >= 10 && @frame <= 12
       elsif spare?(index)
-        result += spare_score(index)
+        result += last_frame ? bonus(index) : spare_score(index)
         index += 2
-        # spare_bonus if @frame >= 10 && @frame <= 11
       else
         result += frame_score(index)
         index += 2
       end
-      @frame += 1
     end
     result
   end
@@ -39,19 +38,19 @@ class Game
   private
 
   def game_over?
-    @score.count >= 20 || @frame >= 10
+    @score.count >= 21 || @frame >= TF
   end
 
   def strike?(index)
-    @score[index] == 10
+    @score[index] == TP
   end
 
   def spare?(index)
-    @score[index] + @score[index + 1] == 10
+    @score[index] + @score[index + 1] == TP
   end
 
   def strike_score(index)
-    10 + @score[index + 1] + @score[index + 2]
+    TP + @score[index + 1] + @score[index + 2]
   end
 
   def spare_score(index)
@@ -62,13 +61,16 @@ class Game
     @score[index] + @score[index + 1]
   end
 
-  # def strike_bonus
-  #   10 + @score[index] + @score[index + 1]
-  #   @bonus += 1
-  # end
+  def bonus(index)
+    if strike?(index)
+      @frame -= 2
+      strike_score(index)
+    else
+      spare_score(index)
+    end
+  end
 
-  # def spare_bonus
-  #   10 + @score[index]
-  #   @bonus += 1
-  # end
+  def last_frame(frame = @frame)
+    frame == TF
+  end
 end
