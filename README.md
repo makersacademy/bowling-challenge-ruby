@@ -21,4 +21,4 @@ The scoring for the last frame operates slightly differently, with a bonus roll 
 ![Frame 10 Flow Chart](images/frame_10_flow.png)
 
 ## Improvements required
-My current score method does not currently correctly calculate the score in the event that the player makes consecutive strikes. I am going to focus on finishing the play logic for frame 10, followed by the method to calculate the final score.  Once those are complete then I will revisit the logic of scoring multiple strikes.
+My current score method does not currently correctly calculate the score in the event that the player makes consecutive strikes. I am going to focus on finishing the method to calculate the final score.  Once that is complete then I will revisit the logic of scoring multiple strikes.
