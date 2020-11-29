@@ -32,4 +32,20 @@ describe Bowling do
     new_game.add_roll(4)
     expect(new_game.bonus).to eq 0
   end
+
+  it 'scoring a stike means you get 2 rounds of bonus scores' do
+    new_game = Bowling.new
+    new_game.add_roll(6)
+    new_game.add_roll(4)
+    new_game.add_roll(10)
+    expect(new_game.bonus).to eq 2
+  end
+
+  it 'scoring 2 strikes then a 5 gives you a total of 45' do
+    new_game = Bowling.new
+    new_game.add_roll(10)
+    new_game.add_roll(10)
+    new_game.add_roll(5)
+    expect(new_game.total).to eq 45
+  end
 end

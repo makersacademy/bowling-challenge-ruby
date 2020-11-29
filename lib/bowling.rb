@@ -9,7 +9,7 @@ class Bowling
   end
 
   def add_roll(pins)
-    bonus? ? score = 2 * pins : score = pins
+    bonus? ? score = multiplier(pins) : score = pins
 
     apply_score(pins, score)
     end_frame if end_of_frame?
@@ -22,6 +22,10 @@ class Bowling
     @bonus += 2 if strike?
     @current_frame.clear
     @frame += 1
+  end
+
+  def multiplier(pins)
+    @bonus >= 3 ? pins * 3 : pins * 2
   end
 
   def apply_score(pins, score)
