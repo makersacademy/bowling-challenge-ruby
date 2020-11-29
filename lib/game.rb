@@ -1,25 +1,27 @@
 # frozen_string_literal: true
 
+require 'frame'
+
 class Game
-  attr_accessor :score, :frame
+  attr_reader :frame, :scores
 
   TP = 10
   TF = 10
   def initialize
-    @score = []
+    @scores = []
     @frame = 0
   end
 
   def roll(pins)
     raise 'Your game is now complete' if game_over?
 
-    @score << pins
+    @scores << pins
   end
 
   def score
     result = 0
     index = 0
-    10.times do
+    TF.times do
       @frame += 1
       if strike?(index)
         result += last_frame ? bonus(index) : strike_score(index)
@@ -38,27 +40,27 @@ class Game
   private
 
   def game_over?
-    @score.count >= 21 || @frame >= TF
+    @scores.count >= 21 || @frame >= TF
   end
 
   def strike?(index)
-    @score[index] == TP
+    @scores[index] == TP
   end
 
   def spare?(index)
-    @score[index] + @score[index + 1] == TP
+    @scores[index] + @scores[index + 1] == TP
   end
 
   def strike_score(index)
-    TP + @score[index + 1] + @score[index + 2]
+    TP + @scores[index + 1] + @scores[index + 2]
   end
 
   def spare_score(index)
-    @score[index] + @score[index + 1] + @score[index + 2]
+    @scores[index] + @scores[index + 1] + @scores[index + 2]
   end
 
   def frame_score(index)
-    @score[index] + @score[index + 1]
+    @scores[index] + @scores[index + 1]
   end
 
   def bonus(index)

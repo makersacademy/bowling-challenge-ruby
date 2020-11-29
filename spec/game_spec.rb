@@ -52,10 +52,10 @@ describe 'A game of bowling' do
     expect(game.score).to eq 300
   end
 
-  xit 'stops knocking down more than ten pins per frame' do
-    game.roll(7)
-    expect { game.roll(6) }.to raise_error "You can't knock down more than ten pins in a frame"
-  end
+  # it 'stops knocking down more than ten pins per frame' do
+  #   game.roll(7)
+  #   expect { game.roll(6) }.to raise_error("You can't knock down more than ten pins in a frame")
+  # end
 
   it 'gives a bonus frame if strike or spare in 10th frame' do
     rolls
