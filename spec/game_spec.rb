@@ -95,6 +95,86 @@ describe Game do
     end
   end
 
+  # context 'play_frame_10' do
+  #   let(:testgame) {Game.new}
+  #   it 'allows the player a third roll if they got a strike on roll 1' do
+  #     testgame.game_rolls = [[4,5],[5,5],[10,0],[4,6],[7,3],[9,1],[0,3],[7,1],[9,1]]
+  #     allow_any_instance_of(Game).to receive(:gets).and_return('10','10','10')
+  #     expect(subject.play_frame_10).to eq 156
+  #   end
+  # end
+
+  context 'play_frame_10 roll 1' do
+    it "saves the player's first roll to frame_rolls" do
+      allow_any_instance_of(Game).to receive(:gets).and_return('4')
+      subject.play_roll_1_10
+      expect(subject.frame_rolls).to eq [4]
+    end
+
+    it 'does not store rolls over 10' do
+      allow_any_instance_of(Game).to receive(:gets). and_return('11','4')
+      expect(subject.play_roll_1_10).to eq [4]
+    end
+
+    it 'resets the pins if the player gets a strike on roll 1' do
+      allow_any_instance_of(Game).to receive(:gets).and_return('10')
+      subject.play_roll_1_10
+      expect(subject.pins).to eq 10
+    end
+  end
+
+  context 'play_frame_10 roll_2_10' do
+    let(:testgame) { Game.new }
+    it 'saves roll 2 to frame_rolls' do
+      testgame.frame_rolls = [10]
+      testgame.pins = 10
+      allow_any_instance_of(Game).to receive(:gets).and_return('5')
+      testgame.play_roll_2_10
+      expect(testgame.frame_rolls).to eq [10,5]
+    end
+
+    it 'resets the pins if the player gets a strike on roll 2' do
+      testgame.frame_rolls = [10]
+      testgame.pins = 10
+      allow_any_instance_of(Game).to receive(:gets).and_return('10')
+      testgame.play_roll_2_10
+      expect(testgame.pins).to eq 10
+    end
+
+    it 'does not store rolls over the remaining number of pins' do
+      testgame.frame_rolls = [10]
+      testgame.pins = 10
+      allow_any_instance_of(Game).to receive(:gets). and_return('11','3')
+      expect(testgame.play_roll_2_10).to eq [10,3]
+    end
+  end
+
+  context 'play_frame_10 roll_2_10_a' do
+    let(:testgame) { Game.new }
+    it 'saves roll 2 to frame_rolls' do
+      testgame.frame_rolls = [4]
+      testgame.pins = 6
+      allow_any_instance_of(Game).to receive(:gets).and_return('5')
+      testgame.play_roll_2_10_a
+      expect(testgame.frame_rolls).to eq [4,5,0]
+    end
+
+    it 'resets the pins if the player gets a spare on roll 2' do
+      testgame.frame_rolls = [4]
+      testgame.pins = 6
+      allow_any_instance_of(Game).to receive(:gets).and_return('6')
+      testgame.play_roll_2_10_a
+      expect(testgame.pins).to eq 10
+    end
+
+    it 'does not store rolls over the remaining number of pins' do
+      testgame.frame_rolls = [7]
+      testgame.pins = 3
+      allow_any_instance_of(Game).to receive(:gets). and_return('4','3')
+      expect(testgame.play_roll_2_10_a).to eq [7,3]
+    end
+  end
+
   context 'calculates the score' do
     let(:testgame) {Game.new}
     it 'defers calculation of current score if latest frame included a spare' do
