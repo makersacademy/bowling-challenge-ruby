@@ -9,7 +9,7 @@ class Bowling
   end
 
   def add_roll(pins)
-    raise 'The game is over!' if !game_continues?
+    raise 'The game is over!' unless game_continues?
 
     bonus? ? score = multiplier(pins) : score = pins
 
@@ -42,7 +42,7 @@ class Bowling
 
   def end_of_frame?
     if @frame < 10
-      @current_frame.length == 2 ||  current_frame_sum == 10
+      @current_frame.length == 2 || current_frame_sum == 10
     else
       @current_frame.length == 3 && current_frame_sum >= 10
     end
@@ -57,7 +57,7 @@ class Bowling
   end
 
   def bonus?
-    @bonus > 0
+    @bonus.positive?
   end
 
   def double_bonus?

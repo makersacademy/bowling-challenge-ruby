@@ -79,4 +79,10 @@ describe Bowling do
     12.times { new_game.add_roll(10) }
     expect(new_game.total).to eq 300
   end
+
+  it 'cant roll an extra strike after the perfect game' do
+    new_game = Bowling.new
+    12.times { new_game.add_roll(10) }
+    expect { new_game.add_roll(10) }.to raise_error 'The game is over!'
+  end
 end
