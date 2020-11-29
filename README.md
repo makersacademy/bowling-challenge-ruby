@@ -19,3 +19,6 @@ I decided to use a flow chart to map the process of play for a bowling game.  Th
 The scoring for the last frame operates slightly differently, with a bonus roll being available if a player gets a strike or a spare in either of the two original rolls for the frame.  This complicates the flow chart as shown below:
 
 ![Frame 10 Flow Chart](images/frame_10_flow.png)
+
+## Improvements required
+My current score method does not currently correctly calculate the score in the event that the player makes consecutive strikes. I am going to focus on finishing the play logic for frame 10, followed by the method to calculate the final score.  Once those are complete then I will revisit the logic of scoring multiple strikes.
