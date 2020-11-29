@@ -73,4 +73,10 @@ describe Bowling do
     21.times { new_game.add_roll(5) }
     expect(new_game.total).to eq 150
   end
+
+  it 'perfect game is 300' do
+    new_game = Bowling.new
+    12.times { new_game.add_roll(10) }
+    expect(new_game.total).to eq 300
+  end
 end
