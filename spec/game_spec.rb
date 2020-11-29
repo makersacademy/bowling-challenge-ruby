@@ -9,9 +9,9 @@ describe 'A game of bowling' do
     expect(game.score).to eq 0
   end
 
-  it 'can have a game where every roll is a 1' do
-    20.times { game.roll(1) }
-    expect(game.score).to eq 20
+  it 'can have a game where every roll is a 2' do
+    20.times { game.roll(2) }
+    expect(game.score).to eq 40
   end
 
   it 'can calculate a spare' do
@@ -38,12 +38,36 @@ describe 'A game of bowling' do
     expect(game.score).to eq 39
   end
 
-  # it 'stops a player throwing too many rolls' do
-  #   rolls
-  #   game.roll(3)
-  #   game.roll(3)
-  #   game.roll(3)
-  #   expect(game.score).to eq 9
-  #   expect { game.roll(3) }.to raise_error('Your game is now complete')
-  # end
+  it 'stops a player throwing too many rolls' do
+    rolls
+    game.roll(3)
+    game.roll(3)
+    game.roll(3)
+    expect(game.score).to eq 9
+    expect { game.roll(3) }.to raise_error('Your game is now complete')
+  end
+
+  it 'stops edge case of trying to roll 13 strikes' do
+    15.times { game.roll(10) }
+    expect(game.score).to eq 300
+  end
+
+  xit 'stops knocking down more than ten pins per frame' do
+    game.roll(7)
+    expect { game.roll(6) }.to raise_error "You can't knock down more than ten pins in a frame"
+  end
+
+  xit 'gives a bonus frame if strike or spare in 10th frame' do
+    rolls
+    4.times { game.roll(10) }
+    expect(game.score).to eq 50
+  end
+
+  it 'stops bonus frame if game doesnt end with spare or strike' do
+    9.times { game.roll(10) }
+    game.roll(5)
+    game.roll(4)
+    expect(game.score).to eq 263
+    expect { game.roll(8) }.to raise_error('Your game is now complete')
+  end
 end
