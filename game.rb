@@ -29,7 +29,6 @@ class Game
     play_roll_1_10
     play_roll_2_decider
     play_roll_3_decider
-    # final_score
   end
 
   def reset_frame
@@ -37,6 +36,7 @@ class Game
     @frame += 1
     @game_rolls << @frame_rolls
     @frame_rolls = []
+    @game_rolls
   end
 
   def play_roll_1
@@ -140,6 +140,44 @@ class Game
     end
   end
 
+  def play_roll_3_10
+    puts 'Bonus roll: How many pins did you knock down?'
+    @roll_3_10 = gets.chomp.to_i
+
+    while @roll_3_10 > 10 do
+      puts 'Invalid entry'
+      puts 'Bonus roll: How many pins did you knock down?'
+      @roll_3_10 = gets.chomp.to_i
+    end
+    if @roll_3_10 == 10
+      puts 'STRIKE!'
+      @pins -= @roll_3_10
+      @frame_rolls << @roll_3_10
+    else
+      @pins -= @roll_3_10
+      @frame_rolls << @roll_3_10
+    end
+  end
+
+  def play_roll_3_10_a
+    puts 'Bonus roll: How many pins did you knock down?'
+    @roll_3_10_a = gets.chomp.to_i
+
+    while @roll_3_10_a > @pins do
+      puts 'Invalid entry'
+      puts 'Bonus roll: How many pins did you knock down?'
+      @roll_3_10_a = gets.chomp.to_i
+    end
+
+    if @roll_3_10_a == @pins
+      puts 'SPARE!'
+      @pins = 0
+      @frame_rolls << @roll_3_10_a
+    else
+      @frame_rolls << @roll_3_10_a
+    end
+  end
+
   def current_score
     if @game_rolls[-1][0] + @game_rolls[-1][1] == 10
       return 'score depends on next frame'
@@ -170,9 +208,9 @@ class Game
 
   def play_roll_3_decider
     if @roll_1_10 + @roll_2_10 = 20 || @roll_1_10 + @roll_2_10_a = 10
-      roll_3_10
+      play_roll_3_10
     elsif @roll_1_10 + @roll_2_10 > 10
-      roll_3_10_a
+      play_roll_3_10_a
     else
     end
   end
