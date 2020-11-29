@@ -67,4 +67,10 @@ describe Bowling do
     20.times { new_game.add_roll(0) }
     expect { new_game.add_roll(0) }.to raise_error 'The game is over!'
   end
+
+  it 'rolling a full game of 5s gives you a score of 150' do
+    new_game = Bowling.new
+    21.times { new_game.add_roll(5) }
+    expect(new_game.total).to eq 150
+  end
 end
