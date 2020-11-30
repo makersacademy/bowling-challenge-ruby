@@ -17,11 +17,22 @@ describe Bowling do
   it "adds the bonus to a strike" do
     game = Bowling.new
     game.roll(10)
-    game.roll(3)
+    game.roll(0)
     game.roll(5)
     game.roll(5)
     expect(game.frame1).to eq 20
   end
+
+  it "adds the bonus to a strike if followed by anotehr strike" do
+    game = Bowling.new
+    game.roll(10)
+    game.roll(0)
+    game.roll(10)
+    game.roll(0)
+    game.roll(5)
+    expect(game.frame1).to eq 25
+  end
+
 
   it "adds the bonus to a spare" do
     game = Bowling.new
