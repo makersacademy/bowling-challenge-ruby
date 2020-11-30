@@ -1,3 +1,6 @@
+Solution lovingly pinched from:
+https://www.youtube.com/watch?v=wrr16PdgHPM
+
 Bowling Challenge in Ruby
 =================
 
