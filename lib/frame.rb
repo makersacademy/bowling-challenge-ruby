@@ -4,20 +4,23 @@ class Frame
   @@total_score = 0
   @@spare_status = false
 
-  attr_reader :scores, :state, :spare_status, :total_score
+  attr_reader :scores, :state, :spare_status, :total_score, :current_roll
 
-  def initialize(id, state =false)
+  def initialize(id, state = false, current_roll = 1)
     @id = id
     @scores = {
         first_roll: 0,
         second_roll: 0
     }
     @state = state
+    @current_roll = current_roll
   end
 
   def first_roll(pins)
     return strike if is_strike?(pins)
+
     increment_score(:first_roll, pins)
+    @current_roll = 2
   end
 
   def second_roll(pins)
