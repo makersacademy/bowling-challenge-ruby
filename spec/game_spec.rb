@@ -241,12 +241,12 @@ describe Game do
 
     it 'refers to the next frame to calculate the score after a spare' do
       testgame.game_rolls = [[4,5],[5,5],[3,2]]
-      expect(testgame.frames_scores).to eq [9,13,5]
+      expect(testgame.frames_scores).to eq 27
     end
 
     it 'refers to the next frame to calculate the score after a strike' do
       testgame.game_rolls = [[4,5],[10,0],[3,2]]
-      expect(testgame.frames_scores).to eq [9,15,5]
+      expect(testgame.frames_scores).to eq 29
     end
 
     it 'sums the frames so far where the last frame not spare or strike' do

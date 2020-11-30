@@ -175,20 +175,22 @@ class Game
     if @game_rolls[-1][0] + @game_rolls[-1][1] == 10
       return 'score depends on next frame'
     else
-      frames_scores.sum
+      frames_scores
     end
   end
 
   def frames_scores
-    @game_rolls.map.with_index do |frame_rolls, index|
+    score = 0
+    for index in 0..(@game_rolls.length - 1)
       if @game_rolls[index][0] == 10
-        (10 + @game_rolls[index + 1].sum)
+        score += (10 + @game_rolls[index + 1].sum)
       elsif @game_rolls[index].sum == 10
-        (10 + @game_rolls[index + 1][0])
+        score += (10 + @game_rolls[index + 1][0])
       else
-        frame_rolls.sum
+        score += @game_rolls[index].sum
       end
     end
+    score
   end
 
   def final_score
