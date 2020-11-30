@@ -16,4 +16,16 @@ describe Frame do
     end
   end
 
+  describe "#first_roll" do
+    it 'is called on an instance of the Frame class' do
+      expect(frame).to respond_to(:first_roll).with(1).argument
+    end
+  end
+
+  describe "#second_roll" do
+    it 'is called on an instance of the Frame class' do
+      expect(frame).to respond_to(:second_roll).with(1).argument
+    end
+  end
+
 end
