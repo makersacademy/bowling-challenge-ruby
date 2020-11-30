@@ -253,5 +253,10 @@ describe Game do
       testgame.game_rolls = [[4,5],[10,0],[3,2]]
       expect(testgame.current_score).to eq 29
     end
+
+    it 'calculates the final score' do
+      testgame.game_rolls = [[4,5],[5,5],[10,0],[4,6],[7,3],[9,1],[0,3],[7,1],[9,1],[10,10,10]]
+      expect(testgame.final_score).to eq 156
+    end
   end
 end

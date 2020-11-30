@@ -11,10 +11,11 @@ class Game
   end
 
   def play
-    while @frame < 3 do
+    while @frame < 10 do
       play_frame
     end
-    # play_frame_10
+    play_frame_10
+    @game_rolls # temporary placement until final scores method is written
     # final_score
   end
 
@@ -29,14 +30,6 @@ class Game
     play_roll_1_10
     play_roll_2_decider
     play_roll_3_decider
-  end
-
-  def reset_frame
-    @pins = 10
-    @frame += 1
-    @game_rolls << @frame_rolls
-    @frame_rolls = []
-    @game_rolls
   end
 
   def play_roll_1
@@ -196,6 +189,30 @@ class Game
         frame_rolls.sum
       end
     end
+  end
+
+  def final_score
+    game_score = 0
+    for index in 0..8
+      p 'in the index 0 to 8 area'
+      if @game_rolls[index][0] == 10
+        game_score += (10 + @game_rolls[index + 1].sum)
+      elsif @game_rolls[index].sum == 10
+        game_score += (10 + @game_rolls[index + 1][0])
+      else
+        game_score += @game_rolls[index].sum
+      end
+    end
+    p 'about to add in score for final frame'
+    game_score += @game_rolls[9].sum
+  end
+
+  def reset_frame
+    @pins = 10
+    @frame += 1
+    @game_rolls << @frame_rolls
+    @frame_rolls = []
+    @game_rolls
   end
 
   def play_roll_2_decider
