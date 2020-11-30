@@ -1,0 +1,29 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/constantine_quantum/Projects/bowling-challenge-ruby/spec/frame_spec.rb": {
+        "lines": [
+          1,
+          null,
+          4,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          4,
+          null,
+          null,
+          1,
+          4,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1606676444
+  }
+}
