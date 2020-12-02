@@ -34,8 +34,7 @@ class Frame
   end
 
   def spare?
-    return false if strike?
-    return true if rolls.inject(:+) == 10
+    return true if rolls.inject(:+) == 10 unless strike?
   end
 
   def close_play

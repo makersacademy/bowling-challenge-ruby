@@ -31,9 +31,12 @@ class Game
     total_score = @frames.map {|frame | frame.score }.sum
   end
 
+
   def last_frame_strike?
     last_frame.strike?
   end
+
+  private
 
   def last_frame_spare?
     last_frame.spare?
@@ -43,7 +46,6 @@ class Game
     @frames.length
    end
 
- private
    
   def point_bonus(pins)
     last_frame.point_bonus(pins) unless frame_count == 1
