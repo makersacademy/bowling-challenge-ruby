@@ -26,7 +26,7 @@ class Frame
   end
 
   def strike?
-    return true if rolls.first == 10
+    rolls.first == 10
   end
   
   def point_bonus(pins)
