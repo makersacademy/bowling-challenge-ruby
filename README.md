@@ -72,3 +72,7 @@ Get the result of roll 3
 Frame 1 total = roll 1 + roll 2 + roll 3
 ```
 ![diagram](basic.png)
+
+## Post coach feedback
+
+I wasn't starting the most simplest way by accounting for all the different scores Frame 1 could have. So, I will now attempt to start with just calculating score for 'no-bonus' roles.
