@@ -11,7 +11,7 @@ class Game
     case 
     when frame_count == 1 && current_frame.in_play
          current_frame.knocked(pins)
-    when frame_count <= 8 && (current_frame.in_play == false)
+    when frame_count <= 8 && !current_frame.in_play
          new_frame
          current_frame.knocked(pins)
          point_bonus(pins) if (last_frame_strike?) && (pins == 10)
@@ -20,7 +20,7 @@ class Game
     when frame_count <=8 && current_frame.in_play
          current_frame.knocked(pins)
          point_bonus(pins) if last_frame_strike?
-    when frame_count == 9 && (current_frame.in_play == false)
+    when frame_count == 9 && !current_frame.in_play
          new_frame_10
          current_frame.knocked(pins)
          point_bonus(pins) if (last_frame_strike?) && (pins == 10)

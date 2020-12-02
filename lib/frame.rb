@@ -18,11 +18,11 @@ class Frame
   
 
   def frame_check
-    close_play if (@rolls.length == 2) && (@frame_10 == false)
+    close_play if (@rolls.length == 2) && !@frame_10
   end
 
   def strike_check
-    close_play if (@rolls[0] == 10) && (@frame_10 == false)
+    close_play if (@rolls[0] == 10) && !@frame_10
   end
 
   def strike?
