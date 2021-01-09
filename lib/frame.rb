@@ -1,7 +1,6 @@
 class Frame
 
-  attr_reader :bonus_rolls
-  attr_accessor :score
+  attr_accessor :score, :bonus_rolls
 
   def initialize
     @score = 0

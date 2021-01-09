@@ -21,7 +21,8 @@ class Game
   end
 
   def start_game
-    for i in 0..0 do
+    for i in 0..2 do
+      puts "Frame number: #{i}"
       roll_1 = nil
       roll_2 = nil
 
@@ -31,7 +32,29 @@ class Game
       end
 
       frames_array[i].add_score(roll_1)
-      p frames_array[i].score
+
+      if i > 0
+        if frames_array[i-1].bonus_rolls > 0
+          frames_array[i-1].add_score(roll_1)
+          frames_array[i-1].bonus_rolls -= 1
+        end
+      end
+
+      if roll_1 == 10
+        frames_array[i].bonus_rolls += 2
+      else
+        loop do
+          puts "Frame number: #{i}"
+          roll_2 = get_roll
+          break if roll_2 >= 0 && roll_2 <= (10 - roll_1)
+        end
+        frames_array[i].add_score(roll_2)
+        # # insert conditional here to only check if i > 1 (not needed for first frame)
+        # if self.frames[i-1].bonus_rolls > 0
+        #   self.frames[i-1].add_score(roll_1)
+        #   self.frames[i-1].remove_bonus_roll
+        # end
+      end
     end
 
   end
