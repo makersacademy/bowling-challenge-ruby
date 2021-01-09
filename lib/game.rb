@@ -1,10 +1,13 @@
+require 'frame'
+
 class Game
   def self.create
     Game.new
   end
 
-  def initialize
+  def initialize(frame_class = Frame)
     @frames = [[], [], [], [], [], [], [], [], [], []]
+    @frame_class = frame_class
   end
 
   def score(scores)
