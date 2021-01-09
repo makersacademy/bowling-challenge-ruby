@@ -13,6 +13,11 @@ describe Game do
     end
   end
 
+  # describe "calculate_score" do
+  #   it "returns the sum of all current frame scores from the frame array" do
+  #   end
+  # end
+
   describe "self.get_roll" do
     it "returns an integer roll input by the user" do
       allow(STDIN).to receive(:gets).and_return("5")
