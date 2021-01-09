@@ -22,7 +22,10 @@ class Game
 
   def start_game
     for i in 0..2 do
+      p frames_array
       puts "Frame number: #{i}"
+      puts "Roll number: 1"
+      puts "Game score: #{self.score}"
       roll_1 = nil
       roll_2 = nil
 
@@ -44,7 +47,10 @@ class Game
         frames_array[i].bonus_rolls += 2
       else
         loop do
+          p frames_array
           puts "Frame number: #{i}"
+          puts "Roll number: 2"
+          puts "Game score: #{self.score}"
           roll_2 = get_roll
           break if roll_2 >= 0 && roll_2 <= (10 - roll_1)
         end
