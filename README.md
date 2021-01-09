@@ -63,3 +63,30 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+### User Stories
+
+As a player,
+So that I can keep track of my score,
+I want a way of recording my current score.
+
+As a player,
+So that I can see what my bowls were for the current frame,
+I want to be told the scores for my specific bowls for this frame.
+
+As a player,
+So that I know what my current score is this frame,
+I want to be able to be told my current score for this frame.
+
+As a player,
+So that I know if I am eligible for bonus points,
+I want to be told if I bowled a Strike or a Spare this frame.
+
+As a player, 
+So that I know what my total score is this game,
+I want to be able to be told my current score for this game.
+
+As a player,
+So that I know how many frames I have left in my current game,
+I want to be able to see what the current frame is.
+
