@@ -25,14 +25,20 @@ RSpec.describe BowlingGame do
 
     it "can roll a strike" do
       @gm.roll 10
-      @gm.roll 4
       @gm.roll 3
+      @gm.roll 4
       16.times { @gm.roll 0 }
       expect(@gm.score).to eq 24
     end
+
     it "can roll a perfect game" do
       12.times { @gm.roll 10 }
       expect(@gm.score).to eq 300
+    end
+
+    it "can roll all spares" do
+      21.times { @gm.roll 5 }
+      expect(@gm.score).to eq 150
     end
   end
 end
