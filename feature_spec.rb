@@ -1,4 +1,6 @@
 require_relative './lib/game.rb'
 
 will = Game.new
-p will.get_roll
+p will.score
+
+will.start_game

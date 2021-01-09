@@ -2,6 +2,10 @@ require 'game.rb'
 
 describe Game do
 
+  it "has a score which can be accessed and starts at zero" do
+    expect(subject.score).to eq(0)
+  end
+
   describe "#frames_array" do
     it "is returns an array of FRAMES_PER_GAME frame instances that can be accessed" do
       expect(subject.frames_array.length).to eq(::Game::FRAMES_PER_GAME)
