@@ -11,13 +11,27 @@ class BowlingGame
     result = 0
     rollIndex = 0
     10.times do
-      if @rolls[rollIndex] + @rolls[rollIndex + 1] == 10
-        result += @rolls[rollIndex] + @rolls[rollIndex + 1] + @rolls[rollIndex + 2]
+      if spare?(rollIndex)
+        result += spareScore(rollIndex)
       else
-        result += @rolls[rollIndex] + @rolls[rollIndex + 1]
+        result += frameScore(rollIndex)
       end
       rollIndex += 2
     end
     result
+  end
+
+  private
+
+  def spare?(rollIndex)
+    @rolls[rollIndex] + @rolls[rollIndex + 1] == 10
+  end
+
+  def spareScore(rollIndex)
+    10 + @rolls[rollIndex + 2]
+  end
+
+  def frameScore(rollIndex)
+    @rolls[rollIndex] + @rolls[rollIndex + 1]
   end
 end
