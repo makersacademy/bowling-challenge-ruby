@@ -8,6 +8,8 @@ describe Game do
   end
 
   describe '.score' do
-    it { is_expected.to respond_to(:score).with(1).argument }
+    it "should receive with one argument" do
+      expect(Game).to respond_to(:score).with(1).argument
+    end
   end
 end
