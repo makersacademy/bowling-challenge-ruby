@@ -34,6 +34,22 @@ As a player
 In order order score a bowling Game
 I would like to create a Game
 ```
+| Objects | Methods     |
+| :------------- | :------------- |
+| Game       | .create       |
+
+#### User Story 2
+```
+As a player
+In order to score my bowling Game
+I would like to provide an array of roll scores, and receive an array of cumulative frame scores
+```
+| Objects | Methods     |
+| :------------- | :------------- |
+| Game       | .score()       |
+
+
+###
 
 ### Diagramming
 
