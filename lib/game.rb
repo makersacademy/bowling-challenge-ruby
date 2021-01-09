@@ -3,5 +3,7 @@ class Game
     Game.new
   end
 
-  # def self.score
+  def self.score(scores)
+    [0,0,0,0,0,0,0,0,0,0]
+  end
 end
