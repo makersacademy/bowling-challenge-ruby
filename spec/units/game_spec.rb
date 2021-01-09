@@ -6,4 +6,8 @@ describe Game do
       expect(Game.create).to be_a Game
     end
   end
+
+  describe '.score' do
+    it { is_expected.to respond_to(:score).with(1).argument }
+  end
 end
