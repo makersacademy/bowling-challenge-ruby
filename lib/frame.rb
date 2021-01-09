@@ -1,6 +1,12 @@
 class Frame
-  def initialize(number)
-    @number = number
+  MAX_FRAMES = 10
+  MAX_PINS = 10
+  MIN_ROLLS_PER_FRAME = 1
+  MAX_ROLLS_PER_FRAME_NORMAL = 2
+  MAX_ROLLS_FOR_MAX_FRAMES = 3
+
+  def initialize(index)
+    @number = index + 1
     @rolls = []
     @bonus = 0
     @score = 0
@@ -16,18 +22,18 @@ class Frame
   end
 
   def strike?
-    rolls.sum == 10 && rolls.length == 1
+    rolls.sum == MAX_PINS && rolls.length == MIN_ROLLS_PER_FRAME
   end
 
   def spare?
-    rolls.sum == 10 && rolls.length == 2
+    rolls.sum == MAX_PINS && rolls.length == MAX_ROLLS_PER_FRAME_NORMAL
   end
 
   def complete?
-    if number == 9
-      rolls.length == 3
+    if number == MAX_FRAMES
+      rolls.length == MAX_ROLLS_FOR_MAX_FRAMES
     else
-      strike? || rolls.length == 2
+      strike? || rolls.length == MAX_ROLLS_PER_FRAME_NORMAL
     end
   end
 
