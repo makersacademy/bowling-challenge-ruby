@@ -19,8 +19,8 @@ class Frame
     @throws.sum == 10 && !strike?
   end
 
-  def add_total_score(amount)
-    @total_score += amount
+  def set_total_score
+    @total_score = @throws.sum
   end
 
 end

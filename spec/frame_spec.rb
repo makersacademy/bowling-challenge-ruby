@@ -42,9 +42,11 @@ describe Frame do
     end
   end
 
-  describe '#add_total_score' do
+  describe '#set_total_score' do
     it 'adds the amount to the total score of the frame' do
-      expect { subject.add_total_score(7) }.to change { subject.total_score }.by(7)
+      subject.add_roll_score(8)
+      subject.add_roll_score(1)
+      expect { subject.set_total_score }.to change { subject.total_score }.by(9)
     end
   end
 end
