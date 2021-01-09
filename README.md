@@ -27,6 +27,8 @@ Rub with Rspec testing.
 What makes your project stand out?
 
 ### User Stories
+
+#### User Story 1
 ```
 As a player
 In order order score a bowling Game
