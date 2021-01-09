@@ -72,14 +72,12 @@ Depending on the size of the project, if it is small and simple enough the refer
 ### Input/Output Table
 | Inputs (knocked down pins per roll array)  | Outputs (cumulative frame score array)     |
 | :------------- | :------------- |
-| [0]       | [0,0,0,0,0,0,0,0,0,0] |
-| [0,0]       | [0,0,0,0,0,0,0,0,0,0] |
 | [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] | [0,0,0,0,0,0,0,0,0,0] |
 | [10,10,10,10,10,10,10,10,10,10,10,10] | [30,60,90,120,150,180,210,240,270,300]|
 | [0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0] | [10,20,30,40,50,60,70,80,90,100] |
 | [1,4,4,5,6,4,5,5,10,0,1,7,3,6,4,10,2,8,6] | [5,14,29,49,60,61,77,97,117,133] |
 | **Edge cases:** | |
-| *anything other than an array of at least one, and up 21, integers between 1 and 10* | Error|
+| *anything other than an array of at least 12, and up 21, integers between 1 and 10* | Error|
 
 ## How to use?
 If people like your project they’ll want to learn how they can use it. To do so include step by step guide to use your project.
