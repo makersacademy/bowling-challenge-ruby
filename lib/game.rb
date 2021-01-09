@@ -1,6 +1,8 @@
 require 'frame'
 
 class Game
+  MAX_FRAMES = 10
+
   def self.create
     Game.new
   end
@@ -14,34 +16,33 @@ class Game
 
   private
 
-  def initialize(frame_class = Frame)
-    @frames = []
-    @frame_class = frame_class
+  def initialize(frames_collection_class = FramesCollection)
+    @frames = frames_collection_class.new
   end
 
   def scores_to_frames
-    frame_index = 0
-    @frames << @frame_class.new(frame_index)
+    number = 1
+    @frames.add_frame(number)
 
     @scores.each do |score|
-      if @frames[frame_index].complete?
-        frame_index += 1
-        @frames << @frame_class.new(frame_index)
+      if @frames.frame(number).complete?
+        number += 1
+        @frames.add_frame(number)
       end
 
-      @frames[frame_index].add_roll(score)
+      @frames.frame(number).add_roll(score)
     end
   end
 
   def add_bonuses_to_frames
-    @frames.each_with_index do |frame, frame_index|
-      if frame_index == 9
+    @frames.collection.each do |frame|
+      if frame.number == MAX_FRAMES
         frame
       elsif frame.spare?
-        frame.add_bonus(next_score(frame_index))
+        frame.add_bonus(next_score(frame.number))
       elsif frame.strike?
-        frame.add_bonus(next_score(frame_index))
-        frame.add_bonus(second_next_score(frame_index))
+        frame.add_bonus(next_score(frame.number))
+        frame.add_bonus(second_next_score(frame.number))
       end
     end
   end
@@ -49,20 +50,20 @@ class Game
   def cumulative_scores
     prior_frame_total_score = 0
 
-    @frames.map do |frame|
+    @frames.collection.map do |frame|
       prior_frame_total_score = frame.total_score(prior_frame_total_score)
     end
   end
 
-  def next_score(frame_index)
-    @frames[frame_index + 1].first_roll_score
+  def next_score(number)
+    @frames.frame(number + 1).first_roll_score
   end
 
-  def second_next_score(frame_index)
-    if @frames[frame_index + 1].second_roll_score
-      @frames[frame_index + 1].second_roll_score
+  def second_next_score(number)
+    if @frames.frame(number + 1).second_roll_score
+      @frames.frame(number + 1).second_roll_score
     else
-      @frames[frame_index + 2].first_roll_score
+      @frames.frame(number + 2).first_roll_score
     end
   end
 end

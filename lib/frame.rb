@@ -1,12 +1,14 @@
 class Frame
+  attr_reader :number
+
   MAX_FRAMES = 10
   MAX_PINS = 10
   MIN_ROLLS_PER_FRAME = 1
   MAX_ROLLS_PER_FRAME_NORMAL = 2
   MAX_ROLLS_FOR_MAX_FRAMES = 3
 
-  def initialize(index)
-    @number = index + 1
+  def initialize(number)
+    @number = number
     @rolls = []
     @bonus = 0
     @score = 0
@@ -51,7 +53,7 @@ class Frame
 
   private
 
-  attr_reader :rolls, :number, :bonus
+  attr_reader :rolls, :bonus
 
   def score
     rolls.sum + @bonus
