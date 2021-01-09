@@ -5,11 +5,6 @@ class Game
     Game.new
   end
 
-  def initialize(frame_class = Frame)
-    @frames = [[], [], [], [], [], [], [], [], [], []]
-    @frame_class = frame_class
-  end
-
   def score(scores)
     @scores = scores
     scores_to_frames
@@ -19,12 +14,22 @@ class Game
 
   private
 
+  def initialize(frame_class = Frame)
+    @frames = []
+    @frame_class = frame_class
+  end
+
   def scores_to_frames
     frame_index = 0
+    @frames << @frame_class.new(frame_index)
 
     @scores.each do |score|
-      @frames[frame_index] << score
-      frame_index += 1 if new_frame?(frame_index)
+      if @frames[frame_index].complete?
+        frame_index += 1
+        @frames << @frame_class.new(frame_index)
+      end
+
+      @frames[frame_index].add_roll(score)
     end
   end
 
@@ -32,45 +37,32 @@ class Game
     @frames.each_with_index do |frame, frame_index|
       if frame_index == 9
         frame
-      elsif spare?(frame)
-        frame << next_score(frame_index)
-      elsif strike?(frame)
-        frame << next_score(frame_index)
-        frame << second_next_score(frame_index)
+      elsif frame.spare?
+        frame.add_bonus(next_score(frame_index))
+      elsif frame.strike?
+        frame.add_bonus(next_score(frame_index))
+        frame.add_bonus(second_next_score(frame_index))
       end
     end
   end
 
   def cumulative_scores
-    prior_frame = 0
+    prior_frame_total_score = 0
 
     @frames.map do |frame|
-      frame = frame.sum + prior_frame
-      prior_frame = frame
+      prior_frame_total_score = frame.total_score(prior_frame_total_score)
     end
   end
 
-  def strike?(frame)
-    frame[0] == 10
-  end
-
-  def spare?(frame)
-    frame.length == 2 && frame.sum == 10
-  end
-
-  def new_frame?(frame_index)
-    (strike?(@frames[frame_index]) || @frames[frame_index].length == 2) && frame_index < 9
-  end
-
   def next_score(frame_index)
-    @frames[frame_index + 1][0]
+    @frames[frame_index + 1].first_roll_score
   end
 
   def second_next_score(frame_index)
-    if @frames[frame_index + 1].length >= 2
-      @frames[frame_index + 1][1]
+    if @frames[frame_index + 1].second_roll_score
+      @frames[frame_index + 1].second_roll_score
     else
-      @frames[frame_index + 2][0]
+      @frames[frame_index + 2].first_roll_score
     end
   end
 end
