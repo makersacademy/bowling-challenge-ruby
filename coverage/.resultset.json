@@ -3,6 +3,8 @@
     "coverage": {
       "/Users/lisa/Desktop/Projects/Week5/End_of_unit_challenge/bowling-challenge-ruby/spec/frame_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -23,6 +25,8 @@
       },
       "/Users/lisa/Desktop/Projects/Week5/End_of_unit_challenge/bowling-challenge-ruby/lib/frame.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           1,
@@ -37,6 +41,8 @@
       },
       "/Users/lisa/Desktop/Projects/Week5/End_of_unit_challenge/bowling-challenge-ruby/spec/frame_ten_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -54,6 +60,8 @@
       },
       "/Users/lisa/Desktop/Projects/Week5/End_of_unit_challenge/bowling-challenge-ruby/lib/frame_ten.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           null,
@@ -66,6 +74,8 @@
       },
       "/Users/lisa/Desktop/Projects/Week5/End_of_unit_challenge/bowling-challenge-ruby/spec/game_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -129,12 +139,13 @@
           1,
           null,
           null,
-          null,
           null
         ]
       },
       "/Users/lisa/Desktop/Projects/Week5/End_of_unit_challenge/bowling-challenge-ruby/lib/game.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           1,
@@ -166,8 +177,6 @@
           1,
           null,
           3,
-          null,
-          null,
           1,
           1,
           1,
@@ -226,6 +235,6 @@
         ]
       }
     },
-    "timestamp": 1610221307
+    "timestamp": 1610286323
   }
 }

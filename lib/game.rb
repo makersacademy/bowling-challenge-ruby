@@ -19,7 +19,7 @@ class Game
     if @round < 10
       calculate_strike(current_frame)
       calculate_spare(current_frame)
-      frames.append(current_frame)
+      @frames.append(current_frame)
       calculate_score
     elsif @round == 10
       check_last_frame(current_frame)
@@ -31,7 +31,7 @@ class Game
   def check_last_frame(current_frame)
     # Roll 1 + Roll 2 < 10
     if (current_frame.frame_score) < 10
-      frames.append(current_frame)
+      @frames.append(current_frame)
       calculate_score
       return
     end
@@ -39,7 +39,7 @@ class Game
     #  Strike at Roll 1
     if current_frame.roll1 == 10
       current_frame.frame_score += current_frame.roll3
-      frames.append(current_frame)
+      @frames.append(current_frame)
       calculate_score
       return
     end
@@ -47,7 +47,7 @@ class Game
     # Spare
     if current_frame.frame_score == 10
       current_frame.frame_score += current_frame.roll3
-      frames.append(current_frame)
+      @frames.append(current_frame)
       calculate_score
       nil
     end
@@ -57,11 +57,11 @@ class Game
 
   def check_previous_frame(current_frame)
     if @is_strike == true
-      previous_frame = frames[-1]
+      previous_frame = @frames[-1]
       previous_frame.frame_score += (current_frame.roll1 + current_frame.roll2)
 
     elsif @is_spare == true
-      previous_frame = frames[-1]
+      previous_frame = @frames[-1]
       previous_frame.frame_score += current_frame.roll1
     end
   end
@@ -80,7 +80,7 @@ class Game
 
   def calculate_score
     @score = 0
-    frames.each do |frame|
+    @frames.each do |frame|
       @score += frame.frame_score
     end
     @score
