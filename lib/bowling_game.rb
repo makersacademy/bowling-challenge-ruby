@@ -27,6 +27,7 @@ class BowlingGame
 
   private
 
+  # A strike (x) is when you knock down all the pins with the ball on your first try.
   def strike?(rollIndex)
     @rolls[rollIndex] == 10
   end
@@ -35,6 +36,7 @@ class BowlingGame
     10 + @rolls[rollIndex + 1] + @rolls[rollIndex + 2]
   end
 
+  # A spare (/) is when you knock down all the pins on your second try.
   def spare?(rollIndex)
     @rolls[rollIndex] + @rolls[rollIndex + 1] == 10
   end
