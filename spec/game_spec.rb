@@ -20,7 +20,7 @@ describe Game do
     end
   end
 
-  # all below methods are currently not isolated from Frame class
+  # all below methods are currently not isolated from Frame class and limited in their test examples
 
   describe "compile_scorecard" do
     it "returns an array of strings of all of the frames and their current scores" do

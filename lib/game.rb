@@ -40,7 +40,8 @@ class Game
   end
 
   def start_game
-    for i in 0..3 do
+    # loop for first 9 rounds
+    for i in 0..8 do
       p frames_array
       puts "Frame number: #{i + 1}"
       puts "Roll number: 1"
@@ -92,6 +93,8 @@ class Game
         end
       end
     end
+
+    #insert  code for final 
 
     puts "Final Score = #{print_score}"
     puts "Final Scorecard:"
