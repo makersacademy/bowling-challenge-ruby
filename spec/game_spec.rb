@@ -133,4 +133,23 @@ describe Game do
       expect(game.bonus_points).to eq('You are not due any bonus points for the last frame.')
     end
   end
+
+  describe '#game_result' do
+    it 'should inform user if they have rolled a gutter game' do
+      game.results.clear
+      10.times { game.input_scores(0, 0) }
+      expect(game.game_result).to eq('Unlucky! You rolled a gutter game. Your score was zero.')
+    end
+    it 'should inform the user if they have rolled a perfect game' do
+      game.results.clear
+      10.times { game.results << [10, 10, 10] }
+      expect(game.game_result).to eq('Congratulations hot shot! You rolled a perfect game. Good for you.')
+    end
+    it 'should return the user the score if not a gutter game or perfect game' do
+      game.results.clear
+      10.times { game.results << [2, 2] }
+      expect(game.game_result).to eq('Your score for this game was 40.')
+    end
+  end
+
 end

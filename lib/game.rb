@@ -39,7 +39,17 @@ class Game
     elsif @results[@frame_count - 2] != [10] && @results[@frame_count - 2].sum == 10
       @results[@frame_count - 2] << @results[@frame_count - 1][0]
     else
-      p 'You are not due any bonus points for the last frame.'
+      'You are not due any bonus points for the last frame.'
+    end
+  end
+
+  def game_result
+    if @results.flatten.sum.zero?
+      'Unlucky! You rolled a gutter game. Your score was zero.'
+    elsif @results.flatten.sum == 300
+      'Congratulations hot shot! You rolled a perfect game. Good for you.'
+    else
+      "Your score for this game was #{@results.flatten.sum}."
     end
   end
 

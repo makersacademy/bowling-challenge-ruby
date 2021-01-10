@@ -90,3 +90,11 @@ As a player,
 So that I know how many frames I have left in my current game,  
 I want to be able to see what the current frame is.  
 
+As a player,  
+So that I know what I scored in the game,  
+I want to be told what my score was.  
+
+As a player,  
+So that I know how well/badly I performed,  
+I want to be told if I rolled a gutter or perfect game.  
+
