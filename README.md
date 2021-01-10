@@ -39,7 +39,7 @@ A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 str
 1. Open the terminal
 
 
-2. Create a folder running 
+2. Create a folder
 ```
 $ mkdir folder_name 
 ```
