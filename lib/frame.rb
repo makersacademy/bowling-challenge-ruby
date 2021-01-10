@@ -1,5 +1,4 @@
 class Frame
-
   attr_reader :throws
   attr_accessor :spare, :strike, :total_score
 
@@ -20,12 +19,11 @@ class Frame
   end
 
   def mark_as_spare?
-    @spare = true if (@throws.sum == 10 && mark_as_strike? == false)
+    @spare = true if @throws.sum == 10 && mark_as_strike? == false
     @spare
   end
 
   def set_total_score
     @total_score = @throws.sum
   end
-
 end
