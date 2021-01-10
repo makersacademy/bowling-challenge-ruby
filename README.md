@@ -36,18 +36,18 @@ A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 str
 
 ### Instructions for use
 
-1. Open the terminal
+1. **Open the terminal**
 
 
-2. Create a folder
+2. **Create a folder**
 ```
 $ mkdir folder_name 
 ```
-3. Clone the repository
+3. **Clone the repository**
 ```
 $ git clone https://github.com/lisabardelli/bowling-challenge-ruby.git
 ```
-4. Run the game
+4. **Run the game**
 ```
 $ ruby bowling-challenge-ruby/lib/main.rb
 ```
