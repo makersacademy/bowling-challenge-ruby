@@ -33,7 +33,14 @@ class Game
     "You are currently on frame #{@frame_count} of 10. You have #{10 - @frame_count} frames to play."
   end
 
-  # This code for Spare calc - @results[-1][1]
-  # This code for Strike calc - @results[-1]
+  def bonus_points
+    if @results[@frame_count - 2] == [10]
+      @results[@frame_count - 2] << @results[@frame_count - 1].sum
+    elsif @results[@frame_count - 2] != [10] && @results[@frame_count - 2].sum == 10
+      @results[@frame_count - 2] << @results[@frame_count - 1][0]
+    else
+      p 'You are not due any bonus points for the last frame.'
+    end
+  end
 
 end

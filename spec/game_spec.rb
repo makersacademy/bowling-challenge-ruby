@@ -33,6 +33,10 @@ describe Game do
     it 'should respond to current_frame' do
       expect(game).to respond_to(:current_frame)
     end
+
+    it 'should respond to bonus_points' do
+      expect(game).to respond_to(:bonus_points)
+    end
   end
 
   describe '#print_frame_score' do
@@ -101,6 +105,32 @@ describe Game do
       game.input_scores(2, 1)
       game.input_scores(2, 6)
       expect(game.current_frame).to eq("You are currently on frame 4 of 10. You have 6 frames to play.")
+    end
+  end
+
+  describe '#bonus_points' do
+    it 'should check to see if the last frame result was a Strike and sum the frame score and push it to the last frames results' do
+      game.results.clear
+      game.frame_count = 0
+      game.input_scores(10)
+      game.input_scores(3, 2)
+      game.bonus_points
+      expect(game.results[game.frame_count - 2]).to eq([10, 5])
+    end
+    it 'should check to see if the last frame result was a Spare, find the first roll of this frame and push it to the last frames results' do
+      game.results.clear
+      game.frame_count = 0
+      game.input_scores(9, 1)
+      game.input_scores(3, 2)
+      game.bonus_points
+      expect(game.results[game.frame_count - 2]).to eq([9, 1, 3])
+    end
+    it 'if the last frame was not a Strike or a Spare then message should be printed to user saying they are not due a bonus' do
+      game.results.clear
+      game.frame_count = 0
+      game.input_scores(6, 2)
+      game.input_scores(3, 2)
+      expect(game.bonus_points).to eq('You are not due any bonus points for the last frame.')
     end
   end
 end
