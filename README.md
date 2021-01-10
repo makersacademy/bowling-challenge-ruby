@@ -9,7 +9,7 @@ Bowling Challenge in Ruby
 ```
 $ mkdir folder_name 
 ```
-3. **Go to the folderr**
+3. **Go to the folder**
 ```
 $ cd folder_name 
 ```
