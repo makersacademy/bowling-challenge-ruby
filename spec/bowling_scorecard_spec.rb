@@ -11,7 +11,13 @@ describe Scorecard do
     it 'correctly handles the 10th frame with a spare' do
       allow(subject).to receive(:gets).and_return('10', '10', '10', '10', '10', '10', '10', '10', '10', '9', '1', '10')
       subject.keep_score
-      expect(subject.frame_scores.sum).to eq 279
+      expect(subject.frame_scores.sum).to eq 280
+    end
+
+    it 'correctly handles the 10th frame with a normal roll' do
+      allow(subject).to receive(:gets).and_return('10', '10', '10', '10', '10', '10', '10', '10', '10', '9', '0')
+      subject.keep_score
+      expect(subject.frame_scores.sum).to eq 267
     end
   end
 
