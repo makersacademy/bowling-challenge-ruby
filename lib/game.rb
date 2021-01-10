@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative './frame'
 require_relative './frame_ten'
 class Game
@@ -34,9 +36,9 @@ class Game
       return
     end
 
-    #  Strike at roll 1
-    if current_frame.roll_1 == 10
-      current_frame.frame_score += current_frame.roll_3
+    #  Strike at Roll 1
+    if current_frame.roll1 == 10
+      current_frame.frame_score += current_frame.roll3
       frames.append(current_frame)
       calculate_score
       return
@@ -44,7 +46,7 @@ class Game
 
     # Spare
     if current_frame.frame_score == 10
-      current_frame.frame_score += current_frame.roll_3
+      current_frame.frame_score += current_frame.roll3
       frames.append(current_frame)
       calculate_score
       nil
@@ -56,20 +58,20 @@ class Game
   def check_previous_frame(current_frame)
     if @is_strike == true
       previous_frame = frames[-1]
-      previous_frame.frame_score += (current_frame.roll_1 + current_frame.roll_2)
+      previous_frame.frame_score += (current_frame.roll1 + current_frame.roll2)
 
     elsif @is_spare == true
       previous_frame = frames[-1]
-      previous_frame.frame_score += current_frame.roll_1
+      previous_frame.frame_score += current_frame.roll1
     end
   end
 
   def calculate_strike(current_frame)
-    @is_strike = current_frame.roll_1 == 10
+    @is_strike = current_frame.roll1 == 10
   end
 
   def calculate_spare(current_frame)
-    @is_spare = if current_frame.frame_score == 10 && current_frame.roll_1 < 10
+    @is_spare = if current_frame.frame_score == 10 && current_frame.roll1 < 10
                   true
                 else
                   false

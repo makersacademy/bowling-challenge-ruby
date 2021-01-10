@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'game'
 
 describe Game do
@@ -11,16 +13,16 @@ describe Game do
     it 'calculates the total score' do
       game = Game.new
       frames = []
-      frame_1 = Frame.new(10, 0)
-      game.play(frame_1)
-      frames.append(frame_1)
-      frame_2 = Frame.new(2, 8)
-      game.play(frame_2)
-      frames.append(frame_2)
+      frame1 = Frame.new(10, 0)
+      game.play(frame1)
+      frames.append(frame1)
+      frame2 = Frame.new(2, 8)
+      game.play(frame2)
+      frames.append(frame2)
       expect(frames[0].frame_score).to eq 20
-      frame_3 = Frame.new(2, 4)
-      game.play(frame_3)
-      frames.append(frame_3)
+      frame3 = Frame.new(2, 4)
+      game.play(frame3)
+      frames.append(frame3)
       expect(frames[1].frame_score).to eq 12
       expect(game.score).to eq 38
     end
