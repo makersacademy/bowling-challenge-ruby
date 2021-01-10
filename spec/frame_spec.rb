@@ -8,7 +8,7 @@ describe Frame do
     expect(subject.score).to eq(0)
   end
 
-  describe ".bonus_rolls" do
+  describe "#bonus_rolls" do
     it "can be used to access the bonus roll count for the frame, which is initialized at zero" do
       expect(subject.bonus_rolls).to eq(0)
     end

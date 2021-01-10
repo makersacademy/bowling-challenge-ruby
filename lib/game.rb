@@ -23,8 +23,20 @@ class Game
     STDIN.gets.chomp.to_i
   end
 
+  def compile_scorecard
+    frame_counter = 0
+    frames_array.collect do |frame|
+      frame_counter += 1
+      frame = "Frame #{frame_counter}: #{frame.score}"
+    end
+  end
+
+  def print_scorecard
+    compile_scorecard.join(', ')
+  end
+
   def start_game
-    for i in 0..2 do
+    for i in 0..0 do
       p frames_array
       puts "Frame number: #{i + 1}"
       puts "Roll number: 1"
@@ -50,7 +62,7 @@ class Game
       if i > 1
         if frames_array[i-2].bonus_rolls > 0
           frames_array[i-2].add_score(roll_1)
-          frames_array[i-2].bonus_rolls -= 2
+          frames_array[i-2].bonus_rolls -= 1
         end
       end
 
@@ -67,11 +79,12 @@ class Game
           break if roll_2 >= 0 && roll_2 <= (10 - roll_1)
         end
         frames_array[i].add_score(roll_2)
-        # # insert conditional here to only check if i > 1 (not needed for first frame)
-        # if self.frames[i-1].bonus_rolls > 0
-        #   self.frames[i-1].add_score(roll_1)
-        #   self.frames[i-1].remove_bonus_roll
-        # end
+        if i > 0
+          if frames_array[i-1].bonus_rolls > 0
+            frames_array[i-1].add_score(roll_2)
+            frames_array[i-1].bonus_rolls -= 1
+          end
+        end
       end
     end
 
