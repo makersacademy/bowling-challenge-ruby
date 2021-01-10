@@ -15,6 +15,13 @@ describe BowlingGame do
     end
   end
 
+  context 'all ones' do 
+    it do 
+      roll_many 20, 1
+      expect(game.score).to eq 20
+    end
+  end
+
   def roll_many(n, pins)
     n.times { game.roll(pins)}
   end
