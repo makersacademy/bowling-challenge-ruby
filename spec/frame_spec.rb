@@ -72,4 +72,10 @@ describe Frame do
         frame_1.roll(4, 3)
         expect(frame_1.scorecard).to eq [10, 0, 10, 10, 0, 30, 4, 3, 44]
     end
+
+    it 'will return a message if both rolls go in the gutter' do
+        frame_1 = Frame.new
+        frame_1.roll(5, 4)
+        expect(frame_1.roll(0, 0)).to eq 'Double gutter! Bad luck!'
+    end
 end

@@ -32,6 +32,8 @@ class Frame
             adding_spare_bonus
         elsif @scorecard[-5] == 10
             add_strike_bonus
+        elsif @first == 0 && @second == 0
+            gutter
         else
             @scorecard << @first + @second + @scorecard[-3]
         
@@ -56,6 +58,9 @@ class Frame
         end
     end
 
+    def gutter
+       "Double gutter! Bad luck!"
+    end
 
 
 
