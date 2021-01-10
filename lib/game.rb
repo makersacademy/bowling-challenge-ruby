@@ -19,10 +19,23 @@ class Game
     frame_score = calculate_frame_score(roll_1, roll_2)
     @total_score += frame_score
     
-    puts "Your current score is #{@total_score}"
+    puts "Your current score is #{@total_score}, not counting any coming bonus!"
 
     strike?(roll_1)
     spare?(roll_1, roll_2)
+    extra_bonus_round?
+  end
+
+  def extra_bonus_round?
+    if @current_frame == 10 && (@strike == true || @spare == true)
+      puts 'You have an extra bonus round!'
+      puts 'What is your first roll?'
+      roll_1 = gets.chomp.to_i
+      puts 'What is your second roll?'
+      roll_2 = gets.chomp.to_i
+      extra_bonus_points = roll_1 + roll_2
+      @total_score += extra_bonus_points 
+    end
   end
 
   def calculate_frame_score(roll_1, roll_2)
