@@ -63,3 +63,12 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+### Reflections
+- I am not confident if I am always testing behaviour rather than state. Tried my best to minimise using eq matcher in rspec tests for this but not sure if using change_by is good enough if I'm referring to instance variables a lot.
+- If I had more time, I would like to have explored using rspec regarding my userinterface with chomps method.
+- Due to previous struggles with stubbing, I focused on this most. I do think I could have made my code more readable and better encapsulated and if I had more time, I would spend more time on that.
+- I have certain methods which might not necessarily need to be extracted as only have 1 or 2 uses, and then others which are too long for my liking.
+- I found it hard to stick to TDD when the bowling logic started to get more and more complex. If I had persisted with sticking to TDD, I do think it might have made things easier for myself as I spent a lot of time at the end improving my test coverage.
+- When I diverged from strict TDD, I found I lacked natural commit points and so my commit messages and points are not very clear and not as frequent as I would like.
+- I am fairly happy that the logic is solid, if a little untidy

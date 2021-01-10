@@ -9,6 +9,12 @@ def roll_normal_frame
   subject.roll_current_frame(6, 3)
 end
 
+def full_normal_frame
+  subject.start_new_frame
+  subject.roll_current_frame(6, 3)
+  subject.end_current_frame
+end
+
 
 def full_spare_frame
   subject.start_new_frame

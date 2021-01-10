@@ -109,10 +109,28 @@ describe Game do
   end
 
   describe '#add_final_bonus' do
-    it 'allows 2 bonus rolls if the last 2 frames are strikes' do
+    it 'can call on final_frame_strike_bonus' do
+      10.times { full_strike_frame }
+      allow(subject).to receive(:final_frame_strike_bonus).with(3,4)
+      subject.add_final_bonus(3, 4)
+    end
+
+    it 'allows 2 bonus rolls, and adjusts last 2 frame scores based on bonus rolls if last 2 frames are strikes' do
       10.times { full_strike_frame }
       expect { subject.add_final_bonus(5, 3) }.to change { subject.frames[-1].total_score }.by(8)
       expect { subject.add_final_bonus(5, 3) }.to change { subject.frames[-2].total_score }.by(5)
+    end
+
+    it 'allows 2 bonus rolls, and adjusts last frame score based on bonus rolls, if last frame is strike' do
+      9.times { full_spare_frame }
+      full_strike_frame
+      expect { subject.add_final_bonus(5, 3) }.to change { subject.frames[-1].total_score }.by(8)
+    end
+
+    it 'allows 1 bonus rolls, and adjusts last frame score based on bonus roll if last frame is a spare' do
+      9.times { full_normal_frame }
+      full_spare_frame
+      expect { subject.add_final_bonus(5) }.to change { subject.frames[-1].total_score }.by(5)
     end
   end
 end
