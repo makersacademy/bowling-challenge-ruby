@@ -33,6 +33,26 @@ A Gutter Game is when the player never hits a pin (20 zero scores).
 
 A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 strikes for the bonus in the 10th frame). The Perfect Game scores 300 points.
 
+
+### Instructions for use
+
+1. Open the terminal
+
+
+2. Create a folder running 
+```
+$ mkdir folder_name 
+```
+3. Clone the repository
+```
+$ git clone https://github.com/lisabardelli/bowling-challenge-ruby.git
+```
+4. Run the game
+```
+$ ruby bowling-challenge-ruby/lib/main.rb
+```
+
+
 See the image below for some score examples.
 
 
