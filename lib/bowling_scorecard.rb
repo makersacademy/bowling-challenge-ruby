@@ -24,12 +24,17 @@ class Scorecard
 
   def calculate_frame
     @frame_scores << @pins_knocked[@frame].sum
+    add_strike if @pins_knocked[@frame][0] == 10
+  end
+
+  def add_strike
+    @strikes_spares[@frame] = 'strike'
   end
 
   private
 
   def frame_complete?
-    @roll > 1 || @pins_knocked[@frame] == 10
+    @roll > 1 || @pins_knocked[@frame].sum == 10
   end
 
   def new_frame

@@ -1,7 +1,6 @@
-require_relative '../lib/bowling_scorecard.rb'
+require_relative '../lib/bowling_scorecard'
 
 describe Scorecard do
-
   describe '#input_roll' do
     it 'adds the first roll result to the pins_knocked array' do
       expect(subject).to receive(:gets).and_return('1')
@@ -31,6 +30,14 @@ describe Scorecard do
       subject.input_roll
       subject.input_roll
       expect(subject.frame_scores.first).to eq 2
+    end
+  end
+
+  describe '#add_strike' do
+    it 'adds a strike flag to the relevant frame in the strikes_spares hash' do
+      expect(subject).to receive(:gets).and_return('10')
+      subject.input_roll
+      expect(subject.strikes_spares[0]).to eq 'strike'
     end
   end
 end
