@@ -36,4 +36,8 @@ class BowlingGame
   def sum_of_balls_in_frame(frame)
     @rolls[frame] + @rolls[frame + 1]
   end
+
+  def strike_bonus(frame)
+    @rolls[frame + 1] + @rolls[frame + 2]
+  end
 end

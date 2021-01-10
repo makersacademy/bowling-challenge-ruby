@@ -22,8 +22,22 @@ describe BowlingGame do
     end
   end
 
+  context 'one strike' do
+    it do
+      roll_strike
+      game.roll 3 
+      game.roll 4
+      roll_many 16, 0
+      expect(game.score).to eq 24
+    end
+  end
+
   def roll_many(n, pins)
     n.times { game.roll(pins)}
+  end
+
+  def roll_strike 
+    game.roll 10 
   end
 end
 
