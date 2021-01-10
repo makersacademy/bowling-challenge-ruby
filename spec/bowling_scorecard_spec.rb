@@ -17,9 +17,7 @@ describe Scorecard do
 
     it 'adds new frame tuples to the pins_knocked array when previous frame complete' do
       expect(subject).to receive(:gets).and_return('1').exactly(3).times
-      subject.input_roll
-      subject.input_roll
-      subject.input_roll
+      3.times { subject.input_roll }
       expect(subject.pins_knocked[1]).to eq [1]
     end
   end
@@ -72,6 +70,32 @@ describe Scorecard do
       subject.input_roll
       subject.input_roll
       expect(subject.frame_scores.first).to eq 11
+    end
+
+    it 'accounts for doubles' do
+      expect(subject).to receive(:gets).and_return('10').twice
+      subject.input_roll
+      subject.input_roll
+      expect(subject).to receive(:gets).and_return('9')
+      subject.input_roll
+      expect(subject).to receive(:gets).and_return('0')
+      subject.input_roll
+      expect(subject.frame_scores.first).to eq 29
+      expect(subject.frame_scores[1]).to eq 19
+      expect(subject.frame_scores[2]).to eq 9
+    end
+
+    it 'accounts for turkeys' do
+      expect(subject).to receive(:gets).and_return('10').exactly(3).times
+      3.times { subject.input_roll }
+      expect(subject).to receive(:gets).and_return('9')
+      subject.input_roll
+      expect(subject).to receive(:gets).and_return('0')
+      subject.input_roll
+      expect(subject.frame_scores.first).to eq 30
+      expect(subject.frame_scores[1]).to eq 29
+      expect(subject.frame_scores[2]).to eq 19
+      expect(subject.frame_scores[3]).to eq 9
     end
   end
 
