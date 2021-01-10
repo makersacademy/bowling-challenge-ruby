@@ -16,14 +16,25 @@ class Scorecard
     @pins_knocked << [] unless @pins_knocked[@frame]
     @pins_knocked[@frame] << result
     @roll += 1
-    if roll > 1 || @pins_knocked[@frame] == 10
+    if frame_complete?
       calculate_frame
-      @frame += 1 
-      @roll = 0
+      new_frame
     end
   end
 
   def calculate_frame
     @frame_scores << @pins_knocked[@frame].sum
   end
+
+  private
+
+  def frame_complete?
+    @roll > 1 || @pins_knocked[@frame] == 10
+  end
+
+  def new_frame
+    @frame += 1 
+    @roll = 0
+  end
+
 end
