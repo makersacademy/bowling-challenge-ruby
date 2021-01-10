@@ -1,6 +1,20 @@
 require_relative '../lib/bowling_scorecard'
 
 describe Scorecard do
+  describe '#keep_score' do
+    it 'correctly handles the 10th frame with all strikes' do
+      expect(subject).to receive(:gets).and_return('10').exactly(12).times
+      subject.keep_score
+      expect(subject.frame_scores.sum).to eq 300
+    end
+
+    it 'correctly handles the 10th frame with a spare' do
+      allow(subject).to receive(:gets).and_return('10', '10', '10', '10', '10', '10', '10', '10', '10', '9', '1', '10')
+      subject.keep_score
+      expect(subject.frame_scores.sum).to eq 279
+    end
+  end
+
   describe '#input_roll' do
     it 'adds the first roll result to the pins_knocked array' do
       expect(subject).to receive(:gets).and_return('1')
