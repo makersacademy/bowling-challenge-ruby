@@ -41,25 +41,24 @@ describe Game do
 
   describe '#check_last_frame' do
     it 'checks the score of the frame ten when last_frame is regular' do
-        game = Game.new
-        (1...10).each do |_i|
-          frame = Frame.new(2, 4)
-          game.play(frame)
-        end
-        frame_ten = FrameTen.new(2, 4, 0)
-        game.check_last_frame(frame_ten)
-        expect(frame_ten.frame_score).to eq 6
+      game = Game.new
+      (1...10).each do |_i|
+        frame = Frame.new(2, 4)
+        game.play(frame)
+      end
+      frame_ten = FrameTen.new(2, 4, 0)
+      game.check_last_frame(frame_ten)
+      expect(frame_ten.frame_score).to eq 6
     end
     it 'checks the score of the frame ten when last_frame is ra spare' do
-        game = Game.new
-        (1...10).each do |_i|
-          frame = Frame.new(2, 4)
-          game.play(frame)
-        end
-        frame_ten = FrameTen.new(2, 8, 1)
-        game.check_last_frame(frame_ten)
-        expect(frame_ten.frame_score).to eq 11
+      game = Game.new
+      (1...10).each do |_i|
+        frame = Frame.new(2, 4)
+        game.play(frame)
+      end
+      frame_ten = FrameTen.new(2, 8, 1)
+      game.check_last_frame(frame_ten)
+      expect(frame_ten.frame_score).to eq 11
     end
-
   end
 end

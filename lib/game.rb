@@ -22,13 +22,13 @@ class Game
     elsif @round == 10
       check_last_frame(current_frame)
     else
-        raise RuntimeError.new('You cannot play more than 10 frames')
+      raise 'You cannot play more than 10 frames'
     end
   end
 
   def check_last_frame(current_frame)
     # Roll 1 + Roll 2 < 10
-    if  (current_frame.frame_score) < 10
+    if (current_frame.frame_score) < 10
       frames.append(current_frame)
       calculate_score
       return
