@@ -66,5 +66,10 @@ describe Frame do
     end
     
     it 'will be able to cope with consecutive strikes' do
-        
+        frame_1 = Frame.new
+        frame_1.roll(10, 0)
+        frame_1.roll(10, 0)
+        frame_1.roll(4, 3)
+        expect(frame_1.scorecard).to eq [10, 0, 10, 10, 0, 30, 4, 3, 44]
     end
+end
