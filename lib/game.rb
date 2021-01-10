@@ -1,5 +1,7 @@
 class Game
 
+  attr_reader :current_frame, :total_score, :strike, :spare
+
   def initialize
     @strike = false
     @spare =  false
@@ -24,25 +26,6 @@ class Game
     strike?(roll_1)
     spare?(roll_1, roll_2)
     extra_bonus_round?
-  end
-
-  def extra_bonus_round?
-    if @current_frame == 10 && @strike == true
-      puts 'You have two extra rolls!'
-      puts 'What is your first roll?'
-      roll_1 = gets.chomp.to_i
-      puts 'What is your second roll?'
-      roll_2 = gets.chomp.to_i
-      extra_bonus_points = roll_1 + roll_2
-    elsif @current_frame == 10 && @spare == true
-      puts 'You have one extra roll!'
-      puts 'What is your extra roll?'
-      roll_1 = gets.chomp.to_i
-      extra_bonus_points = roll_1
-    else 
-      extra_bonus_points = 0
-    end
-      @total_score += extra_bonus_points 
   end
 
   def calculate_frame_score(roll_1, roll_2)
@@ -71,6 +54,25 @@ class Game
       @spare = false
     end 
   end 
+
+  def extra_bonus_round?
+    if @current_frame == 10 && @strike == true
+      puts 'You have two extra rolls!'
+      puts 'What is your first roll?'
+      roll_1 = gets.chomp.to_i
+      puts 'What is your second roll?'
+      roll_2 = gets.chomp.to_i
+      extra_bonus_points = roll_1 + roll_2
+    elsif @current_frame == 10 && @spare == true
+      puts 'You have one extra roll!'
+      puts 'What is your extra roll?'
+      roll_1 = gets.chomp.to_i
+      extra_bonus_points = roll_1
+    else 
+      extra_bonus_points = 0
+    end
+      @total_score += extra_bonus_points 
+  end
   
   def play_a_game
     while @current_frame < 11
