@@ -32,6 +32,22 @@ describe BowlingGame do
     end
   end
 
+  context 'perfect game' do
+    it do
+      roll_many 12, 10
+      expect(game.score).to eq 300
+    end
+  end
+
+  context 'one spare' do 
+    it do
+      roll_spare
+      game.roll 3
+      roll_many 17, 0
+      expect(game.score).to eq 16
+    end
+  end
+
   def roll_many(n, pins)
     n.times { game.roll(pins)}
   end
@@ -39,5 +55,11 @@ describe BowlingGame do
   def roll_strike 
     game.roll 10 
   end
+
+  def roll_spare
+    game.roll 5
+    game.roll 5
+  end
+
 end
 

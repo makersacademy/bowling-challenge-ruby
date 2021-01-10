@@ -40,4 +40,8 @@ class BowlingGame
   def strike_bonus(frame)
     @rolls[frame + 1] + @rolls[frame + 2]
   end
+
+  def spare_bonus(frame)
+    @rolls[frame + 2]
+  end
 end
