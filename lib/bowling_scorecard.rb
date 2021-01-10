@@ -10,7 +10,7 @@ class Scorecard
     @roll = 0
   end
 
-  def roll
+  def input_roll
     puts "Please enter your roll result for frame #{@frame + 1}, roll #{roll + 1}:"
     result = gets.chomp.to_i
     @pins_knocked << [] unless @pins_knocked[@frame]
