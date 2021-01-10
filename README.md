@@ -28,7 +28,7 @@ I initially had some very busy methods but managed to refactor them to make them
 
 I'm pleased with my TDD and most of my refactoring. I'm sure there is a way to do it better! eg. I wonder if there is a way to get the Scorer's #calculate method smaller by using some sort of hash of the rules?
 
-Improvements: I must commit more!!!!
+Improvements: I must commit more!!!! I usually like to try to experiment before committing, but perhaps I could do this on different branches?
 
 Makers Readme:
 ===================
