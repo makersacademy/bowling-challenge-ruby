@@ -9,11 +9,15 @@ Bowling Challenge in Ruby
 ```
 $ mkdir folder_name 
 ```
-3. **Clone the repository**
+3. **Go to the folderr**
+```
+$ cd folder_name 
+```
+4. **Clone the repository**
 ```
 $ git clone https://github.com/lisabardelli/bowling-challenge-ruby.git
 ```
-4. **Run the game**
+5. **Run the game**
 ```
 $ ruby bowling-challenge-ruby/lib/main.rb
 ```
