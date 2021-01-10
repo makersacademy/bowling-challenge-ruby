@@ -35,8 +35,12 @@ class Game
     compile_scorecard.join(', ')
   end
 
+  def print_score
+    frames_array.map{ |frame| frame = frame.score }.sum
+  end
+
   def start_game
-    for i in 0..0 do
+    for i in 0..3 do
       p frames_array
       puts "Frame number: #{i + 1}"
       puts "Roll number: 1"
@@ -79,6 +83,7 @@ class Game
           break if roll_2 >= 0 && roll_2 <= (10 - roll_1)
         end
         frames_array[i].add_score(roll_2)
+        frames_array[i].bonus_rolls += 1 if roll_1 + roll_2 == 10
         if i > 0
           if frames_array[i-1].bonus_rolls > 0
             frames_array[i-1].add_score(roll_2)
@@ -87,6 +92,11 @@ class Game
         end
       end
     end
+
+    puts "Final Score = #{print_score}"
+    puts "Final Scorecard:"
+    puts print_scorecard
+
 
   end
 
