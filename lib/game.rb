@@ -26,14 +26,34 @@ class Game
   end
 
   def end_current_frame
-    update_score
+    update_frame_score
     @frames << @current_frame
     @current_frame = nil
+    update_game_score
+  end
+
+  def update_game_score
+    @game_score = 0
+    @frames.each do |frame|
+      @game_score += frame.total_score
+    end
+  end
+
+  def add_final_bonus(first_roll = 0, second_roll = 0)
+    if @frames[-2].strike == true && @frames[-1].strike == true #last 2 frames are strikes
+      final_frame_strike_bonus(first_roll, second_roll)
+      @frames[-2].total_score += first_roll
+    elsif @frames[-1].strike == true #last frame is a strike
+      final_frame_strike_bonus(first_roll, second_roll)
+    elsif @frames[-1].spare == true #last frame is a spare
+      @frames[-1].add_roll_score(first_roll)
+      @frames[-1].set_total_score
+    end
   end
 
   private
 
-  def update_score
+  def update_frame_score
     @current_frame.set_total_score if current_turn >= 1 #adds knocked pins to current frame score
     if current_turn >= 2
       @frames[-1].total_score += @current_frame.throws[0] if @frames[-1].spare == true #adds spare bonus for previous roll if applicable
@@ -44,21 +64,9 @@ class Game
     end
   end
 
-  def add_final_bonus(first_roll = 0, second_roll = 0)
-    if @frames[-1].strike == true && @current_frame.strike == true
-      final_frame_strike_bonus(first_roll, second_roll)
-      @frames[-1].total_score += first_roll
-    elsif @current_frame.strike == true
-      final_frame_strike_bonus(first_roll)
-    elsif @current_frame.spare == true
-      @current_frame.add_roll_score(first_roll, second_roll)
-      @current_frame.set_total_score
-    end
-  end
-
   def final_frame_strike_bonus(first_roll, second_roll)
-    @current_frame.add_roll_score(first_roll) #first roll
-    @current_frame.add_roll_score(second_roll)
-    @current_frame.set_total_score
+    @frames[-1].add_roll_score(first_roll) #first roll
+    @frames[-1].add_roll_score(second_roll)
+    @frames[-1].set_total_score
   end
 end

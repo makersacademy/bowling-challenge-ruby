@@ -9,7 +9,7 @@ class UserInterface
   end
 
   def play_game
-    while @game.current_turn < 10 do
+    while @game.current_turn < 9 do
       ask_for_rolls
       rolls = gets.chomp #enter as a string separated by a comma (5,4)
       first_roll = rolls.split(',')[0].to_i
@@ -21,13 +21,14 @@ class UserInterface
     final_first_roll = final_rolls.split(',')[0].to_i
     final_second_roll = final_rolls.split(',')[1].to_i
     complete_frame(final_first_roll, final_second_roll)
-    if (@frames[-1].strike == true && @current_frame.strike == true) || (@current_frame.strike == true) || (@current_frame.spare == true)
+    if (@game.frames[-2].strike == true && @game.frames[-1].strike == true) || (@game.frames[-1].strike == true) || (@game.frames[-1].spare == true)
       ask_for_bonus_rolls
       bonus_rolls = gets.chomp #enter as a string separated by a comma (5,4)
       first_bonus_roll = bonus_rolls.split(',')[0].to_i
       second_bonus_roll = bonus_rolls.split(',')[1].to_i
       @game.add_final_bonus(first_bonus_roll, second_bonus_roll)
     end
+    @game.update_game_score
   end
 
   private
