@@ -23,7 +23,7 @@ describe Game do
     expect(game.strike).to eq true
     end
 
-    it 'correctly identifies not a strike' do
+    it 'correctly identifies a non-strike' do
     game.strike?(5)
     expect(game.strike).to eq false
     end
@@ -37,7 +37,7 @@ describe Game do
     expect(game.spare).to eq true
     end
 
-    it 'correctly identifies not a spare' do
+    it 'correctly identifies a non-spare' do
     game.spare?(2,3)
     expect(game.spare).to eq false
     end
@@ -53,6 +53,11 @@ describe Game do
     it 'calculates a score after a strike correctly' do 
     game.strike?(10)
     expect(game.calculate_frame_score(1, 4)).to eq 10
+    end
+
+    it 'calculates a score after a spare correctly' do 
+    game.spare?(6,4)
+    expect(game.calculate_frame_score(1, 4)).to eq 6
     end
   end
 end
