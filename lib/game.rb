@@ -38,9 +38,8 @@ class Game
             true
         end
     end
-    
+
     def adding_spare_bonus
-     
         if first_frame? == true
             @scorecard << 10 + @first + @first + @second
         else
@@ -62,7 +61,11 @@ class Game
 
     def end_game
         if @scorecard[-3] == 10
+            extra_rolls = 0
+            while extra_rolls < 2 do
             roll(first, second)
+            extra_rolls += 1
+            end
         else
             "Game Over!"
         end
