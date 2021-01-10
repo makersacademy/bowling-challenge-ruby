@@ -16,7 +16,7 @@ call add_scores method which checks_for_frame_1 within it
     if scorecard.length < 2
     scorecard << first + second
     else 
-    scorecard << first + second + scorecard[-2]
+    scorecard << first + second + scorecard[-3]
 end
 scorecard = [3, 5, 8]
 
