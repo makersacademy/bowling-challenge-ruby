@@ -25,6 +25,15 @@ class Scorecard
   def calculate_frame
     @frame_scores << @pins_knocked[@frame].sum
     strike_or_spare
+    apply_bonus
+  end
+
+  def apply_bonus
+    if @strikes_spares[@frame -1] == 'strike'
+      @frame_scores[@frame -1] += @pins_knocked[@frame].sum
+    elsif @strikes_spares[@frame -1] == 'spare'
+      @frame_scores[@frame -1] += @pins_knocked[@frame][0]
+    end
   end
 
   def strike_or_spare

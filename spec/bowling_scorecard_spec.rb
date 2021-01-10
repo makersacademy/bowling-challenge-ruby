@@ -50,4 +50,29 @@ describe Scorecard do
       expect(subject.strikes_spares[0]).to eq 'spare'
     end
   end
+
+  describe 'apply_bonus' do
+    it 'adds correct bonus points to a strike frame' do
+      expect(subject).to receive(:gets).and_return('10')
+      subject.input_roll
+      expect(subject).to receive(:gets).and_return('1').twice
+      subject.input_roll
+      subject.input_roll
+      expect(subject.frame_scores.first).to eq 12
+    end
+  end
+
+  describe 'apply_bonus' do
+    it 'adds correct bonus points to a spare frame' do
+      expect(subject).to receive(:gets).and_return('9')
+      subject.input_roll
+      expect(subject).to receive(:gets).and_return('1')
+      subject.input_roll
+      expect(subject).to receive(:gets).and_return('1').twice
+      subject.input_roll
+      subject.input_roll
+      expect(subject.frame_scores.first).to eq 11
+    end
+  end
+
 end
