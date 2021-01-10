@@ -11,22 +11,23 @@ class Scoreboard
 
 
   def add_frame(frame)
-    if frame_is_strike?
+    if spare?
+      frame[0] = frame[0] * 2
+    end
+    if strike?(frame)
       frame[0] = frame[0] * 2
       frame[1] = frame[1] * 2
-    elsif frame_is_spare?
-      frame[0] = frame[0] * 2
     end
     p @frames << frame
     p @score += frame.sum
   end
 
-  def frame_is_spare?
+  def spare?
     @frames.length >= 1 && @frames[0] != 10 && @frames[-1].sum == 10
   end
 
-  def frame_is_strike?
-    @frames.length >= 1 && @frames = [10, 0]
+  def strike?(frame)
+    @frames.length >= 1 && frame[0] == 10
   end
 
   def score
