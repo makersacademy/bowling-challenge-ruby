@@ -15,5 +15,7 @@ class Scorecard
     result = gets.chomp.to_i
     @pins_knocked << [] unless @pins_knocked[@frame]
     @pins_knocked[@frame] << result
+    @roll += 1
+    @frame += 1 if roll > 1
   end
 end
