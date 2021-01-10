@@ -12,14 +12,14 @@ describe Scoreboard do
     expect(scoreboard.score).to eq 0
   end
 
-  it 'should be able to roll a game of 1s (gutter game)' do
+  it 'should be able to roll a game of 1s' do
     scoreboard = Scoreboard.new
     10.times do scoreboard.add_frame([1, 1])
     end
     expect(scoreboard.score).to eq 20
   end
 
-  it 'should be able to roll a game of 2s (gutter game)' do
+  it 'should be able to roll a game of 2s' do
     scoreboard = Scoreboard.new
     10.times do scoreboard.add_frame([2, 2])
     end

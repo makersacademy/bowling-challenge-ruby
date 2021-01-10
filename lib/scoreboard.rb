@@ -12,9 +12,9 @@ class Scoreboard
 
   def add_frame(frame)
     if frame_is_strike?
-      frame[0] *= 2 + frame[1] *= 2
-    end
-    if frame_is_spare?
+      frame[0] = frame[0] * 2
+      frame[1] = frame[1] * 2
+    elsif frame_is_spare?
       frame[0] = frame[0] * 2
     end
     p @frames << frame
@@ -26,7 +26,7 @@ class Scoreboard
   end
 
   def frame_is_strike?
-    @frames.length >= 1 && @frames = [10, 0] 
+    @frames.length >= 1 && @frames = [10, 0]
   end
 
   def score
