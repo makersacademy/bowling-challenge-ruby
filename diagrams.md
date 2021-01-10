@@ -2,14 +2,14 @@ How the game works
 ------------------
 
 
-In Frame.rb
+In Game.rb
 
 methods for each frame.
 
 .roll method will be called on a certain frame and accept arguments of (first, second)
 
-e.g. frame_1 = Frame.new
-frame_1.roll(3, 5)
+e.g. game = Game.new
+game.roll(3, 5)
 scorecard << first, second
 
 call add_scores method which checks_for_frame_1 within it
