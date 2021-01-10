@@ -40,4 +40,14 @@ describe Scorecard do
       expect(subject.strikes_spares[0]).to eq 'strike'
     end
   end
+
+  describe '#add_spare' do
+    it 'adds a spare flag to the relevant frame in the strikes_spares hash' do
+      expect(subject).to receive(:gets).and_return('9')
+      subject.input_roll
+      expect(subject).to receive(:gets).and_return('1')
+      subject.input_roll
+      expect(subject.strikes_spares[0]).to eq 'spare'
+    end
+  end
 end
