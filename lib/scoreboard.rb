@@ -23,11 +23,11 @@ class Scoreboard
   end
 
   def spare?
-    @frames.length >= 1 && @frames[0] != 10 && @frames[-1].sum == 10
+    @frames.length >= 1 && @frames[-1].sum == 10
   end
 
   def strike?(frame)
-    @frames.length >= 1 && frame[0] == 10
+    frame[0] == 10
   end
 
   def score
