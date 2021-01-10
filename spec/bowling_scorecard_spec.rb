@@ -25,4 +25,12 @@ describe Scorecard do
     end
   end
 
+  describe '#calculate_frame' do
+    it 'adds the total score from knocked pins to the frame_scores array' do
+      expect(subject).to receive(:gets).and_return('1').twice
+      subject.input_roll
+      subject.input_roll
+      expect(subject.frame_scores.first).to eq 2
+    end
+  end
 end
