@@ -39,18 +39,18 @@ class Game
     frames_array.map{ |frame| frame = frame.score }.sum
   end
 
-  def add_bonus_score(frame_index, roll)
-    if frames_array[frame_index].bonus_rolls > 0
-      frames_array[frame_index].add_score(roll)
-      frames_array[frame_index].bonus_rolls -= 1
-    end
-  end
-
   def print_current_summary(current_frame_index, roll_number)
     puts print_scorecard
     puts "Frame number: #{current_frame_index + 1}"
     puts "Roll number: #{roll_number}"
     puts "Game score: #{self.print_score}"
+  end
+
+  def add_bonus_score(frame_index, roll)
+    if frames_array[frame_index].bonus_rolls > 0
+      frames_array[frame_index].add_score(roll)
+      frames_array[frame_index].bonus_rolls -= 1
+    end
   end
 
   def start_game
