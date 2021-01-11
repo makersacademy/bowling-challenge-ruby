@@ -40,11 +40,10 @@ end
     puts "Round ##{current_frame}"
     puts "First roll. Enter the number of pins"
     @first_roll = gets.chomp.to_i
-    update_board(current_frame, @first_roll)
-    update_score(@first_roll)
-    # @first_roll = gets.chomp.to_i
-    # @score_board[current_frame] = [@first_roll] #update the board
-    # @total_score += @first_roll # score += 10
+    # update_board(current_frame, @first_roll)
+    # update_score(@first_roll)
+    @score_board[current_frame] = [@first_roll] #update the board
+    @total_score += @first_roll # score += 10
     print_score
     if current_frame == @frames.last
       if self.strike?
@@ -57,10 +56,12 @@ end
         end
       else
         puts "Second roll. Enter the number of pins"
-        # @second_roll = gets.chomp.to_i
-        # @score_board[current_frame] << @second_roll
-        # @total_score += @second_roll
-        update_second_roll
+        @second_roll = gets.chomp.to_i
+        @score_board[current_frame] << @second_roll
+        @total_score += @second_roll
+        @second_roll = gets.chomp.to_i
+      # update_board(current_frame, @second_roll)
+      # update_score(@second_roll)
         print_score
         if @score_board[current_frame].sum == 10
           puts "Bonus roll. Enter the number of pins"
