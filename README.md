@@ -4,7 +4,7 @@ Bowling Challenge in Ruby
 Will's Readme
 =================
 
-##To use:
+### To use:
 * Run bundle install
 * In IRB:
   * make sure you are in the root of the file, then type in the below commands:
@@ -13,21 +13,21 @@ Will's Readme
   * your_game_name.start
   * (alternatively, you can just require_relative './feature_spec.rb')
 
-##Completed:
+### Completed:
 * Scorecard functionality for first 9 frames
 * Program is not manual - start_game function takes the user through the game and prompts for user input when required.
 * User unable to enter invalid integers (e.g. 11)
 
-##Functionality to add:
+### Functionality to add:
 * Correct scoring for final frame (to be added at end of Game.start_game method). Final score calculation methods created but not yet called.
 * Bar user from entering non-integers
 
-##Also to do:
+### Also to do:
 * Refactoring - particularly drying out code in the Game.start_game method by extracting methods. Other methods can also be shortened.
 * Add further test coverage (didn't for last couple of methods in game.rb)
 
 
-##Questions:
+### Questions:
 * Is there any alternative to having a long start_game method with multiple conditionals if you don't want to make the program manual?
 * If not, how to build such a method following the TDD process and how to unit test it. Should I be having some sort of automated feature test?
 * Did I have the correct balance between BUFD and TDD? Spent a significant amount of time planning for this exercise.
