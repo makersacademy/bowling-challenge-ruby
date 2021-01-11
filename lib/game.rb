@@ -46,13 +46,17 @@ class Game
     end
   end
 
+  def print_current_summary(current_frame_index, roll_number)
+    puts print_scorecard
+    puts "Frame number: #{current_frame_index + 1}"
+    puts "Roll number: #{roll_number}"
+    puts "Game score: #{self.print_score}"
+  end
+
   def start_game
     # loop for first 9 frames
     for i in 0..8 do
-      p frames_array
-      puts "Frame number: #{i + 1}"
-      puts "Roll number: 1"
-      puts "Game score: #{self.score}"
+      print_current_summary(i, 1)
       roll_1 = nil
       roll_2 = nil
 
@@ -75,11 +79,8 @@ class Game
       if roll_1 == 10
         frames_array[i].bonus_rolls += 2
       else
+        print_current_summary(i, 2)
         loop do
-          p frames_array
-          puts "Frame number: #{i + 1}"
-          puts "Roll number: 2"
-          puts "Game score: #{self.score}"
           ask_roll
           roll_2 = get_roll
           break if roll_2 >= 0 && roll_2 <= (10 - roll_1)
