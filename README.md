@@ -23,14 +23,14 @@ Will's Readme
 * Bar user from entering non-integers
 
 ### Also to do:
-* Refactoring - particularly drying out code in the Game.start_game method by extracting methods. Other methods can also be shortened.
+* Refactoring - particularly drying out code in the Game.start_game method by extracting methods. roll_1 and roll_2 should be frame attributes. Other methods can also be shortened (e.g. print_current_summary).
 * Add further test coverage (didn't for last couple of methods in game.rb)
 
 
 ### Questions:
 * Is there any alternative to having a long start_game method with multiple conditionals if you don't want to make the program manual?
 * If not, how to build such a method following the TDD process and how to unit test it. Should I be having some sort of automated feature test?
-* Did I have the correct balance between BUFD and TDD? Spent a significant amount of time planning for this exercise.
+* Did I have the correct balance between BUFD and TDD? Spent a significant amount of time planning for this exercise by writing out the steps in conditionals (became start_game method). What would be the TDD approach?
 * How to isolate the final three tests in game_spec.rb from the Frame class, when Frame instances are added to a Game attribute in initialization.
 
 
