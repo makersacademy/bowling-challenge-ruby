@@ -39,8 +39,15 @@ class Game
     frames_array.map{ |frame| frame = frame.score }.sum
   end
 
+  def add_bonus_score(frame_index, roll)
+    if frames_array[frame_index].bonus_rolls > 0
+      frames_array[frame_index].add_score(roll)
+      frames_array[frame_index].bonus_rolls -= 1
+    end
+  end
+
   def start_game
-    # loop for first 9 rounds
+    # loop for first 9 frames
     for i in 0..8 do
       p frames_array
       puts "Frame number: #{i + 1}"
@@ -58,17 +65,11 @@ class Game
       frames_array[i].add_score(roll_1)
 
       if i > 0
-        if frames_array[i-1].bonus_rolls > 0
-          frames_array[i-1].add_score(roll_1)
-          frames_array[i-1].bonus_rolls -= 1
-        end
+        add_bonus_score(i-1, roll_1)
       end
 
       if i > 1
-        if frames_array[i-2].bonus_rolls > 0
-          frames_array[i-2].add_score(roll_1)
-          frames_array[i-2].bonus_rolls -= 1
-        end
+        add_bonus_score(i-2, roll_1)
       end
 
       if roll_1 == 10
@@ -86,15 +87,12 @@ class Game
         frames_array[i].add_score(roll_2)
         frames_array[i].bonus_rolls += 1 if roll_1 + roll_2 == 10
         if i > 0
-          if frames_array[i-1].bonus_rolls > 0
-            frames_array[i-1].add_score(roll_2)
-            frames_array[i-1].bonus_rolls -= 1
-          end
+          add_bonus_score(i-1, roll_2)
         end
       end
     end
 
-    #insert  code for final 
+    #insert  code for final frame here
 
     puts "Final Score = #{print_score}"
     puts "Final Scorecard:"
