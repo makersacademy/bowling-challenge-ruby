@@ -16,6 +16,8 @@ class Scorecard
       break if frame > 9
     end
     extra_rolls
+    p @frame_scores
+    p @pins_knocked
     final_score
   end
 
@@ -27,6 +29,7 @@ class Scorecard
     @roll += 1
     if frame_complete?
       calculate_frame
+      p @frame
       new_frame
     end
   end
@@ -40,7 +43,7 @@ class Scorecard
   def apply_bonus
     if @strikes_spares[@frame -1] == 'strike' && @strikes_spares[@frame -2] == 'strike'
       @frame_scores[@frame -1] += @pins_knocked[@frame].sum unless @frame >= 10
-      @frame_scores[@frame -2] += @pins_knocked[@frame].sum unless @frame >= 11
+      @frame_scores[@frame -2] += @pins_knocked[@frame][0] unless @frame >= 11
     elsif @strikes_spares[@frame -1] == 'strike'
       @frame_scores[@frame -1] += @pins_knocked[@frame].sum unless @frame >= 10
     elsif @strikes_spares[@frame -1] == 'spare'

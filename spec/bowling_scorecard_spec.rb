@@ -11,7 +11,7 @@ describe Scorecard do
     it 'correctly handles the 10th frame with a spare' do
       allow(subject).to receive(:gets).and_return('10', '10', '10', '10', '10', '10', '10', '10', '10', '9', '1', '10')
       subject.keep_score
-      expect(subject.frame_scores.sum).to eq 280
+      expect(subject.frame_scores.sum).to eq 279
     end
 
     it 'correctly handles the 10th frame with a normal roll' do
@@ -19,6 +19,13 @@ describe Scorecard do
       subject.keep_score
       expect(subject.frame_scores.sum).to eq 267
     end
+
+    it 'correctly handles a mix of strikes and spares' do
+      allow(subject).to receive(:gets).and_return('1', '1', '9', '1', '10', '1', '1', '9', '1', '9', '1', '10', '10', '9', '1', '10', '10', '10')
+      subject.keep_score
+      expect(subject.frame_scores.sum).to eq 174
+    end
+
   end
 
   describe '#input_roll' do
