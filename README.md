@@ -1,3 +1,2 @@
 * Would like to work on making tests be more on behaviour rather than state - if had more time, would change a lot of '.to eq' to '.to change' in rspec
-* Went to test my calculations with online bowling calculators - one edge case that I couldn't quite figure out was a spare then a strike in the 10th frame adding 9 bonus points to the 9th frame rather than 10, which is what my interpretation of the rules came up with. Couldn't figure out why this might be the case.
 * If had more time, would like to refactor to extract a 'frame' class that handles individual frame scores, checking if a frame is a strike or a spare, etc.
