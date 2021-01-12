@@ -43,11 +43,18 @@ describe Game do
   describe "#start_game" do
     let(:game) {Game.new}
     it "returns  perfect score for a perfect game" do
-      # allow(subject).to receive(:get_roll).and_return("10")
-      allow(STDIN).to receive(:gets).and_return("10")
+      allow(game).to receive(:get_roll).and_return(10, 10, 10, 10, 10, 10, 10, 10, 10)
+      # allow(STDIN).to receive(:gets).and_return("10")
       game.start_game
       expect(game.print_score).to eq(300)
     end
+
+    it "returns the correct score for a combination of strikes, spares, gutters and scores" do
+        allow(game).to receive(:get_roll).and_return(10, 3, 3, 0, 0, 6, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        game.start_game
+        expect(game.print_score).to eq(42)
+    end
   end
+
 
 end
