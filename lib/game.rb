@@ -36,21 +36,14 @@ class Game
       return
     end
 
-    #  Strike at Roll 1
-    if current_frame.roll1 == 10
+    #  Strike at Roll 1 or Spare
+    if current_frame.roll1 == 10 || current_frame.frame_score == 10
       current_frame.frame_score += current_frame.roll3
       @frames.append(current_frame)
       calculate_score
       return
     end
 
-    # Spare
-    if current_frame.frame_score == 10
-      current_frame.frame_score += current_frame.roll3
-      @frames.append(current_frame)
-      calculate_score
-      nil
-    end
   end
 
   private

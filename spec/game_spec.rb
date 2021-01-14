@@ -10,7 +10,29 @@ describe Game do
   end
 
   describe '.play' do
-    it 'calculates the total score' do
+    it 'calculates the score if first frame is Strike' do
+      game = Game.new
+      frames = []
+      frame1 = Frame.new(10, 0)
+      game.play(frame1)
+      frames.append(frame1)
+      frame2 = Frame.new(2, 8)
+      game.play(frame2)
+      frames.append(frame2)
+      expect(frames[0].frame_score).to eq 20
+    end
+    it 'calculates the score if first frame is Spare' do
+      game = Game.new
+      frames = []
+      frame1 = Frame.new(3, 7)
+      game.play(frame1)
+      frames.append(frame1)
+      frame2 = Frame.new(2, 8)
+      game.play(frame2)
+      frames.append(frame2)
+      expect(frames[0].frame_score).to eq 12
+    end
+    it 'calculates the score of the first three frames' do
       game = Game.new
       frames = []
       frame1 = Frame.new(10, 0)
