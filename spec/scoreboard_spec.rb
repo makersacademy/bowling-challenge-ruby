@@ -1,5 +1,6 @@
 require 'scoreboard'
 
+
 describe Scoreboard do
   it 'can create an instance of scoreboard' do
     expect(subject).to be_kind_of(Scoreboard)
