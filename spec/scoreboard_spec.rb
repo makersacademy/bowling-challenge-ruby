@@ -47,4 +47,18 @@ describe Scoreboard do
     scoreboard.add_frame([1, 1])
     expect(scoreboard.score).to eq 14
   end
+
+  it 'should be able to calculate a strike witha different combination' do
+    scoreboard = Scoreboard.new
+    scoreboard.add_frame([10, 0])
+    scoreboard.add_frame([4, 3])
+    expect(scoreboard.score).to eq 24
+  end
+
+  it 'should be able to calculate a strike with yet another combination' do
+    scoreboard = Scoreboard.new
+    scoreboard.add_frame([10, 0])
+    scoreboard.add_frame([9, 0])
+    expect(scoreboard.score).to eq 28
+  end
 end
