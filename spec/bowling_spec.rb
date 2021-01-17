@@ -22,8 +22,7 @@ describe BowlingGame do
     end
   end
 
-  context 'one strike' do
-    it do
+  context 'one strike' do 
       roll_strike
       game.roll 3 
       game.roll 4
@@ -60,6 +59,5 @@ describe BowlingGame do
     game.roll 5
     game.roll 5
   end
-
 end
 
