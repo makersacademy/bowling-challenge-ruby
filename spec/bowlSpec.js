@@ -7,16 +7,18 @@ describe('Game', function(){
   });
 
  it('should return 0 for a gutter game', function() {
-  for (let i = 0; i < 20; i++) {
-    game.roll(0);
-  } 
+    rollMany(0, 20)
   expect(game.score).toEqual(0);
- })
+ });
 
  it('should return 20 for a singles game', function(){
-   for (let i = 0; i < 20; i++) {
-     game.roll(1);
-   }
+   rollMany(1, 20)
    expect(game.score).toEqual(20);
- })
-})
+ });
+
+ function rollMany(pins, rolls) {
+  for (let i = 0; i < 20; i++) {
+    game.roll(pins);
+ }
+}
+});
