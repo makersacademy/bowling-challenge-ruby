@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 require 'simplecov-console'
 require 'rspec'
 require 'game'
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
-  SimpleCov::Formatter::Console,
-])
+                                                                 SimpleCov::Formatter::Console
+                                                               ])
 SimpleCov.start
 
 RSpec.configure do |config|
@@ -18,5 +20,4 @@ RSpec.configure do |config|
   end
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
-
 end
