@@ -1,11 +1,6 @@
 Bowling Challenge in Ruby
 =================
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
-
 ## The Task
 
 **THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
@@ -13,12 +8,6 @@ Bowling Challenge in Ruby
 Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
 
 A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
-
-As usual please start by
-
-* Forking this repo
-
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am.  And since next week is lab week you have a full extra week to work on this.
 
 ___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
 
@@ -63,3 +52,23 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+## Planning
+### Methodology
+1. Gutter Game - 20 rolls - 0 score
+2. Basic Game - 20 rolls - no spares or strikes
+3. Strikes Game - 20 rolls - no strikes, spares in frames 1-9
+4. Strikes Game - 21 rolls - spare in frame 10-roll 2, opportunity for 3rd roll
+5. Planning tbc for strikes and perfect score
+
+### Input/Output table
+| Input | Output |
+| :------------- | :------------- |
+| [0] | [0] |
+| [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] | [0,0,0,0,0,0,0,0,0,0] |
+| [1,1] | [2] |
+| [1,1,1] | [2,3] |
+| [1,1,1,1,1] | [2,4,5] |
+| [1,1,1,1,1,1,1] | [2,4,6,7] |
+| [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] | [2,4,6,8,10,12,14,16,18,20] |
+| [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,9,1] | [2,4,6,8,10,12,14,16,18,29] |
