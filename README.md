@@ -63,3 +63,15 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+
+
+The maximum number of turns a player can have is 21
+The minimum number of turns a player can have is 12
+
+If a player gets a strike, they move immediately to the next frame. If this happens, the players receives 10 points plus, the amount of points they get for the entire next frame.
+
+
+if a player gets a spare (strike over 2 turns) they move onto the next frame as normal. Also, they receive 10 points, plus the amount of points they receive for the 1st turn of the next frame.
+
+on the 10th frame, a player is given 3 turns, even if they get a strike on every turn
