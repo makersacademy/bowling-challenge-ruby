@@ -12,4 +12,11 @@ class Game
     frames << Frame.new(frames.length + 1)
   end
 
+  def input_roll(pins)
+    if frames.empty? || frames[-1].completed?
+      create_frame
+    end
+    frames[-1].add_roll(pins)
+  end
+
 end

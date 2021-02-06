@@ -14,4 +14,17 @@ describe Game do
     game.create_frame
   end
 
+  it "creates a frame to record the roll" do
+    game.input_roll(4)
+    expect(game.frames.length).to eq 1
+  end
+
+  it "creates another frame when the first is completed" do
+    game.input_roll(10)
+    game.input_roll(8)
+    expect(game.frames.length).to eq 2
+  end
+
+  
+
 end
