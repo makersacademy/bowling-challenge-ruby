@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
 class Game
-  attr_reader :score, :frame
+  attr_reader :scores, :frame
 
   TOTAL_FRAMES = 10
   MAX_POINTS = 10
 
   def initialize
     @frame = 0
-    @score = []
+    @scores = []
   end
 
   def roll(pins)
-    @score << pins
+    @scores << pins
   end
 
-  def game_score
+  def score
     result = 0
     index = 0
 
@@ -28,7 +28,7 @@ class Game
         result += spare(index)
         index += 2
       else
-        result += @score[index] + @score[index + 1]
+        result += @scores[index] + @scores[index + 1]
         index += 2
       end
     end
@@ -38,18 +38,18 @@ class Game
   private
 
   def strike?(index)
-    @score[index] == MAX_POINTS
+    @scores[index] == MAX_POINTS
   end
 
   def strike(index)
-    MAX_POINTS + @score[index + 1] + @score[index + 2]
+    MAX_POINTS + @scores[index + 1] + @scores[index + 2]
   end
 
   def spare?(index)
-    @score[index] + @score[index + 1] == MAX_POINTS
+    @scores[index] + @scores[index + 1] == MAX_POINTS
   end
 
   def spare(index)
-    @score[index] + @score[index + 1] + @score[index + 2]
+    @scores[index] + @scores[index + 1] + @scores[index + 2]
   end
 end
