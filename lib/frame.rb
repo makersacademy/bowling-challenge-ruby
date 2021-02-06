@@ -1,16 +1,10 @@
 class Frame
 
-  attr_reader :rolls
+  attr_reader :number, :rolls
 
-  @@frame_number = 0
-
-  def initialize
-    @@frame_number += 1
+  def initialize(num)
+    @number = num
     @rolls = []
-  end
-
-  def number
-    @@frame_number
   end
 
   def add_roll(pins)
@@ -22,7 +16,7 @@ class Frame
   def completed?
     if number < 10
       rolls.length == 2 || rolls[0] == 10
-      
+
     elsif rolls[0, 2].sum < 10
       rolls.length == 2
     else
