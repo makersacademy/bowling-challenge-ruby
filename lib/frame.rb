@@ -24,4 +24,8 @@ class Frame
     end
   end
 
+  def raw_score
+    rolls.sum
+  end
+
 end

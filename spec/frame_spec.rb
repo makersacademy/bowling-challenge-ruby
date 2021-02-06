@@ -1,10 +1,10 @@
 require "frame"
 
 describe Frame do 
+  let(:frame) { Frame.new(3) }
 
   context "frames 1-9" do
-    let(:frame) { Frame.new(3) }
-
+  
     it "knows which number frame it is" do
       expect(frame.number).to eq 3
     end
@@ -51,6 +51,15 @@ describe Frame do
       frame.add_roll(7)
       frame.add_roll(8)
       expect(frame).to be_completed
+    end
+  end
+
+  context "scoring" do
+
+    it "sums pin score" do
+      frame.add_roll(3)
+      frame.add_roll(2)
+      expect(frame.raw_score).to eq 5
     end
   end
 
