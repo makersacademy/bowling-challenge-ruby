@@ -10,11 +10,6 @@ class Game
     @owed_rolls = Hash.new
   end
 
-  def create_frame
-    frames << Frame.new(frames.length + 1)
-    scores["frame_#{frames.length}".to_sym] = 0
-  end
-
   def input_roll(pins)
     raise "Game is finished" if frames.length == 10 && frames[-1].completed?
 
@@ -34,6 +29,11 @@ class Game
 
   private #--------------------------------------------------
   
+  def create_frame
+    frames << Frame.new(frames.length + 1)
+    scores["frame_#{frames.length}".to_sym] = 0
+  end
+
   def frame_check
     if frames.empty?
       create_frame

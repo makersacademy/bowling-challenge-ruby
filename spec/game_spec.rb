@@ -3,24 +3,6 @@ require "game"
 describe Game do 
   let(:game) { Game.new }
 
-  context "adding frames" do 
-    it "can create a Frame" do
-      game.create_frame
-      expect(game.frames.length).to eq 1
-    end
-
-    it "increments the Frame number" do
-      game.create_frame
-      expect(Frame).to receive(:new).with(2)
-      game.create_frame
-    end
-
-    it "adds an entry in the scores hash" do
-      game.create_frame
-      expect(game.scores[:frame_1]).to eq 0
-    end
-  end
-
   context "#input_roll" do
     it "creates a frame to record the roll" do
       game.input_roll(4)
@@ -81,7 +63,11 @@ describe Game do
       game.input_roll(3)
       expect(game.scores[:frame_1]).to eq 17
     end
- 
   end
 
+  context "end of the game" do
+
+
+
+  end
 end
