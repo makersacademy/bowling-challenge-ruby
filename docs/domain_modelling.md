@@ -61,12 +61,14 @@ I want to scores I previously entered
 - Frame Scores: Property of Frame
 - Frame Bonus Scores: Property of Frame
 - Frame Total Score: Property of Frame
+- Final Frame: Property of Frame
 
 ### Actions
 - Enter Score
 - Add Score
 - Add Bonus Score
 - Check if Bonus Needed
+- Check if frame complete
 
 #### Action Owners/Modifiers
 
@@ -84,4 +86,4 @@ Game      | total_score, frames, current_frame, current_bowl | enter_score
 
 Class     |   Properties      |   Methods   
 ----------|-------------------|--------------
-Frame      | scores, bonus_scores, total_score | add_score, add_bonus_score, need_bonus?
+Frame      | scores, bonus_scores, total_score | add_score, add_bonus_score, need_bonus?, complete?, final_frame?

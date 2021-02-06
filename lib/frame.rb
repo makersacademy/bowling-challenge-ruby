@@ -20,6 +20,10 @@ class Frame
     total_score == 10 || (strike? && @bonus_scores.length < 2)
   end
 
+  def complete?
+    @scores.length == 2 || strike?
+  end
+
   private
 
   def strike?

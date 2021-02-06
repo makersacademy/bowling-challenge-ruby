@@ -20,11 +20,23 @@ describe Frame do
       it 'should set need_bonus to true' do
         expect { frame.add_score(strike) }.to change { frame.need_bonus? }.from(false).to(true)
       end
+      it 'should set the frame as complete' do
+        expect { frame.add_score(strike) }.to change { frame.complete? }.from(false).to(true)
+      end
     end
     context 'when you get less than 10 over two bowls' do
       it 'should leave need_bonus as false' do
         2.times { frame.add_score(bad_score) }
         expect(frame.need_bonus?).to be false
+      end
+    end
+    context 'when the first bowl is not a strike' do
+      before { frame.add_score(score) }
+      it 'should not be complete' do
+        expect(frame).not_to be_complete
+      end
+      it 'should be completed by the second bowl' do
+        expect { frame.add_score(score) }.to change { frame.complete? }.from(false).to(true)
       end
     end
   end
