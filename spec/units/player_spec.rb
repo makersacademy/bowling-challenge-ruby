@@ -2,11 +2,15 @@ require 'player'
 
 describe Player do
   it { is_expected.to respond_to(:roll)}
+  subject { described_class.new }
 
   describe "roll" do
-    it 'opens a frame instance' do
-      subject.roll
-      expect(subject.roll).to eq roll
+    before do
+      $stdin = StringIO.new("2")
+    end
+
+    it 'saves a bowl score' do
+      expect(subject.roll).to eq subject.score
     end
   end
 end
