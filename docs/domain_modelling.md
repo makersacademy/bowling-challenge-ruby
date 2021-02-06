@@ -42,29 +42,45 @@ I want to scores I previously entered
 
 ### Nouns
 - Game
-- Total Score
 - Frames
+- Total Score
 - Current Frame
 - Current Bowl
+- Frame
+- Frame Scores
+- Frame Bonus Scores
+- Frame Total Score  
 
 #### Objects vs Properties
 - Game: Object
 - Total Score: Property of Game
-- Frames: Property of Game
 - Current Frame: Property of Game
 - Current Bowl: Property of Game
+- Frames: Property of Game
+- Frame: Object
+- Frame Scores: Property of Frame
+- Frame Bonus Scores: Property of Frame
+- Frame Total Score: Property of Frame
 
 ### Actions
 - Enter Score
+- Add Score
+- Add Bonus Score
 
 #### Action Owners/Modifiers
 
 Action    |    Owner     | Modifies/Reads  
 ----------|--------------|---------------
-Enter Score | Game       | Total Score, Current Frame
+Enter Score | Game       | Current Frame, Frame -> Frame Scores, Frame -> Bonus Scores (potentially)
+Add Score | Frame       | Frame Scores
+Add Bonus Score | Frame       | Frame Bonus Scores
 
 ### Class Diagrams
 
 Class     |   Properties      |   Methods   
 ----------|-------------------|--------------
 Game      | total_score, frames, current_frame, current_bowl | enter_score
+
+Class     |   Properties      |   Methods   
+----------|-------------------|--------------
+Frame      | scores, bonus_scores, total_score | add_score, add_bonus_score
