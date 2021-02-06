@@ -38,6 +38,10 @@ describe Frame do
         it 'should leave need_bonus true for first addition' do
           expect { frame.add_bonus_score(score) }.not_to(change { frame.need_bonus? })
         end
+        it 'should change need_bonus to false after second addition' do
+          frame.add_bonus_score(score)
+          expect { frame.add_bonus_score(score) }.to change { frame.need_bonus? }.from(true).to(false)
+        end
       end
     end
   end

@@ -17,7 +17,7 @@ class Frame
   end
 
   def need_bonus?
-    total_score == 10 || strike?
+    total_score == 10 || (strike? && @bonus_scores.length == 1)
   end
 
   private
