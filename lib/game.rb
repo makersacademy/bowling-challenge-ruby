@@ -11,7 +11,7 @@ class Game
   end
 
   def input_roll(pins)
-    raise "Game is finished" if frames.length == 10 && frames[-1].completed?
+    raise "Game is finished" if finished?
 
     frame_check
 
@@ -24,6 +24,16 @@ class Game
       scores[k] += pins
       owed_rolls[k] -= 1
     end
+    frames_scores_message
+    if finished?
+      puts "Final score: #{total_score}"
+    else
+      puts "Current score: #{total_score}"
+    end
+  end
+
+  def finished?
+    frames.length == 10 && frames[-1].completed?
   end
 
 
@@ -41,6 +51,23 @@ class Game
       owed_rolls["frame_#{frames.length}".to_sym] = frames[-1].owed_rolls
       create_frame
     end
+  end
+
+  def frames_scores_message
+    puts "Current scores:"
+    frame_scores = ""
+    scores.each do |k, v|
+      frame_scores += " #{k}: #{v} |"
+    end
+    puts frame_scores
+  end
+
+  def total_score
+    total_score = 0
+    scores.each do |k, v|
+      total_score += v
+    end
+    total_score
   end
 
 end

@@ -20,6 +20,10 @@ describe Game do
       allow(game.frames[-1]).to receive(:completed?).and_return true
       expect { game.input_roll(4) }.to raise_error "Game is finished"
     end
+
+    it "prints out current scores" do
+      expect { game.input_roll(6) }.to output(a_string_including("Current scores:")).to_stdout
+    end
   end
 
   context "calculating scores" do
@@ -67,7 +71,12 @@ describe Game do
 
   context "end of the game" do
 
+    it "prints a summary message at the end of the game" do
+      rolls = [1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8]
+      rolls.each { |roll| game.input_roll(roll) }
 
+      expect { game.input_roll(6) }.to output(a_string_including("Final score:")).to_stdout
+    end
 
   end
 end
