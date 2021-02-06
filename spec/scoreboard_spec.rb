@@ -20,4 +20,19 @@ describe Scoreboard do
       expect(scoreboard.score).to include(3)
     end
   end
+
+  describe '#run' do
+    it 'runs the scoreboard' do
+      scoreboard.run
+      expect(scoreboard.score.length).to eq 20
+    end
+  end
+
+  describe '#strike' do
+    it 'adds to the previous frame_score the score of this frame' do
+      allow(scoreboard).to receive(:gets).and_return('10')
+      scoreboard.first_roll
+      expect(scoreboard.strike?).to eq true
+    end
+  end
 end
