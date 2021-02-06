@@ -8,6 +8,14 @@ Ten-pin bowling has surprisingly [complex rules](https://en.wikipedia.org/wiki/T
 
 This was the 5th weekend challenge for [Makers Academy](https://makers.tech). The goal was to practise some more test-driven (TDD) Ruby.
 
+It looks like this in irb:
+```
+ # Half way through a game, doing quite well
+ :008 > game.input_roll(10)
+Current scores:                                                                frame_1: 24 | frame_2: 19 | frame_3: 9 | frame_4: 20 | frame_5: 10 |
+Current score: 82
+```
+
 ### Installation
 * Install Ruby. This code was written in Ruby 3.0.0.
 * Clone this repo
