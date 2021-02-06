@@ -1,11 +1,14 @@
 require 'scoreboard'
 
 describe Scoreboard do
-  subject(:game) { described_class.new }
+  subject(:scoreboard) { described_class.new }
 
-  describe '#score' do
-    it 'starts with 0 score' do
-      expect(game.score).to eq 0
+  describe '#first_roll' do
+    it 'stores the first roll of each frame' do
+      allow(scoreboard).to receive(:gets).and_return('6')
+      scoreboard.first_roll
+      expect(scoreboard.frame_score).to eq([6])
+      expect(scoreboard.score).to eq([6])
     end
   end
 end
