@@ -1,17 +1,16 @@
-require_relative "frame"
+require_relative 'frame'
 
 class Game
-
   attr_reader :frames, :scores, :owed_rolls
 
   def initialize
     @frames = []
-    @scores = Hash.new
-    @owed_rolls = Hash.new
+    @scores = {}
+    @owed_rolls = {}
   end
 
   def input_roll(pins)
-    raise "Game is finished" if finished?
+    raise 'Game is finished' if finished?
 
     frame_check
 
@@ -24,7 +23,7 @@ class Game
       scores[k] += pins
       owed_rolls[k] -= 1
     end
-    
+
     post_roll_message
   end
 
@@ -34,14 +33,12 @@ class Game
 
   def total_score
     total_score = 0
-    scores.each do |k, v|
-      total_score += v
-    end
+    scores.each { |_k, v| total_score += v }
     total_score
   end
 
   private #--------------------------------------------------
-  
+
   def create_frame
     frames << Frame.new(frames.length + 1)
     scores["frame_#{frames.length}".to_sym] = 0
@@ -57,8 +54,8 @@ class Game
   end
 
   def frames_scores_message
-    puts "Current scores:"
-    frame_scores = ""
+    puts 'Current scores:'
+    frame_scores = ''
     scores.each do |k, v|
       frame_scores += " #{k}: #{v} |"
     end
@@ -70,10 +67,9 @@ class Game
 
     if finished?
       puts "Final score: #{total_score}"
-      puts "Perfect Game!" if total_score == 300
+      puts 'Perfect Game!' if total_score == 300
     else
       puts "Current score: #{total_score}"
     end
   end
-
 end

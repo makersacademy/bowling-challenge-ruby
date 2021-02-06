@@ -1,5 +1,4 @@
 class Frame
-
   attr_reader :number, :rolls
 
   def initialize(num)
@@ -8,7 +7,7 @@ class Frame
   end
 
   def add_roll(pins)
-    raise "This frame is completed" if completed?
+    raise 'This frame is completed' if completed?
 
     rolls << pins
   end
@@ -25,7 +24,11 @@ class Frame
   end
 
   def owed_rolls
-    strike? ? 2 : spare? ? 1 : 0
+    if strike?
+      2
+    else
+      spare? ? 1 : 0
+    end
   end
 
   private #---------------------------------------
@@ -37,5 +40,4 @@ class Frame
   def spare?
     rolls.sum == 10
   end
-
 end
