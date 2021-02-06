@@ -5,7 +5,7 @@ describe Game do
 
   describe 'initialize' do
     it 'has three public methods' do
-      expect(game).to respond_to(:frame, :score, :bowling_game)
+      expect(game).to respond_to(:frame, :score, :game_score)
     end
 
     it 'score is an empty array' do
@@ -29,16 +29,16 @@ describe Game do
     end
   end
 
-  describe '#bowling_game?' do
+  describe '#game_score?' do
 
     it 'adds 10 to frames' do
       20.times { game.roll(1) }
-      expect{ game.bowling_game }.to change { game.frame}.by(10)
+      expect{ game.game_score }.to change { game.frame}.by(10)
     end
 
     it 'returns 0 when you play a gutter game' do
       20.times { game.roll(0) }
-      expect(game.bowling_game).to eq(0)
+      expect(game.game_score).to eq(0)
     end
 
     it 'can work out a spare' do
@@ -46,7 +46,26 @@ describe Game do
       2.times { game.roll(1) } #11 + 2
       2.times { game.roll(5) } #13 + 11
       14.times { game.roll(1) } #24 + 14
-      expect(game.bowling_game).to eq(38)
+      expect(game.game_score).to eq(38)
     end
+
+    it 'can work out a strike' do
+      game.roll(10) #10 + 2
+      2.times { game.roll(1) } #12 + 2
+      game.roll(10) #14 + 10 + 2
+      2.times { game.roll(1) } #26 + 2
+      12.times { game.roll(1) } #28 + 12
+      expect(game.game_score).to eq(40)
+    end
+
+    it 'can work out a strike followed by a spare' do
+      game.roll(10) #10 + 2
+      2.times { game.roll(1) } #12 + 2
+      game.roll(10) #14 + 10 + 10
+      2.times { game.roll(5) } #34 + 10 + 1
+      12.times { game.roll(1) } #45 + 12
+      expect(game.game_score).to eq(57)
+    end
+
   end
 end

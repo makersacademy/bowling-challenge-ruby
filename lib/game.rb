@@ -15,18 +15,24 @@ class Game
     @score << pins
   end
 
-  def bowling_game
+  def game_score
     result = 0
     index = 0
 
     TOTAL_FRAMES.times do
       @frame +=1
-      if @score[index] + @score[index + 1] == 10
+      if @score[index] == MAX_POINTS
+        result += @score[index] + @score[index + 1] + @score[index + 2]
+      elsif @score[index] + @score[index + 1] == MAX_POINTS
         result += @score[index] + @score[index + 1] + @score[index + 2]
       else
         result += @score[index] + @score[index + 1]
       end
-      index += 2
+      if @score[index] == MAX_POINTS
+        index +=1
+      else
+        index += 2
+      end
     end
     result
   end
