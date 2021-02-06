@@ -14,6 +14,9 @@ describe Game do
         it 'changes the current bowl' do
           expect { subject }.to change { game.current_bowl }.to 2
         end
+        it 'maintains the current frame' do
+          expect { subject }.not_to change { game.current_frame }
+        end
       end
     end
   end
