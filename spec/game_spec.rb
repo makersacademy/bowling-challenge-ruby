@@ -22,6 +22,8 @@ describe Game do
 
       context 'when you get a strike (enter 10)' do
         let(:score) { 10 }
+        let(:subsequent_scores) { [4, 5] }
+        let(:enter_subsequent) { subsequent_scores.each { |score| game.enter_score(score) } }
         it 'changes the frame' do
           expect { subject }.to change { game.current_frame }.by 1
         end
@@ -30,6 +32,10 @@ describe Game do
         end
         it 'initially increases the score by 10' do
           expect { subject }.to change { game.total_score }.by 10
+        end
+        it 'then adds subsequent two bowls twice, once as bonus' do
+          game.enter_score(10)
+          expect { enter_subsequent }.to change { game.total_score }.by 2 * subsequent_scores.sum
         end
       end
     end
