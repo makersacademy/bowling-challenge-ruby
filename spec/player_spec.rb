@@ -15,6 +15,19 @@ describe Player do
       expect(claude.scores).to include([5, 5])
     end
 
+    it "recognises a strike" do
+      claude.frame(10, 0)
+      expect(claude.strike).to eq(true)
+      expect(claude.spare).to eq(false)
+    end
+
+    it "recognises a spare" do
+      claude.frame(4, 6)
+      expect(claude.spare).to eq(true)
+      expect(claude.strike).to eq(false)
+    end
+
+
   end
 
   describe ".get_scores" do
