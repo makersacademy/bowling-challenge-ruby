@@ -62,9 +62,9 @@ class Scoreboard
     @score.sum
   end
 
-  def strike_bonus
-    frame_score[-3] += (frame_score[-1] + frame_score[-2])
-  end
+  # def strike_bonus
+  #   frame_score[-3] += (frame_score[-1] + frame_score[-2])
+  # end
 
   def bonus_roll
     puts "What's the score on your bonus roll?"

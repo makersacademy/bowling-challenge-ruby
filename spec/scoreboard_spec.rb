@@ -29,7 +29,7 @@ describe Scoreboard do
       scoreboard.first_roll
       allow(scoreboard).to receive(:gets).and_return('2')
       scoreboard.second_roll
-      scoreboard.run
+      # scoreboard.run
       # expect(scoreboard.total).to eq 8
     end
   end
@@ -52,17 +52,17 @@ describe Scoreboard do
     end
   end
 
-  describe '#strike_bonus' do
-    it 'adds on your previous strike your current frame_score' do
-      allow(scoreboard).to receive(:gets).and_return('10')
-      scoreboard.first_roll
-      allow(scoreboard).to receive(:gets).and_return('6')
-      scoreboard.first_roll
-      allow(scoreboard).to receive(:gets).and_return('2')
-      scoreboard.second_roll
-      expect(scoreboard.frame_score).to include(18)
-    end
-  end
+  # describe '#strike_bonus' do
+  #   it 'adds on your previous strike your current frame_score' do
+  #     allow(scoreboard).to receive(:gets).and_return('10')
+  #     scoreboard.first_roll
+  #     allow(scoreboard).to receive(:gets).and_return('6')
+  #     scoreboard.first_roll
+  #     allow(scoreboard).to receive(:gets).and_return('2')
+  #     scoreboard.second_roll
+  #     expect(scoreboard.frame_score).to include(18)
+  #   end
+  # end
 
   describe '#total' do
     it 'shows the total score' do
@@ -71,6 +71,14 @@ describe Scoreboard do
       allow(scoreboard).to receive(:gets).and_return('2')
       scoreboard.second_roll
       expect(scoreboard.total).to eq(8)
+    end
+  end
+
+  describe '#bonus_roll' do
+    it 'should add the bonus point to your score' do
+      allow(scoreboard).to receive(:gets).and_return('6')
+      scoreboard.bonus_roll
+      expect(scoreboard.score).to include(6)
     end
   end
 end
