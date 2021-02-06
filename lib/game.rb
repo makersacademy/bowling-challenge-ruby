@@ -24,18 +24,21 @@ class Game
       scores[k] += pins
       owed_rolls[k] -= 1
     end
-    frames_scores_message
-    if finished?
-      puts "Final score: #{total_score}"
-    else
-      puts "Current score: #{total_score}"
-    end
+    
+    post_roll_message
   end
 
   def finished?
     frames.length == 10 && frames[-1].completed?
   end
 
+  def total_score
+    total_score = 0
+    scores.each do |k, v|
+      total_score += v
+    end
+    total_score
+  end
 
   private #--------------------------------------------------
   
@@ -62,12 +65,15 @@ class Game
     puts frame_scores
   end
 
-  def total_score
-    total_score = 0
-    scores.each do |k, v|
-      total_score += v
+  def post_roll_message
+    frames_scores_message
+
+    if finished?
+      puts "Final score: #{total_score}"
+      puts "Perfect Game!" if total_score == 300
+    else
+      puts "Current score: #{total_score}"
     end
-    total_score
   end
 
 end

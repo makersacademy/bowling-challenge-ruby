@@ -78,5 +78,22 @@ describe Game do
       expect { game.input_roll(6) }.to output(a_string_including("Final score:")).to_stdout
     end
 
+    it "gives a score of 133" do
+      rolls = [1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6]
+      rolls.each { |roll| game.input_roll(roll) }
+      expect(game.total_score).to eq 133
+    end
+
+    it "gives a score of 300 for a perfect game" do
+      rolls = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+      rolls.each { |roll| game.input_roll(roll) }
+      expect(game.total_score).to eq 300
+    end
+
+    it "congratulates on a perfect game" do
+      rolls = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+      rolls.each { |roll| game.input_roll(roll) }
+      expect { game.input_roll(10) }.to output(a_string_including("Perfect Game!")).to_stdout
+    end
   end
 end
