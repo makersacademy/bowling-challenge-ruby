@@ -1,4 +1,4 @@
-require 'player'
+require './lib/player'
 
 class Game
 
@@ -10,9 +10,10 @@ class Game
 
 
   def start(players)
+    x = 0
     players.times do
-      @players.push(Player.new)
+      x += 1
+      @players.push({"Player #{x}" => Player.new})
     end
   end
-
 end
