@@ -25,6 +25,12 @@ describe Game do
         it 'changes the frame' do
           expect { subject }.to change { game.current_frame }.by 1
         end
+        it 'leaves the current bowl as 1' do
+          expect { subject }.not_to(change { game.current_bowl })
+        end
+        it 'initially increases the score by 10' do
+          expect { subject }.to change { game.total_score }.by 10
+        end
       end
     end
   end

@@ -9,7 +9,7 @@ class Game
 
   def enter_score(score)
     @total_score += score
-    @current_bowl = 2
+    @current_bowl = 2 unless score == 10
     @current_frame += 1 if score == 10
   end
 
