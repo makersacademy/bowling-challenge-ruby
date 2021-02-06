@@ -9,11 +9,29 @@ class Scoreboard
   end
 
   def run
-    while @frames <= 10
+    frames_to_9
+    frame_10
+    puts "Your total score is #{total}"
+  end
+
+  def frames_to_9
+    while @frames < 10
       first_roll
-      strike?
+      if strike?
+        @frames += 1
+      else
+        second_roll
+      end
+    end
+  end
+
+  def frame_10
+    first_roll
+    if strike?
       second_roll
-      strike?
+      bonus_roll
+    else
+      second_roll
     end
   end
 
@@ -33,6 +51,25 @@ class Scoreboard
   end
 
   def strike?
-    frame_score[-1] == 10
+    @frame_score[-1] == 10
+  end
+
+  def spare?
+    @frame_score[-1] + @frame_score[-2] == 10
+  end
+
+  def total
+    @score.sum
+  end
+
+  def strike_bonus
+    frame_score[-3] += (frame_score[-1] + frame_score[-2])
+  end
+
+  def bonus_roll
+    puts "What's the score on your bonus roll?"
+    bonus_roll = gets.chomp.to_i
+    @frame_score << bonus_roll
+    @score << bonus_roll
   end
 end
