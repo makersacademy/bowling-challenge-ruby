@@ -14,4 +14,12 @@ class Scoreboard
     @frame_score << roll_1
     @score << roll_1
   end
+
+  def second_roll
+    puts "What's the score on your second roll?"
+    roll_2 = gets.chomp.to_i
+    @frame_score << roll_2
+    @score << roll_2
+    @frames += 1
+  end
 end

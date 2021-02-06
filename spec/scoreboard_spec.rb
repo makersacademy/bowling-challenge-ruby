@@ -11,4 +11,13 @@ describe Scoreboard do
       expect(scoreboard.score).to eq([6])
     end
   end
+
+  describe '#second_roll' do
+    it 'stores the second roll of each frame' do
+      allow(scoreboard).to receive(:gets).and_return('3')
+      scoreboard.second_roll
+      expect(scoreboard.frame_score).to include(3)
+      expect(scoreboard.score).to include(3)
+    end
+  end
 end
