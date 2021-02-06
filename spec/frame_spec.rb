@@ -33,6 +33,12 @@ describe Frame do
           expect { frame.add_bonus_score(score) }.to change { frame.need_bonus? }.from(true).to(false)
         end
       end
+      context 'when the main score was a strike' do
+        before { frame.add_score(strike) }
+        it 'should leave need_bonus true for first addition' do
+          expect { frame.add_bonus_score(score) }.not_to(change { frame.need_bonus? })
+        end
+      end
     end
   end
 
