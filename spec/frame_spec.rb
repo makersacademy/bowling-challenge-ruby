@@ -39,6 +39,25 @@ describe Frame do
         expect { frame.add_score(score) }.to change { frame.complete? }.from(false).to(true)
       end
     end
+    context 'when it is the final frame' do
+      let(:final_frame) { Frame.new(final_frame: true) }
+      context 'when you bowl less than 10 over the frame' do
+        it 'should be completed by the second bowl' do
+          final_frame.add_score(4)
+          expect { final_frame.add_score(2) }.to change { final_frame.complete? }.from(false).to(true)
+        end
+      end
+      context 'when you bowl a spare in the frame' do
+        before { final_frame.add_score(8) }
+        it 'should not be completed by the second bowl' do
+          expect { final_frame.add_score(2) }.not_to(change { final_frame.complete? })
+        end
+        it 'should be completed by the third bowl' do
+          final_frame.add_score(2)
+          expect { final_frame.add_score(2) }.to change { final_frame.complete? }.from(false).to(true)
+        end
+      end
+    end
   end
 
   describe '#add_bonus_score' do

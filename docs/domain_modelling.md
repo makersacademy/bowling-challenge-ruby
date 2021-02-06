@@ -26,6 +26,11 @@ So that I can see how well I'm doing
 I want to see my current total score in the game
 >
 
+>As a very keen bowler  
+So that I don't get stuck playing forever  
+I want to see when the game has finished  
+>
+
 ### Stretch User Stories
 
 >As a keen bowler  

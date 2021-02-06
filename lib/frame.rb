@@ -1,7 +1,8 @@
 class Frame
 
-  def initialize
+  def initialize(final_frame: false)
     @scores, @bonus_scores = [], []
+    @final_frame = final_frame
   end
 
   def total_score
@@ -21,7 +22,8 @@ class Frame
   end
 
   def complete?
-    @scores.length == 2 || strike?
+    return false if @final_frame && total_score == 10 && @scores.length < 3
+    @scores.length >= 2 || strike?
   end
 
   private

@@ -1,3 +1,5 @@
+require_relative 'frame'
+
 class Game
   attr_reader :current_bowl, :current_frame
 
@@ -12,11 +14,6 @@ class Game
     @frames[@current_frame - 1].add_score(score)
     increment_bowl
     increment_frame
-  end
-
-  def create_frames
-    @frames = []
-    10.times { @frames << Frame.new }
   end
 
   def total_score
@@ -41,7 +38,12 @@ class Game
 
   def increment_frame
     @current_frame += 1 if @frames[@current_frame - 1].complete?
+    puts "That's the game folks!" if @current_frame > 10
   end
 
+  def create_frames
+    @frames = []
+    10.times { @frames << Frame.new }
+  end
 
 end

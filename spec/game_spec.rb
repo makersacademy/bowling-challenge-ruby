@@ -59,8 +59,27 @@ describe Game do
       it 'sets the current bowl to 1' do
         expect { subject }.to change { game.current_bowl }.from(2).to(1)
       end
+      it 'changes the total score by the amount of the second bowl' do
+        expect { subject }.to change { game.total_score }.by second_score
+      end
     end
-    
+
+    context 'when it is the last frame of the game' do
+      before { 18.times { game.enter_score(5) } }
+      context 'when you score less than ten in the last frame' do
+        it 'tells you you have finished the game' do
+          game.enter_score(4)
+          expect { game.enter_score(2) }.to output("That's the game folks!\n").to_stdout
+        end
+      end
+      context 'when you get a spare in the last frame' do
+        it 'does not immediately tell you you have finished the game' do
+          game.enter_score(8)
+          expect { game.enter_score(2) }.not_to output("That's the game folks!\n").to_stdout
+        end
+      end
+    end
+
   end
 
 end
