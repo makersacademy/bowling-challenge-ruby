@@ -1,6 +1,6 @@
 class Player
 
-  attr_reader :name, :scores, :total, :strike, :spare
+  attr_reader :name, :scores, :total, :strike, :spare, :bonus_1, :bonus_2
 
   def initialize(name)
     @name = name
@@ -8,11 +8,24 @@ class Player
     @total = 0
     @strike = false
     @spare = false
+    @bonus_1 = 1
+    @bonus_2 = 1
   end
 
   def frame(roll_1, roll_2)
+    check_bonus
+    @scores.push([roll_1 * @bonus_1, roll_2 * @bonus_2])
     strike_spare(roll_1, roll_2)
-    @scores.push([roll_1, roll_2])
+  end
+
+  def check_bonus
+    if @strike == true
+      @bonus_1 = 2
+      @bonus_2 = 2
+    elsif @spare == true
+      @bonus_1 = 2
+      @bonus_2 = 1
+    end
   end
 
   def strike_spare(roll_1, roll_2)
