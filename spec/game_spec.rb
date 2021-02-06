@@ -42,12 +42,46 @@ describe Game do
 
   context "calculating scores" do
 
-    xit "stores scores for each frame" do
+    it "sums scores for first frame (no strike/spare)" do
       game.input_roll(4)
       game.input_roll(3)
       expect(game.scores[:frame_1]).to eq 7
     end
 
+    it "sums scores for second frame (no strike/spare)" do
+      game.input_roll(4)
+      game.input_roll(3)
+      game.input_roll(2)
+      game.input_roll(3)
+      expect(game.scores[:frame_2]).to eq 5
+    end
+
+    it "saves how many extra rolls are owed to a completed frame" do
+      game.input_roll(10)
+      game.input_roll(3)
+      expect(game.owed_rolls[:frame_1]).to eq 1
+    end
+
+    it "adds next roll if there was a spare" do
+      game.input_roll(4)
+      game.input_roll(6)
+      expect(game.scores[:frame_1]).to eq 10
+
+      game.input_roll(8)
+      expect(game.scores[:frame_1]).to eq 18
+      expect(game.scores[:frame_2]).to eq 8
+
+      game.input_roll(1)
+      expect(game.scores[:frame_1]).to eq 18
+    end
+
+    it "adds next two rolls if there was a strike" do
+      game.input_roll(10)
+      game.input_roll(4)
+      game.input_roll(3)
+      expect(game.scores[:frame_1]).to eq 17
+    end
+ 
   end
 
 end

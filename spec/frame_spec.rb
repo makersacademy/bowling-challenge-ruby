@@ -20,7 +20,7 @@ describe Frame do
       expect(frame).to be_completed
     end
 
-    it "knows if frame ended with a strike (except 10th frame)" do
+    it "knows if frame ended early (except 10th frame)" do
       frame.add_roll(10)
       expect(frame).to be_completed
     end
@@ -56,10 +56,9 @@ describe Frame do
 
   context "scoring" do
 
-    it "sums pin score" do
-      frame.add_roll(3)
-      frame.add_roll(2)
-      expect(frame.raw_score).to eq 5
+    it "knows it's owed 2 extra rolls for scoring on a strike" do
+      frame.add_roll(10)
+      expect(frame.owed_rolls).to eq 2
     end
   end
 

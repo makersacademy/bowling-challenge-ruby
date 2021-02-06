@@ -24,8 +24,18 @@ class Frame
     end
   end
 
-  def raw_score
-    rolls.sum
+  def owed_rolls
+    strike? ? 2 : spare? ? 1 : 0
+  end
+
+  private #---------------------------------------
+
+  def strike?
+    rolls[0] == 10
+  end
+
+  def spare?
+    rolls.sum == 10
   end
 
 end
