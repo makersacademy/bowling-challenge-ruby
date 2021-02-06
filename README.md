@@ -43,3 +43,4 @@ scores["frame_#{frames.length}".to_sym] = 0
 ### Known Problems
 * There is no error checking for invalid roll input - the user can enter any number currently.
 * The Game class is in charge of printing out and summing scores, as well as inputting new rolls. It might be better to refactor the roll inputs separately into a Roll class.
+* Magic numbers present.
