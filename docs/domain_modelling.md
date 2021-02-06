@@ -84,4 +84,4 @@ Game      | total_score, frames, current_frame, current_bowl | enter_score
 
 Class     |   Properties      |   Methods   
 ----------|-------------------|--------------
-Frame      | scores, bonus_scores, total_score | add_score, add_bonus_score, bonus_needed?
+Frame      | scores, bonus_scores, total_score | add_score, add_bonus_score, need_bonus?

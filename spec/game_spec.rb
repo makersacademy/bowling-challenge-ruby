@@ -37,6 +37,14 @@ describe Game do
           game.enter_score(10)
           expect { enter_subsequent }.to change { game.total_score }.by 2 * subsequent_scores.sum
         end
+        context 'when the next bowl is also a strike' do
+          let(:enter_subsequent_strike) { [10, 5].each { |score| game.enter_score(score) } }
+          it 'adds the second strike twice, and the subsequent shot three times' do
+            score_increment = 10 * 2 + 5 * 3
+            game.enter_score(10)
+            expect { enter_subsequent_strike }.to change { game.total_score }.by score_increment
+          end
+        end
       end
     end
   end
