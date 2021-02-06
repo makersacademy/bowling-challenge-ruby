@@ -46,17 +46,21 @@ describe Game do
           end
         end
       end
+    end
 
-      context 'when it is the second bowl of a frame' do
-        let(:first_score) { 5 }
-        let(:second_score) { 4 }
-        before { game.enter_score(first_score) }
-        subject { game.enter_score(second_score) }
-        it 'moves to the next frame' do
-          expect { subject }.to change { game.current_frame }.by 1
-        end
+    context 'when it is the second bowl of a frame' do
+      let(:first_score) { 5 }
+      let(:second_score) { 4 }
+      before { game.enter_score(first_score) }
+      subject { game.enter_score(second_score) }
+      it 'moves to the next frame' do
+        expect { subject }.to change { game.current_frame }.by 1
+      end
+      it 'sets the current bowl to 1' do
+        expect { subject }.to change { game.current_bowl }.from(2).to(1)
       end
     end
+    
   end
 
 end

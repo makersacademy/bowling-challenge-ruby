@@ -10,8 +10,8 @@ class Game
   def enter_score(score)
     add_bonus_scores(score)
     @frames[@current_frame - 1].add_score(score)
-    @current_bowl = 2 unless score == 10
-    @current_frame += 1 if score == 10
+    increment_bowl
+    increment_frame
   end
 
   def create_frames
@@ -29,6 +29,18 @@ class Game
     @frames.each do |frame|
       frame.add_bonus_score(score) if frame.need_bonus?
     end
+  end
+
+  def increment_bowl
+    if @frames[@current_frame - 1].complete?
+      @current_bowl = 1
+    else
+      @current_bowl = 2
+    end
+  end
+
+  def increment_frame
+    @current_frame += 1 if @frames[@current_frame - 1].complete?
   end
 
 
