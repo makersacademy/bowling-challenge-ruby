@@ -4,6 +4,7 @@ class Frame
 
   def initialize
     @total_score = 0
+    @need_bonus = false
   end
 
   def add_score(score)
@@ -12,6 +13,10 @@ class Frame
 
   def add_bonus_score(score)
     @total_score += score
+  end
+
+  def need_bonus?
+    @total_score == 10
   end
 
 end
