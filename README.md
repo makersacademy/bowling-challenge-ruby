@@ -16,15 +16,7 @@ Ruby. Tested using RSpec.
 
 ## Diagramming ##
 
-### Initial User Story ###
-
-```
-As a bowling player
-In order to see my running score after each frame
-I would like to create a scorecard
-```
-
-### Main User Story ###
+### User Story ###
 
 ```
 As a bowling player
