@@ -27,19 +27,19 @@ describe Player do
       expect(claude.strike).to eq(false)
     end
 
-    it "doubles the score on both rolls for a strike" do
-      claude.frame(10, 0)
-      claude.frame(6, 3)
-      expect(claude.scores[0]).to eq([10, 0])
-      expect(claude.scores[1]).to eq([12, 6])
-    end
+    # it "doubles the score on both rolls for a strike" do
+    #   claude.frame(10, 0)
+    #   claude.frame(6, 3)
+    #   expect(claude.scores[0]).to eq([10, 0])
+    #   expect(claude.scores[1]).to eq([12, 6])
+    # end
 
-    it "doubles the score on first roll for a spare" do
-      claude.frame(5, 5)
-      claude.frame(6, 3)
-      expect(claude.scores[0]).to eq([5, 5])
-      expect(claude.scores[1]).to eq([12, 3])
-    end
+    # it "doubles the score on first roll for a spare" do
+    #   claude.frame(5, 5)
+    #   claude.frame(6, 3)
+    #   expect(claude.scores[0]).to eq([5, 5])
+    #   expect(claude.scores[1]).to eq([12, 3])
+    # end
 
     it "knows what frame is being played" do
       claude.frame(5,5)
@@ -65,7 +65,7 @@ describe Player do
     #     claude.frame(3,5)
     #   end
     #   claude.frame(10, 0)
-    #   expect(claude.frame_count).to be(8)
+    #   expect(claude.frame_count).to be(9)
     # end
 
   end
@@ -91,12 +91,27 @@ describe Player do
       expect(claude.total).to eq(79)
     end
 
+    it "correctly calculates the score (all spares)" do
+      claude.frame(9,1)
+      claude.frame(9,1)
+      claude.frame(9,1)
+      claude.frame(9,1)
+      claude.frame(9,1)
+      claude.frame(9,1)
+      claude.frame(9,1)
+      claude.frame(9,1)
+      claude.frame(9,1)
+      claude.frame(9,1)
+      claude.frame(0,0)
+      expect(claude.total).to eq(181)
+    end
+
     it "correctly calculates the score (spare in frame 1, strike in frame 5)" do
       claude.frame(4, 6)
       claude.frame(6, 2)
       claude.frame(4, 2)
       claude.frame(8, 1)
-      claude.frame(10, 0)
+      claude.frame(10, "x")
       claude.frame(6, 2)
       claude.frame(7, 2)
       claude.frame(9, 0)
@@ -110,8 +125,8 @@ describe Player do
       claude.frame(6, 2)
       claude.frame(4, 2)
       claude.frame(8, 1)
-      claude.frame(10, 0)
-      claude.frame(10, 0)
+      claude.frame(10, "x")
+      claude.frame(10, "x")
       claude.frame(7, 2)
       claude.frame(9, 0)
       claude.frame(0, 5)
@@ -124,8 +139,8 @@ describe Player do
       claude.frame(6, 2)
       claude.frame(4, 2)
       claude.frame(8, 1)
-      claude.frame(10, 0)
-      claude.frame(10, 0)
+      claude.frame(10, "x")
+      claude.frame(10, "x")
       claude.frame(7, 2)
       claude.frame(9, 0)
       claude.frame(0, 5)
@@ -134,42 +149,56 @@ describe Player do
       expect(claude.total).to eq(125)
     end
 
+
+        it "correctly calculates the score (perfect game)" do
+          claude.frame(10, "x")
+          claude.frame(10, "x")
+          claude.frame(10, "x")
+          claude.frame(10, "x")
+          claude.frame(10, "x")
+          claude.frame(10, "x")
+          claude.frame(10, "x")
+          claude.frame(10, "x")
+          claude.frame(10, "x")
+          claude.frame(10, "x")
+          claude.frame(10, 10)
+          expect(claude.total).to eq(300)
+        end
+
   end
 
   describe ".get_total" do
 
     it "outputs the total" do
-      claude.frame(5, 5)
-      expect{ claude.get_total }.to output("claude's total is 10\n").to_stdout
+      claude.frame(3, 5)
+      expect{ claude.get_total }.to output("claude's total is 8\n").to_stdout
     end
 
   end
 
-  describe ".check_bonus" do
+  # describe ".check_bonus" do
+  #
+  #   it "updates bonus values for a strike" do
+  #     claude.frame(10, 0)
+  #     expect(claude.bonus_1).to eq(2)
+  #     expect(claude.bonus_2).to eq(2)
+  #   end
+  #
+  #
+  #   it "updates bonus values for a spare" do
+  #     claude.frame(5, 5)
+  #     claude.check_bonus
+  #     expect(claude.bonus_1).to eq(2)
+  #     expect(claude.bonus_2).to eq(1)
+  #   end
 
-    it "updates bonus values for a strike" do
-      claude.frame(10, 0)
-      expect(claude.bonus_1).to eq(2)
-      expect(claude.bonus_2).to eq(2)
-    end
 
-
-    it "updates bonus values for a spare" do
-      claude.frame(5, 5)
-      claude.check_bonus
-      expect(claude.bonus_1).to eq(2)
-      expect(claude.bonus_2).to eq(1)
-    end
-
-
-    it "resets bonuses when it's not a strike or spare" do
-      claude.frame(2, 5)
-      claude.check_bonus
-      expect(claude.bonus_1).to eq(1)
-      expect(claude.bonus_2).to eq(1)
-    end
+    # it "resets bonuses when it's not a strike or spare" do
+    #   claude.frame(2, 5)
+    #   claude.check_bonus
+    #   expect(claude.bonus_1).to eq(1)
+    #   expect(claude.bonus_2).to eq(1)
+    # end
 
 
   end
-
-end

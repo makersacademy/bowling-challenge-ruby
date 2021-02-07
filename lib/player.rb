@@ -15,32 +15,31 @@ class Player
     @strike_track = false
   end
 
-  def frame(roll_1, roll_2)
+  def frame(roll_1, roll_2 = "x")
     @frame_count += 1
-    calculate_score(roll_1, roll_2)
+    save_score(roll_1, roll_2)
     strike_spare(roll_1, roll_2)
-    check_bonus
-    scorecard
+    # check_bonus
+    # scorecard
     frame_check
   end
 
-  def calculate_score(roll_1, roll_2)
-    # if @strike == true
-    #   @scores[@frame_count-2] = [10, roll_1]
-    # end
-    if @final_frame == true && @spare == true
-      p "it's reaching here"
-      @scores.push([roll_1, 0])
-    else
-      @scores.push([roll_1 * @bonus_1, roll_2 * @bonus_2])
-    end
+  # def calculate_score(roll_1, roll_2)
+  #   if @final_frame == true && @spare == true
+  #     @scores.push([roll_1, roll_2])
+  #   elsif @final_frame == true && @strike == true
+  #     @scores.push([roll_1, roll_2])
+  #   else
+  #     @scores.push([roll_1 * @bonus_1, roll_2 * @bonus_2])
+  #   end
+  # end
+
+  def save_score(roll_1, roll_2)
+    @scores.push([roll_1, roll_2])
   end
-
-
 
   def frame_check
     if @frame_count == 10
-     p  "it's in frame_check"
       final_roll
     end
   end
@@ -48,7 +47,7 @@ class Player
 
   def check_bonus
     if @strike == true
-      @bonus_1 += 1 unless @bonus == 3
+      @bonus_1 += 1 unless @bonus_1 == 3
       @bonus_2 = 2
     elsif @spare == true
       @bonus_1 = 2
@@ -64,7 +63,6 @@ class Player
       @final_frame = true
       @frame_count = 9
     elsif @final_frame == false && @spare == true
-      p "it's got to final_roll"
       @final_frame = true
       @frame_count = 9
     else
@@ -119,11 +117,45 @@ class Player
 
   def get_total
     @total = 0
-    @scores.each do |score_1, score_2|
-      @total += score_1 + score_2
-    end
+    basic_points
+    bonus_points
     puts "#{name}'s total is #{@total}"
   end
 
+  def basic_points
+    @scores.each do |score_1, score_2|
+      if score_2 == "x"
+        score_2 = 0
+      end
+      @total += score_1 + score_2
+    end
+  end
+
+  def bonus_points
+    index = 1
+    @scores.each do |score_1, score_2|
+      if index == 10
+        return
+      elsif score_1 == 10
+        strike_points(index)
+      elsif score_1 + score_2 == 10
+        spare_points(index)
+      end
+      index += 1
+    end
+  end
+
+    def strike_points(index)
+      first_roll = @scores[index][0]
+      second_roll = @scores[index][1]
+      if second_roll == "x"
+        second_roll = @scores[index+1][0]
+      end
+      @total += first_roll + second_roll
+    end
+
+    def spare_points(index)
+      @total += @scores[index][0]
+    end
 
 end
