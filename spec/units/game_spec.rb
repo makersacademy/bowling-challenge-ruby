@@ -58,4 +58,19 @@ describe Game do
       end
     end
   end
+
+  context "bonus" do
+    it "initiates a bonus class if strike" do
+      subject.input_bowl(10)
+      subject.input_bowl(3)
+      expect(subject.bonus).to eq 3
+    end
+
+    it "initiates a bonus class if spare" do
+      subject.input_bowl(8)
+      subject.input_bowl(2)
+      subject.input_bowl(3)
+      expect(subject.bonus).to eq 3
+    end
+  end
 end

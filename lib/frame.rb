@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 class Frame
-  attr_reader :open, :rolls, :number, :pins
+  attr_reader :open, :rolls, :number, :pins, :bonus
 
   def initialize(num)
     @number = num
     @open = true
     @rolls = []
-    @bonus = 0
   end
 
   def add_roll(pins)
@@ -33,5 +32,9 @@ class Frame
 
   def spare?
     rolls.sum == 10
+  end
+
+  def bonus?
+    @bonus = Bonus.new(number, pins).pins if strike? || spare?
   end
 end
