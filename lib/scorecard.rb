@@ -10,12 +10,12 @@ class Scorecard
 
   def score(roll_scores)
     @roll_scores = roll_scores
-    roll_score
-    frame_score
-    running_cumulative_frame_scores
+    roll_score_to_frame_index # puts the roll scores in the corresponding frame index
+    roll_scores_in_frames_with_bonus # puts the roll scores in the frame subarrays and adds bonus points if necessary
+    running_cumulative_frame_scores # sums the individual scores in each frames and adds it to earlier frames
   end
 
-  def roll_score
+  def roll_score_to_frame_index
     frame_index = 0
 
     @roll_scores.each do | roll_score |
@@ -24,19 +24,15 @@ class Scorecard
     end
   end
 
-  def frame_score
+  def roll_scores_in_frames_with_bonus
     @frames.each_with_index do | frame, frame_index |
-      if frame.sum < 10 || frame_index == 9
+      if last_frame?(frame_index)
         frame
-      elsif frame.length == 2
-        frame << @frames[frame_index + 1][0]
-      elsif @frames[frame_index + 1].length >= 2
-        frame << @frames[frame_index + 1][0]
-        frame << @frames[frame_index + 1][1]
-
-      else
-        frame << @frames[frame_index + 1][0]
-        frame << @frames[frame_index + 2][0]
+      elsif spare?(frame)
+        frame << next_score(frame_index)
+      elsif strike?(frame)
+        frame << next_score(frame_index)
+        frame << second_next_score(frame_index)
       end
     end
   end
@@ -53,8 +49,29 @@ class Scorecard
     true if frame[0] == 10
   end
 
+  def spare?(frame)
+    frame.length == 2 && frame.sum == 10
+  end
+
+  def last_frame?(frame_index)
+    frame_index == 9
+  end
+
   def new_frame?(frame_index)
     (@frames[frame_index].length == 2 || strike?(@frames[frame_index])) && frame_index < 9
+  end
+
+
+  def next_score(frame_index)
+    @frames[frame_index + 1][0]
+  end
+
+  def second_next_score(frame_index)
+    if @frames[frame_index + 1].length >= 2
+      @frames[frame_index + 1][1]
+    else
+      @frames[frame_index + 2][0]
+    end
   end
 
 end
