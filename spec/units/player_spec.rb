@@ -13,4 +13,6 @@ describe Player do
       expect(subject.roll).to eq subject.score
     end
   end
+
+
 end
