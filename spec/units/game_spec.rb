@@ -8,8 +8,8 @@ describe Game do
   let(:score) { double Score.new(input_scores: score_array) }
   subject { described_class.new }
 
-  it 'initializes with a progress measure' do
-    expect(subject.progress).to eq 0
+  it 'initializes with an empty frames array' do
+    expect(subject.frames).to eq []
   end
 
   describe "#input_bowl" do
@@ -17,9 +17,27 @@ describe Game do
       expect(subject).to respond_to(:input_bowl).with(1).argument
     end
 
-    it 'saves pins to score' do
+    it 'saves pins and adds to score' do
       subject.input_bowl(2)
-      expect(subject.progress).to eq(1)
+      subject.input_bowl(5)
+      expect(subject.score_list[0][:pins]).to eq 2
+      expect(subject.scores[:pins]).to eq 5
+      subject.calculate_score
+      expect(subject.running_total).to eq 7
+    end
+
+    it 'makes a new frame on third roll' do
+      subject.input_bowl(2)
+      subject.input_bowl(5)
+      subject.input_bowl(5)
+      expect(subject.frames.length).to eq 2
+    end
+
+    it 'knows when strike, finishes frame' do
+      subject.input_bowl(10)
+      expect(subject.strike?).to eq true
+      subject.input_bowl(5)
+      expect(subject.frames.length).to eq 2
     end
   end
 end
