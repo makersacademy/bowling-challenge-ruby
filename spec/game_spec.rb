@@ -25,6 +25,11 @@ describe Game do
     it 'returns the frame score to the player after each frame' do 
       expect(test_game.latest_roll(6)).to eq 'Current score: frame_1 6'
     end 
+
+    it 'returns the final score at the end of the game' do 
+      19.times { test_game.latest_roll(1) }
+      expect(test_game.latest_roll(1)).to eq 'Final score: 20'
+    end 
   end
 
   describe '.latest_roll' do 

@@ -40,6 +40,10 @@ class Game
   end 
 
   def post_roll_confirmation
+    if frames.length < 11 && !frames[-1].frame_over?
      "Current score: frame_#{frames.length} #{total_score}"
+    else 
+      "Final score: #{total_score}"
+    end 
   end 
 end

@@ -11,12 +11,18 @@ class Frame
   def add_roll(pins)
     raise 'Frame complete' if frame_over?
 
-    @rolls << pins
+    rolls << pins
   end
 
-  
+  def strike?
+    rolls[0] == 10
+  end 
+
+  def spare?
+    rolls.sum == 10
+  end 
 
   def frame_over?
-    @rolls[0] == 10 || @rolls.length == 2
+    strike? || @rolls.length == 2
   end
 end
