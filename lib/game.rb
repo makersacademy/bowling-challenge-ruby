@@ -13,6 +13,7 @@ class Game
 
   def roll(pins)
     raise 'Your game is now complete' if game_over?
+
     @scores << pins
   end
 
@@ -31,8 +32,8 @@ class Game
       else
         result += normal_frame(index)
         index += 2
-       end
-     end
+      end
+    end
     result
   end
 
@@ -60,10 +61,10 @@ class Game
 
   def bonus(index)
     if strike?(index)
-       @frame -= 2
-       strike(index)
+      @frame -= 2
+      strike(index)
     else
-       spare(index)
+      spare(index)
     end
   end
 
@@ -71,7 +72,7 @@ class Game
     @scores.count >= 21 || @frame >= TOTAL_FRAMES
   end
 
-   def last_frame
-     @frame == TOTAL_FRAMES
-   end
+  def last_frame
+    @frame == TOTAL_FRAMES
+  end
 end
