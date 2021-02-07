@@ -26,6 +26,8 @@ class Bowling
     result
   end
 
+  private
+
   def spare?(rollIndex)
     @rolls[rollIndex] + @rolls[rollIndex + 1] == 10
   end
