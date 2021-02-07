@@ -1,0 +1,29 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/carrot-2/Library/Mobile Documents/com~apple~CloudDocs/Makers/weekend-challenges/bowling-challenge-ruby/spec/unit/scorecard_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/carrot-2/Library/Mobile Documents/com~apple~CloudDocs/Makers/weekend-challenges/bowling-challenge-ruby/lib/scorecard.rb": {
+        "lines": [
+          1,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1612703362
+  }
+}
