@@ -28,6 +28,10 @@ class Frame
     !strike? && roll_one + roll_two == SPARE
   end
 
+  def spare_or_strike?
+    spare? || strike?
+  end
+
   def finished?
     strike? || !!roll_two
   end

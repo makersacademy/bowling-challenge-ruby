@@ -48,6 +48,23 @@ describe Frame do
     end
   end
 
+  describe '.spare_or_strike?' do
+    it 'returns true if spare' do
+      frame.roll_one = 3
+      frame.roll_two = 7
+      expect(frame).to be_spare_or_strike
+    end
+    it 'returns true if strike' do
+      frame.roll_one = 10
+      expect(frame).to be_spare_or_strike
+    end
+    it 'returns false if neither spare or strike' do
+      frame.roll_one = 3
+      frame.roll_two = 4
+      expect(frame).not_to be_spare_or_strike
+    end
+  end
+
   describe '.finished?' do 
     it 'returns true if strike' do 
       frame.roll_one = 10
