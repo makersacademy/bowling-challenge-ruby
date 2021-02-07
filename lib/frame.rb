@@ -18,11 +18,12 @@ class Frame
   end
 
   def need_bonus?
-    total_score == 10 || (strike? && @bonus_scores.length < 2)
+    ten_down? && @bonus_scores.length + @scores.length < 3
   end
 
   def complete?
-    return false if @final_frame && total_score == 10 && @scores.length < 3
+    return false if @final_frame && ten_down? && need_bonus?
+    
     @scores.length >= 2 || strike?
   end
 
@@ -30,6 +31,10 @@ class Frame
 
   def strike?
     @scores.length == 1 && @scores.sum == 10
+  end
+
+  def ten_down?
+    @scores.sum == 10
   end
 
 end

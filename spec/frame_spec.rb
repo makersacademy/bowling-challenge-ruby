@@ -52,9 +52,10 @@ describe Frame do
         it 'should not be completed by the second bowl' do
           expect { final_frame.add_score(2) }.not_to(change { final_frame.complete? })
         end
-        it 'should be completed by the third bowl' do
-          final_frame.add_score(2)
-          expect { final_frame.add_score(2) }.to change { final_frame.complete? }.from(false).to(true)
+      end
+      context 'when you bowl a strike' do
+        it 'should not complete the frame' do
+          expect { final_frame.add_score(10) }.not_to(change { final_frame.complete? })
         end
       end
     end
@@ -78,6 +79,25 @@ describe Frame do
       it 'should change need_bonus to false after second addition' do
         frame.add_bonus_score(score)
         expect { frame.add_bonus_score(score) }.to change { frame.need_bonus? }.from(true).to(false)
+      end
+    end
+    context 'when it is the final frame' do
+      let(:final_frame) { Frame.new(final_frame: true) }
+      context 'when you scored a spare in the first two bowls' do
+        before { 2.times { final_frame.add_score(5) } }
+        it 'completes the frame' do
+          expect { final_frame.add_bonus_score(score) }.to change { final_frame.complete? }.from(false).to(true)
+        end
+      end
+      context 'when you scored a strike in the first throw' do
+        before { final_frame.add_score(strike) }
+        it 'does not immediately set the frame to complete' do
+          expect { final_frame.add_bonus_score(score) }.not_to(change { final_frame.complete? })
+        end
+        it 'completes the frame with the second bonus' do
+          final_frame.add_bonus_score(score)
+          expect { final_frame.add_bonus_score(score) }.to change { final_frame.complete? }.from(false).to(true)
+        end
       end
     end
   end

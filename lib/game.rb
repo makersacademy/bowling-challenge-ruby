@@ -43,7 +43,8 @@ class Game
 
   def create_frames
     @frames = []
-    10.times { @frames << Frame.new }
+    9.times { @frames << Frame.new }
+    @frames << Frame.new(final_frame: true)
   end
 
 end

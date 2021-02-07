@@ -73,9 +73,17 @@ describe Game do
         end
       end
       context 'when you get a spare in the last frame' do
+        before { game.enter_score(8) }
         it 'does not immediately tell you you have finished the game' do
-          game.enter_score(8)
           expect { game.enter_score(2) }.not_to output("That's the game folks!\n").to_stdout
+        end
+        it 'tells you you have finished after the bonus roll' do
+          game.enter_score(2)
+          expect { game.enter_score(2) }.to output("That's the game folks!\n").to_stdout
+        end
+        it 'only adds bonus points for the third roll' do
+          game.enter_score(2)
+          expect { game.enter_score(2) }.to change { game.total_score }.by 2
         end
       end
     end
