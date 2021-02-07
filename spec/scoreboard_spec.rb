@@ -1,17 +1,16 @@
-# require 'scoreboard'
-#
-# #test run
-#
-# describe Scoreboard do
-#   subject(:scoreboard) { described_class.new }
-#
-#   describe '#first_roll' do
-#     it 'stores the first roll of each frame' do
-#       allow(scoreboard).to receive(:gets).and_return('6')
-#       scoreboard.first_roll
-#       expect(scoreboard.score).to eq([6])
-#     end
-#   end
+require 'scoreboard'
+
+
+describe Scoreboard do
+  subject(:scoreboard) { described_class.new }
+
+  describe '#first_roll' do
+    it 'stores the first roll of each frame' do
+      allow(scoreboard).to receive(:gets).and_return('6')
+      scoreboard.first_roll
+      expect(scoreboard.frame_score).to eq(1 => [6])
+    end
+  end
 #
 #   describe '#second_roll' do
 #     it 'stores the second roll of each frame' do
@@ -83,4 +82,4 @@
 #   describe '#update_previous_score' do
 #
 #   end
-# end
+end
