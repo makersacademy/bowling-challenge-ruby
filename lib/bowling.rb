@@ -15,30 +15,38 @@ class Bowling
     10.times do
       if spare?(roll_counter)
         result += spare_score(roll_counter)
+        roll_counter += 2
+      elsif strike?(roll_counter)
+        result += strike_score(roll_counter)
+        roll_counter += 1
       else
-      result += @rolls[roll_counter] + @rolls[roll_counter + 1]
-      end
+      result += reg_score(roll_counter)
       roll_counter += 2
+      end
     end
     result
   end
 
   private 
 
-  def strike
-    "STRIKE!"
-  end
-
   def spare?(roll_counter)
     @rolls[roll_counter] + @rolls[roll_counter + 1] == 10
   end
 
   def spare_score(roll_counter)
-    @rolls[roll_counter] + @rolls[roll_counter + 1] + @rolls[roll_counter + 2]
+    10 + @rolls[roll_counter + 2]
   end
 
-  def gutter
-    "GUTTER!"
+  def strike?(roll_counter)
+    @rolls[roll_counter] == 10
+  end
+
+  def strike_score(roll_counter)
+    10 + @rolls[roll_counter + 1] + @rolls[roll_counter + 2]
+  end
+
+  def reg_score(roll_counter)
+    @rolls[roll_counter] + @rolls[roll_counter + 1]
   end
 
 end
