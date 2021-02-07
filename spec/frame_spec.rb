@@ -29,4 +29,10 @@ describe Frame do
         expect(frame).to be_spare
     end
 
+    it 'knows what score was achieved' do
+        frame.add_roll(5)
+        frame.add_roll(3)
+        expect(frame.score).to eq(8)
+    end
+
 end

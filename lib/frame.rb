@@ -10,6 +10,10 @@ class Frame
         @rolls << pins
     end
 
+    def score
+        @rolls.sum
+    end
+
     def finished?
         rolls[0] == 10 || rolls.length > 1
     end
