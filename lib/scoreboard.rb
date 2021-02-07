@@ -11,16 +11,21 @@ class Scoreboard
   def run
     frames_to_9
     frame_10
-    adding_strike_points
-
+    adding_extra_points
     puts "Your total score is #{total}"
+  end
+
+  def adding_extra_points
+    adding_strike_points
+    adding_spare_points
+    p @frame_score
   end
 
   def frames_to_9
     while @frames < 10
       first_roll
       if strike?
-        @frames += 1
+         @frames += 1
       else
         second_roll
       end
@@ -30,8 +35,8 @@ class Scoreboard
   def frame_10
     first_roll
     if strike?
-      second_roll
       bonus_roll
+      second_roll
     else
       second_roll
     end
@@ -41,7 +46,6 @@ class Scoreboard
     puts "What's the score on your first roll?"
     roll_1 = gets.chomp.to_i
     @frame_score[@frames] = [roll_1]
-    p @frame_score
   end
 
 
@@ -59,32 +63,34 @@ class Scoreboard
 
   def adding_strike_points
     @frame_score.each do |frame, rolls|
-    if rolls[0] == 10
-      @frame_score[frame] = 10 + (@frame_score[frame+1]).sum
+      @frame_score[frame] = [10 + (@frame_score[frame+1]).sum ]if rolls[0] == 10 && frame != 10
     end
+    p @frame_score
   end
-  p @frame_score
-end
 
 
-  # def spare?(frame)
-  #   @frame_score[frame].sum == 10
-  # end
-  #
+  def spare?(frame)
+    @frame_score[frame].sum == 10
+  end
+
+  def adding_spare_points
+    @frame_score.each do |frame, rolls|
+      if rolls.sum == 10 && frame != 10
+        @frame_score[frame] = [10 + @frame_score[frame+1][0]]
+      end
+    end
+    p @frame_score
+  end
+
   def total
     @frame_score.each { |frame, rolls| @score << rolls }
     @score.flatten.sum
   end
-  
-  # def bonus_roll
-  #   puts "What's the score on your bonus roll?"
-  #   bonus_roll = gets.chomp.to_i
-  #   @frame_score << bonus_roll
-  #   @score << bonus_roll
-  # end
-  #
-  #
-  # def spare_bonus
-  #   @frame_score[-2] + @frame_score[-3] += @frame_score[-1]
-  # end
+
+  def bonus_roll
+    puts "What's the score on your bonus roll?"
+    bonus_roll = gets.chomp.to_i
+    @frame_score[@frames].push(bonus_roll)
+  end
+
 end
