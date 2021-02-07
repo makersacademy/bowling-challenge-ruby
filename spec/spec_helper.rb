@@ -25,6 +25,10 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
 
 SimpleCov.start
 
+# Get all models
+
+require "./lib/scorecard"
+
 # Default RSpec configuration below
 
 RSpec.configure do |config|

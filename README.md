@@ -28,13 +28,13 @@ I would like to enter my score on a scorecard after each roll
 | Objects     | Actions     |
 | :------------- | :------------- |
 | Roll       | roll_score |
-| Frame       | frame_score, total_score |
-| Scorecard       | create, frame_score, total_score |
+| Frame       | frame_score |
+| Scorecard       | create, score |
 
 
 ## Example Tests ##
 
-| Input (an array of the number of pins knocked after each _roll_)|Output (running score at the end of each _frame_)|Notes | 
+| Input - an array of the number of pins knocked after each _roll_|Output - an array of the _running_ score after each _frame_|Notes | 
 | :------------- | :------------- | :----: |
 | [0]       | [0,0,0,0,0,0,0,0,0,0] | Gutter Game |
 | [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] | [0,0,0,0,0,0,0,0,0,0] | Gutter Game |
@@ -42,7 +42,9 @@ I would like to enter my score on a scorecard after each roll
 | [0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0] | [10,20,30,40,50,60,70,80,90,100] |
 | [1,4,4,5,6,4,5,5,10,0,1,7,3,6,4,10,2,8,6] | [5,14,29,49,60,61,77,97,117,133] |
 | **Edge cases:** | |  |
-| *Anything other than an array integers between 1 and 10 inclusive with max length of 21 and min length 1* | Error|
+| *Anything other than an array integers between 1 and 10 inclusive with max length of 21 and min length 1* | Error| |
+| | | An array of integers with length 10 should be outputted unless it's an error |
+
 
 ***
 
