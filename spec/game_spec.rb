@@ -8,4 +8,11 @@ describe Game do
     end
   end
 
+  describe '#frame_state' do
+    it 'Calls frame_state' do
+      expect(subject).to receive(:frame_state)
+      subject.add(3)
+    end
+  end
+
 end
