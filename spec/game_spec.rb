@@ -23,4 +23,11 @@ describe Game do
     expect(subject.score).to eq 18
   end
 
+  it 'return a strike' do
+    subject.roll(10)
+    subject.roll(5)
+    subject.roll(4)
+    expect(subject.score).to eq 28
+  end
+
 end
