@@ -33,14 +33,14 @@ describe Scoreboard do
 #     end
 #   end
 #
-#   describe '#strike?' do
-#     it 'returns true if you knock all 10 pins down with one roll' do
-#       allow(scoreboard).to receive(:gets).and_return('10')
-#       scoreboard.first_roll
-#       expect(scoreboard.strike?).to eq true
-#     end
-#   end
-#
+  describe '#strike?' do
+    it 'returns true if you knock all 10 pins down with one roll' do
+      allow(scoreboard).to receive(:gets).and_return('10')
+      scoreboard.first_roll
+      expect(scoreboard.strike?).to eq true
+    end
+  end
+
 #   describe '#spare?' do
 #     it 'returns true if you knock all 10 pins down with two rolls' do
 #       allow(scoreboard).to receive(:gets).and_return('6')
