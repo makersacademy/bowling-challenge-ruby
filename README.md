@@ -42,7 +42,6 @@ More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ### To Complete:
 
-* Add functionality to calculate score in tenth frame.
 * Make it impossible for a user to score more than 10 in a frame (and other edge cases).
 * Isolate unit tests for game.
 

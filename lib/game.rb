@@ -59,7 +59,7 @@ class Game
 
         frame_before_last.score += score if previous_frame.strike? && frame_before_last.strike?
       end
-    elsif previous_frame.strike?
+    elsif previous_frame.strike? && current_frame.bonus_roll.nil?
       previous_frame.score += score
     end
   end

@@ -62,5 +62,19 @@ describe Game do
       expect(game.frames['frame_10'].bonus_roll).to eq 5
       expect(game.frames['frame_10'].score).to eq 15
     end
+    it 'adds extra bowl if two strikes' do
+      scores = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+      scores.each { |score| game.bowl(score) }
+      game.bowl(5)
+      expect(game.frames['frame_10'].bonus_roll).to eq 5
+      expect(game.frames['frame_10'].score).to eq 25
+    end
+    it "should increase frame 9's score to 30 in a perfect game" do
+      scores = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+      scores.each { |score| game.bowl(score) }
+      expect(game.frames['frame_10'].roll_two).to eq 10
+      expect(game.frames['frame_10'].bonus_roll).to eq 10
+      expect(game.frames['frame_9'].score).to eq 30
+    end
   end
 end
