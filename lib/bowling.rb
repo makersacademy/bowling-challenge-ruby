@@ -12,8 +12,8 @@ class Bowling
     result = 0
     rollIndex = 0
     10.times do
-      if @rolls[rollIndex] == 10
-        result += @rolls[rollIndex] + @rolls[rollIndex + 1] + @rolls[rollIndex + 2]
+      if strike?(rollIndex)
+        result += strikeScore(rollIndex)
         rollIndex += 1
       elsif spare?(rollIndex)
         result += spareScore(rollIndex)
@@ -36,6 +36,14 @@ class Bowling
 
   def frameScore(rollIndex)
     @rolls[rollIndex] + @rolls[rollIndex + 1]
+  end
+
+  def strike?(rollIndex)
+    @rolls[rollIndex] == 10
+  end
+
+  def strikeScore(rollIndex)
+    @rolls[rollIndex] + @rolls[rollIndex + 1] + @rolls[rollIndex + 2]
   end
 
 end
