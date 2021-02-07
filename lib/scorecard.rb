@@ -14,13 +14,16 @@ class Scorecard
         @frames << frame
     end
 
-    # def check_previous_for_strike 
-        # if an array, .last.strike? to check whether it is a strike. if hash, it will have to be somesort of counter?
-    # end
+    def check_for_strike 
+        @frames.last.strike?
+    end
 
-    # def check_previous_for_spare
-        # if an array, .last.spare? to check whether it is a spare. if hash, it will have to be somesort of counter?
-    # end
+    def check_for_spare
+        @frames.last.spare?
+    end
 
+    def update_score
+        @total_score += @frames.last.frame_score
+    end
 end
 
