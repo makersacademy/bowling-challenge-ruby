@@ -4,7 +4,6 @@ require_relative 'frame'
 
 # Game class
 class Game
-
   TOTAL_NUMBER_OF_FRAMES = 10
 
   attr_reader :total_score, :current_frame_number, :current_frame, :frames
@@ -25,7 +24,9 @@ class Game
   end
 
   def update_correct_roll_in_frame(score)
-    if current_frame.roll_one.nil?
+    if current_frame_number == 10 && !current_frame.roll_two.nil?
+      current_frame.bonus_roll = score
+    elsif current_frame.roll_one.nil?
       current_frame.roll_one = score
     else
       current_frame.roll_two = score
@@ -70,8 +71,10 @@ class Game
       i += 1
       frame = frames["frame_#{i}"]
       total_score += frame.score
-      if frame.number <= TOTAL_NUMBER_OF_FRAMES
+      if frame.number < TOTAL_NUMBER_OF_FRAMES
         puts "Frame: #{frame.number} Roll 1: #{frame.roll_one} Roll 2: #{frame.roll_two} Score: #{frame.score}"
+      elsif frame.number == TOTAL_NUMBER_OF_FRAMES
+        puts "Frame: #{frame.number} Roll 1: #{frame.roll_one} Roll 2: #{frame.roll_two} Roll 3: #{frame.bonus_roll} Score: #{frame.score}"
       end
     end
     puts "Total: #{total_score}"

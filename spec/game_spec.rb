@@ -24,8 +24,13 @@ describe Game do
     end
   end
   describe '.print_scorecard' do
-    it 'changes frame 1 score after following bowls if frame 1 is a spare' do
+    it 'should return nil' do
       game.bowl(5)
+      expect(game.print_scorecard).to eq nil
+    end
+    it 'should retun nil' do
+      scores = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+      scores.each { |score| game.bowl(score) }
       expect(game.print_scorecard).to eq nil
     end
   end
@@ -47,6 +52,15 @@ describe Game do
       game.bowl(10)
       game.bowl(10)
       expect(game.frames['frame_1'].score).to eq 30
+    end
+  end
+  describe 'tenth frame' do
+    it 'adds extra bowl if spare' do
+      scores = [10, 10, 10, 10, 10, 10, 10, 10, 10, 6, 4]
+      scores.each { |score| game.bowl(score) }
+      game.bowl(5)
+      expect(game.frames['frame_10'].bonus_roll).to eq 5
+      expect(game.frames['frame_10'].score).to eq 15
     end
   end
 end
