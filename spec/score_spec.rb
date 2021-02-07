@@ -56,4 +56,26 @@ describe Score do
     end
   end
 
+  describe '#update_normal' do
+    it 'calls spare if spare needs updating' do
+      subject.calculate([3, 7])
+      expect(subject.spare_in_progress?).to be true
+      expect(subject).to receive(:update_spare)
+      subject.update_if_needed([4])
+    end
+
+    it 'calls strike if strike needs updating' do
+      subject.calculate([10])
+      expect(subject).to receive(:update_strike)
+      subject.update_if_needed([3, 4])
+    end
+
+    it 'calls consecative strike if consec strike needs updating' do
+      subject.calculate([10])
+      subject.calculate([10])
+      expect(subject).to receive(:update_consec_strikes)
+      subject.update_if_needed([4])
+    end
+  end
+
 end
