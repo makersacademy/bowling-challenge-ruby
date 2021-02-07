@@ -69,10 +69,6 @@ class Scoreboard
   end
 
 
-  def spare?(frame)
-    @frame_score[frame].sum == 10
-  end
-
   def adding_spare_points
     @frame_score.each do |frame, rolls|
       if rolls.sum == 10 && frame != 10

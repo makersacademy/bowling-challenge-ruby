@@ -41,15 +41,7 @@ describe Scoreboard do
     end
   end
 
-#   describe '#spare?' do
-#     it 'returns true if you knock all 10 pins down with two rolls' do
-#       allow(scoreboard).to receive(:gets).and_return('6')
-#       scoreboard.first_roll
-#       allow(scoreboard).to receive(:gets).and_return('4')
-#       scoreboard.second_roll
-#       expect(scoreboard.spare?(1)).to eq true
-#     end
-#   end
+
 #
 #   # describe '#strike_bonus' do
 #   #   it 'adds on your previous strike your current frame_score' do
