@@ -53,6 +53,13 @@ describe Game do
       expect(test_game.total_score).to eq 30
     end 
 
+    it "adds on the bonus score if there's a strike" do 
+      test_game.latest_roll(10)
+      test_game.latest_roll(4)
+      test_game.latest_roll(1)
+      expect(test_game.total_score).to eq 20
+    end 
+
     it "adds on the bonus score if there's a spare" do 
       test_game.latest_roll(5)
       test_game.latest_roll(5)

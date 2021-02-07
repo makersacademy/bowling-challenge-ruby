@@ -35,7 +35,10 @@ class Game
   def total_score
     total_score = 0
     scores.each { |k, v| total_score += v }
-    if previous_spare?
+    if frames[-1].frame_over? && previous_strike?
+      strike_score 
+      total_score += frames[-2].bonus
+    elsif previous_spare?
       spare_score
       total_score += frames[-2].bonus
     else 
@@ -58,7 +61,7 @@ class Game
   end 
 
   def previous_strike?
-    frames[-2].strike?
+    frames.length == 2 ? frames[-2].strike? : false
   end 
 
   def spare_score
@@ -66,6 +69,7 @@ class Game
   end 
 
   def strike_score
-    frames[-2].add_bonus(frames[(-1)].rolls[0] + frames[(-1)].rolls[1])
+    bonus = (frames[(-1)].rolls[0]) + (frames[(-1)].rolls[1])
+    frames[-2].add_bonus(bonus)
   end 
 end

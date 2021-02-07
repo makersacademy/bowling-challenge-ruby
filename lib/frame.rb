@@ -20,7 +20,7 @@ class Frame
   end 
 
   def spare?
-    rolls.sum == 10
+    rolls.sum == 10 && rolls.count == 2
   end 
 
   def frame_over?
