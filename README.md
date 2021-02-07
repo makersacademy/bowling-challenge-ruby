@@ -1,3 +1,16 @@
+How to guide (for now)(note - this works of the assumption it would be applied to a real game of bowling and therefore there are no restrictions to prevent a user adding two rolls that total more than 10)
+1. scorecard = Scorecard.new 
+2. frame_1 = Frame.new
+3. add rolls as needed
+3.1. frame_1.add_roll_1(no. between 1 and 10)
+3.2. (if roll_1 is not 10) frame_1.add_roll_2(must be an)
+4. frame_1.end_frame 
+
+
+
+
+
+
 Bowling Challenge in Ruby
 =================
 
