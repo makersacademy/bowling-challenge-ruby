@@ -22,7 +22,7 @@ describe Game do
 
     it 'raises an error if game is the game is over' do
       20.times { game.roll(1) }
-      expect{ game.roll(1) }.to raise_error("Game over!")
+      expect{ game.roll(1) }.to raise_error("Game over you scored #{20}")
     end
   end
 
@@ -52,7 +52,7 @@ describe Game do
 
     it 'returns 0 when you play a gutter game' do
       20.times { game.roll(0) }
-      expect(game.score).to eq(0)
+      expect(game.score).to eq("Game over you scored #{0}")
     end
 
     it 'can work out a spare' do
@@ -60,7 +60,7 @@ describe Game do
       2.times { game.roll(1) } #11 + 2
       2.times { game.roll(5) } #13 + 11
       14.times { game.roll(1) } #24 + 14
-      expect(game.score).to eq(38)
+      expect(game.score).to eq("Game over you scored #{38}")
     end
 
     it 'can work out a strike' do
@@ -69,7 +69,7 @@ describe Game do
       game.roll(10) #14 + 10 + 2
       2.times { game.roll(1) } #26 + 2
       12.times { game.roll(1) } #28 + 12
-      expect(game.score).to eq(40)
+      expect(game.score).to eq("Game over you scored #{40}")
     end
 
     it 'can work out a strike followed by a spare' do
@@ -78,7 +78,7 @@ describe Game do
       game.roll(10) #14 + 10 + 10
       2.times { game.roll(5) } #34 + 10 + 1
       12.times { game.roll(1) } #45 + 12
-      expect(game.score).to eq(57)
+      expect(game.score).to eq("Game over you scored #{57}")
     end
 
   end

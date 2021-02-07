@@ -13,7 +13,7 @@ class Game
   end
 
   def roll(pins)
-    raise "Game over!" if game_over?
+    raise score if game_over?
     @scores << pins
     balls_rolled(pins)
   end
@@ -34,7 +34,7 @@ class Game
         index += 2
       end
     end
-    result
+    "Game over you scored #{result}"
   end
 
   private
