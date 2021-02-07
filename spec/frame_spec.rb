@@ -18,4 +18,15 @@ describe Frame do
         expect(frame).to be_finished
     end
 
+    it 'knows if a frame is a strike' do
+        frame.add_roll(10)
+        expect(frame).to be_strike
+    end
+
+    it 'knows if a frame is a spare' do
+        frame.add_roll(4)
+        frame.add_roll(6)
+        expect(frame).to be_spare
+    end
+
 end

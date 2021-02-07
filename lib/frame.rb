@@ -13,4 +13,12 @@ class Frame
     def finished?
         rolls[0] == 10 || rolls.length > 1
     end
+
+    def strike?
+        rolls[0] == 10
+    end
+
+    def spare?
+        rolls[0] + rolls[1] == 10
+    end
 end
