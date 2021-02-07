@@ -1,6 +1,6 @@
 class Player
 
-  attr_reader :name, :scores, :total, :strike, :spare, :bonus_1, :bonus_2, :frame_count, :final_frame
+  attr_reader :name, :scores, :total, :strike, :spare, :bonus_1, :bonus_2, :frame_count, :final_frame, :strike_track
 
   def initialize(name)
     @name = name
@@ -12,25 +12,35 @@ class Player
     @bonus_2 = 1
     @frame_count = 0
     @final_frame = false
+    @strike_track = false
   end
 
   def frame(roll_1, roll_2)
     @frame_count += 1
-    p "Bonuses"
-    p @bonus_1
-    p @bonus_2
-    @scores.push([roll_1 * @bonus_1, roll_2 * @bonus_2])
+    calculate_score(roll_1, roll_2)
     strike_spare(roll_1, roll_2)
     check_bonus
     scorecard
-    p "Bonuses after roll"
-    p @bonus_1
-    p @bonus_2
     frame_check
   end
 
+  def calculate_score(roll_1, roll_2)
+    # if @strike == true
+    #   @scores[@frame_count-2] = [10, roll_1]
+    # end
+    if @final_frame == true && @spare == true
+      p "it's reaching here"
+      @scores.push([roll_1, 0])
+    else
+      @scores.push([roll_1 * @bonus_1, roll_2 * @bonus_2])
+    end
+  end
+
+
+
   def frame_check
     if @frame_count == 10
+     p  "it's in frame_check"
       final_roll
     end
   end
@@ -38,7 +48,7 @@ class Player
 
   def check_bonus
     if @strike == true
-      @bonus_1 = 2
+      @bonus_1 += 1 unless @bonus == 3
       @bonus_2 = 2
     elsif @spare == true
       @bonus_1 = 2
@@ -52,8 +62,9 @@ class Player
   def final_roll
     if @final_frame == false && @strike == true
       @final_frame = true
-      @frame_count = 8
-    elsif @final_frame == false &&@spare == true
+      @frame_count = 9
+    elsif @final_frame == false && @spare == true
+      p "it's got to final_roll"
       @final_frame = true
       @frame_count = 9
     else
@@ -66,6 +77,7 @@ class Player
   def strike_spare(roll_1, roll_2)
     if roll_1 == 10
       strike_rolled
+      p bonus_1
     elsif roll_1 + roll_2 == 10
       spare_rolled
     else
@@ -98,8 +110,10 @@ class Player
   end
 
   def get_scores
+    frame = 0
     @scores.each do |score|
-      puts "#{name}: frame #{@frame_count} - roll 1: #{score[0]}, roll 2: #{score[1]}"
+      frame += 1
+      puts "#{name}: frame #{frame} - roll 1: #{score[0]}, roll 2: #{score[1]}"
     end
   end
 
