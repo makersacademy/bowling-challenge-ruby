@@ -16,7 +16,7 @@ describe Game do
           expect { subject }.to change { game.current_bowl }.to 2
         end
         it 'maintains the current frame' do
-          expect { subject }.not_to(change { game.current_frame })
+          expect { subject }.not_to(change { game.frame_number })
         end
       end
 
@@ -25,7 +25,7 @@ describe Game do
         let(:subsequent_scores) { [4, 5] }
         let(:enter_subsequent) { subsequent_scores.each { |score| game.enter_score(score) } }
         it 'changes the frame' do
-          expect { subject }.to change { game.current_frame }.by 1
+          expect { subject }.to change { game.frame_number }.by 1
         end
         it 'leaves the current bowl as 1' do
           expect { subject }.not_to(change { game.current_bowl })
@@ -54,7 +54,7 @@ describe Game do
       before { game.enter_score(first_score) }
       subject { game.enter_score(second_score) }
       it 'moves to the next frame' do
-        expect { subject }.to change { game.current_frame }.by 1
+        expect { subject }.to change { game.frame_number }.by 1
       end
       it 'sets the current bowl to 1' do
         expect { subject }.to change { game.current_bowl }.from(2).to(1)
