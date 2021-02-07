@@ -2,7 +2,6 @@
 
 # Frame class
 class Frame
-
   STRIKE = 10
   SPARE = 10
 
@@ -11,13 +10,13 @@ class Frame
 
   def initialize(number)
     @number = number
-    @roll_one = nil 
+    @roll_one = nil
     @roll_two = nil
     @score = 0
   end
 
-  def calculate_score 
-    finished? && !strike? ? @score = roll_one + roll_two : @score = roll_one
+  def calculate_score
+    @score = finished? && !strike? ? roll_one + roll_two : roll_one
   end
 
   def strike?
@@ -35,5 +34,4 @@ class Frame
   def finished?
     strike? || !!roll_two
   end
-
 end

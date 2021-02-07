@@ -21,28 +21,28 @@ describe Frame do
   end
 
   describe '.strike?' do
-    it 'returns true if roll_one is 10' do 
-      frame.roll_one = 10 
+    it 'returns true if roll_one is 10' do
+      frame.roll_one = 10
       expect(frame).to be_strike
     end
-    it 'returns false if roll_one is less than 10' do 
+    it 'returns false if roll_one is less than 10' do
       frame.roll_one = 9
       expect(frame).not_to be_strike
     end
   end
 
   describe '.spare?' do
-    it 'returns true if sum of rolls is 10' do 
+    it 'returns true if sum of rolls is 10' do
       frame.roll_one = 5
       frame.roll_two = 5
       expect(frame).to be_spare
     end
-    it 'returns false if sum of rolls is less than 10' do 
+    it 'returns false if sum of rolls is less than 10' do
       frame.roll_one = 3
       frame.roll_two = 6
       expect(frame).not_to be_spare
     end
-    it 'returns false if strike' do 
+    it 'returns false if strike' do
       frame.roll_one = 10
       expect(frame).not_to be_spare
     end
@@ -65,8 +65,8 @@ describe Frame do
     end
   end
 
-  describe '.finished?' do 
-    it 'returns true if strike' do 
+  describe '.finished?' do
+    it 'returns true if strike' do
       frame.roll_one = 10
       expect(frame).to be_finished
     end
@@ -81,4 +81,10 @@ describe Frame do
     end
   end
 
+  describe '.tenth_frame?' do
+    it 'returns true if tenth frame' do 
+      frame_10 = Frame.new(10)
+      expect(frame_10.tenth_frame).to be true
+    end
+  end
 end
