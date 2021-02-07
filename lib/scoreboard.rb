@@ -24,11 +24,7 @@ class Scoreboard
   def frames_to_9
     while @frames < 10
       first_roll
-      if strike?
-         @frames += 1
-      else
-        second_roll
-      end
+      strike? ? @frames += 1 : second_roll
     end
   end
 
@@ -48,13 +44,11 @@ class Scoreboard
     @frame_score[@frames] = [roll_1]
   end
 
-
   def second_roll
     puts "What's the score on your second roll?"
     roll_2 = gets.chomp.to_i
     @frame_score[@frames].push(roll_2)
     @frames += 1
-    p @frame_score
   end
 
   def strike?
@@ -65,9 +59,7 @@ class Scoreboard
     @frame_score.each do |frame, rolls|
       @frame_score[frame] = [10 + (@frame_score[frame+1]).sum ]if rolls[0] == 10 && frame != 10
     end
-    p @frame_score
   end
-
 
   def adding_spare_points
     @frame_score.each do |frame, rolls|
@@ -75,7 +67,6 @@ class Scoreboard
         @frame_score[frame] = [10 + @frame_score[frame+1][0]]
       end
     end
-    p @frame_score
   end
 
   def total
@@ -88,5 +79,4 @@ class Scoreboard
     bonus_roll = gets.chomp.to_i
     @frame_score[@frames].push(bonus_roll)
   end
-
 end

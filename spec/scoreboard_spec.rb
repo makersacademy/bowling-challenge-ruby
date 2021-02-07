@@ -20,19 +20,7 @@ describe Scoreboard do
       scoreboard.second_roll
       expect(scoreboard.frame_score).to eq(1 => [6, 3])
     end
-  end
-
-  # describe '#run' do
-  #   it 'runs the scoreboard' do
-  #     allow(scoreboard).to receive(:gets).and_return('6')
-  #     scoreboard.first_roll
-  #     allow(scoreboard).to receive(:gets).and_return('2')
-  #     scoreboard.second_roll
-  #     allow(scoreboard).to receive(:total)
-  #     scoreboard.run
-  #     expect(scoreboard.total).to eq(8)
-  #   end
-  # end
+  end 
 
   describe '#strike?' do
     it 'returns true if you knock all 10 pins down with one roll' do
