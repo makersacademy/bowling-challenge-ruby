@@ -18,11 +18,11 @@ class Game
 
   def bowl(score)
     update_frames(score)
-    new_frame if need_new_frame?
+    new_frame if current_frame.finished?
   end
 
   def update_correct_roll_in_frame(score)
-    if tenth_frame_and_bonus_roll_granted?
+    if current_frame_number == 10 && !current_frame.roll_two.nil?
       update_bonus_roll(score)
     elsif current_frame.roll_one.nil?
       update_roll_one(score)
@@ -38,14 +38,13 @@ class Game
   end
 
   def update_previous_frames(score)
-    # return nil if on first frame
     return if current_frame_number == 1
 
-    previous_frame = calculate_previous_frame
-    frame_before_last = calculate_frame_before_last
-    if on_first_roll_of_frame?
-      update(previous_frame, frame_before_last, score) if previous_frame.spare_or_strike?
-    elsif bonus_roll_incomplete_and_strike?(previous_frame)
+    previous_frame = frames["frame_#{current_frame_number - 1}"]
+    frame_before_last = frames["frame_#{current_frame_number - 2}"]
+    if first_roll_of_frame_and_spare_or_strike_on?(previous_frame)
+      update(previous_frame, frame_before_last, score)
+    elsif bonus_roll_incomplete_and_strike_on?(previous_frame)
       previous_frame.score += score
     end
   end
@@ -57,16 +56,16 @@ class Game
       i += 1
       frame = frames["frame_#{i}"]
       total_score += frame.score
-      print_all(frame)
+      print_each(frame)
     end
     puts "Total: #{total_score}"
   end
 
   private
 
-  def print_all(frame)
+  def print_each(frame)
     if frame.number < TOTAL_NUMBER_OF_FRAMES
-      print_regular(frame)
+      puts "Frame: #{frame.number} Roll 1: #{frame.roll_one} Roll 2: #{frame.roll_two} Score: #{frame.score}"
     elsif frame.number == TOTAL_NUMBER_OF_FRAMES
       print_tenth(frame)
     end
@@ -76,10 +75,6 @@ class Game
     print "Frame: #{frame.number} Roll 1: #{frame.roll_one} "
     print "Roll 2: #{frame.roll_two} Roll 3: #{frame.bonus_roll} "
     puts "Score: #{frame.score}"
-  end
-
-  def print_regular(frame)
-    puts "Frame: #{frame.number} Roll 1: #{frame.roll_one} Roll 2: #{frame.roll_two} Score: #{frame.score}"
   end
 
   def update_frames(score)
@@ -100,16 +95,8 @@ class Game
     current_frame.roll_two = score
   end
 
-  def need_new_frame?
-    current_frame.finished?
-  end
-
-  def tenth_frame_and_bonus_roll_granted?
-    current_frame_number == 10 && !current_frame.roll_two.nil?
-  end
-
-  def on_first_roll_of_frame?
-    current_frame.roll_two.nil?
+  def first_roll_of_frame_and_spare_or_strike_on?(previous_frame)
+    current_frame.roll_two.nil? && previous_frame.spare_or_strike?
   end
 
   def update(previous_frame, frame_before_last, score)
@@ -119,15 +106,7 @@ class Game
     frame_before_last.score += score if previous_frame.strike? && frame_before_last.strike?
   end
 
-  def bonus_roll_incomplete_and_strike?(previous_frame)
+  def bonus_roll_incomplete_and_strike_on?(previous_frame)
     previous_frame.strike? && current_frame.bonus_roll.nil?
-  end
-
-  def calculate_previous_frame
-    frames["frame_#{current_frame_number - 1}"]
-  end
-
-  def calculate_frame_before_last
-    frames["frame_#{current_frame_number - 2}"]
   end
 end
