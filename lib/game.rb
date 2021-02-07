@@ -1,9 +1,12 @@
+require_relative './score'
+
 class Game
 
-  attr_reader :throws
+  attr_reader :throws, :score
 
-  def initialize()
+  def initialize(score = Score.new)
     @throws = []
+    @score = score
     @frame_finished = true
   end
 
