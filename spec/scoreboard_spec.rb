@@ -55,15 +55,15 @@ describe Scoreboard do
 #   #   end
 #   # end
 #
-#   describe '#total' do
-#     it 'shows the total score' do
-#       allow(scoreboard).to receive(:gets).and_return('6')
-#       scoreboard.first_roll
-#       allow(scoreboard).to receive(:gets).and_return('2')
-#       scoreboard.second_roll
-#       expect(scoreboard.total).to eq(8)
-#     end
-#   end
+  describe '#total' do
+    it 'shows the total score' do
+      allow(scoreboard).to receive(:gets).and_return('6')
+      scoreboard.first_roll
+      allow(scoreboard).to receive(:gets).and_return('2')
+      scoreboard.second_roll
+      expect(scoreboard.total).to eq(8)
+    end
+  end
 #
 #   describe '#bonus_roll' do
 #     it 'should add the bonus point to your score' do
