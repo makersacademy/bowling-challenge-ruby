@@ -1,7 +1,15 @@
 class Game
 
-  def score(roll)
-    0
+  def initialize
+    @rolls = []
+  end
+
+  def rolls(pins)
+    @rolls << pins
+  end
+
+  def score
+    @rolls.sum
   end
 
 end
