@@ -90,22 +90,6 @@ describe Frame do
       frame_ten.roll_two = 1
       expect(frame_ten).not_to be_finished
     end
-    it 'expects 10th frame not to be finished if two strikes' do
-      frame_ten.roll_one = 10
-      frame_ten.roll_two = 10
-      expect(frame_ten).not_to be_finished
-    end
-    it 'expects 10th frame to be finished if three strikes' do
-      frame_ten.roll_one = 10
-      frame_ten.roll_two = 10
-      frame_ten.bonus_roll = 10
-      expect(frame_ten).to be_finished
-    end
-    it 'expects 10th frame to be finished if strike, then no strike' do
-      frame_ten.roll_one = 10
-      frame_ten.roll_two = 9
-      expect(frame_ten).to be_finished
-    end
   end
 
   describe '.tenth_frame?' do

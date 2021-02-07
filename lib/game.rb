@@ -41,15 +41,11 @@ class Game
     # return nil if on first frame
     return if current_frame_number == 1
 
-    previous_frame = frames["frame_#{current_frame_number - 1}"]
-    frame_before_last = frames["frame_#{current_frame_number - 2}"]
-    # check only one roll has been made in the current frame
+    previous_frame = calculate_previous_frame
+    frame_before_last = calculate_frame_before_last
     if on_first_roll_of_frame?
-      # add most recent score to previous frame if it was a spare or strike
-      if previous_frame.spare_or_strike?
-        update_previous_frames_where_spare_or_strike(previous_frame, frame_before_last, score)
-      end
-    elsif previous_frame.strike? && current_frame.bonus_roll.nil?
+      update(previous_frame, frame_before_last, score) if previous_frame.spare_or_strike?
+    elsif bonus_roll_incomplete_and_strike?(previous_frame)
       previous_frame.score += score
     end
   end
@@ -61,16 +57,30 @@ class Game
       i += 1
       frame = frames["frame_#{i}"]
       total_score += frame.score
-      if frame.number < TOTAL_NUMBER_OF_FRAMES
-        puts "Frame: #{frame.number} Roll 1: #{frame.roll_one} Roll 2: #{frame.roll_two} Score: #{frame.score}"
-      elsif frame.number == TOTAL_NUMBER_OF_FRAMES
-        puts "Frame: #{frame.number} Roll 1: #{frame.roll_one} Roll 2: #{frame.roll_two} Roll 3: #{frame.bonus_roll} Score: #{frame.score}"
-      end
+      print_all(frame)
     end
     puts "Total: #{total_score}"
   end
 
   private
+
+  def print_all(frame)
+    if frame.number < TOTAL_NUMBER_OF_FRAMES
+      print_regular(frame)
+    elsif frame.number == TOTAL_NUMBER_OF_FRAMES
+      print_tenth(frame)
+    end
+  end
+
+  def print_tenth(frame)
+    print "Frame: #{frame.number} Roll 1: #{frame.roll_one} "
+    print "Roll 2: #{frame.roll_two} Roll 3: #{frame.bonus_roll} "
+    puts "Score: #{frame.score}"
+  end
+
+  def print_regular(frame)
+    puts "Frame: #{frame.number} Roll 1: #{frame.roll_one} Roll 2: #{frame.roll_two} Score: #{frame.score}"
+  end
 
   def update_frames(score)
     update_correct_roll_in_frame(score)
@@ -102,10 +112,22 @@ class Game
     current_frame.roll_two.nil?
   end
 
-  def update_previous_frames_where_spare_or_strike(previous_frame, frame_before_last, score)
+  def update(previous_frame, frame_before_last, score)
     previous_frame.score += score
     return if current_frame_number <= 2
 
     frame_before_last.score += score if previous_frame.strike? && frame_before_last.strike?
+  end
+
+  def bonus_roll_incomplete_and_strike?(previous_frame)
+    previous_frame.strike? && current_frame.bonus_roll.nil?
+  end
+
+  def calculate_previous_frame
+    frames["frame_#{current_frame_number - 1}"]
+  end
+
+  def calculate_frame_before_last
+    frames["frame_#{current_frame_number - 2}"]
   end
 end
