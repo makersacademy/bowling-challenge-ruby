@@ -11,7 +11,9 @@ class Game
 
   def enter_score(score)
     add_bonus_scores(score)
-    @frames[@current_frame - 1].add_score(score)
+    unless @current_frame == 10 && (@frames[@current_frame - 1].complete? || @frames[@current_frame - 1].need_bonus? )
+      @frames[@current_frame - 1].add_score(score)
+    end
     increment_bowl
     increment_frame
   end

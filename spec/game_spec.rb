@@ -86,6 +86,31 @@ describe Game do
           expect { game.enter_score(2) }.to change { game.total_score }.by 2
         end
       end
+      context 'when you get a strike in the last frame' do
+        let(:strike) { 10 }
+        let(:strike_and_subsequent) { [10, 5].each { |score| game.enter_score(score) } }
+        it 'does not immediately tell you you have finished the game' do
+          expect { game.enter_score(strike) }.not_to output("That's the game folks!\n").to_stdout
+        end
+        it 'does not immediately tell you you have finished after the first bonus roll' do
+          game.enter_score(strike)
+          expect { game.enter_score(5) }.not_to output("That's the game folks!\n").to_stdout
+        end
+        it 'tells you you have finished after the second bonus roll' do
+          game.enter_score(strike)
+          game.enter_score(5)
+          expect { game.enter_score(5) }.to output("That's the game folks!\n").to_stdout
+        end
+        it 'only adds bonus points for the first bonus roll' do
+          game.enter_score(strike)
+          expect { game.enter_score(2) }.to change { game.total_score }.by 2
+        end
+        it 'only adds bonus points for the second bonus roll' do
+          game.enter_score(strike)
+          game.enter_score(strike)
+          expect { game.enter_score(2) }.to change { game.total_score }.by 2
+        end
+      end
     end
 
   end
