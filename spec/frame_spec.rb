@@ -4,6 +4,7 @@ require 'frame'
 
 describe Frame do
   let(:frame) { Frame.new(1) }
+  let(:frame_ten) { Frame.new(10) }
   describe '.calculate_score' do
     it 'returns the score of a frame' do
       frame.roll_one = 3
@@ -75,60 +76,52 @@ describe Frame do
       frame.roll_two = 0
       expect(frame).to be_finished
     end
-    it 'returns false if two rolls' do
+    it 'returns false if one roll, not strike' do
       frame.roll_one = 9
       expect(frame).not_to be_finished
     end
     it 'expects 10th frame to be finished if not spare or strike' do
-      frame_10 = Frame.new(10)
-      frame_10.roll_one = 9
-      frame_10.roll_two = 0
-      expect(frame_10).to be_finished
+      frame_ten.roll_one = 9
+      frame_ten.roll_two = 0
+      expect(frame_ten).to be_finished
     end
     it 'expects 10th frame not to be finished if spare' do
-      frame_10 = Frame.new(10)
-      frame_10.roll_one = 9
-      frame_10.roll_two = 1
-      expect(frame_10).not_to be_finished
+      frame_ten.roll_one = 9
+      frame_ten.roll_two = 1
+      expect(frame_ten).not_to be_finished
     end
     it 'expects 10th frame not to be finished if two strikes' do
-      frame_10 = Frame.new(10)
-      frame_10.roll_one = 10
-      frame_10.roll_two = 10
-      expect(frame_10).not_to be_finished
+      frame_ten.roll_one = 10
+      frame_ten.roll_two = 10
+      expect(frame_ten).not_to be_finished
     end
     it 'expects 10th frame to be finished if three strikes' do
-      frame_10 = Frame.new(10)
-      frame_10.roll_one = 10
-      frame_10.roll_two = 10
-      frame_10.bonus_roll = 10
-      expect(frame_10).to be_finished
+      frame_ten.roll_one = 10
+      frame_ten.roll_two = 10
+      frame_ten.bonus_roll = 10
+      expect(frame_ten).to be_finished
     end
     it 'expects 10th frame to be finished if strike, then no strike' do
-      frame_10 = Frame.new(10)
-      frame_10.roll_one = 10
-      frame_10.roll_two = 9
-      expect(frame_10).to be_finished
+      frame_ten.roll_one = 10
+      frame_ten.roll_two = 9
+      expect(frame_ten).to be_finished
     end
   end
 
   describe '.tenth_frame?' do
     it 'returns true if tenth frame' do
-      frame_10 = Frame.new(10)
-      expect(frame_10).to be_tenth_frame
+      expect(frame_ten).to be_tenth_frame
     end
     it 'expects 10th frame to be finished if strike, then no strike' do
-      frame_10 = Frame.new(10)
-      frame_10.roll_one = 10
-      frame_10.roll_two = 9
-      expect(frame_10.calculate_score).to eq 19
+      frame_ten.roll_one = 10
+      frame_ten.roll_two = 9
+      expect(frame_ten.calculate_score).to eq 19
     end
     it 'expects 10th frame score to be 30 if three strikes' do
-      frame_10 = Frame.new(10)
-      frame_10.roll_one = 10
-      frame_10.roll_two = 10
-      frame_10.bonus_roll = 10
-      expect(frame_10.calculate_score).to eq 30
+      frame_ten.roll_one = 10
+      frame_ten.roll_two = 10
+      frame_ten.bonus_roll = 10
+      expect(frame_ten.calculate_score).to eq 30
     end
   end
 end

@@ -28,7 +28,7 @@ describe Game do
       game.bowl(5)
       expect(game.print_scorecard).to eq nil
     end
-    it 'should retun nil' do
+    it 'should return nil' do
       scores = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
       scores.each { |score| game.bowl(score) }
       expect(game.print_scorecard).to eq nil
