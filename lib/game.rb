@@ -15,13 +15,8 @@ class Game
     @scores = {:frame => frames.length, :pins => pins}
     @score_list << scores
 
-    if frames.empty?
-      frames << Frame.new(frames.length + 1)
-    end
-    if strike? || frames[-1].open == false
-      frames << Frame.new(frames.length + 1)
-      
-    end
+    frames << Frame.new(frames.length + 1) if add_frame?
+
     frames[-1].add_roll(pins)
   end
 
@@ -30,7 +25,7 @@ class Game
     @score_list.each do |x| @running_total +=  x[:pins] end
   end
 
-  def strike?
-    @scores[:pins] == 10
+  def add_frame?
+    frames.empty? || frames[-1].open == false
   end
 end

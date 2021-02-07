@@ -31,6 +31,4 @@ describe Score do
       expect(score.calculate_score).to eq 25
     end
   end
-
-
 end
