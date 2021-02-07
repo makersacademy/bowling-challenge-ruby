@@ -88,8 +88,43 @@ describe Scorecard do
                           0])).to eq [30, 60, 90, 120, 150, 180, 210, 239, 258, 267]
   end
 
-  it 'calculates a 9 strikes and a spare' do
-    expect(subject.score([10, 10, 10, 10, 10, 10, 10, 10, 10, 9, 1,
-                          1])).to eq [30, 60, 90, 120, 150, 180, 210, 239, 259, 270]
+  it 'calculates 10 strikes' do
+    expect(subject.score([10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 9,
+                          0])).to eq [30, 60, 90, 120, 150, 180, 210, 240, 269, 288]
+  end
+
+  it 'strikes at the end of the game but no bonus' do
+    expect(subject.score([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 0,
+                          0])).to eq [0, 0, 0, 0, 0, 0, 0, 30, 50, 60]
+  end
+
+  it 'strikes at the end of the game with a standard bonus' do
+    expect(subject.score([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 3,
+                          0])).to eq [0, 0, 0, 0, 0, 0, 0, 30, 53, 66]
+  end
+
+  it 'strikes at the end of the game with a standard bonus' do
+    expect(subject.score([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 3,
+                          3])).to eq [0, 0, 0, 0, 0, 0, 0, 30, 53, 69]
+  end
+
+  it 'calculates 10 strikes and a standard' do
+    expect(subject.score([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 1,
+                          7])).to eq [0, 0, 0, 0, 0, 0, 0, 30, 51, 69]
+  end
+
+  it 'calculates 10 strikes and a spare' do
+    expect(subject.score([10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 9,
+                          1])).to eq [30, 60, 90, 120, 150, 180, 210, 240, 269, 289]
+  end
+
+  it 'calculates a 11 strikes' do
+    expect(subject.score([10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
+                          1])).to eq [30, 60, 90, 120, 150, 180, 210, 240, 270, 291]
+  end
+
+  it 'calculates 12 strikes' do
+    expect(subject.score([10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
+                          10])).to eq [30, 60, 90, 120, 150, 180, 210, 240, 270, 300]
   end
 end
