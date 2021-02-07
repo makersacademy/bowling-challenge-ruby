@@ -23,4 +23,13 @@ class Game
     @frame_finished = !@frame_finished if pins != 10
   end
 
+  def setup_next_roll(pins)
+    if frame_finished?
+      @score.calculate(@throws)
+      next_frame
+    else
+      @score.update_normal(pins)
+    end
+  end
+
 end
