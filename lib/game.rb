@@ -28,7 +28,7 @@ class Game
         result += spare(index)
         index += 2
       else
-        result += @scores[index] + @scores[index + 1]
+        result += normal_frame(index)
         index += 2
       end
     end
@@ -51,5 +51,9 @@ class Game
 
   def spare(index)
     @scores[index] + @scores[index + 1] + @scores[index + 2]
+  end
+
+  def normal_frame(index)
+    @scores[index] + @scores[index + 1]
   end
 end
