@@ -2,7 +2,6 @@ class Game
 
   def initialize
     @total_score = 0
-    @bowl_history = []
     @strike = false
     @spare = false
     @current_frame = 1
@@ -19,10 +18,9 @@ class Game
         bowl_2 = gets.chomp.to_i
       end
     frame_score = calculate_frame_score(bowl_1, bowl_2)
-    @bowl_history << [bowl_1, bowl_2]
     @total_score += frame_score
     p "Your current score is #{@total_score}, not including pending bonus points ;)"
-    # below evaluates whether the current frame is a strike/spare/neither, 
+    # below evaluates whether the current frame is a strike/spare/neither,
     # so it changes the variable value for the next frame to adjust its scores accordingly
     strike?(bowl_1)
     spare?(bowl_1, bowl_2)
