@@ -1,10 +1,10 @@
+# frozen_string_literal: true
+
 class Player
-  attr_reader :score
+  attr_reader :bowl
 
   def roll
-    "What is your roll?"
-    @score = $stdin.gets.chomp.to_i
+    'What is your roll?'
+    @bowl = $stdin.gets.chomp.to_i
   end
-
-  
 end

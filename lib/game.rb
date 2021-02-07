@@ -1,12 +1,17 @@
+# frozen_string_literal: true
+
 require 'player'
 require 'score'
 
 class Game
-  attr_reader :player, :score
+  attr_reader :progress
 
-  def initialize(player: Player.new, score: Score.new)
-    @player = player
-    @score = score
+  def initialize
+    @progress = 0
+    @scores = Hash.new
   end
 
+  def input_bowl(pins)
+    @progress += 1
+  end
 end
