@@ -6,9 +6,11 @@ How to guide (for now)(note - this works of the assumption it would be applied t
 3.2. (if roll_1 is not 10) frame_1.add_roll_2(must be an)
 4. frame_1.end_frame 
 5. scorecard.add_frame(frame_1)
+6. scorecard.update_score
 
-
-
+Alternative way to run:
+1. game = Game.new
+2. game.run_game 
 
 
 Bowling Challenge in Ruby
