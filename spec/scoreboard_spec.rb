@@ -9,7 +9,6 @@ describe Scoreboard do
     it 'stores the first roll of each frame' do
       allow(scoreboard).to receive(:gets).and_return('6')
       scoreboard.first_roll
-      expect(scoreboard.frame_score).to eq([6])
       expect(scoreboard.score).to eq([6])
     end
   end
@@ -18,7 +17,6 @@ describe Scoreboard do
     it 'stores the second roll of each frame' do
       allow(scoreboard).to receive(:gets).and_return('3')
       scoreboard.second_roll
-      expect(scoreboard.frame_score).to include(3)
       expect(scoreboard.score).to include(3)
     end
   end
@@ -34,11 +32,11 @@ describe Scoreboard do
     end
   end
 
-  describe '#strike' do
+  describe '#strike?' do
     it 'returns true if you knock all 10 pins down with one roll' do
       allow(scoreboard).to receive(:gets).and_return('10')
       scoreboard.first_roll
-      expect(scoreboard.strike?).to eq true
+      expect(scoreboard.strike?(1)).to eq true
     end
   end
 
@@ -48,7 +46,7 @@ describe Scoreboard do
       scoreboard.first_roll
       allow(scoreboard).to receive(:gets).and_return('4')
       scoreboard.second_roll
-      expect(scoreboard.spare?).to eq true
+      expect(scoreboard.spare?(1)).to eq true
     end
   end
 
@@ -80,5 +78,9 @@ describe Scoreboard do
       scoreboard.bonus_roll
       expect(scoreboard.score).to include(6)
     end
+  end
+
+  describe '#update_previous_score' do
+
   end
 end
