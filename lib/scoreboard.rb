@@ -12,6 +12,7 @@ class Scoreboard
     frames_to_9
     frame_10
     adding_strike_points
+
     puts "Your total score is #{total}"
   end
 
@@ -66,34 +67,24 @@ class Scoreboard
 end
 
 
-  def spare?(frame)
-    @frame_score[frame].sum == 10
-  end
-
+  # def spare?(frame)
+  #   @frame_score[frame].sum == 10
+  # end
+  #
   def total
-    @score.sum
+    @frame_score.each { |frame, rolls| @score << rolls }
+    @score.flatten.sum
   end
-
-  def strike_bonus
-    @frame_score[frames - 3] += (@frame_score[frames - 2][0] + @frame_score[frames -2][1])
-  end
-
-  def bonus_roll
-    puts "What's the score on your bonus roll?"
-    bonus_roll = gets.chomp.to_i
-    @frame_score << bonus_roll
-    @score << bonus_roll
-  end
-
-  def update_previous_score
-    if strike?
-      strike_bonus
-    elsif spare?(@frames - 1)
-      spare_bonus
-    end
-  end
-
-  def spare_bonus
-    @frame_score[-2] + @frame_score[-3] += @frame_score[-1]
-  end
+  
+  # def bonus_roll
+  #   puts "What's the score on your bonus roll?"
+  #   bonus_roll = gets.chomp.to_i
+  #   @frame_score << bonus_roll
+  #   @score << bonus_roll
+  # end
+  #
+  #
+  # def spare_bonus
+  #   @frame_score[-2] + @frame_score[-3] += @frame_score[-1]
+  # end
 end
