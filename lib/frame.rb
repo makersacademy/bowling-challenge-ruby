@@ -12,11 +12,13 @@ class Frame
 
   def add_roll(pins)
     raise 'Frame is closed.' if open != true
-    
+
     @pins = pins
     @rolls << pins
     @open = false if close?
   end
+
+  private
 
   def close?
     return true if number < 10 && rolls.length == 2

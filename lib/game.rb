@@ -32,6 +32,6 @@ class Game
   end
 
   def over?
-    frames.length == 10 && frames[-1].close?
+    frames.length == 10 && !frames[-1].open
   end
 end
