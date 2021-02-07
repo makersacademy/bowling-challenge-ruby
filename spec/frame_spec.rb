@@ -35,4 +35,10 @@ describe Frame do
         expect(frame.score).to eq(8)
     end
 
+    it "knows when it's the last frame" do
+        # subject(:frame) { described_class.new(10) }
+        frame = Frame.new(10)
+        expect(frame).to be_last
+    end
+
 end

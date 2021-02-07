@@ -25,4 +25,8 @@ class Frame
     def spare?
         rolls[0] + rolls[1] == 10
     end
+
+    def last?
+        number == 10
+    end
 end
