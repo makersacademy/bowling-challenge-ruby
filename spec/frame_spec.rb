@@ -48,4 +48,11 @@ describe Frame do
       expect(test_frame.spare?).to eq false 
     end 
   end 
+
+  describe '.add_bonus' do 
+    it 'retains to bonus' do 
+      test_frame.add_bonus(5)
+      expect(test_frame.bonus).to eq 5
+    end 
+  end 
 end

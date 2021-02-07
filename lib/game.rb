@@ -22,7 +22,6 @@ class Game
     post_roll_confirmation
   end 
 
-
   def frame_check
     if frames.empty? || frames[-1].frame_over?
       new_frame 
@@ -36,14 +35,37 @@ class Game
   def total_score
     total_score = 0
     scores.each { |k, v| total_score += v }
-    total_score
+    if previous_spare?
+      spare_score
+      total_score += frames[-2].bonus
+    else 
+      total_score 
+    end 
   end 
 
   def post_roll_confirmation
-    if frames.length < 11 && !frames[-1].frame_over?
+    if frames.length < 10
      "Current score: frame_#{frames.length} #{total_score}"
-    else 
+    elsif frames.length == 10 && !frames[-1].frame_over?
+      "Current score: frame_#{frames.length} #{total_score}"
+    elsif frames.length == 10 && frames[-1].frame_over?
       "Final score: #{total_score}"
     end 
+  end 
+
+  def previous_spare?
+    frames.length == 2 ? frames[-2].spare? : false
+  end 
+
+  def previous_strike?
+    frames[-2].strike?
+  end 
+
+  def spare_score
+    frames[-2].add_bonus(frames[(-1)].rolls[0])
+  end 
+
+  def strike_score
+    frames[-2].add_bonus(frames[(-1)].rolls[0] + frames[(-1)].rolls[1])
   end 
 end
