@@ -11,8 +11,8 @@ class Frame
   end
 
   def add_roll(pins)
-
     raise 'Frame is closed.' if open != true
+    
     @pins = pins
     @rolls << pins
     @open = false if close?
