@@ -7,15 +7,18 @@ class Game
 
   def initialize
     @frames = []
+    @scores = {}
   end
 
   def new_frame
-    @frames << Frame.new(frames.length + 1)
+    frames << Frame.new(frames.length + 1)
+    scores["frame#{@frames.length}".to_sym] = 0
   end
 
   def latest_roll(pins)
     frame_check 
-    @frames[-1].add_roll(pins)
+    frames[-1].add_roll(pins)
+    scores["frame#{@frames.length}".to_sym] += pins 
   end 
 
 

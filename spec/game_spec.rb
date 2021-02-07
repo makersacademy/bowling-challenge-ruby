@@ -24,4 +24,12 @@ describe Game do
       expect(test_game.frames[0].rolls).to eq [4]
     end 
   end 
+
+  describe '.scores' do 
+    it 'returns the frame with the rolled scores' do 
+      test_game.latest_roll(4)
+      test_game.latest_roll(4)
+      expect(test_game.scores[:frame1]).to eq 8
+    end 
+  end 
 end
