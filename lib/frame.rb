@@ -17,17 +17,17 @@ class Frame
 
   def strike?
     rolls[0] == 10
-  end 
+  end
 
   def spare?
     rolls.sum == 10 && rolls.count == 2
-  end 
+  end
 
   def frame_over?
     strike? || @rolls.length == 2
   end
 
   def add_bonus(bonus)
-    @bonus = bonus 
-  end 
+    @bonus = bonus
+  end
 end
