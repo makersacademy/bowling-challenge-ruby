@@ -13,7 +13,6 @@ class Game
 
   def roll(pins)
     raise 'Your game is now complete' if game_over?
-
     @scores << pins
   end
 
