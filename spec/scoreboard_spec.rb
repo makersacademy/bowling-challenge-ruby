@@ -21,18 +21,19 @@ describe Scoreboard do
       expect(scoreboard.frame_score).to eq(1 => [6, 3])
     end
   end
-#
-#   describe '#run' do
-#     it 'runs the scoreboard' do
-#       allow(scoreboard).to receive(:gets).and_return('6')
-#       scoreboard.first_roll
-#       allow(scoreboard).to receive(:gets).and_return('2')
-#       scoreboard.second_roll
-#       # scoreboard.run
-#       # expect(scoreboard.total).to eq 8
-#     end
-#   end
-#
+
+  # describe '#run' do
+  #   it 'runs the scoreboard' do
+  #     allow(scoreboard).to receive(:gets).and_return('6')
+  #     scoreboard.first_roll
+  #     allow(scoreboard).to receive(:gets).and_return('2')
+  #     scoreboard.second_roll
+  #     allow(scoreboard).to receive(:total)
+  #     scoreboard.run
+  #     expect(scoreboard.total).to eq(8)
+  #   end
+  # end
+
   describe '#strike?' do
     it 'returns true if you knock all 10 pins down with one roll' do
       allow(scoreboard).to receive(:gets).and_return('10')
@@ -41,20 +42,6 @@ describe Scoreboard do
     end
   end
 
-
-#
-#   # describe '#strike_bonus' do
-#   #   it 'adds on your previous strike your current frame_score' do
-#   #     allow(scoreboard).to receive(:gets).and_return('10')
-#   #     scoreboard.first_roll
-#   #     allow(scoreboard).to receive(:gets).and_return('6')
-#   #     scoreboard.first_roll
-#   #     allow(scoreboard).to receive(:gets).and_return('2')
-#   #     scoreboard.second_roll
-#   #     expect(scoreboard.frame_score).to include(18)
-#   #   end
-#   # end
-#
   describe '#total' do
     it 'shows the total score' do
       allow(scoreboard).to receive(:gets).and_return('6')
@@ -64,16 +51,17 @@ describe Scoreboard do
       expect(scoreboard.total).to eq(8)
     end
   end
-#
-#   describe '#bonus_roll' do
-#     it 'should add the bonus point to your score' do
-#       allow(scoreboard).to receive(:gets).and_return('6')
-#       scoreboard.bonus_roll
-#       expect(scoreboard.score).to include(6)
-#     end
-#   end
-#
-#   describe '#update_previous_score' do
-#
-#   end
+
+  describe '#bonus_roll' do
+    it 'should add the bonus point to your score' do
+      allow(scoreboard).to receive(:gets).and_return('10')
+      scoreboard.first_roll
+      allow(scoreboard).to receive(:gets).and_return('6')
+      scoreboard.bonus_roll
+      allow(scoreboard).to receive(:gets).and_return('2')
+      scoreboard.second_roll
+      last_roll = scoreboard.frame_score[1]
+      expect(last_roll).to include(6)
+    end
+  end
 end
