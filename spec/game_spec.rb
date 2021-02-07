@@ -16,6 +16,15 @@ describe Game do
       test_game.latest_roll(3)
       expect(test_game.frames.last.rolls).to eq [3]
     end 
+
+    it "doesn't create an 11th frame" do 
+      20.times { test_game.latest_roll(5) } 
+      expect { test_game.latest_roll(5) } .to raise_error 'Game finished'
+    end 
+
+    it 'returns the frame score to the player after each frame' do 
+      expect(test_game.latest_roll(6)).to eq 'Current score: frame_1 6'
+    end 
   end
 
   describe '.latest_roll' do 
@@ -30,6 +39,13 @@ describe Game do
       test_game.latest_roll(4)
       test_game.latest_roll(4)
       expect(test_game.scores[:frame1]).to eq 8
+    end 
+  end 
+
+  describe '.total_score' do 
+    it 'returns the overall score of the player' do 
+      6.times { test_game.latest_roll(5) }
+      expect(test_game.total_score).to eq 30
     end 
   end 
 end
