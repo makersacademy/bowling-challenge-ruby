@@ -41,6 +41,24 @@ describe Player do
       expect(claude.scores[1]).to eq([12, 3])
     end
 
+    it "knows what frame is being played" do
+      claude.frame(5,5)
+      expect(claude.frame_count).to eq(1)
+    end
+
+    it "can count frames" do
+      10.times do
+        claude.frame(5,5)
+      end
+      expect(claude.frame_count).to eq(10)
+    end
+
+    it "knows when it's the final frame" do
+      10.times do
+        claude.frame(5,5)
+      end
+      expect(claude.final_frame).to be(true)
+      end
 
   end
 
