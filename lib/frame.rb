@@ -1,20 +1,22 @@
+# frozen_string_literal: true
 
-class Frame 
-  attr_reader :score, :frame_number
+class Frame
+  attr_reader :frame_number, :rolls
+
   def initialize(frame_number)
     @frame_number = frame_number
-    @score = []
-  end 
+    @rolls = []
+  end
 
   def add_roll(pins)
     raise 'Frame complete' if frame_over?
-    @score << pins 
-  end 
 
+    @rolls << pins
+  end
 
-  private
+  
 
   def frame_over?
-    @score[0] == 10
-  end 
-end 
+    @rolls[0] == 10 || @rolls.length == 2
+  end
+end
