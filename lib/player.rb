@@ -15,21 +15,24 @@ class Player
   end
 
   def frame(roll_1, roll_2)
-    frame_check
-    check_bonus
+    @frame_count += 1
+    p "Bonuses"
+    p @bonus_1
+    p @bonus_2
     @scores.push([roll_1 * @bonus_1, roll_2 * @bonus_2])
     strike_spare(roll_1, roll_2)
+    check_bonus
+    scorecard
+    p "Bonuses after roll"
+    p @bonus_1
+    p @bonus_2
+    frame_check
   end
 
   def frame_check
-    @frame_count += 1
-    # if @frame_count == 10 && @last_frame == false
-    #   final_strike
-    #   @last_frame = true
-    # end
     if @frame_count == 10
-      @final_frame = true
-    end 
+      final_roll
+    end
   end
 
 
@@ -40,6 +43,23 @@ class Player
     elsif @spare == true
       @bonus_1 = 2
       @bonus_2 = 1
+    else
+      @bonus_1 = 1
+      @bonus_2 = 1
+    end
+  end
+
+  def final_roll
+    if @final_frame == false && @strike == true
+      @final_frame = true
+      @frame_count = 8
+    elsif @final_frame == false &&@spare == true
+      @final_frame = true
+      @frame_count = 9
+    else
+      @final_frame = true
+      @frame_count = 10
+      scorecard
     end
   end
 
@@ -48,6 +68,9 @@ class Player
       strike_rolled
     elsif roll_1 + roll_2 == 10
       spare_rolled
+    else
+      @strike = false
+      @spare = false
     end
   end
 
@@ -56,17 +79,18 @@ class Player
     @strike = true
   end
 
-  def spare_rolled
-    puts "Spare!"
-    @spare = true
-  end
 
   def check_spare(roll_1 ,roll_2)
     if roll_1 + roll_2 == 10
       puts "Spare!"
-      @strike = true
+      @spare = true
     end
   end
+
+    def spare_rolled
+      puts "Spare!"
+      @spare = true
+    end
 
   def scorecard
     get_scores
@@ -74,14 +98,13 @@ class Player
   end
 
   def get_scores
-    frame = 0
     @scores.each do |score|
-      frame += 1
-      puts "#{name}: frame #{frame} - roll 1: #{score[0]}, roll 2: #{score[1]}"
+      puts "#{name}: frame #{@frame_count} - roll 1: #{score[0]}, roll 2: #{score[1]}"
     end
   end
 
   def get_total
+    @total = 0
     @scores.each do |score_1, score_2|
       @total += score_1 + score_2
     end

@@ -48,7 +48,7 @@ describe Player do
 
     it "can count frames" do
       10.times do
-        claude.frame(5,5)
+        claude.frame(3,5)
       end
       expect(claude.frame_count).to eq(10)
     end
@@ -59,6 +59,14 @@ describe Player do
       end
       expect(claude.final_frame).to be(true)
       end
+
+      it "gives a player two more rolls if they score a strike on final frame" do
+      9.times do
+        claude.frame(3,5)
+      end
+      claude.frame(10, 0)
+      expect(claude.frame_count).to be(8)
+    end
 
   end
 
@@ -94,6 +102,14 @@ describe Player do
       claude.frame(5, 5)
       claude.check_bonus
       expect(claude.bonus_1).to eq(2)
+      expect(claude.bonus_2).to eq(1)
+    end
+
+
+    it "resets bonuses when it's not a strike or spare" do
+      claude.frame(2, 5)
+      claude.check_bonus
+      expect(claude.bonus_1).to eq(1)
       expect(claude.bonus_2).to eq(1)
     end
 
