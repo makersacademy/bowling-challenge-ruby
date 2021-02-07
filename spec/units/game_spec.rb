@@ -13,7 +13,7 @@ describe Game do
   end
 
   describe '#input_bowl' do
-    context "first 1-9 rolls" do
+    context 'first 1-9 rolls' do
       it 'takes one argument; saves it to score' do
         expect(subject).to respond_to(:input_bowl).with(1).argument
       end
@@ -40,12 +40,21 @@ describe Game do
         expect(subject.frames.length).to eq 2
       end
     end
-    
-    context "final roll" do
-      it "allows third roll if strike" do
+
+    context 'final roll' do
+      it 'allows third roll if strike' do
         18.times { subject.input_bowl(2) }
         subject.input_bowl(10)
         expect(subject.frames.length).to eq 10
+        subject.input_bowl(10)
+        subject.input_bowl(10)
+      end
+    end
+
+    context 'end of game' do
+      it 'says game over and prevents more bowls' do
+        20.times { subject.input_bowl(2) }
+        expect {subject.input_bowl(2) }.to raise_error "Game over"
       end
     end
   end
