@@ -57,7 +57,7 @@ describe BowlingGame do
 
     it "sets the limit on rolls per game" do
       BowlingGame::MAX_ROLLS.times { game.roll(1) }
-      expect(game.roll(1)).to raise "The game has finished, final score is 20."
+      expect(game.roll(1)).to raise_error("The game has finished, final score is 20.")
     end
   end
 end
