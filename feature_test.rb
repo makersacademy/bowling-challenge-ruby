@@ -1,6 +1,6 @@
-2.2.3 :001 > g = Game.new
+2.2.3 :001 > g = Game.play
 => Game X0939505924;
-2.2.3 :002 > g.play
+2.2.3 :002 > g.roll
 => frame 1 - roll 1 - please enter your score
 => frame 1 - roll 2 - please enter your score
 Your frame score is 5
