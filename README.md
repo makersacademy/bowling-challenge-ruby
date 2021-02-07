@@ -1,10 +1,34 @@
 Bowling Challenge in Ruby
 =================
+This is my submission for the bowling scorecard challenge in ruby, the fifth weekend challenge on the Makers Academy course.
+It is a scorecard for a bowling game, written in ruby and accessible from the command line at the moment. We will be using it as the basis for a javascript enabled tool that users can actually interact with next weekend.
+The task is described in [The Task](#the_task) below.
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+Set Up
+------
+
+1. Make sure you have rubygems installed
+2. Clone this repository
+3. `cd` into the repo you've just cloned and run `bundle` to install necessary gems
+
+Running the program
+---------
+Currently this program is run from the command line only.  
+
+1. `cd` into this repository and then call irb (interactive ruby) and require the game.rb file with `irb -r './lib/game'`
+2. Create a new game instance with `<game> = Game.new`
+3. Add scores by writing `<game>.enter_score(<score>)`
+4. At any point you can see your current total score with `<game>.total_score`
+5. You can see the current frame number and bowl number with `<game>.frame_number` and `<game>.current_bowl` respectively
+
+
+Running tests
+---------
+Tests are written in rspec. If you have run `bundle` in your repo, you should just be able to run `rspec` in the root directory and check all tests are passing.
+
+The Code
+-----
+See [Domain Model](docs/domain_modelling.md) to see how code works
 
 ## The Task
 
