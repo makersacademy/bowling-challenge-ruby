@@ -1,18 +1,21 @@
 # frozen_string_literal: true
 
 class Game
-  attr_reader :scores, :frame
+  attr_reader :scores, :frame, :balls
 
   TOTAL_FRAMES = 10
   MAX_POINTS = 10
 
   def initialize
+    @balls = 0
     @frame = 0
     @scores = []
   end
 
   def roll(pins)
+    raise "Game over!" if game_over?
     @scores << pins
+    balls_rolled(pins)
   end
 
   def score
@@ -20,7 +23,6 @@ class Game
     index = 0
 
     TOTAL_FRAMES.times do
-      @frame +=1
       if strike?(index)
         result += strike(index)
         index +=1
@@ -55,5 +57,13 @@ class Game
 
   def normal_frame(index)
     @scores[index] + @scores[index + 1]
+  end
+
+  def game_over?
+    @balls >= 20
+  end
+
+  def balls_rolled(pins)
+    pins == MAX_POINTS ? @balls += 2 : @balls +=1
   end
 end

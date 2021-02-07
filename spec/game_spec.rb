@@ -4,8 +4,8 @@ describe Game do
   let(:game) { described_class.new }
 
   describe 'initialize' do
-    it 'has three public methods' do
-      expect(game).to respond_to(:frame, :scores, :score)
+    it 'has four public methods' do
+      expect(game).to respond_to(:frame, :scores, :score, :balls)
     end
 
     it 'score is an empty array' do
@@ -15,6 +15,15 @@ describe Game do
     it 'frame is set to 0' do
       expect(game.frame).to eq(0)
     end
+
+    it 'balls is set to 0' do
+      expect(game.balls).to eq(0)
+    end
+
+    it 'raises an error if game is the game is over' do
+      20.times { game.roll(1) }
+      expect{ game.roll(1) }.to raise_error("Game over!")
+    end
   end
 
   describe '#roll' do
@@ -22,16 +31,21 @@ describe Game do
       expect{ game.roll(9) }.to change{ game.scores.sum }.by(9)
       expect{ game.roll(6) }.to change { game.scores.count}.by(1)
 
-      allow(game).to receive(:scores).and_return([9,2,3,1])
-      expect(game.scores).to eq([9,2,3,1])
-      expect(game.scores.sum).to eq(15)
+      allow(game).to receive(:scores).and_return([7,2,3,1])
+      expect(game.scores).to eq([7,2,3,1])
+      expect(game.scores.sum).to eq(13)
       expect(game.scores.count).to eq(4)
+    end
+
+    it 'counts the balls rolled' do
+      20.times { game.roll(1) }
+      expect(game.balls).to eq(20)
     end
   end
 
   describe '#score' do
 
-    it 'adds 10 to frames' do
+    xit 'adds 10 to frames' do
       20.times { game.roll(1) }
       expect{ game.score }.to change { game.frame}.by(10)
     end
