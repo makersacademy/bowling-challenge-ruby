@@ -15,13 +15,13 @@ class Game
 
   def input_bowl(pins)
     raise "Game over" if over?
+
+    frames << Frame.new(frames.length + 1) if add_frame?
     @scores = { frame: frames.length, pins: pins }
     @score_list << scores
 
-    frames << Frame.new(frames.length + 1) if add_frame?
-
     frames[-1].add_roll(pins)
-    @bonuses << [frames.length, frames[-1].bonus] if frames[-1].bonus
+    @bonuses << [frames[-1].bonus, score_list[frames.length-1][:pins]] if frames[-1].bonus
   end
 
   def calculate_score
@@ -31,7 +31,7 @@ class Game
   end
 
   def add_bonus
-  #@bonus.each { |x| @running_total += x[:pins] }
+
   end
 
   def bonus?
