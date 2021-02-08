@@ -62,4 +62,6 @@ describe Frame do
       expect(frame_ten.open).to be false
     end
   end
+
+
 end

@@ -15,6 +15,13 @@ class Frame
     @pins = pins
     @rolls << pins
     @open = false if close?
+    @bonus = if spare?
+                1
+              elsif strike?
+                2
+              else
+                nil
+              end
   end
 
   private
@@ -31,7 +38,7 @@ class Frame
   end
 
   def spare?
-    rolls.sum == 10
+    rolls.length == 2 && rolls.sum == 10
   end
 
   def bonus?

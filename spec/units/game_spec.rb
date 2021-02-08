@@ -57,20 +57,26 @@ describe Game do
         expect {subject.input_bowl(2) }.to raise_error "Game over"
       end
     end
-  end
 
-  context "bonus" do
-    it "initiates a bonus class if strike" do
-      subject.input_bowl(10)
-      subject.input_bowl(3)
-      expect(subject.bonus).to eq 3
-    end
+    context "bonus" do
+      it "pushes to a bonus array if strike" do
+        subject.input_bowl(10)
+        expect(subject.bonuses).to eq [[1, 2]]
+      end
 
-    it "initiates a bonus class if spare" do
-      subject.input_bowl(8)
-      subject.input_bowl(2)
-      subject.input_bowl(3)
-      expect(subject.bonus).to eq 3
+      it "pushes to a bonus array if spare" do
+        subject.input_bowl(7)
+        subject.input_bowl(3)
+        expect(subject.bonuses).to eq [[1, 1]]
+      end
+
+      it "adds bonus to score" do
+        subject.input_bowl(7)
+        subject.input_bowl(3)
+        subject.input_bowl(3)
+        subject.calculate_score
+        expect(subject.running_total).to eq 16
+      end
     end
   end
 end
