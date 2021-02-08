@@ -1,3 +1,13 @@
+Approach - 
+
+Attempted to create a frame and game class for this and spent a few hours trying to get the planning down.
+
+Instead went with just the one class and developed the tests first for each specification of the game. 
+
+Used this video as found when searching for help. https://www.youtube.com/watch?v=wrr16PdgHPM
+
+
+
 Bowling Challenge in Ruby
 =================
 
