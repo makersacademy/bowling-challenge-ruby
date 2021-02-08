@@ -1,10 +1,15 @@
 Bowling Challenge in Ruby
 =================
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+## How to use
+* git clone repo
+* bundle to intall gems
+* Irb require game.rb then input each roll with game.roll(number) until the game is finished then call game.score for final result.
+
+## Issues
+* It does not give the running total as you input the score only outputs the scores array
+* Haven't included a check to make sure people can inout more than 10 a frame
+* Next task is to take out frames and place it in its own class and then work out how to give the running total
 
 ## The Task
 
