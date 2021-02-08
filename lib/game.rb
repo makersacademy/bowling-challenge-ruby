@@ -24,11 +24,11 @@ class Game
 
   def update_correct_roll_in_frame(score)
     if current_frame_number == 10 && !current_frame.roll_two.nil?
-      update_bonus_roll(score)
+      current_frame.bonus_roll = score
     elsif current_frame.roll_one.nil?
-      update_roll_one(score)
+      current_frame.roll_one = score
     else
-      update_roll_two(score)
+      current_frame.roll_two = score
     end
   end
 
@@ -82,18 +82,6 @@ class Game
     update_correct_roll_in_frame(score)
     current_frame.calculate_score
     update_previous_frames(score)
-  end
-
-  def update_bonus_roll(score)
-    current_frame.bonus_roll = score
-  end
-
-  def update_roll_one(score)
-    current_frame.roll_one = score
-  end
-
-  def update_roll_two(score)
-    current_frame.roll_two = score
   end
 
   def first_roll_of_frame_and_spare_or_strike_on?(previous_frame)

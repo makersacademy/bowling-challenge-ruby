@@ -3,16 +3,33 @@
 require 'game'
 
 describe Game do
-  let(:game) { Game.new }
+  let(:frame_one) do
+    double(roll_one: nil, roll_two: nil,
+           finished?: false)
+  end
+  let(:frame_two) { double(roll_one: nil, roll_two: nil) }
+  let(:frame_class) { double(new: frame_one) }
+  let(:game) { Game.new } # WRITE '(frame_class)' AFTER 'Game.new' TO ISOLATE UNIT TESTS
   describe '.bowl' do
     it 'adds score to the total' do
+      allow(frame_one).to receive(:roll_one=).with(6).and_return(6)
+      allow(frame_one).to receive(:calculate_score).and_return(6)
+      allow(frame_one).to receive(:score).and_return(6)
       game.bowl(6)
       expect(game.current_frame.score).to eq 6
     end
   end
   describe '.current_frame_number' do
     it 'returns two after two non-ten rolls' do
-      game.bowl(7)
+      # allow(frame_one).to receive(:roll_one=).with(6).and_return(6)
+      # allow(frame_one).to receive(:calculate_score).and_return(6)
+      # allow(frame_one).to receive(:finished?).and_return(true)
+      game.bowl(6)
+      # allow(frame_one).to receive(:roll_one).and_return(6)
+      # allow(frame_one).to receive(:roll_two=).with(2).and_return(2)
+      # allow(frame_one).to receive(:spare_or_strike?).and_return(false)
+      # allow(frame_one).to receive(:strike?).and_return(false)
+      # allow(frame_one).to receive(:finished?).and_return(true)
       game.bowl(2)
       game.bowl(5)
       expect(game.current_frame_number).to eq 2
@@ -25,7 +42,7 @@ describe Game do
   end
   describe '.print_scorecard' do
     it 'should return nil' do
-      game.bowl(5)
+      game.bowl(6)
       expect(game.print_scorecard).to eq nil
     end
     it 'should return nil' do
