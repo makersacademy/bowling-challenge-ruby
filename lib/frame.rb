@@ -53,26 +53,14 @@ class Frame
 
   def tenth_frame_finished?
     return false if roll_two.nil?
-
-    calculate_if_tenth_frame_finished_where_spare_or_strike
-  end
-
-  def calculate_if_tenth_frame_finished_where_spare_or_strike
-    if spare_or_strike?
-      if strike? && roll_two != STRIKE
-        true
-      else
-        !bonus_roll.nil?
-      end
-    else
-      true
-    end
+    return true if !spare_or_strike?
+    !bonus_roll.nil?
   end
 
   def calculate_tenth_frame_score
-    if finished? && !bonus_roll.nil?
-      roll_one + roll_two + bonus_roll
-    elsif finished?
+    if finished? 
+      roll_one + roll_two + (bonus_roll.nil? ? 0 : bonus_roll)
+    elsif !roll_two.nil?
       roll_one + roll_two
     else
       roll_one

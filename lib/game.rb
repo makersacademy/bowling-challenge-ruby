@@ -8,10 +8,11 @@ class Game
 
   attr_reader :total_score, :current_frame_number, :current_frame, :frames
 
-  def initialize
+  def initialize(frame_class = Frame)
+    @frame_class = frame_class
     @total_score = 0
     @current_frame_number = 1
-    @current_frame = Frame.new(current_frame_number)
+    @current_frame = frame_class.new(current_frame_number)
     @frames = {}
     @frames["frame_#{current_frame_number}"] = current_frame
   end
@@ -33,7 +34,7 @@ class Game
 
   def new_frame
     @current_frame_number += 1
-    @current_frame = Frame.new(current_frame_number)
+    @current_frame = @frame_class.new(current_frame_number)
     @frames["frame_#{current_frame_number}"] = current_frame
   end
 
