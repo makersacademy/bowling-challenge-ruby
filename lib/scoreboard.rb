@@ -1,5 +1,9 @@
 class Scoreboard
 
+  STRIKE = 10
+  SPARE = 10
+  TOTAL_FRAMES = 10
+
   attr_reader :score, :frame_score, :frames
 
   def initialize
@@ -22,7 +26,7 @@ class Scoreboard
   end
 
   def frames_to_9
-    while @frames < 10
+    while @frames < TOTAL_FRAMES
       first_roll
       strike? ? @frames += 1 : second_roll
     end
@@ -52,18 +56,19 @@ class Scoreboard
   end
 
   def strike?
-    @frame_score[@frames][0] == 10
+    @frame_score[@frames][0] == STRIKE
   end
 
   def adding_strike_points
     @frame_score.each do |frame, rolls|
-      @frame_score[frame] = [10 + (@frame_score[frame+1]).sum ]if rolls[0] == 10 && frame != 10
+      #need to sort that out, include if there are more than 1 strike in a row
+      @frame_score[frame] = [10 + (@frame_score[frame+1]).sum ]if rolls[0] == STRIKE && frame != TOTAL_FRAMES
     end
   end
 
   def adding_spare_points
     @frame_score.each do |frame, rolls|
-      if rolls.sum == 10 && frame != 10
+      if rolls.sum == SPARE && frame != TOTAL_FRAMES
         @frame_score[frame] = [10 + @frame_score[frame+1][0]]
       end
     end
