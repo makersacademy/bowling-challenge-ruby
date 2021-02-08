@@ -4,7 +4,7 @@ Bowling Challenge in Ruby
 ## How to use
 * git clone repo
 * bundle to intall gems
-* Irb require game.rb  then input each roll until the game is finished
+* Irb require game.rb then input each roll with game.roll(number) until the game is finished then call game.score for final result.
 
 ## Issues
 * It does not give the running total as you input the score only outputs the scores array
