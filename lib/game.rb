@@ -26,7 +26,7 @@ class Game
             frame.end_frame
             @scorecard.add_frame(frame)
             @scorecard.update_score
-            puts @scorecard.total_score
+            puts "At the end of frame #{@round}, your total score is #{@scorecard.total_score}"
             @round += 1 
         end
     end

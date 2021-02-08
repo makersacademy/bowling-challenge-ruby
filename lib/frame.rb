@@ -25,14 +25,7 @@ class Frame
     end
 
     def end_frame
-        if @roll_1 == 10 
-            @frame_score = @roll_1 
-        else 
-            @frame_score += @roll_1 
-            @frame_score += @roll_2
-        end
-
-        # @roll_1 == 10 ? @frame_score = @roll_1 : @frame_score = @roll_1 + @roll_2
+        @roll_1 == 10 ? @frame_score = @roll_1 : @frame_score = @roll_1 + @roll_2
     end
 
 end
