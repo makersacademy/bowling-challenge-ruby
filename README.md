@@ -28,7 +28,8 @@ Tests are written in rspec. If you have run `bundle` in your repo, you should ju
 
 The Code
 -----
-See [Domain Model](docs/domain_modelling.md) to see how code works
+See [Domain Model](docs/domain_modelling.md) to see how code works.  
+I have completed the MVP of the program, with the (slight) stretch goals left for now.
 
 ## The Task
 
