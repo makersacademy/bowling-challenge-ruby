@@ -1,21 +1,20 @@
 # frozen_string_literal: true
 
-require 'scorecard'
+require 'score'
 
-describe ScoreCard do
-  num = 1
+describe Score do
+  num = 2
   describe '.input' do
-    it 'will return the inputted score' do
-      expect(subject.input(num)).to eq num
+    it 'will include the inputted score' do
+      expect(subject.add_score(num)).to include(num)
     end
   end
 
-  describe '.user_request' do
-    it 'will ask the user for input' do
-      Object.any_instance.stub(gets: num)
-
-      expect { subject.user_request }.to output("Please enter a score:\n").to_stdout
-      expect(subject.user_request).to eq(num)
+  describe '.total_score' do
+    it 'will return a sum of the score' do
+      subject.add_score(num)
+      subject.add_score(num)
+      expect(subject.total_score).to eq num * 2
     end
   end
 end
