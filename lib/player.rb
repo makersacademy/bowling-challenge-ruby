@@ -1,61 +1,33 @@
-class Player
+# frozen_string_literal: true
 
-  attr_reader :name, :scores, :total, :strike, :spare, :bonus_1, :bonus_2, :frame_count, :final_frame, :strike_track
+class Player
+  attr_reader :name, :scores, :total, :strike, :spare, :frame_count, :final_frame, :strike_track
 
   def initialize(name)
     @name = name
-    @scores = Array.new
+    @scores = []
     @total = 0
     @strike = false
     @spare = false
-    @bonus_1 = 1
-    @bonus_2 = 1
     @frame_count = 0
     @final_frame = false
     @strike_track = false
   end
 
-  def frame(roll_1, roll_2 = "x")
+  def frame(roll_1, roll_2 = 'x')
     @frame_count += 1
     save_score(roll_1, roll_2)
     strike_spare(roll_1, roll_2)
-    # check_bonus
-    # scorecard
     frame_check
+    print_score
   end
-
-  # def calculate_score(roll_1, roll_2)
-  #   if @final_frame == true && @spare == true
-  #     @scores.push([roll_1, roll_2])
-  #   elsif @final_frame == true && @strike == true
-  #     @scores.push([roll_1, roll_2])
-  #   else
-  #     @scores.push([roll_1 * @bonus_1, roll_2 * @bonus_2])
-  #   end
-  # end
 
   def save_score(roll_1, roll_2)
     @scores.push([roll_1, roll_2])
   end
 
   def frame_check
-    if @frame_count == 10
-      final_roll
-    end
-  end
-
-
-  def check_bonus
-    if @strike == true
-      @bonus_1 += 1 unless @bonus_1 == 3
-      @bonus_2 = 2
-    elsif @spare == true
-      @bonus_1 = 2
-      @bonus_2 = 1
-    else
-      @bonus_1 = 1
-      @bonus_2 = 1
-    end
+    final_roll if @frame_count == 10
   end
 
   def final_roll
@@ -75,7 +47,6 @@ class Player
   def strike_spare(roll_1, roll_2)
     if roll_1 == 10
       strike_rolled
-      p bonus_1
     elsif roll_1 + roll_2 == 10
       spare_rolled
     else
@@ -85,22 +56,14 @@ class Player
   end
 
   def strike_rolled
-    puts "Strike!"
+    puts 'Strike!'
     @strike = true
   end
 
-
-  def check_spare(roll_1 ,roll_2)
-    if roll_1 + roll_2 == 10
-      puts "Spare!"
-      @spare = true
-    end
+  def spare_rolled
+    puts 'Spare!'
+    @spare = true
   end
-
-    def spare_rolled
-      puts "Spare!"
-      @spare = true
-    end
 
   def scorecard
     get_scores
@@ -124,9 +87,7 @@ class Player
 
   def basic_points
     @scores.each do |score_1, score_2|
-      if score_2 == "x"
-        score_2 = 0
-      end
+      score_2 = 0 if score_2 == 'x'
       @total += score_1 + score_2
     end
   end
@@ -141,21 +102,34 @@ class Player
       elsif score_1 + score_2 == 10
         spare_points(index)
       end
+
       index += 1
     end
   end
 
-    def strike_points(index)
-      first_roll = @scores[index][0]
-      second_roll = @scores[index][1]
-      if second_roll == "x"
-        second_roll = @scores[index+1][0]
-      end
-      @total += first_roll + second_roll
-    end
+  def strike_points(index)
+    first_roll = @scores[index][0]
+    second_roll = @scores[index][1]
+    second_roll = @scores[index + 1][0] if second_roll == 'x'
+    @total += first_roll + second_roll
+  end
 
-    def spare_points(index)
-      @total += @scores[index][0]
-    end
+  def spare_points(index)
+    @total += @scores[index][0]
+  end
 
+  def print_score
+    frame = 1
+    @scores.each do |score_1, score_2|
+      puts "#{name} - frame #{frame}: #{score_1}, #{score_1}"
+      frame += 1
+    end
+  end
+
+
+  def reset
+    @scores = []
+    @frame_count = 0
+    @final_frame = false
+  end
 end
