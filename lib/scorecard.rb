@@ -85,11 +85,19 @@ class ScoreCard
         i += 2
       end
     end
-    @running_score << (@scores[-3..-1].inject(:+))
+    final_frame_calc
   end
 
   def cumul_calc
     @cumul_scores = @running_score.inject([]) { |acc, value| acc << acc.last.to_i + value.to_i }
+  end
+
+  def final_frame_calc
+    if @frame_score.sum > 10
+      @running_score << (@scores[-3..-1].inject(:+))
+    else
+      @running_score << (@scores[-2..-1].inject(:+))
+    end
   end
 
 end
