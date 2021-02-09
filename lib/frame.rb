@@ -11,17 +11,12 @@ class Frame
 
   def add_roll(pins)
     raise 'Frame is closed.' if open != true
-
+    pins = 0 if number == 10 && rolls.length >= 1 && pins == 10
     @pins = pins
     @rolls << pins
     @open = false if close?
-    @bonus = if spare?
-                1
-              elsif strike?
-                2
-              else
-                nil
-              end
+    @bonus = 2 if strike?
+    @bonus = 1 if spare?
   end
 
   private
@@ -39,9 +34,5 @@ class Frame
 
   def spare?
     rolls.length == 2 && rolls.sum == 10
-  end
-
-  def bonus?
-    @bonus = Bonus.new(number, pins).pins if strike? || spare?
   end
 end

@@ -21,10 +21,7 @@ describe Game do
       it 'saves pins and adds to score' do
         subject.input_bowl(2)
         subject.input_bowl(5)
-        expect(subject.score_list[0][:pins]).to eq 2
-        expect(subject.scores[:pins]).to eq 5
-        subject.calculate_score
-        expect(subject.running_total).to eq 7
+        expect(subject.score).to eq 7
       end
 
       it 'makes a second frame on third roll' do
@@ -40,6 +37,7 @@ describe Game do
         expect(subject.frames.length).to eq 2
       end
     end
+  end
 
     context 'final roll' do
       it 'allows third roll if strike' do
@@ -51,32 +49,38 @@ describe Game do
       end
     end
 
-    context 'end of game' do
-      it 'says game over and prevents more bowls' do
-        20.times { subject.input_bowl(2) }
-        expect {subject.input_bowl(2) }.to raise_error "Game over"
-      end
+  context 'end of game' do
+    it 'says game over and prevents more bowls' do
+      20.times { subject.input_bowl(2) }
+      expect {subject.input_bowl(2) }.to raise_error "Game over"
+    end
+  end
+
+  context 'bonus' do
+    it 'opens a Bonus class if strike' do
+      subject.input_bowl(10)
+      subject.input_bowl(2)
+      expect(subject.bonuses.length).to eq 1
+      expect(subject.bonuses[-1]).to be_a Bonus
     end
 
-    context "bonus" do
-      it "pushes to a bonus array if strike" do
-        subject.input_bowl(10)
-        expect(subject.bonuses).to eq [[1, 2]]
-      end
+    it 'opens a Bonus class if spare' do
+      subject.input_bowl(8)
+      subject.input_bowl(2)
+      subject.input_bowl(2)
+      expect(subject.bonuses.length).to eq 1
+    end
 
-      it "pushes to a bonus array if spare" do
-        subject.input_bowl(7)
-        subject.input_bowl(3)
-        expect(subject.bonuses).to eq [[1, 1]]
-      end
+    it 'adds bonus scores to running total' do
+      subject.input_bowl(8)
+      subject.input_bowl(2)
+      subject.input_bowl(4)
+      expect(subject.score).to eq 18
+    end
 
-      it "adds bonus to score" do
-        subject.input_bowl(7)
-        subject.input_bowl(3)
-        subject.input_bowl(3)
-        subject.calculate_score
-        expect(subject.running_total).to eq 16
-      end
+    it 'doesnt open bonuses for frame 10 rolls 2 & 3' do
+      12.times { subject.input_bowl(10) }
+      expect(subject.bonuses.length).to eq 10
     end
   end
 end

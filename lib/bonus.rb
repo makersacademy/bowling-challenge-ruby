@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 class Bonus
-  attr_reader :pins
-  def initialize(num, pins, type)
-    @pins = pins
-    @roll = num
+  attr_reader :extra, :status
+  def initialize(status)
+    @status = status
+    @extra = 0
   end
 
+  def per_roll(pins)
+    @status -= 1
+    @extra += pins
+  end
 end

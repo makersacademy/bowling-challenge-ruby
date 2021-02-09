@@ -43,6 +43,16 @@ describe Frame do
       expect(frame_ten.open).to be false
     end
 
+    it 'allows third roll if spare' do
+      frame_ten = described_class.new(10)
+      frame_ten.add_roll(8)
+      expect(frame_ten.open).to be true
+      frame_ten.add_roll(2)
+      expect(frame_ten.open).to be true
+      frame_ten.add_roll(10)
+      expect(frame_ten.open).to be false
+    end
+
     it "doesn't normally allow third roll" do
       frame_ten = described_class.new(10)
       expect(frame_ten.number).to eq 10
@@ -52,14 +62,13 @@ describe Frame do
       expect(frame_ten.open).to be false
     end
 
-    it 'allows third roll if spare' do
+    it "doesn't count its own second and third strike pins" do
       frame_ten = described_class.new(10)
-      frame_ten.add_roll(8)
-      expect(frame_ten.open).to be true
-      frame_ten.add_roll(2)
-      expect(frame_ten.open).to be true
       frame_ten.add_roll(10)
-      expect(frame_ten.open).to be false
+      frame_ten.add_roll(10)
+      frame_ten.add_roll(10)
+      expect(frame_ten.rolls.sum).to eq 10
+
     end
   end
 
