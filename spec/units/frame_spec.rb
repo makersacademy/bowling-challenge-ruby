@@ -62,13 +62,11 @@ describe Frame do
       expect(frame_ten.open).to be false
     end
 
-    it "doesn't count its own second and third strike pins" do
+    it "doesn't count pins after strike - only bonuses" do
       frame_ten = described_class.new(10)
       frame_ten.add_roll(10)
-      frame_ten.add_roll(10)
-      frame_ten.add_roll(10)
+      frame_ten.add_roll(8)
       expect(frame_ten.rolls.sum).to eq 10
-
     end
   end
 

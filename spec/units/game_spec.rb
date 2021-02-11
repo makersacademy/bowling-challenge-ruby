@@ -3,10 +3,6 @@
 require 'game'
 
 describe Game do
-  let(:player) { double Player }
-  let(:score_array) { double [2, 3, 4] }
-  let(:score) { double Score.new(input_scores: score_array) }
-  subject { described_class.new }
 
   it 'initializes with an empty frames array' do
     expect(subject.frames).to eq []
@@ -39,15 +35,16 @@ describe Game do
     end
   end
 
-    context 'final roll' do
-      it 'allows third roll if strike' do
-        18.times { subject.input_bowl(2) }
-        subject.input_bowl(10)
-        expect(subject.frames.length).to eq 10
-        subject.input_bowl(10)
-        subject.input_bowl(10)
-      end
+  context 'final roll' do
+    it 'allows third roll if strike' do
+      18.times { subject.input_bowl(2) }
+      subject.input_bowl(10)
+      expect(subject.frames.length).to eq 10
+      subject.input_bowl(10)
+      subject.input_bowl(10)
+      expect(subject.frames[-1].rolls.length).to eq 3
     end
+  end
 
   context 'end of game' do
     it 'says game over and prevents more bowls' do
@@ -81,6 +78,13 @@ describe Game do
     it 'doesnt open bonuses for frame 10 rolls 2 & 3' do
       12.times { subject.input_bowl(10) }
       expect(subject.bonuses.length).to eq 10
+    end
+  end
+
+  describe 'return messages' do
+    it 'creates an instance of the message class' do
+      expect(subject.input_bowl(8)).to eq "You rolled 8!"
+      expect(subject.messages.length).to eq 1
     end
   end
 end

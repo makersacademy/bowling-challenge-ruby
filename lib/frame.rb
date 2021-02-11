@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Frame
-  attr_reader :open, :rolls, :number, :pins, :bonus
+  attr_reader :open, :rolls, :number, :bonus
 
   def initialize(num)
     @number = num
@@ -11,12 +11,11 @@ class Frame
 
   def add_roll(pins)
     raise 'Frame is closed.' if open != true
-    pins = 0 if number == 10 && rolls.length >= 1 && pins == 10
-    @pins = pins
+    pins = 0 if number == 10 && rolls.length >= 1 && rolls.sum >= 10
     @rolls << pins
-    @open = false if close?
     @bonus = 2 if strike?
     @bonus = 1 if spare?
+    @open = false if close?
   end
 
   private
@@ -29,7 +28,7 @@ class Frame
   end
 
   def strike?
-    pins == 10
+    rolls[-1] == 10
   end
 
   def spare?

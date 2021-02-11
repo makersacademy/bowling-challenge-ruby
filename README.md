@@ -19,7 +19,10 @@ After coming to rely on the controller to call methods I found it difficult to e
 The Game class includes a method to input a bowl, which initializes a new instance of the Frame class if some conditions are met; the game stops after ten frames and two rolls, unless there's been a strike or a spare. The Game class also calculates the score, so I think that could be extracted into a separate class.
 
 To do:
-- Finish calculating bonuses
+- Finish calculating bonuses [X]
 - Have an output message after each roll; what it currently returns in irb doesn't correspond to what's happening, which makes it confusing
 - Update Readme with irb excerpts
 - Add diagrams to docs folder
+- do not permit inputs per roll > 10
+- do not permit inputs per frame that sum to >10
+- Refactor specs to keep them dry

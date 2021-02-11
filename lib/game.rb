@@ -14,11 +14,16 @@ class Game
 
   def input_bowl(pins)
     bonus(pins) if frames.any? && frames[-1].bonus
+    puts 1
     raise "Game over" if over?
+    puts 2
 
     frames << Frame.new(frames.length + 1) if add_frame?
+    puts 3
 
     frames[-1].add_roll(pins)
+    puts 4
+    puts "You knocked down #{pins} pins, and your score is #{score}!"
   end
 
   def score
@@ -39,5 +44,9 @@ class Game
   def bonus(pins)
     @bonuses << Bonus.new(frames[-1].bonus) if bonuses.length < 10
     @bonuses.each { |bonus| bonus.per_roll(pins) if bonus.status > 0}
+  end
+
+  def message(pins)
+    "You knocked down #{pins} pins, and your score is #{score}!"
   end
 end
