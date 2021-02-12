@@ -18,7 +18,6 @@ class Player
     save_score(roll_1, roll_2)
     strike_spare(roll_1, roll_2)
     frame_check
-    print_score
   end
 
   def save_score(roll_1, roll_2)
@@ -81,6 +80,7 @@ class Player
     @total = 0
     basic_points
     bonus_points
+    print_score
     puts "#{name}'s total is #{@total}"
   end
 
