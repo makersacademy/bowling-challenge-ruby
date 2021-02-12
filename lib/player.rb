@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Player
-  attr_reader :name, :scores, :total, :strike, :spare, :frame_count, :final_frame, :strike_track
+  attr_reader :name, :scores, :total, :strike, :spare, :frame_count, :final_frame
 
   def initialize(name)
     @name = name
@@ -11,7 +11,6 @@ class Player
     @spare = false
     @frame_count = 0
     @final_frame = false
-    @strike_track = false
   end
 
   def frame(roll_1, roll_2 = 'x')
@@ -27,21 +26,20 @@ class Player
   end
 
   def frame_check
-    final_roll if @frame_count == 10
+    p @frame_count
+    if @frame_count == 10
+      final_roll
+    end
   end
 
   def final_roll
-    if @final_frame == false && @strike == true
-      @final_frame = true
-      @frame_count = 9
-    elsif @final_frame == false && @spare == true
-      @final_frame = true
+    if @final_frame == false && @strike == true || @final_frame == false && @spare == true
       @frame_count = 9
     else
-      @final_frame = true
       @frame_count = 10
       scorecard
     end
+    @final_frame = true
   end
 
   def strike_spare(roll_1, roll_2)
@@ -66,6 +64,7 @@ class Player
   end
 
   def scorecard
+    p "final frame"
     get_scores
     get_total
   end
@@ -102,7 +101,6 @@ class Player
       elsif score_1 + score_2 == 10
         spare_points(index)
       end
-
       index += 1
     end
   end
