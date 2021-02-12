@@ -164,10 +164,7 @@ describe Player do
   end
 
   describe '.get_total' do
-    it 'outputs the total' do
-      claude.frame(3, 5)
-      expect { claude.get_total }.to output("claude's total is 8\n").to_stdout
-    end
+
 
     it 'resets the game' do
       claude.frame(3, 5)
