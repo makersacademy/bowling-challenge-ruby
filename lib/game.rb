@@ -23,7 +23,7 @@ class Game
       scores[k] += pins
       owed_rolls[k] -= 1
     end
-    
+
     post_roll_message
   end
 
@@ -38,18 +38,22 @@ class Game
   end
 
   private #--------------------------------------------------
-  
+
   def create_frame
-    frames << Frame.new(frames.length + 1)
+    Frame.new(frames.length + 1)
+  end
+
+  def set_up_new_frame
+    frames << create_frame
     scores["frame_#{frames.length}".to_sym] = 0
   end
 
   def frame_check
     if frames.empty?
-      create_frame
+      set_up_new_frame
     elsif frames[-1].completed?
       owed_rolls["frame_#{frames.length}".to_sym] = frames[-1].owed_rolls
-      create_frame
+      set_up_new_frame
     end
   end
 

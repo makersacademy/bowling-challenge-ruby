@@ -2,6 +2,14 @@ require 'game'
 
 describe Game do
   let(:game) { Game.new }
+  let(:frame) { double :frame}
+
+  before do
+    allow(game).to receive(:create_frame).and_return(frame)
+    allow(frame).to receive(:add_roll)
+    allow(frame).to receive(:completed?).and_return(false)
+    allow(frame).to receive(:owed_rolls).and_return(0)
+  end
 
   context '#input_roll' do
     it 'creates a frame to record the roll' do
@@ -11,6 +19,7 @@ describe Game do
 
     it 'creates another frame when the first is completed' do
       game.input_roll(10)
+      allow(frame).to receive(:completed?).and_return(true)
       game.input_roll(8)
       expect(game.frames.length).to eq 2
     end
@@ -36,13 +45,17 @@ describe Game do
     it 'sums scores for second frame (no strike/spare)' do
       game.input_roll(4)
       game.input_roll(3)
+      allow(frame).to receive(:completed?).and_return(true)
       game.input_roll(2)
+      allow(frame).to receive(:completed?).and_return(false)
       game.input_roll(3)
       expect(game.scores[:frame_2]).to eq 5
     end
 
     it 'saves how many extra rolls are owed to a completed frame' do
       game.input_roll(10)
+      allow(frame).to receive(:completed?).and_return(true)
+      allow(frame).to receive(:owed_rolls).and_return(2)
       game.input_roll(3)
       expect(game.owed_rolls[:frame_1]).to eq 1
     end
