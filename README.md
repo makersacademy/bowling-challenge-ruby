@@ -1,7 +1,8 @@
 Bowling Challenge in Ruby
 =================
 
-This is my solution to [this](https://github.com/makersacademy/bowling-challenge-ruby) challenge
+This is my solution to [this](https://github.com/makersacademy/bowling-challenge-ruby) challenge.  
+I have also created a browser based version of this using [JavaScript](https://github.com/AdamusBG/bowling-challenge).
 
 ## Scoring in Bowling
 
