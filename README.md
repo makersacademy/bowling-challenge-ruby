@@ -15,11 +15,11 @@ $ cd folder_name
 ```
 4. **Clone the repository**
 ```
-$ git clone https://github.com/lisabardelli/bowling-challenge-ruby.git
+$ git clone https://github.com/lisabardelli/bowling_challenge_ruby.git
 ```
 5. **Run the game**
 ```
-$ ruby bowling-challenge-ruby/lib/main.rb
+$ ruby bowling_challenge_ruby/lib/main.rb
 ```
 
 ## Focus for this challenge
