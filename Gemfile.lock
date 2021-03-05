@@ -63,5 +63,8 @@ DEPENDENCIES
   rspec
   rubocop
 
+RUBY VERSION
+   ruby 2.7.2p137
+
 BUNDLED WITH
-   2.2.6
+   2.2.11
