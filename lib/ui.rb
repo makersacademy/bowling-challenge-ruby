@@ -3,28 +3,36 @@ require_relative 'frame'
 
 class Ui
 
-  attr_reader :game, :scorecard, :user_input
+  attr_reader :game, :scorecard
 
 	def initialize (game = Game)
 		@game = game.create
 		@scorecard = [[]]
-		@user_input
 	end
 
 	def play_bowling
 		while game.turn < 9 do
 
 			game.begin_frame
-			user_input = gets.chomp.to_i
-			game.roll_1(user_input)
+			throw_ball_1
+	
 			add_round_to_scorecard
 			
-			break if user_input == "11" #for testing
+			break if user_input[-1] == 11 #for testing
 		end
 	end
 
-	def add_round_to_scorecard
-		scorecard[-1] << user_input
+	def throw_ball_1(points = gets.chomp.to_i)	
+		game.roll_1(points)
+	end
+
+	def throw_ball_2(points = gets.chomp.to_i)	
+		game.roll_2(points)
+	end
+
+	def add_to_scorecard
+		scorecard[-1] << game.get_score
+		game.clear_score
 		scorecard << []
 	end
 

@@ -12,7 +12,7 @@ class Frame
   end
 
   def strike?
-    score.include?(10) 
+    score[-1] == (10) 
   end
 
   def spare?

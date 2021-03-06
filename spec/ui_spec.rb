@@ -12,4 +12,13 @@ describe Ui do
 		end
 	end
 
+	describe '#throw_ball_1' do
+		it 'throws a ball' do
+			subject.game.begin_frame
+			subject.throw_ball_1(7)
+			subject.add_to_scorecard
+			expect(subject.scorecard[0][0]).to eq(7)
+		end
+	end
+
 end
