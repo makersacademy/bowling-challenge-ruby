@@ -1,18 +1,37 @@
 Bowling Challenge in Ruby
 ==========================
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/6c830bd55e2312455aa1/maintainability)](https://codeclimate.com/github/AJ8GH/bowling-challenge-ruby/maintainability) [![Build Status](https://travis-ci.com/AJ8GH/bowling-challenge-ruby.svg?branch=main)](https://travis-ci.com/AJ8GH/bowling-challenge-ruby) [![Coverage Status](https://coveralls.io/repos/github/AJ8GH/bowling-challenge-ruby/badge.svg?branch=main)](https://coveralls.io/github/AJ8GH/bowling-challenge-ruby?branch=main)
+[![Build Status](https://travis-ci.com/AJ8GH/bowling-challenge-ruby.svg?branch=main)](https://travis-ci.com/AJ8GH/bowling-challenge-ruby) [![Coverage Status](https://coveralls.io/repos/github/AJ8GH/bowling-challenge-ruby/badge.svg?branch=main)](https://coveralls.io/github/AJ8GH/bowling-challenge-ruby?branch=main) [![Maintainability](https://api.codeclimate.com/v1/badges/6c830bd55e2312455aa1/maintainability)](https://codeclimate.com/github/AJ8GH/bowling-challenge-ruby/maintainability)
 
-A Bowling game tracker written in Ruby.
+Bowling score tracker written in Ruby.
 
 ## Technologies used
--
+
+OOP & OOD:
+- SRP
+- Encapsulation
+- Dependency Injection
+- Open-Closed Principle
 
 ## Dependencies
--
+
+Ruby version:
+- `2.7.2`
+
+Gems
+- `coveralls`
+- `rspec`
+- `rubocop`
 
 ## Getting started
--
+
+Clone this repositiory and install the dependencies
+
+```shell
+git clone git@github.com:AJ8GH/bowling-challenge-ruby.git
+cd bowling-challenge-ruby
+bundle
+```
 
 --------
 
@@ -53,25 +72,19 @@ Specs:
 objects | Messages
 --------|----------
 Game    | game.roll
-Frame   | game.score -> sum of 2 rolls or 1 roll if strike
-Spare   | game.over
-Strike  | game.final_frame?
-        | game.bonus
-        | frame.over?
-        | frame.status -> :strike, :spare
-        | frame.score -> sum of 2 rolls or 1 roll if strike
+Game    | game.score -> sum of 2 rolls or 1 roll if strike
+Game    | game.over
+Game    | game.final_frame?
+Game    | game.bonus
+Frame   | frame.over?
+Frame   | frame.status -> :strike, :spare
+Frame   | frame.score -> sum of 2 rolls or 1 roll if strike
 
 ### sequence diagrams
-```flow
-alias p = "Player"
-alias g = "Game"
-alias f = "Frame"
 
-p->g: "roll(score)"
-g->f: "Frame.new"
-f-->g: "frame1"
-g->g: "frame1.score << score"
-```
+Adding score from 1 roll:
+
+![roll](images/roll.png)
 
 ----
 
