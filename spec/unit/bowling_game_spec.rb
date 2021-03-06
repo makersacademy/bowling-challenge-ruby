@@ -17,6 +17,14 @@ let(:game) {described_class.new}
         game.roll(3)
         expect(game.score).to eq 5
       end
+      it 'stores a gutter game' do
+        20.times {game.roll(0)}
+        expect(game.score).to eq 0
+      end
+      it 'stores a full game of twos' do
+        20.times {game.roll(2)}
+        expect(game.score).to eq 40
+      end
     end
 
     context 'user inputs too many pins' do
