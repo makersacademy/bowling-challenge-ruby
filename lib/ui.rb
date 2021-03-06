@@ -18,11 +18,11 @@ class Ui
 	end
 
 	def throw_1(points = gets.chomp.to_i)	
-		game.roll_1(points)
+		game.roll(points)
 	end
 
 	def throw_2(points = gets.chomp.to_i)	
-		game.roll_2(points)
+		game.roll(points)
 	end
 
 	def add_to_scorecard

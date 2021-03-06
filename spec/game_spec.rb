@@ -18,11 +18,11 @@ describe Game do
     end
 
     it 'returns strike! if the user throws a strike' do
-      expect(subject.roll_1(10)).to eq("strike!")
+      expect(subject.roll(10)).to eq("strike!")
     end
 
     it 'adds the users points to the current frame score' do
-      subject.roll_1(7)
+      subject.roll(7)
       expect(subject.current_frame.score[0]).to eq(7)
     end
   end 

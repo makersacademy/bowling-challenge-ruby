@@ -39,14 +39,10 @@ end
     current_frame.strike?
   end
 
-  def roll_1(points)
+  def roll(points)
     mark_score(points)
     spare_or_strike?
   end
 
-  def roll_2(points)
-    mark_score(points)
-    spare_or_strike?
-  end
   
 end
