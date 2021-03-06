@@ -27,6 +27,13 @@ describe BowlingGame do
             expect {subject.new_frame(1,2)}.to raise_error("Game Over, you have played all your frames")
         end
 
+        it 'should allow you to play an 11th frame if you roll a 10 in your 10th frame' do
+            9.times {subject.new_frame(2,2)}
+            subject.new_frame(10, 2)
+            subject.new_frame(2,2)
+            expect(subject.score.length).to eq 11
+        end
+
     
 
     end
