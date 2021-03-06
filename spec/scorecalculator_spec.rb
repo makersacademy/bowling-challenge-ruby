@@ -29,29 +29,23 @@ describe ScoreCalculator do
     end
 
     it 'includes bonus points in a different way allowing max of 3 rolls in the tenth frame where there is a strike' do
-      subject.input(3, 4)
-      subject.input(4, 5)
-      subject.input(2, 3)
-      subject.input(6, 2)
-      subject.input(2, 3)
-      subject.input(2, 6)
-      subject.input(2, 6)
-      subject.input(4, 5)
-      subject.input(5, 2)
-      expect{subject.input(10, 10, 9)}.to output("This the last frame!\nYou scored 29 for frame 10. Your overall score so far is 95\n").to_stdout
+      9.times { subject.input(3, 4) }
+      expect{subject.input(10, 10, 9)}.to output("This the last frame!\nYou scored 29 for frame 10. Your overall score so far is 92\n").to_stdout
     end
 
     it 'only allows two score inputs in the tenth frame if there is no strike or spare' do
-      subject.input(3, 4)
-      subject.input(4, 5)
-      subject.input(2, 3)
-      subject.input(6, 2)
-      subject.input(2, 3)
-      subject.input(2, 6)
-      subject.input(2, 6)
-      subject.input(4, 5)
-      subject.input(5, 2)
+      9.times {subject.input(3, 4)}
       expect{subject.input(4, 5, 6)}.to raise_error("You cannot have more than two scores for the last frame if you haven't striked or spared")
+    end
+
+    it 'calculates the correct overall score when there is a perfect game of strikes' do
+      9.times {subject.input(10)}
+      expect{subject.input(10,10,10)}.to output("This the last frame!\nYou scored 30 for frame 10. Your overall score so far is 300\n").to_stdout
+    end
+
+    it 'calculates the correct overall score when there is a spare in the last frame' do
+      9.times {subject.input(5, 4)}
+      expect{subject.input(5,5,2)}.to output("This the last frame!\nYou scored 12 for frame 10. Your overall score so far is 93\n").to_stdout
     end
   end
 
