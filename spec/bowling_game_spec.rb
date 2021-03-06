@@ -7,4 +7,9 @@ describe BowlingGame do
         expect(new_game.score).to be_empty
     end
 
+    it 'should start on zero frames' do
+    new_game = BowlingGame.new
+    expect(new_game.frame).to eq 0
+    end
+
 end
