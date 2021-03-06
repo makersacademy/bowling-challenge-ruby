@@ -15,6 +15,8 @@ class Frame
     score.include?(10) 
   end
 
-
+  def spare?
+    score.length == 2 && score.sum == 10
+  end
 
 end

@@ -18,10 +18,21 @@ describe Frame do
   end
 
   describe '#strike?' do
-    it 'returns true if the user strikes' do
+    it 'returns true if the user throws a strike' do
       frame.add_roll(10)
       expect(frame.strike?).to eq(true)
     end
   end
+
+  describe '#spare?' do
+    it 'returns true if the user throws a spare' do
+      frame.add_roll(7)
+      frame.add_roll(3)
+      expect(frame.spare?).to eq(true)
+    end
+
+  end
+     
+
 
 end
