@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    ansi (1.5.0)
     ast (2.4.2)
     coveralls (0.8.23)
       json (>= 1.8, < 3)
@@ -46,10 +47,15 @@ GEM
       docile (~> 1.1)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
+    simplecov-console (0.9.1)
+      ansi
+      simplecov
+      terminal-table
     simplecov-html (0.10.2)
     sync (0.5.0)
     term-ansicolor (1.7.1)
       tins (~> 1.0)
+    terminal-table (1.6.0)
     thor (1.1.0)
     tins (1.28.0)
       sync
@@ -64,6 +70,8 @@ DEPENDENCIES
   rspec
   rspec-core
   rubocop
+  simplecov
+  simplecov-console
 
 RUBY VERSION
    ruby 2.7.2p137

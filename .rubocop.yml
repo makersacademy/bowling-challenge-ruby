@@ -1,0 +1,13 @@
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+AllCops:
+  SuggestExtensions: false
+  NewCops: enable
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/*.rb'

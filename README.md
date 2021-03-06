@@ -1,7 +1,8 @@
 Bowling Challenge in Ruby
 ==========================
 
-[![Build Status](https://travis-ci.com/AJ8GH/bowling-challenge-ruby.svg?branch=main)](https://travis-ci.com/AJ8GH/bowling-challenge-ruby) [![Coverage Status](https://coveralls.io/repos/github/AJ8GH/bowling-challenge-ruby/badge.svg?branch=main)](https://coveralls.io/github/AJ8GH/bowling-challenge-ruby?branch=main) [![Maintainability](https://api.codeclimate.com/v1/badges/6c830bd55e2312455aa1/maintainability)](https://codeclimate.com/github/AJ8GH/bowling-challenge-ruby/maintainability)
+[![Build Status](https://travis-ci.com/AJ8GH/bowling-challenge-ruby.svg?branch=main)](https://travis-ci.com/AJ8GH/bowling-challenge-ruby) [![Coverage Status](https://coveralls.io/repos/github/AJ8GH/bowling-challenge-ruby/badge.svg?branch=main)](https://coveralls.io/github/AJ8GH/bowling-challenge-ruby?branch=main) [![Maintainability](https://api.codeclimate.com/v1/badges/6c830bd55e2312455aa1/maintainability)](https://codeclimate.com/github/AJ8GH/bowling-challenge-ruby/maintainability) [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
+
 
 Bowling score tracker written in Ruby.
 
