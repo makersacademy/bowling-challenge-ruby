@@ -1,37 +1,30 @@
-# initialize Game.new - can add a player name here
+require './lib/game.rb'
 
-# create frame
-# ask for user input - how to limit input
-# add input to current frame rolls
-# check if completed?
-    # if !completed?
-        # ask for user input - how to limit input
-        # check if completed?
-    # if completed?
-        # check if spare?
-          # if spare?
-            
-          # create new frame
-          # ask for user input
-                  # add input to frame 1 @rolls
-                  # log frame score onto Game
-          # check if completed?
-          # check if spare?
+game = Game.new
 
-        # check if strike?
-          # if strike?
-            # create new frame
-            # ask for user input
-            # check if completed?
-              # if !completed?
-                  # ask for user input - how to limit input
-                  # add input to frame 1 @rolls
-                  # add input to current frame rolls
-                  # check if completed?
-              # if completed?
-                  # check if spare?
-                  # check if strike?
-
-    # log frame score onto Game 
-    
-# create frame
+while game.frames.count < game.total_frames
+  frame = Frame.new
+  while !frame.completed? do
+    puts "input number of pins knocked down"
+    throw = STDIN.gets.chomp
+    frame.add(throw.to_i)
+  end
+  if frame.strike?
+    new_frame = Frame.new
+    while !new_frame.completed? do
+      puts "input number of pins knocked down"
+      throw = STDIN.gets.chomp
+      new_frame.add(throw.to_i)
+      frame.add(throw.to_i)
+    end
+    game.add_frame(frame.score)
+    game.add_frame(new_frame.score)
+    puts "New frame score: #{new_frame.score}"
+  elsif frame.spare?
+    # do something
+  else
+    game.add_frame(frame.score)
+  end
+puts "Frame score: #{frame.score}"
+puts "Game current score: #{game.score}"
+end

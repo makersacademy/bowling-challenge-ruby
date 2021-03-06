@@ -2,7 +2,7 @@ Bowling Challenge in Ruby
 =================
 
 ## Planning
-![Program Flow] (https://github.com/sandyMax974/bowling-challenge-ruby/blob/main/images/flow%20diagram.png)
+![Program Flow](https://github.com/sandyMax974/bowling-challenge-ruby/blob/main/images/flow%20diagram.png)
 
 ## The Task
 

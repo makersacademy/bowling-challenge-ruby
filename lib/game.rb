@@ -12,4 +12,8 @@ class Game
   def add_frame(frame_score)
     @frames << frame_score
   end 
+
+  def score
+    @frames.sum
+  end
 end

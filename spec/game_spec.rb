@@ -11,4 +11,20 @@ describe Game do
 
     expect(subject.frames).to include 8
   end
+
+  describe 'score' do
+   it 'knows the current game score' do
+      subject.add_frame(8)
+
+      expect(subject.score).to eq 8
+    end
+    it 'knows the current game score' do
+      subject.add_frame(8)
+      subject.add_frame(1)
+      subject.add_frame(3)
+      subject.add_frame(3)
+
+      expect(subject.score).to eq 15
+    end 
+  end
 end
