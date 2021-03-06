@@ -7,7 +7,7 @@ describe Game do
 
   it 'knows the score of all played frames' do
     frame_one = instance_double('Frame', :score => 8)
-    subject.played(frame_one.score)
+    subject.add_frame(frame_one.score)
 
     expect(subject.frames).to include 8
   end

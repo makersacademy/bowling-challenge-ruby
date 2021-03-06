@@ -7,7 +7,7 @@ class Game
     @frames = []
   end
 
-  def played(frame_score)
+  def add_frame(frame_score)
     @frames << frame_score
   end 
 end
