@@ -1,3 +1,51 @@
+
+## How to use
+
+Run the project using irb:
+```
+$ irb
+$ require './lib/bowling_game.rb'
+$ game = BowlingGame.new
+$ game.roll(2)
+$ game.roll(6)
+$ game.score
+ => '8'
+```
+
+## Goal
+
+- Create a bowling game class that can count and sum the score of a player's frame.
+- Write high-quality code witha focus on:
+  - Diagramming & TDD
+  - Testing behaviour rather than state
+  - Frequent commits
+  - SRP & encapsulation
+  - Clear and readable code
+
+
+## Tables
+
+| Class name:        | Game          |
+| ------------------ |:-------------:|
+| Responsibilities   | Collaborators |
+| ------------------ |:-------------:|
+| col 3 is           | right-aligned |
+| col 2 is           | centered      |
+| zebra stripes      | are neat      |  
+
+##Tests
+
+
+
+
+
+
+
+
+
+
+
+
 Bowling Challenge in Ruby
 =================
 
@@ -18,7 +66,7 @@ As usual please start by
 
 * Forking this repo
 
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
+* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am.
 
 ___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
 
