@@ -8,6 +8,10 @@ describe Frame do
     it 'has a clear score' do
       expect(frame.score).to be_empty
     end
+
+    it 'begins on round 1' do
+      expect(frame.round).to eq(1)
+    end
   end
 
   describe '#add_roll' do

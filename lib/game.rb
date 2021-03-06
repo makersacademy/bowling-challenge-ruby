@@ -40,5 +40,4 @@ end
     spare_or_strike?
   end
   
-
 end

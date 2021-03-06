@@ -1,9 +1,9 @@
 class Frame
 
-  attr_reader :score
+  attr_reader :score, :round
 
   def initialize(number)
-    @frame_number = 0
+    @round = number
     @score = []
   end
 
