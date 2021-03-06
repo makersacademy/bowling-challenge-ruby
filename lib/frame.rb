@@ -1,14 +1,12 @@
 class Frame
   attr_reader :number, :bowls
 
-  def initialize(number:, bowl_class: Bowl)
+  def initialize(number:)
     @number = number
-    @bowl_class = bowl_class
     @bowls = []
   end
 
-  def add(pins:)
-    bowl = @bowl_class.new(pins: pins)
+  def add(bowl:)
     @bowls.push(bowl)
   end
 

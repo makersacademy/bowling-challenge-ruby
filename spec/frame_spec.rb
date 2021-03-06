@@ -1,13 +1,11 @@
 require 'frame'
 
+# refactor at end to test behaviour, not state
+
 describe Frame do
   subject { described_class.new(number: 1) }
 
-  # let(:throw_1) { double(:bowl, :pins => 6) }
-  # let(:throw_2) { double(:bowl, :pins => 3) }
-
-  let(:bowl_double) { double(:bowl, :pins => 4) }
-  let(:bowl_class_double) { double(:bowl_class, :new => :bowl_double) }
+  let(:bowl) { double(:bowl, :pins => 4) }
 
   describe '#number' do
     it 'stores the frame number' do
@@ -17,7 +15,7 @@ describe Frame do
 
   describe '#add' do
     it 'adds a bowl to the frame' do
-      subject.add(pins: 4)
+      subject.add(bowl: bowl)
 
       expect(subject.bowls.length).to eq 1
       expect(subject.score).to eq 4
@@ -26,8 +24,8 @@ describe Frame do
 
   describe '#bowls' do
     it 'stores the bowls from the frame' do
-      subject.add(pins: 4)
-      subject.add(pins: 4)
+      subject.add(bowl: bowl)
+      subject.add(bowl: bowl)
 
       expect(subject.bowls).to be_a Array
       expect(subject.bowls.length).to eq 2
