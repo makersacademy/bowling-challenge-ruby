@@ -4,6 +4,7 @@ ruby '2.7.2'
 
 group :test do
   gem 'coveralls', require: false
+  gem 'reek'
   gem 'rspec'
   gem 'rspec-core'
   gem 'rubocop'

@@ -9,7 +9,7 @@ describe Game do
     end
   end
 
-  describe 'current_frame' do
+  describe '#current_frame' do
     it 'holds an instance of frame' do
       expect(subject.current_frame).to be frame
     end
@@ -21,10 +21,25 @@ describe Game do
     end
   end
 
-  describe 'add_roll' do
+  describe '#add_roll' do
     it 'adds roll to current frame' do
       expect(frame).to receive(:add_roll).with(1)
       subject.add_roll(1)
+    end
+
+    context 'when frame is not over' do
+      it 'does not add current frame to frames' do
+        subject.add_roll(3)
+        expect(subject.frames).to be_empty
+      end
+    end
+
+    context 'when frame is over' do
+      it 'adds current frame to frames' do
+        allow(frame).to receive(:over?).and_return(true)
+        subject.add_roll(3)
+        expect(subject.frames.last).to be frame
+      end
     end
   end
 end
