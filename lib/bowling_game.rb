@@ -8,5 +8,6 @@ class BowlingGame
 
 
     def new_frame(roll_1, roll_2)
+        @frame += 1
     end
 end
