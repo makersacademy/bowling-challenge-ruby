@@ -1,7 +1,59 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/annanawrocka/projects/weekend_challenge/bowling-challenge-ruby/spec/score_calculator_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/annanawrocka/projects/weekend_challenge/bowling-challenge-ruby/lib/score_calculator.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          9,
+          9,
+          9,
+          9,
+          null,
+          9,
+          9,
+          null,
+          9,
+          6,
+          null,
+          2,
+          4,
+          null,
+          4,
+          null,
+          null,
+          null,
+          9,
+          null,
+          9,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      }
     },
-    "timestamp": 1615030336
+    "timestamp": 1615035326
   }
 }
