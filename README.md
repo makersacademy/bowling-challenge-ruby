@@ -25,13 +25,25 @@ $ game.score
 
 ## Tables
 
-| Class name:        | Game          |
-| ------------------ |:-------------:|
-| Responsibilities   | Collaborators |
-| ------------------ |:-------------:|
-| col 3 is           | right-aligned |
-| col 2 is           | centered      |
-| zebra stripes      | are neat      |  
+| Class name:           | Game          |
+| ------------------    |:-------------:|
+| #Responsibilities     | #Collaborators|
+| knows frames played   | Frame         |
+| stores total score    | User          |
+| stores score per frame|               |  
+
+
+| Class name:                      | Frame         |
+| -----------------------------    |:-------------:|
+| #Responsibilities                | #Collaborators|
+| knows number of pins             |               |
+| knows number of rolls per frame  |               |
+| counts the score of a roll       |               |  
+| knows a spare                    |               |  
+| knows a strike                   |               |
+| knows when it's the 10th frame   |               |
+| knows the bonus' in 10th frame   |               |
+| knows when the game is over      |               |
 
 ##Tests
 
