@@ -36,7 +36,7 @@ describe ScoreCalculator do
 
     it 'only allows two score inputs in the tenth frame if there is no strike or spare' do
       9.times {subject.input(3, 4)}
-      expect{subject.input(4, 5, 6)}.to raise_error("Only two score inputs allowed if you haven't striked/spared in frame 10")
+      expect{subject.input(4, 5, 6)}.to raise_error("Max of 2 score inputs allowed if you haven't striked/spared in frame 10")
     end
 
     it 'calculates the correct overall score when there is a perfect game of strikes' do
