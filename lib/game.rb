@@ -9,6 +9,7 @@ class Game
 
   def add_roll(pins)
     current_frame.add_roll(pins)
+    add_bonus(pins)
     return unless current_frame.over?
 
     frames << current_frame
@@ -26,5 +27,11 @@ class Game
 
   def new_frame
     self.current_frame = frame_class.new
+  end
+
+  def add_bonus(pins)
+    return if frames.empty?
+
+    frames.last.add_bonus(pins) if frames.last.spare? && !current_frame.roll2
   end
 end

@@ -41,5 +41,26 @@ describe Game do
         expect(subject.frames.last).to be frame
       end
     end
+
+    context 'adding spare bonus' do
+      it 'adds the score of first role to the last frame bonus' do
+        allow(frame).to receive_messages(:spare? => true, roll2: nil)
+        subject.frames << frame
+
+        expect(frame).to receive(:add_bonus).once.with(5)
+        subject.add_roll(5)
+      end
+
+      it 'does not add the score of second roll to bonus' do
+        allow(frame).to receive_messages(:spare? => true, roll2: nil)
+        subject.frames << frame
+
+        expect(frame).to receive(:add_bonus).once.with(5)
+        subject.add_roll(5)
+
+        allow(frame).to receive(:roll2).and_return(5)
+        subject.add_roll(5)
+      end
+    end
   end
 end

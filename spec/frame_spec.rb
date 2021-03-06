@@ -126,4 +126,10 @@ describe Frame do
       end
     end
   end
+
+  describe 'add_bonus' do
+    it 'adds a score to the bonus' do
+      expect { subject.add_bonus(2) }.to change { subject.bonus }.by(2)
+    end
+  end
 end
