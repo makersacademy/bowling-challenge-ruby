@@ -12,13 +12,8 @@ class Ui
 
 	def play_bowling
 		while game.turn < 9 do
-
-			game.begin_frame
-			throw_ball_1
-	
-			add_round_to_scorecard
 			
-			break if user_input[-1] == 11 #for testing
+	
 		end
 	end
 
