@@ -1,11 +1,20 @@
 class Frame
 
-  attr_reader :scoreboard, :total
+  attr_reader :score
 
-  def initialize
-    @scoreboard = []
-    @total = @scoreboard.sum
+  def initialize(number)
+    @frame_number = 0
+    @score = []
   end
+
+  def add_roll(pins)
+    score << pins
+  end
+
+  def strike?
+    score.include?(10) 
+  end
+
 
 
 end

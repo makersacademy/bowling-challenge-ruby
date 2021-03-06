@@ -8,7 +8,7 @@ describe Game do
     end
 
     it '0 rolls have been played' do
-      expect(subject.roll).to eq(0)
+      expect(subject.turn).to eq(0)
     end
   end
 

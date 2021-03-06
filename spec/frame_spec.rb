@@ -2,12 +2,26 @@ require 'frame'
 
 describe Frame do
 
+  let(:frame) { Frame.new(1)}
+
   describe '#initialize' do
-    it 'starts a new frame with a score of 0' do
-      expect(subject.total).to eq(0)
+    it 'has a clear score' do
+      expect(frame.score).to be_empty
     end
   end
 
+  describe '#add_roll' do
+    it 'adds the users roll to the current frame' do
+      frame.add_roll(5)
+      expect(frame.score[0]).to eq(5)
+    end
+  end
 
+  describe '#strike?' do
+    it 'returns true if the user strikes' do
+      frame.add_roll(10)
+      expect(frame.strike?).to eq(true)
+    end
+  end
 
 end
