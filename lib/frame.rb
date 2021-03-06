@@ -17,4 +17,8 @@ class Frame
         @rolls << throw
         @remaining_pins -= throw
     end
+
+    def completed?
+        @rolls.length == 2 || @remaining_pins == 0
+    end
 end 

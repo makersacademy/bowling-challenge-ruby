@@ -1,6 +1,7 @@
 require 'frame'
 
 describe Frame do
+
     it 'knows how many pins are in one frame' do
         expect(subject.pins).to eq 10
     end
@@ -19,6 +20,7 @@ describe Frame do
             expect(subject.score).to eq 0
         end
     end 
+
     describe '#add' do
         it 'adds throws to the frame - example 1' do
             subject.add(3)
@@ -29,6 +31,22 @@ describe Frame do
             subject.add(5)
             subject.add(4)
             expect(subject.score).to eq 9
+        end
+    end
+
+    describe 'completed?' do
+        it 'knows when the frame has been fully played' do
+            subject.add(3)
+            subject.add(5)
+            expect(subject.completed?).to be true
+        end
+        it 'knows when the frame has been fully played' do
+            subject.add(3)
+            expect(subject.completed?).to be false
+        end
+        it 'knows when the frame has been fully played' do
+            subject.add(10)
+            expect(subject.completed?).to be true
         end
     end
 end 
