@@ -30,10 +30,6 @@ end
     current_frame.score[-1]
   end
 
-  def clear_score
-    current_frame.score.clear
-  end
-
   def spare_or_strike?
     return "spare!" if current_frame.spare?
     return "strike!" if current_frame.strike?

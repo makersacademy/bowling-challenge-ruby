@@ -8,14 +8,14 @@ describe Ui do
 		end
 
 		it 'has a blank scoreboard' do
-			expect(subject.scorecard).to eq([[]])
+			expect(subject.scorecard).to eq([])
 		end
 	end
 
 	context 'throwing balls' do 
 		before(:each) do
-			subject.game.begin_frame
-			subject.throw_ball_1(7)
+			subject.begin_frame
+			subject.throw_1(7)
 			subject.add_to_scorecard
 		end
 
@@ -34,12 +34,11 @@ describe Ui do
 
 	describe '#add_to_scorecard' do
 		it 'updates the scorecard' do
-			subject.game.begin_frame
-			subject.throw_ball_1(7)
-			expect{ subject.add_to_scorecard }.to change { subject.scorecard.length }.by(1)
+			subject.begin_frame
+			subject.throw_1(7)
+			subject.throw_2(2)
+			expect{ subject.add_to_scorecard }.to change { subject.scorecard[-1].length }.by(1)
 		end
 	end
-
-
 
 end

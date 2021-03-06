@@ -25,9 +25,6 @@ describe Game do
       subject.roll_1(7)
       expect(subject.current_frame.score[0]).to eq(7)
     end
-  end
-
-  
-
+  end 
 
 end
