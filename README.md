@@ -1,6 +1,8 @@
 Bowling Challenge in Ruby
 =================
 
+![image](https://user-images.githubusercontent.com/75075773/110204624-f3b11000-7e6b-11eb-860a-76925a307d07.png)
+
 * Feel free to use google, your notes, books, etc. but work on your own
 * If you refer to the solution of another coach or student, please put a link to that in your README
 * If you have a partial solution, **still check in a partial solution**
