@@ -8,7 +8,7 @@ describe Ui do
 		end
 
 		it 'has a blank scoreboard' do
-			expect(subject.scorecard).to be_empty
+			expect(subject.scorecard).to eq([[]])
 		end
 	end
 
