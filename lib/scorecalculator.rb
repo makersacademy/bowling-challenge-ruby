@@ -1,5 +1,4 @@
 class ScoreCalculator
-  attr_reader :sheet, :score
 
   def initialize
     @sheet = []
@@ -8,22 +7,10 @@ class ScoreCalculator
   def input(*args)
     @sheet << args
     errors(*args)
-    status_report
     bonuspoints
     puts "You scored #{args.sum} for frame #{currentframe}. Your overall score so far is #{currentscore}"
-    resetframe
-  end
-
-  def currentscore
-    @sheet.flatten.sum
-  end
-
-  def currentframe
-    @sheet.length
-  end
-
-  def resetframe
-    @framescore = 0
+    specialannouncement
+    reset if completegame?
   end
 
   def bonuspoints
@@ -44,18 +31,46 @@ class ScoreCalculator
   def scoreboard
     score = 0
     @sheet.map.with_index do |x, i|
-      puts "Frame #{i + 1}: #{x} | #{x.flatten.sum} | #{score += x.flatten.sum}"
+      puts "Frame #{i + 1}: #{x.flatten} | #{x.flatten.sum} | #{score += x.flatten.sum}"
     end
   end
 
-  def status_report
-    puts 'This the last frame!' if currentframe == 10
-    raise "You can't input any more score as you've finished the game!" if currentframe > 10
-  end
+  private
 
   def errors(*args)
     raise "Only two score inputs allowed if you haven't striked/spared in frame 10" if currentframe == 10 && args.length > 2 && ((args[0] + args[1]) < 10)
     raise "Only two score inputs allowed!" if args.length > 2 && currentframe < 9
-    raise 'Only 1 score input allowed if it includes a strike' if args.include?(10) && currentframe < 10 && args.length > 1
+    raise "Only 1 score input allowed if it includes a strike" if args.include?(10) && currentframe < 10 && args.length > 1
+    raise "You need to input both scores of the current frame if you don't have a strike" if args.length == 1 && args != [10]
+  end
+
+  def currentscore
+    @sheet.flatten.sum
+  end
+
+  def currentframe
+    @sheet.length
+  end
+
+  def perfectgame?
+    currentscore == 300
+  end
+
+  def guttergame?
+    currentframe == 10 && currentscore == 0
+  end
+
+  def specialannouncement
+    puts "Congrats you scored a perfect game!" if perfectgame?
+    puts "Sorry this is a complete gutter game..." if guttergame?
+    puts "You have finished the game, yay!" if !perfectgame? && !guttergame? && currentframe == 10
+  end
+
+  def completegame?
+    @sheet.length == 10
+  end
+
+  def reset
+    @sheet = []
   end
 end
