@@ -1,3 +1,91 @@
+# Bowling Challenge
+
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop) [![Ruby Style Guide](https://img.shields.io/badge/code_style-community-brightgreen.svg)](https://rubystyle.guide)
+
+## Planning
+
+### Thoughts on program design
+
+* Bowl object:
+  * Stores the number of pins struck for that bowl
+* Frame object
+  * Knows the frame number
+  * Stores the bowls for that frame in a hash
+* Game object
+  * Stores the frames for the game
+  * Knows the current frame and bowl
+  * Has a method to add number of pins knocked down in that bowl
+* Score object
+  * Stores all of the scores?
+  * Knows the total score
+* Scorer object
+  * Calculates scores
+* Display object?
+  * Shows all bowls, frames, running total score:
+
+| Current Frame: 5 | Current Bowl: 1 |
+  
+| 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10  |
+| -- | -- | -- | -- | -- | -- | -- | -- | -- | --- |
+| X  | 54 | 7/ | 9- |    |    |    |    |    |     |
+| 19 | 28 | 47 | 56 |    |    |    |    |    |     |
+    
+This would mainly be for debugging purposes - it's not meant as a user interface.
+
+### Sequence Diagram
+
+```
+alias u = "User"
+alias g = "Game"
+alias d = "Display"
+alias f = "Frame"
+alias b = "Bowl"
+alias s = "Score"
+alias sr = "Scorer"
+
+u->g:"start new game"
+g->d:"create new display object"
+g->g:"set current bowl to frame 1, bowl 1"
+d-->g:"return new display object"
+g-->u:"show display"
+u-> g:"enter pins knocked down in bowl"
+g->f:"if first bowl in frame, create new frame object"
+f->b:"create new bowl object"
+b->b:"store number of pins knocked down"
+b-->f:"return bowl object"
+f->f:"store bowl object"
+f-->g:"return frame object"
+g->g:"store frame object"
+g->g:"check if second bowl allowed"
+g->g:"update current bowl"
+g->sr:"please update the score"
+sr->sr:"perform calculation"
+sr->s:"update total score (class method?)"
+sr->g:"return total score"
+g-->u:"update display" 
+u->g:"enter pins knocked down in bowl"
+g->b:"if second bowl, create new bowl object"
+b->b:"store number of pins knocked down"
+b-->g:"return bowl object"
+g->f:"store bowl object in existing frame"
+g->sr:"please update the score"
+sr->sr:"perform calculation"
+sr->s:"update total score (class method?)"
+sr->g:"return total score"
+g->g:"update current bowl"
+g-->u:"update display"
+```
+
+![Image](./images/screenshot_1.png)
+
+![Image](./images/screenshot_2.png)
+
+## Reflection
+
+
+
+---
+
 Bowling Challenge in Ruby
 =================
 
