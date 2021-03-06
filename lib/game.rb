@@ -1,8 +1,7 @@
 class Game
-  attr_reader :score, :current_frame, :frames
+  attr_reader :current_frame, :frames
 
   def initialize(frame_class = Frame)
-    @score = 0
     @frame_class = frame_class
     @current_frame = new_frame
     @frames = []
@@ -14,6 +13,10 @@ class Game
 
     frames << current_frame
     new_frame
+  end
+
+  def score
+    0
   end
 
   private
