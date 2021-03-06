@@ -10,10 +10,10 @@ class Game
 
   def add_roll(pins)
     current_frame.add_roll(pins)
-    if current_frame.over?
-      frames << current_frame
-      new_frame
-    end
+    return unless current_frame.over?
+
+    frames << current_frame
+    new_frame
   end
 
   private

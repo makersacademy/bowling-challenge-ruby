@@ -38,10 +38,16 @@ describe Frame do
       end
     end
 
-
     context 'when player inputs > 10 on first roll' do
       it 'raises error' do
         expect { subject.add_roll(11) }.to raise_error PinError
+      end
+    end
+
+    context 'when player inputs > 10 across 2 rolls' do
+      it 'raises error' do
+        subject.add_roll(5)
+        expect { subject.add_roll(6) }.to raise_error PinError
       end
     end
   end
@@ -68,6 +74,16 @@ describe Frame do
         2.times { subject.add_roll(3) }
         expect(subject).to be_over
       end
+    end
+  end
+
+  describe '#remaining_pins' do
+    it 'starts at 10' do
+      expect(subject.remaining_pins).to be 10
+    end
+
+    it 'decreases by roll score after each roll' do
+      expect { subject.add_roll(5) }.to change { subject.remaining_pins }.by(-5)
     end
   end
 end
