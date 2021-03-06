@@ -5,4 +5,8 @@ class BowlingGame
         @score = []
         @frame = 0
     end
+
+
+    def new_frame(roll_1, roll_2)
+    end
 end
