@@ -25,20 +25,19 @@ $ game.score
 
 ## Tables
 
-| Class name:           | Game          |
-| ------------------    |:-------------:|
-| #Responsibilities     | #Collaborators|
-| knows frames played   | Frame         |
-| stores total score    | User          |
-| stores score per frame|               |  
+| Class name:                 | BowlingGame   |
+| ------------------------    |:-------------:|
+| #Responsibilities           | #Collaborators|
+| knows frames played         | Frame         |
+| stores total score          | User          |
+| sums the score of each roll |               |
+| counts the score of a roll  |               |  
 
 
 | Class name:                      | Frame         |
 | -----------------------------    |:-------------:|
 | #Responsibilities                | #Collaborators|
 | knows number of pins             |               |
-| knows number of rolls per frame  |               |
-| counts the score of a roll       |               |  
 | knows a spare                    |               |  
 | knows a strike                   |               |
 | knows when it's the 10th frame   |               |
