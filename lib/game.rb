@@ -33,17 +33,40 @@ class Game
   end
 
   def create_new_frame(pins)
+    error_checks(pins)
     bowl = create_new_bowl(pins)
     frame = @frame_class.new(number: @current[:frame])
     frame.add(bowl: bowl)
     @frames.push(frame)
-    @current[:bowl] += 1
+    check_for_strike(pins)    
   end
 
   def add_bowl_to_current_frame(pins)
+    error_checks(pins)
     bowl = create_new_bowl(pins)
     @frames.last.add(bowl: bowl)
     @current[:frame] += 1
     @current[:bowl] -= 1
+  end
+
+  def check_for_strike(pins)
+    if pins == 10
+      @current[:frame] += 1 
+    else
+      @current[:bowl] += 1
+    end
+  end
+
+  def error_checks(pins)
+    invalid_pins(pins)
+    invalid_total(pins) if @current[:bowl] == 2
+  end
+
+  def invalid_pins(pins)
+    raise('Your score must be between 0 and 10') if (pins < 0) or (pins > 10)
+  end
+
+  def invalid_total(pins)
+    raise('Your total score for the frame cannot exceed 10; please check your scores') if (@frames.last.pins + pins) > 10
   end
 end

@@ -12,6 +12,20 @@ describe Game do
   # let(:frame_class_double) { double(:frame_class, :new => :frame_double) }
 
   describe '#add_bowl' do
+    it 'adds the result of a bowl to the game' do
+      expect { subject.add_bowl(pins: 5) }.to change { subject.frames.length }.by 1
+    end
+
+    it 'will not let a user enter invalid scores' do
+      expect { subject.add_bowl(pins: -4) }.to raise_error('Your score must be between 0 and 10')
+      expect { subject.add_bowl(pins: 25) }.to raise_error('Your score must be between 0 and 10')
+    end
+
+    it 'will not allow frame total to exceed 10' do
+      subject.add_bowl(pins: 7)
+
+      expect { subject.add_bowl(pins: 6) }.to raise_error('Your total score for the frame cannot exceed 10; please check your scores')
+    end
   end
 
   describe '#state' do
@@ -28,10 +42,17 @@ describe Game do
     end
 
     it 'tracks an increment to the current frame' do
-      subject.add_bowl(pins: 4)
+      2.times { subject.add_bowl(pins: 4) }
 
       expect { subject.state }
         .to output { 'Current Frame: 2; Current Bowl: 1' }.to_stdout
+    end
+
+    it 'increments the frame by one if there is a strike' do
+      subject.add_bowl(pins: 10)
+
+      expect { subject.state }
+      .to output { 'Current Frame: 2; Current Bowl: 1' }.to_stdout
     end
   end
 
