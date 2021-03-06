@@ -25,9 +25,15 @@ let(:game) {described_class.new}
         20.times {game.roll(2)}
         expect(game.score).to eq 40
       end
+      it 'scores a spare and adds a bonus on next roll' do
+        2.times {game.roll(5)}
+        game.roll(4)
+        game.roll(0)
+        expect(game.score).to eq 18
+      end
     end
 
-    context 'user inputs too many pins' do
+    context 'user inputs too many points' do
       it 'throws an error if user inputs an invalid score' do
         expect {game.roll(11)}.to raise_error "Invalid score, please try again."
       end
