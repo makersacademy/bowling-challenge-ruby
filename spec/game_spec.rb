@@ -1,7 +1,7 @@
 describe Game do
   subject { described_class.new(frame_class) }
-  let(:frame) { instance_double(Frame, 'frame', add_roll: nil, over?: false) }
-  let(:frame_class) { class_double(Frame, 'Frame', new: frame) }
+  let(:frame) { instance_double(Frame, :frame, add_roll: nil, over?: false) }
+  let(:frame_class) { class_double(Frame, :frame_class, new: frame) }
 
   describe '#score' do
     it 'starts at zero' do
@@ -43,23 +43,55 @@ describe Game do
     end
 
     context 'adding spare bonus' do
-      it 'adds the score of first role to the last frame bonus' do
-        allow(frame).to receive_messages(:spare? => true, roll2: nil)
-        subject.frames << frame
+      let(:spare) { instance_double(Frame, :spare, spare?: true, strike?: false) }
 
-        expect(frame).to receive(:add_bonus).once.with(5)
+      it 'adds the next roll to the last frame bonus' do
+        expect(spare).to receive(:add_bonus).once.with(5)
+        subject.frames << spare
+
+        allow(frame).to receive(:rolls).and_return([5])
         subject.add_roll(5)
       end
 
-      it 'does not add the score of second roll to bonus' do
-        allow(frame).to receive_messages(:spare? => true, roll2: nil)
-        subject.frames << frame
+      it 'does not add the score of second roll' do
+        expect(spare).to receive(:add_bonus).once.with(5)
+        subject.frames << spare
 
-        expect(frame).to receive(:add_bonus).once.with(5)
+        allow(frame).to receive(:rolls).and_return([5])
         subject.add_roll(5)
 
-        allow(frame).to receive(:roll2).and_return(5)
+        allow(frame).to receive(:rolls).and_return([5, 5])
         subject.add_roll(5)
+      end
+    end
+
+    context 'adding strike bonus' do
+      let(:strike1) { instance_double(Frame, :strike1, strike?: true, spare?: false) }
+      let(:strike2) { instance_double(Frame, :strike2, strike?: true, spare?: false, rolls: [10]) }
+
+      it 'adds the next 2 rolls to the bonus' do
+        expect(strike1).to receive(:add_bonus).twice.with(5)
+        subject.frames << strike1
+
+        allow(frame).to receive(:rolls).and_return([5])
+        subject.add_roll(5)
+
+        allow(frame).to receive(:rolls).and_return([5, 5])
+        subject.add_roll(5)
+      end
+
+      context 'player gets 3 strikes in a row' do
+        it 'adds both following strikes to bonus' do
+          expect(strike1).to receive(:add_bonus).twice.with(10)
+          expect(strike2).to receive(:add_bonus).once.with(10)
+          allow(frame).to receive(:rolls).and_return([10])
+
+          subject.frames << strike1
+          subject.add_roll(10)
+
+          subject.frames << strike2
+          subject.add_roll(10)
+        end
       end
     end
   end

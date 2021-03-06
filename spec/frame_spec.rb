@@ -5,6 +5,12 @@ describe Frame do
     end
   end
 
+  describe '#rolls' do
+    it 'starts empty' do
+      expect(subject.rolls).to be_empty
+    end
+  end
+
   describe '#add_roll' do
     context 'first roll' do
       it 'is added to score' do
@@ -12,9 +18,9 @@ describe Frame do
         expect(subject.score).to be 3
       end
 
-      it 'is recorded in roll1' do
+      it 'is added to rolls' do
         subject.add_roll(3)
-        expect(subject.roll1).to be 3
+        expect(subject.rolls.last).to be 3
       end
     end
 
@@ -28,13 +34,13 @@ describe Frame do
       it 'is recorded in roll2' do
         subject.add_roll(3)
         subject.add_roll(5)
-        expect(subject.roll2).to be 5
+        expect(subject.rolls.last).to be 5
       end
 
       it 'does not change roll1' do
         subject.add_roll(3)
         subject.add_roll(5)
-        expect(subject.roll1).to be 3
+        expect(subject.rolls.first).to be 3
       end
     end
 
@@ -124,10 +130,15 @@ describe Frame do
         subject.add_roll(2)
         expect(subject).not_to be_spare
       end
+
+      it 'returns false for a strike' do
+        subject.add_roll(10)
+        expect(subject).not_to be_spare
+      end
     end
   end
 
-  describe 'add_bonus' do
+  describe '#add_bonus' do
     it 'adds a score to the bonus' do
       expect { subject.add_bonus(2) }.to change { subject.bonus }.by(2)
     end

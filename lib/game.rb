@@ -32,6 +32,14 @@ class Game
   def add_bonus(pins)
     return if frames.empty?
 
-    frames.last.add_bonus(pins) if frames.last.spare? && !current_frame.roll2
+    frames.last.add_bonus(pins) if frames.last.spare? && current_frame.rolls.count < 2
+    frames.last.add_bonus(pins) if frames.last.strike?
+    return if frames.count < 2
+
+    frames[-2].add_bonus(pins) if frames[-2].strike? && number_of_rolls <= 2
+  end
+
+  def number_of_rolls
+    (frames.last.rolls + current_frame.rolls).count
   end
 end

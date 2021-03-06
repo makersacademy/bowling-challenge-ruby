@@ -6,8 +6,12 @@ alias p = "Player"
 alias g = "Game"
 alias f = "Frame"
 
-p->g: "roll(pins)"
-g->g: "current_frame.roll1 = pins"
+p->g: "roll(7)"
+g->g: "current_frame.add_roll(7)"
+p->g: "roll(2)"
+g->g: "current_frame.add_roll(2)"
+g->g: "frames << current_frame"
+g-->p: "new_frame"
 ```
 
 ## Spare bonus
@@ -18,8 +22,26 @@ alias f = "Frame"
 
 p->g: "roll(spare)"
 g->g: "self.current_frame.add_roll(spare)"
-g->g: "new_frame"
+g-->p: "new_frame"
 p->g: "roll(5)"
 g->g: "current_frame.add_roll(5)"
 g->g: "last_frame.bonus += 5"
+```
+
+## Strike bonus
+```flow
+alias p = "Player"
+alias g = "Game"
+alias f = "Frame"
+
+p->g: "roll(strike)"
+g->g: "current_frame.add_roll(10)"
+g-->p: "new_frame"
+p->g: "roll(5)"
+g->g: "current_frame.add_roll(5)"
+g->g: "frames.last.add_bonus(5)"
+p->g: "roll(4)"
+g->g: "current_frame.add_roll(4)"
+g->g: "frames.last.add_bonus(5)"
+g-->p: "new_frame"
 ```

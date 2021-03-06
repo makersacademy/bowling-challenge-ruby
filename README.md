@@ -82,14 +82,17 @@ Frame   | frame.score -> sum of 2 rolls or 1 roll if strike
 
 ### sequence diagrams
 
-Two roll frame:
+Standard frame:
 
-![two roll frame](images/two-roll-frame.png)
-
+![standard frame](images/standard-frame.png)
 
 Spare bonus:
 
 ![spare bonus](images/spare-bonus.png)
+
+Strike bonus
+
+![strike bonus](images/strike-bonus.png)
 
 ----
 
