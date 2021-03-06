@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Game
   attr_reader :frames
-  
+
   def initialize(frame_class: Frame, bowl_class: Bowl)
     @bowl_class = bowl_class
     @frame_class = frame_class
@@ -11,6 +13,7 @@ class Game
     }
   end
 
+  # Note - can we refactor this to take out if/else and reduce the no of lines?
   def add_bowl(pins:)
     if @current[:bowl] == 1
       create_new_frame(pins)
@@ -36,12 +39,11 @@ class Game
     @frames.push(frame)
     @current[:bowl] += 1
   end
-  
+
   def add_bowl_to_current_frame(pins)
     bowl = create_new_bowl(pins)
     @frames.last.add(bowl: bowl)
-    @current[:frame] +=1
+    @current[:frame] += 1
     @current[:bowl] -= 1
   end
-
 end
