@@ -14,7 +14,7 @@ describe Frame do
         subject.add(3)
         expect(subject.rolls.sum).to eq 6 
     end
-    
+
     describe '#score' do
         it 'return the current frame score' do
             expect(subject.score).to eq 0
@@ -48,5 +48,38 @@ describe Frame do
             subject.add(10)
             expect(subject.completed?).to be true
         end
+    end
+
+    describe '#strike' do
+        it 'knows when a roll is a strike' do
+            subject.add(10)
+            expect(subject.strike?).to be true
+        end
+        it 'knows when a roll is a strike' do
+            subject.add(6)
+            expect(subject.strike?).to be false
+        end
+        it 'knows when a roll is a strike' do
+            subject.add(3)
+            subject.add(6)
+            expect(subject.strike?).to be false
+        end
+    end
+
+    describe 'spare?' do
+        it 'knows whe a roll is a spare' do
+            subject.add(10)
+            expect(subject.spare?).to be false
+        end 
+        it 'knows whe a roll is a spare' do
+            subject.add(3)
+            subject.add(3)
+            expect(subject.spare?).to be false
+        end 
+        it 'knows whe a roll is a spare' do
+            subject.add(3)
+            subject.add(7)
+            expect(subject.spare?).to be true
+        end 
     end
 end 

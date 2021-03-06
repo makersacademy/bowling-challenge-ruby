@@ -18,7 +18,17 @@ class Frame
         @remaining_pins -= throw
     end
 
+# this will be used to determined when to stop calling #add
     def completed?
         @rolls.length == 2 || @remaining_pins == 0
     end
-end 
+
+    def strike?
+        @rolls.first == PINS
+    end
+
+    def spare?
+        !strike? && @remaining_pins == 0
+    end
+end
+
