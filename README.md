@@ -29,10 +29,46 @@ run $rspec--init
 ```
 to run the tests, type $rspec
 ```
+
+## How to play
+
+start by creating a new instance of the user interface class:
 ```
-bowlingGame = Ui.new
+bowling = Ui.new
+```
+to begin the first frame:
+```
+bowling.begin_frame
+```
+to enter throw 1 or throw 2 points:
+```
+bowling.throw_1(7)   your points are typed in the brackets.
+bolwing.throw_2(1)
+```
+to add to the scorecard:
+```
+bowling.add_to_scorecard
+```
+to see your scorecard at any point in the game:
+```
+bowling.scorecard
+```
+if you got a spare or a strike, add the respective bonus in the following frame (note - spare won't work for a strike and vice versa): 
+```
+bowling.spare_bonus
+```
+```
+bowling.strike_bonus
+```
+at the end of each turn, begin a new frame
+```
+bowling.begin_frame
 ```
 
+repeat until you've entered your points for all 10 rounds, for the tenth round, simply add your rolls and bonus points then enter the following to see your total:
+```
+bowling.finish_game
+```
 
 ## Bowling — how does it work?
 

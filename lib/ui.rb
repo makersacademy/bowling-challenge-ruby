@@ -27,8 +27,12 @@ attr_reader :game, :scorecard
     if round < MAXIMUM_FRAME
       game.begin_frame 
     else
-      puts "end of the game, you scored: #{total_points}"
+      
     end 
+  end
+
+  def finish_game
+    return "end of the game, you scored: #{total_points}"
   end
 
   def round 
