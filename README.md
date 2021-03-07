@@ -1,17 +1,94 @@
-Bowling Challenge in Ruby
+Bowling Challenge in Ruby 🎳
 ==========================
 
 [![Build Status](https://travis-ci.com/AJ8GH/bowling-challenge-ruby.svg?branch=main)](https://travis-ci.com/AJ8GH/bowling-challenge-ruby) [![Coverage Status](https://coveralls.io/repos/github/AJ8GH/bowling-challenge-ruby/badge.svg?branch=main)](https://coveralls.io/github/AJ8GH/bowling-challenge-ruby?branch=main) [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop) [![Maintainability](https://api.codeclimate.com/v1/badges/6c830bd55e2312455aa1/maintainability)](https://codeclimate.com/github/AJ8GH/bowling-challenge-ruby/maintainability)
 
-Bowling score tracker written in Ruby.
+Bowling score tracker written in Ruby
 
-## Technologies used
+## Specification
 
-OOP & OOD:
-- SRP
-- Encapsulation
-- Dependency Injection
-- Open-Closed Principle
+- Create a program to calculate bowling scores for a single game
+- Program should implement the logic, but not a UI
+- Methods and classes should be short and clean, with clear responsibilites
+
+## Approch and design
+
+- Game is the interface where rolls are input into the system
+- It is responsible for managing frames overall, including when the final frame is reached and applying spare and strike bonuses.
+- Frames are responsible for storing their rolls and being aware if they are spares or strikes, and when they are over.
+- Once a frame knows it is a final frame, it's logic knows how to handle the various scenarios (whether the player gets 2 or 3 roles).
+- ScoreBoard calculates the overall score of the game and can also output the running total as you normally get on a bowling scorecard.
+- The program auto-calculates the score and advance the game correctly as the user inputs the scores, no further user input needed:
+```shell
+# irb
+2.7.2 :001 > g = Game.new
+ => #<Game:0x00007fc536d33030 @frame_class=Frame, @score_board=ScoreBoard, @current_frame=#<Frame:0x00007fc53...
+2.7.2 :002 > g.add_roll(5)
+ => 0
+2.7.2 :003 > g.add_roll(4)
+ => 9
+2.7.2 :004 > g.add_roll(9)
+ => 9
+2.7.2 :005 > g.add_roll(1)
+ => 19
+2.7.2 :006 > g.add_roll(1)
+ => 20
+```
+
+- The scoring system meets every specification in official bowling rules. Spare and strike bonuses are automatically added after the relevant roll has been taken:
+```shell
+2.7.2 :002 > g.add_roll(10)
+ => 10
+2.7.2 :003 > g.add_roll(6)
+ => 16
+2.7.2 :004 > g.add_roll(4)
+ => 30
+2.7.2 :005 > g.add_roll(7)
+ => 37
+2.7.2 :006 > g.add_roll(2)
+ => 46
+ ```
+
+- ScoreBoard output for perfect game - total score:
+```shell
+2.7.2 :001 > g = Game.new
+ => #<Game:0x00007f91e04c8c08 @frame_class=Frame, @score_board=ScoreBoard, @current_frame=#<Frame:0x00007f91e...
+2.7.2 :002 > 12.times { g.add_roll(10) }
+ => 12
+2.7.2 :003 > g.score
+ => 300
+```
+- And running total:
+```shell
+2.7.2 :004 > g.score_board.running_total
+ => [30, 60, 90, 120, 150, 180, 210, 240, 270, 300]
+```
+
+- Game class uses dependency injection within an argument hash. This reduces dependency on the classes being passed in allowing them to be replaced with doubles in the isolated unit tests. The hash further reduces any dependency on the order the arguments are passed in.
+
+```ruby
+  def initialize(args = {})
+    @frame_class = args[:frame_class] || Frame
+    @score_board = args[:score_board] || ScoreBoard
+    @current_frame = frame_class.new
+    @frames = []
+  end
+```
+
+- Thorough testing:
+  - 100% test coverage
+  - unit tests are isolated and test each piece of individual logic, applying doubles and stubs where needed
+  - feature tests run the entire game through, asserting that the flow of the frames and the scoring is correct
+  - edge cases such as perfect games and gutter games are thoroughly tested
+  - Tests are designed to focus on behaviour rather than state
+
+- OOD:
+  - methods have been designed to be as simple and readable as possible
+  - SRP: code is designed to follow single responsibility as much as possible, without impacting the readability and logical flow for the reader
+  - Open / Closed principle: by choosing to inject my classes as hash argurments, the program is open for extension and closed for modification. Scoreboard can also be extended with additional score outputs if necessary
+
+Agile and BDD:
+  - sequence diagrams and class models I used are further down in this readme
 
 ## Dependencies
 
@@ -19,11 +96,15 @@ Ruby version:
 - `2.7.2`
 
 Gems
-- `coveralls`
-- `rspec`
-- `rubocop`
+-  `coveralls`
+-  `reek`
+-  `rspec`
+-  `rspec-core`
+-  `rubocop`
+-  `simplecov`
+-  `simplecov-console`
 
-## Getting started
+# Getting started
 
 Clone this repositiory and install the dependencies
 
@@ -33,13 +114,10 @@ cd bowling-challenge-ruby
 bundle
 ```
 
---------
-
-## Approch and design
--
-
 ## Reflections
--
+
+- Bowling is a deceptively complex game and ensuring short methods and classes which wouldn't generate code-smells took careful planning, thought and diagramming
+- Doing this challenge again, I would likely approach it in a very similar way, particuarly the logic. However I would possibly consider using one or maybe 2 additional classes.
 
 ---------
 
