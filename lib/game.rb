@@ -1,3 +1,4 @@
+# tracks frames and handles bonus logic
 class Game
   attr_reader :current_frame, :frames, :score_board
 
@@ -9,6 +10,8 @@ class Game
   end
 
   def add_roll(pins)
+    raise GameOverError if game_over?
+
     current_frame.add_roll(pins)
     add_bonus(pins) unless frames.empty?
     return score unless current_frame.over?

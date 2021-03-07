@@ -30,6 +30,11 @@ describe Game do
       subject.add_roll(1)
     end
 
+    it 'raises error when game is over' do
+      10.times { subject.frames << frame }
+      expect { subject.add_roll(8) }.to raise_error GameOverError
+    end
+
     context 'when frame is not over' do
       it 'does not add current frame to frames' do
         subject.add_roll(3)

@@ -1,3 +1,5 @@
+# knows if it's a strike, spare or over
+
 class Frame
   TOTAL_PINS = 10
 
@@ -53,6 +55,6 @@ class Frame
   end
 
   def replace_pins
-    self.remaining_pins += TOTAL_PINS
+    self.remaining_pins = TOTAL_PINS
   end
 end
