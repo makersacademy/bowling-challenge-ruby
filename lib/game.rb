@@ -27,7 +27,7 @@ end
   end
 
   def get_score
-    current_frame.score[-1]
+    current_frame.score
   end
 
   def spare_or_strike?

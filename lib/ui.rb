@@ -19,19 +19,20 @@ attr_reader :game, :scorecard
   end
 
   def add_to_scorecard
-    scorecard[-1] << game.get_score
+    scorecard << game.get_score
   end
 
   def begin_frame
     game.begin_frame
-    scorecard << [] 
   end
 
-  def bonus
+  def strike_bonus
     strike_bonus = scorecard[-1]
-    return scorecard[-2] = scorecard[-2] + strike_bonus  if scorecard[-2] == ([10] || [0,10])
-    spare_bonus = scorecard[-2][0]
-    scorecard[-2] = scorecard[-2] + spare_bonus  if scorecard[-2].sum == 10
+    scorecard[-2] = scorecard[-2] + strike_bonus  if scorecard[-2] == ([10] || [0,10])
   end
 
+  def spare_bonus
+    spare_bonus = scorecard[-1][0]
+    scorecard[-2] = scorecard[-2] + [spare_bonus]  if scorecard[-2].sum == 10
+  end
 end
