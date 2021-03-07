@@ -30,6 +30,20 @@ describe Ui do
 				expect(subject.scorecard[0][0]).to eq(7)
 			end
 		end
+
+		describe '#round' do
+			it 'returns the current frame number' do
+				subject.begin_frame
+				expect(subject.round).to eq(2)
+			end
+		end
+
+		describe '#total.points' do
+			it 'gives the sum of the players points' do
+				subject.throw_2(2)
+				expect(subject.total_points).to eq(9)
+			end
+		end
 	end
 
 	describe '#add_to_scorecard' do
