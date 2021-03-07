@@ -3,7 +3,7 @@ describe Game do
 
   let(:frame) { instance_double(Frame, :frame, add_roll: nil, over?: false) }
   let(:frame_class) { class_double(Frame, :frame_class, new: frame) }
-  let(:score_board) { class_double(ScoreBoard, :score_board) }
+  let(:score_board) { class_double(ScoreBoard, :score_board, total_score: nil) }
 
   describe '#score' do
     it 'calls on score_board' do

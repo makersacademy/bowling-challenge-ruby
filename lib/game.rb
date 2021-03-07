@@ -10,8 +10,8 @@ class Game
 
   def add_roll(pins)
     current_frame.add_roll(pins)
-    add_bonus(pins)
-    return unless current_frame.over?
+    add_bonus(pins) unless frames.empty?
+    return score unless current_frame.over?
 
     finish_frame
   end
@@ -38,8 +38,6 @@ class Game
   end
 
   def add_bonus(pins)
-    return if frames.empty?
-
     frames.last.add_bonus(pins) if last_frame_bonus?
     return if frames.count < 2
 
