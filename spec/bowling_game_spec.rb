@@ -60,10 +60,6 @@ describe BowlingGame do
      expect(subject.total_score).to eq 33
      end
 
-    
-
-
-
 
      it 'should add each roll to the score' do
     subject.new_frame(10,2)
