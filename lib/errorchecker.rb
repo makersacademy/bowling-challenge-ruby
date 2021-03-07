@@ -21,6 +21,6 @@ class ErrorChecker
 
   def invalid_total
     raise('Your total score for the frame cannot exceed 10; please check your scores') if
-      (@open_frame.pins + @pins) > 10
+      (@open_frame.pins_total + @pins) > 10
   end
 end

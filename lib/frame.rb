@@ -3,11 +3,12 @@
 class Frame
   attr_reader :number, :bowls, :score
 
-  def initialize(number:, score_class: FrameScore)
-    @score_class = score_class
+  def initialize(number:, score_table:, framescore_class: FrameScore)
+    @framescore_class = framescore_class
     @number = number
     @bowls = []
     @score = nil
+    @score_table = score_table
   end
 
   def add(bowl:)
@@ -15,11 +16,14 @@ class Frame
   end
 
   def pins
+    @bowls.map(&:pins)
+  end
+
+  def pins_total
     @bowls.map(&:pins).sum
   end
 
   def push_score
-    @score = @score_class.new(frame: self)
+    @score = @framescore_class.new(frame: self, score_table: @score_table)
   end
-  # private methods - add defers to normal_frame method or final_frame method?
 end

@@ -2,6 +2,8 @@
 
 require 'game'
 require 'errorchecker'
+require 'scores'
+require 'display'
 
 describe Game do
   subject { described_class.new }

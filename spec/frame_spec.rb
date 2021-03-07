@@ -5,7 +5,7 @@ require 'frame'
 # refactor at end to test behaviour, not state
 
 describe Frame do
-  subject { described_class.new(number: 1) }
+  subject { described_class.new(number: 1, score_table: {} ) }
 
   let(:bowl) { double(:bowl, pins: 4) }
   let(:strike) { double(:bowl, pins: 10) }
@@ -21,7 +21,7 @@ describe Frame do
       subject.add(bowl: bowl)
 
       expect(subject.bowls.length).to eq 1
-      expect(subject.pins).to eq 4
+      expect(subject.pins_total).to eq 4
     end
   end
 
@@ -31,7 +31,7 @@ describe Frame do
 
       expect(subject.bowls).to be_a Array
       expect(subject.bowls.length).to eq 2
-      expect(subject.pins).to eq 8
+      expect(subject.pins_total).to eq 8
     end
   end
 

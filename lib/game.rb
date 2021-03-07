@@ -1,14 +1,24 @@
 # frozen_string_literal: true
 
 class Game
-  attr_reader :frames
+  attr_reader :frames, :display
 
-  def initialize(frame_class: Frame, bowl_class: Bowl, framescore_class: FrameScore)
+  def initialize(
+    bowl_class: Bowl,
+    display_class: Display,
+    frame_class: Frame,
+    framescore_class: FrameScore,
+    scores_class: Scores
+  )
     @bowl_class = bowl_class
+    @display_class = display_class
     @frame_class = frame_class
     @framescore_class = framescore_class
+    @scores_class = scores_class
+    @display = display_class.new
     @frames = []
     @open_frame = nil
+    @scores = scores_class.new(display: @display)
     @current = {
       frame: 1,
       bowl: 1
@@ -16,6 +26,7 @@ class Game
   end
 
   def add_bowl(pins:)
+    add_bonus_to_frames(pins)
     if @current[:frame] == 10
       final_frame(pins)
     elsif @current[:bowl] == 1
@@ -23,7 +34,6 @@ class Game
     else
       add_bowl_to_current_frame(pins)
     end
-    add_bonus_to_frames(pins)
   end
 
   private
@@ -33,7 +43,7 @@ class Game
   end
 
   def create_new_frame(pins)
-    @open_frame = @frame_class.new(number: @current[:frame])
+    @open_frame = @frame_class.new(number: @current[:frame], score_table: @scores)
     verify_pins_and_create_bowl_object(pins)
     check_for_strike(pins)
   end
@@ -61,26 +71,23 @@ class Game
 
   def final_frame(pins)
     if @current[:bowl] == 1
-      @open_frame = @frame_class.new(number: @current[:frame])
+      @open_frame = @frame_class.new(number: @current[:frame], score_table: @scores)
     end
     verify_pins_and_create_bowl_object(pins)
     check_final_frame_over
   end
 
   def check_final_frame_over
-    score_frame if @current[:bowl] == 2 && @open_frame.pins < 10
+    score_frame if @current[:bowl] == 2 && @open_frame.pins_total < 10
     score_frame if @current[:bowl] == 3
     @current[:bowl] += 1
   end
 
   def score_frame
-    push_score_to_frame
+    @open_frame.push_score
+    @display.update_pins(frame_number: @current[:frame], pins: @open_frame.pins)
     push_current_frame_to_frames
     update_counters
-  end
-
-  def push_score_to_frame
-    @open_frame.push_score
   end
 
   def push_current_frame_to_frames
