@@ -1,5 +1,50 @@
-Bowling Challenge in Ruby
-=================
+# How to view this project #
+
+Clone this repo to your device:
+```
+git init
+git clone https://github.com/ianmcnicholas/bowling-challenge-ruby.git
+```
+Open the project directory and install the gems:
+```
+cd bowling-challenge-ruby
+bundle install
+```
+Open an IRB session, requiring the ./lib/game.rb file:
+```
+IRB
+require .'./lib/game.rb'
+```
+Begin a game:
+```
+game = Game.new
+```
+Input your latest score as an integer (e.g. (10) for a strike):
+```
+game.input_score(integer)
+```
+Continue inputting scores until the game ends.
+
+Check the scorecard throughout the game:
+```
+game.scorecard
+```
+
+## Notes for the user ##
+
+* The approach to this project was to make sure that the user only has to input their scores, not specify what frame they are in.
+* At present, the game collects scores for the frames, including spares and strikes.
+* Bonus points are only added for spares.  The method for a strike_bonus is yet to be included.
+* The game will 'break' once #10 frames have been played.  There is no method for the bonus rolls in the 10th frame yet.
+* Printing the scoreboard is also a feature that needs to be added.
+
+## Reflection from the author ##
+
+* I have not used many classes: the 'Game' class is doing lots of work. I might refactor the program to include a 'Spare' class and a 'Strike' class, and possibly a 'Score' class.
+* I am happy with the quantity of tests that have been used, however they can certainly be refactored e.g. make use of mocks etc.  Overall I think my approach to TDD is good, as is my focus on test coverage.
+* Whilst planning was carried out, there is minimal evidence.  This should be captured in the future.
+
+# Project Outline from Makers #
 
 * Feel free to use google, your notes, books, etc. but work on your own
 * If you refer to the solution of another coach or student, please put a link to that in your README
@@ -18,7 +63,7 @@ As usual please start by
 
 * Forking this repo
 
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
+* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am.
 
 ___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
 
