@@ -38,6 +38,22 @@ describe BowlingGame do
 
     end
 
+    it 'should add the score of the current frame to the previous frame if the previous frame was a strike' do
+        subject.new_frame(10,0)
+        p subject.score[0]
+        subject.new_frame(3,4)
+        p subject.score[0]
+        expect(subject.score[0]).to eq [10, 0, [3, 4]]
+        expect(subject.score[1]).to eq [3, 4]
+    end
+
+    it 'should add the first roll from the current frame to the previous frame if the previous frame was a spare' do
+
+    
+
+
+
+
      it 'should add each roll to the score' do
     subject.new_frame(10,2)
     expect(subject.score.length).to eq 1
