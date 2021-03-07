@@ -13,12 +13,20 @@ Bowling score tracker written in Ruby
 
 ## Approch and design
 
-- Game is the interface where rolls are input into the system
-- It is responsible for managing frames overall, including when the final frame is reached and applying spare and strike bonuses.
-- Frames are responsible for storing their rolls and being aware if they are spares or strikes, and when they are over.
-- Once a frame knows it is a final frame, it's logic knows how to handle the various scenarios (whether the player gets 2 or 3 roles).
-- ScoreBoard calculates the overall score of the game and can also output the running total as you normally get on a bowling scorecard.
-- The program auto-calculates the score and advance the game correctly as the user inputs the scores, no further user input needed:
+Classes:
+
+Game
+  - the interface where rolls are input into the system
+  - manages frames and applies spare and strike bonuses.
+
+Frame
+  - stores rolls and knows if they are spares or strikes, and when they are over.
+  - Once it knows it is a final frame, it's logic handles the various scenarios (whether the player gets 2 or 3 roles).
+
+ScoreBoard
+  - calculates overall score of the game or running total as you normally get on a bowling scorecard.
+  - the program auto-calculates the score after each frame and the bonuses after each roll, and advances the game as the user inputs their rolls:
+
 ```shell
 # irb
 2.7.2 :001 > g = Game.new
@@ -35,7 +43,8 @@ Bowling score tracker written in Ruby
  => 20
 ```
 
-- The scoring system meets every specification in official bowling rules. Spare and strike bonuses are automatically added after the relevant roll has been taken:
+- The scoring system works identically to official bowling rules. Spare and strike bonuses are automatically added after the relevant roll has been taken:
+
 ```shell
 2.7.2 :002 > g.add_roll(10)
  => 10
@@ -50,6 +59,7 @@ Bowling score tracker written in Ruby
  ```
 
 - ScoreBoard output for perfect game - total score:
+
 ```shell
 2.7.2 :001 > g = Game.new
  => #<Game:0x00007f91e04c8c08 @frame_class=Frame, @score_board=ScoreBoard, @current_frame=#<Frame:0x00007f91e...
@@ -59,6 +69,7 @@ Bowling score tracker written in Ruby
  => 300
 ```
 - And running total:
+
 ```shell
 2.7.2 :004 > g.score_board.running_total
  => [30, 60, 90, 120, 150, 180, 210, 240, 270, 300]
@@ -114,12 +125,24 @@ cd bowling-challenge-ruby
 bundle
 ```
 
+## Running tests
+
+Use rspec to run tests:
+
+```shell
+rspec
+```
+
+Use the `-fd` flag to see format documentation output of tests:
+
+```shell
+rspec -fd
+```
+
 ## Reflections
 
 - Bowling is a deceptively complex game and ensuring short methods and classes which wouldn't generate code-smells took careful planning, thought and diagramming
 - Doing this challenge again, I would likely approach it in a very similar way, particuarly the logic. However I would possibly consider using one or maybe 2 additional classes.
-
----------
 
 ## User stories
 
