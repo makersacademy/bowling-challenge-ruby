@@ -25,7 +25,7 @@ class Frame
   end
 
   def spare?
-    rolls.sum == TOTAL_PINS && !strike?
+    remaining_pins.zero? && !strike?
   end
 
   def strike?
@@ -38,5 +38,5 @@ class Frame
 
   private
 
-  attr_writer :score, :remaining_pins, :bonus
+  attr_writer :remaining_pins, :bonus
 end
