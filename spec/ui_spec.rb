@@ -37,7 +37,7 @@ describe Ui do
 			subject.begin_frame
 			subject.throw_1(7)
 			subject.throw_2(2)
-			expect{ subject.add_to_scorecard }.to change { subject.scorecard[-1].length }.by(1)
+			expect{ subject.add_to_scorecard }.to change { subject.scorecard.length }.by(1)
 		end
 	end
 
