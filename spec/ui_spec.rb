@@ -12,7 +12,7 @@ describe Ui do
 		end
 	end
 
-	context 'throwing balls' do 
+	context 'entering scores' do 
 		before(:each) do
 			subject.begin_frame
 			subject.throw_1(7)
@@ -42,6 +42,15 @@ describe Ui do
 			it 'gives the sum of the players points' do
 				subject.throw_2(2)
 				expect(subject.total_points).to eq(9)
+			end
+		end
+
+		describe '#finish_game' do
+			it 'returns the total points to the user' do
+				subject.begin_frame
+				subject.throw_1(10)
+				subject.add_to_scorecard
+				expect(subject.finish_game).to eq("end of the game, you scored: 17")
 			end
 		end
 	end

@@ -30,7 +30,7 @@ run $rspec--init
 to run the tests, type $rspec
 ```
 
-## How to play
+## How to enter score
 
 start by creating a new instance of the user interface class:
 ```

@@ -19,7 +19,7 @@ end
   def begin_frame
     @turn += 1
     @current_frame = Frame.new(turn)
-    puts "frame #{turn}"
+    return "frame #{turn}"
   end
 
   def mark_score(points)
@@ -43,6 +43,5 @@ end
     mark_score(points)
     spare_or_strike?
   end
-
   
 end
