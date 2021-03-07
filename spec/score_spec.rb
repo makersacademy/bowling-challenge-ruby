@@ -1,4 +1,5 @@
 require_relative '../lib/score.rb'
+require_relative 'helper_methods'
 
 describe Score do
   let(:score){ Score.new("Sisyphus") }
@@ -76,6 +77,54 @@ describe Score do
       score.add_score(10, 9)
       expect{score.add_score(10, 8)}.to raise_error(BadScore, "Scores entered add up to over 10 (9 + 8 = 17)")
     end
+
+    it "returns true when frame is [2, 8, 6]" do
+      score.add_score(10, 2)
+      score.add_score(10, 8)
+      score.add_score(10, 6)
+    end
   end
 
+  context ".total" do
+
+    it "of frames [1, 4] to equal 5" do
+      fill_score(score, [[1, 4]])
+      expect(score.total).to eq 5
+    end
+
+    it "of frames [[10], [4, 5]] to eq 28" do
+      fill_score(score, [[10], [4, 5]])
+      expect(score.total).to eq 28
+    end
+
+    it "of frames [[10], [10], [3, 5]] to eq 49" do
+      fill_score(score, [[10], [10], [3, 5]])
+      expect(score.total).to eq 49
+    end
+
+    it "of frames [[3, 7], [5, 0], [3, 5]] to eq 28" do
+      fill_score(score, [[3, 7], [5, 0], [3, 5]])
+      expect(score.total).to eq 28
+    end
+
+    it "of frames [[3, 7], [10], [3,5], [6, 4],[1,2]] to eq 60" do
+      fill_score(score, [[3, 7], [10], [3,5], [6, 4],[1,2]])
+      expect(score.total).to eq 60
+    end
+
+    it "of first score up to frame 9 to equal 107" do
+      fill_score(score, [[1, 4], [4, 5], [6, 4], [5, 5], [10], [0, 1], [7, 3], [6, 4], [10]])
+      expect(score.total).to eq 107
+    end
+
+    it "of a perfect game equals 300" do
+      fill_score(score, [[10]]*9 + [[10, 10, 10]] )
+      expect(score.total).to eq 300
+    end
+
+    it "expect first score to equal 133" do
+      fill_default_score(score)
+      expect(score.total).to eq 133
+    end
+  end
 end
