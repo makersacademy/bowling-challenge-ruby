@@ -2,6 +2,7 @@ require_relative 'game'
 require_relative 'frame'
 
 class Ui
+  MAXIMUM_FRAME = 10
 
 attr_reader :game, :scorecard
 
@@ -23,7 +24,15 @@ attr_reader :game, :scorecard
   end
 
   def begin_frame
-    game.begin_frame
+    if round < MAXIMUM_FRAME
+      game.begin_frame 
+    else
+      puts "end of the game, you scored: #{total_points}"
+    end 
+  end
+
+  def round 
+    game.turn
   end
 
   def strike_bonus
@@ -33,6 +42,12 @@ attr_reader :game, :scorecard
 
   def spare_bonus
     spare_bonus = scorecard[-1][0]
-    scorecard[-2] = scorecard[-2] + [spare_bonus]  if scorecard[-2].sum == 10
+    scorecard[-2] = scorecard[-2] + [spare_bonus]  if scorecard[-2].length == 2 && scorecard[-2].sum == 10
+  end
+
+  def total_points
+    total = []
+    scorecard.each { |frame| total << frame.sum }
+    total.sum
   end
 end
