@@ -3,6 +3,8 @@
     "coverage": {
       "/Users/ianmcnicholas/MAKERS/Week_5/bowling-challenge-ruby/spec/frame_spec.rb": {
         "lines": [
+          null,
+          null,
           1,
           null,
           1,
@@ -16,20 +18,18 @@
           1,
           1,
           null,
-          null,
           null
         ]
       },
       "/Users/ianmcnicholas/MAKERS/Week_5/bowling-challenge-ruby/lib/frame.rb": {
         "lines": [
-          1,
           null,
+          null,
+          1,
           1,
           null,
           1,
           172,
-          null,
-          null,
           null,
           null,
           null,
@@ -38,10 +38,11 @@
       },
       "/Users/ianmcnicholas/MAKERS/Week_5/bowling-challenge-ruby/spec/game_spec.rb": {
         "lines": [
-          1,
+          null,
           null,
           1,
           null,
+          1,
           18,
           null,
           1,
@@ -110,7 +111,6 @@
           null,
           null,
           null,
-          null,
           1,
           1,
           1,
@@ -152,12 +152,6 @@
           1,
           1,
           1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null,
           null,
           null,
@@ -182,10 +176,11 @@
       },
       "/Users/ianmcnicholas/MAKERS/Week_5/bowling-challenge-ruby/lib/game.rb": {
         "lines": [
-          1,
+          null,
           null,
           1,
           null,
+          1,
           1,
           null,
           1,
@@ -207,6 +202,7 @@
           1,
           24,
           24,
+          null,
           23,
           23,
           16,
@@ -231,8 +227,6 @@
           22,
           22,
           220,
-          3,
-          null,
           null,
           22,
           null,
@@ -254,19 +248,16 @@
           24,
           24,
           240,
-          231,
-          null,
           null,
           24,
           null,
           null,
           24,
-          null,
           null,
           null
         ]
       }
     },
-    "timestamp": 1615151120
+    "timestamp": 1615152610
   }
 }

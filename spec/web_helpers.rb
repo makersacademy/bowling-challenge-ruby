@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def score_strike
   game.input_score(10)
 end
