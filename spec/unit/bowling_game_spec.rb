@@ -31,11 +31,28 @@ let(:game) {described_class.new}
         game.roll(0)
         expect(game.score).to eq 18
       end
+      it 'scores a strike and adds a bonus on the next two rolls' do
+        game.roll(10)
+        game.roll(4)
+        game.roll(2)
+        expect(game.score).to eq 22
+      end
+      #this test will fail because the roll isn't an even number
     end
 
     context 'user inputs too many points' do
       it 'throws an error if user inputs an invalid score' do
         expect {game.roll(11)}.to raise_error "Invalid score, please try again."
+      end
+    end
+
+    context 'The game is finished' do
+      describe '#game_over' do
+        it 'returns true if game is over' do
+          21.times {game.roll(3)}
+          game.roll(3)
+          expect(game).to be_game_over
+        end
       end
     end
 end

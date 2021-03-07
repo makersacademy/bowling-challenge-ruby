@@ -32,12 +32,11 @@ $ game.score
 | stores total score          | User          |
 | sums the score of each roll |               |
 | counts the score of a roll  |               |  
-
+| knows number of pins        |               |
 
 | Class name:                      | Frame         |
 | -----------------------------    |:-------------:|
 | #Responsibilities                | #Collaborators|
-| knows number of pins             |               |
 | knows a spare                    |               |  
 | knows a strike                   |               |
 | knows when it's the 10th frame   |               |
