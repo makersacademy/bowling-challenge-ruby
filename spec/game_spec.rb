@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'game'
+require 'errorchecker'
 
 describe Game do
   subject { described_class.new }

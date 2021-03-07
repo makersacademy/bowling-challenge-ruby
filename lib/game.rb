@@ -43,6 +43,22 @@ class Game
     score_frame
   end
 
+  def verify_pins_and_create_bowl_object(pins)
+    ErrorChecker.new(
+      pins: pins,
+      current_bowl: @current[:bowl],
+      current_frame: @current[:frame],
+      open_frame: @open_frame
+    )
+    bowl = create_new_bowl(pins)
+    @open_frame.add(bowl: bowl)
+  end
+
+  def check_for_strike(pins)
+    score_frame if pins == 10
+    @current[:bowl] += 1 if pins < 10
+  end
+
   def final_frame(pins)
     if @current[:bowl] == 1
       @open_frame = @frame_class.new(number: @current[:frame])
@@ -55,17 +71,6 @@ class Game
     score_frame if @current[:bowl] == 2 && @open_frame.pins < 10
     score_frame if @current[:bowl] == 3
     @current[:bowl] += 1
-  end
-
-  def verify_pins_and_create_bowl_object(pins)
-    error_checks(pins)
-    bowl = create_new_bowl(pins)
-    @open_frame.add(bowl: bowl)
-  end
-
-  def check_for_strike(pins)
-    score_frame if pins == 10
-    @current[:bowl] += 1 if pins < 10
   end
 
   def score_frame
@@ -91,20 +96,5 @@ class Game
   def add_bonus_to_frames(pins)
     bonus_frames = @frames.select { |frame| frame.score.final == false }
     bonus_frames.each { |frame| frame.score.add_bonus_bowl(pins: pins) }
-  end
-
-  def error_checks(pins)
-    invalid_pins(pins)
-    invalid_total(pins) if (@current[:bowl] == 2 && @current[:frame] < 10)
-  end
-
-  def invalid_pins(pins)
-    raise('Your score must be between 0 and 10') if
-      pins.negative? || (pins > 10)
-  end
-
-  def invalid_total(pins)
-    raise('Your total score for the frame cannot exceed 10; please check your scores') if
-      (@open_frame.pins + pins) > 10
   end
 end
