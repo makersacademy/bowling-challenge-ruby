@@ -10,9 +10,7 @@ class BowlingGame
     def new_frame(roll_1, roll_2 = 0)
         @frame += 1
        
-        if @frame == 11
-            raise "Game Over, you have played all your frames" unless @score[9].include?(10)
-        end
+        game_over
 
         if @frame > 1 && strike?
              @score[@frame -2] << [roll_1 , roll_2]
@@ -41,6 +39,12 @@ class BowlingGame
 
   def spare?
     @score[@frame -2].inject(:+) == 10
+  end
+
+  def game_over
+    if @frame == 11
+       raise "Game Over, you have played all your frames" unless @score[9].include?(10)
+    end
   end
    
 end
