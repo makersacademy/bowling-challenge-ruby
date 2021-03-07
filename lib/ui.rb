@@ -24,11 +24,7 @@ attr_reader :game, :scorecard
   end
 
   def begin_frame
-    if round < MAXIMUM_FRAME
-      game.begin_frame 
-    else
-      
-    end 
+    round < MAXIMUM_FRAME ? game.begin_frame : finish_game
   end
 
   def finish_game
