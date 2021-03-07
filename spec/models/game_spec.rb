@@ -50,6 +50,8 @@ describe Game do
 
       it 'adds the next roll to the last frame bonus' do
         expect(spare).to receive(:add_bonus).once.with(5)
+
+        allow(spare).to receive(:rolls).and_return([5, 5])
         subject.frames << spare
 
         allow(frame).to receive(:rolls).and_return([5])
@@ -58,6 +60,8 @@ describe Game do
 
       it 'does not add the score of second roll' do
         expect(spare).to receive(:add_bonus).once.with(5)
+
+        allow(spare).to receive(:rolls).and_return([5, 5])
         subject.frames << spare
 
         allow(frame).to receive(:rolls).and_return([5])

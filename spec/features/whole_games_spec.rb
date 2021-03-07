@@ -1,6 +1,8 @@
 describe 'playing a whole game' do
   subject(:game) { Game.new }
 
+  let(:example_game1) { [1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6] }
+
   context 'game and scoreboard calculate the correct score' do
     it 'calulates 300 for a perfect game' do
       12.times { game.add_roll(10) }
@@ -23,10 +25,7 @@ describe 'playing a whole game' do
     end
 
     it 'calculates 133 for this example game' do
-      [1,4,4,5,6,4,5,5,10,0,1,7,3,6,4,10,2,8,6].each do |roll|
-        game.add_roll(roll)
-      end
-
+      example_game1.each { |roll| game.add_roll(roll) }
       expect(game.score).to be 133
     end
   end

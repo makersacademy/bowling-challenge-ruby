@@ -10,4 +10,4 @@ AllCops:
 
 Metrics/BlockLength:
   Exclude:
-    - 'spec/*.rb'
+    - 'spec/*/*.rb'

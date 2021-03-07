@@ -1,5 +1,5 @@
 class Game
-  attr_reader :current_frame, :frames
+  attr_reader :current_frame, :frames, :score_board
 
   def initialize(frame_class = Frame, score_board = ScoreBoard)
     @frame_class = frame_class
@@ -22,7 +22,7 @@ class Game
 
   private
 
-  attr_reader :frame_class, :score_board
+  attr_reader :frame_class
   attr_writer :current_frame
 
   def finish_frame
@@ -45,15 +45,14 @@ class Game
   end
 
   def last_frame_bonus?
-    frames.last.spare? && current_frame.rolls.count <= 1 ||
-      frames.last.strike? && rolls_since_strike <= 3
+    (frames.last.spare? || frames.last.strike?) && rolls_since <= 3
   end
 
   def second_strike_bonus?
-    frames[-2].strike? && rolls_since_strike <= 2
+    frames[-2].strike? && rolls_since <= 2
   end
 
-  def rolls_since_strike
+  def rolls_since
     (frames.last.rolls + current_frame.rolls).count
   end
 end
