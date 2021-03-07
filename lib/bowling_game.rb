@@ -19,15 +19,20 @@ class BowlingGame
     
         if @frame > 1 && @score[@frame -2].include?(10)
              @score[@frame -2] << [roll_1 ,roll_2]
+        elsif @frame > 1 && @score[@frame -2].inject(:+) == 10
+            @score[@frame -2] << [roll_1]  
         end
 
     end
 
   def total_score
+    @score.flatten.inject(:+)
   end
 
 
     #if previous index includes strike or spare when frame = 2 previous index = 0??
+
+    #currently won't if you roll a strike on first go
 
    
 end
