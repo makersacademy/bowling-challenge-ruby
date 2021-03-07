@@ -29,14 +29,12 @@ describe BowlingGame do
 
         it 'should allow you to play an 11th frame if you roll a 10 in your 10th frame' do
             9.times {subject.new_frame(2,2)}
-            subject.new_frame(10, 2)
+            subject.new_frame(10, 0)
             subject.new_frame(2,0)
             expect(subject.score.length).to eq 11
         end
 
-        # it 'should not allow 2 rolls in the same frame to total more than 10' do
-        #     expect {subject.new_frame(6,6)}.to raise_error("Check pins, this score is not possible")
-        # end
+
 
     end
 
@@ -70,7 +68,7 @@ describe BowlingGame do
 
 
      it 'should add each roll to the score' do
-    subject.new_frame(10,2)
+    subject.new_frame(3,2)
     expect(subject.score.length).to eq 1
     end
 

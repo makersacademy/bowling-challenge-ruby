@@ -1,6 +1,8 @@
 class BowlingGame
     attr_reader :score, :frame
 
+    TOTAL_PINS = 10
+
     def initialize
         @score = []
         @frame = 0
@@ -9,6 +11,7 @@ class BowlingGame
 
     def new_frame(roll_1, roll_2 = 0)
         @frame += 1
+        check_pins(roll_1, roll_2)
         final_frame
 
         if @frame > 1 && strike? 
@@ -32,6 +35,10 @@ class BowlingGame
   end
 
   private
+
+  def check_pins(roll_1, roll_2)
+    raise "Score not possible" if roll_1 + roll_2 > 10
+  end
 
   def add_to_score(roll_1, roll_2)
     @score << [roll_1, roll_2]
