@@ -16,14 +16,25 @@ def score
   result = 0
   roll_index = 0
   10.times do
-    if @rolls[roll_index] + @rolls[roll_index + 1 ] == 10
-      result += @rolls[roll_index] + @rolls[roll_index + 1 ] + @rolls[roll_index + 2]
+    if spare?(roll_index)
+      result += spareScore(roll_index)
     else
-    result += @rolls[roll_index] + @rolls[roll_index + 1 ]
+    result += frameScore(roll_index)
     end
     roll_index += 2
   end
   result
 end
 
+def spare?(roll_index)
+  @rolls[roll_index] + @rolls[roll_index + 1 ] == 10
+end
+
+def spareScore(roll_index)
+   @rolls[roll_index] + @rolls[roll_index + 1 ] + @rolls[roll_index + 2]
+end
+
+def frameScore(roll_index)
+  @rolls[roll_index] + @rolls[roll_index + 1 ]
+end
 end
