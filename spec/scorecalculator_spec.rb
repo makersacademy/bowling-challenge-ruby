@@ -25,40 +25,54 @@ describe ScoreCalculator do
       subject.input(10) # 23
       subject.input(10) # 18
       subject.input(3, 5) # 8
-      expect{subject.input(4, 5)}.to output("You scored 9 for frame 4. Your overall score so far is 58\n").to_stdout # 9
+      expect do
+        subject.input(4, 5)
+      end.to output("You scored 9 for frame 4. Your overall score so far is 58\n").to_stdout # 9
     end
 
     it 'includes bonus points in a different way allowing max of 3 rolls in the tenth frame where there is a strike' do
       9.times { subject.input(3, 4) }
       message = "You scored 29 for frame 10. Your overall score so far is 92\nYou have finished the game, yay!\n"
-      expect{subject.input(10, 10, 9)}.to output(message).to_stdout
+      expect { subject.input(10, 10, 9) }.to output(message).to_stdout
     end
 
     it 'only allows two score inputs in the tenth frame if there is no strike or spare' do
-      9.times {subject.input(3, 4)}
-      expect{subject.input(4, 5, 6)}.to raise_error("Max of 2 score inputs allowed if you haven't striked/spared in frame 10")
+      9.times { subject.input(3, 4) }
+      expect do
+        subject.input(4, 5, 6)
+      end.to raise_error("Max of 2 score inputs allowed if you haven't striked/spared in frame 10")
     end
 
     it 'calculates the correct overall score when there is a perfect game of strikes' do
-      9.times {subject.input(10)}
+      9.times { subject.input(10) }
       message = "You scored 30 for frame 10. Your overall score so far is 300\nCongrats you scored a perfect game!\n"
-      expect{subject.input(10,10,10)}.to output(message).to_stdout
+      expect { subject.input(10, 10, 10) }.to output(message).to_stdout
     end
 
     it 'calculates the correct overall score when there is a spare in the last frame' do
-      9.times {subject.input(5, 4)}
+      9.times { subject.input(5, 4) }
       message = "You scored 12 for frame 10. Your overall score so far is 93\nYou have finished the game, yay!\n"
-      expect{subject.input(5,5,2)}.to output(message).to_stdout
+      expect { subject.input(5, 5, 2) }.to output(message).to_stdout
     end
 
     it 'tells the user it is a gutter game if user has inputted all zeros for 10 frames' do
-      9.times {subject.input(0,0)}
+      9.times { subject.input(0, 0) }
       message = "You scored 0 for frame 10. Your overall score so far is 0\nSorry this is a complete gutter game...\n"
-      expect{subject.input(0,0)}.to output(message).to_stdout
+      expect { subject.input(0, 0) }.to output(message).to_stdout
     end
 
     it 'raises an error asking for another input for the frame if the user only enter 1 score less than 10' do
-      expect {subject.input(9)}.to raise_error("You need to input both scores of the current frame if you don't have a strike")
+      expect do
+        subject.input(9)
+      end.to raise_error("You need to input both scores of the current frame if you don't have a strike")
+    end
+
+    it 'raises an error if input is more than 10' do
+      expect { subject.input(11) }.to raise_error('Score in the frame cannot exceed 10!')
+    end
+
+    it 'raises an error if total input is more than 10 in frames before 10' do
+      expect { subject.input(5, 6) }.to raise_error('Score in the frame cannot exceed 10!')
     end
   end
 
