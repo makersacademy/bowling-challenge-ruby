@@ -1,37 +1,74 @@
 Bowling Challenge in Ruby
 =================
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+![image](https://user-images.githubusercontent.com/75075773/110204624-f3b11000-7e6b-11eb-860a-76925a307d07.png)
 
-## The Task
 
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
+This is my solution for the end of week 5 challenge at Makers Academy. The goal is to create a program that allows a user to keep score of their 10 pin bowling game. The user will input their scores each turn and will be returned an array displaying their scorecard.
 
-Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
 
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
 
-As usual please start by
+## Focuses
 
-* Forking this repo
+- Test Driven Development
+- Code clarity
+- Using Diagraming to approach this challenge
+- Good Git practices
+- Designing class responsibilities 
 
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
+## How to install
 
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
+simply follow the instructions beloew
 
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
+```
+fork and clone this repo
+```
+```
+run $rspec--init 
+```
+```
+to run the tests, type $rspec
+```
 
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
+## How to enter score
+
+start by creating a new instance of the user interface class:
+```
+bowling = Ui.new
+```
+to begin the first frame:
+```
+bowling.begin_frame
+```
+to enter throw 1 or throw 2 points:
+```
+bowling.throw_1(7)   your points are typed in the brackets.
+bolwing.throw_2(1)
+```
+to add to the scorecard:
+```
+bowling.add_to_scorecard
+```
+to see your scorecard at any point in the game:
+```
+bowling.scorecard
+```
+if you got a spare or a strike, add the respective bonus in the following frame (note - spare won't work for a strike and vice versa): 
+```
+bowling.spare_bonus
+```
+```
+bowling.strike_bonus
+```
+at the end of each turn, begin a new frame
+```
+bowling.begin_frame
+```
+
+repeat until you've entered your points for all 10 rounds, for the tenth round, simply add your rolls and bonus points then enter the following to see your total:
+```
+bowling.finish_game
+```
 
 ## Bowling — how does it work?
 
