@@ -6,15 +6,8 @@ class Ui
   attr_reader :game, :scorecard
 
 	def initialize (game = Game)
-		@game = game.create
+	  @game = game.create
 		@scorecard = []
-	end
-
-	def play_bowling
-		while game.turn < 9 do
-			
-	
-		end
 	end
 
 	def throw_1(points = gets.chomp.to_i)	
