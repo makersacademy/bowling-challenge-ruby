@@ -16,7 +16,9 @@ class Game
   end
 
   def add_bowl(pins:)
-    if @current[:bowl] == 1
+    if @current[:frame] == 10
+      final_frame(pins)
+    elsif @current[:bowl] == 1
       create_new_frame(pins)
     else
       add_bowl_to_current_frame(pins)
@@ -31,18 +33,34 @@ class Game
   end
 
   def create_new_frame(pins)
-    error_checks(pins)
-    bowl = create_new_bowl(pins)
     @open_frame = @frame_class.new(number: @current[:frame])
-    @open_frame.add(bowl: bowl)
+    verify_pins_and_create_bowl_object(pins)
     check_for_strike(pins)
   end
 
   def add_bowl_to_current_frame(pins)
+    verify_pins_and_create_bowl_object(pins)
+    score_frame
+  end
+
+  def final_frame(pins)
+    if @current[:bowl] == 1
+      @open_frame = @frame_class.new(number: @current[:frame])
+    end
+    verify_pins_and_create_bowl_object(pins)
+    check_final_frame_over
+  end
+
+  def check_final_frame_over
+    score_frame if @current[:bowl] == 2 && @open_frame.pins < 10
+    score_frame if @current[:bowl] == 3
+    @current[:bowl] += 1
+  end
+
+  def verify_pins_and_create_bowl_object(pins)
     error_checks(pins)
     bowl = create_new_bowl(pins)
     @open_frame.add(bowl: bowl)
-    score_frame
   end
 
   def check_for_strike(pins)
@@ -51,14 +69,9 @@ class Game
   end
 
   def score_frame
-    create_score_object
     push_score_to_frame
     push_current_frame_to_frames
     update_counters
-  end
-
-  def create_score_object
-    score = @framescore_class.new(frame: @open_frame)
   end
 
   def push_score_to_frame
@@ -71,7 +84,7 @@ class Game
   end
 
   def update_counters
-    @current[:frame] += 1
+    @current[:frame] += 1 unless @current[:frame] >= 10
     @current[:bowl] = 1
   end
 
@@ -82,7 +95,7 @@ class Game
 
   def error_checks(pins)
     invalid_pins(pins)
-    invalid_total(pins) if @current[:bowl] == 2
+    invalid_total(pins) if (@current[:bowl] == 2 && @current[:frame] < 10)
   end
 
   def invalid_pins(pins)

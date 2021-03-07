@@ -25,7 +25,7 @@ class FrameScore
   end
 
   def complete?
-    @frame.pins < 10
+    @frame.pins < 10 || @frame.number == 10
   end
 
   def bonus

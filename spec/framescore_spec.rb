@@ -6,9 +6,9 @@ describe FrameScore do
   let(:bowl_3) { double(:bowl, pins: 10) }
   let(:bowl_4) { double(:bowl, pins: 4) }
 
-  let(:frame_1) { double(:frame, pins: 9, bowls: [bowl_1, bowl_2]) }
-  let(:frame_2) { double(:frame, pins: 10, bowls: [bowl_3]) }
-  let(:frame_3) { double(:frame, pins: 10, bowls: [bowl_2, bowl_4]) }
+  let(:frame_1) { double(:frame, pins: 9, bowls: [bowl_1, bowl_2], number: 1) }
+  let(:frame_2) { double(:frame, pins: 10, bowls: [bowl_3], number: 2) }
+  let(:frame_3) { double(:frame, pins: 10, bowls: [bowl_2, bowl_4], number: 3) }
   
   subject(:open) { described_class.new(frame: frame_1) }
   subject(:strike) { described_class.new(frame: frame_2) }
