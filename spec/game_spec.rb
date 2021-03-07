@@ -66,7 +66,7 @@ describe Game do
     end
 
     context 'adding strike bonus' do
-      let(:strike1) { instance_double(Frame, :strike1, strike?: true, spare?: false) }
+      let(:strike1) { instance_double(Frame, :strike1, strike?: true, spare?: false, rolls: [10]) }
       let(:strike2) { instance_double(Frame, :strike2, strike?: true, spare?: false, rolls: [10]) }
 
       it 'adds the next 2 rolls to the bonus' do
@@ -94,6 +94,32 @@ describe Game do
           subject.add_roll(10)
         end
       end
+
+      context 'when player gets 4 strikes in final 2 frames' do
+        it 'only adds 20 to frame 9 bonus' do
+          expect(strike1).to receive(:add_bonus).twice.with(10)
+
+          subject.frames << strike1
+
+          allow(frame).to receive_messages(final?: true, rolls: [10])
+          subject.add_roll(10)
+
+          allow(frame).to receive_messages(final?: true, rolls: [10, 10])
+          subject.add_roll(10)
+
+          allow(frame).to receive_messages(final?: true, rolls: [10, 10, 10])
+          subject.add_roll(10)
+        end
+      end
+    end
+
+    it 'sets current frame to final when frame count is 9' do
+      expect(frame).to receive(:final).once
+
+      allow(frame).to receive_messages(over?: true, spare?: false, strike?: false)
+      8.times { subject.frames << frame }
+
+      subject.add_roll(10)
     end
   end
 end

@@ -14,6 +14,7 @@ class Game
 
     frames << current_frame
     new_frame
+    current_frame.final if frames.count == 9
   end
 
   def score
@@ -39,7 +40,8 @@ class Game
   end
 
   def last_frame_bonus?
-    frames.last.spare? && current_frame.rolls.count < 2 || frames.last.strike?
+    frames.last.spare? && current_frame.rolls.count < 2 ||
+    frames.last.strike? && rolls_since_strike <= 3
   end
 
   def second_strike_bonus?
