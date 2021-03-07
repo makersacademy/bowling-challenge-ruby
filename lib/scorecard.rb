@@ -1,7 +1,7 @@
 require_relative 'frame'
 
 class Scorecard
-  attr_reader :frames, :total
+  attr_reader :frames, :total_score
 
   def initialize(frame)
     @frames = [frame]
@@ -15,7 +15,7 @@ class Scorecard
       second_strike_bonus(@frames[-2], frame) if (@frames.last.is_strike? && @frames[-2].is_strike?)
     end
     @frames << frame
-    total_score if @frames.length == 10
+    get_total if @frames.length == 10
   end
 
   def calculate_strike_bonus(frame, bonus_frame)
@@ -24,6 +24,7 @@ class Scorecard
     else
       bonus = bonus_frame.base_score
     end
+
     frame.add_bonus(bonus)
   end
 
@@ -32,17 +33,15 @@ class Scorecard
     frame.add_bonus(bonus)
   end
 
-
   def calculate_spare_bonus(frame, bonus_frame)
     bonus = bonus_frame.rolls.first
     frame.add_bonus(bonus)
   end
 
-  def total_score
+  def get_total
     @frames.each do |frame|
       @total_score += frame.final_score
     end
-    @total_score
   end
 
 end

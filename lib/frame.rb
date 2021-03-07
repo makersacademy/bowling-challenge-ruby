@@ -8,11 +8,11 @@ class Frame
   end
 
   def is_strike?
-    @rolls.first == 10 ? true : false
+    @rolls.first == 10
   end
 
   def is_spare?
-    (!is_strike? && @rolls.sum == 10) ? true : false
+    !is_strike? && @rolls.sum == 10
   end
 
   def add_bonus(bonus)
