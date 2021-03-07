@@ -39,5 +39,12 @@ describe Frame do
     end
   end
 
+  describe '#add_bonus' do
+    it 'adds bonus to final_score' do
+      strike = described_class.new(10)
+      expect { strike.add_bonus(7) }.to change { strike.final_score }.by 7
+    end
+  end
+
 
 end

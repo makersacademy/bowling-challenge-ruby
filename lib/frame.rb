@@ -1,9 +1,10 @@
 class Frame
-  attr_reader :rolls, :final_score, :score
+  attr_reader :rolls, :base_score, :final_score
 
   def initialize(*args)
     @rolls = args
-    @score = @rolls.sum
+    @base_score = @rolls.sum
+    @final_score = @rolls.sum
   end
 
   def is_strike?
@@ -14,12 +15,8 @@ class Frame
     (!is_strike? && @rolls.sum == 10) ? true : false
   end
 
-  def calculate_strike_bonus do
-    
-  end
-
-  def calculate_spare_bonus do
-
+  def add_bonus(bonus)
+    @final_score += bonus
   end
 
 end
