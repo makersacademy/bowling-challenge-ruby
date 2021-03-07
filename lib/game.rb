@@ -3,7 +3,7 @@ class Game
 attr_reader :score
 
 
-def initialize
+def initialize(rolls = [])
   @score = 0
   @rolls = []
 end
@@ -13,21 +13,24 @@ def roll(pins)
 end
 
 def score
-  result = 0
-  roll_index = 0
+  @score = 0
+  @roll_index = 0
   10.times do
-    if strike?(roll_index)
-      result += strikeScore(roll_index)
-      roll_index += 1
-    elsif spare?(roll_index)
-      result += spareScore(roll_index)
-      roll_index += 2
+    if strike?(@roll_index)
+      @score += strikeScore(@roll_index)
+      print_scoreboard
+      @roll_index += 1
+    elsif spare?(@roll_index)
+      @score += spareScore(@roll_index)
+      print_scoreboard
+      @roll_index += 2
     else
-    result += frameScore(roll_index)
-    roll_index += 2
+    @score += frameScore(@roll_index)
+    print_scoreboard
+    @roll_index += 2
     end
   end
-  result
+  @score
 end
 
 def spare?(roll_index)
@@ -49,4 +52,11 @@ end
 def frameScore(roll_index)
   @rolls[roll_index] + @rolls[roll_index + 1 ]
 end
+
+def print_scoreboard
+  print "\n"
+  print "Frame #{@roll_index + 1}\n"
+  print "Score so far #{@score}\n"
+end
+
 end
