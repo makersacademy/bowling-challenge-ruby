@@ -4,7 +4,7 @@ Bowling Challenge in Ruby
 ## approach
 
 * Rather than diagramming for this challenge, I used a lot of pseudo-code to think through various options, which I found very helpful.
-* I TDDd both classes but primarily the scorecard through irb rather than rspec. I found it easier and more efficient to get visibility on whole games this way.
+* I TDDd both classes but primarily the scorecard through irb rather than rspec. I found it easier and more efficient to get visibility on whole games this way. As a consequence the spec file for Scorecard needs work.
 * To use this code - a Frame object should be created with the rolls for the frame passed as arguments. A Scorecard is created when the first Frame is passed as an argument on initialisation. Subsequent frames can be added (one at a time) with .add_frame to the scorecard. The idea is that the user can see their running total. This code will work if strikes are passed as 10 or as 10, 0.
 * Frames display both the 'base_score' and the 'total_score' - the former is the initial score for the frame itself, the latter reflects any subsequent bonuses.
 * the only public methods on the scorecard are its attribute reader, initialize method, add_frame and running_total. the final_score can be accessed through the attribute reader. running_total will show the total score after each frame, though bear in mind this will not take into account bonuses that may then be gained for strikes and spares.
