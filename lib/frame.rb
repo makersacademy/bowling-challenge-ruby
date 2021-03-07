@@ -6,6 +6,7 @@ class Frame
   def initialize
     @bonus = 0
     @rolls = []
+    @final = false
     @remaining_pins = TOTAL_PINS
   end
 
@@ -17,11 +18,14 @@ class Frame
     raise PinError if pins > remaining_pins
 
     self.remaining_pins -= pins
+    replace_pins if final? && !over?
     rolls << pins
   end
 
   def over?
-    rolls.count == 2 || strike?
+    return rolls.count == 2 || strike? unless final?
+
+    rolls.count == 3 || rolls.count == 2 && rolls.sum < TOTAL_PINS
   end
 
   def spare?
@@ -36,7 +40,19 @@ class Frame
     self.bonus += pins
   end
 
+  def final
+    @final = true
+  end
+
   private
 
   attr_writer :remaining_pins, :bonus
+
+  def final?
+    @final
+  end
+
+  def replace_pins
+    self.remaining_pins += TOTAL_PINS
+  end
 end

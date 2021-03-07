@@ -143,4 +143,56 @@ describe Frame do
       expect { subject.add_bonus(2) }.to change { subject.bonus }.by(2)
     end
   end
+
+  describe '#final' do
+    context 'when final has not been called' do
+      it 'ends the frame after a spare' do
+        subject.add_roll(4)
+        subject.add_roll(6)
+        expect(subject).to be_over
+      end
+
+      it 'ends the frame after a strike' do
+        subject.add_roll(10)
+        expect(subject).to be_over
+      end
+    end
+
+    context 'when final has been called' do
+      context 'after a spare' do
+        it 'allows a bonus roll' do
+          subject.final
+          subject.add_roll(4)
+          subject.add_roll(6)
+          expect(subject).not_to be_over
+
+          subject.add_roll(5)
+          expect(subject.rolls.count).to be 3
+          expect(subject.score).to be 15
+        end
+
+        it 'ends the frame after 3 rolls' do
+          subject.final
+          subject.add_roll(4)
+          subject.add_roll(6)
+          expect(subject).not_to be_over
+
+          subject.add_roll(7)
+          expect(subject).to be_over
+        end
+      end
+
+      it 'gives 2 bonus rolls after a strike' do
+        subject.final
+        subject.add_roll(10)
+        expect(subject).not_to be_over
+
+        subject.add_roll(7)
+        subject.add_roll(2)
+
+        expect(subject.rolls.count).to be 3
+        expect(subject.score).to be 19
+      end
+    end
+  end
 end
