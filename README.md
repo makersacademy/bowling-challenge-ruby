@@ -3,10 +3,10 @@ Bowling Challenge in Ruby
 
 ![image](https://user-images.githubusercontent.com/75075773/110204624-f3b11000-7e6b-11eb-860a-76925a307d07.png)
 
-```
+
 This is my solution for the end of week 5 challenge at Makers Academy. The goal is to create a program that allows a user to keep score of their 10 pin bowling game.
 
-```
+
 
 ## Focuses
 
