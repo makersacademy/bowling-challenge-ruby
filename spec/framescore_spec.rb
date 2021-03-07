@@ -15,7 +15,7 @@ describe FrameScore do
   subject(:spare) { described_class.new(frame: frame_3) }
   
   it 'shows the score for a frame' do
-    expect(open.score).to eq 9
+    expect(open.total).to eq 9
   end
 
   it 'marks the scoring of a frame as complete' do
@@ -23,7 +23,7 @@ describe FrameScore do
   end
 
   it 'does not score a frame if it is not complete' do
-    expect(strike.score).to eq 0
+    expect(strike.total).to eq 0
   end
 
   it 'does not mark a frame score as final if a strike is bowled' do
@@ -31,21 +31,21 @@ describe FrameScore do
   end
 
   it 'correctly scores a spare' do
-    spare.add_bonus_bowl(bowl: bowl_1)
+    spare.add_bonus_bowl(pins: 3)
 
-    expect(spare.score).to eq 13
+    expect(spare.total).to eq 13
     expect(spare.final).to eq true
   end
 
   it 'correctly scores a strike' do
-    strike.add_bonus_bowl(bowl:bowl_3)
+    strike.add_bonus_bowl(pins: 10)
 
-    expect(strike.score).to eq 0
+    expect(strike.total).to eq 0
     expect(strike.final).to eq false
 
-    strike.add_bonus_bowl(bowl: bowl_2)
+    strike.add_bonus_bowl(pins: 6)
 
-    expect(strike.score).to eq 26
+    expect(strike.total).to eq 26
     expect(strike.final).to eq true
   end
 end

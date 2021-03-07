@@ -1,17 +1,17 @@
 class FrameScore
-  attr_reader :score, :final
+  attr_reader :total, :final
   
   def initialize(frame:)
     @frame = frame
     @final = false
-    @score = 0
+    @total = 0
     @bonus_bowls = 0
     @bonus = []
     score_frame
   end
 
-  def add_bonus_bowl(bowl:)
-    @bonus.push(bowl.pins)
+  def add_bonus_bowl(pins:)
+    @bonus.push(pins)
     @bonus_bowls -= 1
     complete_bonus if @bonus_bowls == 0
   end
@@ -19,9 +19,9 @@ class FrameScore
   private
 
   def score_frame
-    @score += @frame.pins if complete?
+    @total += @frame.pins if complete?
     @final = true if complete?
-    bonus if !complete?
+    bonus unless complete?
   end
 
   def complete?
@@ -42,8 +42,8 @@ class FrameScore
   end
 
   def complete_bonus
-    @score += @frame.pins
-    @score += @bonus.sum
+    @total += @frame.pins
+    @total += @bonus.sum
     @final = true
   end
 end

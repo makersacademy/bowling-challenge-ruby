@@ -3,5 +3,7 @@
 require_relative 'bowl'
 require_relative 'frame'
 require_relative 'game'
-require_relative 'scorer'
+require_relative 'framescore'
 require_relative 'display'
+require_relative 'error_checker'
+

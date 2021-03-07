@@ -8,6 +8,7 @@ describe Frame do
   subject { described_class.new(number: 1) }
 
   let(:bowl) { double(:bowl, pins: 4) }
+  let(:strike) { double(:bowl, pins: 10) }
 
   describe '#number' do
     it 'stores the frame number' do
@@ -26,12 +27,23 @@ describe Frame do
 
   describe '#bowls' do
     it 'stores the bowls from the frame' do
-      subject.add(bowl: bowl)
-      subject.add(bowl: bowl)
+      2.times { subject.add(bowl: bowl) }
 
       expect(subject.bowls).to be_a Array
       expect(subject.bowls.length).to eq 2
       expect(subject.pins).to eq 8
+    end
+  end
+
+  describe '#score' do
+    let(:score_double) { double(:framescore, score: 8)}
+    let(:score_class_double) { double(:score_class, new: score_double) }
+    
+    it 'displays the score for the frame' do
+      2.times { subject.add(bowl: bowl) }
+      subject.push_score
+
+      expect(subject.score.total).to eq 8
     end
   end
 end

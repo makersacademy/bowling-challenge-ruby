@@ -9,6 +9,6 @@ class Display
     print "\nBowls  "
     @frames.each { |frame| print "| #{frame.bowls.first.pins}#{frame.bowls.last.pins} |" } 
     print "\nScore  "
-    @frames.each { |frame| print "| -- |"  }
+    @frames.each { |frame| print "| #{frame.score.total} |"  }
   end
 end
