@@ -30,13 +30,21 @@ describe BowlingGame do
         it 'should allow you to play an 11th frame if you roll a 10 in your 10th frame' do
             9.times {subject.new_frame(2,2)}
             subject.new_frame(10, 2)
-            subject.new_frame(2,2)
+            subject.new_frame(2,0)
             expect(subject.score.length).to eq 11
         end
 
-    
+        # it 'should not allow 2 rolls in the same frame to total more than 10' do
+        #     expect {subject.new_frame(6,6)}.to raise_error("Check pins, this score is not possible")
+        # end
 
     end
+
+    it 'should know 0 points is a gutter game' do
+        10.times {subject.new_frame(0,0)}
+        expect(subject.total_score).to eq "Gutter Game! You're terrible, you scored 0 points"
+    end
+
 
     it 'should add the score of the current frame to the previous frame if the previous frame was a strike' do
         subject.new_frame(10,0)

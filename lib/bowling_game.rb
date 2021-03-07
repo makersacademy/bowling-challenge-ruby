@@ -1,6 +1,8 @@
 class BowlingGame
     attr_reader :score, :frame
 
+    TOTAL_PINS = 10
+
     def initialize
         @score = []
         @frame = 0
@@ -9,8 +11,13 @@ class BowlingGame
 
     def new_frame(roll_1, roll_2 = 0)
         @frame += 1
+
+        #raise "Check pins, this score is not possible" if roll_1 + roll_2 > TOTAL_PINS 
        
-        game_over
+        final_frame
+
+        #raise "Check pins, this score is not possible" if roll_1 + roll_2 > TOTAL_PINS 
+        
 
         if @frame > 1 && strike?
              @score[@frame -2] << [roll_1 , roll_2]
@@ -24,7 +31,11 @@ class BowlingGame
      end
 
   def total_score
-    @score.flatten.inject(:+)
+   final_score = @score.flatten.inject(:+)
+   if final_score == 0
+    "Gutter Game! You're terrible, you scored 0 points" 
+   else final_score
+   end
   end
 
   private
@@ -41,10 +52,13 @@ class BowlingGame
     @score[@frame -2].inject(:+) == 10
   end
 
-  def game_over
+  def final_frame
     if @frame == 11
-       raise "Game Over, you have played all your frames" unless @score[9].include?(10)
+       raise "Game Over, you have played all your frames" unless strike? || spare?
+    elsif @frame == 11 && strike?
     end
   end
    
 end
+
+#need to sort out scoring for the final frame
