@@ -23,16 +23,10 @@ class ScoreCalculator
 
   def errors(*args)
     raise 'Score in the frame cannot exceed 10!' if currentframe < 9 && args.sum > 10
-    if currentframe == 9 && args.length > 2 && ((args[0] + args[1]) < 10)
-      raise "Max of 2 score inputs allowed if you haven't striked/spared in frame 10"
-    end
+    raise "Max of 2 score inputs allowed if you haven't striked/spared in frame 10" if currentframe == 9 && args.length > 2 && ((args[0] + args[1]) < 10)
     raise "Max of 2 score inputs allowed if you haven't striked/spared!" if args.length > 2 && currentframe < 9
-    if args.include?(10) && currentframe < 9 && args.length > 1
-      raise 'Only 1 score input allowed if it includes a strike'
-    end
-    if args.length == 1 && args != [10]
-      raise "You need to input both scores of the current frame if you don't have a strike"
-    end
+    raise 'Only 1 score input allowed if it includes a strike' if args.include?(10) && currentframe < 9 && args.length > 1
+    raise "You need to input both scores of the current frame if you don't have a strike" if args.length == 1 && args != [10]
   end
 
   def bonuspoints
