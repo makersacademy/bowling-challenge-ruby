@@ -1,5 +1,5 @@
 describe Game do
-  subject { described_class.new(frame_class, score_board) }
+  subject { described_class.new(frame_class: frame_class, score_board: score_board) }
 
   let(:frame) { instance_double(Frame, :frame, add_roll: nil, over?: false) }
   let(:frame_class) { class_double(Frame, :frame_class, new: frame) }

@@ -2,9 +2,9 @@
 class Game
   attr_reader :current_frame, :frames, :score_board
 
-  def initialize(frame_class = Frame, score_board = ScoreBoard)
-    @frame_class = frame_class
-    @score_board = score_board
+  def initialize(args = {})
+    @frame_class = args[:frame_class] || Frame
+    @score_board = args[:score_board] || ScoreBoard
     @current_frame = frame_class.new
     @frames = []
   end
@@ -14,9 +14,8 @@ class Game
 
     current_frame.add_roll(pins)
     add_bonus(pins) unless frames.empty?
-    return score unless current_frame.over?
-
-    finish_frame
+    finish_frame if current_frame.over?
+    score
   end
 
   def score

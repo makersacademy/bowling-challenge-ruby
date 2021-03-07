@@ -1,5 +1,4 @@
 # knows if it's a strike, spare or over
-
 class Frame
   TOTAL_PINS = 10
 
@@ -27,7 +26,7 @@ class Frame
   def over?
     return rolls.count == 2 || strike? unless final?
 
-    rolls.count == 3 || rolls.count == 2 && rolls.sum < TOTAL_PINS
+    rolls.count == 3 || rolls.count == 2 && score < TOTAL_PINS
   end
 
   def spare?
