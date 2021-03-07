@@ -1,9 +1,10 @@
 class Game
   attr_reader :current_frame, :frames
 
-  def initialize(frame_class = Frame)
+  def initialize(frame_class = Frame, score_board = ScoreBoard)
     @frame_class = frame_class
-    @current_frame = new_frame
+    @score_board = score_board
+    @current_frame = frame_class.new
     @frames = []
   end
 
@@ -12,22 +13,28 @@ class Game
     add_bonus(pins)
     return unless current_frame.over?
 
-    frames << current_frame
-    new_frame
-    current_frame.final if frames.count == 9
+    finish_frame
   end
 
   def score
-    0
+    score_board.total_score(frames)
   end
 
   private
 
-  attr_reader :frame_class
+  attr_reader :frame_class, :score_board
   attr_writer :current_frame
 
-  def new_frame
+  def finish_frame
+    frames << current_frame
+    return if game_over?
+
     self.current_frame = frame_class.new
+    current_frame.final if frames.count == 9
+  end
+
+  def game_over?
+    frames.count == 10
   end
 
   def add_bonus(pins)
@@ -40,8 +47,8 @@ class Game
   end
 
   def last_frame_bonus?
-    frames.last.spare? && current_frame.rolls.count < 2 ||
-    frames.last.strike? && rolls_since_strike <= 3
+    frames.last.spare? && current_frame.rolls.count <= 1 ||
+      frames.last.strike? && rolls_since_strike <= 3
   end
 
   def second_strike_bonus?

@@ -1,11 +1,14 @@
 describe Game do
-  subject { described_class.new(frame_class) }
+  subject { described_class.new(frame_class, score_board) }
+
   let(:frame) { instance_double(Frame, :frame, add_roll: nil, over?: false) }
   let(:frame_class) { class_double(Frame, :frame_class, new: frame) }
+  let(:score_board) { class_double(ScoreBoard, :score_board) }
 
   describe '#score' do
-    it 'starts at zero' do
-      expect(subject.score).to be_zero
+    it 'calls on score_board' do
+      expect(score_board).to receive(:total_score).once
+      subject.score
     end
   end
 
