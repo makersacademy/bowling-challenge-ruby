@@ -70,14 +70,15 @@ describe Game do
       let(:strike2) { instance_double(Frame, :strike2, strike?: true, spare?: false, rolls: [10]) }
 
       it 'adds the next 2 rolls to the bonus' do
-        expect(strike1).to receive(:add_bonus).twice.with(5)
+        expect(strike1).to receive(:add_bonus).once.with(5)
+        expect(strike1).to receive(:add_bonus).once.with(3)
         subject.frames << strike1
 
         allow(frame).to receive(:rolls).and_return([5])
         subject.add_roll(5)
 
-        allow(frame).to receive(:rolls).and_return([5, 5])
-        subject.add_roll(5)
+        allow(frame).to receive(:rolls).and_return([5, 3])
+        subject.add_roll(3)
       end
 
       context 'player gets 3 strikes in a row' do

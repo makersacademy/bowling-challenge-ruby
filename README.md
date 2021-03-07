@@ -94,6 +94,18 @@ Strike bonus
 
 ![strike bonus](images/strike-bonus.png)
 
+2 strike final frame
+
+![2 strike final frame](images/2-strike-final-frame.png)
+
+Final frame spare
+
+![Final frame spare](images/final-frame-spare.png)
+
+2 roll final frame
+
+![2 roll final frame](images/2-roll-final-frame.png)
+
 ----
 
 ## Rules
@@ -129,3 +141,11 @@ Strike bonus
 
 ### Edge cases
 - player can't input values equalling > 10 over 2 rolls of a frame
+- perfect game:
+  - final 3 frames scoring table:
+
+total score | frame | frame roll | frame bonus | frame score
+------------|-------|------------|-------------|-------------
+240         | 8     | 10         | 20          | 30
+270         | 9     | 10         | 20          | 30
+300         | 10    | 10 * 3     | n/a         | 30
