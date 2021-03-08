@@ -5,7 +5,7 @@ class Scorecard
     @scorecard = []
   end
 
-  def input_rolls(frame, roll1, roll2 = nil)
+  def input_rolls(frame, roll1, roll2 = '-')
     @scorecard.push({frame => [roll1, roll2]})
   end
 

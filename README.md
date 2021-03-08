@@ -60,19 +60,19 @@ add points to current frame.
 
 As a player,
 So I can play a game of bowling,
-I want to input my shots into the scorecard.  
-
-As a player,
-So I can play a game of bowling,
-I want to add my pins from this frame to the score of the current frame.
-
-As a player,
-So I can play a game of bowling,
 I want to keep a running total of the score in each frame.
+
+As a player,
+So I can play a game of bowling,
+I want to input my shots into the scorecard.  
 
 As a player,
 So I can knock down all ten pins each frame,
 I want to enter ONE roll (strike only) or TWO rolls onto the scorecard.
+
+As a player,
+So I can play a game of bowling,
+I want to add my pins from this frame to the score of the current frame.
 
 As a player,
 So I can count my bonus points,
