@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-03-07T20:00:50+00:00">2021-03-07T20:00:50+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-03-08T08:50:56+00:00">2021-03-08T08:50:56+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -30,7 +30,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         8.57
+         8.82
        </span>
     </span> hits/line
     )
@@ -88,7 +88,7 @@
             <td class="cell--number">38</td>
             <td class="cell--number">38</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">18.89</td>
+            <td class="cell--number">19.76</td>
             
           </tr>
         
@@ -558,7 +558,7 @@
 
             
 
-            <code class="ruby">    fail &#39;this game is over&#39; if @frames.length &gt;= 10</code>
+            <code class="ruby">    fail &#39;this game is over&#39; if game_finished?</code>
           </li>
         </div>
       
@@ -591,7 +591,7 @@
 
             
 
-            <code class="ruby">    get_total if last_frame?</code>
+            <code class="ruby">    get_total if game_finished?</code>
           </li>
         </div>
       
@@ -734,7 +734,7 @@
 
             
 
-            <code class="ruby">    second_strike_bonus(@frames[-2], frame) if @frames.length &gt;= 2</code>
+            <code class="ruby">    consecutive_strikes_bonus(@frames[-2], frame) if @frames.length &gt;= 2</code>
           </li>
         </div>
       
@@ -756,7 +756,7 @@
 
             
 
-            <code class="ruby">  </code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -899,13 +899,13 @@
 
             
 
-            <code class="ruby">  def last_frame?</code>
+            <code class="ruby">  def game_finished?</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="33" data-linenumber="44">
-            <span class="hits">33</span>
+          <li class="covered" data-hits="66" data-linenumber="44">
+            <span class="hits">66</span>
             
 
             
@@ -943,7 +943,7 @@
 
             
 
-            <code class="ruby">  def second_strike_bonus(frame, bonus_frame)</code>
+            <code class="ruby">  def consecutive_strikes_bonus(frame, bonus_frame)</code>
           </li>
         </div>
       

@@ -9,10 +9,10 @@ class Scorecard
   end
 
   def add_frame(frame)
-    fail 'this game is over' if @frames.length >= 10
+    fail 'this game is over' if game_finished?
     bonuses(frame)
     @frames << frame
-    get_total if last_frame?
+    get_total if game_finished?
     running_total
   end
 
@@ -25,9 +25,9 @@ class Scorecard
   def bonuses(frame)
     calculate_spare_bonus(@frames.last, frame)
     calculate_strike_bonus(@frames.last, frame)
-    second_strike_bonus(@frames[-2], frame) if @frames.length >= 2
+    consecutive_strikes_bonus(@frames[-2], frame) if @frames.length >= 2
   end
-  
+
   def calculate_strike_bonus(frame, bonus_frame)
     return unless frame.is_strike?
 
@@ -40,11 +40,11 @@ class Scorecard
     frame.add_bonus(bonus)
   end
 
-  def last_frame?
+  def game_finished?
     @frames.length == 10
   end
 
-  def second_strike_bonus(frame, bonus_frame)
+  def consecutive_strikes_bonus(frame, bonus_frame)
     return unless frame.is_strike? && @frames.last.is_strike?
     bonus = bonus_frame.rolls.first
     frame.add_bonus(bonus)
