@@ -1,8 +1,8 @@
 # calculates overall scoring
 class ScoreBoard
   class << self
-    def total_score(frames)
-      self.frames = frames
+    def total_score(game_frames = frames)
+      self.frames = game_frames
       frame_scores.sum
     end
 

@@ -103,7 +103,8 @@ ScoreBoard
 - And running total:
 
 ```shell
-2.7.2 :004 > game.score_board.running_total
+# ScoreBoard saves the frames in a class instance variable so scores can be retrieved directly
+2.7.2 :004 > ScoreBoard.running_total
  => [30, 60, 90, 120, 150, 180, 210, 240, 270, 300]
 ```
 
@@ -131,7 +132,7 @@ Example of a stock-game in irb:
  => [[1, 4], [4, 5], [6, 4], [5, 5], [10], [0, 1], [7, 3], [6, 4], [10], [2, 8, 6]]
 
 # running total / score-board total:
-2.7.2 :008 > game.score_board.running_total
+2.7.2 :008 > ScoreBoard.running_total
  => [5, 14, 29, 49, 60, 61, 77, 97, 117, 133]
 ```
 
