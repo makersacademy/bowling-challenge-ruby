@@ -1,6 +1,59 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/christinekharweechee/Projects/bowling-challenge-ruby/spec/frame_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/christinekharweechee/Projects/bowling-challenge-ruby/lib/frame.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          68,
+          null,
+          null,
+          null,
+          1,
+          118,
+          null,
+          null,
+          1,
+          67,
+          null,
+          null,
+          1,
+          24,
+          null,
+          null,
+          1,
+          78,
+          null,
+          null,
+          1,
+          13,
+          null,
+          null
+        ]
+      },
       "/Users/christinekharweechee/Projects/bowling-challenge-ruby/spec/scorecalculator_spec.rb": {
         "lines": [
           1,
@@ -106,7 +159,10 @@
       "/Users/christinekharweechee/Projects/bowling-challenge-ruby/lib/scorecalculator.rb": {
         "lines": [
           1,
+          null,
           1,
+          1,
+          16,
           16,
           null,
           null,
@@ -153,10 +209,14 @@
           null,
           1,
           205,
+          205,
+          952,
+          null,
+          205,
           null,
           null,
           1,
-          688,
+          624,
           null,
           null,
           1,
@@ -184,6 +244,6 @@
         ]
       }
     },
-    "timestamp": 1615135169
+    "timestamp": 1615206116
   }
 }

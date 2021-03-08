@@ -86,7 +86,7 @@ describe ScoreCalculator do
     it 'includes bonus points in the frame score when there is a strike' do
       subject.input(10)
       subject.input(4, 5)
-      expect { subject.scoreboard }.to output("Frame 1: [10, 4, 5] | 19 | 19\nFrame 2: [4, 5] | 9 | 28\n").to_stdout
+      expect { subject.scoreboard }.to output("Frame 1: [10, [4, 5]] | 19 | 19\nFrame 2: [4, 5] | 9 | 28\n").to_stdout
     end
 
     it 'includes bonus points in the frame score when there is a spare' do

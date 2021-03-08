@@ -1,13 +1,16 @@
+require_relative './frame.rb'
+
 class ScoreCalculator
-  def initialize
+  def initialize(frameclass = Frame)
     @sheet = []
+    @frameclass = frameclass
   end
 
   def input(*args)
     errors(*args)
-    @sheet << args
+    @sheet << @frameclass.new(*args)
     bonuspoints
-    puts "You scored #{args.sum} for frame #{currentframe}. Your overall score so far is #{currentscore}"
+    puts "You scored #{@sheet.last.total} for frame #{currentframe}. Your overall score so far is #{currentscore}"
     specialannouncement
     reset if completegame?
   end
@@ -15,7 +18,7 @@ class ScoreCalculator
   def scoreboard
     score = 0
     @sheet.map.with_index do |x, i|
-      puts "Frame #{i + 1}: #{x.flatten} | #{x.flatten.sum} | #{score += x.flatten.sum}"
+      puts "Frame #{i + 1}: #{x.frame} | #{x.total} | #{score += x.total}"
     end
   end
 
@@ -31,21 +34,25 @@ class ScoreCalculator
 
   def bonuspoints
     # for continuous strikes
-    if @sheet.length >= 3 && @sheet[currentframe - 3].first == 10 && @sheet[currentframe - 2].first == 10
-      @sheet[currentframe - 3] << @sheet[currentframe - 1].first
+    if @sheet.length >= 3 && @sheet[currentframe - 3].is_strike? && @sheet[currentframe - 2].is_strike?
+      @sheet[currentframe - 3].add(@sheet.last.frame.first)
     end
     # for a spare
-    if @sheet[currentframe - 2].sum == 10 && @sheet[currentframe - 2].first != 10 && @sheet.length > 1
-      @sheet[currentframe - 2] << @sheet[currentframe - 1].first
+    if @sheet[currentframe - 2].is_spare? && @sheet.length > 1
+      @sheet[currentframe - 2].add(@sheet.last.frame.first)
     end
     # for a strike
-    if @sheet[currentframe - 2].sum == 10 && @sheet[currentframe - 2].first == 10 && @sheet.length > 1
-      @sheet[currentframe - 2] << (@sheet[currentframe - 1][0..1])
+    if @sheet[currentframe - 2].is_strike? && @sheet.length > 1
+      @sheet[currentframe - 2].add(@sheet.last.values[0..1])
     end
   end
 
   def currentscore
-    @sheet.flatten.sum
+    score = 0
+    @sheet.each do |x|
+      score += x.frame.flatten.sum
+    end
+    score
   end
 
   def currentframe
