@@ -16,6 +16,7 @@ class Frame
   end
 
   def add_roll(pins)
+    pins = pins.abs
     raise PinError if pins > remaining_pins
 
     self.remaining_pins -= pins

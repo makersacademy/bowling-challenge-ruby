@@ -20,8 +20,8 @@ Game
   - Manages frames and applies spare and strike bonuses.
 
 Frame
-  - Stores rolls and knows if they are spares or strikes, and when they are over.
-  - Once it knows it is a final frame, it's logic handles the various scenarios (whether the player gets 2 or 3 roles).
+  - Stores rolls, knows if it is a spare or strike, and when it is over.
+  - Once it knows it is a final frame, it's logic adjusts to handle the various scenarios (whether the player gets 2 or 3 roles).
 
 ScoreBoard
   - Calculates overall score of the game or running total as you normally get on a bowling scorecard.

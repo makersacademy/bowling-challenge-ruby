@@ -22,10 +22,10 @@ class ScoreBoard
 
     private
 
+    attr_accessor :frames
+
     def frame_scores
       frames.map(&:score)
     end
-
-    attr_accessor :frames
   end
 end
