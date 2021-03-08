@@ -19,10 +19,12 @@ class Player
     calculate_bonus()
     calculate_points()
   end
+
  private
 
   def calculate_bonus
     ind = 0
+    @bonus = 0 #this is to assure the calculation of bonus can be performed many times
     ((@score.size)-1).times do
       @bonus += (@score[ind + 1][:total]) if @score[ind][:roll_1] == 10
       @bonus += @score[ind + 1][:roll_1] if (@score[ind][:roll_1] + @score[ind][:roll_2]) == 10 && @score[ind][:roll_1] != 10
@@ -32,8 +34,12 @@ class Player
   end
 
   def calculate_points
-    @score.map do |turn|
-      @points += turn[:total]
+    ind = 0
+    @points = 0 #this is to assure the calculation of points can be performed many times
+    ((@score.size)).times do
+      # so that the bonus balls or a 10th frame strike/spare are not counted
+      @points += @score[ind][:total] if ind != 10
+      ind += 1
     end
   end
 
