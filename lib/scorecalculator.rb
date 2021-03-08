@@ -10,7 +10,7 @@ class ScoreCalculator
     errors(*args)
     @sheet << @frameclass.new(*args)
     bonuspoints
-    puts "You scored #{@sheet.last.total} for frame #{currentframe}. Your overall score so far is #{currentscore}"
+    puts "You scored #{@sheet.last.total} for frame #{framecount}. Your overall score so far is #{currentscore}"
     specialannouncement
     reset if completegame?
   end
@@ -25,25 +25,25 @@ class ScoreCalculator
   private
 
   def errors(*args)
-    raise 'Score in the frame cannot exceed 10!' if currentframe < 9 && args.sum > 10
-    raise "Max of 2 score inputs allowed if you haven't striked/spared in frame 10" if currentframe == 9 && args.length > 2 && ((args[0] + args[1]) < 10)
-    raise "Max of 2 score inputs allowed if you haven't striked/spared!" if args.length > 2 && currentframe < 9
-    raise 'Only 1 score input allowed if it includes a strike' if args.include?(10) && currentframe < 9 && args.length > 1
-    raise "You need to input both scores of the current frame if you don't have a strike" if args.length == 1 && args != [10]
+    raise 'Score in the frame cannot exceed 10!' if framecount < 9 && args.sum > 10
+    raise "Max of 2 score inputs allowed if you haven't striked/spared in frame 10" if framecount == 9 && args.length > 2 && ((args[0] + args[1]) < 10)
+    raise "Max of 2 score inputs allowed if you haven't striked/spared!" if args.length > 2 && framecount < 9
+    raise 'Only 1 score input allowed if there is a strike first' if args.first == 10 && framecount < 9 && args.length > 1
+    raise "You need to input both scores of the current frame if you don't have a strike" if args.length == 1 && args.first != 10
   end
 
   def bonuspoints
     # for continuous strikes
-    if @sheet.length >= 3 && @sheet[currentframe - 3].is_strike? && @sheet[currentframe - 2].is_strike?
-      @sheet[currentframe - 3].add(@sheet.last.frame.first)
+    if length >= 3 && two_frames_ago.is_strike? && previousframe.is_strike?
+      two_frames_ago.add(currentframe.values.first)
     end
     # for a spare
-    if @sheet[currentframe - 2].is_spare? && @sheet.length > 1
-      @sheet[currentframe - 2].add(@sheet.last.frame.first)
+    if previousframe.is_spare? && length > 1
+      previousframe.add(currentframe.values.first)
     end
     # for a strike
-    if @sheet[currentframe - 2].is_strike? && @sheet.length > 1
-      @sheet[currentframe - 2].add(@sheet.last.values[0..1])
+    if previousframe.is_strike? && length > 1
+      previousframe.add(currentframe.values[0..1])
     end
   end
 
@@ -55,7 +55,7 @@ class ScoreCalculator
     score
   end
 
-  def currentframe
+  def framecount
     @sheet.length
   end
 
@@ -64,13 +64,13 @@ class ScoreCalculator
   end
 
   def guttergame?
-    currentframe == 10 && currentscore == 0
+    framecount == 10 && currentscore == 0
   end
 
   def specialannouncement
     puts 'Congrats you scored a perfect game!' if perfectgame?
     puts 'Sorry this is a complete gutter game...' if guttergame?
-    puts 'You have finished the game, yay!' if !perfectgame? && !guttergame? && currentframe == 10
+    puts 'You have finished the game, yay!' if !perfectgame? && !guttergame? && framecount == 10
   end
 
   def completegame?
@@ -79,5 +79,21 @@ class ScoreCalculator
 
   def reset
     @sheet = []
+  end
+
+  def previousframe
+    @sheet[framecount - 2]
+  end
+
+  def currentframe
+    @sheet.last
+  end
+
+  def two_frames_ago
+    @sheet[framecount - 3]
+  end
+
+  def length
+    @sheet.length
   end
 end
