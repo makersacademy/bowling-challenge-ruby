@@ -4,27 +4,31 @@ describe Game do
   it 'has a max of ten frames' do
     expect(subject.total_frames).to eq 10
   end
-
-  it 'knows the score of all played frames' do
-    frame_one = instance_double('Frame', :score => 8)
-    subject.add_frame(frame_one.score)
-
-    expect(subject.frames).to include 8
+  it 'knows how many frames have been played' do
+    4.times{ subject.roll(1) }
+    expect(subject.count).to eq 2
   end
 
-  describe 'score' do
-   it 'knows the current game score' do
-      subject.add_frame(8)
-
-      expect(subject.score).to eq 8
+  describe 'get_score' do
+    it 'should be 0 for only gutter rolls' do
+      20.times{ subject.roll(0) }
+      expect(subject.get_score).to eq 0
     end
-    it 'knows the current game score' do
-      subject.add_frame(8)
-      subject.add_frame(1)
-      subject.add_frame(3)
-      subject.add_frame(3)
+    it 'should return the game total score' do
+      subject.roll(4)
+      subject.roll(5)
+      subject.roll(7)
+      subject.roll(1)
+      16.times{ subject.roll(1) }
+      expect(subject.get_score).to eq 33
+    end
 
-      expect(subject.score).to eq 15
-    end 
+    it 'should return the game total score' do
+      subject.roll(10)
+      subject.roll(2)
+      subject.roll(4)
+      16.times{ subject.roll(0) }
+      expect(subject.get_score).to eq 22
+    end
   end
 end
