@@ -13,7 +13,8 @@ describe Game do
 
   describe '#add_bowl' do
     it 'adds the result of a bowl to the game' do
-      expect { 2.times { subject.add_bowl(pins: 4) } }.to change { subject.frames.length }.by 1
+      expect { 2.times { subject.add_bowl(pins: 4) } }
+        .to change { subject.frames.length }.by 1
     end
 
     it 'will not let a user enter invalid scores' do

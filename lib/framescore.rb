@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class FrameScore
   attr_reader :total, :final
-  
+
   def initialize(frame:, score_table:)
     @frame = frame
     @final = false
@@ -14,7 +16,7 @@ class FrameScore
   def add_bonus_bowl(pins:)
     @bonus.push(pins)
     @bonus_bowls -= 1
-    complete_bonus if @bonus_bowls == 0
+    complete_bonus if @bonus_bowls.zero?
   end
 
   private

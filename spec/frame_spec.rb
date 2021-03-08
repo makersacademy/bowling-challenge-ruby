@@ -5,7 +5,7 @@ require 'frame'
 # refactor at end to test behaviour, not state
 
 describe Frame do
-  subject { described_class.new(number: 1, score_table: {} ) }
+  subject { described_class.new(number: 1, score_table: {}) }
 
   let(:bowl) { double(:bowl, pins: 4) }
   let(:strike) { double(:bowl, pins: 10) }
@@ -36,9 +36,9 @@ describe Frame do
   end
 
   describe '#score' do
-    let(:score_double) { double(:framescore, score: 8)}
+    let(:score_double) { double(:framescore, score: 8) }
     let(:score_class_double) { double(:score_class, new: score_double) }
-    
+
     it 'displays the score for the frame' do
       2.times { subject.add(bowl: bowl) }
       subject.push_score

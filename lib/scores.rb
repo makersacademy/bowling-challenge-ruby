@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Scores
   attr_reader :table
-  
+
   def initialize(display:)
     @display = display
     @table = {}
