@@ -1,0 +1,10 @@
+class Game
+stores frames already finished
+knows about how many frames remaining
+checks for bonuses after a frame happens
+make a frame happen
+
+class Frame
+is a current Frame
+makes rolls happen
+if roll_one = 10 roll_two doesnt happen and both rolls are being returned
