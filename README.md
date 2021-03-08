@@ -16,63 +16,123 @@ Bowling score tracker written in Ruby
 Classes:
 
 Game
-  - the interface where rolls are input into the system
-  - manages frames and applies spare and strike bonuses.
+  - The interface where rolls are input into the system
+  - Manages frames and applies spare and strike bonuses.
 
 Frame
-  - stores rolls and knows if they are spares or strikes, and when they are over.
+  - Stores rolls and knows if they are spares or strikes, and when they are over.
   - Once it knows it is a final frame, it's logic handles the various scenarios (whether the player gets 2 or 3 roles).
 
 ScoreBoard
-  - calculates overall score of the game or running total as you normally get on a bowling scorecard.
-  - the program auto-calculates the score after each frame and the bonuses after each roll, and advances the game as the user inputs their rolls:
+  - Calculates overall score of the game or running total as you normally get on a bowling scorecard.
+  - The program auto-calculates the score after each frame and the bonuses after each roll, and advances the game as the user inputs their rolls:
 
 ```shell
-# irb
-2.7.2 :001 > g = Game.new
+# in irb - begin a new game
+2.7.2 :001 > game = Game.new
  => #<Game:0x00007fc536d33030 @frame_class=Frame, @score_board=ScoreBoard, @current_frame=#<Frame:0x00007fc53...
-2.7.2 :002 > g.add_roll(5)
+
+# use the add roll method to input scores after each roll
+2.7.2 :002 > game.add_roll(5)
  => 0
-2.7.2 :003 > g.add_roll(4)
+
+# score is returned after each roll, but doesn't update until current-frame is over
+2.7.2 :003 > game.add_roll(4)
  => 9
-2.7.2 :004 > g.add_roll(9)
+
+2.7.2 :004 > game.add_roll(9)
  => 9
-2.7.2 :005 > g.add_roll(1)
+
+2.7.2 :005 > game.add_roll(1)
  => 19
-2.7.2 :006 > g.add_roll(1)
+
+# bonuses are added to the relevant frame (and the overall score) straight after the roll
+2.7.2 :006 > game.add_roll(1)
  => 20
 ```
 
 - The scoring system works identically to official bowling rules. Spare and strike bonuses are automatically added after the relevant roll has been taken:
 
 ```shell
-2.7.2 :002 > g.add_roll(10)
+# strike bonus - the next 2 rolls are added to the strike frame's score
+2.7.2 :002 > game.add_roll(10)
  => 10
-2.7.2 :003 > g.add_roll(6)
+
+# strike bonus one (score + 6)
+2.7.2 :003 > game.add_roll(6)
  => 16
-2.7.2 :004 > g.add_roll(4)
+
+# checking the bonus:
+2.7.2 :004 > game.frames.last.bonus
+ => 6
+
+# strike bonus 2 (score + 4)
+# overall score = 30 (10 for frame 1, 10 for frame 2, 10 bonus for frame 1)
+2.7.2 :005 > game.add_roll(4)
  => 30
-2.7.2 :005 > g.add_roll(7)
+
+# checking our frames:
+2.7.2 :006 > game.frames
+ => [#<Frame:0x00007feacb8b4eb8 @bonus=10, @rolls=[10], @final=false, @remaining_pins=0>,
+     #<Frame:0x00007feac8e1a180 @bonus=0, @rolls=[6, 4], @final=false, @remaining_pins=0>]
+
+# spare bonus - the next roll is added to the spare frame's score
+2.7.2 :007 > game.add_roll(7)
  => 37
-2.7.2 :006 > g.add_roll(2)
+
+# overall score now 46 (rolls = [10, 6, 4, 7, 2], bonus = [10, 7])
+2.7.2 :008 > game.add_roll(2)
  => 46
+
+2.7.2 :008 > game.frames
+ => [#<Frame:0x00007feacb8b4eb8 @bonus=10, @rolls=[10], @final=false, @remaining_pins=0>,
+     #<Frame:0x00007feac8e1a180 @bonus=7, @rolls=[6, 4], @final=false, @remaining_pins=0>,
+     #<Frame:0x00007feac8c3aab8 @bonus=0, @rolls=[7, 2], @final=false, @remaining_pins=1>]
  ```
 
 - ScoreBoard output for perfect game - total score:
 
 ```shell
-2.7.2 :001 > g = Game.new
+2.7.2 :001 > game = Game.new
  => #<Game:0x00007f91e04c8c08 @frame_class=Frame, @score_board=ScoreBoard, @current_frame=#<Frame:0x00007f91e...
-2.7.2 :002 > 12.times { g.add_roll(10) }
+2.7.2 :002 > 12.times { game.add_roll(10) }
  => 12
-2.7.2 :003 > g.score
+2.7.2 :003 > game.score
  => 300
 ```
 - And running total:
 
 ```shell
-2.7.2 :004 > g.score_board.running_total
+2.7.2 :004 > game.score_board.running_total
  => [30, 60, 90, 120, 150, 180, 210, 240, 270, 300]
+```
+
+Example of a stock-game in irb:
+
+```shell
+2.7.2 :001 > game = Game.new
+ => #<Game:0x00007feac8ccda48 @frame_class=Frame, @score_board=ScoreBoard, @current_frame=#<Frame:0x00007feac8ccd9d0 @bonus=0, @rolls=[], @final=false, @remaining_pins=10>, @frames=[]>
+
+# example game which should score 133 in total:
+2.7.2 :002 > example_game = [1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6]
+ => [1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6]
+
+2.7.2 :003 > example_game.each do |roll|
+2.7.2 :004 >   game.add_roll(roll)
+2.7.2 :005 > end
+ => [1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6]
+
+# total score:
+2.7.2 :007 > game.score
+ => 133
+
+# each roll is stored in its corresponding frame:
+2.7.2 :006 > game.frames.map(&:rolls)
+ => [[1, 4], [4, 5], [6, 4], [5, 5], [10], [0, 1], [7, 3], [6, 4], [10], [2, 8, 6]]
+
+# running total / score-board total:
+2.7.2 :008 > game.score_board.running_total
+ => [5, 14, 29, 49, 60, 61, 77, 97, 117, 133]
 ```
 
 - Game class uses dependency injection within an argument hash. This reduces dependency on the classes being passed in allowing them to be replaced with doubles in the isolated unit tests. The hash further reduces any dependency on the order the arguments are passed in.
@@ -86,20 +146,22 @@ ScoreBoard
   end
 ```
 
-- Thorough testing:
+- Testing:
   - 100% test coverage
-  - unit tests are isolated and test each piece of individual logic, applying doubles and stubs where needed
-  - feature tests run the entire game through, asserting that the flow of the frames and the scoring is correct
-  - edge cases such as perfect games and gutter games are thoroughly tested
+  - TDD - all code written test first, using red green refactor approach
+  - Unit tests are isolated and test each piece of individual logic, applying doubles and stubs where needed
+  - Feature tests run the entire game through, asserting that the flow of the frames and the scoring is correct
+  - Edge cases such as perfect games and gutter games are thoroughly tested
   - Tests are designed to focus on behaviour rather than state
 
 - OOD:
-  - methods have been designed to be as simple and readable as possible
+  - Methods have been designed to be as simple and readable as possible
   - SRP: code is designed to follow single responsibility as much as possible, without impacting the readability and logical flow for the reader
   - Open / Closed principle: by choosing to inject my classes as hash argurments, the program is open for extension and closed for modification. Scoreboard can also be extended with additional score outputs if necessary
 
 Agile and BDD:
-  - sequence diagrams and class models I used are further down in this readme
+  - [Sequence diagrams](#sequence-diagrams)
+  - [class models](#class-models)
 
 ## Dependencies
 
@@ -117,12 +179,13 @@ Gems
 
 # Getting started
 
-Clone this repositiory and install the dependencies
+Clone this repositiory, install dependencies and load the spec_helper in irb
 
 ```shell
 git clone git@github.com:AJ8GH/bowling-challenge-ruby.git
 cd bowling-challenge-ruby
 bundle
+irb -r ./spec/spec_helper.rb
 ```
 
 ## Running tests
@@ -142,7 +205,9 @@ rspec -fd
 ## Reflections
 
 - Bowling is a deceptively complex game and ensuring short methods and classes which wouldn't generate code-smells took careful planning, thought and diagramming
-- Doing this challenge again, I would likely approach it in a very similar way, particuarly the logic. However I would possibly consider using one or maybe 2 additional classes.
+- Doing this challenge again, I would likely approach it in a very similar way, particuarly the logic
+- I would consider using one or 2 additional classes, particularly if I were to develop the app into a full stack web app with a front end user interface. I would also possibly design the public interfaces slightly differently in this case.
+- This was a fairly tricky kata and I feel that it will be challenging to replicate in Javascript after only a week of learning the language!
 
 ## User stories
 
@@ -166,22 +231,7 @@ Specs:
 - final frame bonus rolls
 ```
 
-## Models
-
-### Class models
-
-objects | Messages
---------|----------
-Game    | game.roll
-Game    | game.score -> sum of 2 rolls or 1 roll if strike
-Game    | game.over
-Game    | game.final_frame?
-Game    | game.bonus
-Frame   | frame.over?
-Frame   | frame.status -> :strike, :spare
-Frame   | frame.score -> sum of 2 rolls or 1 roll if strike
-
-### sequence diagrams
+### Sequence diagrams
 
 Standard frame:
 
@@ -207,42 +257,61 @@ Final frame spare
 
 ![2 roll final frame](images/2-roll-final-frame.png)
 
+## Models
+
+### Class models
+
+Objects      | Messages
+-------------|----------
+Game         | game.roll
+Game         | game.score -> sum of 2 rolls or 1 roll if strike
+Game         | game.over
+Game         | game.final_frame?
+Game         | game.bonus
+Frame        | frame.over?
+Frame        | frame.stike?
+Frame        | frame.spare?
+Frame        | frame.final?
+Frame        | frame.score -> sum of 2 rolls or 1 roll if strike
+ScoreBoard   | self.total_score
+ScoreBoard   | self.running_total
+
 ----
 
 ## Rules
 
-### basic functionality
+### Basic functionality
 - 1 player
 - 10 frames
-- rolls per regular frame:
+- Rolls per regular frame:
   - 1 if strike
   - 2 if *no* strike
-- rolls per final frame:
+- Rolls per final frame:
   - 2 if *no* spare or strike
   - 3 if spare or strike
-- score = number of pins *(+ strike / spare bonus)*
+- Score = number of pins *(+ strike / spare bonus)*
 
-### bonuses
-- ***strike bonus:***
-  - number of pins knocked down in next 2 rolls
-- ***spare bonus:***
-  - number of pins knocked down in next roll
-- ***final frame bonus***
-  - spare or strike in final frame results in 3 rolls total for that frame
-  - spare: 1 extra roll
-  - strike: 2 extra rolls
+### Bonuses
+- ***Strike bonus:***
+  - Number of pins knocked down in next 2 rolls
+- ***Spare bonus:***
+  - Number of pins knocked down in next roll
+- ***Final frame bonus***
+  - Spare or strike in final frame results in 3 rolls total for that frame
+  - Spare: 1 extra roll
+  - Strike: 2 extra rolls
 
 ### Special games
-- ***perfect game:***
+- ***Perfect game:***
   - 12 strikes (10 + 2 bonus rolls)
   - 300 points
-- ***gutter game:***
+- ***Gutter game:***
   - 20 zero rolls
   - 0 points
 
 ### Edge cases
-- player can't input values equalling > 10 over 2 rolls of a frame
-- perfect game:
+- Player can't input values equalling > 10 over 2 rolls of a frame
+- Perfect game:
   - final 3 frames scoring table:
 
 total score | frame | frame roll | frame bonus | frame score
