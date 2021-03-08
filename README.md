@@ -1,65 +1,80 @@
-Bowling Challenge in Ruby
-=================
+# Quickstart
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+run 
+`bundle install`
 
-## The Task
+open app.rb
+```terminal
+ruby app.rb
+```
 
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
+Start messing around, but be careful because there isn't any error catching.
 
-Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
+Alternatively, enter `irb -r './lib/score.rb'` in the terminal, and follow the instructions in Usage.
 
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
+# Theory of Operation
 
-As usual please start by
+Score is the class doing all the heavy lifting. It initiates with the name of the user, and creates a hash that functions as an empty score card, using `nil` as placeholders for the numbers. As the game progresses, `nil` is either replaced with a number, or left in place (i.e. after rolling a strike, the value for that frame turns from `[nil, nil]` to `[10, nil]`).
 
-* Forking this repo
+When `score.total` is run, a method re-formats the score hash into an array, with each `nil` value removed. In case of a strike or spare, this purely-numeric score array is flattened, and the next value or two is added to the cumulative score, depending on if it's a strike or a spare.
 
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
+Most of the code is error-catching, and ways to add the scores in a rugged manner without keeping an external tally of the current roll. I wrote it this way to make it more rugged as a stand-alone class, I probably wouldn't've done it this way if I was writing this for an MVC application.
 
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
+# Usage
 
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
+The Score class in score.rb keeps the score for one user. To create a new user:
+```ruby
+score = Score.new("The Dude")
+```
+To add scores, pass the frame and score to add_score. Keep adding a score to a frame, it will return `true` when the players turn has ended, or `false` if they still have rolls left
+```ruby
+score.add_score(frame, number of pins)
 
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
+# get a strike on your first roll
+score.add_score(1, 10) # => returns true
 
-## Bowling — how does it work?
+# roll a 4 and a 6 on your third frame
+score.add_score(3, 4) # => returns false
+score.add_score(3, 6) # => returns true
 
-### Strikes
+# a rough example of intended implementation:
+(1..10).each do |frame|
+  loop do
+    score = gets.chomp.to_i
+    break if score.add_score(frame, score)
+  end
+end
+# for an actual implementation, look at run() in ui.rb (line 9)
+```
 
-The player has a strike if he knocks down all 10 pins with the first roll in a frame. The frame ends immediately (since there are no pins left for a second roll). The bonus for that frame is the number of pins knocked down by the next two rolls. That would be the next frame, unless the player rolls another strike.
+To get the total score, just call
+```ruby
+score.total()
+```
+You can call this at any time to find the current total score.
 
-### Spares
+# Flowcharts
+(copy and paste codeblocks into https://playground.diagram.codes/d/flowchart)
+## For each frame except the last, ask each player to input a score.
+```
+"'(user input) Enter score for {player 1}, frame {1}, roll{1}:'"
+IF "if score<10"
+"'(user input) Enter score for {player 1}, frame {1}, roll{2}:'"
+ "go to next player"
 
-The player has a spare if the knocks down all 10 pins with the two rolls of a frame. The bonus for that frame is the number of pins knocked down by the next roll (first roll of next frame).
+ELSE
+ "go to next player"
+ "'(user input) Enter score for {player 2}, frame {1}, roll{1}:'"
+```
 
-### 10th frame
-
-If the player rolls a strike or spare in the 10th frame they can roll the additional balls for the bonus. But they can never roll more than 3 balls in the 10th frame. The additional rolls only count for the bonus not for the regular frame count.
-
-    10, 10, 10 in the 10th frame gives 30 points (10 points for the regular first strike and 20 points for the bonus).
-    1, 9, 10 in the 10th frame gives 20 points (10 points for the regular spare and 10 points for the bonus).
-
-### Gutter Game
-
-A Gutter Game is when the player never hits a pin (20 zero scores).
-
-### Perfect Game
-
-A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 strikes for the bonus in the 10th frame). The Perfect Game scores 300 points.
-
-In the image below you can find some score examples.
-
-More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
-
-![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+## For the last frame:
+```language
+"'(user input) Enter score for {player 1}, frame {10}, roll{1}:'"
+"'(user input) Enter score for {player 1}, frame {10}, roll{2}:'"
+IF "score[roll 1 & 2].total == 10"
+ "'(user input) Enter score for {player 1}, frame {10}, roll{3}:'"
+ "go to next player"
+ELSE
+ "go to next player"
+ "'(user input) Enter score for {player 2}, frame {10}, roll{1}:'"
+```
