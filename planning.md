@@ -15,6 +15,7 @@
 - Frame needs to go up every two rolls unless the first roll is a strike.
 - Accumulator for score and for frame.
 - Input for a roll is one (10) or two arguments.
+Edge cases e/g/ can't input 12 etc. How will user inptu
 
 #### How to store points...
 1. Separate hashes with arrays for rolls and total score.
@@ -32,6 +33,8 @@ bonus = [0, 1, 2, 3, ]
 ** How can I tell which frame I am on? **
 
 Or instead of rolls, have strike => false, spare => true
+* Iain's complete or not complete bonus
+* number of bonus balls, when it gets to zero, closed
 
 #### Order of game...
 
@@ -43,9 +46,12 @@ Loop until frame = 10...
 add points to current frame.
 
 ###### frame = 2-8
-If the previous frame's (use indexes on arrays) first index = 10 add both numbers from roll to previous total.
+If the previous frame's (use indexes on arrays) first index = 10, add both numbers from rolls to previous total.
 If the previous frame's first two indexes = 10, add the first roll number to previous total.
 Add points to current frame.
+
+###### frame 10
+add points to current frame.
 
 ## User stories
 
