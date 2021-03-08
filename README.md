@@ -1,4 +1,37 @@
 Bowling Challenge in Ruby
+
+## Install
+
+* Fork this repo and clone
+* Run lib/scorecalculator.rb in irb
+
+## How to use
+```
+score = ScoreCalculator.new
+
+score.input(10)  # stores value in the @sheet array and prints 
+                  'You scored 10 for frame 1. Your overall score so far is 10'
+                  
+score.input(2,3) # starts storing bonus points for the first strike. 
+                   'You scored 5 for frame 2. Your overall score so far is 20'
+                   
+score.input(4,0) # overall scores now includes first strike's complete bonus points 
+                   'You scored 4 for frame 3. Your overall score so far is 24'
+                   
+score.scoreboard # [individual score in each frame (and bonus points)] | frame score | overall score
+                   Frame 1: [10, 2, 3] | 15 | 15
+                   Frame 2: [2, 3] | 5 | 20
+                   Frame 3: [4, 0] | 4 | 24
+```
+
+## Rules
+
+The below rules must be followed, or else it will raise an error in the calculator.
+* If the score inputted is not a strike, each input must contain two values not exceeding 10.
+* Unless for the tenth frame, user cannot input more than 2 values and only in the tenth frame with a strike or spare, can the user input a third value.
+* User can only input 1 value if the frame has a strike (except the tenth frame).
+* User must input 2 values for each frame, even if it contains 0(s) when it doesn't include a strike.
+
 =================
 
 * Feel free to use google, your notes, books, etc. but work on your own
