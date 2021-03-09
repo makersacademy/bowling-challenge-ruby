@@ -1,89 +1,126 @@
 require 'bowling'
 
 describe Bowling do
-
-  # KEEPS SCORE
-  let(:frame_class) { double 'frame_class' }
-  describe 'play' do
-    it 'creates a new frame' do
-      allow(frame_class).to receive_message_chain("new.get_rolls")
-      expect(frame_class).to receive(:new)
-      subject.play(frame_class)
+  let(:scorer) { double 'scorer', calculate: 'calculating', update_if_needed: 'checking updates', total: 'total' }
+  subject { Bowling.new(scorer) }
+  describe 'add' do
+    it 'adds pins knocked down to list of rolls' do
+      expect { subject.add(3) }.to change { subject.throws.size }.by(1)
     end
 
-    it 'returns current frame as array of numbers' do
-      allow(frame_class).to receive_message_chain("new.get_rolls") { [3,4] }
-      expect(subject.play(frame_class)).to eq [3,4]
+    it 'calls on frame_status' do
+      expect(subject).to receive(:frame_status)
+      subject.add(3)
+    end
+
+    it 'calls calculate on scorer' do
+      expect(scorer).to receive(:calculate)
+      subject.add(10)
+    end
+
+    it 'calls new_frame' do
+      expect(subject).to receive(:new_frame)
+      subject.add(10)
+    end
+
+    it 'calls update if needed on scorer' do
+      expect(scorer).to receive(:update_if_needed)
+      subject.add(3)
     end
   end
 
+  describe '#frame_complete?' do
+    it 'returns true if total frame is less than 10' do
+      subject.add(3)
+      subject.add(4)
+      expect(subject.frame_complete?).to be true
+    end
 
+    it 'returns false if not yet complete' do
+      subject.add(3)
+      expect(subject.frame_complete?).to be false
+    end
 
-  # describe 'start' do
-  #   it 'initiates bowling game' do
-  #     expect(subject).to receive(:get_frame)
-  #     subject.start
-  #     # expect(subject.score_card).to eq []
-  #   end
-  # end
+    it 'returns true if first roll is 10' do
+      subject.add(10)
+      expect(subject.frame_complete?).to be true
+    end
+  end
 
+  describe '#new_frame' do
+    it 'clears the throws array' do
+      subject.add(3)
+      expect { subject.add(4) }.to change { subject.throws }.to []
+    end
 
+    it 'increases frame count by 1' do
+      expect { subject.new_frame }.to change { subject.frame_count }.by(1)
+    end
+  end
 
-  # describe 'get_frame' do
-  #   it "gets input from user and puts it in scores array" do
-  #     expect{ subject.get_frame }.to output.to_stdout
-  #     expect{ subject.get_frame }.to change{ subject.frames }
-  #   end
-  # end
-  #
-  # describe 'calculate' do
-  #   it 'calculates array of scores' do
-  #
-  #   end
-  # end
-  # describe 'direct' do
-  #   it "sends to less_than_10 with '5,3' input" do
-  #     expect(subject).to receive(:less_than_10)
-  #     subject.direct([5,3])
-  #   end
-  #
-  #   it "sends to spare with '4,6' input" do
-  #     expect(subject).to receive(:spare)
-  #     subject.direct([4,6])
-  #   end
-  #
-  #   it "sends to strike with '10,0' input" do
-  #     expect(subject).to receive(:strike)
-  #     subject.direct([10,0])
-  #   end
-  # end
-  #
-  # describe 'less_than_10' do
-  #   it "receives user input for less than 10 and inputs into score_card" do
-  #     subject.less_than_10([5,3])
-  #     expect(subject.score_card).to eq [[5,3,8]]
-  #   end
-  # end
-  #
-  # describe 'spare' do
-  #   it "receives user input for total of 10 and inputs into score_card" do
-  #     expect(subject).to receive(:request_roll_following_spare)
-  #     subject.spare([4,6])
-  #     expect(subject.score_card).to eq [[4,6,'pending']]
-  #   end
-  # end
-  #
-  # describe 'strike' do
-  #   it "receives user input for strike and inputs into score_card" do
-  #     expect(subject).to receive(:request_roll_following_strike)
-  #     subject.strike([10,0])
-  #     expect(subject.score_card).to eq [[10,0,'pending']]
-  #   end
-  # end
-  #
-  # describe 'request_roll_following_spare'
-  #   it 'adds first roll of next frame to 10 and puts into score_card' do
-  #     # subject.score_card = [[4,6,'pending']]
-  #     expect(subject.request_roll_following_spare)
-  #   end
+  describe '#frame_status' do
+    it 'sets frame complete to true after a strike' do
+      subject.frame_status(10)
+      expect(subject.frame_complete?).to be true
+    end
+  end
+
+  describe '#setup_next_roll' do
+    it 'calls calculate on scorer if frame is complete' do
+      expect(scorer).to receive(:calculate)
+      subject.add(10)
+    end
+
+    it 'calls for new_frame if frame complete' do
+      expect(subject).to receive(:new_frame)
+      subject.add(10)
+    end
+
+    it 'calls update_if_needed on scorer if frame not yet complete' do
+      expect(scorer).to receive(:update_if_needed)
+      subject.add(3)
+    end
+  end
+
+  describe '#final_frame?' do
+    it 'returns true if frame count is 10' do
+      (Bowling::FRAME_LIMIT * 2 - 2).times { subject.add(3) }
+      expect(subject.final_frame?).to be true
+    end
+  end
+
+  describe '#play_final_frame' do
+    it 'adds pins to final frame array' do
+      expect { subject.play_final_frame(5) }.to change { subject.final_frame.size }.by(1)
+    end
+  end
+
+  describe '#final_frame_complete?' do
+    it 'returns true if final frame is size 2 and less than 10' do
+      allow(scorer).to receive(:calculate_final_frame)
+      (Bowling::FRAME_LIMIT - 1).times { subject.add(10) }
+      2.times { subject.add(3) }
+      expect(subject.final_frame_complete?).to be true
+    end
+  end
+
+  describe '#gameover' do
+    it 'calls calculate on scorer' do
+      expect(scorer).to receive(:calculate_final_frame)
+      subject.gameover
+    end
+
+    it 'calls for total score' do
+      allow(scorer).to receive(:calculate_final_frame)
+      expect(scorer).to receive(:total)
+      subject.gameover
+    end
+  end
+
+  describe '#scores' do
+    it 'calls for scores from scorer' do
+      expect(scorer).to receive(:scores)
+      subject.scores
+    end
+  end
 end

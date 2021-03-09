@@ -1,6 +1,8 @@
 Bowling Challenge in Ruby
 =================
 
+I did some planning and some flow diagrams to work out how (and when) spares and strikes were scored, and tried to use an input and output table to help my process. I don't think I did this very successfully.
+
 INPUT | OUTPUT
 -|-
 1,2 | 3
@@ -12,15 +14,21 @@ INPUT | OUTPUT
 10 | updates result above + 10 + enter next roll
 5,3 | updates 2 above with + 5, the result above with + 5 + 3, and scores 8 here
 
+![spare example](images/bowling_spare.png)
 
+![1 strike example](images/bowling_1_strike.png)
 
+![2 strikes example](images/bowling_2_strikes.png)
 
+The first thing I did was write code that calculated the scores given a full set of scores. This was a way for me to get my head around the maths. Once I had achieved this, I moved on to making it more interactive - ie updating as it went along. I struggled with this a lot more! Even with attempts at diagramming and tables, I have spent hours on it :(
 
+After trying to decide what classes to do and getting a bit frustrated, I did a bit of research into coding a bowling scorecard to see if anyone had any suggestions. I looked at a couple of different sites which briefly talked about it (in different computing languages) and decided on a Bowling class and a Scorer class. The bowling class is responsible for counting the frames and managing the gameplay, the Scorer class is responsible for the actual scoring - calculating frame totals, bonuses and the final total score.
 
+I initially had some very busy methods but managed to refactor them to make them smaller.
 
+I'm pleased with my TDD and most of my refactoring. I'm sure there is a way to do it better! eg. I wonder if there is a way to get the Scorer's #calculate method smaller by using some sort of hash of the rules?
 
-
-
+Improvements: I must commit more!!!! I usually like to try to experiment before committing, but perhaps I could do this on different branches?
 
 Makers Readme:
 ===================

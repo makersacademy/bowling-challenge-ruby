@@ -1,62 +1,70 @@
-require_relative './frame'
+# Game responsible for collecting throws and counting frames
+
+require_relative './scorer'
 
 class Bowling
+  attr_reader :throws, :scorer, :frame_count, :final_frame
 
-  # attr_reader :frame_number, :scores
+  FRAME_LIMIT = 10
 
-  def play(frame_class = Frame)
-    current_frame = frame_class.new.get_rolls
-    score(current_frame)
+  def initialize(scorer = Scorer.new)
+    @throws = []
+    @frame_complete = true
+    @scorer = scorer
+    @frame_count = 1
+    @final_frame = []
   end
 
-  def score(current_frame)
-
+  def add(pins)
+    @throws << pins
+    play_final_frame(pins) if final_frame?
+    frame_status(pins)
+    setup_next_roll(pins)
   end
-#   def initialize
-#     @frames = []
-#     @frame_number = 1
-#   end
-#
-#   def start
-#     while @frame_number < 10 #while loop needed eventually
-#       frame = get_frame
-#       if frame == strike
-#         Strike.new(@frame_number)
-#       elsif
-#       calculate(@frames)
-#       @frame_number += 1 #think about where to do this
-#     end
-#   end
-#
-#   def get_frame
-#     puts "Frame #{@frame_number}, Roll 1:"
-#     roll1 = gets.chomp
-#     puts "Frame #{@frame_number}, Roll 2:"
-#     roll2 = gets.chomp
-#     frame = [roll1, roll2]
-#   end
-#
-#   def direct(scores)
-#     if scores.sum < 10
-#       less_than_10(scores)
-#     elsif scores[0] != 10
-#       spare(scores)
-#     else
-#       strike(scores)
-#     end
-#   end
-#
-#   def less_than_10(scores)
-#     score_card << [scores[0], scores[1], scores.sum]
-#   end
-#
-#   def spare(scores)
-#     score_card << [scores[0], scores[1], 'pending']
-#     request_roll_following_spare
-#   end
-#
-#   def strike(scores)
-#     score_card << [scores[0], scores[1], 'pending']
-#   end
-#
+
+  # this method sets frame_complete to false if 2nd roll is needed
+  def frame_status(pins)
+    @frame_complete = !@frame_complete if pins != 10
+  end
+
+  def frame_complete?
+    @frame_complete
+  end
+
+  def setup_next_roll(pins)
+    if frame_complete?
+      @scorer.calculate(@throws)
+      new_frame
+    else
+      @scorer.update_if_needed(pins)
+    end
+  end
+
+  def new_frame
+    @throws.clear
+    @frame_count += 1
+  end
+
+  def final_frame?
+    @frame_count >= FRAME_LIMIT
+  end
+
+  def play_final_frame(pins)
+    @final_frame << pins
+    gameover if final_frame_complete?
+  end
+
+  def final_frame_complete?
+    @final_frame.size == 2 && @final_frame.sum < 10 || @final_frame.size == 3
+  end
+
+  def gameover
+    @scorer.calculate_final_frame(@final_frame, FRAME_LIMIT)
+    total = @scorer.total
+    p "Gameover! You scored #{total} points!"
+  end
+
+  def scores
+    @scorer.scores
+  end
 end
