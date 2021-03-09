@@ -1,5 +1,4 @@
 # Bowling Scorecard (Ruby)
-  =================
 
 ## Brief
 
@@ -36,7 +35,7 @@ A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 str
 
 This program runs in the terminal console allowing for user input.
 
-To begin,clone the repository from GitHub:
+To begin, clone the repository from GitHub:
 ```
 $ git clone https://github.com/PiperS52/bowling-challenge-ruby.git
 $ cd bowling-challenge-ruby
@@ -50,11 +49,3 @@ Create a new scorecard:
 scorecard = ScoreCard.new
 scorecard.run
 ```
-### Completed
-- Scores are correct for ten frames (inc bonus)
-- Programs runs as intended
-
-### Queries
-- Any guidance on how to implement further feature tests, as requiring user input to generate scores seems to make this slightly more fiddly (?)
-- Please could you check correct use of stubs
-- Originally planned to use one or two other classes, although with the approach I took, running it in the terminal, I ended up keeping it to a single class
