@@ -24,17 +24,6 @@ describe ScoreBoard do
     end
   end
 
-  describe '.scores_and_rolls' do
-    it 'returns the rolls and scores for each frame' do
-      expect(described_class.scores_and_rolls).to eq [
-        { rolls: [5, 3], score: 8 },
-        { rolls: [6, 4], score: 20 },
-        { rolls: [10], score: 17 },
-        { rolls: [4, 3], score: 7 }
-      ]
-    end
-  end
-
   describe '.running_total' do
     it 'outputs the scores as a running total' do
       expect(described_class.running_total).to eq [8, 28, 45, 52]

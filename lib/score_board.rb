@@ -6,18 +6,8 @@ class ScoreBoard
       frame_scores.sum
     end
 
-    def scores_and_rolls
-      frames.map { |frame| { rolls: frame.rolls, score: frame.score } }
-    end
-
     def running_total
-      scores = []
-      i = 0
-      while i < frames.count
-        scores << frame_scores[0..i].sum
-        i += 1
-      end
-      scores
+      frame_scores.map.with_index { |frame, i| frame_scores[0..i].sum }
     end
 
     private
