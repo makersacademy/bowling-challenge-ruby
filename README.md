@@ -1,6 +1,29 @@
 Bowling Challenge in Ruby
 =================
 
+INPUT | OUTPUT
+-|-
+1,2 | 3
+4,6 | 10 + enter next roll
+5,3 | updates result above + 5, and scores 8 here
+10 | 10 + enter next roll
+5,3 | updates result above + 5 + 3, and scores 8 here
+10 | 10 + enter next roll
+10 | updates result above + 10 + enter next roll
+5,3 | updates 2 above with + 5, the result above with + 5 + 3, and scores 8 here
+
+
+
+
+
+
+
+
+
+
+
+Makers Readme:
+===================
 * Feel free to use google, your notes, books, etc. but work on your own
 * If you refer to the solution of another coach or student, please put a link to that in your README
 * If you have a partial solution, **still check in a partial solution**
