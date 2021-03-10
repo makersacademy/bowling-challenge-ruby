@@ -12,18 +12,6 @@ describe Game do
     end
   end
 
-  describe '#current_frame' do
-    it 'holds an instance of frame' do
-      expect(subject.current_frame).to be frame
-    end
-
-    it 'becomes a new frame after frame is over' do
-      allow(frame).to receive(:over?).and_return(true)
-      expect(frame_class).to receive(:new).twice
-      subject.add_roll(3)
-    end
-  end
-
   describe '#add_roll' do
     it 'adds roll to current frame' do
       expect(frame).to receive(:add_roll).with(1)
@@ -33,21 +21,6 @@ describe Game do
     it 'raises error when game is over' do
       10.times { subject.frames << frame }
       expect { subject.add_roll(8) }.to raise_error GameOverError
-    end
-
-    context 'when frame is not over' do
-      it 'does not add current frame to frames' do
-        subject.add_roll(3)
-        expect(subject.frames).to be_empty
-      end
-    end
-
-    context 'when frame is over' do
-      it 'adds current frame to frames' do
-        allow(frame).to receive(:over?).and_return(true)
-        subject.add_roll(3)
-        expect(subject.frames.last).to be frame
-      end
     end
 
     context 'adding spare bonus' do
