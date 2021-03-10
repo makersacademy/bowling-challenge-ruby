@@ -83,16 +83,6 @@ describe Frame do
     end
   end
 
-  describe '#remaining_pins' do
-    it 'starts at 10' do
-      expect(subject.remaining_pins).to be 10
-    end
-
-    it 'decreases by roll score after each roll' do
-      expect { subject.add_roll(5) }.to change { subject.remaining_pins }.by(-5)
-    end
-  end
-
   describe '#bonus' do
     it 'starts at 0' do
       expect(subject.bonus).to be_zero

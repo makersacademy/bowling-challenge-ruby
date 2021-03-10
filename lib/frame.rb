@@ -2,7 +2,7 @@
 class Frame
   TOTAL_PINS = 10
 
-  attr_reader :remaining_pins, :bonus, :rolls
+  attr_reader :rolls, :bonus
 
   def initialize
     @bonus = 0
@@ -48,7 +48,9 @@ class Frame
 
   private
 
-  attr_writer :remaining_pins, :bonus
+  attr_writer :bonus
+  attr_accessor :remaining_pins
+
 
   def final?
     @final
