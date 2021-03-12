@@ -1,0 +1,10 @@
+body {
+    border: solid blue 10px; 
+    margin: 5px auto;
+}
+
+#names {
+    border: dashed orange 5px; 
+    width: 600px auto;
+    margin: 10px auto;
+}

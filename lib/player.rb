@@ -13,11 +13,13 @@ class Player
   def add_score(roll_1:, roll_2: 0, total:)
    @score << {roll_1: roll_1, roll_2: roll_2, total: total}
    @frame_number += 1
+   calculate()
   end
 
   def calculate
     calculate_bonus()
     calculate_points()
+    calculate_total()
   end
 
  private
@@ -41,6 +43,10 @@ class Player
       @points += @score[ind][:total] if ind != 10
       ind += 1
     end
+  end
+
+  def calculate_total
+    @total = @points + @bonus
   end
 
 end

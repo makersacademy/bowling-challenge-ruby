@@ -1,6 +1,6 @@
 class Frame
 
-  attr_reader :total
+  attr_reader :total, :roll_1, :roll_2
 
   def initialize(roll_1:, roll_2: 0)
     @roll_1 = roll_1

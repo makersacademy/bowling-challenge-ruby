@@ -1,7 +1,14 @@
-
+require 'capybara'
+require 'capybara/rspec'
 require 'game'
 require 'player'
 require 'frame'
+require_relative '../app.rb'
+
+
+Capybara.app = Bowling_scores_app
+Capybara.server = :puma
+
 
 def strike
   subject.add_score(roll_1: 10, total: 10)
