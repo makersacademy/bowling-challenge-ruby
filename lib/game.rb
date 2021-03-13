@@ -18,7 +18,6 @@ class Game
       roll_2 = gets.chomp.to_i
       play(roll_1: roll_1, roll_2: roll_2)
       player_readout()
-      
     end
   end
 
@@ -28,6 +27,10 @@ class Game
     @player_2.add_score(roll_1: frame.roll_1, roll_2: frame.roll_2, total: frame.total) if @whos_turn == "player_2"
     swap_goes()
   end
+
+  def self.instance(player_1_name:, player_2_name:)
+    @game ||= self.new(player_1_name: player_1_name, player_2_name: player_2_name)
+  end 
 
 private
 
