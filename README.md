@@ -1,5 +1,15 @@
+![language-ruby-red](https://img.shields.io/badge/language-ruby-red) ![version-2.6.5-orange](https://img.shields.io/badge/version-2.6.5-orange)
+
+
 Bowling Challenge in Ruby
 =================
+
+## How to run?
+```
+$ git clone git@github.com:sandyMax974/bowling-challenge-ruby.git
+$ cd bowling-challenge-ruby
+$ bundle install
+```
 
 ## Planning
 
