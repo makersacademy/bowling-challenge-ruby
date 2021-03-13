@@ -24,9 +24,9 @@ class Game
 
   def add_bonus 
     if @frames.last.strike?
-      @frames << strike_bonus
+      strike_bonus
     elsif @frames.last.spare?
-      @frames << spare_bonus
+      spare_bonus
     end
   end
 
@@ -48,6 +48,10 @@ class Game
     frame.score
   end
 
+  def double_strike_score(frame, next_frame, after_next_frame)
+    frame.score + next_frame.score + after_next_frame.score
+  end
+
   def strike_score(frame, next_frame)
     frame.score + next_frame.score
   end
@@ -57,14 +61,17 @@ class Game
   end
 
   def strike_bonus
-    bonus_frame = Frame.new
-    2.times { bonus_rolls(bonus_frame) }
-    bonus_frame
+    2.times { 
+    bonus_frame = Frame.new  
+    bonus_rolls(bonus_frame) 
+    @frames << bonus_frame
+  }
   end
 
   def spare_bonus
     bonus_frame = Frame.new
     bonus_rolls(bonus_frame)
+    @frames << bonus_frame
   end
 
   def bonus_rolls(bonus_frame)
@@ -75,10 +82,15 @@ class Game
   end
 
   def scoring_logic(index)
-    if @frames[index].strike? 
+    if @frames[index].strike? && @frames[index + 1].strike?
+      @score << double_strike_score(@frames[index], @frames[index + 1], @frames[index + 2])
+
+    elsif @frames[index].strike? && (@frames[index + 1].strike? !=  false)
       @score << strike_score(@frames[index], @frames[index + 1])
+    
     elsif @frames[index].spare? 
       @score << spare_score(@frames[index], @frames[index + 1])
+    
     else
       @score << standard_score(@frames[index])
     end
