@@ -12,9 +12,9 @@ class Game
 
   # lets create a frame and roll for it
 
-  def play_game
+  def play
     until @frames.length == @max_frames
-      frame = Frame.new      
+      frame = Frame.new
       until frame.completed?
         puts 'Number of pins knocked down'
         pins = gets.chomp.to_i
@@ -24,32 +24,51 @@ class Game
     end
   end
 
-# def game_score
-#   i = 0
-#   while i <= @frames.length
-#     puts @frames[i]
-#     strike_score(@frames[i], @frames[i + 1]) if @frames[i].strike?
-#     spare_score(@frames[i], @frames[i + 1]) if @frames[i].spare?
-#     standard_score(@frames[i])
-#     i += 1
-#   end
-# end
+  def add_bonus 
+    @frames << strike_bonus if @frames.last.strike?
+    @frames << spare_bonus if @frames.last.spare?
+  end
 
-  def game_score
+  def strike_bonus
+    bonus_frame = Frame.new
+    2.times {
+      puts 'Number of pins knocked down'
+      pins = gets.chomp.to_i
+      bonus_frame.roll(pins)
+    }
+    bonus_frame
+  end
+
+  def spare_bonus
+    bonus_frame = Frame.new
+    puts 'Number of pins knocked down'
+    pins = gets.chomp.to_i
+    bonus_frame.roll(pins)
+    bonus_frame
+  end
+
+  def frame_scoring
     @frames.each_index do | index |
-      if @frames[index].strike? 
-        @score << strike_score(@frames[index], @frames[index + 1])
-      elsif @frames[index].spare? 
-        @score << spare_score(@frames[index], @frames[index + 1])
-      else
-        @score << standard_score(@frames[index])
+      if index < 10
+        if @frames[index].strike? 
+          @score << strike_score(@frames[index], @frames[index + 1])
+        elsif @frames[index].spare? 
+          @score << spare_score(@frames[index], @frames[index + 1])
+        else
+          @score << standard_score(@frames[index])
+        end
       end
     end
   end
 
 
+
+  def final_score
+    @score.sum
+  end 
+
   private
-  
+
   def standard_score(frame)
     frame.score
   end
