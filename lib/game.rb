@@ -23,8 +23,11 @@ class Game
   end
 
   def add_bonus 
-    @frames << strike_bonus if @frames.last.strike?
-    @frames << spare_bonus if @frames.last.spare?
+    if @frames.last.strike?
+      @frames << strike_bonus
+    elsif @frames.last.spare?
+      @frames << spare_bonus
+    end
   end
 
   def frame_scoring
@@ -56,6 +59,7 @@ class Game
   def strike_bonus
     bonus_frame = Frame.new
     2.times { bonus_rolls(bonus_frame) }
+    bonus_frame
   end
 
   def spare_bonus
