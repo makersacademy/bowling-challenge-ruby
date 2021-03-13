@@ -19,7 +19,7 @@ class Frame
 
 # this will be used to determined when to stop calling #add
     def completed?
-        @rolls != nil && @rolls.length == 2 || @rolls != nil && @rolls.sum == 0
+        @rolls.length == 2 || @rolls.sum == 10
     end
 
     def strike?

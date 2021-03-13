@@ -12,20 +12,14 @@ class Game
   # lets create a frame and roll for it
 
   def create_game
-    10.times{ @frames << Frame.new }
-  end
-
-  # lets input the rolls for all frames
-  def input_rolls
-    i = 0
-    while i < @max_frames do
-      # while !@frames[i].completed? do
-        puts "Input number of pins knocked down for frames#{i}"
+    until @frames.length == @max_frames
+      frame = Frame.new       
+      until frame.completed?
+        puts 'Number of pins knocked down'
         pins = gets.chomp.to_i
-        p @frames[i]
-        @frames[i].roll(pins)
-      # end
-      i += 1
+        frame.roll(pins)
+      end
+      @frames << frame
     end
   end
 
