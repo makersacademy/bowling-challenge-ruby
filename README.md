@@ -1,7 +1,7 @@
 ![language-ruby-red](https://img.shields.io/badge/language-ruby-red) ![version-2.6.5-orange](https://img.shields.io/badge/version-2.6.5-orange)
 
 
-Bowling Challenge in Ruby
+Bowling Challenge
 =================
 
 ## How to run?
