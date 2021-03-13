@@ -10,8 +10,6 @@ class Game
     @score =[]
   end
 
-  # lets create a frame and roll for it
-
   def play
     until @frames.length == @max_frames
       frame = Frame.new
@@ -32,15 +30,24 @@ class Game
   def strike_bonus
     bonus_frame = Frame.new
     2.times {
-      puts 'Number of pins knocked down'
-      pins = gets.chomp.to_i
-      bonus_frame.roll(pins)
+      bonus_rolls(bonus_frame)
+      # puts 'Number of pins knocked down'
+      # pins = gets.chomp.to_i
+      # bonus_frame.roll(pins)
     }
-    bonus_frame
+    # bonus_frame
   end
 
   def spare_bonus
     bonus_frame = Frame.new
+    bonus_rolls(bonus_frame)
+    # puts 'Number of pins knocked down'
+    # pins = gets.chomp.to_i
+    # bonus_frame.roll(pins)
+    # bonus_frame
+  end
+
+  def bonus_rolls(bonus_frame)
     puts 'Number of pins knocked down'
     pins = gets.chomp.to_i
     bonus_frame.roll(pins)
@@ -61,8 +68,6 @@ class Game
     end
   end
 
-
-
   def final_score
     @score.sum
   end 
@@ -78,7 +83,7 @@ class Game
   end
 
   def spare_score(frame, next_frame)
-    frame.score + next_frame.rolls[0]
+    frame.score + next_frame.spare_score
   end
 
 end

@@ -1,24 +1,25 @@
 class Frame
-    attr_reader :rolls
+
+    attr_reader
     PINS = 10
 
     def initialize
-    #   @number = number
       @rolls = []
       @pins = PINS
-      # @remaining_pins = PINS
     end
 
     def score
       @rolls.sum
     end
 
-    def roll(pins) # throw is Integer(1...10)
+    def roll(pins) 
       @rolls << pins
-      # @remaining_pins -= pins
     end
 
-# this will be used to determined when to stop calling #add
+    def spare_score
+      @rolls.first
+    end
+
     def completed?
       @rolls.length == 2 || @rolls.sum == 10
     end
