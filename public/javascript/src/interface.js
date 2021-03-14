@@ -7,10 +7,19 @@ $(document).ready(function() {
         console.log(names)
       
         $("#names_form").remove();
-        update()
+        $('#games_section').show();
+        update_names();
       });
 
 
+    function update_names() {
+        $.get('/update', function(res){
+            var data = JSON.parse(res);
+            if(data.status === 200) {
+                $('#names_intro').text(data.player_1_name + ' vs. ' + data.player_2_name);
+            };
+        });
+    };
 
     function update() {
         $.get('/update', function(res){
