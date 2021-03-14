@@ -28,7 +28,7 @@ class Game
     swap_goes()
   end
 
-  def self.instance(player_1_name:, player_2_name:)
+  def self.instance(player_1_name, player_2_name)
     @game ||= self.new(player_1_name: player_1_name, player_2_name: player_2_name)
   end 
 

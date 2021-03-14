@@ -1,25 +1,32 @@
 <html>
   <head>
       <title>Bowling Score Keeper</title>
-      
+      <link rel="stylesheet" href="css/stylesheet.css">
+      <script src = 'jquery.js'> </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
+     <script>
+       // wait for the DOM to be loaded
+       $(function() {
+         // bind 'myForm' and provide a simple callback function
+         $('#myForm').ajaxForm(function() {
+             alert("Thank you for your comment!");
+         });
+       });
+     </script>
+      <script src = 'javascript/src/interface.js'></script> </script>
   </head>
   <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script> src = 'public/javascript/src/interface.js' </script>
-    
-    <link rel="stylesheet" href="css/stylesheet.css">
       <h1>Bowling Score App</h1>
      <section id='names'> 
          <span id='names_intro'>Please Enter Names</span> 
-         <span id = 'names_form'> <form>
+         <form id = 'names_form' action='/names_post' method='post'>
           <input type="text" name='player_1_name' placeholder="Player 1 Name">
           <input type="text" name='player_2_name' placeholder='Player 2 Name'>
           <input id ='submit_names' type="submit" value='Continue'>
-          <button id='test_button'> Clcik</button>
-        </form></span>
+        </form>
      </section>
 
-     <section id='game_section'>
+     <section hidden id='game_section'>
 
      </section>
   </body>

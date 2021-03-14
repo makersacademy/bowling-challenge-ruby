@@ -1,26 +1,27 @@
 $(document).ready(function() {
-    update();
-
-    // $('#test_button').click(function() {
-    //     $('#test_button').remove();
-    // });
-    $("test_button").click(function(){
-        console.log("randomword")
-        $("test_button").attr("display","none");
+    
+    $("#names_form").submit(function(e){
+        e.preventDefault();
+        $("#names_form").ajaxSubmit({url: '/names_post', type: 'post'});
+        // var names = $(this).ajaxSubmit();
+        console.log(names)
+      
+        $("#names_form").remove();
+        update()
       });
 
-    update = function() {
-        $.get('/', function(){
+
+
+    function update() {
+        $.get('/update', function(res){
             var data = JSON.parse(res);
+            console.log(res);
+            console.log(data);
             if(data.status === 200) {
-                return ;
+                $('#names_intro').text(data.player_1_name + ' vs. ' + data.player_2_name);
+
             };
-        })
+        });
     };
-
-
+    
 });
-$("test_button").click(function(){
-    console.log("randomword")
-    $("test_button").attr("display","none");
-  });
