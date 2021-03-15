@@ -1,3 +1,8 @@
+table, th, td {
+    border: 2px solid blue;
+    padding: 2px;
+}
+
 body {
     border: solid blue 10px; 
     margin: 5px auto;
@@ -7,4 +12,21 @@ body {
     border: dashed orange 5px; 
     width: 600px auto;
     margin: 10px auto;
+}
+ #game_section {
+    border: dashed orange 5px; 
+    width: 600px auto;
+    margin: 10px auto;
+    white-space: nowrap;
+ }
+
+ #player_1_game_section {
+    border: solid blue 10px; 
+    width: 300px auto;
+    margin: 5px auto;
+ }
+
+ #player_2_game_section {
+    border: solid blue 10px; 
+    margin: 5px auto;
 }
