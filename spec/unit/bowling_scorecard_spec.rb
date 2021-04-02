@@ -25,11 +25,19 @@ describe BowlingScorecard do
       expect(test_scorecard.current_score).to eq 15
     end
 
-    pending it 'takes into account the bonus scoring if there is a strike' do
+    it 'takes into account the bonus scoring if there is a strike' do
       test_scorecard.enter_roll(10)
       test_scorecard.enter_roll(4)
       test_scorecard.enter_roll(6)
       expect(test_scorecard.current_score).to eq 30
+    end
+
+    it 'takes into account the bonus scoring if there is a strike and then another strike' do
+      test_scorecard.enter_roll(10)
+      test_scorecard.enter_roll(10)
+      test_scorecard.enter_roll(4)
+      test_scorecard.enter_roll(6)
+      expect(test_scorecard.current_score).to eq 54
     end
   end
 
@@ -58,7 +66,7 @@ describe BowlingScorecard do
       it 'displays the current scorecard' do
         test_scorecard.enter_roll(5)
         test_scorecard.enter_roll(4)
-        expect(test_scorecard.display_scorecard).to eq([{ frame: 1, first_roll: 5, second_roll: 4, strike: false, spare: false, bonus_points: nil, frame_score: 9, total_score: 9 }])
+        expect(test_scorecard.display_scorecard).to eq([{ frame: 1, first_roll: 5, second_roll: 4, strike: false, spare: false, bonus_points: 0, frame_score: 9, total_score: 9 }])
       end
     end
 
@@ -70,8 +78,8 @@ describe BowlingScorecard do
         test_scorecard.enter_roll(4)
 
         expect(test_scorecard.display_scorecard).to eq([
-          { frame: 1, first_roll: 5, second_roll: 4, strike: false, spare: false, bonus_points: nil, frame_score: 9, total_score: 9 },
-          { frame: 2, first_roll: 4, second_roll: 4, strike: false, spare: false, bonus_points: nil, frame_score: 8, total_score: 17 },
+          { frame: 1, first_roll: 5, second_roll: 4, strike: false, spare: false, bonus_points: 0, frame_score: 9, total_score: 9 },
+          { frame: 2, first_roll: 4, second_roll: 4, strike: false, spare: false, bonus_points: 0, frame_score: 8, total_score: 17 },
         ])
       end
     end
