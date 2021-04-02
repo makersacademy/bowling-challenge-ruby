@@ -52,12 +52,10 @@ describe BowlingScorecard do
       expect(test_scorecard.current_score).to eq 20
     end
 
-    # it 'takes into account the bonus scoring if there is a spare' do
-    #   test_scorecard.enter_roll(4)
-    #   test_scorecard.enter_roll(6)
-    #   test_scorecard.enter_roll(5)
-    #   expect(test_scorecard.current_score).to eq 20
-    # end
+    it 'calculates a perfect game score of 300 when 12 strikes in a row' do
+      12.times { test_scorecard.enter_roll(10) }
+      expect(test_scorecard.current_score).to eq 300
+    end
   end
 
   describe '#frame' do

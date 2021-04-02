@@ -14,8 +14,17 @@ class BowlingScorecard
   end
 
   def enter_roll(score)
-    invalid_message = "Invalid score entered, score must be between 0 and #{10 - @frame_score}."
+    puts score
+    invalid_message = "Invalid score entered, score must be between 0 and #{max_score}."
     return invalid_message unless valid?(score)
+
+    if @frame == 10
+      @third_roll = nil
+      (@current_score += score) if @strike
+      (@current_score += score) if @spare
+      puts @score_log
+      puts @current_score
+    end
 
     assign(score)
     update_current_and_frame(score)
@@ -23,6 +32,7 @@ class BowlingScorecard
     update_score_log
     increment_frame_if_end_frame
 
+    puts @current_score
     score
   end
 
@@ -32,10 +42,16 @@ class BowlingScorecard
 
 private
   def valid?(score)
-    return false if score > (10 - @frame_score)
+    return false if score > max_score
     return false if score.negative?
 
     true
+  end
+
+  def max_score
+    return 10 if @frame == 10
+
+    10 - @frame_score
   end
 
   def assign(score)
@@ -43,6 +59,7 @@ private
       @strike = true if score == 10
       @first_roll = score
     else
+      @spare = true if (@strike == true and @frame == 10)
       @spare = true if (@first_roll + score) == 10
       @second_roll = score
     end
