@@ -58,7 +58,7 @@ game = BowlingGame.new
 game.roll_1(4)
 game.roll_2(3)
 game.scorecard
-=> [{"frame_1"=>{:roll_1=>4, :roll_2=>3, :bonus_score=>0}}]
+ => [{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}}
 
 #gets a strike:
 game.roll_1(10)
@@ -68,7 +68,9 @@ game.roll_1(2)
 game.roll_2(5)
 game.scorecard
 =>
-[{"frame_1"=>{:roll_1=>4, :roll_2=>3, :bonus_score=>0}}, {"frame_2"=>{:roll_1=>10, :roll_2=>0, :bonus_score=>7}}, {"frame_3"=>{:roll_1=>2, :roll_2=>5, :bonus_score=>0}}]
+[{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}},
+{"frame_2"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7}},
+{"frame_3"=>{:roll_1=>2, :roll_2=>5, :roll_3=>nil, :bonus_score=>0}}]
 
 game.strike
 => false
@@ -80,4 +82,31 @@ game.roll_1(4)
 game.roll_2(3)
 game.scorecard
 =>
-[{"frame_1"=>{:roll_1=>4, :roll_2=>3, :bonus_score=>0}}, {"frame_2"=>{:roll_1=>10, :roll_2=>0, :bonus_score=>7}}, {"frame_3"=>{:roll_1=>2, :roll_2=>5, :bonus_score=>0}}, {"frame_3"=>{:roll_1=>3, :roll_2=>7, :bonus_score=>4}}, {"frame_4"=>{:roll_1=>4, :roll_2=>3, :bonus_score=>0}}]
+[{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}},
+{"frame_2"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7}},
+{"frame_3"=>{:roll_1=>2, :roll_2=>5, :roll_3=>nil, :bonus_score=>0}},
+{"frame_4"=>{:roll_1=>3,:roll_2=>7, :roll_3=>nil, :bonus_score=>4}},
+{"frame_5"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}}]
+
+# plays 10 frames
+game.roll_1(3)
+game.roll_2(7)
+game.roll_1(4)
+game.roll_2(3)
+game.roll_1(10)
+game.roll_2(7)
+game.roll_3(4)
+=> "end of game"
+
+game.scorecard
+=>
+[{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}},
+{"frame_2"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7}},
+{"frame_3"=>{:roll_1=>2, :roll_2=>5, :roll_3=>nil, :bonus_score=>0}},
+{"frame_4"=>{:roll_1=>3, :roll_2=>7, :roll_3=>nil, :bonus_score=>4}},
+{"frame_5"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}},
+{"frame_6"=>{:roll_1=>3, :roll_2=>7, :roll_3=>nil, :bonus_score=>4}},
+{"frame_7"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}},
+{"frame_8"=>{:roll_1=>3, :roll_2=>7, :roll_3=>nil, :bonus_score=>4}},
+{"frame_9"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}},
+{"frame_10"=>{:roll_1=>10, :roll_2=>7, :roll_3=>4, :bonus_score=>0}}]

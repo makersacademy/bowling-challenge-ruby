@@ -12,7 +12,7 @@ describe BowlingGame do
     expect(new_game.current_frame).to eq 1
     expect(new_game.roll_1_score).to eq 0
     expect(new_game.roll_2_score).to eq 0
-    expect(new_game.roll_3_score).to eq 0
+    expect(new_game.roll_3_score).to eq nil
     expect(new_game.bonus_score).to eq 0
     expect(new_game.total_frame_score).to eq 0
     expect(new_game.strike).to eq false
@@ -118,7 +118,7 @@ describe BowlingGame do
       it 'saves roll_1 and roll_2 values to a scorecard' do
         new_game.roll_1(test_roll1)
         new_game.roll_2(test_roll2)
-        expect(new_game.scorecard).to eq [{ "frame_1" => { :roll_1 => 5, :roll_2 => 2, :bonus_score => 0 } }]
+        expect(new_game.scorecard).to eq [{ "frame_1" => { :roll_1 => 5, :roll_2 => 2, :roll_3 => nil,  :bonus_score => 0 } }]
       end
     end
 
@@ -129,7 +129,7 @@ describe BowlingGame do
         new_game.roll_1(test_roll1)
         new_game.roll_2(test_roll2)
 
-        expect(new_game.scorecard).to eq [{ "frame_1" => { :roll_1 => 3, :roll_2 => 7, :bonus_score => 5 } }, { "frame_2" => { :roll_1 => 5, :roll_2 => 2, :bonus_score => 0 } }]
+        expect(new_game.scorecard).to eq [{ "frame_1" => { :roll_1 => 3, :roll_2 => 7, :roll_3 => nil, :bonus_score => 5 } }, { "frame_2" => { :roll_1 => 5, :roll_2 => 2, :roll_3 => nil, :bonus_score => 0 } }]
       end
     end
 
@@ -139,8 +139,30 @@ describe BowlingGame do
         new_game.roll_1(test_roll1)
         new_game.roll_2(test_roll2)
 
-        expect(new_game.scorecard).to eq [{ "frame_1" => { :roll_1 => 10, :roll_2 => 0, :bonus_score => 7 } }, { "frame_2" => { :roll_1 => 5, :roll_2 => 2, :bonus_score => 0 } }]
+        expect(new_game.scorecard).to eq [{ "frame_1" => { :roll_1 => 10, :roll_2 => 0, :roll_3 => nil, :bonus_score => 7 } }, { "frame_2" => { :roll_1 => 5, :roll_2 => 2, :roll_3 => nil, :bonus_score => 0 } }]
       end
     end
   end
+
+  context '10th frame' do
+    it 'allows a third roll if in the 10th frame the first roll equals a strike or spare' do
+    9.times {
+      new_game.roll_1(test_roll1)
+      new_game.roll_2(test_roll2) }
+      new_game.roll_1(test_strike)
+      new_game.roll_2(test_roll1)
+      new_game.roll_3(test_roll2)
+      expect(new_game.scorecard).to eq [{"frame_1"=>{:roll_1=>5, :roll_2=>2,:roll_3 => nil, :bonus_score=>0}}, {"frame_2"=>{:roll_1=>5, :roll_2=>2, :roll_3 => nil, :bonus_score=>0}}, {"frame_3"=>{:roll_1=>5, :roll_2=>2, :roll_3 => nil, :bonus_score=>0}}, {"frame_4"=>{:roll_1=>5, :roll_2=>2, :roll_3 => nil, :bonus_score=>0}}, {"frame_5"=>{:roll_1=>5, :roll_2=>2, :roll_3 => nil, :bonus_score=>0}}, {"frame_6"=>{:roll_1=>5, :roll_2=>2, :roll_3 => nil, :bonus_score=>0}}, {"frame_7"=>{:roll_1=>5, :roll_2=>2, :roll_3 => nil, :bonus_score=>0}}, {"frame_8"=>{:roll_1=>5, :roll_2=>2, :roll_3 => nil, :bonus_score=>0}}, {"frame_9"=>{:roll_1=>5, :roll_2=>2, :roll_3 => nil, :bonus_score=>0}},
+      {"frame_10"=>{:roll_1=>10, :roll_2=>5, :roll_3 => 2, :bonus_score=>0}}]
+    end
+  end
+
+  context 'end the game' do
+    describe '.end_of_game' do
+      it 'returns a confrimation of game ending' do
+        expect(new_game.end_of_game).to eq "End of game"
+      end
+    end
+  end
+
 end
