@@ -22,9 +22,7 @@ class BowlingGame
 
     if @strike
       @bonus_score = players_score
-    end
-
-    if @spare
+    elsif @spare
       @bonus_score = players_score
     end
   end
@@ -50,8 +48,29 @@ class BowlingGame
   end
 
   def update_scorecard
-    @scorecard << { "frame_#{@current_frame}" => { :roll_1 => @roll_1_score, :roll_2 => @roll_2_score }}
+
+    @scorecard << { "frame_#{@current_frame}" => { :roll_1 => @roll_1_score, :roll_2 => @roll_2_score, :bonus_score => @bonus_score }}
     next_frame
   end
+
+  def update_scorecard_if_spare
+    if @spare
+      @scorecard[@current_frame-2]["frame_#{@current_frame-1}"][:bonus_score] = @bonus_score
+    end
+
+    @spare = false
+    @bonus_score = 0
+    @scorecard << { "frame_#{@current_frame}" => { :roll_1 => @roll_1_score, :roll_2 => @roll_2_score, :bonus_score => @bonus_score }}
+  end
+
+ def update_scorecard_if_strike
+   if @strike
+     @scorecard[@current_frame-2]["frame_#{@current_frame-1}"][:bonus_score] = @bonus_score
+   end
+
+   @strike = false
+   @bonus_score = 0
+   @scorecard << { "frame_#{@current_frame}" => { :roll_1 => @roll_1_score, :roll_2 => @roll_2_score, :bonus_score => @bonus_score }}
+ end
 
 end
