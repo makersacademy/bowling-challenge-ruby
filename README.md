@@ -12,27 +12,31 @@ In order to do this, you may pay particular attention to the following:
 ## Bowling Challenge
 
 #### User stories
-
+```
 As a player
 To see my score after a roll
 I want to see the amount of pins knocked down per roll
-
+```
+```
 As a player
 To see my score after a frame
 I want to see the points per frame added up together
-
+```
+```
 As a player
 To see my score throughout the game
 I want to see my total points 
-
+```
+```
 As a player
 To understand my bonusses
 I want to see the bonus points explaned to me
-
+```
+```
 As a player
 To finish the game
 I want to get an extra roll if I hit 10 pins in the last frame
-
+```
 ### What do I need 
 
 - Keep track of which frame the player is at        |   @frame_count
@@ -65,7 +69,7 @@ I want to get an extra roll if I hit 10 pins in the last frame
 - Gutter game: No pins hit at all
 
 - Perfect game: 12 strikes
-    300 pointsx
+    300 points
 
 
 
