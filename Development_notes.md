@@ -27,6 +27,26 @@ Model:
 - Miro Board with logic
     - https://miro.com/app/board/o9J_lLjv0EE=/
 
+#### User Stories
+
+As a user
+I want to add my score into the scorecard
+
+As a user
+I want to see my current score
+
+As a user
+I want to play 10 frames
+
+
+#### Domain Model
+
+BowlingScorecard
+- recieves a score
+- keeps record of scores
+- list current score
+- lists all rolls to date
+
 #### Input/Output Table
 
 Input           |  Ouput
