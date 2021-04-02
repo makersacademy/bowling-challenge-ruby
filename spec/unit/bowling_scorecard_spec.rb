@@ -26,4 +26,12 @@ describe BowlingScorecard do
     end
   end
 
+  describe '#display_scorecard' do
+    it 'displays the current scorecard' do
+      test_scorecard.enter_roll(5)
+      test_scorecard.enter_roll(4)
+      expect(test_scorecard.display_scorecard).to eq [{ round: 1, first_roll: 5, second_roll: 4 , roll_score: 9, strike: false, spare: false, bonus_points: 0, frame_score: 9, total_score: 9 }]
+    end
+  end
+
 end
