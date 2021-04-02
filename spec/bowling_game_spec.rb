@@ -47,7 +47,6 @@ describe BowlingGame do
 
   context 'player gets a strike' do
     before do
-      new_game.roll_2(5)
       new_game.roll_1(test_strike)
     end
 
@@ -62,7 +61,7 @@ describe BowlingGame do
     it 'updates the bonus variable with the next 2 roll values of next frame' do
       new_game.roll_1(test_roll1)
       new_game.roll_2(test_roll2)
-      expect(new_game.bonus_score).to eq 7
+     expect(new_game.scorecard[0]["frame_1"][:bonus_score]).to eq 7
     end
 
     it 'changes strike back to false when bonus is added to scorecard' do
@@ -70,7 +69,6 @@ describe BowlingGame do
       new_game.update_scorecard
       new_game.roll_1(test_roll1)
       new_game.roll_2(test_roll2)
-      new_game.update_scorecard_if_strike
       expect(new_game.strike).to eq false
     end
   end
@@ -88,14 +86,14 @@ describe BowlingGame do
     it 'updates the bonus variable with the next 1 roll value of next frame' do
       new_game.roll_1(test_roll1)
       new_game.roll_2(test_roll2)
-      expect(new_game.bonus_score).to eq 5
+      p new_game.scorecard
+      p new_game.current_frame
+      expect(new_game.scorecard[0]["frame_1"][:bonus_score]).to eq 5
     end
 
     it 'changes spare back to flase when bonus is added to scorecard' do
       new_game.roll_1(test_roll1)
       new_game.roll_2(test_roll2)
-      new_game.update_scorecard
-      new_game.update_scorecard_if_spare
       expect(new_game.spare).to eq false
     end
 
@@ -120,7 +118,6 @@ describe BowlingGame do
       it 'saves roll_1 and roll_2 values to a scorecard' do
         new_game.roll_1(test_roll1)
         new_game.roll_2(test_roll2)
-        new_game.update_scorecard
         expect(new_game.scorecard).to eq [{ "frame_1" => { :roll_1 => 5, :roll_2 => 2, :bonus_score => 0 } }]
       end
     end
@@ -129,10 +126,8 @@ describe BowlingGame do
       it 'saves bonus values to a scorecard when there is a spare' do
         new_game.roll_1(test_spare1)
         new_game.roll_2(test_spare2)
-        new_game.update_scorecard
         new_game.roll_1(test_roll1)
         new_game.roll_2(test_roll2)
-        new_game.update_scorecard_if_spare
 
         expect(new_game.scorecard).to eq [{ "frame_1" => { :roll_1 => 3, :roll_2 => 7, :bonus_score => 5 } }, { "frame_2" => { :roll_1 => 5, :roll_2 => 2, :bonus_score => 0 } }]
       end
@@ -141,10 +136,8 @@ describe BowlingGame do
     describe '.update_scorecard_if_spare' do
       it 'saves bonus values to a scorecard when there is a strike' do
         new_game.roll_1(test_strike)
-        new_game.update_scorecard
         new_game.roll_1(test_roll1)
         new_game.roll_2(test_roll2)
-        new_game.update_scorecard_if_strike
 
         expect(new_game.scorecard).to eq [{ "frame_1" => { :roll_1 => 10, :roll_2 => 0, :bonus_score => 7 } }, { "frame_2" => { :roll_1 => 5, :roll_2 => 2, :bonus_score => 0 } }]
       end

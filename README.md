@@ -57,18 +57,16 @@ require './lib/bowling_game.rb'
 game = BowlingGame.new
 game.roll_1(4)
 game.roll_2(3)
-game.update_scorecard
 game.scorecard
 => [{"frame_1"=>{:roll_1=>4, :roll_2=>3, :bonus_score=>0}}]
 
 #gets a strike:
 game.roll_1(10)
-game.update_scorecard
 game.strike
 => true
 game.roll_1(2)
 game.roll_2(5)
-game.update_scorecard_if_strike
+game.scorecard
 =>
 [{"frame_1"=>{:roll_1=>4, :roll_2=>3, :bonus_score=>0}}, {"frame_2"=>{:roll_1=>10, :roll_2=>0, :bonus_score=>7}}, {"frame_3"=>{:roll_1=>2, :roll_2=>5, :bonus_score=>0}}]
 
@@ -78,9 +76,8 @@ game.strike
 # gets a spare:
 game.roll_1(3)
 game.roll_2(7)
-game.update_scorecard
 game.roll_1(4)
 game.roll_2(3)
-game.update_scorecard_if_spare
+game.scorecard
 =>
 [{"frame_1"=>{:roll_1=>4, :roll_2=>3, :bonus_score=>0}}, {"frame_2"=>{:roll_1=>10, :roll_2=>0, :bonus_score=>7}}, {"frame_3"=>{:roll_1=>2, :roll_2=>5, :bonus_score=>0}}, {"frame_3"=>{:roll_1=>3, :roll_2=>7, :bonus_score=>4}}, {"frame_4"=>{:roll_1=>4, :roll_2=>3, :bonus_score=>0}}]
