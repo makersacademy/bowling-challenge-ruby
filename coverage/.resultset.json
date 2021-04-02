@@ -1,0 +1,25 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/jackmccarthy/Documents/Makers/Week_5/bowling-challenge-ruby/spec/unit/bowling_scorecard_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/jackmccarthy/Documents/Makers/Week_5/bowling-challenge-ruby/lib/bowling_scorecard.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      }
+    },
+    "timestamp": 1617384242
+  }
+}
