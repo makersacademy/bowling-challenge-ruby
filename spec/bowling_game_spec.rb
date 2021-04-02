@@ -25,6 +25,8 @@ describe BowlingGame do
       it 'saves result of first roll to the roll_1_score instance variable' do
         new_game.roll_1(test_roll1)
         expect(new_game.roll_1_score).to eq 5
+        new_game.roll_1(test_roll2)
+        expect(new_game.roll_1_score).to eq 2
       end
     end
 
@@ -45,6 +47,7 @@ describe BowlingGame do
 
   context 'player gets a strike' do
     before do
+      new_game.roll_2(5)
       new_game.roll_1(test_strike)
     end
 
