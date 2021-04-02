@@ -14,19 +14,10 @@ class BowlingScorecard
   end
 
   def enter_roll(score)
-    return "Invalid score entered, entered_score must be between 0 and 10." unless valid_score?(score)
+    return "Invalid score entered, entered_score must be between 0 and 10." unless valid?(score)
 
-    if @first_roll == nil
-      @first_roll = score
-    else
-      @second_roll = score
-    end
-
-    if @first_roll != nil and @second_roll != nil
-      @frame += 1
-      @first_roll = nil
-      @second_roll = nil
-    end
+    assign(score)
+    increment_frame_if_end_frame
 
     @current_score += score
   end
@@ -36,12 +27,34 @@ class BowlingScorecard
   end
 
 private
-  def valid_score?(score)
+  def valid?(score)
     return false if (score > 10 || score < 0)
 
     true
   end
 
+  def assign(score)
+    if @first_roll == nil
+      @strike = true if score == 10
+      @first_roll = score
+    else
+      @second_roll = score
+    end
+  end
 
+  def increment_frame_if_end_frame
+    if @first_roll != nil and @second_roll != nil
+      @frame += 1
+      reset_frame_stats
+    elsif @first_roll != nil and @strike == true
+      @frame += 1
+      reset_frame_stats
+    end
+  end
 
+  def reset_frame_stats
+    @first_roll = nil
+    @second_roll = nil
+    @strike = nil
+  end
 end

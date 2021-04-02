@@ -27,11 +27,22 @@ describe BowlingScorecard do
   end
 
   describe '#frame' do
-    it 'returns the frame' do
-      test_scorecard.enter_roll(5)
-      test_scorecard.enter_roll(4)
-      test_scorecard.enter_roll(6)
-      expect(test_scorecard.frame).to eq 2
+    context '1st frame had two rolls' do
+      it 'returns the frame' do
+        test_scorecard.enter_roll(5)
+        test_scorecard.enter_roll(4)
+        test_scorecard.enter_roll(6)
+        expect(test_scorecard.frame).to eq 2
+      end
+    end
+
+    context '1st frame was a strike' do
+      it 'returns the frame' do
+        test_scorecard.enter_roll(10)
+        test_scorecard.enter_roll(4)
+        test_scorecard.enter_roll(6)
+        expect(test_scorecard.frame).to eq 3
+      end
     end
   end
 
