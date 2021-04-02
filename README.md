@@ -14,6 +14,16 @@ In order to do this, you may pay particular attention to the following:
 #### User stories
 ```
 As a player
+To know how far along in the game we are
+I want to know what frame we are at
+```
+```
+As a player
+To know how many rolls I have left
+I want to know what roll we are at
+```
+```
+As a player
 To see my score after a roll
 I want to see the amount of pins knocked down per roll
 ```
