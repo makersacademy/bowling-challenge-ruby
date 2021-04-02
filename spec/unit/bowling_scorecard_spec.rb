@@ -26,12 +26,12 @@ describe BowlingScorecard do
     end
   end
 
-  describe '#current_frame' do
-    it 'returns the current frame' do
+  describe '#frame' do
+    it 'returns the frame' do
       test_scorecard.enter_roll(5)
       test_scorecard.enter_roll(4)
       test_scorecard.enter_roll(6)
-      expect(test_scorecard.current_frame).to eq 2
+      expect(test_scorecard.frame).to eq 2
     end
   end
 

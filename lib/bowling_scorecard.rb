@@ -1,5 +1,5 @@
 class BowlingScorecard
-  attr_reader :current_score
+  attr_reader :current_score, :frame
 
   def initialize
     @frame = 1
@@ -16,6 +16,18 @@ class BowlingScorecard
   def enter_roll(score)
     return "Invalid score entered, entered_score must be between 0 and 10." unless valid_score?(score)
 
+    if @first_roll == nil
+      @first_roll = score
+    else
+      @second_roll = score
+    end
+
+    if @first_roll != nil and @second_roll != nil
+      @frame += 1
+      @first_roll = nil
+      @second_roll = nil
+    end
+
     @current_score += score
   end
 
@@ -29,6 +41,7 @@ private
 
     true
   end
+
 
 
 end
