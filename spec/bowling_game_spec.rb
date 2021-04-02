@@ -76,14 +76,25 @@ describe BowlingGame do
       end
     end
 
-    it 'increases the frame number by 1 after roll 2 is complete' do
-      new_game.roll_2(test_roll1)
+    it 'increases the frame number by 1 when adding to scorecard is complete' do
+      new_game.update_scorecard
       expect(new_game.current_frame).to eq 2
     end
 
-    it 'increases the frame number by 1 when there is a strike' do
-      new_game.roll_1(test_strike)
-      expect(new_game.current_frame).to eq 2
+    # it 'increases the frame number by 1 when there is a strike' do
+    #   new_game.roll_1(test_strike)
+    #   expect(new_game.current_frame).to eq 2
+    # end
+  end
+
+  context 'saving values to a scorecard' do
+    describe '.update_scorecard' do
+      it 'saves roll_1 and roll_2 values to a scorecard' do
+        new_game.roll_1(test_roll1)
+        new_game.roll_2(test_roll2)
+        new_game.update_scorecard
+        expect(new_game.scorecard).to eq [{ "frame_1" => { :roll_1 => 5, :roll_2 => 2 } }]
+      end
     end
   end
 

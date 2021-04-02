@@ -18,7 +18,6 @@ class BowlingGame
     @roll_1_score = players_score
     if players_score == 10
       @strike = true
-      next_frame
     end
   end
 
@@ -27,7 +26,6 @@ class BowlingGame
       @spare = true
     end
     @roll_2_score = players_score
-    next_frame
   end
 
   def roll_3(players_score)
@@ -36,6 +34,11 @@ class BowlingGame
 
   def next_frame
     @current_frame += 1
+  end
+
+  def update_scorecard
+    @scorecard << { "frame_#{@current_frame}" => { :roll_1 => @roll_1_score, :roll_2 => @roll_2_score }}
+    next_frame
   end
 
 end
