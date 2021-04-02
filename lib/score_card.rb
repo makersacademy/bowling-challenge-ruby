@@ -21,10 +21,16 @@ class ScoreCard
 
   def roll(user_input)
     @hit_pins_per_roll << user_input
-    next_roll
+    next_roll 
   end
 
   def save_frame
     @hit_pins_per_frame << @hit_pins_per_roll
+    @hit_pins_per_roll = []
   end
+
+  def total 
+    @hit_pins_per_frame.map { |frame|
+      frame.sum }.sum
+  end 
 end 

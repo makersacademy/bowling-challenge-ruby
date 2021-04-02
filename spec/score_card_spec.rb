@@ -59,11 +59,11 @@ describe ScoreCard do
 
       expect(bowl.roll_count).to eq 2
     end 
-    it 'should only save each frame' do 
+    it 'should only save each frame and reset' do 
       bowl.roll(4)
       bowl.roll(5)
 
-      expect(bowl.hit_pins_per_roll).to eq [4, 5]
+      expect(bowl.hit_pins_per_roll).to eq []
     end 
   end 
 
@@ -74,8 +74,19 @@ describe ScoreCard do
     it 'should save the hits per roll' do 
       bowl.roll(4)
       bowl.roll(5)
-      
+
       expect(bowl.hit_pins_per_frame).to eq [[4, 5]]
+    end
+  end 
+
+  describe '#total' do 
+    it 'adds up all rolls' do 
+      bowl.roll(4)
+      bowl.roll(5)
+      bowl.roll(7)
+      bowl.roll(1)
+
+      expect(bowl.total).to eq 17
     end
   end 
 end 
