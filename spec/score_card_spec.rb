@@ -44,4 +44,20 @@ describe ScoreCard do
       expect(bowl.frame_count).to eq 2
     end
   end
+
+  describe '#hit_pins' do 
+    it 'is an array' do 
+      expect(bowl.hit_pins).to eq []
+    end
+    it 'saves the amount of hit pins per roll' do 
+      bowl.roll(4)
+
+      expect(bowl.hit_pins).to eq [4]
+    end 
+    it 'should initiate the next roll' do 
+      bowl.roll(4)
+
+      expect(bowl.roll_count).to eq 2
+    end 
+  end 
 end 

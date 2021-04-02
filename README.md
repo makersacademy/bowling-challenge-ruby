@@ -52,7 +52,7 @@ I want to get an extra roll if I hit 10 pins in the last frame
 - Keep track of which frame the player is at        |   @frame_count
 - Keep track of which roll the player is at         |   @roll_count
 - Keep trach of the amount of pins hit per roll     |   @hit_pins
-- Keep track of the amount of pins hit per frame    |   @hit_pint_per_frame
+- Keep track of the amount of pins hit per frame    |   @hit_pins_per_frame
 - Keep track of the total score                     |   @total 
 - Implement the rules                               |   module (?)
 - Leave notes when any of the special rules apply   |   a hash
