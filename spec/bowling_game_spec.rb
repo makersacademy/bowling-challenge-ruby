@@ -55,6 +55,13 @@ describe BowlingGame do
     it 'defaults the score of the second_roll to zero' do
       expect(new_game.roll_2_score).to eq 0
     end
+
+    it 'updates the bonus variable with the next 2 roll values of next frame' do
+      new_game.roll_1(test_roll1)
+      new_game.roll_2(test_roll2)
+      expect(new_game.bonus_score).to eq 7
+    end
+
   end
 
   context 'player gets a spare' do
@@ -65,6 +72,12 @@ describe BowlingGame do
 
     it 'changes spare to true when the roll 1 and 2 equal 10 ' do
       expect(new_game.spare).to eq true
+    end
+
+    it 'updates the bonus variable with the next 1 roll value of next frame' do
+      new_game.roll_1(test_roll1)
+      new_game.roll_2(test_roll2)
+      expect(new_game.bonus_score).to eq 5
     end
   end
 

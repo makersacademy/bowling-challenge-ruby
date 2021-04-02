@@ -19,12 +19,25 @@ class BowlingGame
     if players_score == 10
       @strike = true
     end
+
+    if @strike
+      @bonus_score = players_score
+    end
+
+    if @spare
+      @bonus_score = players_score
+    end
   end
 
   def roll_2(players_score)
     if @roll_1_score + players_score == 10
       @spare = true
     end
+
+    if @strike
+      @bonus_score += players_score
+    end
+
     @roll_2_score = players_score
   end
 
