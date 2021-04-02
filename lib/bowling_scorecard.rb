@@ -2,6 +2,14 @@ class BowlingScorecard
   attr_reader :current_score
 
   def initialize
+    @frame = 1
+    @first_roll = nil
+    @second_roll = nil
+    @roll_score = nil
+    @strike = false
+    @spare = false
+    @bonus_points = nil
+    @frame_score = nil
     @current_score = 0
   end
 
@@ -12,16 +20,15 @@ class BowlingScorecard
   end
 
   def display_scorecard
-    [{ round: 1, first_roll: 5, second_roll: 4 , roll_score: 9, strike: false, spare: false, bonus_points: 0, frame_score: 9, total_score: 9 }]
+    [{ frame: 1, first_roll: 5, second_roll: 4 , roll_score: 9, strike: false, spare: false, bonus_points: 0, frame_score: 9, total_score: 9 }]
   end
 
 private
-
   def valid_score?(score)
-    if score > 10 || score < 0
-      false
-    else
-      true
-    end
+    return false if (score > 10 || score < 0)
+
+    true
   end
+
+
 end
