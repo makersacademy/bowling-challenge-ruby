@@ -14,11 +14,12 @@ class BowlingScorecard
   end
 
   def enter_roll(score)
-    return "Invalid score entered, entered_score must be between 0 and #{10 - @frame_score}." unless valid?(score)
+    invalid_message = "Invalid score entered, score must be between 0 and #{10 - @frame_score}."
+    return invalid_message unless valid?(score)
 
     assign(score)
     update_current_and_frame(score)
-    apply_bonus_points(score)
+    bonus_points_applicable?(score)
     update_score_log
     increment_frame_if_end_frame
 
@@ -52,28 +53,27 @@ private
     @current_score += score
   end
 
-  # def calculate(score)
-  #   score
-  # end
+  def bonus_points_applicable?(score)
+    return unless @frame > 1
 
-  def apply_bonus_points(score)
-    if @frame > 1
-      if @score_log[@frame - 2][:strike]
-        @score_log[@frame - 2][:bonus_points] += score
-        @score_log[@frame - 2][:frame_score] += score
-        @score_log[@frame - 2][:total_score] += score
-        @current_score += score
-        if @score_log[@frame - 3][:strike] and @second_roll == nil and @frame > 2
-          @score_log[@frame - 3][:bonus_points] += score
-          @score_log[@frame - 3][:frame_score] += score
-          @score_log[@frame - 3][:total_score] += score
-          @current_score += score
-        end
-      elsif @score_log[@frame - 2][:spare] and @second_roll == nil
-        @score_log[@frame - 2][:bonus_points] += score
-        @current_score += score
-      end
+    if @score_log[@frame - 2][:strike]
+      apply_bonus_points(@frame - 2, score)
+      apply_bonus_if_two_strikes_in_row(@frame - 3, score)
+    elsif @score_log[@frame - 2][:spare] and @second_roll.nil?
+      apply_bonus_points(@frame - 2, score)
     end
+  end
+
+  def apply_bonus_if_two_strikes_in_row(frame, score)
+    two_strikes_in_row_test = (@score_log[frame][:strike] and @second_roll.nil? and @frame > 2)
+    apply_bonus_points(frame, score) if two_strikes_in_row_test
+  end
+
+  def apply_bonus_points(frame, score)
+    @score_log[frame][:bonus_points] += score
+    @score_log[frame][:frame_score] += score
+    @score_log[frame][:total_score] += score
+    @current_score += score
   end
 
   def update_score_log
@@ -98,6 +98,8 @@ private
   end
 
   def increment_frame_if_end_frame
+    return if @frame == 10
+
     if @first_roll != nil and @second_roll != nil
       @frame += 1
       reset_frame_stats
