@@ -10,5 +10,9 @@ describe BowlingScorecard do
     it 'will reject any score over 10' do
       expect(test_scorecard.enter_roll(11)).to eq "Invalid score entered, entered_score must be between 0 and 10."
     end
+
+    it 'will reject any negative score' do
+      expect(test_scorecard.enter_roll(-1)).to eq "Invalid score entered, entered_score must be between 0 and 10."
+    end
   end
 end
