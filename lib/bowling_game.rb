@@ -14,15 +14,21 @@ class BowlingGame
     @scorecard = []
   end
 
-  def first_roll(players_score)
+  def roll_1(players_score)
     @roll_1_score = players_score
+    if players_score == 10
+      @strike = true
+    end
   end
 
-  def second_roll(players_score)
+  def roll_2(players_score)
     @roll_2_score = players_score
+    if @roll_1_score + players_score == 10
+      @spare = true
+    end
   end
 
-  def third_roll(players_score)
+  def roll_3(players_score)
     @roll_3_score = players_score
   end
 

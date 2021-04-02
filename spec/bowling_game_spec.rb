@@ -21,25 +21,50 @@ describe BowlingGame do
   end
 
   context 'saving score values of each roll per frame' do
-    describe '.first_roll' do
+    describe '.roll_1' do
       it 'saves result of first roll to the roll_1_score instance variable' do
-        new_game.first_roll(test_roll1)
+        new_game.roll_1(test_roll1)
         expect(new_game.roll_1_score).to eq 5
       end
     end
 
-    describe '.second_roll' do
+    describe '.roll_2' do
       it 'saves result of second roll to the roll_2_score instance variable' do
-        new_game.second_roll(test_roll2)
+        new_game.roll_2(test_roll2)
         expect(new_game.roll_2_score).to eq 2
       end
     end
 
-    describe '.third_roll' do
+    describe '.roll_3' do
       it 'saves result of third roll to the roll_3_score instance variable' do
-        new_game.third_roll(test_roll2)
+        new_game.roll_3(test_roll2)
         expect(new_game.roll_3_score).to eq 2
       end
+    end
+  end
+
+  context 'player gets a strike' do
+    before do
+      new_game.roll_1(test_strike)
+    end
+
+    it 'changes strike to true when the first roll has a value of 10' do
+      expect(new_game.strike).to eq true
+    end
+
+    it 'defaults the score of the second_roll to zero' do
+      expect(new_game.roll_2_score).to eq 0
+    end
+  end
+
+  context 'player gets a spare' do
+    before do
+      new_game.roll_1(test_spare1)
+      new_game.roll_2(test_spare2)
+    end
+
+    it 'changes spare to true when the roll 1 and 2 equal 10 ' do
+      expect(new_game.spare).to eq true
     end
   end
 end
