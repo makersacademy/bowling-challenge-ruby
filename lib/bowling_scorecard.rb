@@ -18,23 +18,14 @@ class BowlingScorecard
 
     assign(score)
     update_current_and_frame(score)
-    if @frame > 1
-      if @score_log[@frame - 2][:strike]
-        @score_log[@frame - 2][:bonus_points] += score
-        @current_score += score
-        if @score_log[@frame - 3][:strike] and @second_roll == nil and @frame > 2
-          @score_log[@frame - 3][:bonus_points] += score
-          @current_score += score
-        end
-      end
-    end
+    apply_bonus_points(score)
     update_score_log
     increment_frame_if_end_frame
 
     score
   end
 
-  def display_scorecard
+  def generate_scorecard_info
     @score_log
   end
 
@@ -50,25 +41,9 @@ private
       @strike = true if score == 10
       @first_roll = score
     else
+      @spare = true if (@first_roll + score) == 10
       @second_roll = score
     end
-  end
-
-  def increment_frame_if_end_frame
-    if @first_roll != nil and @second_roll != nil
-      @frame += 1
-      reset_frame_stats
-    elsif @first_roll != nil and @strike == true
-      @frame += 1
-      reset_frame_stats
-    end
-  end
-
-  def reset_frame_stats
-    @first_roll = nil
-    @second_roll = nil
-    @strike = false
-    @frame_score = 0
   end
 
   def update_current_and_frame(score)
@@ -76,8 +51,24 @@ private
     @current_score += score
   end
 
-  def calculate(score)
-    score
+  # def calculate(score)
+  #   score
+  # end
+
+  def apply_bonus_points(score)
+    if @frame > 1
+      if @score_log[@frame - 2][:strike]
+        @score_log[@frame - 2][:bonus_points] += score
+        @current_score += score
+        if @score_log[@frame - 3][:strike] and @second_roll == nil and @frame > 2
+          @score_log[@frame - 3][:bonus_points] += score
+          @current_score += score
+        end
+      elsif @score_log[@frame - 2][:spare] and @second_roll == nil
+        @score_log[@frame - 2][:bonus_points] += score
+        @current_score += score
+      end
+    end
   end
 
   def update_score_log
@@ -99,5 +90,23 @@ private
       frame_score: @frame_score,
       total_score: @current_score
     }
+  end
+
+  def increment_frame_if_end_frame
+    if @first_roll != nil and @second_roll != nil
+      @frame += 1
+      reset_frame_stats
+    elsif @first_roll != nil and @strike == true
+      @frame += 1
+      reset_frame_stats
+    end
+  end
+
+  def reset_frame_stats
+    @first_roll = nil
+    @second_roll = nil
+    @strike = false
+    @spare = false
+    @frame_score = 0
   end
 end

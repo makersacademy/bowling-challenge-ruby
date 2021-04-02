@@ -39,6 +39,13 @@ describe BowlingScorecard do
       test_scorecard.enter_roll(6)
       expect(test_scorecard.current_score).to eq 54
     end
+
+    it 'takes into account the bonus scoring if there is a spare' do
+      test_scorecard.enter_roll(4)
+      test_scorecard.enter_roll(6)
+      test_scorecard.enter_roll(5)
+      expect(test_scorecard.current_score).to eq 20
+    end
   end
 
   describe '#frame' do
@@ -61,12 +68,12 @@ describe BowlingScorecard do
     end
   end
 
-  describe '#display_scorecard' do
+  describe '#generate_scorecard_info' do
     context 'after one frame' do
       it 'displays the current scorecard' do
         test_scorecard.enter_roll(5)
         test_scorecard.enter_roll(4)
-        expect(test_scorecard.display_scorecard).to eq([{ frame: 1, first_roll: 5, second_roll: 4, strike: false, spare: false, bonus_points: 0, frame_score: 9, total_score: 9 }])
+        expect(test_scorecard.generate_scorecard_info).to eq([{ frame: 1, first_roll: 5, second_roll: 4, strike: false, spare: false, bonus_points: 0, frame_score: 9, total_score: 9 }])
       end
     end
 
@@ -77,7 +84,7 @@ describe BowlingScorecard do
         test_scorecard.enter_roll(4)
         test_scorecard.enter_roll(4)
 
-        expect(test_scorecard.display_scorecard).to eq([
+        expect(test_scorecard.generate_scorecard_info).to eq([
           { frame: 1, first_roll: 5, second_roll: 4, strike: false, spare: false, bonus_points: 0, frame_score: 9, total_score: 9 },
           { frame: 2, first_roll: 4, second_roll: 4, strike: false, spare: false, bonus_points: 0, frame_score: 8, total_score: 17 },
         ])
