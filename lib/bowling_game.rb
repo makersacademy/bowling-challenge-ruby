@@ -1,6 +1,6 @@
 class BowlingGame
 
-  attr_reader :current_frame, :roll_1_score, :roll_2_score, :roll_3_score, :bonus_score, :total_frame_score, :strike, :spare, :scorecard
+  attr_reader :current_frame, :roll_1_score, :roll_2_score, :roll_3_score, :bonus_score, :total_game_score, :strike, :spare, :scorecard
 
   def initialize
     @current_frame = 1
@@ -8,7 +8,7 @@ class BowlingGame
     @roll_2_score = 0
     @roll_3_score = nil
     @bonus_score = 0
-    @total_frame_score = 0
+    @total_game_score = 0
     @strike = false
     @spare = false
     @scorecard = []
@@ -25,11 +25,13 @@ class BowlingGame
       @roll_1_score = players_score
       @roll_2_score = 0
       @roll_3_score = 0
+      running_total
       update_scorecard
     elsif players_score == 10 && @current_frame < 10
       @strike = true
       @roll_1_score = players_score
       @roll_2_score = 0
+      running_total
       update_scorecard
     else
       @roll_1_score = players_score
@@ -47,6 +49,7 @@ class BowlingGame
     elsif @spare
       update_scorecard_if_spare
     elsif (@strike == false && @spare == false)
+      running_total
       update_scorecard
     end
 
@@ -63,6 +66,7 @@ class BowlingGame
     elsif @spare
       update_scorecard_if_spare
     else
+      running_total
       update_scorecard
     end
   end
@@ -76,36 +80,60 @@ class BowlingGame
   end
 
   def update_scorecard
-    @scorecard << { "frame_#{@current_frame}" => { :roll_1 => @roll_1_score, :roll_2 => @roll_2_score, :roll_3 => @roll_3_score, :bonus_score => @bonus_score }}
+    @scorecard << { "frame_#{@current_frame}" => { :roll_1 => @roll_1_score, :roll_2 => @roll_2_score, :roll_3 => @roll_3_score, :bonus_score => @bonus_score, :total => @total_game_score }}
     next_frame
   end
 
   def update_scorecard_if_spare
+    running_total
+
     if @current_frame == 10
       @scorecard[@current_frame-2]["frame_#{@current_frame-1}"][:bonus_score] = @roll_1_score
+
     else
-    @scorecard[@current_frame-2]["frame_#{@current_frame-1}"][:bonus_score] = @bonus_score
+      @scorecard[@current_frame-2]["frame_#{@current_frame-1}"][:bonus_score] = @bonus_score
+
+      @scorecard[@current_frame-2]["frame_#{@current_frame-1}"][:total] += @bonus_score
+
+      @total_game_score+=@bonus_score
     end
+
 
     @spare = false
     @bonus_score = 0
 
-    @scorecard << { "frame_#{@current_frame}" => { :roll_1 => @roll_1_score, :roll_2 => @roll_2_score, :roll_3 => @roll_3_score, :bonus_score => @bonus_score }}
+    @scorecard << { "frame_#{@current_frame}" => { :roll_1 => @roll_1_score, :roll_2 => @roll_2_score, :roll_3 => @roll_3_score, :bonus_score => @bonus_score, :total => @total_game_score }}
     next_frame
   end
 
  def update_scorecard_if_strike
+   running_total
+
    if @current_frame == 10
      @scorecard[@current_frame-2]["frame_#{@current_frame-1}"][:bonus_score] = @roll_1_score + @roll_2_score
+
    else
      @scorecard[@current_frame-2]["frame_#{@current_frame-1}"][:bonus_score] = @bonus_score
+
+     @scorecard[@current_frame-2]["frame_#{@current_frame-1}"][:total] += @bonus_score
+
+     @total_game_score+=@bonus_score
+
    end
 
    @strike = false
    @bonus_score = 0
 
-   @scorecard << { "frame_#{@current_frame}" => { :roll_1 => @roll_1_score, :roll_2 => @roll_2_score, :roll_3 => @roll_3_score, :bonus_score => @bonus_score }}
+   @scorecard << { "frame_#{@current_frame}" => { :roll_1 => @roll_1_score, :roll_2 => @roll_2_score, :roll_3 => @roll_3_score, :bonus_score => @bonus_score, :total => @total_game_score }}
    next_frame
+ end
+
+ def running_total
+  if current_frame < 10
+    @total_game_score += @roll_1_score + @roll_2_score
+  else
+    @total_game_score+=@roll_1_score + @roll_2_score + @roll_3_score
+  end
  end
 
  def end_of_game

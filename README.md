@@ -110,3 +110,10 @@ game.scorecard
 {"frame_8"=>{:roll_1=>3, :roll_2=>7, :roll_3=>nil, :bonus_score=>4}},
 {"frame_9"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}},
 {"frame_10"=>{:roll_1=>10, :roll_2=>7, :roll_3=>4, :bonus_score=>0}}]
+
+
+
+=>
+[{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>7}},
+{"frame_2"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>14}}, "frame_3"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7, :total=>31}}, {"frame_4"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>38}}, {"frame_5"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>45}}, {"frame_6"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>52}}, {"frame_7"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0,:total=>59}}, {"frame_8"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>66}},
+{"frame_9"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>73}}, {"frame_10"=>{:roll_1=>10, :roll_2=>3, :roll_3=>3, :bonus_score=>0, :total=>86}}]
