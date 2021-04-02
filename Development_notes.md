@@ -31,12 +31,20 @@ Model:
 
 As a user
 I want to add my score into the scorecard
+- accepts a score between 0 to 10 on the first roll - DONE
+- on second roll - can only accept a score which brings total up to 10 max  
 
 As a user
 I want to see my current score
+- you get all the scoredcard information generated - DONE
+- need to implement strike and spare information
+- 
+
 
 As a user
 I want to play 10 frames
+- need to implement 10th frame mechanics
+- need to implement win output - gutter game, perfect game, etc..
 
 
 #### Domain Model
