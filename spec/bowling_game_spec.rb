@@ -67,4 +67,24 @@ describe BowlingGame do
       expect(new_game.spare).to eq true
     end
   end
+
+  context 'moving on to new frames' do
+    describe '.next_frame' do
+      it 'increases the frame number for each frame played' do
+        3.times { new_game.next_frame }
+        expect(new_game.current_frame).to eq 4
+      end
+    end
+
+    it 'increases the frame number by 1 after roll 2 is complete' do
+      new_game.roll_2(test_roll1)
+      expect(new_game.current_frame).to eq 2
+    end
+
+    it 'increases the frame number by 1 when there is a strike' do
+      new_game.roll_1(test_strike)
+      expect(new_game.current_frame).to eq 2
+    end
+  end
+
 end
