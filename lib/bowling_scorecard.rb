@@ -14,16 +14,55 @@ class BowlingScorecard
   end
 
   def enter_roll(score)
-    puts score
     invalid_message = "Invalid score entered, score must be between 0 and #{max_score}."
     return invalid_message unless valid?(score)
 
     if @frame == 10
-      @third_roll = nil
-      (@current_score += score) if @strike
-      (@current_score += score) if @spare
-      puts @score_log
-      puts @current_score
+      if @first_roll.nil?
+        puts @score_log
+        puts "------"
+        puts "------"
+        @bonus_points = 0
+        @first_roll = score
+        if score == 10
+          @strike = true
+        end
+        update_current_and_frame(score)
+        bonus_points_applicable?(score)
+        update_score_log
+        return score
+      end
+
+      if @first_roll != nil and @second_roll.nil?
+        @second_roll = score
+        puts @score_log
+        puts "------"
+        puts "------"
+        if @strike
+          update_current_and_frame(score)
+          bonus_points_applicable?(score)
+          @bonus_points += score
+          update_score_log
+          return score
+        end
+      end
+
+      if @first_roll != nil and @second_roll != nil
+        puts @score_log
+        puts "------"
+        puts "------"
+        @third_roll = score
+        update_current_and_frame(score)
+        @bonus_points += score
+        update_score_log
+        puts @score_log
+        puts "------"
+        puts "------"
+        return "end game"
+      end
+
+      # apply_bonus_points(10-1, score) if @strike
+      # (@current_score += score) if @spare
     end
 
     assign(score)
@@ -31,8 +70,9 @@ class BowlingScorecard
     bonus_points_applicable?(score)
     update_score_log
     increment_frame_if_end_frame
-
-    puts @current_score
+    puts @score_log
+    puts "------"
+    puts "------"
     score
   end
 
@@ -49,7 +89,7 @@ private
   end
 
   def max_score
-    return 10 if @frame == 10
+    return 10 if @frame == 10 and @strike
 
     10 - @frame_score
   end
@@ -59,7 +99,6 @@ private
       @strike = true if score == 10
       @first_roll = score
     else
-      @spare = true if (@strike == true and @frame == 10)
       @spare = true if (@first_roll + score) == 10
       @second_roll = score
     end
@@ -81,15 +120,18 @@ private
     end
   end
 
-  def apply_bonus_if_two_strikes_in_row(frame, score)
-    two_strikes_in_row_test = (@score_log[frame][:strike] and @second_roll.nil? and @frame > 2)
-    apply_bonus_points(frame, score) if two_strikes_in_row_test
+  def apply_bonus_if_two_strikes_in_row(frame_index, score)
+    two_strikes_in_row_test = (@score_log[frame_index][:strike] and @second_roll.nil? and @frame > 2)
+    if two_strikes_in_row_test
+      apply_bonus_points(frame_index, score)
+      @score_log[frame_index + 1][:total_score] += score
+    end
   end
 
-  def apply_bonus_points(frame, score)
-    @score_log[frame][:bonus_points] += score
-    @score_log[frame][:frame_score] += score
-    @score_log[frame][:total_score] += score
+  def apply_bonus_points(frame_index, score)
+    @score_log[frame_index][:bonus_points] += score
+    @score_log[frame_index][:frame_score] += score
+    @score_log[frame_index][:total_score] += score
     @current_score += score
   end
 
@@ -115,7 +157,7 @@ private
   end
 
   def increment_frame_if_end_frame
-    return if @frame == 10
+    return if @frame == 10 #10th frame logic
 
     if @first_roll != nil and @second_roll != nil
       @frame += 1

@@ -79,7 +79,7 @@ describe BowlingScorecard do
 
     context 'after 11 rolls, all strikes' do
       it {
-        11.times { test_scorecard.enter_roll(10) }
+        12.times { test_scorecard.enter_roll(10) }
         expect(test_scorecard.frame).to eq 10
       }
     end
@@ -140,6 +140,21 @@ describe BowlingScorecard do
           { frame: 3, first_roll: 4, second_roll: 6, strike: false, spare: true, bonus_points: 8, frame_score: 18, total_score: 46 },
           { frame: 4, first_roll: 8, second_roll: 1, strike: false, spare: false, bonus_points: 0, frame_score: 9, total_score: 55 }
         ])
+      end
+
+      context 'after three frames' do
+        it 'displays the current scorecard, where all three are strikes' do
+          test_scorecard.enter_roll(10)
+          test_scorecard.enter_roll(10)
+          test_scorecard.enter_roll(10)
+
+
+          expect(test_scorecard.generate_scorecard_info).to eq([
+            { frame: 1, first_roll: 10, second_roll: nil, strike: true, spare: false, bonus_points: 20, frame_score: 30, total_score: 30 },
+            { frame: 2, first_roll: 10, second_roll: nil, strike: true, spare: false, bonus_points: 10, frame_score: 20, total_score: 50 },
+            { frame: 3, first_roll: 10, second_roll: nil, strike: true, spare: false, bonus_points: 0, frame_score: 10, total_score: 60 }
+          ])
+        end
       end
     end
 
