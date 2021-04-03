@@ -20,6 +20,33 @@ describe BowlingScorecard do
       test_scorecard.enter_roll(5)
       expect(test_scorecard.enter_roll(6)).to eq "Invalid score entered, score must be between 0 and 5."
     end
+
+    it 'will reject any non-number' do
+      expect(test_scorecard.enter_roll('s')).to eq "Invalid score entered, score must be between 0 and 10."
+    end
+
+    it 'returns end game if conditions met - all strikes' do
+      11.times { test_scorecard.enter_roll(10) }
+      expect(test_scorecard.enter_roll(10)).to eq "End Game"
+    end
+
+    it 'returns end game if conditions met - all strikes except for spare in last game' do
+      9.times { test_scorecard.enter_roll(10) }
+      test_scorecard.enter_roll(4)
+      test_scorecard.enter_roll(6)
+      expect(test_scorecard.enter_roll(10)).to eq "End Game"
+    end
+
+    it 'returns end game if conditions met - all strikes except for 4 and 3 in last game' do
+      9.times { test_scorecard.enter_roll(10) }
+      test_scorecard.enter_roll(4)
+      expect(test_scorecard.enter_roll(3)).to eq "End Game"
+    end
+
+    it 'further test for end game conditions' do
+      9.times { test_scorecard.enter_roll(10) }
+      expect(test_scorecard.enter_roll(3)).to eq 3
+    end
   end
 
   describe '#current_score' do

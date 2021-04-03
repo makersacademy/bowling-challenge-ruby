@@ -24,6 +24,8 @@ class BowlingScorecard
     tenth_frame_bonus_points(score)
     update_score_log
     increment_frame_if_end_frame # not needed for 10
+    return "End Game" if end_game_condition
+
     score
   end
 
@@ -42,6 +44,7 @@ class BowlingScorecard
 
 private
   def valid?(score)
+    return false if score.is_a? String
     return false if score > max_score
     return false if score.negative?
 
@@ -193,5 +196,22 @@ private
       display << empty_row
       counter += 1
     end
+  end
+
+  def end_game_condition
+    return false unless @frame == 10
+    return true if end_game_scenarios
+
+    false
+  end
+
+  def end_game_scenarios
+    end_game_scenario_1 = (
+      @first_roll != nil and
+      @second_roll != nil and
+      !@strike and
+      !@spare
+    )
+    @third_roll != nil or end_game_scenario_1
   end
 end
