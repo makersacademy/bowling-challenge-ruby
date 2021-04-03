@@ -18,11 +18,11 @@ describe BowlingGame do
 
   context 'rolls are compelte with no strike or spare' do
     describe '.roll_1' do
-      it 'confirmation of roll 1 complete' do
-        expect(new_game.roll_1(test_roll1)).to eq "Nice roll! Let's Roll again!"
-        expect(new_game.roll_1(test_roll2)).to eq "Nice roll! Let's Roll again!"
-      end
+    it 'confirmation of roll 1 complete' do
+      expect(new_game.roll_1(test_roll1)).to eq "Nice roll! Let's Roll again!"
+      expect(new_game.roll_1(test_roll2)).to eq "Nice roll! Let's Roll again!"
     end
+  end
 
     describe '.roll_2' do
       it 'confirmation of roll 2 complete' do
@@ -96,7 +96,6 @@ describe BowlingGame do
     end
   end
 
-
   context '10th frame' do
     it 'allows a third roll if in the 10th frame the first roll equals a strike or spare' do
     9.times {
@@ -114,13 +113,12 @@ describe BowlingGame do
         expect(new_game.end_of_game).to eq "End of game"
       end
 
-
       it 'returns a confrimation of game ending after roll 3' do
-        9.times {
-          new_game.roll_1(test_roll1)
-          new_game.roll_2(test_roll2) }
-          new_game.roll_1(test_strike)
-          new_game.roll_2(test_roll1)
+      9.times {
+        new_game.roll_1(test_roll1)
+        new_game.roll_2(test_roll2) }
+        new_game.roll_1(test_strike)
+        new_game.roll_2(test_roll1)
         expect(new_game.roll_3(5)).to eq "End of game"
       end
     end

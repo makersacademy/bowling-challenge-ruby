@@ -1,7 +1,6 @@
 require_relative 'scorecard'
 
 class BowlingGame
-
   attr_reader :current_frame, :strike, :spare, :scorecard
 
   def initialize
@@ -56,10 +55,8 @@ class BowlingGame
       @spare = true
       return "Spare!"
     end
-  "Great Job! That's the end of this frame"
-
+    "Great Job! That's the end of this frame"
   end
-
 
   def roll_3(players_score)
     if @current_frame < 10
@@ -74,14 +71,13 @@ class BowlingGame
     else
       update_scorecard
     end
-
   end
 
   def next_frame
     if @current_frame < 10
       @current_frame += 1
     else
-    end_of_game
+      end_of_game
     end
   end
 
@@ -101,18 +97,16 @@ class BowlingGame
     @scorecard.update_bonus(players_score)
   end
 
-
   def update_scorecard
     @scorecard.update_scorecard(@current_frame, @strike, @spare)
     next_frame
   end
 
- def view_scorecard
-   @scorecard.scorecard
- end
+  def view_scorecard
+    @scorecard.scorecard
+  end
 
- def end_of_game
-   "End of game"
- end
-
+  def end_of_game
+    "End of game"
+  end
 end

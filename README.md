@@ -50,8 +50,7 @@ A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 str
 
 ### Modelling
 
-### logic to add:
-
+### To-Do:
 [ ] roll 2 cannot be played if roll 1 is a strike
 [ ] value of roll 2 cannot be a number where, when added to roll 1 value, it will equal more than 10
 [ ]
