@@ -24,13 +24,20 @@ class BowlingScorecard
     tenth_frame_bonus_points(score)
     update_score_log
     increment_frame_if_end_frame # not needed for 10
-    return score unless end_game_condition
-
-    "end game"
+    score
   end
 
   def generate_scorecard_info
     @score_log
+  end
+
+  def display_scorecard
+    display = ["Frame |  1  |  2  | Frame-Score | Total-Score"]
+    generate_scorecard_info.each do |frame_info|
+      display << frame_row(frame_info)
+    end
+    fill_empty_rows(11 - display.length, display)
+    display.join("\n")
   end
 
 private
@@ -149,15 +156,42 @@ private
     @frame_score = 0
   end
 
-  def end_game_condition
-    return false unless @frame == 10
-    return true if @third_roll != nil
-    return true unless third_roll?
-
-    false
+  def frame_row(frame_info)
+    frame_info[:second_roll] = display_strike_spare(frame_info)
+    sprintf(string_format(frame_info),
+            { frame: "#{frame_info[:frame]}",
+              first_roll: "#{frame_info[:first_roll]}",
+              second_roll: "#{frame_info[:second_roll]}",
+              third_roll: "#{frame_info[:third_roll]}",
+              frame_score: "#{frame_info[:frame_score]} ",
+              total_score: "#{frame_info[:total_score]}"
+              })
   end
 
-  def third_roll?
-    @first_roll != nil and @second_roll != nil and (!@spare or !@strike)
+  def display_strike_spare(frame_info)
+    return 'x' if frame_info[:second_roll].nil? and frame_info[:strike]
+    return '/' if frame_info[:spare]
+
+    frame_info[:second_roll]
+  end
+
+  def string_format(frame_info)
+    "%<frame>-6s|%<first_roll>3s  |#{ten_fr_display_check(frame_info)}|" +
+    "%<frame_score>8s     |%<total_score>7s     "
+  end
+
+  def ten_fr_display_check(frame_info)
+    return "%<second_roll>-2s %<third_roll>2s" if frame_info[:frame] == 10
+
+    "%<second_roll>3s  "
+  end
+
+  def fill_empty_rows(counter, display)
+    counter = 11 - counter
+    until counter > 10
+      empty_row = sprintf('%<frame>-6s|     |     |             |            ', { frame: counter })
+      display << empty_row
+      counter += 1
+    end
   end
 end
