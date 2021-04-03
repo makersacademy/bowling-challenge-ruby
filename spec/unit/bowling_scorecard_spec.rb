@@ -71,6 +71,43 @@ describe BowlingScorecard do
       test_scorecard.enter_roll(5) #- 262
       expect(test_scorecard.current_score).to eq 262
     end
+
+    it 'calculates a score of 270 when 10 strikes in a row and two gutter balls' do
+      9.times { test_scorecard.enter_roll(10) } # - 240
+      test_scorecard.enter_roll(10) #- 270
+      test_scorecard.enter_roll(0)
+      test_scorecard.enter_roll(0)
+      expect(test_scorecard.current_score).to eq 270
+    end
+
+    it 'calculates a score of 95 with assorted rolls including strikes and spares' do
+      test_scorecard.enter_roll(10) # 10
+      test_scorecard.enter_roll(3) # 16
+      test_scorecard.enter_roll(2) # 20
+      test_scorecard.enter_roll(6) # 26
+      test_scorecard.enter_roll(4) # 30
+      test_scorecard.enter_roll(8) # 46
+      test_scorecard.enter_roll(0) # 46
+      test_scorecard.enter_roll(10) # 56
+      test_scorecard.enter_roll(0) # 56
+      test_scorecard.enter_roll(0) # 56
+      test_scorecard.enter_roll(3) # 59
+      test_scorecard.enter_roll(4) # 63
+      test_scorecard.enter_roll(5) # 68
+      test_scorecard.enter_roll(3) # 71
+      test_scorecard.enter_roll(9) # 80
+      test_scorecard.enter_roll(0) # 80
+      test_scorecard.enter_roll(8) # 88
+      test_scorecard.enter_roll(2) # 90
+      test_scorecard.enter_roll(5) # 95
+      expect(test_scorecard.current_score).to eq 95
+    end
+
+    it 'scores 0 in the event of a gutter game - 20 rolls of 0' do
+      20.times { test_scorecard.enter_roll(0) }
+      expect(test_scorecard.current_score).to eq 0
+    end
+
   end
 
   describe '#frame' do
