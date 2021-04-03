@@ -47,11 +47,6 @@ describe Game do
       end
       game.tenth_frame_extra(5)
 
-      p game.state
-      p game.frames
-      p game.frames_total
-      p game.total
-
       expect(game.frame_counter).to eq(11)
       expect(game.frames_total.length).to eq(10)
       expect(game.total).to eq(150)
