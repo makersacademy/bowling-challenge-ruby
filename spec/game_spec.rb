@@ -39,6 +39,24 @@ describe Game do
       expect(game.total).to eq(300)
     end
 
+    it 'when a full game is played and each bowling frame is a spare' do
+      game = Game.new
+
+      10.times do
+        game.frame(5, 5)
+      end
+      game.tenth_frame_extra(5)
+
+      p game.state
+      p game.frames
+      p game.frames_total
+      p game.total
+
+      expect(game.frame_counter).to eq(11)
+      expect(game.frames_total.length).to eq(10)
+      expect(game.total).to eq(150)
+    end
+
     it 'when a full game is played and the last frame is strike, strike, 5' do
       game = Game.new
 
@@ -47,11 +65,6 @@ describe Game do
       end
       game.tenth_frame_extra(10)
       game.tenth_frame_extra(5)
-
-      p game.state
-      p game.frames
-      p game.frames_total
-      p game.total
 
       expect(game.frame_counter).to eq(12)
       expect(game.frames_total.length).to eq(10)
@@ -66,11 +79,6 @@ describe Game do
       end
       game.frame(5, 5)
       game.tenth_frame_extra(6)
-
-      p game.state
-      p game.frames
-      p game.frames_total
-      p game.total
 
       expect(game.frame_counter).to eq(11)
       expect(game.frames_total.length).to eq(10)
@@ -161,7 +169,7 @@ describe Game do
       allow(game).to receive(:prev_condition) { 'spare' }
       allow(game).to receive(:current_frame) { 7 }
 
-      expect { game.spare }.to change { game.frames_total.count }.by(1)
+      expect { game.spare }.to change { game.frames_total.count }.by(0)
     end
   end
 

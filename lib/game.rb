@@ -57,7 +57,7 @@ class Game
     when 'x1_strike'
       @frames_total.push(20)
     when 'spare'
-      @frames_total.push(10 + current_frame(0))
+      @frame_counter.zero? ? nil : @frames_total.push(10 + current_frame(0))
     end
   end
 
