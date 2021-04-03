@@ -9,17 +9,6 @@ Count and sum the scores of a bowling game for one player.
 A bowling game consists of 10 frames in which the player tries to knock down the 10 pins.
 In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
 
-
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
-In order to do this, you may pay particular attention to the following:
-[ ] Using diagramming to plan your approach to the challenge
-[ ] TDD your code
-[ ] Focus on testing behaviour rather than state
-[ ] Commit often, with good commit messages
-[ ] Single Responsibility Principle and encapsulation
-[ ] Clear and readable code
-
 ---
 ## Bowling rules
 
@@ -50,10 +39,32 @@ A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 str
 
 ### Modelling
 
+|     class      |   initialize                   |   method                                       |
+|----------------|--------------------------------|------------------------------------------------|
+|   BowlingGame  |  @current_frame = 1            | roll_1(players_score)                          |
+|                |  @strike = false               | roll_2(players_score)                          |
+|                |  @spare = false                | roll_3(players_score)                          |
+|                |  @scorecard = Scorecard.new    | roll_2(players_score)                          |
+|                |                                | next_frame                                     |
+|                |                                | update_roll_1_score(players_score)             |
+|                |                                | update_roll_2_score(players_score)             |
+|                |                                | update_roll_3_score(players_score)             |
+|                |                                | update_bonus(players_score)                    |
+|                |                                | update_scorecard                               |
+|                |                                | view_scorecard                                 |
+|                |                                | end_of_game                                    |
+|  Scorecard     |   @scorecard = []              | update_bonus(players_score)                    |
+|                |   @roll_1_score = 0            | update_scorecard(current_frame, strike, spare) |
+|                |   @roll_2_score = 0            | running_total(current_frame)                   |
+|                |   @roll_3_score = nil          |                                                |
+|                |   @bonus_score = 0             |                                                |
+|                |   @total_game_score = 0        |                                                |
+
+
 ### To-Do:
 [ ] roll 2 cannot be played if roll 1 is a strike
 [ ] value of roll 2 cannot be a number where, when added to roll 1 value, it will equal more than 10
-[ ]
+[ ] logic of more than one strike in a row
 
 
 ### irb
