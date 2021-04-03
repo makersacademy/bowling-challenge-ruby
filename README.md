@@ -50,43 +50,53 @@ A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 str
 
 ### Modelling
 
+### logic to add:
+
+[ ] roll 2 cannot be played if roll 1 is a strike
+[ ] value of roll 2 cannot be a number where, when added to roll 1 value, it will equal more than 10
+[ ]
+
 
 ### irb
 #regular play:
 require './lib/bowling_game.rb'
 game = BowlingGame.new
 game.roll_1(4)
+ => "Nice roll! Let's Roll again!"
 game.roll_2(3)
-game.scorecard
- => [{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}}
+ => "Great Job! That's the end of this frame"
+
+game.view_scorecard
+ => [{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>7}}]
+
 
 #gets a strike:
 game.roll_1(10)
+=> "Strike!"
 game.strike
 => true
-game.roll_1(2)
-game.roll_2(5)
-game.scorecard
+game.roll_1(4)
+game.roll_2(3)
+game.view_scorecard
 =>
-[{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}},
-{"frame_2"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7}},
-{"frame_3"=>{:roll_1=>2, :roll_2=>5, :roll_3=>nil, :bonus_score=>0}}]
+=> [
+{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>7}}, {"frame_2"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7, :total=>24}}, {"frame_3"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>31}}]
 
 game.strike
 => false
 
 # gets a spare:
 game.roll_1(3)
+=> "Nice roll! Let's Roll again!"
 game.roll_2(7)
+ => "Spare!"
 game.roll_1(4)
+=> "Nice roll! Let's Roll again!"
 game.roll_2(3)
-game.scorecard
-=>
-[{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}},
-{"frame_2"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7}},
-{"frame_3"=>{:roll_1=>2, :roll_2=>5, :roll_3=>nil, :bonus_score=>0}},
-{"frame_4"=>{:roll_1=>3,:roll_2=>7, :roll_3=>nil, :bonus_score=>4}},
-{"frame_5"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}}]
+ => "Great Job! That's the end of this frame"
+game.view_scorecard
+=> [
+{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>7}}, {"frame_2"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7, :total=>24}}, {"frame_3"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>31}}, {"frame_4"=>{:roll_1=>3, :roll_2=>7, :roll_3=>nil, :bonus_score=>4, :total=>45}}, {"frame_5"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>52}}]
 
 # plays 10 frames
 game.roll_1(3)
@@ -99,21 +109,6 @@ game.roll_3(4)
 => "end of game"
 
 game.scorecard
-=>
-[{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}},
-{"frame_2"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7}},
-{"frame_3"=>{:roll_1=>2, :roll_2=>5, :roll_3=>nil, :bonus_score=>0}},
-{"frame_4"=>{:roll_1=>3, :roll_2=>7, :roll_3=>nil, :bonus_score=>4}},
-{"frame_5"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}},
-{"frame_6"=>{:roll_1=>3, :roll_2=>7, :roll_3=>nil, :bonus_score=>4}},
-{"frame_7"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}},
-{"frame_8"=>{:roll_1=>3, :roll_2=>7, :roll_3=>nil, :bonus_score=>4}},
-{"frame_9"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0}},
-{"frame_10"=>{:roll_1=>10, :roll_2=>7, :roll_3=>4, :bonus_score=>0}}]
-
-
-
-=>
-[{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>7}},
-{"frame_2"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>14}}, "frame_3"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7, :total=>31}}, {"frame_4"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>38}}, {"frame_5"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>45}}, {"frame_6"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>52}}, {"frame_7"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0,:total=>59}}, {"frame_8"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>66}},
-{"frame_9"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>73}}, {"frame_10"=>{:roll_1=>10, :roll_2=>3, :roll_3=>3, :bonus_score=>0, :total=>86}}]
+=> [
+{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>7}}, {"frame_2"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7, :total=>24}}, {"frame_3"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>31}}, {"frame_4"=>{:roll_1=>3, :roll_2=>7, :roll_3=>nil, :bonus_score=>4, :total=>45}}, {"frame_5"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>52}}, {"frame_6"=>{:roll_1=>3, :roll_2=>7, :roll_3=>nil, :bonus_score=>4, :total=>66}}, {"frame_7"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>73}}, {"frame_8"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7, :total=>90}}, {"frame_9"=>{:roll_1=>10, :roll_2=>7, :roll_3=>nil,:bonus_score=>0, :total=>107}},
+{"frame_10"=>{:roll_1=>10, :roll_2=>7, :roll_3=>4, :bonus_score=>0, :total=>128}}]

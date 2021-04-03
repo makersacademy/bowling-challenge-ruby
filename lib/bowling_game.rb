@@ -1,74 +1,80 @@
+require_relative 'scorecard'
+
 class BowlingGame
 
-  attr_reader :current_frame, :roll_1_score, :roll_2_score, :roll_3_score, :bonus_score, :total_game_score, :strike, :spare, :scorecard
+  attr_reader :current_frame, :strike, :spare, :scorecard
 
   def initialize
     @current_frame = 1
-    @roll_1_score = 0
-    @roll_2_score = 0
-    @roll_3_score = nil
-    @bonus_score = 0
-    @total_game_score = 0
     @strike = false
     @spare = false
-    @scorecard = []
+    @scorecard = Scorecard.new
   end
 
   def roll_1(players_score)
     if @strike
-      @bonus_score = players_score
+      update_bonus(players_score)
     elsif @spare
-      @bonus_score = players_score
+      update_bonus(players_score)
     end
 
     if players_score < 10 && @current_frame == 10
-      @roll_1_score = players_score
-      @roll_2_score = 0
-      @roll_3_score = 0
-      running_total
+      update_roll_1_score(players_score)
+      update_roll_2_score(0)
+      update_roll_3_score(0)
       update_scorecard
     elsif players_score == 10 && @current_frame < 10
-      @strike = true
-      @roll_1_score = players_score
-      @roll_2_score = 0
-      running_total
+      update_roll_1_score(players_score)
+      update_roll_2_score(0)
       update_scorecard
+      @strike = true
+      "Strike!"
     else
-      @roll_1_score = players_score
+      update_roll_1_score(players_score)
+      "Nice roll! Let's Roll again!"
     end
   end
 
   def roll_2(players_score)
-    @roll_2_score = players_score
+    update_roll_2_score(players_score)
 
     if @current_frame == 10
-      @roll_2_score = players_score
+      update_roll_2_score(players_score)
     elsif @strike
-      @bonus_score += players_score
-      update_scorecard_if_strike
+      update_bonus(players_score)
+      update_scorecard
+      @strike = false
     elsif @spare
-      update_scorecard_if_spare
-    elsif (@strike == false && @spare == false)
-      running_total
+      update_scorecard
+      @spare = false
+    elsif @strike == false && @spare == false
+      update_roll_2_score(players_score)
       update_scorecard
     end
 
-    if @roll_1_score + players_score == 10
+    if @scorecard.roll_1_score + players_score == 10
       @spare = true
+      return "Spare!"
     end
+  "Great Job! That's the end of this frame"
+
   end
 
 
   def roll_3(players_score)
-    @roll_3_score = players_score
+    if @current_frame < 10
+      return "You can only roll a third time in the 10th frame"
+    end
+
+    update_roll_3_score(players_score)
     if @strike
-      update_scorecard_if_strike
+      update_scorecard
     elsif @spare
-      update_scorecard_if_spare
+      update_scorecard
     else
-      running_total
       update_scorecard
     end
+
   end
 
   def next_frame
@@ -79,61 +85,30 @@ class BowlingGame
     end
   end
 
+  def update_roll_1_score(players_score)
+    @scorecard.roll_1_score = players_score
+  end
+
+  def update_roll_2_score(players_score)
+    @scorecard.roll_2_score = 0
+  end
+
+  def update_roll_3_score(players_score)
+    @scorecard.roll_3_score = 0
+  end
+
+  def update_bonus(players_score)
+    @scorecard.update_bonus(players_score)
+  end
+
+
   def update_scorecard
-    @scorecard << { "frame_#{@current_frame}" => { :roll_1 => @roll_1_score, :roll_2 => @roll_2_score, :roll_3 => @roll_3_score, :bonus_score => @bonus_score, :total => @total_game_score }}
+    @scorecard.update_scorecard(@current_frame, @strike, @spare)
     next_frame
   end
 
-  def update_scorecard_if_spare
-    running_total
-
-    if @current_frame == 10
-      @scorecard[@current_frame-2]["frame_#{@current_frame-1}"][:bonus_score] = @roll_1_score
-
-    else
-      @scorecard[@current_frame-2]["frame_#{@current_frame-1}"][:bonus_score] = @bonus_score
-
-      @scorecard[@current_frame-2]["frame_#{@current_frame-1}"][:total] += @bonus_score
-
-      @total_game_score+=@bonus_score
-    end
-
-
-    @spare = false
-    @bonus_score = 0
-
-    @scorecard << { "frame_#{@current_frame}" => { :roll_1 => @roll_1_score, :roll_2 => @roll_2_score, :roll_3 => @roll_3_score, :bonus_score => @bonus_score, :total => @total_game_score }}
-    next_frame
-  end
-
- def update_scorecard_if_strike
-   running_total
-
-   if @current_frame == 10
-     @scorecard[@current_frame-2]["frame_#{@current_frame-1}"][:bonus_score] = @roll_1_score + @roll_2_score
-
-   else
-     @scorecard[@current_frame-2]["frame_#{@current_frame-1}"][:bonus_score] = @bonus_score
-
-     @scorecard[@current_frame-2]["frame_#{@current_frame-1}"][:total] += @bonus_score
-
-     @total_game_score+=@bonus_score
-
-   end
-
-   @strike = false
-   @bonus_score = 0
-
-   @scorecard << { "frame_#{@current_frame}" => { :roll_1 => @roll_1_score, :roll_2 => @roll_2_score, :roll_3 => @roll_3_score, :bonus_score => @bonus_score, :total => @total_game_score }}
-   next_frame
- end
-
- def running_total
-  if current_frame < 10
-    @total_game_score += @roll_1_score + @roll_2_score
-  else
-    @total_game_score+=@roll_1_score + @roll_2_score + @roll_3_score
-  end
+ def view_scorecard
+   @scorecard.scorecard
  end
 
  def end_of_game
