@@ -61,8 +61,15 @@ describe BowlingScorecard do
       9.times { test_scorecard.enter_roll(10) } # - 240
       test_scorecard.enter_roll(4) #- 248 - 252
       test_scorecard.enter_roll(6) #- 264
-      puts test_scorecard.enter_roll(10) #- 274
+      test_scorecard.enter_roll(10) #- 274
       expect(test_scorecard.current_score).to eq 274
+    end
+
+    it 'calculates a score of 262 when 9 strikes in a row and then a 4 and 5 on the 10th frame (no 3rd roll)' do
+      9.times { test_scorecard.enter_roll(10) } # - 240
+      test_scorecard.enter_roll(4) #- 248 - 252
+      test_scorecard.enter_roll(5) #- 262
+      expect(test_scorecard.current_score).to eq 262
     end
   end
 

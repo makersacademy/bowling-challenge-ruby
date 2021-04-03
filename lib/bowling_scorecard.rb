@@ -64,6 +64,15 @@ class BowlingScorecard
           puts "------"
           return score
         end
+
+        update_current_and_frame(score)
+        bonus_points_applicable?(score)
+        update_score_log
+        puts @score_log
+        puts "------"
+        puts "------"
+        return "end game"
+
       end
 
       if @first_roll != nil and @second_roll != nil
