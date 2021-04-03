@@ -19,6 +19,7 @@ class BowlingScorecard
 
     if @frame == 10
       if @first_roll.nil?
+        puts "it got here - first roll"
         puts @score_log
         puts "------"
         puts "------"
@@ -30,11 +31,15 @@ class BowlingScorecard
         update_current_and_frame(score)
         bonus_points_applicable?(score)
         update_score_log
+        puts @score_log
+        puts "------"
+        puts "------"
         return score
       end
 
       if @first_roll != nil and @second_roll.nil?
         @second_roll = score
+        puts "it got here - second roll"
         puts @score_log
         puts "------"
         puts "------"
@@ -43,11 +48,26 @@ class BowlingScorecard
           bonus_points_applicable?(score)
           @bonus_points += score
           update_score_log
+          puts @score_log
+          puts "------"
+          puts "------"
+          return score
+        end
+
+        if (@frame_score + score) == 10
+          @spare = true
+          update_current_and_frame(score)
+          bonus_points_applicable?(score)
+          update_score_log
+          puts @score_log
+          puts "------"
+          puts "------"
           return score
         end
       end
 
       if @first_roll != nil and @second_roll != nil
+        puts "it got here - third roll"
         puts @score_log
         puts "------"
         puts "------"
@@ -89,7 +109,7 @@ private
   end
 
   def max_score
-    return 10 if @frame == 10 and @strike
+    return 10 if @frame == 10 and (@strike or @spare)
 
     10 - @frame_score
   end
