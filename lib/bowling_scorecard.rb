@@ -12,8 +12,6 @@ class BowlingScorecard
     @frame_score = 0
     @current_score = 0
     @score_log = []
-    @first_roller = false
-    @second_roller = false
   end
 
   def enter_roll(score)
@@ -23,73 +21,16 @@ class BowlingScorecard
     assign(score)
     update_current_and_frame(score)
     bonus_points_applicable?(score) unless (@frame == 10 and @third_roll != nil)
-    if @frame == 10
-      @bonus_points += score if @strike and @second_roll != nil
-      @bonus_points += score if @spare and @third_roll != nil
-    end
-
-    if @frame == 10
-      if @first_roller == false
-        @first_roller = true
-        # @third_roll = nil # inside
-        # @first_roll = score # inside assign
-        # @strike = true if score == 10 # inside aassign
-        # update_current_and_frame(score)
-        # bonus_points_applicable?(score)
-        # update_score_log
-
-        # return score
-
-      # puts @first_roll
-      # puts @second_roll
-      elsif @second_roller == false
-        @second_roller = true
-        # @second_roll = score # inside assign
-        # @spare = true if (@frame_score + score) == 10 # inside assign
-        # update_current_and_frame(score)
-        # bonus_points_applicable?(score)
-        # @bonus_points += score if @strike
-        # update_score_log
-        # # puts "second_roll"
-        # # puts @score_log
-        # return score if (@stike || @spare)
-        #
-        # return "end game"
-
-      elsif @first_roll != nil and @second_roll != nil
-        # @third_roll = score # inside assign
-        # update_current_and_frame(score)
-        # @bonus_points += score
-        # update_score_log
-        # # puts "third_roll"
-        # # puts @score_log
-        # return "end game"
-      end
-    end
-
-
-    # update_current_and_frame(score) # across all 3
-    # bonus_points_applicable?(score) # across 1 & 2,
-    update_score_log # across all 3
-    # puts "first_roll" if @frame == 10
-    # puts @score_log if @frame == 10
+    tenth_frame_bonus_points(score)
+    update_score_log
     increment_frame_if_end_frame # not needed for 10
     return score unless end_game_condition
 
     "end game"
-
-    # can implement an end game conditional
   end
 
   def generate_scorecard_info
     @score_log
-  end
-
-  def end_game_condition
-    return true if @frame == 10 and @third_roll != nil
-    return true if @frame == 10 and @first_roll != nil and @second_roll != nil and !@spare and !@strike
-
-    false
   end
 
 private
@@ -108,15 +49,23 @@ private
 
   def assign(score)
     if @first_roll.nil?
-      @third_roll = nil if @frame == 10
-      @strike = true if score == 10
-      @first_roll = score
+      first_roll_assignments(score)
     elsif @first_roll != nil and @second_roll.nil?
-      @spare = true if (@first_roll + score) == 10
-      @second_roll = score
-    elsif @first_roll != nil and @second_roll != nil
+      second_roll_assignments(score)
+    else
       @third_roll = score
     end
+  end
+
+  def first_roll_assignments(score)
+    @third_roll = nil if @frame == 10
+    @strike = true if score == 10
+    @first_roll = score
+  end
+
+  def second_roll_assignments(score)
+    @spare = true if (@first_roll + score) == 10
+    @second_roll = score
   end
 
   def update_current_and_frame(score)
@@ -148,6 +97,13 @@ private
     @score_log[frame_index][:frame_score] += score
     @score_log[frame_index][:total_score] += score
     @current_score += score
+  end
+
+  def tenth_frame_bonus_points(score)
+    return unless @frame == 10
+
+    @bonus_points += score if @strike and @second_roll != nil
+    @bonus_points += score if @spare and @third_roll != nil
   end
 
   def update_score_log
@@ -191,5 +147,17 @@ private
     @strike = false
     @spare = false
     @frame_score = 0
+  end
+
+  def end_game_condition
+    return false unless @frame == 10
+    return true if @third_roll != nil
+    return true unless third_roll?
+
+    false
+  end
+
+  def third_roll?
+    @first_roll != nil and @second_roll != nil and (!@spare or !@strike)
   end
 end

@@ -246,6 +246,25 @@ describe BowlingScorecard do
           { frame: 10, first_roll: 4, second_roll: 6, third_roll: 10, strike: false, spare: true, bonus_points: 10, frame_score: 20, total_score: 274 }
         ])
       end
+
+      it 'displays the current scorecard, where first nine rolls are strikes and 10th frame is a 9' do
+        9.times { test_scorecard.enter_roll(10) }
+        test_scorecard.enter_roll(4)
+        test_scorecard.enter_roll(5)
+
+        expect(test_scorecard.generate_scorecard_info).to eq([
+          { frame: 1, first_roll: 10, second_roll: nil, strike: true, spare: false, bonus_points: 20, frame_score: 30, total_score: 30 },
+          { frame: 2, first_roll: 10, second_roll: nil, strike: true, spare: false, bonus_points: 20, frame_score: 30, total_score: 60 },
+          { frame: 3, first_roll: 10, second_roll: nil, strike: true, spare: false, bonus_points: 20, frame_score: 30, total_score: 90 },
+          { frame: 4, first_roll: 10, second_roll: nil, strike: true, spare: false, bonus_points: 20, frame_score: 30, total_score: 120 },
+          { frame: 5, first_roll: 10, second_roll: nil, strike: true, spare: false, bonus_points: 20, frame_score: 30, total_score: 150 },
+          { frame: 6, first_roll: 10, second_roll: nil, strike: true, spare: false, bonus_points: 20, frame_score: 30, total_score: 180 },
+          { frame: 7, first_roll: 10, second_roll: nil, strike: true, spare: false, bonus_points: 20, frame_score: 30, total_score: 210 },
+          { frame: 8, first_roll: 10, second_roll: nil, strike: true, spare: false, bonus_points: 14, frame_score: 24, total_score: 234 },
+          { frame: 9, first_roll: 10, second_roll: nil, strike: true, spare: false, bonus_points: 9, frame_score: 19, total_score: 253 },
+          { frame: 10, first_roll: 4, second_roll: 5, third_roll: nil, strike: false, spare: false, bonus_points: 0, frame_score: 9, total_score: 262 }
+        ])
+      end
     end
   end
 end
