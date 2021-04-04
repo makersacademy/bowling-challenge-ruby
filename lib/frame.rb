@@ -15,7 +15,7 @@ class Frame
     end
 
     def is_spare?
-      @rolls.length == 2 && @rolls.sum == 10
+      @rolls.length == 2 && count == 10
     end 
 
     def count 
