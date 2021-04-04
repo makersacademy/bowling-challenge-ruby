@@ -12,7 +12,7 @@ class RunScorecard
       score = choice_loop
       @end_game = true if score == "End Game"
       puts(@end_game ? "\nFinal Scorecard" : "\nCurrent Scorecard:")
-      puts @scorecard.display_scorecard + "\n\n"
+      puts display_scorecard + "\n\n"
     end
   end
 

@@ -6,7 +6,7 @@ jackmcc08 answer to the challenge.
 
 On Submission:
 - RSPEC tests all passed
-- Rubocop - only one violation (main class too long)
+- Rubocop - only one violation (BowlingScorecard class too long)
 
 ## To use
 1. git clone to your local machine
@@ -20,6 +20,11 @@ Program is built entirely with Ruby and used the following gems for testing deve
 Cool features include:
 - Using Sprintf method to format the display strings simply and easily.
 - mocking user input with $stdin and stubbing gets.
+
+The program is split into two classes:
+- RunScorecard which includes the display logic and the game loop
+- BowlingScorecard which includes all the logic for the game and storing the information.
+- If I have time I will look to extract a Frame class, but unlikely at this point.
 
 ## Development History
 

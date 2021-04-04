@@ -1,3 +1,5 @@
+require_relative 'frame'
+
 class BowlingScorecard
   attr_reader :current_score, :frame
 
@@ -19,12 +21,7 @@ class BowlingScorecard
     return invalid_message unless valid?(score)
 
     score = score.to_i
-    assign(score)
-    update_current_and_frame(score)
-    bonus_points_applicable?(score) unless (@frame == 10 and @third_roll != nil)
-    tenth_frame_bonus_points(score)
-    update_score_log
-    increment_frame_if_end_frame # not needed for 10
+    roll_turn(score)
     end_game_condition ? "End Game" : score
   end
 
@@ -32,28 +29,28 @@ class BowlingScorecard
     @score_log
   end
 
-  def display_scorecard
-    display = ["Frame |  1  |  2  | Frame-Score | Total-Score"]
-    generate_scorecard_info.each do |frame_info|
-      display << frame_row(frame_info)
-    end
-    fill_empty_rows(11 - display.length, display)
-    display.join("\n")
-  end
-
 private
   def valid?(score)
     return false if score.to_s.match?(/\D/)
-    return false if score.to_i > max_score
-    return false if score.to_i.negative?
+
+    score = score.to_i
+    return false if score > max_score or score.negative?
 
     true
   end
 
   def max_score
-    return 10 if @frame == 10 and (@strike or @spare)
+    return 10 if last_frame? and (@strike or @spare)
 
     10 - @frame_score
+  end
+
+  def roll_turn(score)
+    assign(score)
+    update_current_and_frame(score)
+    apply_bonuses(score)
+    update_score_log
+    increment_frame_if_end_frame # not needed for 10
   end
 
   def assign(score)
@@ -67,7 +64,7 @@ private
   end
 
   def first_roll_assignments(score)
-    @third_roll = nil if @frame == 10
+    @third_roll = nil if last_frame?
     @strike = true if score == 10
     @first_roll = score
   end
@@ -80,6 +77,11 @@ private
   def update_current_and_frame(score)
     @frame_score += score
     @current_score += score
+  end
+
+  def apply_bonuses(score)
+    bonus_points_applicable?(score) unless (last_frame? and @third_roll != nil)
+    tenth_frame_bonus_points(score)
   end
 
   def bonus_points_applicable?(score)
@@ -109,7 +111,7 @@ private
   end
 
   def tenth_frame_bonus_points(score)
-    return unless @frame == 10
+    return unless last_frame?
 
     @bonus_points += score if @strike and @second_roll != nil
     @bonus_points += score if @spare and @third_roll != nil
@@ -122,7 +124,7 @@ private
       @score_log[@frame - 1] = current_frame_information
     end
 
-    @score_log[9][:third_roll] = @third_roll if @frame == 10
+    @score_log[9][:third_roll] = @third_roll if last_frame?
   end
 
   def current_frame_information
@@ -139,15 +141,11 @@ private
   end
 
   def increment_frame_if_end_frame
-    return if @frame == 10
+    return if last_frame?
+    return unless @first_roll != nil and (@second_roll != nil or @strike == true)
 
-    if @first_roll != nil and @second_roll != nil
-      @frame += 1
-      reset_frame_stats
-    elsif @first_roll != nil and @strike == true
-      @frame += 1
-      reset_frame_stats
-    end
+    @frame += 1
+    reset_frame_stats
   end
 
   def reset_frame_stats
@@ -158,59 +156,24 @@ private
     @frame_score = 0
   end
 
-  def frame_row(frame_info)
-    frame_info[:second_roll] = display_strike_spare(frame_info)
-    sprintf(string_format(frame_info),
-            { frame: "#{frame_info[:frame]}",
-              first_roll: "#{frame_info[:first_roll]}",
-              second_roll: "#{frame_info[:second_roll]}",
-              third_roll: "#{frame_info[:third_roll]}",
-              frame_score: "#{frame_info[:frame_score]} ",
-              total_score: "#{frame_info[:total_score]}"
-              })
-  end
-
-  def display_strike_spare(frame_info)
-    return 'x' if frame_info[:second_roll].nil? and frame_info[:strike]
-    return '/' if frame_info[:spare]
-
-    frame_info[:second_roll]
-  end
-
-  def string_format(frame_info)
-    "%<frame>-6s|%<first_roll>3s  |#{ten_fr_display_check(frame_info)}|" +
-    "%<frame_score>8s     |%<total_score>7s     "
-  end
-
-  def ten_fr_display_check(frame_info)
-    return "%<second_roll>-2s %<third_roll>2s" if frame_info[:frame] == 10
-
-    "%<second_roll>3s  "
-  end
-
-  def fill_empty_rows(counter, display)
-    counter = 11 - counter
-    until counter > 10
-      empty_row = sprintf('%<frame>-6s|     |     |             |            ', { frame: counter })
-      display << empty_row
-      counter += 1
-    end
-  end
-
   def end_game_condition
-    return false unless @frame == 10
+    return false unless last_frame?
     return true if end_game_scenarios
 
     false
   end
 
   def end_game_scenarios
-    end_game_scenario_1 = (
+    end_game_scenario_one = (
       @first_roll != nil and
       @second_roll != nil and
       !@strike and
       !@spare
     )
-    @third_roll != nil or end_game_scenario_1
+    @third_roll != nil or end_game_scenario_one
+  end
+
+  def last_frame?
+    @frame == 10
   end
 end

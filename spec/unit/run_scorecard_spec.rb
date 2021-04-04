@@ -12,7 +12,7 @@ describe RunScorecard do
 
     context 'it does not progress if an invalid score is entered' do
       it {
-        allow($stdin).to receive(:gets).and_return('s','10')
+        allow($stdin).to receive(:gets).and_return('s', '10')
         expect(test_game.run_game).to eq(nil)
       }
     end
