@@ -76,7 +76,7 @@ describe ScoreCard do
       bowl.roll(0)
 
 
-      expect(bowl.play(0)).to eq 240
+      expect(bowl.play(0)).to eq 270
     end 
   end 
 
@@ -124,6 +124,14 @@ describe ScoreCard do
       bowl.play(4)
 
       expect(bowl.play(4)).to eq 'Game ended! Your score was 86'
+    end 
+  end 
+
+  describe 'perfect round' do 
+    it 'should end with a score of 300' do 
+      11.times { bowl.play(10)}
+
+      expect(bowl.play(10)).to eq 300
     end 
   end 
 

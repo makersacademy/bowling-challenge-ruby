@@ -23,20 +23,19 @@ class ScoreCard
   end 
 
   def tenth_round(user_input)
-
     if @frames.last.rolls.length >= 2 && !@frames.last.is_strike? && !@frames.last.is_spare?
+      @score == 270 ? @score -= 30 : @score
       return "Game ended! Your score was #{tenth_round_score + @score }"
     elsif @frames.last.rolls.length >= 3
       return "Game ended! Your score was #{tenth_round_score + @score }"
     else 
       @frames.last.roll(user_input)
-      @score == 270 ? @score -= 30 : @score
       tenth_round_score + @score 
     end
   end
 
   def tenth_round_score
-    @frames.last.rolls.sum
+      @frames.last.rolls.sum
   end 
 
   def total
@@ -59,7 +58,7 @@ class ScoreCard
   private
 
   def previous_frame_is_strike(index)
-    @frames[index - 1] && @frames[index - 1].is_strike?
+    @frames[index - 2] && @frames[index - 1].is_strike?
   end
 
   def previous_two_frames_are_strikes(index)
