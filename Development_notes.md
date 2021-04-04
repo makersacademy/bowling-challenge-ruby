@@ -4,6 +4,8 @@ Initial perusal of the challenge requirements is to make a Bowling Scorecard pro
 
 It also says you do not need to build a web app with a UI, instead just to focus on the logic - sooooo I am going to focus on the ruby model first and then if I have time I am going to build a database layer, and then potentially a view & controller layer.
 
+- Update near end of development (Sunday Morning): Development of the logic took me considerably longer than expected. Therefore I built a terminal interface for the scorecard, but did not build a database layer or a web app. Before finishing I wil write up a readme and attempt to do some class extraction.
+
 Model:
 - This is all about the logic of scoring, outlined it below.
 - I am assuming that the user will input one score at a time and will not input the round number or any other details, this will be auto calculated by the game.
@@ -32,20 +34,25 @@ Model:
 As a user
 I want to add my score into the scorecard
 - accepts a score between 0 to 10 on the first roll - DONE
-- on second roll - can only accept a score which brings total up to 10 max  
+- on second roll - can only accept a score which brings total up to 10 max  - done
+
 
 As a user
 I want to see my current score
 - you get all the scoredcard information generated - DONE
-- need to implement strike and spare information
-- 
+- need to implement strike and spare information - DONE
+-
 
 
 As a user
 I want to play 10 frames
-- need to implement 10th frame mechanics
-- need to implement win output - gutter game, perfect game, etc..
+- need to implement 10th frame mechanics - DONE
+- need to implement win output - gutter game, perfect game, etc.. _ DONE
 
+To do
+- catch non-number inputs - DONE
+- write up readmes - DONE
+- extract classes
 
 #### Domain Model
 

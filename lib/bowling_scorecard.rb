@@ -18,15 +18,14 @@ class BowlingScorecard
     invalid_message = "Invalid score entered, score must be between 0 and #{max_score}."
     return invalid_message unless valid?(score)
 
+    score = score.to_i
     assign(score)
     update_current_and_frame(score)
     bonus_points_applicable?(score) unless (@frame == 10 and @third_roll != nil)
     tenth_frame_bonus_points(score)
     update_score_log
     increment_frame_if_end_frame # not needed for 10
-    return "End Game" if end_game_condition
-
-    score
+    end_game_condition ? "End Game" : score
   end
 
   def generate_scorecard_info
@@ -44,9 +43,9 @@ class BowlingScorecard
 
 private
   def valid?(score)
-    return false if score.is_a? String
-    return false if score > max_score
-    return false if score.negative?
+    return false if score.to_s.match?(/\D/)
+    return false if score.to_i > max_score
+    return false if score.to_i.negative?
 
     true
   end
