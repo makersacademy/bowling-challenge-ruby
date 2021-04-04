@@ -13,7 +13,7 @@ class ScoreCard
   end
 
   def roll(user_input)
-    if @frames.length.zero? || @frames.last.is_strike? || @frames.last.rolls.length == 2
+    if new_frame
       frame = Frame.new
       @frames << frame
     else
@@ -23,36 +23,24 @@ class ScoreCard
     total
   end
 
-  def tenth_round(user_input)
-    if @frames.last.rolls.length >= 2 && !@frames.last.is_strike? && !@frames.last.is_spare?
-      @score == 270 ? @score -= 30 : @score
-      "Game ended! Your score was #{tenth_round_score + @score}"
-    elsif @frames.last.rolls.length >= 3
-      "Game ended! Your score was #{tenth_round_score + @score}"
-    else
-      @frames.last.roll(user_input)
-      tenth_round_score + @score
-    end
-  end
-
-  def tenth_round_score
-    @frames.last.rolls.sum
-  end
-
   def total
     unless final_frame
       @score = @frames.map.with_index do |frame, index|
         bonus = 0
         bonus += frame.rolls.first if previous_two_frames_are_strikes(index)
         if previous_frame_is_strike(index)
-          bonus += frame.rolls.sum
+          bonus += frame.count
         elsif previous_frame_is_spare(index)
           bonus += frame.rolls.first
         end
-        bonus + frame.rolls.sum
+        bonus + frame.count
       end.sum
     end
   end
+
+  def game_over 
+    "Game ended! Your score was #{tenth_round_score + @score}"
+  end 
 
   private
 
@@ -70,5 +58,25 @@ class ScoreCard
 
   def final_frame
     @frames.length > 9
+  end
+
+  def new_frame
+    @frames.length.zero? || @frames.last.is_strike? || @frames.last.rolls.length == 2
+  end 
+
+  def tenth_round_no_bonus
+    @frames.last.rolls.length >= 2 && !@frames.last.is_strike? && !@frames.last.is_spare?
+  end 
+
+  def tenth_round_with_bonus
+    @frames.last.rolls.length >= 3
+  end 
+
+  def tenth_round(user_input)
+    tenth_round_no_bonus || tenth_round_with_bonus ? game_over : @frames.last.roll(user_input) && tenth_round_score + @score
+  end
+
+  def tenth_round_score
+    @frames.last.count
   end
 end
