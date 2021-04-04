@@ -23,9 +23,16 @@ class ScoreCard
   end 
 
   def tenth_round(user_input)
-    @frames.last.roll(user_input)
-    @score == 270 ? @score -= 30 : @score
-    tenth_round_score + @score 
+
+    if @frames.last.rolls.length >= 2 && !@frames.last.is_strike? && !@frames.last.is_spare?
+      return "Game ended! Your score was #{tenth_round_score + @score }"
+    elsif @frames.last.rolls.length >= 3
+      return "Game ended! Your score was #{tenth_round_score + @score }"
+    else 
+      @frames.last.roll(user_input)
+      @score == 270 ? @score -= 30 : @score
+      tenth_round_score + @score 
+    end
   end
 
   def tenth_round_score

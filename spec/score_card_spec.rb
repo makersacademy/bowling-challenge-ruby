@@ -102,11 +102,29 @@ describe ScoreCard do
 
       expect(bowl.play(2)).to eq 87
     end 
-    # it 'should not allow a third roll if the first roll is not a strike' do 
-    #   18.times { bowl.play(4) }
-    #   bowl.play(4)
-    #   bowl.play(4)
-    # end 
+    it 'should not allow a third roll if the first roll is not a strike nor a spare' do 
+      18.times { bowl.play(4) }
+      bowl.play(4)
+      bowl.play(4)
+      
+      expect(bowl.play(4)).to eq 'Game ended! Your score was 80'
+    end 
+    it 'should allow a third roll if the first roll is a strike' do 
+      18.times { bowl.play(4) }
+      bowl.play(10)
+      bowl.play(4)
+      bowl.play(4)
+      
+      expect(bowl.play(4)).to eq 'Game ended! Your score was 90'
+    end 
+    it 'should allow a third roll if the first to rolls were a spare' do 
+      18.times { bowl.play(4) }
+      bowl.play(6)
+      bowl.play(4)
+      bowl.play(4)
+
+      expect(bowl.play(4)).to eq 'Game ended! Your score was 86'
+    end 
   end 
 
   
