@@ -25,9 +25,9 @@ class Frame
       value = [10, nil, 2]
     else
       @roll2 = roll2(@roll1)
-      if strike(@roll2)
-        @bonus = 1
-      elsif spare
+      # if strike(@roll2)
+      #   @bonus = 1
+      if spare
         @bonus = 1
       else
         @bonus = 0

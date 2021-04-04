@@ -1,5 +1,5 @@
 class Score
-
+attr_reader :roll1, :roll2, :bonus
   def initialize
     @bonus_score = 0
     @bonus_score_previous = 0
@@ -59,5 +59,4 @@ class Score
       @add_bonus = true
     end
   end
-
 end

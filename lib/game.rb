@@ -2,7 +2,7 @@ require_relative 'frame'
 require_relative 'score'
 
 class Game
-  attr_reader :frame
+  attr_reader :frame, :action
   def initialize
     @frame_class = Frame
     @frame = 0
@@ -40,23 +40,34 @@ class Game
     exit
   end
 
-  def play
+  def start_message
     puts "Welcome to ten pin bowling."
     puts "What would you like to do?"
+  end
+
+  def get_action
+    gets.chomp
+  end
+
+  def choose_action
+    case get_action
+    when "frame" || "Frame"
+      puts @frame
+    when "roll" || "Roll"
+      roll
+    when "quit" || "Quit"
+      quit
+    else
+      puts "Command not recognised. Try 'frame, roll or quit'"
+    end
+    puts "What would you like to do?" unless @frame == 10
+  end
+
+  def play
+    start_message
     while true
       break if @frame == 10
-      action = gets.chomp
-      case action
-      when "frame" || "Frame"
-        puts @frame
-      when "roll" || "Roll"
-        roll
-      when "quit" || "Quit"
-        quit
-      else
-        puts "Command not recognised. Try 'frame, roll or quit'"
-      end
-      puts "What would you like to do?" unless @frame == 10
+      choose_action
     end
   end
 end
