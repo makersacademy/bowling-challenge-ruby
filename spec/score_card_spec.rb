@@ -62,6 +62,52 @@ describe ScoreCard do
 
       expect(bowl.total).to eq 49
     end 
+
+    it 'can take a perfect run before the 10th round' do
+      bowl.roll(10)
+      bowl.roll(10)
+      bowl.roll(10)
+      bowl.roll(10)
+      bowl.roll(10)
+      bowl.roll(10)
+      bowl.roll(10)
+      bowl.roll(10)
+      bowl.roll(10)
+      bowl.roll(0)
+
+
+      expect(bowl.play(0)).to eq 240
+    end 
   end 
+
+  describe '#tenth_round' do
+    it 'should allow a third roll if the first roll is a strike' do 
+      18.times { bowl.play(4) }
+      bowl.play(10)
+      bowl.play(3)
+      bowl.play(2)
+
+      expect(bowl.frames.length).to eq 10
+    end 
+    it 'returns the final score when the game ends' do 
+      18.times { bowl.play(4) }
+      bowl.play(3)
+
+      expect(bowl.play(3)).to eq 78
+    end 
+    it 'should calculate the right bonus for the final round with strike' do
+      18.times { bowl.play(4) }
+      bowl.play(10)
+      bowl.play(3)
+
+      expect(bowl.play(2)).to eq 87
+    end 
+    # it 'should not allow a third roll if the first roll is not a strike' do 
+    #   18.times { bowl.play(4) }
+    #   bowl.play(4)
+    #   bowl.play(4)
+    # end 
+  end 
+
   
 end
