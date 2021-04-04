@@ -1,0 +1,58 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/jackhooper/Documents/Makers/Week Five - (Full Course)/bowling-challenge-ruby/spec/frame_spec.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          1,
+          null,
+          2,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/jackhooper/Documents/Makers/Week Five - (Full Course)/bowling-challenge-ruby/lib/frame.rb": {
+        "lines": [
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1617557086
+  }
+}

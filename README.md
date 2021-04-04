@@ -1,3 +1,41 @@
+I may have jumped the gun by setting up the UI - this is logic only to begin with.
+
+Misunderstanding on my behalf - but at least that's set up for next weekend.
+
+------------------------------------------
+
+Set up a diagram
+
+https://miro.com/app/board/o9J_lLkDGNc=/
+
+------------------------------------------
+
+As a player
+So that I know who is playing
+I want to be able to put my name in
+
+
+- *Started off writing this but realised actually this is a feature and shouldn't really be here as this is logic only.*
+
+------------------------------------------
+
+Okay so I'm going to divvy this up into two Classes - Frames and Game.
+
+Frame is going to set up each frame of a game:
+
+- A frame should have no more than 10 pins
+- A frame should allow for two rolls then move onto the next frame, unless:
+        - The first shot is a strike (X) then we move onto the next frame
+        - The second shot is a spare (/) then we move onto the next frame and add the bonus points from the first roll of the next frame
+- There should be no more than 10 frames per game
+
+Game is going to be set up to run a bowling game and display the final scores
+
+------------------------------------------
+
+Issue with repo - had to set up again
+
+
 Bowling Challenge in Ruby
 =================
 
