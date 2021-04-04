@@ -2,6 +2,7 @@
 class Frame
 
     PIN_COUNT = 10
+    FRAME_LIMIT = 10
 
     attr_reader :frame, :frame_number
 
@@ -15,7 +16,11 @@ class Frame
         @frame << start_pins
     end
 
+    def end_game
+        "Game over you scored score" if last_frame? == true
+    end
+
     def last_frame?
-        return true if @frame_number == 10
+        return true if @frame_number = FRAME_LIMIT
     end
 end
