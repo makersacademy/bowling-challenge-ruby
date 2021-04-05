@@ -46,11 +46,11 @@ describe BowlingScore do
         end
       end
 
-      context 'when spare' do
-        xit "doesn't change score before bonus is calculated" do
-          # This is to fully adhere to how it works in bowling halls, but not part of the brief
-        end
-      end
+      # context 'when spare' do
+      #   xit "doesn't change score before bonus is calculated" do
+      #     # This is to fully adhere to how it works in bowling halls, but not part of the brief
+      #   end
+      # end
     end
 
     context 'when following a spare' do
@@ -79,11 +79,22 @@ describe BowlingScore do
         player1.roll(10)
         player1.roll(3)
         expect { player1.roll(4) }.to change { player1.total_score }.by(11)
-        # 11 made up of 7 (overall frame score for [3,4]) and 4 (second strike bonus)
+        # Increase of 11 made up of 7 (overall frame score for [3,4]) and 4 (second strike bonus)
       end
 
       context 'when two strikes in a row' do
-        
+        it 'adds strike bonus based on strike in next frame' do
+          player1.roll(10)
+          expect { player1.roll(10) }.to change { player1.total_score }.by(20)
+          # Increase of 20 is made up of 10 (overall frame score for second strike) and 10 (first bonus for first strike)
+        end
+
+        it 'adds two strike bonuses simultaneously for first roll after two strikes' do
+          player1.roll(10)
+          player1.roll(10)
+          expect { player1.roll(8) }.to change { player1.total_score }.by(16)
+          # Increase of 16 is made up of 8 (second bonus for first strike) and 8 (first bonus for second strike)
+        end
       end
     end
   end
