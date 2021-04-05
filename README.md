@@ -34,6 +34,6 @@ Additional features or changes I would implement if I had more time:
 ## To play around with this code
 1. Clone this repo locally
 2. Run an REPL such as PRY or IRB
-3. `require './lib/bowling_score'
+3. Require the class: `require './lib/bowling_score'`
 4. Create a new instance of the BowlingScore class, e.g. `player1 = BowlingScore.new`
 5. Enter your rolls by calling the `#roll` method (e.g. `player1.roll(5)`), and see the updated score returned.
