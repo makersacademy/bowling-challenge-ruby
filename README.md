@@ -68,43 +68,26 @@ As a player
 So that I know how much each of my rolls are worth
 I want to be able to keep track of my score
 
+- I'm a bit confused - .strike? should only be returning true if the first element of @shots is == PIN_COUNT. This means my test should be passing. I've set it up so that the frame has ten pins, the user then bowls PIN_COUNT, which means frame.strike? should return true because the first element of the @shots array is a ten.
+
+  1) Frame#strike? returns true if first shot knocked down all the pins
+     Failure/Error: expect(frame.strike?).to be true
+     
+       expected true
+            got false
+
+- Added frame_setup in front of .bowl and .strike? in test - this throws up a new error:
+
+          1) Frame#strike? returns true if first shot knocked down all the pins
+     Failure/Error: frame_setup.bowl(Frame::PIN_COUNT)
+     
+     NoMethodError:
+       undefined method `bowl' for [10]:Array
 
 
 
-Bowling Challenge in Ruby
+
 =================
-
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
-
-## The Task
-
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
-
-Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
-
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
-
-As usual please start by
-
-* Forking this repo
-
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
-
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
-
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
-
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
 
 ## Bowling — how does it work?
 

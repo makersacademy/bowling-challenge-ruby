@@ -47,9 +47,10 @@ describe Frame do
 
     describe '#strike?' do
         it 'returns true if first shot knocked down all the pins' do
-            frame.bowl(Frame::PIN_COUNT)
+            frame_setup
+            frame_setup.bowl(Frame::PIN_COUNT)
 
-            expect(frame.strike?).to be true
+            expect(frame_setup.strike?).to be true
         end
 
         it 'returns false if first shot does not knock down all the pins' do
