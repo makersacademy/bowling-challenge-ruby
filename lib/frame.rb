@@ -4,11 +4,11 @@ class Frame
     PIN_COUNT = 10
     FRAME_LIMIT = 10
 
-    attr_reader :frame, :frame_number
+    attr_reader :frame, :frame_number, :shots
 
     def initialize
         @frame_number = []
-        remaining_pins = PIN_COUNT
+        @remaining_pins = PIN_COUNT
         @shots = []
     end
 
@@ -18,13 +18,21 @@ class Frame
         @frame << start_pins
     end
 
+    def played?
+        @remaining_pins == 0 || shots.length == 2
+    end
+
     def bowl(*shot)
         @shots << shot
         return @shots.flatten.inject(:+)
     end
 
     def strike?
-        @shots.first == PIN_COUNT
+        return true if shots.first == PIN_COUNT
+    end
+
+    def spare?
+        !strike? && remaining_pins == 0
     end
 
     def end_game

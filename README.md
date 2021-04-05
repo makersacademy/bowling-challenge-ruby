@@ -85,7 +85,10 @@ I want to be able to keep track of my score
        undefined method `bowl' for [10]:Array
 
 
+- God I can't get any of this to work. There is a problem with the strike? method and how it interacts with the Array object but I have no idea how to fix it.
+- I think it might be the test you know, but I can't see it - the lines are all becoming one.
 
+- IT LOOKS LIKE GOOD CODE WHY NO WORK.
 
 =================
 
