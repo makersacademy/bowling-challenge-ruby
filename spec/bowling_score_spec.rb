@@ -9,16 +9,20 @@ describe BowlingScore do
         it "doesn't affect frame number" do
           expect { player1.roll(5) }.not_to change { player1.frame_number }
         end
+
+        it "doesn't affect total score" do
+          expect { player1.roll(5) }.not_to change { player1.total_score }
+        end
       end
       
       context 'when strike' do
         it 'changes frame number' do
           expect { player1.roll(10) }.to change { player1.frame_number }.by(1)
         end
-      end
 
-      it "doesn't affect total score" do
-        expect { player1.roll(5) }.not_to change { player1.total_score }
+        it 'adds to score' do
+          expect { player1.roll(10) }.to change { player1.total_score }.by(10)
+        end
       end
     end
 
@@ -62,6 +66,24 @@ describe BowlingScore do
         player1.roll(2)
         player1.roll(3)
         expect { player1.roll(4) }.to change { player1.total_score }.by(7)
+      end
+    end
+
+    context 'when following a strike' do
+      it 'adds strike bonus based on first roll of next frame' do
+        player1.roll(10)
+        expect { player1.roll(3) }.to change { player1.total_score }.by(3)
+      end
+
+      it 'adds strike bonus based on second roll of next frame on top of next frame score' do
+        player1.roll(10)
+        player1.roll(3)
+        expect { player1.roll(4) }.to change { player1.total_score }.by(11)
+        # 11 made up of 7 (overall frame score for [3,4]) and 4 (second strike bonus)
+      end
+
+      context 'when two strikes in a row' do
+        
       end
     end
   end
