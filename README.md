@@ -35,6 +35,41 @@ Game is going to be set up to run a bowling game and display the final scores
 
 Issue with repo - had to set up again
 
+------------------------------------------
+
+As a player
+So that I know how many frames I've played
+I want to be able to count my frames
+
+- For some reason new_frame can't be call on Frame class...
+
+------------------------------------------
+    
+As a player
+So that I know that I have won after the 10th frame
+I want to see a summary of the game
+
+- My tests were working and now they are not. This is rather confusing...
+
+      1) Frame end_game ends the game if number of frames is equal to 10
+     Failure/Error: frame.new_frame(10)
+     
+     NoMethodError:
+       undefined method `new_frame' for #<Frame:0x00007fdc03954368 @frame_number=[]>
+
+        *How bizzare, it didn't like that I called frame.new_frame on the test despite having no problem with it earlier... but makes sense as I have frame = Frame.new_frame(10) in a previous test*
+
+
+- I feel like I jumped the gun with making this second.
+    
+------------------------------------------
+
+As a player
+So that I know how much each of my rolls are worth
+I want to be able to keep track of my score
+
+
+
 
 Bowling Challenge in Ruby
 =================

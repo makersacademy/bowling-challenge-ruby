@@ -6,14 +6,25 @@ class Frame
 
     attr_reader :frame, :frame_number
 
-    def initialize(*frame_number)
-        @frame_number = frame_number
+    def initialize
+        @frame_number = []
+        remaining_pins = PIN_COUNT
+        @shots = []
     end
 
-    def self.new_frame(start_pins)
+    def self.new_frame(*start_pins)
         @frame = []
         start_pins = PIN_COUNT
         @frame << start_pins
+    end
+
+    def bowl(*shot)
+        @shots << shot
+        return @shots.flatten.inject(:+)
+    end
+
+    def strike?
+        @shots.first == PIN_COUNT
     end
 
     def end_game
