@@ -5,8 +5,16 @@ describe BowlingScore do
 
   describe '#roll' do
     context 'when first roll of the frame' do
-      it "doesn't affect frame number" do
-        expect { player1.roll(5) }.not_to change { player1.frame_number }
+      context 'when not strike' do
+        it "doesn't affect frame number" do
+          expect { player1.roll(5) }.not_to change { player1.frame_number }
+        end
+      end
+      
+      context 'when strike' do
+        it 'changes frame number' do
+          expect { player1.roll(10) }.to change { player1.frame_number }.by(1)
+        end
       end
 
       it "doesn't affect total score" do
