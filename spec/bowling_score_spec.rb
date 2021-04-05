@@ -45,12 +45,6 @@ describe BowlingScore do
           expect { player1.roll(2) }.to change { player1.total_score }.by(7)
         end
       end
-
-      # context 'when spare' do
-      #   xit "doesn't change score before bonus is calculated" do
-      #     # This is to fully adhere to how it works in bowling halls, but not part of the brief
-      #   end
-      # end
     end
 
     context 'when following a spare' do
