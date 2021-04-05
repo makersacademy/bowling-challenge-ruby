@@ -10,19 +10,17 @@ class BowlingScore
 
   def roll(pins)
     @current_frame << pins
-    if @frame_number > 2 && double_strike_bonus?
-      @total_score += (pins * 2)
-    elsif @frame_number > 1 && (strike_bonus? || spare_bonus?)
-      @total_score += pins
-    end
-
+    @total_score += pins * number_of_bonuses
     if @current_frame.length == 2 || pins == 10
-      @frames[@frame_number] = @current_frame
-      @frame_number += 1
-      @total_score += @current_frame.sum
-      @current_frame = []
+      end_frame
     end
     @total_score
+  end
+
+  private
+
+  def last_frame
+    @frame_number - 1
   end
 
   def spare_bonus?
@@ -38,9 +36,20 @@ class BowlingScore
     @frames[frame_before_last].length == 1 && strike_bonus?
   end
 
-  private
+  def number_of_bonuses
+    if @frame_number > 2 && double_strike_bonus?
+      2
+    elsif @frame_number > 1 && (strike_bonus? || spare_bonus?)
+      1
+    else
+      0
+    end
+  end
 
-  def last_frame
-    @frame_number - 1
+  def end_frame
+    @frames[@frame_number] = @current_frame
+    @frame_number += 1
+    @total_score += @current_frame.sum
+    @current_frame = []
   end
 end
