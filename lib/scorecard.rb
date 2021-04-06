@@ -11,8 +11,8 @@ class Scorecard
 
   def game_finished?
     return true if @frames.length == 11 && @frames[-2].special.empty?
-    return true if @frames.length == 11 && @frames[-2].special.first.is_a?(Spare)
-    return true if @frames.length == 12 && @frames[-3].special.first.is_a?(Strike)
+    return true if @frames.length == 12 && @frames[-2].special.first.is_a?(Spare)
+    return true if @frames.length == 13 && @frames[-3].special.first.is_a?(Strike)
     false
   end
 
@@ -45,9 +45,11 @@ class Scorecard
 
   def score
     total = 0
-    @frames.each do |frame|
+    @frames.each_with_index do |frame, i|
       total += frame.rolls.sum
-      total += frame.special.first.bonus_points.sum if frame.special.any?
+      if frame.special.any?
+        total += frame.special.first.bonus_points.sum unless i >= 9
+      end
     end
     total
   end
