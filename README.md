@@ -44,15 +44,15 @@ A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 str
 |   BowlingGame  |  @current_frame = 1            | roll_1(players_score)                          |
 |                |  @strike = false               | roll_2(players_score)                          |
 |                |  @spare = false                | roll_3(players_score)                          |
-|                |  @scorecard = Scorecard.new    | roll_2(players_score)                          |
+|                |  @scorecard = Scorecard.new    | update_bonus(players_score)                    |
 |                |                                | next_frame                                     |
 |                |                                | update_roll_1_score(players_score)             |
 |                |                                | update_roll_2_score(players_score)             |
 |                |                                | update_roll_3_score(players_score)             |
-|                |                                | update_bonus(players_score)                    |
+|                |                                | end_of_game                                    |
 |                |                                | update_scorecard                               |
 |                |                                | view_scorecard                                 |
-|                |                                | end_of_game                                    |
+|                |                                |                                                |
 |  Scorecard     |   @scorecard = []              | update_bonus(players_score)                    |
 |                |   @roll_1_score = 0            | update_scorecard(current_frame, strike, spare) |
 |                |   @roll_2_score = 0            | running_total(current_frame)                   |
