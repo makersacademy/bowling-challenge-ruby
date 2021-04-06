@@ -1,39 +1,16 @@
 Bowling Challenge in Ruby
 =================
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+BOWLING SCORECARD PROGRAM
 
-## The Task
 
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
+Count and sum the scores of a bowling game for one player.
 
-Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
+A bowling game consists of 10 frames in which the player tries to knock down the 10 pins.
+In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
 
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
-
-As usual please start by
-
-* Forking this repo
-
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
-
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
-
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
-
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
-
-## Bowling — how does it work?
+---
+## Bowling rules
 
 ### Strikes
 
@@ -58,8 +35,91 @@ A Gutter Game is when the player never hits a pin (20 zero scores).
 
 A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 strikes for the bonus in the 10th frame). The Perfect Game scores 300 points.
 
-In the image below you can find some score examples.
+---
 
-More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
+### Modelling
 
-![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+|     class      |   initialize                   |   method                                       |
+|----------------|--------------------------------|------------------------------------------------|
+|   BowlingGame  |  @current_frame = 1            | roll_1(players_score)                          |
+|                |  @strike = false               | roll_2(players_score)                          |
+|                |  @spare = false                | roll_3(players_score)                          |
+|                |  @scorecard = Scorecard.new    | update_bonus(players_score)                    |
+|                |                                | next_frame                                     |
+|                |                                | update_roll_1_score(players_score)             |
+|                |                                | update_roll_2_score(players_score)             |
+|                |                                | update_roll_3_score(players_score)             |
+|                |                                | end_of_game                                    |
+|                |                                | update_scorecard                               |
+|                |                                | view_scorecard                                 |
+|                |                                |                                                |
+|  Scorecard     |   @scorecard = []              | update_bonus(players_score)                    |
+|                |   @roll_1_score = 0            | update_scorecard(current_frame, strike, spare) |
+|                |   @roll_2_score = 0            | running_total(current_frame)                   |
+|                |   @roll_3_score = nil          |                                                |
+|                |   @bonus_score = 0             |                                                |
+|                |   @total_game_score = 0        |                                                |
+
+
+### irb
+#regular play:  
+require './lib/bowling_game.rb'  
+game = BowlingGame.new  
+game.roll_1(4)  
+ => "Nice roll! Let's Roll again!"  
+game.roll_2(3)  
+ => "Great Job! That's the end of this frame"  
+  
+game.view_scorecard  
+ => [{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>7}}]  
+  
+
+###### gets a strike:  
+game.roll_1(10)  
+=> "Strike!"  
+game.strike  
+=> true  
+game.roll_1(4)  
+game.roll_2(3)  
+game.view_scorecard  
+=> [  
+{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>7}}, {"frame_2"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7, :total=>24}}, {"frame_3"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>31}}]  
+  
+game.strike  
+=> false  
+  
+##### gets a spare:  
+game.roll_1(3)  
+=> "Nice roll! Let's Roll again!"  
+game.roll_2(7)  
+ => "Spare!"  
+game.roll_1(4)  
+=> "Nice roll! Let's Roll again!"  
+game.roll_2(3)  
+ => "Great Job! That's the end of this frame"  
+game.view_scorecard  
+=> [  
+{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>7}}, {"frame_2"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7, :total=>24}}, {"frame_3"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>31}}, {"frame_4"=>{:roll_1=>3, :roll_2=>7, :roll_3=>nil, :bonus_score=>4, :total=>45}}, {"frame_5"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>52}}]  
+
+##### plays 10 frames
+game.roll_1(3)  
+game.roll_2(7)  
+game.roll_1(4)  
+game.roll_2(3)  
+game.roll_1(10)  
+game.roll_2(7)  
+game.roll_3(4)  
+=> "end of game"  
+    
+game.scorecard  
+=> [  
+{"frame_1"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>7}}, {"frame_2"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7, :total=>24}}, {"frame_3"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>31}}, {"frame_4"=>{:roll_1=>3, :roll_2=>7, :roll_3=>nil, :bonus_score=>4, :total=>45}}, {"frame_5"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>52}}, {"frame_6"=>{:roll_1=>3, :roll_2=>7, :roll_3=>nil, :bonus_score=>4, :total=>66}}, {"frame_7"=>{:roll_1=>4, :roll_2=>3, :roll_3=>nil, :bonus_score=>0, :total=>73}}, {"frame_8"=>{:roll_1=>10, :roll_2=>0, :roll_3=>nil, :bonus_score=>7, :total=>90}}, {"frame_9"=>{:roll_1=>10, :roll_2=>7, :roll_3=>nil,:bonus_score=>0, :total=>107}},
+{"frame_10"=>{:roll_1=>10, :roll_2=>7, :roll_3=>4, :bonus_score=>0, :total=>128}}]  
+  
+  ### status of program:
+  - all tests passing at 96% coverage. 
+  
+ ### Still left To-Do:
+[ ] roll 2 cannot be played if roll 1 is a strike  
+[ ] value of roll 2 cannot be a number where, when added to roll 1 value, it will equal more than 10  
+[ ] logic of more than one strike in a row  
