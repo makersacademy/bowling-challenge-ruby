@@ -1,0 +1,27 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/ralphbartley/Projects/bowling-challenge-ruby/spec/units/frame_spec.rb": {
+        "lines": [
+
+        ]
+      },
+      "/Users/ralphbartley/Projects/bowling-challenge-ruby/spec/units/scorecard_spec.rb": {
+        "lines": [
+
+        ]
+      },
+      "/Users/ralphbartley/Projects/bowling-challenge-ruby/spec/units/spare_spec.rb": {
+        "lines": [
+
+        ]
+      },
+      "/Users/ralphbartley/Projects/bowling-challenge-ruby/spec/units/strike_spec.rb": {
+        "lines": [
+
+        ]
+      }
+    },
+    "timestamp": 1617694205
+  }
+}
