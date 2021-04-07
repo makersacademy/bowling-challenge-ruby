@@ -11,8 +11,9 @@ This was the 5th weekend challenge for [Makers Academy](https://makers.tech). Th
 It looks like this in irb:
 ```
  # Half way through a game, doing quite well
- :008 > game.input_roll(10)
-Current scores:                                                                frame_1: 24 | frame_2: 19 | frame_3: 9 | frame_4: 20 | frame_5: 10 |
+:008 > game.input_roll(10)
+Current scores:
+frame_1: 24 | frame_2: 19 | frame_3: 9 | frame_4: 20 | frame_5: 10 |
 Current score: 82
 ```
 
@@ -42,3 +43,4 @@ scores["frame_#{frames.length}".to_sym] = 0
 ### Known Problems
 * There is no error checking for invalid roll input - the user can enter any number currently.
 * The Game class is in charge of printing out and summing scores, as well as inputting new rolls. It might be better to refactor the roll inputs separately into a Roll class.
+* Magic numbers present.
