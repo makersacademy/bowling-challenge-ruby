@@ -8,24 +8,19 @@ Ten-pin bowling has surprisingly [complex rules](https://en.wikipedia.org/wiki/T
 
 This was the 5th weekend challenge for [Makers Academy](https://makers.tech). The goal was to practise some more test-driven (TDD) Ruby.
 
-It looks like this in irb:
-```
- # Half way through a game, doing quite well
-:008 > game.input_roll(10)
-Current scores:
-frame_1: 24 | frame_2: 19 | frame_3: 9 | frame_4: 20 | frame_5: 10 |
-Current score: 82
-```
+It looks like this:
+![bowling game in irb](bowling_irb.png)
 
 ### Installation
 * Install Ruby. This code was written in Ruby 3.0.0.
-* Clone this repo
+* Clone this repo and navigate into it
 * No gems are necessary to interact with the code manually
+* Run `irb -r ./lib/game` to load the files into the irb REPL
 
-Run the test suite:
-* Make sure Bundler is installed on your machine
+#### Run the test suite:
+* Make sure Bundler is installed
 * Run `bundle` to install RSpec
-* Run `rspec` to run the unit tests
+* Run `rspec` to run the (fully isolated) unit tests
 
 
 ### Technical Approach
