@@ -8,7 +8,7 @@ Ten-pin bowling has surprisingly [complex rules](https://en.wikipedia.org/wiki/T
 
 This was the 5th weekend challenge for [Makers Academy](https://makers.tech). The goal was to practise some more test-driven (TDD) Ruby.
 
-It looks like this:
+It looks like this:  
 ![bowling game in irb](bowling_irb.png)
 
 ### Installation
