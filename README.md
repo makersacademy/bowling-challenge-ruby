@@ -6,8 +6,6 @@ Bowling Challenge in Ruby
 
 A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
 
-
-
 ## Bowling — how does it work?
 
 ### Strikes
@@ -37,6 +35,22 @@ In the image below you can find some score examples.
 
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
-![Ten Pin Score Example](images/example_ten_pin_scoring.png)
 
+User Stories
+
+ - Max 6 players can play
+ - Minimum 2 players can play
+ - 10 frames per player per game
+ - player can do 2 rolls usually
+ - if player scores 10 points with first roll then strike
+ - if player scores 10 points with 2 rolls then spare
+ - for score every card is a sum of the points for 2 rolls unless strike or spare
+ - if strike then the score: score of the roll (10) + strike bonus score: of the next 2 rolls
+ - if strike then player has only one roll
+ - if spare then the score: score ot the rolls (10) + spare bonus score: of the next 1 roll
+- 10th frame can have 3 rolls if strike or spare
+- if 3 strikes in 10th frame - score is 30
+- if spare in 10th frame - score is 20
+- if 'perfect game' (12 strikes) - score is 300 points
+- gutter game - when 0 pins throughout the whole game
 
