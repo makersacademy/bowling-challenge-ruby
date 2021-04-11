@@ -71,4 +71,38 @@ describe Game do
       expect(game.frame_scores).to eq([12, 5])
     end
   end
+   describe '10th frame' do
+    it 'last frame and final score in regular circumstances' do
+      frame_double1 = double('frame_double1', frame: { first_roll: 0, second_roll: 1})
+      10.times { game.turn(frame_double1) }
+      expect(game.final_score).to eq(10)
+    end
+
+    it 'final score when 10th frame is a strike' do
+      frame_double1 = double('frame_double1', frame: { first_roll: 0, second_roll: 1})
+      9.times { game.turn(frame_double1) }
+      frame_double2 = double('frame_double2', frame: { first_roll: 'strike' })
+      game.turn(frame_double2)
+      game.extra_roll(2)
+      game.extra_roll(3)
+      expect(game.final_score).to eq(24)
+    end
+
+     it 'final score when 10th frame is a spare' do
+       frame_double1 = double('frame_double1', frame: { first_roll: 0, second_roll: 1})
+       9.times { game.turn(frame_double1) }
+       frame_double2 = double('frame_double2', frame: { first_roll: 1, second_roll: 'spare' })
+       game.turn(frame_double2)
+       game.extra_roll(2)
+       expect(game.final_score).to eq(21)
+     end
+
+     it 'ends game after 10th frame' do
+       frame_double1 = double('frame_double1', frame: { first_roll: 'strike' })
+       10.times { game.turn(frame_double1) }
+       game.extra_roll(10)
+       game.extra_roll(10)
+       expect(game.final_score).to eq(300)
+     end
+   end
 end
