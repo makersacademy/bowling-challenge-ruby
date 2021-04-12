@@ -48,15 +48,16 @@ class Game
       @frame_scores.pop
       @frame_scores << 10 + @extra_roll
     end
+    @state = nil
     @final_score = @frame_scores.sum
   end
 
   private
 
   def score_state(frame)
-    if frame[:first_roll] == 'strike'
+    if frame[:first_roll] == 10
       @state = :strike
-    elsif frame[:second_roll] == 'spare'
+    elsif frame[:first_roll] + frame[:second_roll] == 10
       @state = :spare
     else 
       @state = nil
@@ -65,21 +66,22 @@ class Game
 
   def add_score
     if @state == :strike
-      @frame_scores << :strike
+      @frame_scores << 10
     elsif @state == :spare
-      @frame_scores << :spare
+      @frame_scores << 10
     else
       @frame_scores << @frame[:first_roll] + @frame[:second_roll]
     end
   end
 
   def bonus_points(new_frame)
+    @new_frame = new_frame
     if @state == :strike
       @frame_scores.pop
-      @frame_scores << 10 + new_frame[:first_roll] + new_frame[:second_roll]
+      @frame_scores << 10 + @new_frame[:first_roll] + @new_frame[:second_roll]
     elsif @state == :spare
       @frame_scores.pop
-      @frame_scores << 10 + new_frame[:first_roll]
+      @frame_scores << 10 + @new_frame[:first_roll]
     end
   end
 
