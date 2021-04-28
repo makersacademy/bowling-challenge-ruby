@@ -1,0 +1,172 @@
+<html>
+  <head>
+      <title>Bowling Score Keeper</title>
+      <link rel="stylesheet" href="css/stylesheet.css">
+      <script src = 'jquery.js'> </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
+     <script>
+       // wait for the DOM to be loaded
+       $(function() {
+         // bind 'myForm' and provide a simple callback function
+         $('#myForm').ajaxForm(function() {
+             alert("Thank you for your comment!");
+         });
+       });
+     </script>
+      <script src = 'javascript/src/interface.js'></script> </script>
+  </head>
+  <body>
+      <h1>Bowling Score App</h1>
+      <section id='names'> 
+         <span id='names_intro'>Please Enter Names</span> 
+         <form id = 'names_form' action='/names_post' method='post'>
+           <input type="text" name='player_1_name' placeholder="Player 1 Name">
+           <input type="text" name='player_2_name' placeholder='Player 2 Name'>
+           <input id ='submit_names' type="submit" value='Continue'>
+         </form>
+      </section>
+     
+    <section id='game_section'>
+      Player Turn: <div id='whos_turn'></div>
+      Input Bowl Results. (if 0, please input 0)<br>
+      <form id='input_result' action='/input_result' method='post'>
+      Roll 1:<input name='roll_1' type="text" placeholder='Roll 1'>
+      Roll 2: <input name='roll_2' type="text" placeholder='Roll 2'>
+      <input type="submit" value='Submit Scores'>
+      </form>
+      <section id='player_1_game_section'>
+       Player 1:     <div id='player_1_name'></div> 
+       <table>
+        <tr>
+          <th>Frame</th>
+          <th>1:</th>
+          <th>2:</th>
+          <th>3:</th>
+          <th>4:</th>
+          <th>5:</th>
+          <th>6:</th>
+          <th>7:</th>
+          <th>8:</th>
+          <th>9:</th>
+          <th>10:</th>
+          <th>Total Pins</th>
+          <th>Bonus</th>
+          <th>Overall</th>
+        </tr>
+        <tr>
+          <td> Roll 1:</td>
+          <td id='p1.r1.1'></td>
+          <td id='p1.r1.2'></td>
+          <td id='p1.r1.3'></td>
+          <td id='p1.r1.4'></td>
+          <td id='p1.r1.5'></td>
+          <td id='p1.r1.6'></td>
+          <td id='p1.r1.7'></td>
+          <td id='p1.r1.8'></td>
+          <td id='p1.r1.9'></td>
+          <td id='p1.r1.10'></td>
+          <td id='p1_total_pins' rowspan='4'></td>
+          <td id='p1_bonus' rowspan='4'></td>
+          <td id='p1_overall' rowspan='4'></td>
+        </tr>
+        <tr>
+          <td> Roll 2:</td>
+          <td id='p1.2.1'></td>
+          <td id='p1.2.2'></td>
+          <td id='p1.2.3'></td>
+          <td id='p1.2.4'></td>
+          <td id='p1.2.5'></td>
+          <td id='p1.2.6'></td>
+          <td id='p1.2.7'></td>
+          <td id='p1.2.8'></td>
+          <td id='p1.2.9'></td>
+          <td id='p1.2.10'></td>
+        </tr>
+        <tr>
+          <td> Frame Total:</td>
+          <td id='p1.t.1'></td>
+          <td id='p1.t.2'></td>
+          <td id='p1.t.3'></td>
+          <td id='p1.t.4'></td>
+          <td id='p1.t.5'></td>
+          <td id='p1.t.6'></td>
+          <td id='p1.t.7'></td>
+          <td id='p1.t.8'></td>
+          <td id='p1.t.9'></td>
+          <td id='p1.t.10'></td>
+        </tr>
+      </table>
+      </section>
+      <br>
+      
+      <section id='player_2_game_section'>
+      Player 2:     <div id='player_2_name'></div>   
+      <table>
+        <tr>
+          <th>Frame</th>
+          <th>1:</th>
+          <th>2:</th>
+          <th>3:</th>
+          <th>4:</th>
+          <th>5:</th>
+          <th>6:</th>
+          <th>7:</th>
+          <th>8:</th>
+          <th>9:</th>
+          <th>10:</th>
+          <th>Total Pins</th>
+          <th>Bonus</th>
+          <th>Overall</th>
+        </tr>
+        <tr>
+          <td> Roll 1:</td>
+          <td id='p2.r1.1'></td>
+          <td id='p2.r1.2'></td>
+          <td id='p2.r1.3'></td>
+          <td id='p2.r1.4'></td>
+          <td id='p2.r1.5'></td>
+          <td id='p2.r1.6'></td>
+          <td id='p2.r1.7'></td>
+          <td id='p2.r1.8'></td>
+          <td id='p2.r1.9'></td>
+          <td id='p2.r1.10'></td>
+          <td id='p2_total_pins' rowspan='4'></td>
+          <td id='p2_bonus' rowspan='4'></td>
+          <td id='p2_overall' rowspan='4'></td>
+        </tr>
+        <tr>
+          <td> Roll 2:</td>
+          <td id='p2.2.1'></td>
+          <td id='p2.2.2'></td>
+          <td id='p2.2.3'></td>
+          <td id='p2.2.4'></td>
+          <td id='p2.2.5'></td>
+          <td id='p2.2.6'></td>
+          <td id='p2.2.7'></td>
+          <td id='p2.2.8'></td>
+          <td id='p2.2.9'></td>
+          <td id='p2.2.10'></td>
+        </tr>
+        <tr>
+            <td>Frame Total:</td>
+            <td id='p2.t.1'></td>
+            <td id='p2.t.2'></td>
+            <td id='p2.t.3'></td>
+            <td id='p2.t.4'></td>
+            <td id='p2.t.5'></td>
+            <td id='p2.t.6'></td>
+            <td id='p2.t.7'></td>
+            <td id='p2.t.8'></td>
+            <td id='p2.t.9'></td>
+            <td id='p2.t.10'></td>
+        </tr>
+      </section>
+    </section>
+  </body>
+
+
+
+
+
+
+</html>

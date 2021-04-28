@@ -1,0 +1,15 @@
+source "https://rubygems.org"
+
+git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+
+# gem "rails"
+
+gem 'rspec'
+gem "rubocop", "~> 1.11"
+gem "simplecov", "~> 0.21.2", require: false
+gem 'simplecov-console', require: false
+gem 'capybara'
+gem 'sinatra'
+gem 'puma'
+gem 'rack'
+gem 'launchy'
