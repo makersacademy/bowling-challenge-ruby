@@ -9,11 +9,6 @@ Bowling Challenge in Ruby
 * Frames display both the 'base_score' and the 'total_score' - the former is the initial score for the frame itself, the latter reflects any subsequent bonuses.
 * the only public methods on the scorecard are its attribute reader, initialize method, add_frame and running_total. the final_score can be accessed through the attribute reader. running_total will show the total score after each frame, though bear in mind this will not take into account bonuses that may then be gained for strikes and spares.
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
-
 ## The Task
 
 **THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
