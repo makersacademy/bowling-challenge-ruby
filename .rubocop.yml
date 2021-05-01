@@ -13,7 +13,8 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 # Disable top-level class documentation comment check
-Style/Documentation:  Enabled: false
+Style/Documentation:
+  Enabled: false
 
 # Allow use of numerical digits in variable names
 Naming/VariableNumber:
