@@ -31,11 +31,20 @@ class Game
         end
         i += 1
       else 
-        i = 0
-        round += 1 
-        puts "Your total score is #{score}"
-        puts "You knocked over #{knocked_over_pins} pins!"
-        knocked_over_pins = 0
+        if knocked_over_pins == 0
+          i = 0 
+          puts "\nBad Luck!"
+          puts "Your total score is #{score}"
+          puts "You knocked over #{knocked_over_pins} pins this round!"
+          round += 1 
+          knocked_over_pins = 0
+        else
+          i = 0
+          puts "Your total score is #{score}"
+          puts "You knocked over #{knocked_over_pins} pins this round!"
+          round += 1 
+          knocked_over_pins = 0
+        end
       end 
     end
     puts "Game Over.... You Finished with a score of #{score}"
