@@ -2,12 +2,10 @@ require 'game'
 
 describe Game do
   after(:each) {Game.begin_game(nil)}
-  let(:player_double) { double(:player) }
   let(:scorecard_double) { double(:scorecard) }
-  let(:subject) { Game.new(player: player_double, scorecard: scorecard_double)}
+  let(:subject) { Game.new( scorecard: scorecard_double)}
   
   before do 
-    allow(player_double).to receive(:bowl)
     allow(scorecard_double).to receive(:add_score)
   end
   

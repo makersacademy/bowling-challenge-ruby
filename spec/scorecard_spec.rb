@@ -45,7 +45,7 @@ describe Scorecard do
     end
 
     it 'takes into account a strike and gives bonus' do
-      subject.add_score(10) 
+      subject.add_score(Scorecard::STRIKE_SCORE) 
       subject.add_score(1) 
       subject.add_score(8) 
       subject.add_score(0)
@@ -64,7 +64,7 @@ describe Scorecard do
 
     it 'correctly calculates for strike in 10th frame' do
       18.times { subject.add_score(3) }
-      subject.add_score 10
+      subject.add_score Scorecard::STRIKE_SCORE
       subject.add_score 4
       subject.add_score 6
       expect(subject.calculate_score).to eq 74
@@ -79,7 +79,7 @@ describe Scorecard do
     end
 
     it 'perfect game' do
-      12.times { subject.add_score(10) }
+      12.times { subject.add_score(Scorecard::STRIKE_SCORE) }
       expect(subject.calculate_score).to eq 300
     end
 
@@ -89,7 +89,7 @@ describe Scorecard do
     end
 
     it 'does not break for pending strike bonus' do
-      subject.add_score 10
+      subject.add_score Scorecard::STRIKE_SCORE
       expect(subject.calculate_score).to eq 10
     end
 

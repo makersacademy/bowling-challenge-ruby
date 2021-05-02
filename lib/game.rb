@@ -4,7 +4,6 @@ class Game
   attr_reader :scorecard, :frame, :roll, :player
 
   def initialize(input)
-    @player = input[:player]
     @scorecard = input[:scorecard]
   end
 
