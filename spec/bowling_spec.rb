@@ -15,7 +15,7 @@ describe 'Bowling Game Rules' do
   it 'can roll all ones' do
     20.times { @game.roll 1 }
     expect(@game.score).to eq 20
-  end
+  end 
 
   it 'can roll a spare' do
     @game.roll(9)
@@ -23,5 +23,13 @@ describe 'Bowling Game Rules' do
     @game.roll(4)
     17.times { @game.roll 0 }
     expect(@game.score).to eq 18
+  end
+
+  it 'can roll a strike' do 
+    @game.roll(10)
+    @game.roll(4)
+    @game.roll(3)
+    16.times { @game.roll 0 } 
+    expect(@game.score).to eq 24
   end
 end
