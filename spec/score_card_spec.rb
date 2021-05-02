@@ -46,6 +46,12 @@ describe ScoreCard do
         scores = [25, 18, 8]
         expect(scorecard.frame_scores(frames)).to eq(scores)
       end
+
+      it 'returns score when two strikes achieved in a row on last frame' do
+        frames = [[10], [10]]
+        scores = [20, 10]
+        expect(scorecard.frame_scores(frames)).to eq(scores)
+      end
     end
 
     context 'when 10 frames played' do
@@ -93,6 +99,12 @@ describe ScoreCard do
         ninth_frame_score = 20
         expect(scorecard.frame_scores(frames)[ninth_index]).to eq(ninth_frame_score)
       end
+
+      it 'returns score for strike in 9th frame where strike in 10th frame' do
+        frames = eight_frames << [10] << [10, 2, 7]
+        ninth_frame_score = 22
+        expect(scorecard.frame_scores(frames)[ninth_index]).to eq(ninth_frame_score)
+      end
     end
   end
 
@@ -104,7 +116,7 @@ describe ScoreCard do
       expect(scorecard.game_score(frames)).to eq(score)
     end
 
-    xit 'returns total score for a perfect game' do
+    it 'returns total score for a perfect game' do
       frames = []
       9.times { frames << [10] }
       frames << [10, 10, 10]

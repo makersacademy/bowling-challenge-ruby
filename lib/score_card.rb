@@ -48,9 +48,17 @@ class ScoreCard
     if last_frame?(frames, index)
       0
     elsif strike?(frames[index + 1])
-      frames[index + 1].first + frames[index + 2].first
+      strike_follows_strike_bonus_score(frames, index)
     else
       basic_frame_score(frames[index + 1])
+    end
+  end
+
+  def strike_follows_strike_bonus_score(frames, index)
+    if ninth_frame?(index)
+      basic_frame_score(frames[index + 1])
+    else
+      spare_bonus_score(frames, index) + spare_bonus_score(frames, index + 1)
     end
   end
 
@@ -68,6 +76,10 @@ class ScoreCard
 
   def last_frame?(frames, index)
     frames[index + 1].nil?
+  end
+
+  def ninth_frame?(index)
+    index == 8
   end
 
   def tenth_frame?(index)
