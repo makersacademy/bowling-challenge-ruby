@@ -8,6 +8,8 @@ class Bowling
   end
 
   def roll(pins)
+    raise 'Cannot roll values higher than 10' if pins > 10
+
     @rolls << pins
   end
 

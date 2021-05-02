@@ -39,4 +39,8 @@ describe Bowling do
     12.times { game.roll(10) }
     expect(game.score).to eq 300
   end
+
+  it 'does not allow values over 10' do
+    expect { game.roll(12) }.to raise_error 'Cannot roll values higher than 10'
+  end
 end
