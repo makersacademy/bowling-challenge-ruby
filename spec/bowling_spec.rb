@@ -43,4 +43,20 @@ describe Bowling do
   it 'does not allow values over 10' do
     expect { game.roll(12) }.to raise_error 'Cannot roll values higher than 10'
   end
+
+  it 'calculates for a strike in the 10th frame' do
+    18.times { game.roll(3) }
+    game.roll(10)
+    game.roll(4)
+    game.roll(5)
+    expect(game.score).to eq 73
+  end
+
+  it 'calculates for a spare in the 10th frame' do
+    18.times { game.roll(4) }
+    game.roll(8)
+    game.roll(2)
+    game.roll(5)
+    expect(game.score).to eq 87
+  end
 end
