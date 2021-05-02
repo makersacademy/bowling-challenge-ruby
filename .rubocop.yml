@@ -36,4 +36,5 @@ RSpec/MultipleExpectations:
 Metrics/BlockLength:
   IgnoredMethods:
     - describe
+    - context
     - feature

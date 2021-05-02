@@ -34,6 +34,12 @@ describe ScoreCard do
         scores = [17, 7]
         expect(scorecard.frame_scores(frames)).to eq(scores)
       end
+
+      it 'returns score when strike achieved on last frame' do
+        frames = [[9, 0], [10]]
+        scores = [9, 10]
+        expect(scorecard.frame_scores(frames)).to eq(scores)
+      end
     end
   end
 end

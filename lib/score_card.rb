@@ -44,6 +44,10 @@ class ScoreCard
   end
 
   def strike_bonus_score(frames, index)
-    basic_frame_score(frames[index + 1])
+    if last_frame?(frames, index)
+      0
+    else
+      basic_frame_score(frames[index + 1])
+    end
   end
 end
