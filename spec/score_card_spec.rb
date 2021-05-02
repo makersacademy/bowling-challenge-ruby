@@ -22,6 +22,12 @@ describe ScoreCard do
         scores = [12, 6]
         expect(scorecard.frame_scores(frames)).to eq(scores)
       end
+
+      it 'returns score when strike achieved' do
+        frames = [[10], [6, 1]]
+        scores = [17, 7]
+        expect(scorecard.frame_scores(frames)).to eq(scores)
+      end
     end
   end
 end

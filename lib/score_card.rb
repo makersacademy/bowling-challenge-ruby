@@ -3,7 +3,11 @@ class ScoreCard
     results = []
     0.upto(frames.length - 1) do |index|
       total_score = basic_frame_score(frames, index)
-      total_score += spare(frames, index) if total_score == 10
+      if frames[index].first == 10
+        total_score += strike_score(frames, index)
+      elsif total_score == 10
+        total_score += spare_score(frames, index)
+      end
       results << total_score
     end
     results
@@ -17,7 +21,11 @@ class ScoreCard
     total_score
   end
 
-  def spare(frames, index)
+  def spare_score(frames, index)
     frames[index + 1].first
+  end
+
+  def strike_score(frames, index)
+    basic_frame_score(frames, index + 1)
   end
 end
