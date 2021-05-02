@@ -23,9 +23,9 @@ describe ScoreCard do
         expect(scorecard.frame_scores(frames)).to eq(scores)
       end
 
-      xit 'returns score when spare achieved on last frame' do
-        frames = [[3, 4], [2, 4]]
-        scores = [7, 6]
+      it 'returns score when spare achieved on last frame' do
+        frames = [[3, 4], [2, 8]]
+        scores = [7, 10]
         expect(scorecard.frame_scores(frames)).to eq(scores)
       end
 

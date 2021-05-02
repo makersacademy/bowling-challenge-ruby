@@ -20,10 +20,17 @@ class ScoreCard
   end
 
   def spare_score(frames, index)
-    frames[index + 1].first
+    unless last_frame(frames, index)
+      return frames[index + 1].first
+    end
+    0
   end
 
   def strike_score(frames, index)
     basic_frame_score(frames, index + 1)
+  end
+
+  def last_frame(frames, index)
+    frames[index + 1].nil?
   end
 end
