@@ -16,9 +16,7 @@ class ScoreCard
   private
 
   def basic_frame_score(frames, index)
-    total_score = 0
-    frames[index].each { |score| total_score += score }
-    total_score
+    frames[index].sum
   end
 
   def spare_score(frames, index)

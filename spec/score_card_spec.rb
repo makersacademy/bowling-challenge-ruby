@@ -17,13 +17,19 @@ describe ScoreCard do
         expect(scorecard.frame_scores(frames)).to eq(scores)
       end
 
-      it 'returns score when spare achieved' do
+      it 'returns score when spare achieved (not on last frame)' do
         frames = [[5, 5], [2, 4]]
         scores = [12, 6]
         expect(scorecard.frame_scores(frames)).to eq(scores)
       end
 
-      it 'returns score when strike achieved' do
+      xit 'returns score when spare achieved on last frame' do
+        frames = [[3, 4], [2, 4]]
+        scores = [7, 6]
+        expect(scorecard.frame_scores(frames)).to eq(scores)
+      end
+
+      it 'returns score when strike achieved (not on last frame)' do
         frames = [[10], [6, 1]]
         scores = [17, 7]
         expect(scorecard.frame_scores(frames)).to eq(scores)
