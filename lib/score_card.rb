@@ -1,4 +1,8 @@
 class ScoreCard
+  def game_score(frames)
+    frame_scores(frames).sum
+  end
+
   def frame_scores(frames)
     results = []
     frames.each.with_index do |frame, index|

@@ -44,9 +44,9 @@ describe ScoreCard do
 
     context 'when 10 frames played' do
       let(:eight_frames) do
-        nine_frames = []
-        8.times { nine_frames << [0, 0] }
-        nine_frames
+        eight_frames = []
+        8.times { eight_frames << [0, 0] }
+        eight_frames
       end
       let(:nine_frames) { eight_frames << [0, 0] }
       let(:ninth_index) { 8 }
@@ -87,6 +87,40 @@ describe ScoreCard do
         ninth_frame_score = 20
         expect(scorecard.frame_scores(frames)[ninth_index]).to eq(ninth_frame_score)
       end
+    end
+  end
+
+  describe '#total score' do
+    it 'returns total score for a gutter game' do
+      frames = []
+      10.times { frames << [0, 0] }
+      score = 0
+      expect(scorecard.game_score(frames)).to eq(score)
+    end
+
+    xit 'returns total score for a perfect game' do
+      frames = []
+      9.times { frames << [10] }
+      frames << [10, 10, 10]
+      score = 300
+      expect(scorecard.game_score(frames)).to eq(score)
+    end
+
+    it 'returns total score for a mixed game' do
+      frames = [
+        [1, 4],
+        [4, 5],
+        [6, 4],
+        [5, 5],
+        [10],
+        [0, 1],
+        [7, 3],
+        [6, 4],
+        [10],
+        [2, 8, 6]
+      ]
+      score = 133
+      expect(scorecard.game_score(frames)).to eq(score)
     end
   end
 end
