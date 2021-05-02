@@ -9,7 +9,12 @@ describe ScoreRecorder do
       expect(scorerecorder.current_frame(frames)).to eq(1)
     end
 
-    it 'returns 2 after two rolls' do
+    it 'returns 1 after one (non-strike) roll' do
+      frames = [[9]]
+      expect(scorerecorder.current_frame(frames)).to eq(1)
+    end
+
+    it 'returns 2 after two (non-strike) rolls' do
       frames = [[3, 4]]
       expect(scorerecorder.current_frame(frames)).to eq(2)
     end
