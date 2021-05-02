@@ -12,7 +12,7 @@ class Bowling
     total_score = 0
     roll_number = 0
     10.times do 
-      if @rolls[roll_number].to_i + @rolls[roll_number + 1].to_i == 10
+      if spare?(roll_number)
         total_score += @rolls[roll_number].to_i + @rolls[roll_number + 1].to_i + @rolls[roll_number + 2].to_i
       else
         total_score += @rolls[roll_number].to_i + @rolls[roll_number + 1].to_i
@@ -20,6 +20,10 @@ class Bowling
       roll_number += 2
     end
     total_score
+  end
+
+  def spare?(roll_number)
+    @rolls[roll_number].to_i + @rolls[roll_number + 1].to_i == 10
   end
 
 end
