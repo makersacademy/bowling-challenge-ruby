@@ -1,4 +1,3 @@
-require_relative 'player'
 require_relative 'scorecard'
 
 class Game
@@ -18,7 +17,6 @@ class Game
   end
 
   def bowl(score)
-    @player.bowl(score)
     @scorecard.add_score(score)
   end
 end

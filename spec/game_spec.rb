@@ -29,11 +29,6 @@ describe Game do
   end
 
   describe '#bowl' do
-    it 'calls bowl on the player' do
-      expect(player_double).to receive(:bowl).with(5)
-      subject.bowl(5)
-    end
-    
     it 'calls add score to scorecard' do
       expect(scorecard_double).to receive(:add_score).with(5)
       subject.bowl(5)

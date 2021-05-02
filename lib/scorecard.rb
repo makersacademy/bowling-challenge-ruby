@@ -10,16 +10,43 @@ class Scorecard
   def add_score(score)
     if @roll == 1
       @scorecard << [score]
-      @roll = 2
+      score == 10 ? next_frame : @roll = 2
     else
       @scorecard[@frame - 1] << score
       next_frame
     end
   end
 
+  def calculate_score
+    total = 0
+    @scorecard[0..9].each_with_index do |score, ind|
+      if strike?(score) 
+        total += 10
+        if strike?(@scorecard[ind+1])
+          total += 10 + @scorecard[ind+2][0]
+        else
+          total += @scorecard[ind+1].flatten.inject(:+)
+        end
+      elsif spare?(score)
+        total += 10 + @scorecard[ind+1][0]
+      else
+        total += score.inject(:+)
+      end
+    end
+    total
+  end
+
   private
   def next_frame
     @roll = 1
     @frame += 1
+  end
+
+  def strike?(score)
+    score[0] == 10
+  end
+  
+  def spare?(score)
+    score.inject(:+) == 10
   end
 end
