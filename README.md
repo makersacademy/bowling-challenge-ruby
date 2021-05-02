@@ -1,10 +1,16 @@
 Bowling Challenge in Ruby
 =================
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+Approach
+----------
+* Created two classes: `Game` to manage the game in which further functionality would be added if an app was created and `Scorecard` which records the scores for a game through `add_score` and can calculate the total score by `calculate_score` as well as determine if the game has finished with `game_over?`
+* The `Game` class was designed to interact with the controller whilst the `Scorecard` class contains the majority of the logic for the programme.
+* The `add_score` method was the first feature added and this adds scores to the `@scorecard` variable with each frame represented by a nested array. The score is placed in the correct position based upon the `@frame` and `@roll` variables.
+* The `@scorecard` variable initially is defined as an array of 12 sets of `[nil, nil]`, the first 10 representing the first 10 frames and the last two acting as placeholders for potential bonus balls as a result of the final frame.
+* `add_score` also is aware of if the ball rolled is a strike and will move onto the next frame accordingly.
+* `calculate_score` was the next feature added and this returns the total score for the round including bonuses. This loops through the first 10 scores in `@scorecard`, determines if the frame is a strike or spare and adds the bonus score accordingly. If the bonus rolls have not been added yet they are 0 until the scorecard is updated.
+* As the last two elements in `@scorecard` are only used as bonus balls they do not need to be included in the loop and will be accounted for if they are required.
+* `game_over?` was the final feature and this required a rework of the scorecard as the default values were initially set to 0 rather than `nil`. This meant that it was impossible to differentiate between a ball that has not been rolled yet and a gutterball which was an issue in deciding when the end of the game was when bonus balls were required. This issue was fixed using `nil` in place of 0 and with a combination of `nil.to_i`, `.compact` and `||` to prevent `nil` disrupting calculations.
 
 ## The Task
 
