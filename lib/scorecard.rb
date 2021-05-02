@@ -6,7 +6,7 @@ class Scorecard
   STRIKE_SCORE = 10
 
   def initialize
-    @scorecard = Array.new(12) { [0, 0] }
+    @scorecard = Array.new(12) { [nil, nil] }
     @roll = 1
     @frame = 1
   end
@@ -30,21 +30,21 @@ class Scorecard
   def calculate_score
     total = 0
     @scorecard[0..9].each_with_index do |score, ind|
-      total += if strike?(score)
-                 STRIKE_SCORE + strike_bonuses(ind)
-               elsif spare?(score)
-                 10 + @scorecard[ind + 1][0]
-               else
-                 score.inject(:+)
-               end
+      if strike?(score)
+        total += STRIKE_SCORE + strike_bonuses(ind)
+      elsif spare?(score)
+        total += 10 + @scorecard[ind + 1][0].to_i
+      else
+        total += score.compact.inject(:+) || 0
+      end
     end
     total
   end
 
   def game_over?
     return false if @frame < 11 ||
-             (@frame == 11 && (strike?(@scorecard[9]) || spare?(@scorecard[9]))) ||
-             (@frame == 12 && (strike?(@scorecard[9]) && strike?(@scorecard[10] )))
+             (@frame == 11 && (strike?(@scorecard[9]) || spare?(@scorecard[9]) && @scorecard[10][0] == nil)) ||
+             (@frame == 12 && strike?(@scorecard[9]) && strike?(@scorecard[10]) && @scorecard[11][0] == nil)
     true
   end
 
@@ -67,11 +67,11 @@ class Scorecard
     if strike?(@scorecard[ind + 1])
       STRIKE_SCORE + @scorecard[ind + 2][0]
     else
-      @scorecard[ind + 1].flatten.inject(:+)
+      @scorecard[ind + 1][0].to_i + @scorecard[ind + 1][1].to_i
     end
   end
 
   def spare?(score)
-    score.inject(:+) == 10
+    score.compact.inject(:+) == 10
   end
 end
