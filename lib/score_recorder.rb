@@ -1,5 +1,5 @@
 class ScoreRecorder
   def current_frame(frames)
-    1
+    frames.length + 1
   end
 end
