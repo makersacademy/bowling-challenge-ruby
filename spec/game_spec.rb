@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 require 'game'
 
 describe Game do
-  after(:each) {Game.begin_game(nil)}
+  after(:each) { Game.begin_game(nil) }
   let(:scorecard_double) { double(:scorecard) }
-  let(:subject) { Game.new( scorecard: scorecard_double)}
-  
-  before do 
+  let(:subject) { Game.new(scorecard: scorecard_double) }
+
+  before do
     allow(scorecard_double).to receive(:add_score)
   end
-  
+
   describe '#load_game' do
     it 'Returns nil if begin game hasnt been called' do
       expect(Game.load_game).to be_nil
