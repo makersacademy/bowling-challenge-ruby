@@ -43,13 +43,15 @@ describe ScoreCard do
     end
 
     context 'when 10 frames played' do
-      let (:nine_frames) do
+      let(:eight_frames) do
         nine_frames = []
-        9.times { nine_frames << [0, 0] }
+        8.times { nine_frames << [0, 0] }
         nine_frames
       end
-      let (:tenth_index) { 9 }
-      
+      let(:nine_frames) { eight_frames << [0, 0] }
+      let(:ninth_index) { 8 }
+      let(:tenth_index) { 9 }
+
       it 'returns score for non-strike/spare in 10th frame' do
         frames = nine_frames << [4, 1]
         tenth_frame_score = 5
@@ -80,22 +82,10 @@ describe ScoreCard do
         expect(scorecard.frame_scores(frames)[tenth_index]).to eq(tenth_frame_score)
       end
 
-      xit 'example test' do
-        frames = [
-          [1, 4],
-          [4, 5],
-          [6, 4],
-          [5, 5],
-          [10],
-          [0, 1],
-          [7, 3],
-          [6, 4],
-          [10],
-          [2, 8, 6]
-        ]
-        score_total = 133
-        p scorecard.frame_scores(frames)
-        expect(scorecard.frame_scores(frames).sum).to eq(score_total)
+      it 'returns score for strike in 9th frame where extra rolls in tenth frame' do
+        frames = eight_frames << [10] << [6, 4, 3]
+        ninth_frame_score = 20
+        expect(scorecard.frame_scores(frames)[ninth_index]).to eq(ninth_frame_score)
       end
     end
   end
