@@ -26,4 +26,12 @@ describe Bowling do
     17.times { game.roll(0) }
     expect(game.score).to eq 16
   end
+
+  it 'can score a strike' do
+    game.roll(10)
+    game.roll(5)
+    game.roll(2)
+    16.times { game.roll(0) }
+    expect(game.score).to eq 24
+  end
 end
