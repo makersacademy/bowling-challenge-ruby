@@ -1,4 +1,4 @@
-class ScoreCard
+class ScoreCalculator
   def game_score(frames)
     frame_scores(frames).sum
   end
