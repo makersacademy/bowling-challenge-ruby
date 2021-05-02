@@ -3,10 +3,10 @@ class ScoreCard
     results = []
     frames.each.with_index do |frame, index|
       total_score = basic_frame_score(frame)
-      if frame.first == 10
-        total_score += strike_bonus_score(frames, index)
-      elsif total_score == 10
+      if spare?(frame)
         total_score += spare_bonus_score(frames, index)
+      elsif strike?(frame)
+        total_score += strike_bonus_score(frames, index)
       end
       results << total_score
     end
@@ -14,6 +14,22 @@ class ScoreCard
   end
 
   private
+
+  def all_pins_down?(score)
+    score == 10
+  end
+
+  def spare?(frame)
+    all_pins_down?(basic_frame_score(frame)) unless strike?(frame)
+  end
+
+  def strike?(frame)
+    all_pins_down?(frame.first)
+  end
+
+  def last_frame?(frames, index)
+    frames[index + 1].nil?
+  end
 
   def basic_frame_score(frame)
     frame.sum
@@ -29,9 +45,5 @@ class ScoreCard
 
   def strike_bonus_score(frames, index)
     basic_frame_score(frames[index + 1])
-  end
-
-  def last_frame?(frames, index)
-    frames[index + 1].nil?
   end
 end
