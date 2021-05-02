@@ -40,6 +40,12 @@ describe ScoreCard do
         scores = [9, 10]
         expect(scorecard.frame_scores(frames)).to eq(scores)
       end
+
+      it 'returns score when two strikes achieved in a row' do
+        frames = [[10], [10], [5, 3]]
+        scores = [25, 18, 8]
+        expect(scorecard.frame_scores(frames)).to eq(scores)
+      end
     end
 
     context 'when 10 frames played' do

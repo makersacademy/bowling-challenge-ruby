@@ -4,16 +4,16 @@ class ScoreCard
   end
 
   def frame_scores(frames)
-    results = []
+    frame_scores_list = []
     frames.each.with_index do |frame, index|
-      total_score = if tenth_frame?(index)
+      frame_score = if tenth_frame?(index)
                       tenth_frame_score(frame)
                     else
                       mid_game_frame_score(frames, index)
                     end
-      results << total_score
+      frame_scores_list << frame_score
     end
-    results
+    frame_scores_list
   end
 
   private
@@ -47,6 +47,8 @@ class ScoreCard
   def strike_bonus_score(frames, index)
     if last_frame?(frames, index)
       0
+    elsif strike?(frames[index + 1])
+      frames[index + 1].first + frames[index + 2].first
     else
       basic_frame_score(frames[index + 1])
     end
