@@ -1,15 +1,20 @@
 class ScoreCalculator
+  def initialize
+    @frames = []
+  end
+
   def game_score(frames)
     frame_scores(frames).sum
   end
 
   def frame_scores(frames)
+    @frames = frames
     frame_scores_list = []
-    frames.each.with_index do |frame, index|
+    @frames.each.with_index do |_frame, index|
       frame_score = if tenth_frame?(index)
-                      tenth_frame_score(frame)
+                      tenth_frame_score
                     else
-                      mid_game_frame_score(frames, index)
+                      mid_game_frame_score(index)
                     end
       frame_scores_list << frame_score
     end
@@ -18,47 +23,47 @@ class ScoreCalculator
 
   private
 
-  def tenth_frame_score(frame)
-    frame.sum
+  def tenth_frame_score
+    @frames[9].sum
   end
 
-  def mid_game_frame_score(frames, index)
-    total_score = basic_frame_score(frames[index])
-    if spare?(frames[index])
-      total_score += spare_bonus_score(frames, index)
-    elsif strike?(frames[index])
-      total_score += strike_bonus_score(frames, index)
+  def mid_game_frame_score(index)
+    total_score = basic_frame_score(index)
+    if spare?(index)
+      total_score += spare_bonus_score(index)
+    elsif strike?(index)
+      total_score += strike_bonus_score(index)
     end
     total_score
   end
 
-  def basic_frame_score(frame)
-    frame[0..1].sum
+  def basic_frame_score(index)
+    @frames[index][0..1].sum
   end
 
-  def spare_bonus_score(frames, index)
-    if last_frame?(frames, index)
+  def spare_bonus_score(index)
+    if last_frame?(index)
       0
     else
-      frames[index + 1].first
+      @frames[index + 1].first
     end
   end
 
-  def strike_bonus_score(frames, index)
-    if last_frame?(frames, index)
+  def strike_bonus_score(index)
+    if last_frame?(index)
       0
-    elsif strike?(frames[index + 1])
-      strike_follows_strike_bonus_score(frames, index)
+    elsif strike?(index + 1)
+      strike_follows_strike_bonus_score(index)
     else
-      basic_frame_score(frames[index + 1])
+      basic_frame_score(index + 1)
     end
   end
 
-  def strike_follows_strike_bonus_score(frames, index)
+  def strike_follows_strike_bonus_score(index)
     if ninth_frame?(index)
-      basic_frame_score(frames[index + 1])
+      basic_frame_score(index + 1)
     else
-      spare_bonus_score(frames, index) + spare_bonus_score(frames, index + 1)
+      spare_bonus_score(index) + spare_bonus_score(index + 1)
     end
   end
 
@@ -66,16 +71,16 @@ class ScoreCalculator
     score == 10
   end
 
-  def spare?(frame)
-    all_pins_down?(basic_frame_score(frame)) unless strike?(frame)
+  def spare?(index)
+    all_pins_down?(basic_frame_score(index)) unless strike?(index)
   end
 
-  def strike?(frame)
-    all_pins_down?(frame.first)
+  def strike?(index)
+    all_pins_down?(@frames[index].first)
   end
 
-  def last_frame?(frames, index)
-    frames[index + 1].nil?
+  def last_frame?(index)
+    @frames[index + 1].nil?
   end
 
   def ninth_frame?(index)

@@ -1,8 +1,13 @@
 class ScoreRecorder
+  def initialize
+    @frames = []
+  end
+
   def next_input_roll(frames)
-    if game_end?(frames)
+    @frames = frames
+    if game_end?
       nil
-    elsif new_game?(frames) || completed_frame?(frames)
+    elsif new_game? || completed_frame?
       1
     else
       2
@@ -10,44 +15,45 @@ class ScoreRecorder
   end
 
   def next_input_frame(frames)
+    @frames = frames
     if next_input_roll(frames) == 1
-      next_frame(frames)
+      next_frame
     else
-      this_frame(frames)
+      this_frame
     end
   end
 
   private
 
-  def this_frame(frames)
-    frames.length
+  def this_frame
+    @frames.length
   end
 
-  def next_frame(frames)
-    this_frame(frames) + 1
+  def next_frame
+    this_frame + 1
   end
 
-  def new_game?(frames)
-    frames == []
+  def new_game?
+    @frames == []
   end
 
-  def completed_frame?(frames)
-    full_frame?(frames) || strike?(frames)
+  def completed_frame?
+    full_frame? || strike?
   end
 
-  def full_frame?(frames)
-    frames[-1].length == 2
+  def full_frame?
+    @frames[-1].length == 2
   end
 
-  def tenth_frame?(frames)
-    frames.length == 10
+  def tenth_frame?
+    @frames.length == 10
   end
 
-  def strike?(frames)
-    frames[-1] == [10]
+  def strike?
+    @frames[-1] == [10]
   end
 
-  def game_end?(frames)
-    tenth_frame?(frames) && full_frame?(frames)
+  def game_end?
+    tenth_frame? && full_frame?
   end
 end
