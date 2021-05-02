@@ -1,6 +1,10 @@
 class ScoreRecorder
   def next_input_roll(frames)
-    1 if new_game?(frames) || full_frame?(frames)
+    if new_game?(frames) || full_frame?(frames)
+      1
+    else
+      2
+    end
   end
 
   def next_input_frame(frames)
@@ -26,6 +30,6 @@ class ScoreRecorder
   end
 
   def full_frame?(frames)
-    frames[0].length == 2
+    frames[-1].length == 2
   end
 end
