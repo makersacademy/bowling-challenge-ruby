@@ -41,6 +41,13 @@ class Scorecard
     total
   end
 
+  def game_over?
+    return false if @frame < 11 ||
+             (@frame == 11 && (strike?(@scorecard[9]) || spare?(@scorecard[9]))) ||
+             (@frame == 12 && (strike?(@scorecard[9]) && strike?(@scorecard[10] )))
+    true
+  end
+
   private
 
   def update_scorecard(score)

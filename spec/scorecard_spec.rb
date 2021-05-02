@@ -106,4 +106,70 @@ describe Scorecard do
       expect(subject.calculate_score).to eq 10
     end
   end
+
+  describe '#game_over?' do
+    it 'returns true if game is over' do
+      20.times { subject.add_score 0 }
+      expect(subject.game_over?).to be true
+    end
+
+    it 'returns false if still in regular frames' do
+      2.times { subject.add_score 0 }
+      expect(subject.game_over?).to be false
+    end
+
+    it 'returns false if spare in last frame' do
+      18.times { subject.add_score 0 }
+      subject.add_score 9
+      subject.add_score 1
+      expect(subject.game_over?).to be false
+    end
+
+    it 'returns true if spare into strike in last frame' do
+      18.times { subject.add_score 0 }
+      subject.add_score 9
+      subject.add_score 1
+      subject.add_score 10
+      expect(subject.game_over?).to be true
+    end
+
+    it 'returns false if strike into strike in last frame' do
+      18.times { subject.add_score 0 }
+      subject.add_score 10
+      subject.add_score 10
+      expect(subject.game_over?).to be false
+    end
+
+    it 'returns true if strike into spare in last frame' do
+      18.times { subject.add_score 0 }
+      subject.add_score 10
+      subject.add_score 9
+      subject.add_score 1
+      expect(subject.game_over?).to be true
+    end
+
+    it 'true if strike in last 3 balls in final frame' do
+      18.times { subject.add_score 0 }
+      subject.add_score 10
+      subject.add_score 10
+      subject.add_score 10
+      expect(subject.game_over?).to be true
+    end
+
+    it 'true if strike into strike into any in final frame' do
+      18.times { subject.add_score 0 }
+      subject.add_score 10
+      subject.add_score 10
+      subject.add_score 1
+      expect(subject.game_over?).to be true
+    end
+
+    it 'returns true if spare into any in last frame' do
+      18.times { subject.add_score 0 }
+      subject.add_score 9
+      subject.add_score 1
+      subject.add_score 1
+      expect(subject.game_over?).to be true
+    end
+  end
 end

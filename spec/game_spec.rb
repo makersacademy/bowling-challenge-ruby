@@ -9,6 +9,8 @@ describe Game do
 
   before do
     allow(scorecard_double).to receive(:add_score)
+    allow(scorecard_double).to receive(:calculate_score)
+    allow(scorecard_double).to receive(:game_over?)
   end
 
   describe '#load_game' do
@@ -32,6 +34,18 @@ describe Game do
     it 'calls add score to scorecard' do
       expect(scorecard_double).to receive(:add_score).with(5)
       subject.bowl(5)
+    end
+
+    it 'calls game_over? to scorecard' do
+      expect(scorecard_double).to receive(:game_over?)
+      subject.bowl(5)
+    end
+  end
+
+  describe '#score' do
+    it 'calls calculate score on the scorecard' do
+      expect(scorecard_double).to receive(:calculate_score)
+      subject.score
     end
   end
 end
