@@ -32,4 +32,9 @@ describe 'Bowling Game Rules' do
     16.times { @game.roll 0 } 
     expect(@game.score).to eq 24
   end
+
+  it 'can roll a perfect game' do 
+    12.times { @game.roll 10}
+    expect(@game.score).to eq 300
+  end
 end
