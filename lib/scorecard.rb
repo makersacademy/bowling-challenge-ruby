@@ -2,17 +2,22 @@ class Scorecard
   attr_reader :scorecard, :roll, :frame
 
   def initialize
-    @scorecard = []
+    @scorecard = Array.new(12) { [0,0] }
     @roll = 1
     @frame = 1
   end
 
   def add_score(score)
     if @roll == 1
-      @scorecard << [score]
-      score == 10 ? next_frame : @roll = 2
+      if score == 10 
+        @scorecard[@frame - 1] = [10]
+        next_frame
+      else
+        update_score(score)
+        @roll = 2
+      end
     else
-      @scorecard[@frame - 1] << score
+      update_score(score)
       next_frame
     end
   end
@@ -37,6 +42,10 @@ class Scorecard
   end
 
   private
+  def update_score(score)
+    @scorecard[@frame - 1][@roll - 1] = score
+  end
+
   def next_frame
     @roll = 1
     @frame += 1

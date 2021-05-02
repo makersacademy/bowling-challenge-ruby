@@ -87,5 +87,16 @@ describe Scorecard do
       20.times { subject.add_score 0 }
       expect(subject.calculate_score).to eq 0
     end
+
+    it 'does not break for pending strike bonus' do
+      subject.add_score 10
+      expect(subject.calculate_score).to eq 10
+    end
+
+    it 'does not break for pending spare bonus' do
+      subject.add_score 6
+      subject.add_score 4
+      expect(subject.calculate_score).to eq 10
+    end
   end
 end
