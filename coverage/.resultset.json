@@ -1,0 +1,24 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/tiffanyvallo/Makers/Projects/bowling-challenge-ruby/spec/game_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/tiffanyvallo/Makers/Projects/bowling-challenge-ruby/lib/game.rb": {
+        "lines": [
+          1,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1620031472
+  }
+}
