@@ -38,27 +38,27 @@ describe ScoreRecorder do
         nine_frames
       end
 
-      it 'returns 2 after after first (non_strike) roll in 10th frame)' do
+      it 'returns 2 after after first (non_strike) roll' do
         frames = nine_frames << [8]
         expect(scorerecorder.next_input_roll(frames)).to eq(2)
       end
 
-      it 'returns nil after full game (no spare/strikes in 10th frame)' do
+      it 'returns nil after full game (no spare/strikes' do
         frames = nine_frames << [2, 2]
         expect(scorerecorder.next_input_roll(frames)).to eq(nil)
       end
 
-      it 'returns 2 after strike first roll in 10th frame' do
+      it 'returns 2 after strike first roll' do
         frames = nine_frames << [10]
         expect(scorerecorder.next_input_roll(frames)).to eq(2)
       end
 
-      it 'returns 3 after strike first roll in 10th frame and additional roll' do
+      it 'returns 3 after strike first roll and additional roll' do
         frames = nine_frames << [10, 0]
         expect(scorerecorder.next_input_roll(frames)).to eq(3)
       end
 
-      it 'returns 3 after spare in 10th frame' do
+      it 'returns 3 after spare' do
         frames = nine_frames << [5, 5]
         expect(scorerecorder.next_input_roll(frames)).to eq(3)
       end
@@ -100,15 +100,25 @@ describe ScoreRecorder do
         nine_frames
       end
 
-      it 'returns 10 after strike first roll in 10th frame and additional roll' do
+      it 'returns 10 after strike first roll and additional roll' do
         frames = nine_frames << [10, 0]
         expect(scorerecorder.next_input_frame(frames)).to eq(10)
       end
 
-      it 'returns 3 after spare in 10th frame' do
+      it 'returns 10 after spare' do
         frames = nine_frames << [5, 5]
         expect(scorerecorder.next_input_frame(frames)).to eq(10)
-      end      
+      end
+
+      it 'returns nil after second roll (not strike or spare) taken' do
+        frames = nine_frames << [1, 2]
+        expect(scorerecorder.next_input_frame(frames)).to eq(nil)
+      end
+
+      it 'returns nil after extra roll taken' do
+        frames = nine_frames << [10, 10, 10]
+        expect(scorerecorder.next_input_frame(frames)).to eq(nil)
+      end
     end
   end
 end

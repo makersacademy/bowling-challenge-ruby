@@ -16,7 +16,9 @@ class ScoreRecorder
 
   def next_input_frame(frames)
     @frames = frames
-    if next_input_roll(frames) == 1
+    if game_end?
+      nil
+    elsif next_input_roll(frames) == 1
       this_frame + 1
     else
       this_frame
