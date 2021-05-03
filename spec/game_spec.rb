@@ -11,4 +11,11 @@ describe Game do
     end
   end
 
+  describe '#score a normal game' do
+    it 'can produces results for a normal game' do
+      20.times { subject.roll (1) }
+      expect(subject.score).to eq 20
+    end
+  end
+
 end
