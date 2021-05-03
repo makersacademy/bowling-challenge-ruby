@@ -26,6 +26,11 @@ describe Game do
       17.times { subject.roll(0) }
       expect(subject.score).to eq 18
     end
+    
+    it 'can roll all spares in a game' do
+      21.times{ subject.roll(5) }
+      expect(subject.score).to eq 150
+    end
   end
 
   describe '#strike game' do
