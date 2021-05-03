@@ -31,11 +31,11 @@ class Scorecard
   end
 
   def spare?(roll_index)
-    @rolls[roll_index] + @rolls[roll_index + 1] == 10
+    frame_score(roll_index) == 10
   end
 
   def spare_score(roll_index)
-    @rolls[roll_index] + @rolls[roll_index + 1] + @rolls[roll_index + 2]
+    frame_score(roll_index) + @rolls[roll_index + 2]
   end
 
 end
