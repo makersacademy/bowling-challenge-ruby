@@ -19,6 +19,95 @@ In order to do this, you may pay particular attention to the following:
 * Single Responsibility Principle and encapsulation
 * Clear and readable code
 
+## Approach
+
+### User Stories
+```
+As a player,
+So that I know my scores
+I would like to have a scorecard that gives me a list of my scores.
+```
+```
+As a player, 
+So I know my accomplishment, 
+I would like to see my score total at the end of my game.
+```
+```
+As a player, 
+So i am scored for my strikes
+I would like to see that I get bonus points from my next frame when I have a strike.
+```
+```
+As a player, 
+So I can track my spares, 
+I would like to see that I get bonus points from my next roll when I have a spare.
+```
+```
+As a player, 
+So I know if i got a gutter game, 
+I would like to see all my nil scores throughout the game.
+```
+```
+As a player
+So I know if I achieved a perfect game,
+I would like to see all my scores, including my bonus points equal 300.
+```
+```
+As a player, 
+So I know when is the end of my game, 
+I would like to see that I have played a total of 10 frames. 
+```
+```
+As a player,
+So I know what my last frame bonus is, 
+I would like to see if I get any bonus points in my last frame. 
+```
+
+### Domain Modelling
+
+Nouns | Property or owner of property? |
+---------|----------|
+ game | owner | 
+ scorecare | owner | 
+
+<br>
+
+| Actions  | Owned by?  |
+|--------- |----------- |
+|roll | game |
+|score_total |  scorecard|
+|bonus_points | scorecard|
+|strike? | game |
+|spear? | game |
+|last_game? | game|
+|gutter_game? | game|
+
+<br>
+
+
+
+|Actions     | Property it reads or changes?    |
+|--------- | ----------- |
+|roll | @roll, @frame |
+|score_total | @roll, total|
+|bonus_points | @pins, @total, @frame |
+|strike? | @pins, @frames, @roll? |
+|spear? | @pins, @frames, @roll?  |
+|last_game? | @frame, strike?, spare? |
+|gutter_game? | @pins, @frames, @roll? |
+
+<br>
+<br>
+
+<details>
+<summary> Diagram Planning </summary>
+<br>
+<img src="/images/bowling_ruby_diagram.png">
+</details>
+
+<br>
+<br>
+
 ## Bowling — how to play?
 
 ### How to set up the game
