@@ -1,5 +1,24 @@
 Bowling Challenge in Ruby
 =================
+The task for the Makers Academy Week 5 weekend challenge is to write the backend logic for a program that calculates a scorecard for a single player bowling game. 
+## Approach
+
+<details>
+    <summary> Planning </summary>
+    <br>
+
+</details>
+
+<details>
+    <summary> Implementation </summary>
+    <br>
+
+</details>
+
+## Task Overview
+<details>
+    <summary> Instructions </summary>
+    <br>
 
 * Feel free to use google, your notes, books, etc. but work on your own
 * If you refer to the solution of another coach or student, please put a link to that in your README
@@ -33,6 +52,12 @@ In order to do this, you may pay particular attention to the following:
 * Single Responsibility Principle and encapsulation
 * Clear and readable code
 
+</details>
+
+<details>
+    <summary> Bowling rules </summary>
+    <br>
+
 ## Bowling — how does it work?
 
 ### Strikes
@@ -63,3 +88,5 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+</details>
