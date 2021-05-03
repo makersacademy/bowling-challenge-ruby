@@ -12,8 +12,8 @@ class Game
     score_total = 0
     roll_count = 0
     10.times do
-      if @rolls[roll_count] == 10
-        score_total += @rolls[roll_count] + @rolls[roll_count + 1] + @rolls[roll_count + 2]
+      if strike?(roll_count)
+        score_total += stike_score(roll_count)
         roll_count += 1
       elsif spare?(roll_count)
       score_total += spare_score(roll_count) 
@@ -28,6 +28,14 @@ class Game
 
   def spare?(roll_count)
     @rolls[roll_count] + @rolls[roll_count + 1] == 10
+  end
+
+  def strike?(roll_count)
+    @rolls[roll_count] == 10
+  end
+
+  def stike_score(roll_count)
+    @rolls[roll_count] + @rolls[roll_count + 1] + @rolls[roll_count + 2]
   end
 
   def spare_score(roll_count)
