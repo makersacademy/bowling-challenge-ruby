@@ -63,3 +63,8 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+## References
+
+https://www.youtube.com/watch?v=D2PSsnqgBiw&t=6s
+https://www.wikihow.com/Bowl
