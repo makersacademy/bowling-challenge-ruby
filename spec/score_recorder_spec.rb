@@ -47,6 +47,16 @@ describe ScoreRecorder do
         frames = nine_frames << [2, 2]
         expect(scorerecorder.next_input_roll(frames)).to eq(nil)
       end
+
+      it 'returns 2 after strike first roll in 10th frame' do
+        frames = nine_frames << [10]
+        expect(scorerecorder.next_input_roll(frames)).to eq(2)
+      end
+
+      xit 'returns 3 after  strike first roll in 10th frame' do
+        frames = nine_frames << [10, 0]
+        expect(scorerecorder.next_input_roll(frames)).to eq(3)
+      end
     end
   end
 

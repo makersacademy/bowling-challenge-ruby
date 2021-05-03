@@ -38,11 +38,15 @@ class ScoreRecorder
   end
 
   def completed_frame?
-    full_frame? || strike?
+    if tenth_frame?
+      full_frame?
+    else
+      full_frame? || strike?
+    end
   end
 
   def full_frame?
-    @frames[-1].length == 2
+    @frames[-1].length == 2 unless tenth_frame? && strike?
   end
 
   def tenth_frame?
