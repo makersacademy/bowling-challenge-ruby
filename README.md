@@ -75,7 +75,7 @@ The task for the Makers Academy Week 5 weekend challenge is to write the backend
         Frames == 10
         End game/ error: max no. rolls played. 
 
-Notes: 
+Notes: <br>
 Currently automated iteratin throug array - would like to try and convert logic to manually input two roll scores per frame so that I can attempt to implement a 'game over' method which resets the scorecard to 0 once the 10th frame has been played. 
 
 
