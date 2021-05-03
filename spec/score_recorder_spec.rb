@@ -62,6 +62,11 @@ describe ScoreRecorder do
         frames = nine_frames << [5, 5]
         expect(scorerecorder.next_input_roll(frames)).to eq(3)
       end
+
+      it 'returns nil after extra roll played' do
+        frames = nine_frames << [0, 10, 3]
+        expect(scorerecorder.next_input_roll(frames)).to eq(nil)
+      end
     end
   end
 

@@ -46,7 +46,11 @@ class ScoreRecorder
   end
 
   def full_frame?
-    @frames[-1].length == 2 unless extra_roll_required?
+    @frames[-1].length == if extra_roll_required?
+                            3
+                          else
+                            2
+                          end
   end
 
   def extra_roll_required?
