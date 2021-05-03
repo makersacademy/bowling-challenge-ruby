@@ -28,4 +28,14 @@ describe Game do
     end
   end
 
+  describe '#strike game' do
+    it 'can roll a strike' do
+      subject.roll(10)
+      subject.roll(5)
+      subject.roll(3)
+      16.times{ subject.roll(0) }
+      expect(subject.score).to eq 26
+    end
+  end
+
 end
