@@ -1,3 +1,13 @@
+## How to play
+* clone this repository 
+* `cd` into the cloned directory
+* Run `bundle` to install dependencies
+* Open `irb` and require `'./lib/game.rb'`
+
+# A few notes:
+* I commented out the '10th frame strike' option, as the logic is incorrect, although Rspec is passing. To be continued.
+* I would also like to keep working on my code and split it into two classes- 'Game' and 'Scoreboard'. 
+
 Bowling Challenge in Ruby
 =================
 
