@@ -92,5 +92,23 @@ describe ScoreRecorder do
         expect(scorerecorder.next_input_frame(frames)).to eq(2)
       end
     end
+
+    context 'when 10 frames played' do
+      let(:nine_frames) do
+        nine_frames = []
+        9.times { nine_frames << [0, 0] }
+        nine_frames
+      end
+
+      it 'returns 10 after strike first roll in 10th frame and additional roll' do
+        frames = nine_frames << [10, 0]
+        expect(scorerecorder.next_input_frame(frames)).to eq(10)
+      end
+
+      it 'returns 3 after spare in 10th frame' do
+        frames = nine_frames << [5, 5]
+        expect(scorerecorder.next_input_frame(frames)).to eq(10)
+      end      
+    end
   end
 end
