@@ -6,11 +6,13 @@ describe Scorecard do
 
   it 'can score a gutter game' do 
     20.times{ game.roll(0) }
+
     expect(game.score).to eq 0
   end
 
   it 'can score a game of all ones' do 
     20.times{ game.roll(1) }
+
     expect(game.score).to eq 20
   end
 
@@ -19,6 +21,7 @@ describe Scorecard do
     game.roll(4)
     game.roll(5)
     17.times{ game.roll(0) }
+
     expect(game.score).to eq 20
   end
 
@@ -27,11 +30,13 @@ describe Scorecard do
     game.roll(3)
     game.roll(6)
     16.times{ game.roll(0) }
+
     expect(game.score).to eq 28
   end
 
   it 'can score a perfect game' do
     12.times{ game.roll(10) }
+
     expect(game.score).to eq 300
   end
 
@@ -40,6 +45,7 @@ describe Scorecard do
     game.roll(10)
     game.roll(3)
     game.roll(4)
+
     expect(game.score).to eq 35
   end
 
@@ -48,11 +54,14 @@ describe Scorecard do
     game.roll(5)
     game.roll(5)
     game.roll(8)
+
     expect(game.score).to eq 36
   end
 
-  # it 'can end the game after 10 frames' do
-  #   
+  # it 'can reset the game after 10 frames' do
+  #   21.times{ game.roll(1) }
+
+  #   expect(game.score).to eq 1
   # end
 
   it 'can raise an error to prevent rolls above 10' do

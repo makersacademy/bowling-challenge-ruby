@@ -15,6 +15,7 @@ class Scorecard
     result = 0
     roll_index = 0
     frame = 1
+
     10.times do
       if strike?(roll_index)
         result += strike_score(roll_index)
@@ -28,7 +29,9 @@ class Scorecard
       end
       frame += 1
     end
+    # gameover?(frame)
     result 
+    
   end
 
   private
@@ -52,9 +55,9 @@ class Scorecard
   def strike_score(roll_index)
     @rolls[roll_index] + @rolls[roll_index + 1] + @rolls[roll_index + 2]
   end
-end
 
-# def gameover?
-  # method to determine that 10 frames have been played and output final score / reset game score to 0
-  # return 0 if frame > 10
-# end
+  # def gameover?(frame)
+  #   return 0 if frame > 10
+  # end
+
+end
