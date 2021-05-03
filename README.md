@@ -33,6 +33,10 @@ As a bowler
 So I can become one of the greats
 I can play a perfect game and achieve a score of 300
 ```
+## To play
+* Clone this repository
+* Run `bundle` to install the dependencies 
+* Open `irb` and require `./lib/bowling.rb`
 
 ## Instructions
 
