@@ -15,12 +15,16 @@ class Bowling
     score = 0
     index = 0
     10.times do
-      if spare?(index)
+      if strike?(index)
+        score += strike_score(index)
+        index += 1
+      elsif spare?(index)
         score += spare_score(index)
+        index += 2
       else
         score += frame_score(index)
+        index += 2
       end
-      index += 2
     end
     score
   end
@@ -38,4 +42,13 @@ class Bowling
   def frame_score(index)
     @rolls[index] + @rolls[index + 1]
   end
+
+  def strike?(index)
+    @rolls[index] == 10
+  end
+
+  def strike_score(index)
+    10 + @rolls[index + 1] + @rolls[index + 2]
+  end
+
 end
