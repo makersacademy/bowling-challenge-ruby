@@ -17,7 +17,7 @@ class ScoreRecorder
   def next_input_frame(frames)
     @frames = frames
     if next_input_roll(frames) == 1
-      next_frame
+      this_frame + 1
     else
       this_frame
     end
@@ -33,10 +33,6 @@ class ScoreRecorder
     @frames.length
   end
 
-  def next_frame
-    this_frame + 1
-  end
-
   def new_game?
     @frames == []
   end
@@ -50,7 +46,11 @@ class ScoreRecorder
   end
 
   def full_frame?
-    @frames[-1].length == 2 unless tenth_frame? && strike?
+    @frames[-1].length == 2 unless extra_roll_required?
+  end
+
+  def extra_roll_required?
+    tenth_frame? && (strike? || spare?)
   end
 
   def tenth_frame?
@@ -59,6 +59,10 @@ class ScoreRecorder
 
   def strike?
     @frames[-1].first == 10
+  end
+
+  def spare?
+    @frames[-1][0..1].sum == 10
   end
 
   def game_end?

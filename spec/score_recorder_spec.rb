@@ -57,6 +57,11 @@ describe ScoreRecorder do
         frames = nine_frames << [10, 0]
         expect(scorerecorder.next_input_roll(frames)).to eq(3)
       end
+
+      it 'returns 3 after spare in 10th frame' do
+        frames = nine_frames << [5, 5]
+        expect(scorerecorder.next_input_roll(frames)).to eq(3)
+      end
     end
   end
 
