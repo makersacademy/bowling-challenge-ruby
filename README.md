@@ -1,6 +1,6 @@
 Bowling Challenge in Ruby
 =================
-The task for the Makers Academy Week 5 weekend challenge is to write the backend logic for a program that calculates a scorecard for a single player bowling game. 
+The task for the Makers Academy Week 5 weekend challenge is to write the backend logic for a program that calculates a scorecard for a single player bowling game. The program doesn't simulate a game itself, it operates as a calculator and requires the user to enter in manually the number of pins knocked down each roll.
 ## Approach
 
 <details>
@@ -20,16 +20,25 @@ The task for the Makers Academy Week 5 weekend challenge is to write the backend
     <summary> Implementation </summary>
     <br>
 
+ ### Inclusions: 
+- [ ] Need to allow game score to be 0 == gutter game
+- [ ] Need to allow for a spare == all ten pins knocked down over 2 rolls of a frame
+- [ ] Need to allow for a strike == all ten pins knocked down with first roll of frame, no second roll
+- [ ] Need to allow for a perfect score == 300 (in tests) 
+- [ ] Need to allow for bonus rolls if strike or spare scored in the 10th frame (2 and 1 respectively)
+
 <details>
-        <summary> Psuedocode </summary>
+        <summary> Pseudocode </summary>
         <br>
 
 
-</details>
+
 
 </details>
 
-## To test in IRB
+</details>
+
+## To Test in IRB
 
 
 ## Task Overview
