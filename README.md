@@ -20,7 +20,6 @@ In order to do this, you may pay particular attention to the following:
 * Clear and readable code
 
 ## Approach
-
 ### User Stories
 ```
 As a player,
@@ -68,18 +67,16 @@ I would like to see if I get any bonus points in my last frame.
 Nouns | Property or owner of property? |
 ---------|----------|
  game | owner | 
- scorecare | owner | 
+ 
 
 <br>
 
 | Actions  | Owned by?  |
 |--------- |----------- |
 |roll | game |
-|score_total |  scorecard|
-|bonus_points | scorecard|
+|score_total |  game|
 |strike? | game |
 |spear? | game |
-|last_game? | game|
 |gutter_game? | game|
 
 <br>
@@ -88,13 +85,11 @@ Nouns | Property or owner of property? |
 
 |Actions     | Property it reads or changes?    |
 |--------- | ----------- |
-|roll | @roll, @frame |
-|score_total | @roll, total|
-|bonus_points | @pins, @total, @frame |
-|strike? | @pins, @frames, @roll? |
-|spear? | @pins, @frames, @roll?  |
-|last_game? | @frame, strike?, spare? |
-|gutter_game? | @pins, @frames, @roll? |
+|roll | pins [rolls] |
+|score | @roll, score_total, [rolls], roll_count|
+|strike? |roll_count, [rolls] |
+|spear? | roll_count, [rolls]  |
+|gutter_game? | roll_count, [rolls] |
 
 <br>
 <br>
@@ -111,8 +106,19 @@ Nouns | Property or owner of property? |
 ## Bowling — how to play?
 
 ### How to set up the game
+On REPL
+```
+require './lib/game'
+```
+ ### To run tests:
 
-
+```
+rspec
+```
+### To run linting:
+```
+rubocop
+```
 
 
 ## Bowling — how does it work?

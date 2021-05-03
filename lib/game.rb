@@ -6,6 +6,7 @@ class Game
 
   def roll(pins)
     raise "Please enter roll between 1-10" if pins > 10
+
     @rolls << pins
   end
 
@@ -17,11 +18,11 @@ class Game
         score_total += stike_score(roll_count)
         roll_count += 1
       elsif spare?(roll_count)
-      score_total += spare_score(roll_count) 
-      roll_count += 2
+        score_total += spare_score(roll_count) 
+        roll_count += 2
       else 
-      score_total += frame_score(roll_count)
-      roll_count += 2
+        score_total += frame_score(roll_count)
+        roll_count += 2
       end
     end
     score_total
