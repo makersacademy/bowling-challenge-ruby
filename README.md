@@ -7,13 +7,30 @@ The task for the Makers Academy Week 5 weekend challenge is to write the backend
     <summary> Planning </summary>
     <br>
 
+
+
+### Diagramming Game Logic
+<img src="/public/images/bowling_rules.png">
+
+### Domain Model
+
 </details>
 
 <details>
     <summary> Implementation </summary>
     <br>
 
+<details>
+        <summary> Psuedocode </summary>
+        <br>
+
+
 </details>
+
+</details>
+
+## To test in IRB
+
 
 ## Task Overview
 <details>
