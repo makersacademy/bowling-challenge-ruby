@@ -25,11 +25,11 @@ forgive me  ( •_•)
 
 # RULES:
 
-  if the sum of a frame from 0-9 is <10, NO BONUS, else, BONUS.
-    if it's a strike [10,0], bonus is the next 2 bowls.
-    if it's a spare, bonus is the next bowl.
-  once we get to frame 10, the only bonus is the potential 11th frame,
-  which can only exist if a spare or strike is bowled.
+- if the sum of a frame from 0-9 is <10, NO BONUS, else, BONUS.
+- if it's a strike [10,0], bonus is the next 2 bowls.
+- if it's a spare, bonus is the next bowl.
+- once we get to frame 10, the only bonus is the potential 11th frame,
+- this can only exist if a spare or strike is bowled.
 
  the highest possible score is 300, as a series of strikes 
  has a kind of 'cascade' effect.
