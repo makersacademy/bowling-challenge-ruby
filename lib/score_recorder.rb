@@ -10,7 +10,7 @@ class ScoreRecorder
     elsif new_game? || completed_frame?
       1
     else
-      2
+      this_roll + 1
     end
   end
 
@@ -24,6 +24,10 @@ class ScoreRecorder
   end
 
   private
+
+  def this_roll
+    @frames.last.length
+  end
 
   def this_frame
     @frames.length
@@ -54,7 +58,7 @@ class ScoreRecorder
   end
 
   def strike?
-    @frames[-1] == [10]
+    @frames[-1].first == 10
   end
 
   def game_end?
