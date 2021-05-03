@@ -14,8 +14,8 @@ class Scorecard
     result = 0
     roll_index = 0
     10.times do
-      if @rolls[roll_index] == 10
-        result += @rolls[roll_index] + @rolls[roll_index + 1] + @rolls[roll_index + 2]
+      if strike?(roll_index)
+        result += strike_score(roll_index)
         roll_index += 1
       elsif spare?(roll_index)
         result += spare_score(roll_index)
@@ -45,4 +45,11 @@ class Scorecard
     #although that should rely on roll(pins) == 10, not frame_score
   end
 
+  def strike?(roll_index)
+    @rolls[roll_index] == 10
+  end
+
+  def strike_score(roll_index)
+    @rolls[roll_index] + @rolls[roll_index + 1] + @rolls[roll_index + 2]
+  end
 end
