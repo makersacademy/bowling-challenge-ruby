@@ -7,6 +7,7 @@ class Scorecard
   end
 
   def roll(pins)
+   raise 'Error: only 10 pins per frame' if pins > 10
     @rolls << pins
   end
 
@@ -35,14 +36,11 @@ class Scorecard
   end
 
   def spare?(roll_index)
-    frame_score(roll_index) == 10 
-    # may need to rethink this to account for strike logic to be implemented
+    frame_score(roll_index) == 10
   end
 
   def spare_score(roll_index)
     frame_score(roll_index) + @rolls[roll_index + 2]
-    # may need to rethink this to account for strike logic to be implemented
-    #although that should rely on roll(pins) == 10, not frame_score
   end
 
   def strike?(roll_index)

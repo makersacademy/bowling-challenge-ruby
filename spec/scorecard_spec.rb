@@ -30,4 +30,33 @@ describe Scorecard do
     expect(game.score).to eq 28
   end
 
+  it 'can score a perfect game' do
+    12.times{ game.roll(10) }
+    expect(game.score).to eq 300
+  end
+
+  it 'can allow for 2 bonus rolls for a strike in the 10th frame' do
+    18.times{ game.roll(1) }
+    game.roll(10)
+    game.roll(3)
+    game.roll(4)
+    expect(game.score).to eq 35
+  end
+
+  it 'can allow for 1 bonus roll for a spare in the 10th frame' do
+    18.times{ game.roll(1) }
+    game.roll(5)
+    game.roll(5)
+    game.roll(8)
+    expect(game.score).to eq 36
+  end
+
+  # it 'can end the game after 10 frames' do
+  # 
+  # end
+
+  it 'can raise an error to prevent rolls above 10' do
+    expect{ game.roll(11) }.to raise_error 'Error: only 10 pins per frame'
+  end
+  
 end
