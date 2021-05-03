@@ -35,6 +35,15 @@ describe Game do
       21.times{ subject.roll(5) }
       expect(subject.score).to eq 150
     end
+
+    it 'can correctly calculate last game spare' do
+      18.times { subject.roll(2) }
+      subject.roll(7)
+      subject.roll(3)
+      subject.roll(7)
+      expect(subject.score).to eq 53
+    end
+
   end
 
   describe '#strike game' do
@@ -44,6 +53,14 @@ describe Game do
       subject.roll(3)
       16.times{ subject.roll(0) }
       expect(subject.score).to eq 26
+    end
+
+    it 'can correctly calculate last game strike' do
+      18.times { subject.roll(3) }
+      subject.roll(10)
+      subject.roll(7)
+      subject.roll(2)
+      expect(subject.score).to eq 73
     end
   end
 
