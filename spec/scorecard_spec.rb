@@ -52,7 +52,7 @@ describe Scorecard do
   end
 
   # it 'can end the game after 10 frames' do
-  # 
+  #   
   # end
 
   it 'can raise an error to prevent rolls above 10' do
