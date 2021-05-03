@@ -5,6 +5,7 @@ class Game
   end
 
   def roll(pins)
+    raise "Please enter roll between 1-10" if pins > 10
     @rolls << pins
   end
 
@@ -25,6 +26,8 @@ class Game
     end
     score_total
   end
+
+  private
 
   def spare?(roll_count)
     @rolls[roll_count] + @rolls[roll_count + 1] == 10

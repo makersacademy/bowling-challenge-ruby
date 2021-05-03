@@ -16,6 +16,10 @@ describe Game do
       20.times { subject.roll (1) }
       expect(subject.score).to eq 20
     end
+
+    it 'can raise an error is pin inputted is higher than 10' do
+      expect { subject.roll(17) }.to raise_error "Please enter roll between 1-10"
+    end
   end
 
   describe '#spare game' do
@@ -26,7 +30,7 @@ describe Game do
       17.times { subject.roll(0) }
       expect(subject.score).to eq 18
     end
-    
+
     it 'can roll all spares in a game' do
       21.times{ subject.roll(5) }
       expect(subject.score).to eq 150
