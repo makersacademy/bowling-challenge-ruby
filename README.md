@@ -14,9 +14,9 @@ I hard-copied the scores and commented them out under each arr.
 
 The key logic is in codezilla.rb and has 3 functions:
 
-strike_or_spare?  < triggers bonus calculation logic
-strike?           < triggers strike-specific bonus calc logic
-final_score       < turns a scorecard array into a final score
+- strike_or_spare? triggers bonus calculation logic
+- strike? triggers strike-specific bonus calc logic
+- final_score turns a scorecard array into a final score
 
 I'll be honest, I named it codezilla because it's pretty ugly.
 I wrote pseudocode in this readme which may help.
