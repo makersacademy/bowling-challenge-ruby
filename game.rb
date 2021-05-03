@@ -1,23 +1,29 @@
 class Game
   def self.play 
+
     i = 0
     score = 0
     round = 0
     knocked_over_pins = 0
-    while round < 20 
+
+    until round == 22
       if i == 0  
         puts "Please enter your score..."
         userscore = gets.chomp.to_i
           if userscore == 10 
             puts "Strike!"
             score += 20
-            knocked_over_pins += userscore
             i += 1
+            knocked_over_pins += userscore
+            if round == 20
+              round == 21
+            end
           else 
             score += userscore
             knocked_over_pins += userscore
           end
         i += 1
+
       elsif i == 1 
         puts "Please enter your score..."
         userscore = gets.chomp.to_i
@@ -45,7 +51,11 @@ class Game
           round += 1 
           knocked_over_pins = 0
         end
+        if round == 20
+          round == 22
+        end
       end 
+
     end
     puts "Game Over.... You Finished with a score of #{score}"
   end
