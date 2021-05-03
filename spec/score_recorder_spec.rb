@@ -9,6 +9,14 @@ describe ScoreRecorder do
       expected_frames = [[1]]
       expect(score_recorder.frames).to eq(expected_frames)
     end
+
+    it 'adds second roll' do
+      frames = [[1]]
+      score_recorder.test_setup(frames)
+      score_recorder.add_roll(2)
+      expected_frames = [[1, 2]]
+      expect(score_recorder.frames).to eq(expected_frames)
+    end
   end
 
   describe '#next_input_row' do

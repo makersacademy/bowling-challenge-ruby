@@ -10,7 +10,13 @@ class ScoreRecorder
   end
 
   def add_roll(score)
-    @frames << [score]
+    if game_end?
+      nil
+    elsif next_input_roll == 1
+      add_new_frame(score)
+    else
+      add_to_last_frame(score)
+    end
   end
 
   def next_input_roll
@@ -35,6 +41,14 @@ class ScoreRecorder
 
   private
 
+  def add_new_frame(score)
+    @frames << [score]
+  end
+
+  def add_to_last_frame(score)
+    @frames.last << score
+  end
+
   def this_roll
     @frames.last.length
   end
@@ -56,7 +70,7 @@ class ScoreRecorder
   end
 
   def full_frame?
-    @frames[-1].length == if extra_roll_required?
+    @frames.last.length == if extra_roll_required?
                             3
                           else
                             2
@@ -72,11 +86,11 @@ class ScoreRecorder
   end
 
   def strike?
-    @frames[-1].first == 10
+    @frames.last.first == 10
   end
 
   def spare?
-    @frames[-1][0..1].sum == 10
+    @frames.last[0..1].sum == 10
   end
 
   def game_end?
