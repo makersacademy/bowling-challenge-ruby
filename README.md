@@ -13,7 +13,7 @@ The task for the Makers Academy Week 5 weekend challenge is to write the backend
 <img src="/public/images/bowling_rules.png">
 
 ### Domain Model
-
+[attach image]
 </details>
 
 <details>
@@ -21,19 +21,62 @@ The task for the Makers Academy Week 5 weekend challenge is to write the backend
     <br>
 
  ### Inclusions: 
-- [ ] Need to allow for a frame to consist of 2 rolls, and to calculate the game score based on 10 frames 
+- [x] Need to allow for a frame to consist of 2 rolls, and to calculate the game score based on 10 frames 
 - [ ] Need to allow for a total of 10 frames per game (raise an error if further rolls entered, or set scorecard to 0?)
-- [ ] Need to allow game score to be 0 == gutter game
-- [ ] Need to allow for a spare == all ten pins knocked down over 2 rolls of a frame
-- [ ] Need to allow for a strike == all ten pins knocked down with first roll of frame, no second roll (i.e. score of 10 ends the turn)
-- [ ] Need to allow for a perfect score == 300 (in tests) 
-- [ ] Need to allow for bonus rolls if strike or spare scored in the 10th frame (2 and 1 respectively)
+- [x] Need to allow game score to be 0 == gutter game
+- [x] Need to allow for a spare == all ten pins knocked down over 2 rolls of a frame
+- [x] Need to allow for a strike == all ten pins knocked down with first roll of frame, no second roll (i.e. score of 10 ends the turn)
+- [x] Need to allow for a perfect score == 300 (in tests) 
+- [x] Need to allow for bonus rolls if strike or spare scored in the 10th frame (2 and 1 respectively)
 
 <details>
         <summary> Pseudocode </summary>
         <br>
 
+**Scorecard class methods:**
+ 
+	Initialize 
+		Rolls = [ ]
+ 
+    Roll(no. of pins) (i.e. - play)
+        Raise error if ‘pins’ value > 10
+        Push no of pins to rolls array
+    
+        Total_score (i.e. - points as result of play)
+            using the roll index from the rolls array - sum the rolls per frame to return frame score, and use this to return total score for whole game by iterasting through whole array (using counter). 
 
+
+**Private methods:**
+
+    Frame score
+        Need to establish that a frame consists of 10 pins and 2 possible rolls
+        
+    Strike? (roll)
+        First roll in frame == all ten pins knocked down, no second roll.
+
+    Strike score
+        Frame 1 == 10 + (frame 2a Score + frame 2b score)
+
+    Spare? (roll)
+        First roll + second roll == 10
+        
+    Spare score 
+        Frame 1 == 10 + (frame 2a score)
+    
+    Bonus rolls (end of game)
+        10th frame has max of 3 rolls if strike or spare rolled. 
+    
+    Game over?
+        If frame(10) score == strike?
+            Allow 2 more rolls
+        Elsif frame(10) score == spare?
+            Allow 1 more roll
+        Else
+        Frames == 10
+        End game/ error: max no. rolls played. 
+
+Notes: 
+Currently automated iteratin throug array - would like to try and convert logic to manually input two roll scores per frame so that I can attempt to implement a 'game over' method which resets the scorecard to 0 once the 10th frame has been played. 
 
 
 </details>
