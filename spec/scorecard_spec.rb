@@ -22,4 +22,12 @@ describe Scorecard do
     expect(game.score).to eq 20
   end
 
+  it 'can score a strike' do
+    game.roll(10)
+    game.roll(3)
+    game.roll(6)
+    16.times{ game.roll(0) }
+    expect(game.score).to eq 28
+  end
+
 end
