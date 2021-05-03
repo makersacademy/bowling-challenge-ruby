@@ -38,4 +38,11 @@ describe Game do
     end
   end
 
+  describe '#perfect game' do
+    it 'can roll a perfect game' do
+    12.times { subject.roll(10) }
+    expect(subject.score).to eq 300
+    end
+  end
+
 end
