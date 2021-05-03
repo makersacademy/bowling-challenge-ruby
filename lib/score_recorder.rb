@@ -1,10 +1,19 @@
 class ScoreRecorder
+  attr_reader :frames
+
   def initialize
     @frames = []
   end
 
-  def next_input_roll(frames)
-    @frames = frames
+  def test_setup(frames)
+    @frames = frames if ENV['ENV'] == 'test'
+  end
+
+  def add_roll(score)
+    @frames << [score]
+  end
+
+  def next_input_roll
     if game_end?
       nil
     elsif new_game? || completed_frame?
@@ -14,11 +23,10 @@ class ScoreRecorder
     end
   end
 
-  def next_input_frame(frames)
-    @frames = frames
+  def next_input_frame
     if game_end?
       nil
-    elsif next_input_roll(frames) == 1
+    elsif next_input_roll == 1
       this_frame + 1
     else
       this_frame

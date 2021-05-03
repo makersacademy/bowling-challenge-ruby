@@ -1,33 +1,46 @@
 require 'score_recorder'
 
 describe ScoreRecorder do
-  subject(:scorerecorder) { described_class.new }
+  subject(:score_recorder) { described_class.new }
+
+  describe '#add_roll' do
+    it 'adds first roll' do
+      score_recorder.add_roll(1)
+      expected_frames = [[1]]
+      expect(score_recorder.frames).to eq(expected_frames)
+    end
+  end
 
   describe '#next_input_row' do
     context 'when less than 10 frames played' do
       it 'returns 1 for new game' do
         frames = []
-        expect(scorerecorder.next_input_roll(frames)).to eq(1)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_roll).to eq(1)
       end
 
       it 'returns 2 after first (non_strike) roll' do
         frames = [[3]]
-        expect(scorerecorder.next_input_roll(frames)).to eq(2)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_roll).to eq(2)
       end
 
       it 'returns 1 after two (non_strike) rolls' do
         frames = [[6, 4]]
-        expect(scorerecorder.next_input_roll(frames)).to eq(1)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_roll).to eq(1)
       end
 
       it 'returns 2 after three (non_strike) rolls' do
         frames = [[2, 3], [9]]
-        expect(scorerecorder.next_input_roll(frames)).to eq(2)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_roll).to eq(2)
       end
 
       it 'returns 1 after strike' do
         frames = [[10]]
-        expect(scorerecorder.next_input_roll(frames)).to eq(1)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_roll).to eq(1)
       end
     end
 
@@ -40,32 +53,38 @@ describe ScoreRecorder do
 
       it 'returns 2 after after first (non_strike) roll' do
         frames = nine_frames << [8]
-        expect(scorerecorder.next_input_roll(frames)).to eq(2)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_roll).to eq(2)
       end
 
       it 'returns nil after full game (no spare/strikes' do
         frames = nine_frames << [2, 2]
-        expect(scorerecorder.next_input_roll(frames)).to eq(nil)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_roll).to eq(nil)
       end
 
       it 'returns 2 after strike first roll' do
         frames = nine_frames << [10]
-        expect(scorerecorder.next_input_roll(frames)).to eq(2)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_roll).to eq(2)
       end
 
       it 'returns 3 after strike first roll and additional roll' do
         frames = nine_frames << [10, 0]
-        expect(scorerecorder.next_input_roll(frames)).to eq(3)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_roll).to eq(3)
       end
 
       it 'returns 3 after spare' do
         frames = nine_frames << [5, 5]
-        expect(scorerecorder.next_input_roll(frames)).to eq(3)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_roll).to eq(3)
       end
 
       it 'returns nil after extra roll played' do
         frames = nine_frames << [0, 10, 3]
-        expect(scorerecorder.next_input_roll(frames)).to eq(nil)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_roll).to eq(nil)
       end
     end
   end
@@ -74,22 +93,26 @@ describe ScoreRecorder do
     context 'when less than 10 frames played' do
       it 'returns 1 for new game' do
         frames = []
-        expect(scorerecorder.next_input_frame(frames)).to eq(1)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_frame).to eq(1)
       end
 
       it 'returns 1 after one (non-strike) roll' do
         frames = [[9]]
-        expect(scorerecorder.next_input_frame(frames)).to eq(1)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_frame).to eq(1)
       end
 
       it 'returns 2 after two (non-strike) rolls' do
         frames = [[3, 4]]
-        expect(scorerecorder.next_input_frame(frames)).to eq(2)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_frame).to eq(2)
       end
 
       it 'returns 2 after 1 strike roll' do
         frames = [[10]]
-        expect(scorerecorder.next_input_frame(frames)).to eq(2)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_frame).to eq(2)
       end
     end
 
@@ -102,22 +125,26 @@ describe ScoreRecorder do
 
       it 'returns 10 after strike first roll and additional roll' do
         frames = nine_frames << [10, 0]
-        expect(scorerecorder.next_input_frame(frames)).to eq(10)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_frame).to eq(10)
       end
 
       it 'returns 10 after spare' do
         frames = nine_frames << [5, 5]
-        expect(scorerecorder.next_input_frame(frames)).to eq(10)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_frame).to eq(10)
       end
 
       it 'returns nil after second roll (not strike or spare) taken' do
         frames = nine_frames << [1, 2]
-        expect(scorerecorder.next_input_frame(frames)).to eq(nil)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_frame).to eq(nil)
       end
 
       it 'returns nil after extra roll taken' do
         frames = nine_frames << [10, 10, 10]
-        expect(scorerecorder.next_input_frame(frames)).to eq(nil)
+        score_recorder.test_setup(frames)
+        expect(score_recorder.next_input_frame).to eq(nil)
       end
     end
   end
