@@ -21,9 +21,10 @@ The task for the Makers Academy Week 5 weekend challenge is to write the backend
     <br>
 
  ### Inclusions: 
+- [ ] Need to allow for a frame to consist of 2 rolls, and to calculate the game score based on 10 frames 
 - [ ] Need to allow game score to be 0 == gutter game
 - [ ] Need to allow for a spare == all ten pins knocked down over 2 rolls of a frame
-- [ ] Need to allow for a strike == all ten pins knocked down with first roll of frame, no second roll
+- [ ] Need to allow for a strike == all ten pins knocked down with first roll of frame, no second roll (i.e. score of 10 ends the turn)
 - [ ] Need to allow for a perfect score == 300 (in tests) 
 - [ ] Need to allow for bonus rolls if strike or spare scored in the 10th frame (2 and 1 respectively)
 
