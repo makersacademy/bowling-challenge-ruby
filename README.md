@@ -19,7 +19,7 @@ The key logic is in codezilla.rb and has 3 functions:
 - final_score turns a scorecard array into a final score
 
 I'll be honest, I named it codezilla because it's pretty ugly.
-I wrote pseudocode in this readme which may help.
+I wrote a file, pseudocode.rb, which mirrors my code in human language.
 
 forgive me  ( •_•)
 
