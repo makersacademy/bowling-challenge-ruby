@@ -1,5 +1,13 @@
 Bowling Challenge in Ruby
 =================
+## To Do
+- Update the tests so they run.
+- Split into multiple classes
+- Remove the puts statements
+- Do the unit and feature tests as they kept breaking using the puts. 
+
+
+=================
 
 * Feel free to use google, your notes, books, etc. but work on your own
 * If you refer to the solution of another coach or student, please put a link to that in your README
