@@ -14,10 +14,6 @@ describe Scorecard do
     
       subject.add_score(2)
 
-      # p subject.current_frame
-      subject.roll
-
-
       expect(subject.scorecard.first[:roll_1_score]).to eq 1
       expect(subject.scorecard.first[:roll_2_score]).to eq 2
     end

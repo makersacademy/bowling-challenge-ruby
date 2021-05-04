@@ -1,24 +1,28 @@
 class Scorecard
-  attr_reader :scorecard, :roll
+  attr_reader :scorecard, :roll, :frame_number
 
   def initialize
     @roll = 1
-    @scorecard = Array.new(10, Hash.new(0))
+    @scorecard = []
     @frame_number = 0
   end
 
   def add_score(score)
     if @roll == 1
-      @scorecard[@frame_number][:roll_1_score] += score
-      @scorecard[@frame_number][:total_score] += score
+      @frame = Hash.new(0)
+      @frame[:roll_1_score] += score
+      @frame[:total_score] += score
+      @scorecard[@frame_number] = @frame
+
       switch_rolls
 
     elsif @roll == 2
-      @scorecard[@frame_number][:roll_2_score] += score
-      @scorecard[@frame_number][:total_score] += score
+      @frame[:roll_2_score] += score
+      @frame[:total_score] += score
+      @scorecard[@frame_number] = @frame
+      update_frame
     end
 
-    update_frame
   end
 
   private
