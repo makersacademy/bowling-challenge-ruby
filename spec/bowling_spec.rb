@@ -30,4 +30,21 @@ describe Bowling do
     12.times{ game.roll(10) }
     expect(game.score).to eq 300
   end
+  
+  it 'can roll a strike in the 10th frame' do
+    18.times { game.roll(6) }
+    game.roll(10)
+    game.roll(3)
+    game.roll(2)
+    expect(game.score).to eq 123
+  end
+
+  it 'can roll a spare in the 10th frame' do
+    18.times { game.roll(6) }
+    game.roll(8)
+    game.roll(2)
+    game.roll(3)
+    expect(game.score).to eq 121
+  end
+
 end
