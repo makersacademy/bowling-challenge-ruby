@@ -10,8 +10,7 @@ class Scorecard
 
   def add_frame(frame)
     @board << frame
-    apply_bonus(frame)
-    end_total
+    game_over? ? end_total : total_so_far
   end
 
   def spare_bonus(frame, bonus)
@@ -50,6 +49,8 @@ class Scorecard
   def end_total
     @board.map {
       |frame|
+      apply_bonus(frame)
+
       p @total_score += frame.frame_score
     }
   end

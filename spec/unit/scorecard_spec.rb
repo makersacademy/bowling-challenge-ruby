@@ -61,6 +61,8 @@ describe Scorecard do
   context "#end_total" do
     it "should be able to calculate a perfect game" do
       10.times { subject.add_frame(Frame.new([10, 0])) }
+      2.times { subject.board.last.knockdown(10) }
+      p subject.board.last
       expect(subject.total_score).to eq 300
     end
   end

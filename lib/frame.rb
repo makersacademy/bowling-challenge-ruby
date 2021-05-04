@@ -4,7 +4,7 @@ class Frame
   attr_reader :rolls, :frame_score
 
   def initialize(rolls = [])
-    @rolls = rolls.take(3)
+    @rolls = rolls
     @frame_score = rolls.sum
   end
 
