@@ -55,12 +55,6 @@ describe ScoreCalculator do
     end
 
     context 'when 10 frames played' do
-      let(:eight_frames) do
-        eight_frames = []
-        8.times { eight_frames << [0, 0] }
-        eight_frames
-      end
-      let(:nine_frames) { eight_frames << [0, 0] }
       let(:ninth_index) { 8 }
       let(:tenth_index) { 9 }
 

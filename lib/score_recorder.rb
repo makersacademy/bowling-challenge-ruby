@@ -1,12 +1,8 @@
 class ScoreRecorder
   attr_reader :frames
 
-  def initialize
-    @frames = []
-  end
-
-  def test_setup(frames)
-    @frames = frames if ENV['ENV'] == 'test'
+  def initialize(frames = [])
+    @frames = frames
   end
 
   def add_roll(score)
