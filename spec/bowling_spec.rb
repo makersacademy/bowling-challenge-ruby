@@ -14,7 +14,7 @@ describe Bowling do
     game.roll(4)
     game.roll(6)
     game.roll(4)
-    17.times { game.roll 0 }
+    17.times { game.roll(0) }
     expect(game.score).to eq 18
   end
 
@@ -22,8 +22,12 @@ describe Bowling do
     game.roll(10)
     game.roll(7)
     game.roll(5)
-    16.times { game.roll 0 }
+    16.times { game.roll(0) }
     expect(game.score).to eq 34
   end
 
+  it 'can roll a perfect game' do
+    12.times{ game.roll(10) }
+    expect(game.score).to eq 300
+  end
 end
