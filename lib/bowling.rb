@@ -13,17 +13,17 @@ class Bowling
 
   def score
     score = 0
-    index = 0
+    roll_index = 0
     10.times do
-      if strike?(index)
-        score += strike_score(index)
-        index += 1
-      elsif spare?(index)
-        score += spare_score(index)
-        index += 2
+      if strike?(roll_index)
+        score += strike_score(roll_index)
+        roll_index += 1
+      elsif spare?(roll_index)
+        score += spare_score(roll_index)
+        roll_index += 2
       else
-        score += frame_score(index)
-        index += 2
+        score += frame_score(roll_index)
+        roll_index += 2
       end
     end
     score
@@ -31,24 +31,24 @@ class Bowling
 
   private
 
-  def spare?(index)
-    @rolls[index] + @rolls[index + 1] == 10
+  def spare?(roll_index)
+    @rolls[roll_index].to_i + @rolls[roll_index + 1].to_i == 10
   end
 
-  def spare_score(index)
-    @rolls[index] + @rolls[index + 1] + @rolls[index + 2]
+  def spare_score(roll_index)
+    @rolls[roll_index].to_i + @rolls[roll_index + 1].to_i + @rolls[roll_index + 2].to_i
   end
 
-  def frame_score(index)
-    @rolls[index] + @rolls[index + 1]
+  def frame_score(roll_index)
+    @rolls[roll_index].to_i + @rolls[roll_index + 1].to_i
   end
 
-  def strike?(index)
-    @rolls[index] == 10
+  def strike?(roll_index)
+    @rolls[roll_index].to_i == 10
   end
 
-  def strike_score(index)
-    10 + @rolls[index + 1] + @rolls[index + 2]
+  def strike_score(roll_index)
+    10 + @rolls[roll_index + 1].to_i + @rolls[roll_index + 2].to_i
   end
 
 end
