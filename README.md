@@ -1,65 +1,46 @@
-Bowling Challenge in Ruby
-=================
+Beca Parker's solution to Bowling Scorecard Challenge (Ruby)  
+============================================================
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+## What the code does
 
-## The Task
+This ruby code provides the logic for counting and summing the scores of a 10-pin bowling game for one player, according to the [traditional scoring rules](https://en.wikipedia.org/wiki/Ten-pin_bowling#Traditional_scoring).
 
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
+*Input:* User inputs the number of pins knocked down at each roll.  
+*Output:* After each frame, [WHAT WILL THE OUTPUT BE?]. At the end of the game, the terminal will display the final score (max. 300)  
 
-Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
 
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
+## Setup
 
-As usual please start by
+Use these commands in your terminal:  
+* `git clone https://github.com/BecaLParker/chitter-challenge`  
+* `cd chitter-challenge`  
+* `bundle`  
+* now you can run the tests I built: `rspec`
+* and/or interact as a user: [INSERT COMMAND TO RUN CODE]
 
-* Forking this repo
 
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
+## My goals during this challenge
 
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
+The user interface in this solution is intentionally minimal.
+Instead, the focus for this challenge was to write high-quality code.
 
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
-
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
+In order to do this, I aimed to give particular attention to :
+* Using diagramming to plan my approach to the challenge
+* TDD the code
 * Focus on testing behaviour rather than state
 * Commit often, with good commit messages
 * Single Responsibility Principle and encapsulation
 * Clear and readable code
 
-## Bowling — how does it work?
+## Planning and approach
 
-### Strikes
+I created [user stories](./planning/user_stories.md), which in turn helped me establish a domain model: 
+![domain model](./planning/)
 
-The player has a strike if he knocks down all 10 pins with the first roll in a frame. The frame ends immediately (since there are no pins left for a second roll). The bonus for that frame is the number of pins knocked down by the next two rolls. That would be the next frame, unless the player rolls another strike.
-
-### Spares
-
-The player has a spare if the knocks down all 10 pins with the two rolls of a frame. The bonus for that frame is the number of pins knocked down by the next roll (first roll of next frame).
-
-### 10th frame
-
-If the player rolls a strike or spare in the 10th frame they can roll the additional balls for the bonus. But they can never roll more than 3 balls in the 10th frame. The additional rolls only count for the bonus not for the regular frame count.
-
-    10, 10, 10 in the 10th frame gives 30 points (10 points for the regular first strike and 20 points for the bonus).
-    1, 9, 10 in the 10th frame gives 20 points (10 points for the regular spare and 10 points for the bonus).
-
-### Gutter Game
-
-A Gutter Game is when the player never hits a pin (20 zero scores).
-
-### Perfect Game
-
-A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 strikes for the bonus in the 10th frame). The Perfect Game scores 300 points.
-
-In the image below you can find some score examples.
-
-More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
+Here are some score examples I used as a TDD basis for this code:
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+
+
+
