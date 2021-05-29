@@ -12,6 +12,7 @@ describe Scorecard do
     expect(subject.current_roll).to eq 1
   end
 
+<<<<<<< HEAD
   it 'can limit the game to 10 Frames' do
     10.times { 
       subject.roll_1(1)
@@ -21,6 +22,8 @@ describe Scorecard do
     expect(subject.final_score).to eq 30 
   end
 
+=======
+>>>>>>> 47b071342b893c23c0df70eb3622310dec31a024
   describe '#roll_1' do
     it 'fails when too many pins entered' do
       expect { subject.roll_1(11) }.to raise_error 'Max pins exceeded, recheck and try again'

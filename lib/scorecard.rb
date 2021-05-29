@@ -27,7 +27,7 @@ class Scorecard
     @current_frame += 1
     @current_roll = 1
   end
-
+  
   def final_score
     raise 'You have not bowled 10 frames yet' if game_over? == false
 
@@ -40,8 +40,4 @@ class Scorecard
     else false
     end
   end
-
-  
-
-
 end
