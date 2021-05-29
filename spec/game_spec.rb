@@ -48,5 +48,37 @@ describe Game do
         end
       end
     end
+
+    context 'when a spare occurs' do
+      context 'when given 7' do
+        it 'returns 7' do
+          expect(subject.bowl(7)).to eq(7)
+        end
+      end
+
+      context 'when given 7 then 3' do
+        it 'returns 10' do
+          subject.bowl(7)
+          expect(subject.bowl(3)).to eq(10)
+        end
+      end
+
+      context 'when given 7 then 3 then 4' do
+        it 'returns 18' do
+          subject.bowl(7)
+          subject.bowl(3)
+          expect(subject.bowl(4)).to eq(18)
+        end
+      end
+
+      context 'when given 7 then 3 then 4 then 2' do
+        it 'returns 20' do
+          subject.bowl(7)
+          subject.bowl(3)
+          subject.bowl(4)
+          expect(subject.bowl(2)).to eq(20)
+        end
+      end
+    end
   end
 end
