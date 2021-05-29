@@ -1,21 +1,41 @@
-# User stories  
+Bowling user stories
+====================
 
-WIP - write user stories based on these facts:
+## As a player,
+## So that I can see an accurate score....
 
-## Bowling — how does it work?
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
+#### Normal frames (where player scores less than 10 frames)
 
-### Strikes
+So that I can play a 10-frame game,  
+I want to know my final total score after 10 frames.  
 
-The player has a strike if he knocks down all 10 pins with the first roll in a frame. The frame ends immediately (since there are no pins left for a second roll). The bonus for that frame is the number of pins knocked down by the next two rolls. That would be the next frame, unless the player rolls another strike.
+So that I can have more than one go at knocking down the pins in a frame,  
+I want the scoreboard to accumulate my score from two rolls per frame (and potentially 3 rolls in frame 10 - see special frames).  
 
-### Spares
+So that I don’t get access to more than 10 pins per frame,  
+I want to know if I’ve tried to enter more than  10 in total across the rolls of a frame (in frames 1-9).  
 
-The player has a spare if the knocks down all 10 pins with the two rolls of a frame. The bonus for that frame is the number of pins knocked down by the next roll (first roll of next frame).
 
-### 10th frame
+#### Special frames (where player scores 10 in a frame)  
 
-If the player rolls a strike or spare in the 10th frame they can roll the additional balls for the bonus. But they can never roll more than 3 balls in the 10th frame. The additional rolls only count for the bonus not for the regular frame count.
+#### Strikes  
+When I knock down 10 pins in the first roll of a frame,  
+I want the frame to end.  
 
-    10, 10, 10 in the 10th frame gives 30 points (10 points for the regular first strike and 20 points for the bonus).
-    1, 9, 10 in the 10th frame gives 20 points (10 points for the regular spare and 10 points for the bonus).
+When I knock down 10 pons in the first roll of a frame,  
+I want the ‘strike bonus’ rules to apply to the next two rolls (which could be one frame, or if I get another strike - could be more than one frame)  
+
+#### Spare  
+When I knock down 10 pins with the two rolls of a frame,   
+I want the the ‘spare bonus’ rules to apply to the next roll (first roll of the next frame).  
+
+#### Strike/Spare in 10th frame  
+When I roll a strike or spare in the 10th frame,  
+So that the corresponding bonus rules (strike or spare) can apply,  
+I want to be able to enter my score for up to 3 rolls.  
+
+So that I can score the perfect 10th frame,  
+I want to be able to enter a max of 10 per roll in the 10th frame.   
+
+So that any additional rolls in frame 10 only count for the bonus (not for the regular frame count),  
+I want the scoreboard to know if the roll I’m entering a score for is ‘regular’ vs ‘additional’.   
