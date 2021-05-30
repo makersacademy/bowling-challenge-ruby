@@ -9,6 +9,10 @@ describe Scorecard do
     expect(subject.current_score).to eq 0
   end
 
+  it 'begins the game with no bonus rules pending' do
+    expect(subject.pending_bonus).to eq nil
+  end
+
   it 'begins the game at Frame 1: Roll 1' do
     expect(subject.current_frame).to eq 1
     expect(subject.current_roll).to eq 1
@@ -28,21 +32,14 @@ describe Scorecard do
       expect { subject.roll_1(11) }.to raise_error 'Max pins exceeded, recheck and try again'
     end
 
-    it 'increases the scores' do
-      subject.roll_1(5)
-      expect(subject.frame_scores).to eq [5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      expect(subject.current_score).to eq 5
+    it 'prompts roll_2 if fewer than 10 pins knocked down' do
+      expect { subject.roll_1(5) }.to change { subject.current_roll }.from(1).to(2)
     end
 
-    it 'prompts roll_2 if fewer than 10 pins knocked down' do
-      subject.roll_1(5)
-      expect(subject.current_roll).to eq 2
-    end
 
     it 'ends the frame if roll 1 = strike' do
-      subject.roll_1(10)
-      expect(subject.current_frame).to eq 2
-    end
+      expect { subject.roll_1(10) }.to change { subject.current_frame }.from(1).to(2)
+    end    
   end
 
   describe '#roll_2' do
@@ -51,20 +48,34 @@ describe Scorecard do
       expect { subject.roll_2(6) }.to raise_error 'Max pins exceeded, recheck and try again'
     end
 
-    it 'increases the total score' do
+    it 'increases scores' do
       subject.roll_1(2)
-      subject.roll_2(5)
-      expect(subject.frame_scores).to eq [7, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      expect { subject.roll_2(5) }.to change { subject.frame_scores }.from([2, 0, 0, 0, 0, 0, 0, 0, 0, 0]).to([7, 0, 0, 0, 0, 0, 0, 0, 0, 0])
       expect(subject.current_score).to eq 7
+    end
+
+    it 'sets spare bonus to pending when all 10 pins down' do
+      subject.roll_1(5)
+      expect { subject.roll_2(5) }.to change { subject.pending_bonus }.from(nil).to(:spare)
+
     end
 
     it 'advances to first roll of next frame' do
       subject.roll_1(2)
-      subject.roll_2(5)
-      expect(subject.current_frame).to eq 2
-      expect(subject.current_roll).to eq 1
+      expect { subject.roll_2(5) }.to change { subject.current_frame }.by(+1)
+      subject.roll_1(2)
+      expect { subject.roll_2(5) }.to change { subject.current_roll }.to(1)
     end
   end
+
+  describe '#normal_scoring' do
+    it 'adds pins to current frame score' do
+      expect { subject.normal_scoring(2) }.to change { subject.frame_scores }.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]).to([2, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+      expect(subject.current_score).to eq 2
+
+    end
+  end
+
 
   describe '#final_score' do
     it 'fails if your game is incomplete' do
@@ -78,6 +89,22 @@ describe Scorecard do
       end
 
       expect(subject.final_score).to eq 20
+    end
+  end
+
+  describe '#spare_scoring' do
+    before {
+      subject.roll_1(5)
+      subject.roll_2(5)
+    }
+    it 'handles spare bonus' do
+      expect { subject.spare_scoring(2) }.to change { subject.current_score }.by(+2)
+      expect(subject.current_score).to eq 12
+      expect { subject.spare_scoring(2) }.to change { subject.frame_scores[0] }.by(+2)
+    end
+
+    it 'resets pending_bonus to nil' do
+      expect { subject.spare_scoring(2) }.to change { subject.pending_bonus }.from(:spare).to(nil)
     end
   end
 end
