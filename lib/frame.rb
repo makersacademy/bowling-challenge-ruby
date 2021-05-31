@@ -3,6 +3,11 @@ class Frame
 
   def initialize
     @rolls = []
+    @bonuses = []
+  end
+
+  def score
+    @rolls.reduce(0, :+) + @bonuses.reduce(0, :+)
   end
 
   def roll(pinfall)
@@ -10,7 +15,7 @@ class Frame
   end
 
   def pinfall
-    @rolls.reduce(:+)
+    @rolls.reduce(0, :+)
   end
 
   def rolls
@@ -24,6 +29,10 @@ class Frame
   def spare?
     return false if @rolls.length < 2
 
-    @rolls[0] + @rolls[1] == FRAME_PINS && !strike?
+    !strike? && @rolls[0] + @rolls[1] == FRAME_PINS
+  end
+
+  def add_bonus(pinfall)
+    @bonuses << pinfall
   end
 end

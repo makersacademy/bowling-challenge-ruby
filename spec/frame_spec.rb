@@ -2,7 +2,7 @@ require 'frame'
 
 describe Frame do
   describe '#pinfall' do
-    it 'returns the total pinfall of the frame' do
+    it 'returns the total pinfall of the frame, excluding bonuses' do
       subject.roll(3)
       subject.roll(4)
       expect(subject.pinfall).to eq(7)
@@ -56,6 +56,17 @@ describe Frame do
         subject.roll(10)
         expect(subject.spare?).to be_falsy
       end
+    end
+  end
+
+  describe '#add_bonus' do
+    it 'adds to the score of the frame, but not the pinfall' do
+      subject.roll(3)
+      subject.roll(4)
+      expect(subject.pinfall).to eq(7)
+      subject.add_bonus(3)
+      subject.add_bonus(6)
+      expect(subject.score).to eq(16)
     end
   end
 end
