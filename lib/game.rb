@@ -6,7 +6,8 @@ class Game
   MAX_FRAMES = 10
 
   def initialize
-    @frames = [Frame.new]
+    @frames = []
+    new_frame
   end
 
   def total_score
@@ -14,7 +15,7 @@ class Game
   end
 
   def bowl(pinfall)
-    return total_score if @frames.length > MAX_FRAMES
+    return total_score if game_over?
 
     current_frame.roll(pinfall)
     distribute_bonuses(pinfall)
@@ -23,16 +24,23 @@ class Game
   end
 
   def distribute_bonuses(pinfall)
-    return unless previous_frame
+    distribute_previous_frame_bonuses(pinfall) if previous_frame
+    distribute_previous_previous_frame_bonuses(pinfall) if previous_previous_frame
+  end
 
+  def distribute_previous_frame_bonuses(pinfall)
     previous_frame.add_bonus(pinfall) if previous_frame.strike? && current_frame.rolls < 3
     previous_frame.add_bonus(pinfall) if previous_frame.spare? && current_frame.rolls < 2
+  end
 
-    return unless previous_previous_frame
-
+  def distribute_previous_previous_frame_bonuses(pinfall)
     if previous_previous_frame.strike? && current_frame.rolls + previous_frame.rolls < 3
       previous_previous_frame.add_bonus(pinfall)
     end
+  end
+
+  def current_frame
+    @frames.last
   end
 
   def previous_frame
@@ -43,23 +51,27 @@ class Game
     @frames[@frames.length - 3] unless @frames.length < 3
   end
 
-  def current_frame
-    @frames.last
-  end
-
   def current_frame_over?
-    if @frames.length == MAX_FRAMES
-      current_frame.rolls == if current_frame.pinfall < FRAME_PINS
-                               FRAME_ROLLS
-                             else
-                               3
-                             end
+    if last_frame? && current_frame.pinfall >= FRAME_PINS
+      current_frame.rolls == 3
     else
       current_frame.rolls == FRAME_ROLLS || current_frame.pinfall == FRAME_PINS
     end
   end
 
+  def last_frame?
+    frame_number == MAX_FRAMES
+  end
+
+  def frame_number
+    @frames.length
+  end
+
   def new_frame
     @frames << Frame.new
+  end
+
+  def game_over?
+    frame_number > MAX_FRAMES
   end
 end
