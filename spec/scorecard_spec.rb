@@ -4,7 +4,6 @@ require 'scorecard'
 
 describe Scorecard do
   it 'begins the game with a score of 0' do
-    expect(subject.frame_scores).to eq [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     expect(subject.frame_scores.length).to eq 10
     expect(subject.current_score).to eq 0
   end
@@ -32,6 +31,9 @@ describe Scorecard do
       expect { subject.roll_1(11) }.to raise_error 'Max pins exceeded, recheck and try again'
     end
 
+    it 'stores the roll score at correct point in array' do
+      expect { subject.roll_1(5) }.to change { subject.roll_scores }.to([[5]])
+    end
     it 'prompts roll_2 if fewer than 10 pins knocked down' do
       expect { subject.roll_1(5) }.to change { subject.current_roll }.from(1).to(2)
     end
@@ -49,6 +51,10 @@ describe Scorecard do
     it 'fails when too many pins entered' do
       subject.roll_1(5)
       expect { subject.roll_2(6) }.to raise_error 'Max pins exceeded, recheck and try again'
+    end
+    it 'stores the roll score at correct point in array' do
+      subject.roll_1(5)
+      expect { subject.roll_2(5) }.to change { subject.roll_scores }.from([[5]]).to([[5,5]])
     end
 
     it 'increases scores' do
