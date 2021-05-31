@@ -3,11 +3,12 @@
 require_relative './frame'
 
 class Game
-  FRAME_PINS = 10
-  FRAME_ROLLS = 2
   MAX_FRAMES = 10
 
-  def initialize
+  attr_reader :frame_class
+
+  def initialize(frame_class: Frame)
+    @frame_class = frame_class
     @frames = []
     new_frame
   end
@@ -54,10 +55,10 @@ class Game
   end
 
   def current_frame_over?
-    if last_frame? && current_frame.pinfall >= FRAME_PINS
+    if last_frame? && current_frame.pinfall >= frame_class::FRAME_PINS
       current_frame.rolls == 3
     else
-      current_frame.rolls == FRAME_ROLLS || current_frame.pinfall == FRAME_PINS
+      current_frame.rolls == frame_class::FRAME_ROLLS || current_frame.pinfall == frame_class::FRAME_PINS
     end
   end
 
@@ -70,7 +71,7 @@ class Game
   end
 
   def new_frame
-    @frames << Frame.new
+    @frames << frame_class.new
   end
 
   def game_over?
