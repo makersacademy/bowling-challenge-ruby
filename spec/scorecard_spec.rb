@@ -104,10 +104,19 @@ describe Scorecard do
       subject.roll_1(5)
       subject.roll_2(5)
     end
-    it 'handles spare bonus' do
+    it 'handles 1 spare bonus' do
       expect { subject.spare_scoring(2) }.to change { subject.current_score }.by(+2)
       expect(subject.current_score).to eq 12
       expect { subject.spare_scoring(2) }.to change { subject.frame_scores[0] }.by(+2)
+    end
+
+    it 'handles 2 spares in a row' do
+      subject.roll_1(3)
+      subject.roll_2(7)
+      subject.roll_1(2)
+      subject.roll_2(0)
+      expect(subject.frame_scores[0]).to eq 13
+      expect(subject.frame_scores[1]).to eq 12
     end
 
   end
