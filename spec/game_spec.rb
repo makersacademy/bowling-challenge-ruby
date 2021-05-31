@@ -48,6 +48,14 @@ describe Game do
           expect(subject.bowl(4)).to eq(32)
         end
       end
+
+      context 'when three strikes occur in a row' do
+        it 'returns 60' do
+          subject.bowl(10)
+          subject.bowl(10)
+          expect(subject.bowl(10)).to eq(60)
+        end
+      end
     end
 
     context 'when a spare occurs' do
@@ -89,6 +97,13 @@ describe Game do
           subject.bowl(2)
           expect(subject.bowl(4)).to eq(119)
         end
+
+        it 'the player does not get any bonus rolls' do
+          bowl_until_last_frame
+          subject.bowl(2)
+          subject.bowl(4)
+          expect(subject.bowl(4)).to eq(119)
+        end
       end
 
       context 'when the player makes a spare' do
@@ -96,6 +111,14 @@ describe Game do
           bowl_until_last_frame
           subject.bowl(2)
           subject.bowl(8)
+          expect(subject.bowl(6)).to eq(133)
+        end
+
+        it 'the player only gets one bonus roll' do
+          bowl_until_last_frame
+          subject.bowl(2)
+          subject.bowl(8)
+          subject.bowl(6)
           expect(subject.bowl(6)).to eq(133)
         end
       end
@@ -107,6 +130,26 @@ describe Game do
           subject.bowl(8)
           expect(subject.bowl(2)).to eq(137)
         end
+
+        it 'the player only gets 2 bonus rolls' do
+          bowl_until_last_frame
+          subject.bowl(10)
+          subject.bowl(8)
+          subject.bowl(2)
+          expect(subject.bowl(2)).to eq(137)
+        end
+      end
+    end
+
+    context 'when the player bowls a perfect game' do
+      it 'returns 300' do
+        expect(bowl_perfect_game).to eq(300)
+      end
+    end
+
+    context 'when the player bowl a gutter game' do
+      it 'returns 0' do
+        expect(bowl_gutter_game).to eq(0)
       end
     end
   end

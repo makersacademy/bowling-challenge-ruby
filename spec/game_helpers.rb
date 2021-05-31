@@ -16,3 +16,41 @@ def bowl_until_last_frame
   subject.bowl(4)
   subject.bowl(10)
 end
+
+def bowl_perfect_game
+  subject.bowl(10)
+  subject.bowl(10)
+  subject.bowl(10)
+  subject.bowl(10)
+  subject.bowl(10)
+  subject.bowl(10)
+  subject.bowl(10)
+  subject.bowl(10)
+  subject.bowl(10)
+  subject.bowl(10)
+  subject.bowl(10)
+  subject.bowl(10)
+end
+
+def bowl_gutter_game
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+  subject.bowl(0)
+end
