@@ -9,6 +9,14 @@ describe Frame do
     end
   end
 
+  describe '#rolls' do
+    it 'returns the number of rolls currently in the frame' do
+      subject.roll(3)
+      subject.roll(4)
+      expect(subject.rolls).to eq(2)
+    end
+  end
+
   describe '#strike?' do
     context 'when the first roll of a frame is 10' do
       it 'returns true' do

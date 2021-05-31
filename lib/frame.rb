@@ -13,6 +13,10 @@ class Frame
     @rolls.reduce(:+)
   end
 
+  def rolls
+    @rolls.length
+  end
+
   def strike?
     @rolls.first == FRAME_PINS
   end
