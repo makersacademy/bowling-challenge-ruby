@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class Scorecard
-  attr_reader :current_frame, :current_roll, :frame_scores, :pending_bonus, :strike_bonus_holder, :roll_scores
+  attr_reader :current_frame, :current_roll, :frame_scores, :frame_bonus_type, :pending_bonus, :strike_bonus_holder, :roll_scores
 
   def initialize
     @current_frame = 1
     @current_roll = 1
     @roll_scores = []
     @frame_scores = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    @frame_bonus = []
+    @frame_bonus_type = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     @pending_bonus = nil
 
     @strike_bonus_holder = []
@@ -24,8 +24,9 @@ class Scorecard
     strike_scoring(@strike_bonus_holder.sum) if @pending_bonus == :strike && @strike_bonus_holder.length == 2
 
     if pins == 10
-      @current_frame += 1
       @pending_bonus = :strike
+      @frame_bonus_type[@current_frame -1] = :strike
+      @current_frame += 1
     else @current_roll += 1
     end
   end
@@ -38,6 +39,7 @@ class Scorecard
     normal_scoring(pins)
     @strike_bonus_holder << pins if @pending_bonus == :strike && @strike_bonus_holder.length < 2
     strike_scoring(@strike_bonus_holder.sum) if @pending_bonus == :strike && @strike_bonus_holder.length == 2
+    @frame_bonus_type[@current_frame - 1] = :spare if pins + roll_1 == 10
     @pending_bonus = :spare if pins + roll_1 == 10
     @current_frame += 1
     @current_roll = 1

@@ -42,8 +42,8 @@ describe Scorecard do
       expect { subject.roll_1(10) }.to change { subject.current_frame }.from(1).to(2)
     end
 
-    it 'sets the pending_bonus to strike' do
-      expect { subject.roll_1(10) }.to change { subject.pending_bonus }.from(nil).to(:strike)
+    it 'sets the frame bonus type to strike' do
+      expect { subject.roll_1(10) }.to change { subject.frame_bonus_type[0] }.from(0).to(:strike)
     end
   end
 
@@ -69,6 +69,12 @@ describe Scorecard do
       subject.roll_1(5)
       expect { subject.roll_2(5) }.to change { subject.pending_bonus }.from(nil).to(:spare)
     end
+
+    it 'sets the frame bonus type to spare' do
+      subject.roll_1(5)
+      expect { subject.roll_2(5) }.to change { subject.frame_bonus_type[0] }.from(0).to(:spare)
+    end
+
 
     it 'advances to first roll of next frame' do
       subject.roll_1(2)
