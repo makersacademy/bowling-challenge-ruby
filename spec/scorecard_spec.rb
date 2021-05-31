@@ -36,10 +36,13 @@ describe Scorecard do
       expect { subject.roll_1(5) }.to change { subject.current_roll }.from(1).to(2)
     end
 
-
     it 'ends the frame if roll 1 = strike' do
       expect { subject.roll_1(10) }.to change { subject.current_frame }.from(1).to(2)
-    end    
+    end
+
+    it 'sets the pending_bonus to strike' do
+      expect { subject.roll_1(10) }.to change { subject.pending_bonus }.from(nil).to(:strike)
+    end
   end
 
   describe '#roll_2' do
@@ -50,14 +53,15 @@ describe Scorecard do
 
     it 'increases scores' do
       subject.roll_1(2)
-      expect { subject.roll_2(5) }.to change { subject.frame_scores }.from([2, 0, 0, 0, 0, 0, 0, 0, 0, 0]).to([7, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+      expect { subject.roll_2(5) }.to change {
+                                        subject.frame_scores
+                                      }.from([2, 0, 0, 0, 0, 0, 0, 0, 0, 0]).to([7, 0, 0, 0, 0, 0, 0, 0, 0, 0])
       expect(subject.current_score).to eq 7
     end
 
     it 'sets spare bonus to pending when all 10 pins down' do
       subject.roll_1(5)
       expect { subject.roll_2(5) }.to change { subject.pending_bonus }.from(nil).to(:spare)
-
     end
 
     it 'advances to first roll of next frame' do
@@ -70,12 +74,12 @@ describe Scorecard do
 
   describe '#normal_scoring' do
     it 'adds pins to current frame score' do
-      expect { subject.normal_scoring(2) }.to change { subject.frame_scores }.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]).to([2, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+      expect { subject.normal_scoring(2) }.to change {
+                                                subject.frame_scores
+                                              }.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]).to([2, 0, 0, 0, 0, 0, 0, 0, 0, 0])
       expect(subject.current_score).to eq 2
-
     end
   end
-
 
   describe '#final_score' do
     it 'fails if your game is incomplete' do
@@ -93,10 +97,10 @@ describe Scorecard do
   end
 
   describe '#spare_scoring' do
-    before {
+    before do
       subject.roll_1(5)
       subject.roll_2(5)
-    }
+    end
     it 'handles spare bonus' do
       expect { subject.spare_scoring(2) }.to change { subject.current_score }.by(+2)
       expect(subject.current_score).to eq 12
@@ -105,6 +109,36 @@ describe Scorecard do
 
     it 'resets pending_bonus to nil' do
       expect { subject.spare_scoring(2) }.to change { subject.pending_bonus }.from(:spare).to(nil)
+    end
+  end
+
+  describe '#strike_scoring' do
+    before do
+      subject.roll_1(10)
+    end
+    it 'handles one strike bonus' do
+      expect { subject.strike_scoring(2) }.to change { subject.current_score }.by(+2)
+      expect(subject.current_score).to eq 12
+      expect { subject.strike_scoring(2) }.to change { subject.frame_scores[0] }.by(+2)
+    end
+
+    it 'resets pending_bonus to nil' do
+      expect { subject.strike_scoring(2) }.to change { subject.pending_bonus }.from(:strike).to(nil)
+    end
+
+    it 'copes with two strikes in a row' do
+      p subject.frame_scores
+      p subject.strike_bonus_holder
+      subject.roll_1(10)
+      p subject.frame_scores
+      p subject.strike_bonus_holder
+      subject.roll_1(1)
+      p subject.frame_scores
+      p subject.strike_bonus_holder
+      subject.roll_2(1)
+      p subject.frame_scores
+      p subject.strike_bonus_holder
+      expect(subject.frame_scores).to eq [21, 12, 2, 0, 0, 0, 0, 0, 0, 0]
     end
   end
 end
