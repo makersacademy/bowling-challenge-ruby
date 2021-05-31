@@ -1,4 +1,5 @@
 require 'game'
+require_relative './game_helpers'
 
 describe Game do
   describe '#bowl' do
@@ -77,6 +78,34 @@ describe Game do
           subject.bowl(3)
           subject.bowl(4)
           expect(subject.bowl(2)).to eq(20)
+        end
+      end
+    end
+
+    context 'in the 10th frame' do
+      context 'when the player does not make a strike or a spare' do
+        it 'returns 119' do
+          bowl_until_last_frame
+          subject.bowl(2)
+          expect(subject.bowl(4)).to eq(119)
+        end
+      end
+
+      context 'when the player makes a spare' do
+        it 'returns 133' do
+          bowl_until_last_frame
+          subject.bowl(2)
+          subject.bowl(8)
+          expect(subject.bowl(6)).to eq(133)
+        end
+      end
+
+      context 'when the player makes a strike' do
+        it 'returns 137' do
+          bowl_until_last_frame
+          subject.bowl(10)
+          subject.bowl(8)
+          expect(subject.bowl(2)).to eq(137)
         end
       end
     end
