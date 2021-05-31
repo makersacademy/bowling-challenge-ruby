@@ -21,6 +21,7 @@ Frame objects keep track of their own pinfall and any bonuses that have been add
 ```bash
 git clone https://github.com/rdupplaw/bowling-challenge-ruby.git
 cd bowling-challenge-ruby
+bundle
 ```
 
 ## Usage
