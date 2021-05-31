@@ -6,15 +6,18 @@ class Scorecard
   def initialize
     @current_frame = 1
     @current_roll = 1
+    @roll_scores = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
     @frame_scores = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    @frame_bonus = []
     @pending_bonus = nil
+
     @strike_bonus_holder = []
   end
 
   def roll_1(pins)
     raise 'Max pins exceeded, recheck and try again' if pins > 10
 
-    @roll_1 = pins
+    @roll_scores[@current_frame -1][0] = pins
     normal_scoring(pins)
     spare_scoring(pins) if @pending_bonus == :spare
     @strike_bonus_holder << pins if @pending_bonus == :strike && @strike_bonus_holder.length < 2
@@ -28,12 +31,13 @@ class Scorecard
   end
 
   def roll_2(pins)
-    raise 'Max pins exceeded, recheck and try again' if pins + @roll_1 > 10
+    roll_1 = @roll_scores[@current_frame -1][0]
+    raise 'Max pins exceeded, recheck and try again' if pins + roll_1 > 10
 
     normal_scoring(pins)
     @strike_bonus_holder << pins if @pending_bonus == :strike && @strike_bonus_holder.length < 2
     strike_scoring(@strike_bonus_holder.sum) if @pending_bonus == :strike && @strike_bonus_holder.length == 2
-    @pending_bonus = :spare if pins + @roll_1 == 10
+    @pending_bonus = :spare if pins + roll_1 == 10
     @current_frame += 1
     @current_roll = 1
   end
