@@ -162,4 +162,14 @@ describe Scorecard do
       expect(subject.roll_scores[9]).to eq [10, 10, 10]
     end
   end
+  
+  it 'can score the perfect game' do
+    10.times do 
+      subject.roll_1(10)
+    end
+    subject.roll_2(10)
+    subject.roll_3(10)
+    
+    expect(subject.final_score).to eq 300
+  end
 end

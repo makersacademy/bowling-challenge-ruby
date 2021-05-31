@@ -6,7 +6,7 @@ Beca Parker's solution to Bowling Scorecard Challenge (Ruby)
 This ruby code provides the logic for counting and summing the scores of a 10-pin bowling game for one player, according to the [traditional scoring rules](https://en.wikipedia.org/wiki/Ten-pin_bowling#Traditional_scoring).
 
 *Input:* User inputs the number of pins knocked down at each roll.  
-*Output:* The methods can return the current frame and roll, an array of current frame scores, and the current total score depending on what commands the eventual UI calls on throughout. By default, the terminal will display the final score (max. 300) once the user has entered input for all 10 frames.
+*Output:* The methods can return the current frame and roll, an array of current frame scores, and the current total score depending on what commands the eventual UI calls on throughout.
 
 
 ## Setup
@@ -19,7 +19,6 @@ Use these commands in your terminal:
 * and/or interact as a user in irb: 
   > `irb -r './lib/scorecard.rb`   
   > `s=Scorecard.new`  
-  > `=> #<Scorecard:0x00007fbf360b3568 @current_frame=1, @current_roll=1, @frame_scores=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], @pending_bonus=nil>`
 * See user stories below for further commands
 
 
@@ -33,13 +32,13 @@ In order to do this, I aimed to give particular attention to :
 * TDD the code
 * Focus on testing behaviour rather than state
 * Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
+* Single Responsibility Principle and encapsulation (WIP -  I plan to extract a frame class that will inject instances of frames into an array in the scorecard class)
+* Clear and readable code (WIP - I plan to refactor further)
 
 ## Planning and approach
 
-I created [user stories](./planning/user_stories.md), which in turn helped me establish a domain models: 
-![domain model](./planning/)
+I created [user stories](./planning/user_stories.md), which in turn helped me establish some models (see [planning folder](./planning)) e.g.: 
+![frame model](./planning/frame_model.svg)
 
 ## User stories and commands
 #### Normal frames (where player scores less than 10 in a frame)
@@ -172,7 +171,9 @@ In irb, enter 9 frames of a new game, then a perfect 10th frame:
 Your `s.roll_scores` output will show two rolls entered for frames 1-9 and the 3 tens in the final array item. 
 
 ___
-WIP WIP
 
-So that any additional rolls in frame 10 only count for the bonus (not for the regular frame count),  
-I want the scoreboard to know if the roll I’m entering a score for is ‘regular’ vs ‘additional’. 
+>So that any additional rolls in frame 10 only count for the bonus (not for the regular frame count),  
+>I want the scoreboard to know if the roll I’m entering a score for is ‘regular’ vs ‘bonus’. 
+
+You can test this in irb by bowling the perfect game (final score 300) or by entering the scores as per the [example score card](./images/example_ten_pin_scoring.png) Makers provided. 
+

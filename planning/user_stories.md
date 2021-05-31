@@ -38,4 +38,4 @@ So that I can score the perfect 10th frame,
 I want to be able to enter a max of 10 per roll in the 10th frame.   
 
 So that any additional rolls in frame 10 only count for the bonus (not for the regular frame count),  
-I want the scoreboard to know if the roll I’m entering a score for is ‘regular’ vs ‘additional’.   
+I want the scoreboard to know if the roll I’m entering a score for is ‘regular’ vs ‘bonus’.   

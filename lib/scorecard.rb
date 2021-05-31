@@ -55,6 +55,7 @@ class Scorecard
     raise 'Max pins exceeded, recheck and try again' if pins > 10
 
     @roll_scores[9] << pins
+    @frame_scores[9] += pins
   end
 
   def current_score
