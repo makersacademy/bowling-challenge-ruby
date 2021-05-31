@@ -2,6 +2,7 @@
 
 class Frame
   FRAME_PINS = 10
+  FRAME_ROLLS = 2
 
   def initialize
     @rolls = []
