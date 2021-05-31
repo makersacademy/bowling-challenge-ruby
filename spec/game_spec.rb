@@ -149,7 +149,7 @@ describe Game do
       end
     end
 
-    context 'when the player bowl a gutter game' do
+    context 'when the player bowls a gutter game' do
       it 'returns 0' do
         expect(bowl_gutter_game).to eq(0)
       end
