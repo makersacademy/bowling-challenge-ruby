@@ -38,9 +38,15 @@ require 'bowling'
     end
 
     it 'can return the score for a perfect game' do 
-      20.times{@game.bowl(10)}
+      12.times{@game.bowl(10)}
 
       expect(@game.score).to eq(300)
+    end
+
+    it 'can roll all spares' do 
+      21.times{@game.bowl(5)}
+
+      expect(@game.score).to eq(150)
     end
   end
 
