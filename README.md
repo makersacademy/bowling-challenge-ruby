@@ -10,6 +10,8 @@ game.bowl(3)
 
 The method returns the current total score, following [traditional ten-pin bowling rules](https://en.wikipedia.org/wiki/Ten-pin_bowling#Traditional_scoring). There is no need to enter `game.bowl(0)` after a strike; the game logic will automatically move onto a new frame when a strike occurs (except for the final frame).
 
+The game does not validate the pinfall of rolls, so there's nothing to stop a user from inputting `game.bowl(100)`. The game does keep track of the number of frames, so a user can't add any more rolls after ten frames.
+
 ## Design
 
 This program comprises two classes: Game and Frame. Game encompasses the rules and logic of ten-pin bowling, and calculates the total score. Game holds an array of Frame objects.
