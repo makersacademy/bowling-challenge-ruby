@@ -2,18 +2,15 @@ class Game
   FRAME_PINS = 10
   FRAME_ROLLS = 2
   MAX_FRAMES = 10
-  STRIKE_BONUS_ROLLS = 2
-  SPARE_BONUS_ROLLS = 1
-  BONUS_MULTIPLIER = 2
 
-  attr_reader :total_score, :bonus_rolls, :current_frame, :current_frame_pinfall, :current_frame_rolls
+  attr_reader :total_score, :current_frame, :current_frame_pinfall, :current_frame_rolls
 
   def initialize
     @total_score = 0
-    @bonus_rolls = 0
     @current_frame = 1
     @current_frame_pinfall = 0
     @current_frame_rolls = 0
+    @roll_multipliers = [1, 1, 1]
   end
 
   def bowl(pinfall)
@@ -21,27 +18,28 @@ class Game
 
     add_pinfall_to_score(pinfall)
     bowl_current_frame(pinfall)
-    @bonus_rolls += STRIKE_BONUS_ROLLS if strike?(pinfall)
-    @bonus_rolls += SPARE_BONUS_ROLLS if current_frame_spare?(pinfall)
+    add_strike_bonus if strike?(pinfall) && (!current_frame == 10 || current_frame_rolls == 1)
+    add_spare_bonus if current_frame_spare?(pinfall)
     reset_frame if current_frame_over?
     total_score
   end
 
   def add_pinfall_to_score(pinfall)
-    if bonus_rolls?
-      @bonus_rolls -= 1
-      @total_score += if current_frame_pinfall < FRAME_PINS
-                        BONUS_MULTIPLIER * pinfall
-                      else
-                        pinfall
-                      end
-    else
-      @total_score += pinfall
-    end
+    @total_score += if current_frame_pinfall < FRAME_PINS
+                      @roll_multipliers.shift * pinfall
+                    else
+                      @roll_multipliers.shift * pinfall - pinfall
+                    end
+    @roll_multipliers.push(1)
   end
 
-  def bonus_rolls?
-    bonus_rolls.positive?
+  def add_strike_bonus
+    @roll_multipliers[0] += 1
+    @roll_multipliers[1] += 1
+  end
+
+  def add_spare_bonus
+    @roll_multipliers[0] += 1
   end
 
   def strike?(pinfall)

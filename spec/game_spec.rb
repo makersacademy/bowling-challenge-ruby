@@ -128,7 +128,7 @@ describe Game do
           bowl_until_last_frame
           subject.bowl(10)
           subject.bowl(8)
-          expect(subject.bowl(2)).to eq(137)
+          expect(subject.bowl(2)).to eq(145)
         end
 
         it 'the player only gets 2 bonus rolls' do
@@ -136,7 +136,7 @@ describe Game do
           subject.bowl(10)
           subject.bowl(8)
           subject.bowl(2)
-          expect(subject.bowl(2)).to eq(137)
+          expect(subject.bowl(2)).to eq(145)
         end
       end
     end
