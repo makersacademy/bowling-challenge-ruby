@@ -137,11 +137,23 @@ Your  `s.frames_scores` output will now be `[22, 15, 5, 0, 0, 0, 0, 0, 0, 0]`
 
 ___
 
-WIP WIP WIP 
 ##### Strike/Spare in 10th frame  
-When I roll a strike or spare in the 10th frame,  
-So that the corresponding bonus rules (strike or spare) can apply,  
-I want to be able to enter my score for up to 3 rolls.  
+>When I roll a strike or spare in the 10th frame,  
+>So that the corresponding bonus rules (strike or spare) can apply,  
+>I want to be able to enter my score for up to 3 rolls.  
+
+In irb, enter 9 frames of a new game, then score a strike or a spare in frame 10: 
+```
+  s=Scorecard.new  
+  9.times { s.roll_1(1)
+   s.roll_2(1) }
+  s.roll_1(10)
+  s.roll_2(4)
+
+```  
+You will now be able to run `s.roll_3(4)`. Note that running roll_3 without having first scored a strike or spare in frame 10 will throw an error like: 'You are not eligible for roll_3'  
+
+WIP WIP WIP 
 
 So that I can score the perfect 10th frame,  
 I want to be able to enter a max of 10 per roll in the 10th frame.   

@@ -12,6 +12,8 @@ class Scorecard
   end
 
   def roll_1(pins)
+    raise 'You are not on roll_1, recheck and try again' if @current_roll != 1
+
     raise 'Max pins exceeded, recheck and try again' if pins > 10
 
     @roll_scores << [pins]
@@ -24,12 +26,14 @@ class Scorecard
 
     if pins == 10
       @frame_bonus_type[@current_frame - 1] = :strike
-      @current_frame += 1
+      @current_frame += 1 if @current_frame < 10
     else @current_roll += 1
     end
   end
 
   def roll_2(pins)
+    raise 'You are not on roll_2, recheck and try again' if @current_roll != 2
+
     roll_1 = @roll_scores[@current_frame - 1][0]
     raise 'Max pins exceeded, recheck and try again' if pins + roll_1 > 10
 
@@ -39,6 +43,10 @@ class Scorecard
     @frame_bonus_type[@current_frame - 1] = :spare if pins + roll_1 == 10
     @current_frame += 1
     @current_roll = 1
+  end
+
+  def roll_3(_pins)
+    raise 'You are not eligible for a third roll' if (@frame_bonus_type[9]).zero?
   end
 
   def current_score

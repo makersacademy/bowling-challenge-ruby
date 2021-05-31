@@ -23,6 +23,11 @@ describe Scorecard do
   end
 
   describe '#roll_1' do
+    it 'fails when not expecting roll 1 data' do
+      subject.roll_1(0)
+      expect { subject.roll_1(5) }.to raise_error 'You are not on roll_1, recheck and try again'
+    end
+
     it 'fails when too many pins entered' do
       expect { subject.roll_1(11) }.to raise_error 'Max pins exceeded, recheck and try again'
     end
@@ -47,6 +52,10 @@ describe Scorecard do
     it 'fails when too many pins entered' do
       subject.roll_1(5)
       expect { subject.roll_2(6) }.to raise_error 'Max pins exceeded, recheck and try again'
+    end
+
+    it 'fails when not expecting roll 2 data' do
+      expect { subject.roll_2(5) }.to raise_error 'You are not on roll_2, recheck and try again'
     end
     it 'stores the roll score at correct point in array' do
       subject.roll_1(5)
@@ -134,6 +143,12 @@ describe Scorecard do
       subject.roll_1(1)
       subject.roll_2(1)
       expect(subject.frame_scores).to eq [21, 12, 2, 0, 0, 0, 0, 0, 0, 0]
+    end
+  end
+
+  describe '#roll_3' do
+    it 'fails if no strike/spare in 10th frame' do
+      expect { subject.roll_3(10) }.to raise_error 'You are not eligible for a third roll'
     end
   end
 end
