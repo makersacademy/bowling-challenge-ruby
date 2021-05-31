@@ -153,10 +153,26 @@ In irb, enter 9 frames of a new game, then score a strike or a spare in frame 10
 ```  
 You will now be able to run `s.roll_3(4)`. Note that running roll_3 without having first scored a strike or spare in frame 10 will throw an error like: 'You are not eligible for roll_3'  
 
-WIP WIP WIP 
+___
 
-So that I can score the perfect 10th frame,  
-I want to be able to enter a max of 10 per roll in the 10th frame.   
+>So that I can score the perfect 10th frame,  
+>I want to be able to enter a max of 10 per roll in the 10th frame. 
+
+In irb, enter 9 frames of a new game, then a perfect 10th frame:
+```
+  s=Scorecard.new  
+  9.times { s.roll_1(1)
+   s.roll_2(1) }
+  s.roll_1(10)
+  s.roll_2(10)
+  s.roll_3(10)
+
+```  
+
+Your `s.roll_scores` output will show two rolls entered for frames 1-9 and the 3 tens in the final array item. 
+
+___
+WIP WIP
 
 So that any additional rolls in frame 10 only count for the bonus (not for the regular frame count),  
 I want the scoreboard to know if the roll I’m entering a score for is ‘regular’ vs ‘additional’. 

@@ -24,18 +24,22 @@ class Scorecard
       chain_strike_scoring(pins)
     end
 
-    if pins == 10
+    if pins == 10 && @current_frame < 10
       @frame_bonus_type[@current_frame - 1] = :strike
-      @current_frame += 1 if @current_frame < 10
+      @current_frame += 1
+    elsif pins == 10 && @current_frame == 10
+      @frame_bonus_type[@current_frame - 1] = :strike
+      @current_roll += 1
     else @current_roll += 1
     end
   end
 
   def roll_2(pins)
     raise 'You are not on roll_2, recheck and try again' if @current_roll != 2
+    raise 'Max pins exceeded, recheck and try again' if pins > 10
 
     roll_1 = @roll_scores[@current_frame - 1][0]
-    raise 'Max pins exceeded, recheck and try again' if pins + roll_1 > 10
+    raise 'Max pins exceeded, recheck and try again' if pins + roll_1 > 10 && @current_frame < 10
 
     @roll_scores[@current_frame - 1] << pins
     normal_scoring(pins)
@@ -45,8 +49,12 @@ class Scorecard
     @current_roll = 1
   end
 
-  def roll_3(_pins)
-    raise 'You are not eligible for a third roll' if (@frame_bonus_type[9]).zero?
+  def roll_3(pins)
+    raise 'You are not eligible for a third roll' if (@frame_bonus_type[9]) == 0
+
+    raise 'Max pins exceeded, recheck and try again' if pins > 10
+
+    @roll_scores[9] << pins
   end
 
   def current_score

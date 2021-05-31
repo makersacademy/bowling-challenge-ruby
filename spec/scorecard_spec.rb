@@ -150,5 +150,16 @@ describe Scorecard do
     it 'fails if no strike/spare in 10th frame' do
       expect { subject.roll_3(10) }.to raise_error 'You are not eligible for a third roll'
     end
+
+    it 'can log the perfect 10th frame' do
+      9.times do
+        subject.roll_1(9)
+        subject.roll_2(1)
+      end
+      subject.roll_1(10)
+      subject.roll_2(10)
+      subject.roll_3(10)
+      expect(subject.roll_scores[9]).to eq [10, 10, 10]
+    end
   end
 end
