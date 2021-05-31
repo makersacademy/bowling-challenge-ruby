@@ -9,8 +9,6 @@ class Scorecard
     @roll_scores = []
     @frame_scores = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     @frame_bonus_type = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-    @strike_bonus_holder = []
   end
 
   def roll_1(pins)
@@ -19,24 +17,25 @@ class Scorecard
     @roll_scores << [pins]
     normal_scoring(pins)
     spare_scoring(pins) if @frame_bonus_type[@current_frame - 2] == :spare
-    @strike_bonus_holder << pins if @pending_bonus == :strike && @strike_bonus_holder.length < 2
-    strike_scoring(@strike_bonus_holder.sum) if @pending_bonus == :strike && @strike_bonus_holder.length == 2
+    strike_scoring(pins) if @frame_bonus_type[@current_frame - 2] == :strike
+    if @frame_bonus_type[@current_frame - 3] == :strike && @roll_scores[@current_frame - 2][0] == 10
+      chain_strike_scoring(pins)
+    end
 
     if pins == 10
-      @frame_bonus_type[@current_frame -1] = :strike
+      @frame_bonus_type[@current_frame - 1] = :strike
       @current_frame += 1
     else @current_roll += 1
     end
   end
 
   def roll_2(pins)
-    roll_1 = @roll_scores[@current_frame -1][0]
+    roll_1 = @roll_scores[@current_frame - 1][0]
     raise 'Max pins exceeded, recheck and try again' if pins + roll_1 > 10
 
-    @roll_scores[@current_frame -1] << pins
+    @roll_scores[@current_frame - 1] << pins
     normal_scoring(pins)
-    @strike_bonus_holder << pins if @pending_bonus == :strike && @strike_bonus_holder.length < 2
-    strike_scoring(@strike_bonus_holder.sum) if @pending_bonus == :strike && @strike_bonus_holder.length == 2
+    strike_scoring(pins) if @frame_bonus_type[@current_frame - 2] == :strike
     @frame_bonus_type[@current_frame - 1] = :spare if pins + roll_1 == 10
     @current_frame += 1
     @current_roll = 1
@@ -66,7 +65,9 @@ class Scorecard
 
   def strike_scoring(strike_bonus)
     @frame_scores[@current_frame - 2] += strike_bonus
-    @pending_bonus = nil
-    @strike_bonus_holder = []
+  end
+
+  def chain_strike_scoring(strike_bonus)
+    @frame_scores[@current_frame - 3] += strike_bonus
   end
 end

@@ -50,7 +50,7 @@ describe Scorecard do
     end
     it 'stores the roll score at correct point in array' do
       subject.roll_1(5)
-      expect { subject.roll_2(5) }.to change { subject.roll_scores }.from([[5]]).to([[5,5]])
+      expect { subject.roll_2(5) }.to change { subject.roll_scores }.from([[5]]).to([[5, 5]])
     end
 
     it 'increases scores' do
@@ -65,7 +65,6 @@ describe Scorecard do
       subject.roll_1(5)
       expect { subject.roll_2(5) }.to change { subject.frame_bonus_type[0] }.from(0).to(:spare)
     end
-
 
     it 'advances to first roll of next frame' do
       subject.roll_1(2)
@@ -118,10 +117,9 @@ describe Scorecard do
       expect(subject.frame_scores[0]).to eq 13
       expect(subject.frame_scores[1]).to eq 12
     end
-
   end
 
-  describe '#strike_scoring' do
+  describe 'strikes' do
     before do
       subject.roll_1(10)
     end
@@ -131,19 +129,10 @@ describe Scorecard do
       expect { subject.strike_scoring(2) }.to change { subject.frame_scores[0] }.by(+2)
     end
 
-
     it 'copes with two strikes in a row' do
-      p subject.frame_scores
-      p subject.strike_bonus_holder
       subject.roll_1(10)
-      p subject.frame_scores
-      p subject.strike_bonus_holder
       subject.roll_1(1)
-      p subject.frame_scores
-      p subject.strike_bonus_holder
       subject.roll_2(1)
-      p subject.frame_scores
-      p subject.strike_bonus_holder
       expect(subject.frame_scores).to eq [21, 12, 2, 0, 0, 0, 0, 0, 0, 0]
     end
   end

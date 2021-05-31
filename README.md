@@ -97,6 +97,8 @@ Now knock down 2 pins in your next throw: `s.roll_1(2)` and run `s.frames_scores
 Finish frame 2 with `s.roll_2(2)`.  
 Your  `s.frames_scores` output will now be `[12, 4, 0, 0, 0, 0, 0, 0, 0, 0]` 
 
+___
+
 ##### Strikes  
 > When I knock down 10 pins in the first roll of a frame,  
 > I want the frame to end.  
@@ -109,5 +111,40 @@ s.current_frame
 ```
 You will get a return of '2' because the game has auto-advanced to the second frame.
 
+___
+
 > When I knock down 10 pins in the first roll of a frame,  
 > I want the ‘strike bonus’ rules to apply to the next two rolls (which could be one frame, > or if I get another strike - could be more than one frame)  
+
+In irb, enter a strike on roll one of a new game, then enter some non-special rolls for the next frame: 
+```
+s=Scorecard.new 
+s.roll_1(10)
+s.roll_1(4)
+s.roll_2(3)
+```
+Your  `s.frames_scores` output will now be `[17, 7, 0, 0, 0, 0, 0, 0, 0, 0]` 
+
+To see strike chaining in action:
+```
+s=Scorecard.new 
+s.roll_1(10)
+s.roll_1(10)
+s.roll_1(2)
+s.roll_2(3)
+```
+Your  `s.frames_scores` output will now be `[22, 15, 5, 0, 0, 0, 0, 0, 0, 0]` 
+
+___
+
+WIP WIP WIP 
+##### Strike/Spare in 10th frame  
+When I roll a strike or spare in the 10th frame,  
+So that the corresponding bonus rules (strike or spare) can apply,  
+I want to be able to enter my score for up to 3 rolls.  
+
+So that I can score the perfect 10th frame,  
+I want to be able to enter a max of 10 per roll in the 10th frame.   
+
+So that any additional rolls in frame 10 only count for the bonus (not for the regular frame count),  
+I want the scoreboard to know if the roll I’m entering a score for is ‘regular’ vs ‘additional’. 
