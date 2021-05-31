@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'game'
 require_relative './game_helpers'
 

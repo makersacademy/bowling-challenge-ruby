@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Frame
   FRAME_PINS = 10
 

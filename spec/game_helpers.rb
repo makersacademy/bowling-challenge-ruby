@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def bowl_until_last_frame
   subject.bowl(1)
   subject.bowl(4)
