@@ -33,7 +33,7 @@ class Scorecard
     normal_scoring(pins)
     @strike_bonus_holder << pins if @pending_bonus == :strike && @strike_bonus_holder.length < 2
     strike_scoring(@strike_bonus_holder.sum) if @pending_bonus == :strike && @strike_bonus_holder.length == 2
-    @pending_bonus = if pins + @roll_1 == 10
+    @pending_bonus = :spare if pins + @roll_1 == 10
     @current_frame += 1
     @current_roll = 1
   end
