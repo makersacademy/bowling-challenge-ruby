@@ -1,6 +1,18 @@
 Bowling Challenge in Ruby
 =================
 
+Plan:
+The initial programme will be a scorecard, that accepts up to 20 moves. 
+It will return the total at the end
+
+Then I will add an edge case - if 19th move == strike/10, then let total moves == 21
+
+To implement the strike function I will have to create a method which will retrieve and double 
+the next two moves of the player.
+
+For the spare move, if the previous even then odd numbers = 10, then the next move score
+will be doubled. 
+
 * Feel free to use google, your notes, books, etc. but work on your own
 * If you refer to the solution of another coach or student, please put a link to that in your README
 * If you have a partial solution, **still check in a partial solution**
