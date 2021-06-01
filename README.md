@@ -3,7 +3,7 @@ Bowling Challenge in Ruby
 
 This program calculates and returns the score of a bowling game for one player.
 
-files
+## Files
 
 ```
 ./lib/bowling_score.rb
