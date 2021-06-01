@@ -24,5 +24,10 @@ describe BowlingScore do
       17.times { subject.roll(0) }
       expect(subject.total_score).to eq 20
     end
+
+    it 'saves a perfect game' do
+      12.times {subject.roll(10)}
+      expect(subject.total_score).to eq 300
+    end
   end
 end
