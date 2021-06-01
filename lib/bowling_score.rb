@@ -33,7 +33,7 @@ class BowlingScore
     @score[index] == 10
   end
 
-  def spare?(ball_1, ball_2)
-    @score[ball_1] + @score[ball_2] == 10
+  def spare?(ball1, ball2)
+    @score[ball1] + @score[ball2] == 10
   end
 end
