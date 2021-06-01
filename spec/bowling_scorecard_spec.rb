@@ -46,13 +46,3 @@ describe Bowling_scorecard do
       end
     end
   end
-
-
-  # it 'gives a bonus roll if the player rolls a strike in the 10th frame' do
-  #   18.times { subject.roll(0) }
-  #   subject.roll(10)
-  #   subject.roll(10)
-  #   subject.roll(10)
-  #   expect(subject.final_score).to eq 30
-  # end
-
