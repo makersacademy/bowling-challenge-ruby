@@ -12,8 +12,8 @@ This ruby code provides the logic for counting and summing the scores of a 10-pi
 ## Setup
 
 Use these commands in your terminal:  
-* `git clone https://github.com/BecaLParker/chitter-challenge`  
-* `cd chitter-challenge`  
+* `git clone https://github.com/BecaLParker/bowling-challenge-ruby`  
+* `cd bowling-challenge-ruby`  
 * `bundle`  
 * now you can run the tests I built: `rspec`
 * and/or interact as a user in irb: 
