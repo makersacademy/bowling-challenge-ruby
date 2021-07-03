@@ -1,6 +1,10 @@
 Bowling Challenge in Ruby
 =================
 
+## Makers week 5 weekend challenge
+This challenge was to create a ruby app that returns the scores for a bowling game with the player inputting the amount of pins they knocked down each shot. It will take into account additional bonus points when the player gets a strike or spare and in the 10th frame, it will add an extra shot if the player gets a strike or spare in the first two shots that frame
+=================
+
 * Feel free to use google, your notes, books, etc. but work on your own
 * If you refer to the solution of another coach or student, please put a link to that in your README
 * If you have a partial solution, **still check in a partial solution**
