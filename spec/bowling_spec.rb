@@ -12,6 +12,11 @@ describe Bowling do
       subject.frame(2, 3)
       expect(subject.rolls[0]).to eq({:first=>2, :second=>3})
     end
+
+    it 'records a strike' do
+      subject.frame(10)
+      expect(subject.rolls[0]).to eq({:first=>10})
+    end
   end
-  
+
 end
