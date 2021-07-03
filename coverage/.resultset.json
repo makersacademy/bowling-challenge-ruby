@@ -6,6 +6,18 @@
           1,
           null,
           1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
           null,
           null
         ]
@@ -13,11 +25,19 @@
       "/Users/theodoreweisz/MakersMain/week5/bowling-challenge-ruby/lib/bowling.rb": {
         "lines": [
           1,
+          1,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          1,
           null,
           null
         ]
       }
     },
-    "timestamp": 1625322567
+    "timestamp": 1625324378
   }
 }
