@@ -63,4 +63,18 @@ describe Bowling do
     end
   end
 
+  context '.score_tenth_frame' do
+    it 'scores the tenth frame when no strike nore spare are bowled' do
+      9.times {subject.frame(3,3)}
+      subject.tenth_frame(3,3)
+      expect(subject.score_tenth_frame).to eq 6
+    end
+
+    it 'scores the tenth frame with a strike' do
+      9.times {subject.frame(3,3)}
+      subject.tenth_frame(10, 10, 5)
+      expect(subject.score_tenth_frame).to eq 25
+    end
+  end
+
 end

@@ -36,4 +36,11 @@ class Bowling
     end
   end
 
+  def score_tenth_frame
+    if @rolls[9][:first] + @rolls[9][:second] >= 10
+      @rolls[9][:first] + @rolls[9][:second] + @rolls[9][:third]
+    else
+      @rolls[9][:first] + @rolls[9][:second]
+    end
+  end
 end
