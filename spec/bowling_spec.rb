@@ -30,4 +30,37 @@ describe Bowling do
       expect(subject.rolls[0]).to eq({ first: 6, second: 4, third: 10 })
     end
   end
+  
+  context '.score_frame' do
+    it 'scores the first frame with no strike nor spare' do
+      subject.frame(2, 3)
+      expect(subject.score_frame(1)).to eq 5
+    end
+
+    it 'scores a spare' do
+      subject.frame(6, 4)
+      subject.frame(2, 3)
+      expect(subject.score_frame(1)).to eq 12
+    end
+
+    it 'scores a strike' do
+      subject.frame(10)
+      subject.frame(2, 3)
+      expect(subject.score_frame(1)).to eq 15
+    end
+
+    it 'scores a strike followed by another strike' do
+      subject.frame(10)
+      subject.frame(10)
+      subject.frame(5, 3)
+      expect(subject.score_frame(1)).to eq 25
+    end
+
+    it 'scores a strike followed by a strike in the tenth frame' do
+      9.times {subject.frame(10)}
+      subject.tenth_frame(10, 5, 5)
+      expect(subject.score_frame(9)).to eq 25
+    end
+  end
+
 end

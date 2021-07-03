@@ -3,6 +3,7 @@ class Bowling
 
   def initialize
     @rolls = []
+
   end
 
   def frame(roll_one, roll_two = 'strike')
@@ -20,4 +21,19 @@ class Bowling
                 { first: roll_one, second: roll_two, third: roll_three }
               end
   end
+
+  def score_frame(frame)
+    if frame == 9 && @rolls[frame - 1][:first] == 10 #strike in the 9th frame
+      @rolls[frame - 1][:first] + @rolls[frame][:first] + @rolls[frame][:second]
+    elsif @rolls[frame - 1][:first] == 10 && @rolls[frame][:first] == 10 #strike followed by another strike
+      @rolls[frame - 1][:first] + @rolls[frame][:first] + @rolls[frame + 1][:first]
+    elsif @rolls[frame - 1][:first] == 10 #strike
+      @rolls[frame - 1][:first] + @rolls[frame][:first] + @rolls[frame][:second]
+    elsif @rolls[frame - 1][:first] + @rolls[frame - 1][:second] == 10 #spare
+      @rolls[frame - 1][:first] + @rolls[frame - 1][:second] + @rolls[frame][:first]
+    else
+      @rolls[frame - 1][:first] + @rolls[frame - 1][:second]
+    end
+  end
+
 end
