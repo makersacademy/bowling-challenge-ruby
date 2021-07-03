@@ -1,0 +1,23 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/theodoreweisz/MakersMain/week5/bowling-challenge-ruby/spec/bowling_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/theodoreweisz/MakersMain/week5/bowling-challenge-ruby/lib/bowling.rb": {
+        "lines": [
+          1,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1625322567
+  }
+}
