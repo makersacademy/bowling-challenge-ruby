@@ -1,6 +1,6 @@
-require 'frame'
+require 'final_frame'
 
-describe Frame do
+describe FinalFrame do
   let(:roll) { double(:roll) }
 
   context 'the default frame' do
@@ -14,7 +14,27 @@ describe Frame do
       expect(subject).not_to be_ended
     end
 
-    xit 'can end the frame' do
+    it 'can end the frame' do
+      allow(roll).to receive(:pins).and_return(1)
+      subject.add(roll)
+      subject.add(roll)
+      expect(subject).to be_ended
+    end
+
+    it 'does not end the frame if there is a spare' do
+      allow(roll).to receive(:pins).and_return(5)
+      subject.add(roll)
+      subject.add(roll)
+      
+      expect(subject).not_to be_ended
+    end
+
+    xit 'does not end the frame for a strike' do
+      allow(roll).to receive(:pins).and_return(10)
+      subject.add(roll)
+      expect(subject).not_to be_ended
+      subject.add(roll)
+      expect(subject).not_to be_ended
     end
   end
 
@@ -37,6 +57,13 @@ describe Frame do
       subject.add(roll)
 
       expect(subject.rolls).to eq [roll, roll]
+    end
+
+    it 'resets the frame after a strike' do
+      allow(roll).to receive(:pins).and_return(10)
+      subject.add(roll)
+
+      expect(subject.pins).to eq 10
     end
   end
 

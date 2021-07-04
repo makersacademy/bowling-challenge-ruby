@@ -1,4 +1,4 @@
-class Frame
+class FinalFrame
   attr_reader :pins, :rolls
 
   def initialize
@@ -7,12 +7,12 @@ class Frame
   end
 
   def ended?
-    false
+    no_more_moves? && @pins != 0
   end
 
   def add(roll = Roll.new(pins))
     @rolls << roll
-    deduct_pins(roll)
+    deduct_pins(roll) unless strike?
   end
 
   def score
