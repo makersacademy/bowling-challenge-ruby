@@ -1,8 +1,9 @@
 class Game
 
-  def initialize(roll_class = Roll, frame = Frame.new)
+  def initialize(roll_class = Roll, frame = Frame.new, finalframe = FinalFrame.new)
     @frames = []
-    10.times { @frames << frame }
+    9.times { @frames << frame }
+    @frames << finalframe
     @roll_class = roll_class
   end
 
@@ -30,6 +31,10 @@ class Game
   def score_frame(index)
     @frames[index].score
   end
+  
+  def final_frame_bonus(index)
+    @frames[index].bonus_score
+  end
 
   def spare_frame?(index)
     @frames[index].spare?
@@ -44,7 +49,15 @@ class Game
   end
 
   def strike_bonus(index)
-    score_frame(index + 1)
+    if index == 9
+      final_frame_bonus(index)
+    elsif strike_frame?(index + 1) && index == 8
+      score_frame(index + 1) + @frames[index + 1].roll_2
+    elsif strike_frame?(index + 1)
+      score_frame(index + 1) + @frames[index + 2].roll_1 
+    else
+      score_frame(index + 1)
+    end
   end
 
   def ended?(frame)
@@ -54,4 +67,5 @@ class Game
   def add(roll, frame)
     frame.add(roll)
   end
+
 end

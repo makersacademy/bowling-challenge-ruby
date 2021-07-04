@@ -7,7 +7,7 @@ describe Game do
   let(:roll_double_3) { double(:roll) }
   let(:roll_class_double) { double(:roll_class) }
   let(:frame_double) { double(:frame) }
-  subject { described_class.new(roll_class_double, frame_double) }
+  subject { described_class.new(roll_class_double, frame_double, frame_double) }
   let(:two_rolls_per_frame) { [false, false,
                                true, false, true, false,
                                true, true, false, true, true, false,
@@ -29,6 +29,17 @@ describe Game do
                                 true, true, true, true, true, true, true, false, true, true, true, true, true, true, true, false,
                                 true, true, true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, false,
                                 true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, false]
+  }  
+  let(:one_roll_nine_frames_then_three) { [false,
+                                            true, false,
+                                            true, true, false,
+                                            true, true, true, false,
+                                            true, true, true, true, false,
+                                            true, true, true, true, true, false, 
+                                            true, true, true, true, true, true, false, 
+                                            true, true, true, true, true, true, true, false, 
+                                            true, true, true, true, true, true, true, true, false, 
+                                            ]
   }  
   
   before do
@@ -79,7 +90,7 @@ describe Game do
     expect(subject.score).to eq 16
   end
 
-  it 'can score a strike' do
+  it 'can score one strike' do
     allow(roll_class_double).to receive(:new).with(10).and_return(roll_double_1)
     allow(roll_class_double).to receive(:new).with(1).and_return(roll_double_2)
     allow(roll_class_double).to receive(:new).with(0).and_return(roll_double)
@@ -96,5 +107,28 @@ describe Game do
     subject.roll(1)
     16.times { subject.roll(0) }
     expect(subject.score).to eq 14
+  end
+
+  it 'can score a perfect game' do
+    final_frame_double = double(:final_frame)
+    game = described_class.new(roll_class_double, frame_double, final_frame_double)
+    allow(roll_class_double).to receive(:new).with(10).and_return(roll_double)
+    allow(roll_double).to receive(:pins).and_return(10)
+    allow(frame_double).to receive(:ended?).and_return(*one_roll_nine_frames_then_three)
+    allow(frame_double).to receive(:score).and_return(10)
+    allow(frame_double).to receive(:spare?).and_return(false)
+    allow(frame_double).to receive(:strike?).and_return(true)
+    allow(final_frame_double).to receive(:ended?).and_return(true, true, true, true, true, true, true, true, true, false, false, false)
+    allow(final_frame_double).to receive(:add)
+    allow(final_frame_double).to receive(:score).and_return(10)
+    allow(final_frame_double).to receive(:spare?).and_return(false)
+    allow(final_frame_double).to receive(:strike?).and_return(true)
+    allow(final_frame_double).to receive(:bonus_score).and_return(20)
+    allow(frame_double).to receive(:roll_1).and_return(10)
+    allow(final_frame_double).to receive(:roll_1).and_return(10)
+    allow(final_frame_double).to receive(:roll_2).and_return(10)
+    
+    12.times { game.roll(10) }
+    expect(game.score).to eq 300
   end
 end
