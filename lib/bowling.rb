@@ -1,10 +1,10 @@
 class Bowling
   def initialize
-     @rolls = []
+    @rolls = []
   end
 
   def roll(pin)
-     @rolls.push(pin)
+    @rolls << pin
   end
 
   def score
@@ -12,21 +12,21 @@ class Bowling
     rolls_index = 0
 
     10.times do
-      if strike? (rolls_index)
+      if strike? rolls_index
         frame_score = 10 + @rolls[rolls_index + 1] + @rolls[rolls_index + 2]
         total_score += frame_score
         rolls_index += 1
-      elsif spare? (rolls_index)
-         frame_score = 10 + @rolls[rolls_index + 2]
-         total_score += frame_score
+      elsif spare? rolls_index
+        frame_score = 10 + @rolls[rolls_index + 2]
+        total_score += frame_score
         rolls_index += 2
-      else 
-         frame_score = @rolls[rolls_index] + @rolls[rolls_index + 1]
-         total_score += frame_score
-         rolls_index += 2
+      else
+        frame_score = @rolls[rolls_index] + @rolls[rolls_index + 1]
+        total_score += frame_score
+        rolls_index += 2
       end
     end
-     total_score
+    total_score
   end
 
   def strike?(rolls_index)
@@ -34,6 +34,6 @@ class Bowling
   end
 
   def spare?(rolls_index)
-    @rolls[rolls_index] + @rolls[rolls_index + 1 ] == 10
+    @rolls[rolls_index] + @rolls[rolls_index + 1] == 10
   end
 end

@@ -11,7 +11,7 @@ describe Bowling do
 
   it 'can calculate the score ' do
     game = Bowling.new
-    20.times {game.roll(1)}
+    20.times { game.roll(1) }
     expect(game.score).to eq(20)
   end
 
@@ -20,8 +20,8 @@ describe Bowling do
     game.roll(10)
     game.roll(2)
     game.roll(3)
-    16.times {game.roll(0)}
-    expect(game.score).to eq (20)
+    16.times { game.roll(0) }
+    expect(game.score).to eq 20
   end
 
   it 'can play a spare' do
@@ -29,14 +29,13 @@ describe Bowling do
     game.roll(5)
     game.roll(5)
     game.roll(5)
-    17.times {game.roll(0)}
-    expect(game.score).to eq (20)
+    17.times { game.roll(0) }
+    expect(game.score).to eq 20
   end
 
   it 'can play a perfect game' do
     game = Bowling.new
-    12.times {game.roll(10)}
-    expect(game.score).to eq (300)
+    12.times { game.roll(10) }
+    expect(game.score).to eq 300
   end
 end
-
