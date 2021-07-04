@@ -1,8 +1,7 @@
 class Frame
-  attr_reader :pins, :rolls
+  attr_reader :rolls
 
   def initialize
-    @pins = 10
     @rolls = []
   end
 
@@ -12,7 +11,6 @@ class Frame
 
   def add(roll = Roll.new(pins))
     @rolls << roll
-    deduct_pins(roll)
   end
 
   def score
@@ -28,9 +26,6 @@ class Frame
   end
 
   private
-  def deduct_pins(roll)
-    @pins -= roll.pins
-  end
 
   def count_pins_on_turn(number)
     @rolls[number - 1].pins

@@ -4,8 +4,6 @@ describe Frame do
   let(:roll) { double(:roll) }
 
   context 'the default frame' do
-    it { is_expected.to have_attributes(pins: 10) }
-
     it { is_expected.to respond_to(:rolls) }
   end
 
@@ -34,12 +32,6 @@ describe Frame do
       allow(roll).to receive(:pins).and_return(5)
       subject.add(roll)
       expect(subject.rolls).to eq [roll]
-    end
-
-    it 'can deduct pins by the amount rolled over' do
-      allow(roll).to receive(:pins).and_return(5)
-      subject.add(roll)
-      expect(subject.pins).to eq 5
     end
 
     it 'can store a second roll' do
