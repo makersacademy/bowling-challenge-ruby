@@ -72,4 +72,24 @@ describe Frame do
       expect(subject).not_to be_spare
     end
   end
+
+  context '#roll_points' do
+    it 'can retreive the first roll in points' do
+      allow(roll).to receive(:pins).and_return(10)
+      subject.add(roll)
+
+      expect(subject.roll_points(1)).to eq 10
+    end
+
+    it 'can retreive the second roll in points' do
+      roll_1 = double(:roll)
+      roll_2 = double(:roll)
+      allow(roll_1).to receive(:pins).and_return(3)
+      allow(roll_2).to receive(:pins).and_return(6)
+      subject.add(roll_1)
+      subject.add(roll_2)
+
+      expect(subject.roll_points(2)).to eq 6
+    end
+  end
 end

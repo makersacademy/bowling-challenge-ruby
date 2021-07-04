@@ -18,18 +18,18 @@ class Frame
   end
 
   def spare?
-    strike? ? false : count_pins_on_turn(1) + count_pins_on_turn(2) == 10
+    strike? ? false : roll_points(1) + roll_points(2) == 10
   end
 
   def strike?
-    no_moves_made? ? false : count_pins_on_turn(1) == 10
+    no_moves_made? ? false : roll_points(1) == 10
+  end
+
+  def roll_points(turn)
+    @rolls[turn - 1].pins
   end
 
   private
-
-  def count_pins_on_turn(number)
-    @rolls[number - 1].pins
-  end
 
   def no_moves_made?
     @rolls.empty?

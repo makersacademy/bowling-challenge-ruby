@@ -18,33 +18,33 @@ class FinalFrame
     if strike?
       10
     else
-      count_pins_on_turn(1) + count_pins_on_turn(2)
+      roll_points(1) + roll_points(2)
     end
   end
 
   def bonus_score
     if strike?
-      count_pins_on_turn(2) + count_pins_on_turn(3)
+      roll_points(2) + roll_points(3)
     elsif spare?
-      count_pins_on_turn(3)
+      roll_points(3)
     else
       0
     end   
   end
 
   def spare?
-    strike? ? false : count_pins_on_turn(1) + count_pins_on_turn(2) == 10
+    strike? ? false : roll_points(1) + roll_points(2) == 10
   end
 
   def strike?
-    no_moves_made? ? false : count_pins_on_turn(1) == 10
+    no_moves_made? ? false : roll_points(1) == 10
+  end
+
+  def roll_points(turn)
+    @rolls[turn - 1].pins
   end
 
   private
-
-  def count_pins_on_turn(number)
-    @rolls[number - 1].pins
-  end
 
   def no_moves_made?
     @rolls.empty?
@@ -55,7 +55,7 @@ class FinalFrame
   end
 
   def pins_are_less_than_10
-    count_pins_on_turn(1) + count_pins_on_turn(2) < 10
+    roll_points(1) + roll_points(2) < 10
   end
 
   def made_three_moves?

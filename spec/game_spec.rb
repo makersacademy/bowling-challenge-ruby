@@ -81,7 +81,7 @@ describe Game do
     allow(frame_double).to receive(:score).and_return(10, 3, 0)
     allow(frame_double).to receive(:spare?).and_return(true, false)
     allow(frame_double).to receive(:strike?).and_return(false)
-    allow(frame_double).to receive(:roll_1).and_return(3)
+    allow(frame_double).to receive(:roll_points).with(1).and_return(3)
 
     subject.roll(6)
     subject.roll(4)
@@ -124,9 +124,9 @@ describe Game do
     allow(final_frame_double).to receive(:spare?).and_return(false)
     allow(final_frame_double).to receive(:strike?).and_return(true)
     allow(final_frame_double).to receive(:bonus_score).and_return(20)
-    allow(frame_double).to receive(:roll_1).and_return(10)
-    allow(final_frame_double).to receive(:roll_1).and_return(10)
-    allow(final_frame_double).to receive(:roll_2).and_return(10)
+    allow(frame_double).to receive(:roll_points).with(1).and_return(10)
+    allow(final_frame_double).to receive(:roll_points).with(1).and_return(10)
+    allow(final_frame_double).to receive(:roll_points).with(2).and_return(10)
     
     12.times { game.roll(10) }
     expect(game.score).to eq 300
