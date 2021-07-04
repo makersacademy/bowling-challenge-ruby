@@ -28,4 +28,12 @@ describe 'bowling' do
     expect(game.score).to eq 14
   end
 
+  it 'bowl a strike' do
+    game = Game.new
+    game.bowl(10)
+    game.bowl(5)
+    game.bowl(2)
+    16.times{game.bowl 0}
+    expect(game.score).to eq 24
+  end
 end

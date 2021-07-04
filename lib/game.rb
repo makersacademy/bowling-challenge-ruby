@@ -13,12 +13,17 @@ class Game
     total_score = 0
     bowl_index= 0
     10.times do
-      if spare?(bowl_index)
+      if strike?(bowl_index)
+        total_score += strike_score(bowl_index)
+        bowl_index += 1
+      elsif spare?(bowl_index)
         total_score += spare_score(bowl_index)
+        bowl_index += 2
       else
         total_score += normal_frame_score(bowl_index)
+        bowl_index += 2
       end
-      bowl_index += 2
+      
       
     end
     total_score
@@ -28,6 +33,13 @@ class Game
     @bowls[bowl_index] + @bowls[bowl_index + 1] == 10
   end
 
+  def strike?(bowl_index)
+    @bowls[bowl_index] == 10   
+  end
+
+  def strike_score(bowl_index)
+    @bowls[bowl_index + 1] + @bowls[bowl_index + 2] + 10  
+  end
   def spare_score(bowl_index)
     @bowls[bowl_index + 2] + 10
   end
@@ -35,4 +47,6 @@ class Game
   def normal_frame_score(bowl_index)
     @bowls[bowl_index] + @bowls[bowl_index + 1]
   end
+
+
 end
