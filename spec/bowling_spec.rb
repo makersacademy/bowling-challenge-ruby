@@ -3,39 +3,38 @@ require 'bowling'
 describe Bowling do
   it { is_expected.to respond_to(:roll).with(1).argument }
 
+  before do
+    subject { described_class.new }
+  end
+
   it 'can play a gutter game ' do
-    game = Bowling.new
-    20.times { game.roll(0) }
-    expect(game.score).to eq(0)
+    20.times { subject.roll(0) }
+    expect(subject.score).to eq(0)
   end
 
   it 'can calculate the score ' do
-    game = Bowling.new
-    20.times { game.roll(1) }
-    expect(game.score).to eq(20)
+    20.times { subject.roll(1) }
+    expect(subject.score).to eq(20)
   end
 
   it 'can play a strike' do
-    game = Bowling.new
-    game.roll(10)
-    game.roll(2)
-    game.roll(3)
-    16.times { game.roll(0) }
-    expect(game.score).to eq 20
+    subject.roll(10)
+    subject.roll(2)
+    subject.roll(3)
+    16.times { subject.roll(0) }
+    expect(subject.score).to eq 20
   end
 
   it 'can play a spare' do
-    game = Bowling.new
-    game.roll(5)
-    game.roll(5)
-    game.roll(5)
-    17.times { game.roll(0) }
-    expect(game.score).to eq 20
+    subject.roll(5)
+    subject.roll(5)
+    subject.roll(5)
+    17.times { subject.roll(0) }
+    expect(subject.score).to eq 20
   end
 
   it 'can play a perfect game' do
-    game = Bowling.new
-    12.times { game.roll(10) }
-    expect(game.score).to eq 300
+    12.times { subject.roll(10) }
+    expect(subject.score).to eq 300
   end
 end
