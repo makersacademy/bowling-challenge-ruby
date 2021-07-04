@@ -4,20 +4,15 @@ class Frame
   def initialize
     @pins = 10
     @rolls = []
-    @ended = false
   end
 
   def ended?
-    if @rolls.length == 2
-      @ended = true
-    else
-      @ended
-    end
+    @rolls.length == 2 || strike?
   end
 
   def add(roll = Roll.new(pins))
     @rolls << roll
-    @pins -= roll.pins
+    deduct_pins(roll)
   end
 
   def score
@@ -25,12 +20,24 @@ class Frame
   end
 
   def spare?
-    unless strike?
-      @rolls[0].pins + @rolls[1].pins == 10
-    end
+    strike? ? false : count_pins_on_turn(1) + count_pins_on_turn(2) == 10
   end
 
   def strike?
-    @rolls[0].pins == 10
+    no_moves? ? false : count_pins_on_turn(1) == 10
   end
+
+  private
+  def deduct_pins(roll)
+    @pins -= roll.pins
+  end
+
+  def count_pins_on_turn(number)
+    @rolls[number - 1].pins
+  end
+
+  def no_moves?
+    @rolls.empty?
+  end
+
 end

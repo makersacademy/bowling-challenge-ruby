@@ -18,7 +18,14 @@ describe Frame do
       allow(roll).to receive(:pins).and_return(1)
       subject.add(roll)
       subject.add(roll)
-      expect(subject.ended?).to be true
+      expect(subject).to be_ended
+    end
+
+    it 'ends the frame for a strike' do
+      allow(roll).to receive(:pins).and_return(10)
+      subject.add(roll)
+
+      expect(subject).to be_ended
     end
   end
 
