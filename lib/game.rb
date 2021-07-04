@@ -1,3 +1,7 @@
+require 'frame'
+require 'final_frame'
+require 'roll'
+
 class Game
 
   def initialize(roll_class = Roll, frame_class = Frame, finalframe = FinalFrame.new)
@@ -41,7 +45,11 @@ class Game
   end
 
   def spare_bonus(index)
+    if index == 9
+      final_frame_bonus
+    else
     @frames[index + 1].roll_points(1)
+    end
   end
 
   def strike_frame?(index)

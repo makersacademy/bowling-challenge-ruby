@@ -133,4 +133,27 @@ describe Game do
     12.times { game.roll(10) }
     expect(game.score).to eq 300
   end
+
+  it 'can score an all spares game' do
+    final_frame_double = double(:final_frame)
+    game = described_class.new(roll_class_double, frame_class_double, final_frame_double)
+    allow(roll_class_double).to receive(:new).with(5).and_return(roll_double)
+    allow(roll_double).to receive(:pins).and_return(5)
+    allow(frame_double).to receive(:ended?).and_return(*one_roll_nine_frames_then_three)
+    allow(frame_double).to receive(:score).and_return(10)
+    allow(frame_double).to receive(:spare?).and_return(true)
+    allow(frame_double).to receive(:strike?).and_return(false)
+    allow(final_frame_double).to receive(:ended?).and_return(true, true, true, true, true, true, true, true, true, false, false, false)
+    allow(final_frame_double).to receive(:add)
+    allow(final_frame_double).to receive(:score).and_return(10)
+    allow(final_frame_double).to receive(:spare?).and_return(true)
+    allow(final_frame_double).to receive(:strike?).and_return(false)
+    allow(final_frame_double).to receive(:bonus_score).and_return(5)
+    allow(frame_double).to receive(:roll_points).with(1).and_return(5)
+    allow(final_frame_double).to receive(:roll_points).with(1).and_return(5)
+
+    21.times { game.roll(5) }
+
+    expect(game.score).to eq 150
+  end
 end

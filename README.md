@@ -52,5 +52,94 @@ More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
 
 ## My Solution
+A Makers Week 5 solo weekend challenge. 
+
+* **Languages used**: Ruby
+* **Testing frameworks**: RSpec, Capybara
+* **Linting**: Rubocop
 
 ### Domain Model
+| Class | Game |
+| --- | --- |
+| **Properties (instance variables):** | @frames: Array (of 9 inst. Frames and 1 inst. FinalFrame) |
+| **Actions (methods):** | roll(pins : Int) : Nil |
+| | score : Int | 
+
+| Class | Frame |
+| --- | --- |
+| **Properties (instance variables):** | @rolls : Array (of Roll instances) |
+| **Actions (methods):** | ended? : Boolean |
+| | add(roll : Roll) | 
+| | score : Int | 
+| | spare? : Boolean | 
+| | strike? : Boolean |
+| | roll_points(turn : Int) : Int | 
+
+| Class | FinalFrame |
+| --- | --- |
+| **Properties (instance variables):** | @rolls : Array (of Roll instances) |
+| **Actions (methods):** | ended? : Boolean |
+| | add(roll : Roll) | 
+| | score : Int | 
+| | spare? : Boolean | 
+| | strike? : Boolean |
+| | roll_points(turn : Int) : Int | 
+| | bonus_score : Int | 
+
+| Class | Roll |
+| --- | --- |
+| **Properties (instance variables):** | @pins : Int |
+| **Actions (methods):** | initialize(value) : @pins = value |
+
+**Relationships**
+* Game & Frame: 1 to 9
+* Game & FinalFrame: 1 to 1
+* Frame & Roll: 1 to (1..2)
+* FinalFrame & Roll: 1 to (2..3)
+
+### My approach
+* I need to create a Game class that is able to roll a number of pins and calculate a score. I imagined how it would work in irb:
+```
+game = Game.new
+20.times { game.roll(1) }
+game.score                  # => 20
+```
+* Next I drafted my Domain Model:
+  * Each Game has 10 frames, therefore perhaps Frame needs to be a class, and Game stores 10 different instances of Frame.
+  * Each Frame has a default of 10 pins, originally I had implemented the number of pins outstanding in the frame, however I discovered that it was not necessary. Normal Frames end when 2 moves have been made or when there is a strike. 
+  * Each Frame has 2 rolls, perhaps Roll needs to be a class, Frame works with 2 instances of Roll. 
+  * Each roll can knock down a number of pins, so Roll may be instantiated with the number of pins knocked down, and should be accessible for reading. 
+  * Each Frame has a score, excluding the bonus scores which may be handled by the `score` method in Game, because they are dependent on future frames. 
+  * The Game should iterate through each Frame and sum each frame score plus bonus scores to give the final score.
+  * The FinalFrame is a special frame that has up to 3 rolls. The game ends with 2 rolls if the first two rolls are less than 10. It also has an additional method that calculates the bonus_score for Game. Therefore it makes sense to have a FinalFrame class, similar to Frame but with special rules.
+  * Please see above final Domain Model (Class Diagram).
+* I TDD'd my code
+* Tried to refactor where possible with SRP in mind. There are a few things I am not sure how to refactor the `score` method in Game.
+* Tests are isolated early on using doubles and dependency injection.
+* I feature tested using Capybara.
+* Linted using Rubocop.
+
+### How to use
+
+Install gems using bundler:
+```
+bundle install
+```
+
+To run tests:
+```
+rspec
+```
+
+To run game in `irb`:
+```irb
+game = Game.new
+game.roll(10)     # make a roll between 0 and 10
+game.score        # calculate final score once you have made all your moves
+```
+
+### Improvements
+* SRP
+* Refactor unit tests
+* Refactor code
+* Use a mixin for Frame and FinalFrame's similar behaviour
