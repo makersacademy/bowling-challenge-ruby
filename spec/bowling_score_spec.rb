@@ -4,9 +4,9 @@ require 'bowling'
 
 describe BowlingScore do
   let(:bowling) { BowlingScore.new }
-  it 'hits 5 pins' do
-    expect(bowling.hit(5)).to eq(5)
-  end
+  # it 'hits 5 pins' do
+  #   expect(bowling.hit(5)).to eq(5)
+  # end
 
   context '#current_score' do
     it 'current score to equal 5' do
