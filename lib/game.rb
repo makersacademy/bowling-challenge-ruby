@@ -1,20 +1,17 @@
-
+# frozen_string_literal: true.
 class Game
-
   def initialize
     @bowls = []
   end
 
   def bowl(pins_down)
-    if pins_down > 10 
-      raise "Please enter a score of 10 or below"
-    end
+    raise 'enter a score less than 10' if pins_down > 10
     @bowls << pins_down
   end
 
   def score
     total_score = 0
-    bowl_index= 0
+    bowl_index = 0
     10.times do
       if strike?(bowl_index)
         total_score += strike_score(bowl_index)
@@ -26,8 +23,6 @@ class Game
         total_score += normal_frame_score(bowl_index)
         bowl_index += 2
       end
-      
-      
     end
     total_score
   end
@@ -37,12 +32,13 @@ class Game
   end
 
   def strike?(bowl_index)
-    @bowls[bowl_index] == 10   
+    @bowls[bowl_index] == 10
   end
 
   def strike_score(bowl_index)
-    @bowls[bowl_index + 1] + @bowls[bowl_index + 2] + 10  
+    @bowls[bowl_index + 1] + @bowls[bowl_index + 2] + 10
   end
+
   def spare_score(bowl_index)
     @bowls[bowl_index + 2] + 10
   end
@@ -50,6 +46,4 @@ class Game
   def normal_frame_score(bowl_index)
     @bowls[bowl_index] + @bowls[bowl_index + 1]
   end
-
-
 end
