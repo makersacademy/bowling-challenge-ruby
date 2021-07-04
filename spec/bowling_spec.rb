@@ -20,8 +20,17 @@ describe Bowling do
     game.roll(10)
     game.roll(2)
     game.roll(3)
+    16.times {game.roll(0)}
+    expect(game.score).to eq (20)
+  end
+
+  it 'can play a spare' do
+    game = Bowling.new
+    game.roll(5)
+    game.roll(5)
+    game.roll(5)
     17.times {game.roll(0)}
-    expect(game.score).to eq (15)
+    expect(game.score).to eq (20)
   end
 end
 
