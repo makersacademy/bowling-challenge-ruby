@@ -14,4 +14,10 @@ class BowlingScore
     'Gutter ball!'
   end
 
+  def spare
+    if @current_score == 10
+      'Spare!'
+    end
+  end
+
 end
