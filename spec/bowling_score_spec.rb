@@ -21,17 +21,19 @@ describe BowlingScore do
     end
   end
 
-  context '#gutter'
+  context '#gutter' do
     it 'gutters the ball' do
       bowling.gutter
       expect(bowling.current_score).to eq(0)
     end
   end
-
-  it 'hit a spare' do
-    bowling.hit(4)
-    bowling.hit(6)
-    expect(bowling.spare).to eq('Spare!')
+  
+  context '#spare' do
+    it 'hit a spare' do
+      bowling.hit(4)
+      bowling.hit(6)
+      expect(bowling.spare).to eq('Spare!')
+    end
   end
 
   it 'determines number of rolls' do
