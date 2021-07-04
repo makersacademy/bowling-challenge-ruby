@@ -24,20 +24,20 @@ class Bowling
 
   def score_frame(frame)
     if frame == 9 && @rolls[frame - 1][:first] == 10 # strike in the 9th frame
-      @frame_score << @rolls[frame - 1][:first] + @rolls[frame][:first] + @rolls[frame][:second]
+      regular_strike(frame)
     elsif @rolls[frame - 1][:first] == 10 && @rolls[frame][:first] == 10 # strike followed by another strike
-      @frame_score << @rolls[frame - 1][:first] + @rolls[frame][:first] + @rolls[frame + 1][:first]
+      strike_then_strike(frame)
     elsif @rolls[frame - 1][:first] == 10 # strike
-      @frame_score << @rolls[frame - 1][:first] + @rolls[frame][:first] + @rolls[frame][:second]
+      regular_strike(frame)
     elsif @rolls[frame - 1][:first] + @rolls[frame - 1][:second] == 10 # spare
-      @frame_score << @rolls[frame - 1][:first] + @rolls[frame - 1][:second] + @rolls[frame][:first]
+      spare(frame)
     else
-      @frame_score << @rolls[frame - 1][:first] + @rolls[frame - 1][:second]
+      regular_score(frame)
     end
   end
 
   def score_tenth_frame
-    if @rolls[9][:first] + @rolls[9][:second] >= 10
+    if @rolls[9][:first] + @rolls[9][:second] >= 10 #strike or spare in the tenth
       @frame_score << @rolls[9][:first] + @rolls[9][:second] + @rolls[9][:third]
     else
       @frame_score << @rolls[9][:first] + @rolls[9][:second]
@@ -46,5 +46,23 @@ class Bowling
 
   def overall_score
     @frame_score.reduce(:+)
+  end
+
+  private
+
+  def regular_strike(frame)
+    @frame_score << @rolls[frame - 1][:first] + @rolls[frame][:first] + @rolls[frame][:second]
+  end
+
+  def strike_then_strike(frame)
+    @frame_score << @rolls[frame - 1][:first] + @rolls[frame][:first] + @rolls[frame + 1][:first]
+  end
+
+  def spare(frame)
+    @frame_score << @rolls[frame - 1][:first] + @rolls[frame - 1][:second] + @rolls[frame][:first]
+  end
+
+  def regular_score(frame)
+    @frame_score << @rolls[frame - 1][:first] + @rolls[frame - 1][:second]
   end
 end
