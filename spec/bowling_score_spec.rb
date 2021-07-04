@@ -35,10 +35,11 @@ describe BowlingScore do
       expect(bowling.spare).to eq('Spare!')
     end
   end
-
-  it 'determines number of rolls' do
-    bowling.hit(4)
-    bowling.hit(3)
-    expect(bowling.number_of_rolls).to eq(2)
+  context '#number_of_rolls' do
+    it 'determines number of rolls' do
+      bowling.hit(4)
+      bowling.hit(3)
+      expect(bowling.number_of_rolls).to eq(2)
+    end
   end
 end
