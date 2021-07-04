@@ -53,4 +53,13 @@ describe 'bowling' do
     game = Game.new
     expect{game.bowl(11)}.to raise_error "Please enter a score of 10 or below"
   end
+
+  it 'last game strike' do
+    game = Game.new
+    18.times { game.bowl(3) }
+    game.bowl(10)
+    game.bowl(7)
+    game.bowl(2)
+    expect(game.score).to eq 73
+  end
 end
