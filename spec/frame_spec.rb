@@ -1,23 +1,52 @@
 require 'frame'
 
 describe Frame do
-  let(:roll_1) { instance_double(Roll) }
-  let(:roll_2) { instance_double(Roll) }
-  subject { described_class.new(roll_1, roll_2) }
-
   context 'the default frame' do
-    before do
-      allow(roll_1).to receive(:pins=).with(0).and_return(0)
-      allow(roll_1).to receive(:pins).and_return(0)
-      allow(roll_2).to receive(:pins=).with(0).and_return(0)
-      allow(roll_2).to receive(:pins).and_return(0)
+    it { is_expected.to have_attributes(pins: 10) }
+
+    it { is_expected.to respond_to(:rolls) }
+  end
+
+  context '#ended?' do
+    it 'defaults to false' do
+      expect(subject.ended?).to be false
+    end
+  end
+
+  context '#add' do
+    let(:roll) { double(:roll) }
+
+    it 'can store rolls' do
+      allow(roll).to receive(:pins).and_return(5)
+      subject.add(roll)
+      expect(subject.rolls).to eq [roll]
     end
 
-    xit { is_expected.to have_attributes(pins: 10) }
+    it 'can deduct pins by the amount rolled over' do
+      allow(roll).to receive(:pins).and_return(5)
+      subject.add(roll)
+      expect(subject.pins).to eq 5
+    end
 
-    xit { is_expected.to respond_to(:roll_1) }
+    it 'can store a second roll' do
+      allow(roll).to receive(:pins).and_return(1)
+      subject.add(roll)
+      subject.add(roll)
 
-    xit { is_expected.to respond_to(:roll_2) }
+      expect(subject.rolls).to eq [roll, roll]
+    end
+  end
+
+  context '#score' do
+    let(:roll) { double(:roll) }
+    
+    it 'can score a frame' do
+      allow(roll).to receive(:pins).and_return(1)
+      subject.add(roll)
+      subject.add(roll)
+
+      expect(subject.score).to eq 2
+    end
   end
 
 end

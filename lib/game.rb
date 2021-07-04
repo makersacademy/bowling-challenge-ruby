@@ -32,8 +32,8 @@ class Game
     @frames[index].score
   end
   
-  def final_frame_bonus(index)
-    @frames[index].bonus_score
+  def final_frame_bonus
+    @frames[9].bonus_score
   end
 
   def spare_frame?(index)
@@ -50,7 +50,7 @@ class Game
 
   def strike_bonus(index)
     if index == 9
-      final_frame_bonus(index)
+      final_frame_bonus
     elsif strike_frame?(index + 1) && index == 8
       score_frame(index + 1) + @frames[index + 1].roll_2
     elsif strike_frame?(index + 1)
