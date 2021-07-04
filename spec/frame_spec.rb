@@ -45,4 +45,14 @@ RSpec.describe Frame do
 			expect(frame.spare?).to be_truthy
 		end
 	end
+
+	context '10th frame' do
+		it ' can give an additional shot, if a spare was made' do
+			frame = Frame.new(10, 5, 5, 4)
+
+			expect(frame.rolling?).to be_truthy
+
+			expect(frame.points).to eq(14)
+		end
+	end
 end
