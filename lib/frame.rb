@@ -14,7 +14,11 @@ class Frame
   end
 
   def score
-    @rolls.map { |roll| roll.pins }.inject(:+)
+    if strike?
+      10
+    else
+      roll_points(1) + roll_points(2)
+    end
   end
 
   def spare?

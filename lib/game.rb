@@ -1,8 +1,8 @@
 class Game
 
-  def initialize(roll_class = Roll, frame = Frame.new, finalframe = FinalFrame.new)
+  def initialize(roll_class = Roll, frame_class = Frame, finalframe = FinalFrame.new)
     @frames = []
-    9.times { @frames << frame }
+    9.times { @frames << frame_class.new }
     @frames << finalframe
     @roll_class = roll_class
   end

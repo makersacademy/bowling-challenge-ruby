@@ -6,8 +6,9 @@ describe Game do
   let(:roll_double_2) { double(:roll) }
   let(:roll_double_3) { double(:roll) }
   let(:roll_class_double) { double(:roll_class) }
+  let(:frame_class_double) { double(:frame_class) }
   let(:frame_double) { double(:frame) }
-  subject { described_class.new(roll_class_double, frame_double, frame_double) }
+  subject { described_class.new(roll_class_double, frame_class_double, frame_double) }
   let(:two_rolls_per_frame) { [false, false,
                                true, false, true, false,
                                true, true, false, true, true, false,
@@ -43,6 +44,7 @@ describe Game do
   }  
   
   before do
+    allow(frame_class_double).to receive(:new).and_return(frame_double)
     allow(frame_double).to receive(:add)
   end
 
@@ -111,7 +113,7 @@ describe Game do
 
   it 'can score a perfect game' do
     final_frame_double = double(:final_frame)
-    game = described_class.new(roll_class_double, frame_double, final_frame_double)
+    game = described_class.new(roll_class_double, frame_class_double, final_frame_double)
     allow(roll_class_double).to receive(:new).with(10).and_return(roll_double)
     allow(roll_double).to receive(:pins).and_return(10)
     allow(frame_double).to receive(:ended?).and_return(*one_roll_nine_frames_then_three)
