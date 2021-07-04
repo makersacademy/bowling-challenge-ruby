@@ -1,5 +1,5 @@
 class Frame
-	attr_reader :id, :roll_1, :roll_2
+	attr_reader :id, :roll_1, :roll_2, :points
 
 	def initialize(id, roll_1 = 0, roll_2 = 0)
 		@id = id
@@ -11,19 +11,11 @@ class Frame
 		@points = @roll_1 + @roll_2
 	end
 
-	def spare
-		true if points == 10
+	def spare?
+		points == 10 && @roll_2 != 0 ? true : false
 	end
 
-	def strike
-		true if @roll_1 == 10
-	end
-
-	def additional_points(extra_1, extra_2)
-		@total = @points + extra_1 + extra_2
-	end
-
-	def total_points
-		spare || strike ? @total : @points
+	def strike?
+		@roll_1 == 10 ? true : false
 	end
 end
