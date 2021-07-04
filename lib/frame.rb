@@ -25,6 +25,12 @@ class Frame
   end
 
   def spare?
-    @rolls[0].pins + @rolls[1].pins == 10
+    unless strike?
+      @rolls[0].pins + @rolls[1].pins == 10
+    end
+  end
+
+  def strike?
+    @rolls[0].pins == 10
   end
 end

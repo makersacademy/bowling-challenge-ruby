@@ -63,4 +63,14 @@ describe Frame do
       expect(subject).to be_spare
     end
   end
+
+  context '#strike?' do
+    it 'can identify a strike' do
+      allow(roll).to receive(:pins).and_return(10)
+      subject.add(roll)
+
+      expect(subject).to be_strike
+      expect(subject).not_to be_spare
+    end
+  end
 end
