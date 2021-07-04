@@ -18,4 +18,9 @@ describe BowlingScore do
       expect(bowling.current_score).to eq(9)
     end
   end
+
+  it 'gutters the ball' do
+    bowling.hit(0)
+    expect(bowling.gutter).to eq(0)
+  end
 end
