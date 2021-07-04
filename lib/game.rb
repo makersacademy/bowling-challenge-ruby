@@ -24,6 +24,8 @@ class Game
       score += @frames[i].score
       if @frames[i].spare?
         score += @frames[i + 1].roll_1
+      elsif @frames[i].strike?
+        score += @frames[i + 1].score
       end
       i += 1
     end

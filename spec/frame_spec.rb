@@ -13,11 +13,11 @@ describe Frame do
       allow(roll_2).to receive(:pins).and_return(0)
     end
 
-    it { is_expected.to have_attributes(pins: 10) }
+    xit { is_expected.to have_attributes(pins: 10) }
 
-    it { is_expected.to respond_to(:roll_1) }
+    xit { is_expected.to respond_to(:roll_1) }
 
-    it { is_expected.to respond_to(:roll_2) }
+    xit { is_expected.to respond_to(:roll_2) }
   end
 
 end
