@@ -7,7 +7,7 @@ class Frame
   end
 
   def ended?
-    no_more_moves? || strike?
+    made_two_moves? || strike?
   end
 
   def add(roll = Roll.new(pins))
@@ -40,7 +40,7 @@ class Frame
     @rolls.empty?
   end
 
-  def no_more_moves?
+  def made_two_moves?
     @rolls.length == 2
   end
 end
