@@ -42,4 +42,10 @@ describe 'bowling' do
     16.times{game.bowl 10}
     expect(game.score).to eq 300
   end
+
+  it "can bowl all spares" do
+    game = Game.new
+    21.times{game.bowl 5}
+    expect(game.score).to eq 150
+  end
 end
