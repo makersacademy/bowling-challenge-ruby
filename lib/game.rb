@@ -1,7 +1,6 @@
 class Game
 
   def initialize(roll_class = Roll, frame = Frame.new)
-    @score = 0
     @frames = []
     10.times { @frames << frame }
     @roll_class = roll_class
@@ -13,16 +12,21 @@ class Game
       if frame.ended?
         next
       else
-        frame.add(roll)
+        return frame.add(roll)
       end
     end
   end
 
   def score
-    @frames.each do |frame|
-      @score += frame.score
+    i = 0
+    score = 0
+    10.times do
+      score += @frames[i].score
+      # if previous_frame.spare?
+      #   @score += frame.roll_1
+      # end
     end
 
-    @score
+    score
   end
 end
