@@ -1,2 +1,0 @@
-describe Turn do
-end
