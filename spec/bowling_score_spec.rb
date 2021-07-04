@@ -21,9 +21,11 @@ describe BowlingScore do
     end
   end
 
-  it 'gutters the ball' do
-    bowling.gutter
-    expect(bowling.current_score).to eq(0)
+  context '#gutter'
+    it 'gutters the ball' do
+      bowling.gutter
+      expect(bowling.current_score).to eq(0)
+    end
   end
 
   it 'hit a spare' do
