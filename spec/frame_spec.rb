@@ -11,11 +11,10 @@ describe Frame do
 
   context '#ended?' do
     it 'defaults to false' do
-      expect(subject.ended?).to be false
+      expect(subject).not_to be_ended
     end
 
     it 'can end the frame' do
-      allow(roll).to receive(:pins).and_return(1)
       allow(roll).to receive(:pins).and_return(1)
       subject.add(roll)
       subject.add(roll)
@@ -52,6 +51,16 @@ describe Frame do
       subject.add(roll)
 
       expect(subject.score).to eq 2
+    end
+  end
+
+  context '#spare?' do
+    it 'can identify a spare' do
+      allow(roll).to receive(:pins).and_return(5)
+      subject.add(roll)
+      subject.add(roll)
+
+      expect(subject).to be_spare
     end
   end
 end

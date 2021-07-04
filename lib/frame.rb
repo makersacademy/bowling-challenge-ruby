@@ -23,4 +23,8 @@ class Frame
   def score
     @rolls.map { |roll| roll.pins }.inject(:+)
   end
+
+  def spare?
+    @rolls[0].pins + @rolls[1].pins == 10
+  end
 end
