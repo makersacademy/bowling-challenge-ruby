@@ -1,4 +1,6 @@
 class BowlingScore
+
+  attr_reader :current_score
   def initialize
     @current_score = 0
   end
@@ -7,7 +9,8 @@ class BowlingScore
     @current_score += number
   end
 
-  def current_score
-    @current_score
+  def gutter
+    @current_score += 0
   end
+
 end
