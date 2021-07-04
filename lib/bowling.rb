@@ -3,6 +3,7 @@ class Bowling
 
   def initialize
     @rolls = []
+    @frame_score = []
   end
 
   def frame(roll_one, roll_two = 'strike')
@@ -23,23 +24,27 @@ class Bowling
 
   def score_frame(frame)
     if frame == 9 && @rolls[frame - 1][:first] == 10 # strike in the 9th frame
-      @rolls[frame - 1][:first] + @rolls[frame][:first] + @rolls[frame][:second]
+      @frame_score << @rolls[frame - 1][:first] + @rolls[frame][:first] + @rolls[frame][:second]
     elsif @rolls[frame - 1][:first] == 10 && @rolls[frame][:first] == 10 # strike followed by another strike
-      @rolls[frame - 1][:first] + @rolls[frame][:first] + @rolls[frame + 1][:first]
+      @frame_score << @rolls[frame - 1][:first] + @rolls[frame][:first] + @rolls[frame + 1][:first]
     elsif @rolls[frame - 1][:first] == 10 # strike
-      @rolls[frame - 1][:first] + @rolls[frame][:first] + @rolls[frame][:second]
+      @frame_score << @rolls[frame - 1][:first] + @rolls[frame][:first] + @rolls[frame][:second]
     elsif @rolls[frame - 1][:first] + @rolls[frame - 1][:second] == 10 # spare
-      @rolls[frame - 1][:first] + @rolls[frame - 1][:second] + @rolls[frame][:first]
+      @frame_score << @rolls[frame - 1][:first] + @rolls[frame - 1][:second] + @rolls[frame][:first]
     else
-      @rolls[frame - 1][:first] + @rolls[frame - 1][:second]
+      @frame_score << @rolls[frame - 1][:first] + @rolls[frame - 1][:second]
     end
   end
 
   def score_tenth_frame
     if @rolls[9][:first] + @rolls[9][:second] >= 10
-      @rolls[9][:first] + @rolls[9][:second] + @rolls[9][:third]
+      @frame_score << @rolls[9][:first] + @rolls[9][:second] + @rolls[9][:third]
     else
-      @rolls[9][:first] + @rolls[9][:second]
+      @frame_score << @rolls[9][:first] + @rolls[9][:second]
     end
+  end
+
+  def overall_score
+    @frame_score.reduce(:+)
   end
 end
