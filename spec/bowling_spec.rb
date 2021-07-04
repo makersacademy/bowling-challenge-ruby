@@ -32,5 +32,11 @@ describe Bowling do
     17.times {game.roll(0)}
     expect(game.score).to eq (20)
   end
+
+  it 'can play a perfect game' do
+    game = Bowling.new
+    12.times {game.roll(10)}
+    expect(game.score).to eq (300)
+  end
 end
 
