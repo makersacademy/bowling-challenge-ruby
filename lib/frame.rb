@@ -8,7 +8,7 @@ class Frame
 	end
 
 	def points
-		@roll_1 + @roll_2
+		@points = @roll_1 + @roll_2
 	end
 
 	def spare
@@ -17,5 +17,13 @@ class Frame
 
 	def strike
 		true if @roll_1 == 10
+	end
+
+	def additional_points(extra_1, extra_2)
+		@total = @points + extra_1 + extra_2
+	end
+
+	def total_points
+		spare || strike ? @total : @points
 	end
 end
