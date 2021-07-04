@@ -48,4 +48,9 @@ describe 'bowling' do
     21.times{game.bowl 5}
     expect(game.score).to eq 150
   end
+
+  it 'raise an error if pin_down is more than 10' do
+    game = Game.new
+    expect{game.bowl(11)}.to raise_error "Please enter a score of 10 or below"
+  end
 end

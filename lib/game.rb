@@ -6,6 +6,9 @@ class Game
   end
 
   def bowl(pins_down)
+    if pins_down > 10 
+      raise "Please enter a score of 10 or below"
+    end
     @bowls << pins_down
   end
 
