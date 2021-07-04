@@ -1,23 +1,26 @@
 class Frame
   attr_reader :pins, :rolls
 
-  def initialize()
+  def initialize
     @pins = 10
     @rolls = []
-    @turns_left = 2
+    @ended = false
   end
 
   def ended?
-    false
+    if @rolls.length == 2
+      @ended = true
+    else
+      @ended
+    end
   end
 
   def add(roll = Roll.new(pins))
     @rolls << roll
     @pins -= roll.pins
-    @turns_left -= 1
   end
 
   def score
-    @rolls.map {|roll| roll.pins }.inject(:+)
+    @rolls.map { |roll| roll.pins }.inject(:+)
   end
 end
