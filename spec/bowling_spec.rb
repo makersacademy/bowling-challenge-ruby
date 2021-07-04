@@ -24,3 +24,4 @@ describe Bowling do
     expect(game.score).to eq (15)
   end
 end
+
