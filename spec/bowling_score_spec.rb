@@ -1,3 +1,5 @@
+require 'bowling'
+
 describe BowlingScore do
   it 'hits 5 pins' do
     bowling = BowlingScore.new
