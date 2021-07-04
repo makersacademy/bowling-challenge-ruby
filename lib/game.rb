@@ -7,8 +7,7 @@ class Game
   end
 
   def roll(pins)
-    roll = @roll_class.new
-    roll.pins = pins
+    roll = @roll_class.new(pins)
     @score += roll.pins
   end
 end

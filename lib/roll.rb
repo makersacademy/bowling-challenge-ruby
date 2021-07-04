@@ -1,7 +1,7 @@
 class Roll
-  attr_accessor :pins
+  attr_reader :pins
 
-  def initialize
-    @pins = 0
+  def initialize(pins)
+    @pins = pins
   end
 end
