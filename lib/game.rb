@@ -22,9 +22,10 @@ class Game
     score = 0
     10.times do
       score += @frames[i].score
-      # if previous_frame.spare?
-      #   @score += frame.roll_1
-      # end
+      if @frames[i].spare?
+        score += @frames[i + 1].roll_1
+      end
+      i += 1
     end
 
     score
