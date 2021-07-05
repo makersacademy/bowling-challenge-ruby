@@ -40,6 +40,14 @@ let(:frame_3) {double(id: 10, roll_1: 5, roll_2: 5, spare?: true, strike?: false
 				subject.add(Frame.new(2, 5, 4))
 				expect(subject.total).to eq(24)
 			end
+
+			it 'can add the first roll of the third frame when the first two are strikes' do
+				subject.add(Frame.new(1, 10))
+				subject.add(Frame.new(2, 10))
+				subject.add(Frame.new(3, 5, 3))
+
+				expect(subject.total).to eq(51)
+			end
 		end
 	end
 end

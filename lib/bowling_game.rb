@@ -9,28 +9,17 @@ class BowlingGame
 	end
 	
 	def add(frame)
-		@total += frame.points
-		extra_points(frame) if frame.id != 1 
 		@frames << frame
+		@total += frame.points
+		extra_points(frame) if frame.id != 1
 		result
 	end
 
 	private
 
 	def extra_points(frame)
-		if frame.strike?
-			strike_(frame)
-		else
-			regular_(frame)
-		end
-	end
-
-	def strike_(frame)
-		if previous_(frame).strike?
-			@total += frame.points + next_(frame).roll_1
-		elsif previous_(frame).spare? 
-			@total += frame.roll_1
-		end
+		regular_(frame)
+		@total += frame.roll_1 if frame.id > 2 && previous_2_(frame).strike?
 	end
 
 	def regular_(frame)
@@ -45,8 +34,8 @@ class BowlingGame
 		@frames[frame.id - 2]
 	end
 
-	def next_(frame)
-		@frames[frame.id]
+	def previous_2_(frame)
+		@frames[frame.id - 3]
 	end
 
 	def perfect_game
