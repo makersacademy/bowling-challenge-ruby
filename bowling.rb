@@ -50,20 +50,25 @@ def frame
    
     
    def calc(rolls)
-   score = 0
-   counter = 0
-   while counter < 10
-   if rolls[counter].length == 1 && counter == 8
-    score += rolls[counter].sum + rolls[counter + 1][0] + rolls[counter + 1][1]
-   elsif rolls[counter].length == 1
-    score += rolls[counter].sum + rolls[counter + 1].sum
-   elsif rolls[counter].sum == 10
-    score += rolls[counter].sum + rolls[counter + 1][0]
-   else
-    score += rolls[counter].sum
-   end
-   counter += 1
-   end
-   puts score
-   end
+    score = 0
+    counter = 0
+    while counter < 10
+      if rolls[counter].length == 1 && counter == 8
+        score += rolls[counter].sum + rolls[counter + 1][0] + rolls[counter + 1][1]
+      elsif rolls[counter].length == 1 && rolls[counter + 1].length != 1
+        score += rolls[counter].sum + rolls[counter + 1].sum
+      elsif rolls[counter].length == 1 && rolls[counter + 2].length != 1
+        score += rolls[counter].sum + rolls[counter + 1].sum + rolls[counter + 2][0]
+      elsif rolls[counter].length == 1
+        score += rolls[counter].sum + rolls[counter + 1].sum + rolls[counter + 2].sum
+      elsif rolls[counter].sum == 10
+        score += rolls[counter].sum + rolls[counter + 1][0]
+      else
+        score += rolls[counter].sum
+      end
+      puts score
+      counter += 1
+    end
+    puts score
+  end
    
