@@ -2,13 +2,16 @@ class BowlingScore
   attr_reader :current_score
 
   def initialize
-    @current_score = 0
     @number_of_rolls = 0
+    @current_score = 0
   end
 
   def hit(number)
-    @current_score += number
     @number_of_rolls += 1
+    @current_score += number
+      if @current_score == 10
+        spare
+      end
   end
 
   def gutter
@@ -17,9 +20,7 @@ class BowlingScore
   end
 
   def spare
-    if @current_score == 10
-      'Spare!'
-    end
+    'Spare!'
   end
 
   def number_of_rolls

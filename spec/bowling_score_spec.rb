@@ -40,4 +40,5 @@ describe BowlingScore do
       expect(bowling.number_of_rolls).to eq(2)
     end
   end
+
 end
