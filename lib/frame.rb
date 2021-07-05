@@ -13,11 +13,11 @@ class Frame
 	end
 
 	def spare?
-		@roll_1 + @roll_2 == 10 ? true : false
+		@roll_1 + @roll_2 == 10 
 	end
 
 	def strike?
-		@roll_1 == 10 ? true : false
+		@roll_1 == 10 
 	end
 
 	def rolling?
