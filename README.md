@@ -2,7 +2,7 @@
 Bowling Challenge Ruby - Chuka Okoye-Ahaneku
 ==================
 
-Current score and number or rolls instance variablea added, needs working on spare and frame counting.
+Current score and number or rolls instance variablea added, needs working on spare and frame counting. Currently all RSpec tests pass, need to add feature test as well in the future.
 
 Class model below:
 ![Imgur](https://i.imgur.com/lNoyi9x.png)
