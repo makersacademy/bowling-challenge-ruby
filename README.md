@@ -1,6 +1,9 @@
 Bowling Challenge in Ruby
 =================
 The task for the Makers Academy Week 5 weekend challenge is to write the backend logic for a program that calculates a scorecard for a single player bowling game. The program doesn't simulate a game itself, it operates as a calculator and requires the user to enter in manually the number of pins knocked down each roll.
+
+[ Gif of function in terminal ]
+
 ## Approach
 
 <details>
