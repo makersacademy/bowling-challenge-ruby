@@ -13,6 +13,8 @@
 ### Stage 3 - Frame class
 11. Created frame spec. Expect it to have a score and frame number as default.
 12. Created frame.rb. Inits taking a round as an init arg, and inits with a score.
+13. Created tests that pass rolls to frame, and expect it to change score accordingly
+14. Created frame methods that pass rolls to score (commit 6).
 
 
 

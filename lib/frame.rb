@@ -6,4 +6,12 @@ class Frame
     @round = round
     @score = Score.new
   end
+
+  def first_roll(pins:)
+    @score.first_roll(pins: pins)
+  end
+  
+  def second_roll(pins:)
+    @score.second_roll(pins: pins)
+  end
 end
