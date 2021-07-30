@@ -15,4 +15,9 @@ describe Score do
     expect(subject.spare).to eq(false)
     expect(subject.strike).to eq(false)
   end
+
+  it 'scoring 10 in first round sets strike to true' do
+    subject.first_roll(pins: 10)
+    expect(subject.strike).to eq(true)
+  end
 end

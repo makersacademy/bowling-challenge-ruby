@@ -8,6 +8,7 @@ class Score
   end
 
   def first_roll(pins:)
+    @strike = true if pins == 10
     pins
   end
 
