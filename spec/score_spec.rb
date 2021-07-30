@@ -2,7 +2,8 @@ require 'score'
 
 describe Score do
   it 'accepts a numeric roll' do 
-    expect(subject.first_roll(pins: 5)).to eq(5)
+    subject.first_roll(pins: 5)
+    expect(subject.first_roll_pins).to eq(5)
   end
 
   it 'accepts a second numeric roll' do

@@ -1,11 +1,16 @@
 ## Steps
+### Stage 1 - Prep
 1. Created CRC cards and flow chart (accesible in docs - previews attached later in Readme) 
 2. Created Gemfile. Minimal gem usage - gems targeted for improving code/test quality. RSpec framework installed.
+### Stage 2 - Scoring
 3. Created score spec. Expected that it can receive a numberic roll
-3. Created score.rb that accepts numeric roll. Currently just returns it (commit 1).
-4. Create distinct tests and score for second roll. Changed name of original roll method to reflect second roll (commit 2). 
-5. Created test for score object to init with two roll totals (init to nil) and spare/strike (init to false) (commit 3).
-6. Created test for scoring 10 pins to set strike to true. Added if statement to set strike to true when first_roll ==10.
+4. Created score.rb that accepts numeric roll. Currently just returns it (commit 1).
+5. Create distinct tests and score for second roll. Changed name of original roll method to reflect second roll (commit 2). 
+6. Created test for score object to init with two roll totals (init to nil) and spare/strike (init to false) (commit 3).
+7. Created test for scoring 10 pins in one roll to set strike to true. Added if statement to set strike to true when first_roll ==10.
+8. Created test for scoring 10 pins in two rolls to set spare to true. Added if statement to set spare to true when first roll + second roll ==10 (commit 4).
+9. REFACTOR. To satisfy SRP within the score class, I created distinct methods for spare/strike logic. Test 1 refactored to check instance var first_roll as opposed to pins being returned by method (commit 5).
+
 
 
 Bowling Challenge in Ruby
