@@ -15,6 +15,8 @@
 12. Created frame.rb. Inits taking a round as an init arg, and inits with a score.
 13. Created tests that pass rolls to frame, and expect it to change score accordingly
 14. Created frame methods that pass rolls to score (commit 6).
+## Stage 4 - Game class
+15. 
 
 
 
