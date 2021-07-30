@@ -1,3 +1,12 @@
+## Steps
+1. Created CRC cards and flow chart (accesible in docs - previews attached later in Readme) 
+2. Created Gemfile. Minimal gem usage - gems targeted for improving code/test quality. RSpec framework installed.
+3. Created score spec. Expected that it can receive a numberic roll
+3. Created score.rb that accepts numeric roll. Currently just returns it (commit 1).
+4. Create distinct tests and score for second roll. Changed name of original roll method to reflect second roll (commit 2). 
+
+
+
 Bowling Challenge in Ruby
 =================
 
