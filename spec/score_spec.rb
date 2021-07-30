@@ -6,7 +6,9 @@ describe Score do
   end
 
   it 'accepts a second numeric roll' do
-    expect(subject.second_roll(pins: 5)).to eq(5)
+    subject.first_roll(pins: 5)
+    subject.second_roll(pins: 5)
+    expect(subject.second_roll_pins).to eq(5)
   end
 
   it 'initalizes with scores and strikes set to nil' do
@@ -19,5 +21,11 @@ describe Score do
   it 'scoring 10 in first round sets strike to true' do
     subject.first_roll(pins: 10)
     expect(subject.strike).to eq(true)
+  end
+
+  it 'scoring 10 across two rounds sets spare to true' do
+    subject.first_roll(pins: 5)
+    subject.second_roll(pins: 5)
+    expect(subject.spare).to eq(true)
   end
 end

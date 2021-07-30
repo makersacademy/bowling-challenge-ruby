@@ -9,10 +9,11 @@ class Score
 
   def first_roll(pins:)
     @strike = true if pins == 10
-    pins
+    @first_roll_pins = pins
   end
 
   def second_roll(pins:)
-    pins
+    @second_roll_pins = pins
+    @spare = true if @first_roll_pins + @second_roll_pins == 10
   end
 end

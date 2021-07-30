@@ -5,7 +5,7 @@
 3. Created score.rb that accepts numeric roll. Currently just returns it (commit 1).
 4. Create distinct tests and score for second roll. Changed name of original roll method to reflect second roll (commit 2). 
 5. Created test for score object to init with two roll totals (init to nil) and spare/strike (init to false) (commit 3).
-6. Created test for scoring 10 pins to set strike to true
+6. Created test for scoring 10 pins to set strike to true. Added if statement to set strike to true when first_roll ==10.
 
 
 Bowling Challenge in Ruby
