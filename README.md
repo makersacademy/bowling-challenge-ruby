@@ -4,7 +4,7 @@
 3. Created score spec. Expected that it can receive a numberic roll
 3. Created score.rb that accepts numeric roll. Currently just returns it (commit 1).
 4. Create distinct tests and score for second roll. Changed name of original roll method to reflect second roll (commit 2). 
-
+5. Created test for score object to init with two roll totals (init to nil) and spare/strike (init to false)
 
 
 Bowling Challenge in Ruby

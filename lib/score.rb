@@ -1,4 +1,12 @@
 class Score
+  attr_reader :first_roll_pins, :second_roll_pins, :spare, :strike
+  def initialize
+    @first_roll_pins
+    @second_roll_pins
+    @spare = false
+    @strike = false
+  end
+
   def first_roll(pins:)
     pins
   end
