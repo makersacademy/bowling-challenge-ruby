@@ -5,24 +5,17 @@ class Player
   def initialize(scores = [], sum = 0)
     @scores = scores
     @sum = sum
+    @valid_scores = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   end
 
   def add(score)
-    valid_scores = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    if !valid_scores.include?(score)
-      return 'Please enter a number from 1 to 10'
-    end
+    fail 'Please enter a number from 1 to 10' if !@valid_scores.include?(score)
 
     if @scores.length <= 9
-
       # check if it's the start of the game or frame
       if !@scores.last || @scores.last.length == 2
         # if a strike, move to next frame
-        if score == 10
-          @scores.push([10,0])
-        else
-          @scores.push([score])
-        end
+        score == 10 ? @scores.push([10,0]) : @scores.push([score])
 
         @first_roll = score
       
@@ -36,10 +29,13 @@ class Player
         return scores
       # second roll of frame  
       else
-        valid_second_roll = valid_scores.filter{ |n| n <= (10 - @first_roll) }
+        valid_second_roll = @valid_scores.filter{ |n| n <= (10 - @first_roll) }
         if !(valid_second_roll.include?(score))
           return "Please enter a number from 1 to #{10-@first_roll}"
         end
+        # the line below won't work for some reason despite the other guard clause working
+        # fail "Please enter a number from 1 to #{10-@first_roll}" if !(valid_second_roll.include?(score))
+       
         # push score into frame array
         @scores.last.push(score)
 

@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-07-31T19:16:17+01:00">2021-07-31T19:16:17+01:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-07-31T20:30:50+01:00">2021-07-31T20:30:50+01:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  91.43%
+  91.18%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         8.78
+         8.28
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>105</b> relevant lines,
-    <span class="green"><b>96</b> lines covered</span> and
+    <b>102</b> relevant lines,
+    <span class="green"><b>93</b> lines covered</span> and
     <span class="red"><b>9</b> lines missed. </span>
     (<span class="green">
-  91.43%
+  91.18%
 </span>
 )
   </div>
@@ -83,12 +83,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#ebd30ecba84f347f5cb2d08503898cdde6c6fa07" class="src_link" title="lib/player.rb">lib/player.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">78.57 %</td>
-            <td class="cell--number">88</td>
-            <td class="cell--number">42</td>
-            <td class="cell--number">33</td>
+            <td class="red strong cell--number t-file__coverage">76.92 %</td>
+            <td class="cell--number">84</td>
+            <td class="cell--number">39</td>
+            <td class="cell--number">30</td>
             <td class="cell--number">9</td>
-            <td class="cell--number">19.52</td>
+            <td class="cell--number">19.03</td>
             
           </tr>
         
@@ -106,11 +106,11 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#63f38133dce8914e0d3eebae6446063346be96a6" class="src_link" title="spec/player_spec.rb">spec/player_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">87</td>
+            <td class="cell--number">89</td>
             <td class="cell--number">55</td>
             <td class="cell--number">55</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.71</td>
+            <td class="cell--number">1.73</td>
             
           </tr>
         
@@ -222,7 +222,7 @@
     <h3>lib/player.rb</h3>
     <h4>
       <span class="red">
-  78.57%
+  76.92%
 </span>
 
       lines covered
@@ -231,8 +231,8 @@
     
 
     <div class="t-line-summary">
-      <b>42</b> relevant lines.
-      <span class="green"><b>33</b> lines covered</span> and
+      <b>39</b> relevant lines.
+      <span class="green"><b>30</b> lines covered</span> and
       <span class="red"><b>9</b> lines missed.</span>
     </div>
 
@@ -321,13 +321,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="8">
-            
-            
-
+          <li class="covered" data-hits="13" data-linenumber="8">
+            <span class="hits">13</span>
             
 
-            <code class="ruby">  end</code>
+            
+
+            <code class="ruby">    @valid_scores = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code>
           </li>
         </div>
       
@@ -338,12 +338,23 @@
 
             
 
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="10">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="10">
+          <li class="covered" data-hits="1" data-linenumber="11">
             <span class="hits">1</span>
             
 
@@ -354,51 +365,18 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="60" data-linenumber="11">
-            <span class="hits">60</span>
-            
-
-            
-
-            <code class="ruby">    valid_scores = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code>
-          </li>
-        </div>
-      
-        <div>
           <li class="covered" data-hits="60" data-linenumber="12">
             <span class="hits">60</span>
             
 
             
 
-            <code class="ruby">    if !valid_scores.include?(score)</code>
+            <code class="ruby">    fail &#39;Please enter a number from 1 to 10&#39; if !@valid_scores.include?(score)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="13">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      return &#39;Please enter a number from 1 to 10&#39;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="14">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="15">
+          <li class="never" data-hits="" data-linenumber="13">
             
             
 
@@ -409,7 +387,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="59" data-linenumber="16">
+          <li class="covered" data-hits="59" data-linenumber="14">
             <span class="hits">59</span>
             
 
@@ -420,18 +398,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="17">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="18">
+          <li class="never" data-hits="" data-linenumber="15">
             
             
 
@@ -442,7 +409,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="53" data-linenumber="19">
+          <li class="covered" data-hits="53" data-linenumber="16">
             <span class="hits">53</span>
             
 
@@ -453,7 +420,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="20">
+          <li class="never" data-hits="" data-linenumber="17">
             
             
 
@@ -464,62 +431,18 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="30" data-linenumber="21">
+          <li class="covered" data-hits="30" data-linenumber="18">
             <span class="hits">30</span>
             
 
             
 
-            <code class="ruby">        if score == 10</code>
+            <code class="ruby">        score == 10 ? @scores.push([10,0]) : @scores.push([score])</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="22">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">          @scores.push([10,0])</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="23">
-            
-            
-
-            
-
-            <code class="ruby">        else</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="28" data-linenumber="24">
-            <span class="hits">28</span>
-            
-
-            
-
-            <code class="ruby">          @scores.push([score])</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="25">
-            
-            
-
-            
-
-            <code class="ruby">        end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="26">
+          <li class="never" data-hits="" data-linenumber="19">
             
             
 
@@ -530,7 +453,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="30" data-linenumber="27">
+          <li class="covered" data-hits="30" data-linenumber="20">
             <span class="hits">30</span>
             
 
@@ -541,7 +464,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="28">
+          <li class="never" data-hits="" data-linenumber="21">
             
             
 
@@ -552,7 +475,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="29">
+          <li class="never" data-hits="" data-linenumber="22">
             
             
 
@@ -563,7 +486,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="30" data-linenumber="30">
+          <li class="covered" data-hits="30" data-linenumber="23">
             <span class="hits">30</span>
             
 
@@ -574,7 +497,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="21" data-linenumber="31">
+          <li class="covered" data-hits="21" data-linenumber="24">
             <span class="hits">21</span>
             
 
@@ -585,7 +508,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="32">
+          <li class="never" data-hits="" data-linenumber="25">
             
             
 
@@ -596,7 +519,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="33">
+          <li class="covered" data-hits="2" data-linenumber="26">
             <span class="hits">2</span>
             
 
@@ -607,13 +530,90 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="34">
+          <li class="never" data-hits="" data-linenumber="27">
             
             
 
             
 
             <code class="ruby">          end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="28">
+            
+            
+
+            
+
+            <code class="ruby">        end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="30" data-linenumber="29">
+            <span class="hits">30</span>
+            
+
+            
+
+            <code class="ruby">        return scores</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="30">
+            
+            
+
+            
+
+            <code class="ruby">      # second roll of frame  </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="31">
+            
+            
+
+            
+
+            <code class="ruby">      else</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="253" data-linenumber="32">
+            <span class="hits">253</span>
+            
+
+            
+
+            <code class="ruby">        valid_second_roll = @valid_scores.filter{ |n| n &lt;= (10 - @first_roll) }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="23" data-linenumber="33">
+            <span class="hits">23</span>
+            
+
+            
+
+            <code class="ruby">        if !(valid_second_roll.include?(score))</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="34">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">          return &quot;Please enter a number from 1 to #{10-@first_roll}&quot;</code>
           </li>
         </div>
       
@@ -629,13 +629,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="30" data-linenumber="36">
-            <span class="hits">30</span>
+          <li class="never" data-hits="" data-linenumber="36">
+            
             
 
             
 
-            <code class="ruby">        return scores</code>
+            <code class="ruby">        # the line below won&#39;t work for some reason despite the other guard clause working</code>
           </li>
         </div>
       
@@ -646,7 +646,7 @@
 
             
 
-            <code class="ruby">      # second roll of frame  </code>
+            <code class="ruby">        # fail &quot;Please enter a number from 1 to #{10-@first_roll}&quot; if !(valid_second_roll.include?(score))</code>
           </li>
         </div>
       
@@ -657,56 +657,12 @@
 
             
 
-            <code class="ruby">      else</code>
+            <code class="ruby">       </code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="253" data-linenumber="39">
-            <span class="hits">253</span>
-            
-
-            
-
-            <code class="ruby">        valid_second_roll = valid_scores.filter{ |n| n &lt;= (10 - @first_roll) }</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="23" data-linenumber="40">
-            <span class="hits">23</span>
-            
-
-            
-
-            <code class="ruby">        if !(valid_second_roll.include?(score))</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="41">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">          return &quot;Please enter a number from 1 to #{10-@first_roll}&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="42">
-            
-            
-
-            
-
-            <code class="ruby">        end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="43">
+          <li class="never" data-hits="" data-linenumber="39">
             
             
 
@@ -717,7 +673,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="22" data-linenumber="44">
+          <li class="covered" data-hits="22" data-linenumber="40">
             <span class="hits">22</span>
             
 
@@ -728,7 +684,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="45">
+          <li class="never" data-hits="" data-linenumber="41">
             
             
 
@@ -739,7 +695,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="46">
+          <li class="never" data-hits="" data-linenumber="42">
             
             
 
@@ -750,7 +706,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="22" data-linenumber="47">
+          <li class="covered" data-hits="22" data-linenumber="43">
             <span class="hits">22</span>
             
 
@@ -761,7 +717,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="17" data-linenumber="48">
+          <li class="covered" data-hits="17" data-linenumber="44">
             <span class="hits">17</span>
             
 
@@ -772,7 +728,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="49">
+          <li class="never" data-hits="" data-linenumber="45">
             
             
 
@@ -783,7 +739,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="50">
+          <li class="covered" data-hits="1" data-linenumber="46">
             <span class="hits">1</span>
             
 
@@ -794,7 +750,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="51">
+          <li class="never" data-hits="" data-linenumber="47">
             
             
 
@@ -805,7 +761,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="52">
+          <li class="never" data-hits="" data-linenumber="48">
             
             
 
@@ -816,7 +772,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="22" data-linenumber="53">
+          <li class="covered" data-hits="22" data-linenumber="49">
             <span class="hits">22</span>
             
 
@@ -827,7 +783,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="54">
+          <li class="never" data-hits="" data-linenumber="50">
             
             
 
@@ -838,7 +794,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="55">
+          <li class="never" data-hits="" data-linenumber="51">
             
             
 
@@ -849,7 +805,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="56">
+          <li class="never" data-hits="" data-linenumber="52">
             
             
 
@@ -860,7 +816,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="57">
+          <li class="never" data-hits="" data-linenumber="53">
             
             
 
@@ -871,7 +827,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="6" data-linenumber="58">
+          <li class="covered" data-hits="6" data-linenumber="54">
             <span class="hits">6</span>
             
 
@@ -882,7 +838,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="59">
+          <li class="covered" data-hits="2" data-linenumber="55">
             <span class="hits">2</span>
             
 
@@ -893,7 +849,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="60">
+          <li class="never" data-hits="" data-linenumber="56">
             
             
 
@@ -904,7 +860,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="61">
+          <li class="never" data-hits="" data-linenumber="57">
             
             
 
@@ -915,7 +871,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="62">
+          <li class="never" data-hits="" data-linenumber="58">
             
             
 
@@ -926,7 +882,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="6" data-linenumber="63">
+          <li class="covered" data-hits="6" data-linenumber="59">
             <span class="hits">6</span>
             
 
@@ -937,7 +893,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="6" data-linenumber="64">
+          <li class="covered" data-hits="6" data-linenumber="60">
             <span class="hits">6</span>
             
 
@@ -948,7 +904,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="65">
+          <li class="never" data-hits="" data-linenumber="61">
             
             
 
@@ -959,7 +915,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="66">
+          <li class="never" data-hits="" data-linenumber="62">
             
             
 
@@ -970,7 +926,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="67">
+          <li class="missed" data-hits="0" data-linenumber="63">
             
             
 
@@ -981,7 +937,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="68">
+          <li class="never" data-hits="" data-linenumber="64">
             
             
 
@@ -992,7 +948,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="69">
+          <li class="missed" data-hits="0" data-linenumber="65">
             
             
 
@@ -1003,7 +959,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="70">
+          <li class="never" data-hits="" data-linenumber="66">
             
             
 
@@ -1014,7 +970,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="71">
+          <li class="missed" data-hits="0" data-linenumber="67">
             
             
 
@@ -1025,7 +981,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="72">
+          <li class="missed" data-hits="0" data-linenumber="68">
             
             
 
@@ -1036,7 +992,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="73">
+          <li class="never" data-hits="" data-linenumber="69">
             
             
 
@@ -1047,7 +1003,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="74">
+          <li class="missed" data-hits="0" data-linenumber="70">
             
             
 
@@ -1058,7 +1014,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="75">
+          <li class="missed" data-hits="0" data-linenumber="71">
             
             
 
@@ -1069,7 +1025,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="76">
+          <li class="never" data-hits="" data-linenumber="72">
             
             
 
@@ -1080,7 +1036,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="77">
+          <li class="missed" data-hits="0" data-linenumber="73">
             
             
 
@@ -1091,7 +1047,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="78">
+          <li class="never" data-hits="" data-linenumber="74">
             
             
 
@@ -1102,7 +1058,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="79">
+          <li class="missed" data-hits="0" data-linenumber="75">
             
             
 
@@ -1113,7 +1069,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="80">
+          <li class="missed" data-hits="0" data-linenumber="76">
             
             
 
@@ -1124,7 +1080,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="81">
+          <li class="never" data-hits="" data-linenumber="77">
             
             
 
@@ -1135,13 +1091,57 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="82">
+          <li class="never" data-hits="" data-linenumber="78">
             
             
 
             
 
             <code class="ruby">    end  </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="79">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="80">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="81">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def sum</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="82">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">    @scores.flatten.sum</code>
           </li>
         </div>
       
@@ -1158,50 +1158,6 @@
       
         <div>
           <li class="never" data-hits="" data-linenumber="84">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="85">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  def sum</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="86">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">    @scores.flatten.sum</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="87">
-            
-            
-
-            
-
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="88">
             
             
 
@@ -1604,24 +1560,24 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="23">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="23">
+            
             
 
             
 
-            <code class="ruby">      expect(subject.add(11)).to eq(&#39;Please enter a number from 1 to 10&#39;)</code>
+            <code class="ruby">      # expect(subject.add(11)).to eq(&#39;Please enter a number from 1 to 10&#39;)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="24">
-            
-            
-
+          <li class="covered" data-hits="2" data-linenumber="24">
+            <span class="hits">2</span>
             
 
-            <code class="ruby">    end</code>
+            
+
+            <code class="ruby">      expect{ subject.add(11) }.to raise_error &#39;Please enter a number from 1 to 10&#39;</code>
           </li>
         </div>
       
@@ -1632,18 +1588,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="26">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="26">
+            
             
 
             
 
-            <code class="ruby">    it &#39;only accepts a number from 1 to 10 minus the first roll score for the second roll&#39; do</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -1654,7 +1610,7 @@
 
             
 
-            <code class="ruby">      subject.add(4)</code>
+            <code class="ruby">    it &#39;only accepts a number from 1 to 10 minus the first roll score for the second roll&#39; do</code>
           </li>
         </div>
       
@@ -1665,18 +1621,18 @@
 
             
 
-            <code class="ruby">      expect(subject.add(7)).to eq(&#39;Please enter a number from 1 to 6&#39;)</code>
+            <code class="ruby">      subject.add(4)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="29">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="29">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">    end</code>
+            
+
+            <code class="ruby">      expect(subject.add(7)).to eq(&#39;Please enter a number from 1 to 6&#39;)</code>
           </li>
         </div>
       
@@ -1687,7 +1643,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">      # expect{ subject.add(7) }.to raise_error &#39;Please enter a number from 1 to 6&#39;</code>
           </li>
         </div>
       
@@ -1698,29 +1654,29 @@
 
             
 
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="32">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="32">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="33">
+            
             
 
             
 
-            <code class="ruby">    it &#39;adds a score to the scores array&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="33">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      @score = 5</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -1731,7 +1687,7 @@
 
             
 
-            <code class="ruby">      subject.add(@score)</code>
+            <code class="ruby">    it &#39;adds a score to the scores array&#39; do</code>
           </li>
         </div>
       
@@ -1742,18 +1698,18 @@
 
             
 
-            <code class="ruby">      expect(subject.scores).to eq([[5]])</code>
+            <code class="ruby">      @score = 5</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="36">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="36">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">    end</code>
+            
+
+            <code class="ruby">      subject.add(@score)</code>
           </li>
         </div>
       
@@ -1764,18 +1720,18 @@
 
             
 
-            <code class="ruby">    it &#39;adds both scores of a frame to the score array&#39; do</code>
+            <code class="ruby">      expect(subject.scores).to eq([[5]])</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="38">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="38">
+            
             
 
             
 
-            <code class="ruby">      subject.add(5)</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -1786,7 +1742,7 @@
 
             
 
-            <code class="ruby">      subject.add(4)</code>
+            <code class="ruby">    it &#39;adds both scores of a frame to the score array&#39; do</code>
           </li>
         </div>
       
@@ -1797,45 +1753,12 @@
 
             
 
-            <code class="ruby">      expect(subject.scores).to eq([[5, 4]])</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="41">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="42">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    it &#39;adds a third score in a new array&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="43">
-            <span class="hits">1</span>
-            
-
-            
-
             <code class="ruby">      subject.add(5)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="44">
+          <li class="covered" data-hits="1" data-linenumber="41">
             <span class="hits">1</span>
             
 
@@ -1846,13 +1769,46 @@
         </div>
       
         <div>
+          <li class="covered" data-hits="1" data-linenumber="42">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(subject.scores).to eq([[5, 4]])</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="43">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="44">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;adds a third score in a new array&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
           <li class="covered" data-hits="1" data-linenumber="45">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      subject.add(6)</code>
+            <code class="ruby">      subject.add(5)</code>
           </li>
         </div>
       
@@ -1863,12 +1819,34 @@
 
             
 
+            <code class="ruby">      subject.add(4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="47">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      subject.add(6)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="48">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">      expect(subject.scores).to eq([[5, 4],[6]])</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="47">
+          <li class="never" data-hits="" data-linenumber="49">
             
             
 
@@ -1879,35 +1857,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="48">
+          <li class="never" data-hits="" data-linenumber="50">
             
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="49">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    context &#39;scoring of spares&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="50">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      it &#39;after a spare the next roll is added to the score of the frame with the spare&#39; do</code>
           </li>
         </div>
       
@@ -1918,7 +1874,7 @@
 
             
 
-            <code class="ruby">        subject.add(5)</code>
+            <code class="ruby">    context &#39;scoring of spares&#39; do</code>
           </li>
         </div>
       
@@ -1929,7 +1885,7 @@
 
             
 
-            <code class="ruby">        subject.add(5)</code>
+            <code class="ruby">      it &#39;after a spare the next roll is added to the score of the frame with the spare&#39; do</code>
           </li>
         </div>
       
@@ -1940,7 +1896,7 @@
 
             
 
-            <code class="ruby">        subject.add(6)</code>
+            <code class="ruby">        subject.add(5)</code>
           </li>
         </div>
       
@@ -1951,29 +1907,29 @@
 
             
 
+            <code class="ruby">        subject.add(5)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="55">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        subject.add(6)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="56">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">        expect(subject.scores).to eq([[5,11],[6]])</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="55">
-            
-            
-
-            
-
-            <code class="ruby">      end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="56">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -1984,29 +1940,29 @@
 
             
 
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="58">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="59">
+            
+            
+
+            
+
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="58">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    context &#39;strikes&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="59">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      it &#39;skips the next roll of the frame&#39; do</code>
           </li>
         </div>
       
@@ -2017,7 +1973,7 @@
 
             
 
-            <code class="ruby">        subject.add(10)</code>
+            <code class="ruby">    context &#39;strikes&#39; do</code>
           </li>
         </div>
       
@@ -2028,18 +1984,18 @@
 
             
 
-            <code class="ruby">        expect(subject.scores).to eq([[10, 0]])</code>
+            <code class="ruby">      it &#39;skips the next roll of the frame&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="62">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="62">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">      end</code>
+            
+
+            <code class="ruby">        subject.add(10)</code>
           </li>
         </div>
       
@@ -2050,18 +2006,18 @@
 
             
 
-            <code class="ruby">      it &#39;after a strike the next two rolls are added to the score of the frame with the spare&#39; do</code>
+            <code class="ruby">        expect(subject.scores).to eq([[10, 0]])</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="64">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="64">
+            
             
 
             
 
-            <code class="ruby">        subject.add(10)</code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
@@ -2072,7 +2028,7 @@
 
             
 
-            <code class="ruby">        subject.add(5)</code>
+            <code class="ruby">      it &#39;after a strike the next two rolls are added to the score of the frame with the spare&#39; do</code>
           </li>
         </div>
       
@@ -2083,7 +2039,7 @@
 
             
 
-            <code class="ruby">        subject.add(3)</code>
+            <code class="ruby">        subject.add(10)</code>
           </li>
         </div>
       
@@ -2094,29 +2050,29 @@
 
             
 
+            <code class="ruby">        subject.add(5)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="68">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        subject.add(3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="69">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">        expect(subject.scores).to eq([[10, 8],[5, 3]])</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="68">
-            
-            
-
-            
-
-            <code class="ruby">      end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="69">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -2127,166 +2083,12 @@
 
             
 
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="71">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    context &#39;ending the game&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="72">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      it &#39;while not getting spares or strikes, will not let you add a score after frame 10 is finished&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="21" data-linenumber="73">
-            <span class="hits">21</span>
-            
-
-            
-
-            <code class="ruby">        20.times {subject.add(3)}</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="74">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        subject.add(3)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="75">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        expect(subject.add(3)).to eq(&quot;The game has finished&quot;)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="76">
-            
-            
-
-            
-
             <code class="ruby">      end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="77">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="78">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      it &#39;after a strike or spare in frame 10, will not let you add a score after frame 10 is finished&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="20" data-linenumber="79">
-            <span class="hits">20</span>
-            
-
-            
-
-            <code class="ruby">        19.times {subject.add(3)}</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="80">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        subject.add(10)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="81">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        subject.add(3)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="82">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="83">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        expect(subject.add(3)).to eq(&quot;The game has finished&quot;)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="84">
-            
-            
-
-            
-
-            <code class="ruby">      end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="85">
+          <li class="never" data-hits="" data-linenumber="71">
             
             
 
@@ -2297,7 +2099,183 @@
         </div>
       
         <div>
+          <li class="never" data-hits="" data-linenumber="72">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="73">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    context &#39;ending the game&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="74">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      it &#39;while not getting spares or strikes, will not let you add a score after frame 10 is finished&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="21" data-linenumber="75">
+            <span class="hits">21</span>
+            
+
+            
+
+            <code class="ruby">        20.times {subject.add(3)}</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="76">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        subject.add(3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="77">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        expect(subject.add(3)).to eq(&quot;The game has finished&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="78">
+            
+            
+
+            
+
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="79">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="80">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      it &#39;after a strike or spare in frame 10, will not let you add a score after frame 10 is finished&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="20" data-linenumber="81">
+            <span class="hits">20</span>
+            
+
+            
+
+            <code class="ruby">        19.times {subject.add(3)}</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="82">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        subject.add(10)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="83">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        subject.add(3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="84">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="85">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        expect(subject.add(3)).to eq(&quot;The game has finished&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
           <li class="never" data-hits="" data-linenumber="86">
+            
+            
+
+            
+
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="87">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="88">
             
             
 
@@ -2308,7 +2286,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="87">
+          <li class="never" data-hits="" data-linenumber="89">
             
             
 
