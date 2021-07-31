@@ -4,11 +4,13 @@ class Game
   attr_reader :current_frame_obj, :current_frame_num, :all_frames
   def initialize
     @current_frame_obj
-    @current_frame_num = 1
+    @current_frame_num
     @all_frames = []
+    @total_score
   end
 
   def start_game
+    @current_frame_num = 1
     @current_frame_obj = Frame.new(round: @current_frame_num)
   end
 
@@ -36,6 +38,12 @@ class Game
     end_game if @current_frame_num == 10
     @current_frame_num += 1
     @current_frame_obj = Frame.new(round: @current_frame_num)
+  end
+
+  def total_score
+    @total_score = 0
+    all_frames.each { |frame| @total_score += frame.calculate_score }
+    @total_score
   end
 
   def end_game

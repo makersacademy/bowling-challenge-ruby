@@ -19,8 +19,8 @@ describe Game do
       expect(subject.all_frames).to eq([])
     end
 
-    it 'inits with an empty array of all frames' do
-      expect(subject.current_frame_num).to eq(1)
+    it 'inits with no frame num' do
+      expect(subject.current_frame_num).to eq(nil)
     end
   end
 
@@ -47,7 +47,8 @@ describe Game do
       expect(subject.first_roll_input).to eq(5)
     end
 
-    it 'is expected to record score normally without strike' do 
+    it 'is expected to record score normally without strike' do
+      subject.start_game
       roll_an_eight
       expect(subject.all_frames[0].calculate_score).to eq(8) 
     end
@@ -55,7 +56,17 @@ describe Game do
 
   describe '#end_game' do
     it 'is expected to be called at the end of the 10th round' do
+      subject.start_game
       expect{ 10.times { roll_an_eight }}.to output("Game over! Your total score is:\n").to_stdout
+    end
+  end
+
+  describe '#total_score' do
+    it 'totals the score across two rounds' do
+      subject.start_game
+      roll_an_eight
+      roll_an_eight
+      expect(subject.total_score).to eq(16)
     end
   end
 
