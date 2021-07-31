@@ -26,8 +26,9 @@ describe Player do
 
     it 'only accepts a number from 1 to 10 minus the first roll score for the second roll' do
       subject.add(4)
-      expect(subject.add(7)).to eq('Please enter a number from 1 to 6')
-      # expect{ subject.add(7) }.to raise_error 'Please enter a number from 1 to 6'
+      # expect(subject.add(7)).to eq('Please enter a number from 1 to 6')
+      # the line below won't work for some reason despite the other guard clause working
+      expect{ subject.add(7) }.to raise_error "Please enter a number from 1 to 6"
     end
 
 

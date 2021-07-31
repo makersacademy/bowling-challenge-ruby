@@ -30,11 +30,7 @@ class Player
       # second roll of frame  
       else
         valid_second_roll = @valid_scores.filter{ |n| n <= (10 - @first_roll) }
-        if !(valid_second_roll.include?(score))
-          return "Please enter a number from 1 to #{10-@first_roll}"
-        end
-        # the line below won't work for some reason despite the other guard clause working
-        # fail "Please enter a number from 1 to #{10-@first_roll}" if !(valid_second_roll.include?(score))
+        fail "Please enter a number from 1 to #{10-@first_roll}" if !(valid_second_roll.include?(score))
        
         # push score into frame array
         @scores.last.push(score)
