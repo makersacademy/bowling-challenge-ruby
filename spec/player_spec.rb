@@ -8,7 +8,7 @@ describe Player do
   end
 
   describe '#sum' do
-    xit 'starts with a sum of 0' do
+    it 'starts with a sum of 0' do
       expect(subject.sum).to eq(0)
     end
 
@@ -19,7 +19,12 @@ describe Player do
   end
 
   describe '#add' do
-    it 'adds a score to the score array' do
+    it 'only accepts a number between 1 and 10 for the first roll' do
+      expect(subject.add(11)).to eq('Please enter a number from 1 to 10')
+    end
+
+
+    it 'adds a score to the scores array' do
       @score = 5
       subject.add(@score)
       expect(subject.scores).to eq([[5]])
@@ -37,11 +42,24 @@ describe Player do
     end
 
     context 'scoring of spares' do
-      it 'adds the score of the next roll to the spare' do
+      it 'after a spare the next roll is added to the score of the frame with the spare' do
         subject.add(5)
         subject.add(5)
         subject.add(6)
         expect(subject.scores).to eq([[5,11],[6]])
+      end
+    end
+
+    context 'strikes' do
+      it 'skips the next roll of the frame' do
+        subject.add(10)
+        expect(subject.scores).to eq([[10, 0]])
+      end
+      it 'after a strike the next two rolls are added to the score of the frame with the spare' do
+        subject.add(10)
+        subject.add(5)
+        subject.add(3)
+        expect(subject.scores).to eq([[10, 8],[5, 3]])
       end
     end
 
@@ -61,12 +79,4 @@ describe Player do
       end
     end
   end
-
-  context 'strikes' do
-    it 'skips the next roll of the frame' do
-    subject.add(10)
-    expect(subject.scores).to eq([[10, 0]])
-    end
-  end
-
 end

@@ -8,6 +8,11 @@ class Player
   end
 
   def add(score)
+    valid_scores = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    if !valid_scores.include?(score)
+      return 'Please enter a number from 1 to 10'
+    end
+
     if @scores.length <= 9
 
       # check if it's the start of the game or frame
