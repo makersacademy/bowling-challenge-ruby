@@ -23,6 +23,11 @@ describe Player do
       expect(subject.add(11)).to eq('Please enter a number from 1 to 10')
     end
 
+    it 'only accepts a number from 1 to 10 minus the first roll score for the second roll' do
+      subject.add(4)
+      expect(subject.add(7)).to eq('Please enter a number from 1 to 6')
+    end
+
 
     it 'adds a score to the scores array' do
       @score = 5
