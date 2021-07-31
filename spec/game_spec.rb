@@ -50,7 +50,7 @@ describe Game do
     it 'is expected to record score normally without strike' do
       subject.start_game
       roll_an_eight
-      expect(subject.all_frames[0].calculate_score).to eq(8) 
+      expect(subject.all_frames[0].calculate_score('normal')).to eq(8) 
     end
   end
 
@@ -63,11 +63,19 @@ describe Game do
   end
 
   describe '#total_score' do
-    it 'totals the score across two rounds' do
+    it 'totals the score across two rounds with non/strike/spare rolls' do
       subject.start_game
       roll_an_eight
       roll_an_eight
       expect(subject.total_score).to eq(16)
+    end
+
+    it 'totals the score across two rounds when the first round is a spare' do
+      subject.start_game
+      roll_a_spare
+      roll_an_eight
+      expect(subject.all_frames[0].calculate_score).to eq(14)
+      expect(subject.total_score).to eq(22)
     end
   end
 

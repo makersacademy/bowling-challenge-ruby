@@ -35,12 +35,11 @@ class Game
   def end_frame
     store_frame
     return if check_if_end
-    puts "That's the end of Frame #{@current_frame_num}, you scored #{current_frame_obj.calculate_score}, your total score is #{total_score}"
+    puts "That's the end of Frame #{@current_frame_num}, you scored #{current_frame_obj.calculate_score('normal')}, your total score is #{total_score}"
     next_frame
   end
 
   def store_frame
-    @current_frame_obj.calculate_score
     @all_frames << @current_frame_obj
   end
 
@@ -56,7 +55,15 @@ class Game
 
   def total_score
     @total_score = 0
-    all_frames.each { |frame| @total_score += frame.calculate_score }
+    all_frames.each_with_index do |frame, index|
+      if index == 0
+        @total_score += frame.calculate_score('normal')
+      elsif all_frames[index - 1].score.spare
+        @total_score += frame.calculate_score('spare')
+      else
+        @total_score += frame.calculate_score('normal')
+      end
+    end
     @total_score
   end
 

@@ -1,5 +1,6 @@
 class Score
   attr_reader :first_roll_pins, :second_roll_pins, :spare, :strike
+  attr_accessor :score
   def initialize
     @first_roll_pins
     @second_roll_pins
@@ -26,8 +27,16 @@ class Score
     @spare = true if @first_roll_pins + @second_roll_pins == 10
   end
 
-  def calculate_score
+  def calculate_normal_score
     !@spare && !@strike ?
     @score = @first_roll_pins + @second_roll_pins : @score = 0
+  end
+
+  def calculate_spare_score
+    @score = @first_roll_pins
+  end
+
+  def calculate_strike_score
+
   end
 end

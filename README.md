@@ -32,6 +32,11 @@
 28. Created a test that made two rolls (non-strike) and expected game to know the score. Created game method that looks at array of past frames, and uses the inbuilt frame method to calculate total score and plot on a game instance var (commit 12).
 29. Added additional messaging output to signpost end of frame to user (commit 13).
 30. REFACTOR: Created 3 new methods to create smalller methods in game class (due to SRP) (commit 14).
+## Striking out - returning to Frame & Score
+31. Changed the name of calculate_score in Score to calculate_normal_score in anticipation of alternative ways of calculating scores. Created calculate_strike_score and calculate_spare_score (empty methods).
+32. Created a helper method for rolling a spare, and a helper method for rolling a strike.
+33. Created a game test where it expects game to pass to Frame whether the last round was a strike.
+
 
 Bowling Challenge in Ruby
 =================

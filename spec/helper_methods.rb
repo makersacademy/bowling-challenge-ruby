@@ -3,3 +3,13 @@ def roll_an_eight
   subject.second_roll(pins: subject.second_roll_input)
   subject.end_frame
 end
+
+def roll_a_spare
+  subject.first_roll(pins: 6)
+  subject.second_roll(pins: 4)
+  subject.end_frame
+end
+
+def roll_a_strike
+
+end
