@@ -14,12 +14,17 @@ class Scorecard
     if no_rolls_in_frame
       @scorecard[@frame] = [number] 
       @frame += 1 if number == 10
+      # add a bit about if you get a strike and roll before was a spare/strike then double it
     elsif first_roll_done 
       @scorecard[@frame] << number
+      if (@scorecard.length > 1) && previous_roll_10?
+        @score += @scorecard[@frame].sum
+      end
       @frame += 1
     end
     @score += number
   end
+
 
   def print_scorecard
     @scorecard.each { |k, v| puts "Frame #{k} => Roll 1: #{v[0]}, Roll 2: #{v[1]}" }
@@ -40,4 +45,10 @@ class Scorecard
     @scorecard[@frame].join.to_i
   end
 
+  def previous_roll_10?
+    @scorecard[@frame - 1].sum == 10
+  end
+
 end
+
+

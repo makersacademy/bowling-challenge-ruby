@@ -40,6 +40,12 @@ describe Scorecard do
       subject.roll(10)
       expect(subject.frame).to eq 2
     end
+    it 'will double the score if person has got a strike/spare in the previous go' do
+      subject.roll(10)
+      subject.roll(2)
+      subject.roll(3)
+      expect(subject.score).to eq 20
+    end
   end
 
   describe '#print_scorecard' do
@@ -47,6 +53,13 @@ describe Scorecard do
       subject.roll(3)
       subject.roll(7)
       expect { subject.print_scorecard }.to output("Frame 1 => Roll 1: 3, Roll 2: 7\nTotal score: 10\n").to_stdout
+    end
+    it 'deals with strikes and being in the middle of a frame by not printing a score' do
+      subject.roll(3)
+      subject.roll(4)
+      subject.roll(10)
+      subject.roll(4)
+      expect { subject.print_scorecard }.to output("Frame 1 => Roll 1: 3, Roll 2: 4\nFrame 2 => Roll 1: 10, Roll 2: \nFrame 3 => Roll 1: 4, Roll 2: \nTotal score: 21\n").to_stdout
     end
   end
 end
