@@ -15,7 +15,7 @@
 12. Created frame.rb. Inits taking a round as an init arg, and inits with a score.
 13. Created tests that pass rolls to frame, and expect it to change score accordingly
 14. Created frame methods that pass rolls to score (commit 6).
-## Stage 4 - Game class
+### Stage 4 - Game class
 15. Created game class spec with empty test.
 16. Created game class to satisft empty test.
 17. Added test that checks game class initis with current frame (nil expectation) and all frames (empty array expectation).
@@ -32,7 +32,7 @@
 28. Created a test that made two rolls (non-strike) and expected game to know the score. Created game method that looks at array of past frames, and uses the inbuilt frame method to calculate total score and plot on a game instance var (commit 12).
 29. Added additional messaging output to signpost end of frame to user (commit 13).
 30. REFACTOR: Created 3 new methods to create smalller methods in game class (due to SRP) (commit 14).
-## Striking out - returning to Frame & Score
+### Stage 5 - Sparing and Striking out - returning to Frame & Score
 31. Changed the name of calculate_score in Score to calculate_normal_score in anticipation of alternative ways of calculating scores. Created calculate_strike_score and calculate_spare_score (empty methods).
 32. Created a helper method for rolling a spare, and a helper method for rolling a strike.
 33. Created a game test where it expects game to pass to Frame whether the last round was a strike.
@@ -40,10 +40,14 @@
 35. Changed scoring to know whether previous round was a spare.
 36. Changed scoring to add bonus for spare.
 37. Changed scoring to add bonus for strike.
-## PANIC at the bowling alley! Big refactor
+### Stage 6 - PANIC at the bowling alley! Big refactor
 38. Realised that strike and spare bonuses should be added to PRIOR rounds, meaning my current method of adding bonus to round score was incorrect. Would have to add it to prior score - though would need an overhaul of scoring to allow for this, as frame scores weren't exposed. 
-39. Fixed tests for scoring in game spec, by changing numbers to expect right amounts - and changed their expect subject to track the previous roll scores in the old scores array.
-40. Changed logic to target new scoring mechanism - added a conditional to scoring total, where if the prior round was a spare, the current round would go back into the array of past scores and edit using first roll (commit 15).
+39. Fixed tests for scoring in game spec, by changing numbers to expect right amounts - and changed their expect subject to track the previous roll scores in the old scores array (commit 15)
+40. Changed logic to target new scoring mechanism - added a conditional to scoring total, where if the prior round was a spare, the current round would go back into the array of past scores and edit using first roll (commit 16).
+41. Copied strike to logic to spares with a few tweaks. Strike works with full functionality (commit 17).
+### Stage 7 - Being really good at Bowling - last round strikes and spares
+42. Created a test that played out 10 rounds - scoring a spare on the 10th round. Test expects game to be ongoing if 10th round is spare. 
+
 
 
 Bowling Challenge in Ruby

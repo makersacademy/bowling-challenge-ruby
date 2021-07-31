@@ -60,6 +60,11 @@ describe Game do
       9.times { roll_an_eight}
       expect{ roll_an_eight }.to output("Game over! Your total score is:\n").to_stdout
     end
+
+    
+    it 'is always expected to activate on the 11th round' do 
+
+    end 
   end
 
   describe '#total_score' do
