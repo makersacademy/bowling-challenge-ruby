@@ -27,6 +27,7 @@
 23. Created test that checks end_frame creates a new frame obj that is distinct from old one, pushes old one into array of old frames, and changes frame num. Created relevant method (commit 9).
 24. Created test that checks user input. Created test that rolls a non-strike, then stores the old frame with a completed score in array.
 25. Created methods for above. Created stub that mocks a roll of a non strike across two rolls to pass tests (commit 10).
+26. Created a test that expects game end message after 10 frames. Created end game method, which is called during end frame if frame num == 10 (commit 11). 
 
 
 Bowling Challenge in Ruby

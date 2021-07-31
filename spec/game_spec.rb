@@ -1,4 +1,5 @@
 require 'game'
+require 'helper_methods'
 
 describe Game do
   before (:each) do
@@ -47,12 +48,17 @@ describe Game do
     end
 
     it 'is expected to record score normally without strike' do 
-      subject.start_game
-      subject.first_roll(pins: subject.first_roll_input)
-      subject.second_roll(pins: subject.second_roll_input)
-      subject.end_frame
+      roll_an_eight
       expect(subject.all_frames[0].calculate_score).to eq(8) 
     end
   end
+
+  describe '#end_game' do
+    it 'is expected to be called at the end of the 10th round' do
+      expect{ 10.times { roll_an_eight }}.to output("Game over! Your total score is:\n").to_stdout
+    end
+  end
+
+
   
 end

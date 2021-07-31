@@ -33,7 +33,12 @@ class Game
   def end_frame
     @current_frame_obj.calculate_score
     @all_frames << @current_frame_obj
+    end_game if @current_frame_num == 10
     @current_frame_num += 1
     @current_frame_obj = Frame.new(round: @current_frame_num)
+  end
+
+  def end_game
+    puts 'Game over! Your total score is:'
   end
 end
