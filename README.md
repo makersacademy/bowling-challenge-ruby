@@ -16,7 +16,10 @@
 13. Created tests that pass rolls to frame, and expect it to change score accordingly
 14. Created frame methods that pass rolls to score (commit 6).
 ## Stage 4 - Game class
-15. 
+15. Created game class spec with empty test.
+16. Created game class to satisft empty test.
+17. Added test that checks game class initis with current frame (nil expectation) and all frames (empty array expectation).
+18. Added instance variables to game class, enabling it to pass step 17. tests (commit 7). 
 
 
 
