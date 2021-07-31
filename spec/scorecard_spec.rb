@@ -33,4 +33,12 @@ describe Scorecard do
       expect(subject.scorecard).to eq({ 1 => [3, 7] })
     end
   end
+
+  describe '#print_scorecard' do
+    it 'prints current scorecard' do
+      subject.roll(3)
+      subject.roll(7)
+      expect { subject.print_scorecard }.to output("Frame 1 => Roll 1: 3, Roll 2: 7\nTotal score: 10\n").to_stdout
+    end
+  end
 end

@@ -19,4 +19,10 @@ class Scorecard
 
     @frame += 0.5
   end
+
+
+  def print_scorecard
+    @scorecard.each { |k, v| puts "Frame #{k} => Roll 1: #{v[0]}, Roll 2: #{v[1]}" }
+    puts "Total score: #{@score}"
+  end
 end
