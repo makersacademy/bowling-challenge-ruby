@@ -53,6 +53,12 @@ describe Scorecard do
       subject.roll(3)
       expect(subject.score).to eq 17
     end
+    it 'will double the score if you get one strike after another' do
+      subject.roll(10)
+      subject.roll(10)
+      subject.roll(10)
+      expect(subject.score).to eq 50
+    end
   end
 
   describe '#print_scorecard' do

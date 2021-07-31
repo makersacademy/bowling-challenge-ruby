@@ -13,6 +13,7 @@ class Scorecard
 
     if no_rolls_in_frame
       @scorecard[@frame] = [number] 
+      @score += 10 if (@scorecard.length > 1) && (strike? || spare?) && number == 10
       @frame += 1 if number == 10
       # add a bit about if you get a strike and roll before was a spare/strike then double it
     elsif first_roll_done
@@ -47,7 +48,7 @@ class Scorecard
   end
 
   def strike?
-    @scorecard[@frame - 1].length == 1 && @scorecard[@frame - 1].sum == 10
+    @scorecard[@frame - 1].length == 1 && @scorecard[@frame - 1][0] == 10
   end
 
   def spare?
