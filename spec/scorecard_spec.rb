@@ -32,6 +32,10 @@ describe Scorecard do
       subject.roll(7)
       expect(subject.scorecard).to eq({ 1 => [3, 7] })
     end
+    it 'raises error if second roll adds up to more than 10' do
+      subject.roll(8)
+      expect { subject.roll(4) }.to raise_error 'This score is invalid'
+    end
   end
 
   describe '#print_scorecard' do

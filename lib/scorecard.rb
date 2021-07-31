@@ -9,7 +9,11 @@ class Scorecard
   end
 
   def roll(number)
-    raise 'This score is invalid' if number > 10
+    if number > 10 || !(first_roll) && ((first_roll_score + number) > 10)
+      raise 'This score is invalid'
+    end
+    # find out if frame is empty and if it is not then check it the number
+    # plus what is already in it add up to more than 10
     @score += number
     if @scorecard[@frame.floor].nil?
       @scorecard[@frame.floor] = [number]   
@@ -20,6 +24,13 @@ class Scorecard
     @frame += 0.5
   end
 
+  def first_roll
+    @scorecard[@frame.floor].nil?
+  end
+
+  def first_roll_score
+    @scorecard[@frame.floor].join.to_i
+  end
 
   def print_scorecard
     @scorecard.each { |k, v| puts "Frame #{k} => Roll 1: #{v[0]}, Roll 2: #{v[1]}" }
