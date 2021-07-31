@@ -57,7 +57,8 @@ describe Game do
   describe '#end_game' do
     it 'is expected to be called at the end of the 10th round' do
       subject.start_game
-      expect{ 10.times { roll_an_eight }}.to output("Game over! Your total score is:\n").to_stdout
+      9.times { roll_an_eight}
+      expect{ roll_an_eight }.to output("Game over! Your total score is:\n").to_stdout
     end
   end
 

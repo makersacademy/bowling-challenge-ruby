@@ -36,6 +36,8 @@ class Game
     @current_frame_obj.calculate_score
     @all_frames << @current_frame_obj
     end_game if @current_frame_num == 10
+    return if @current_frame_num == 10
+    puts "That's the end of Frame #{@current_frame_num}, you scored #{current_frame_obj.calculate_score}, your total score is #{total_score}"
     @current_frame_num += 1
     @current_frame_obj = Frame.new(round: @current_frame_num)
   end

@@ -27,6 +27,7 @@ class Score
   end
 
   def calculate_score
-    @score = @first_roll_pins + @second_roll_pins if !@spare && !@strike
+    !@spare && !@strike ?
+    @score = @first_roll_pins + @second_roll_pins : @score = 0
   end
 end
