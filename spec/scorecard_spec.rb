@@ -36,6 +36,10 @@ describe Scorecard do
       subject.roll(8)
       expect { subject.roll(4) }.to raise_error 'This score is invalid'
     end
+    it 'will skip to next frame given a strike' do
+      subject.roll(10)
+      expect(subject.frame).to eq 2
+    end
   end
 
   describe '#print_scorecard' do
