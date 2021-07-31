@@ -1,12 +1,14 @@
 require_relative 'score'
 
 class Frame
-  attr_reader :score, :round
+  attr_reader :score, :round, :spare, :strike
   attr_accessor :frame_score
   def initialize(round:)
     @round = round
     @score = Score.new
-    @framescore
+    @frame_score
+    @spare = @score.spare
+    @strike = @score.strike
   end
 
   def first_roll(pins:)
@@ -17,14 +19,7 @@ class Frame
     @score.second_roll(pins: pins)
   end
 
-  def calculate_score(type)
-    case type
-    when 'strike'
-       @score.calculate_strike_score
-    when 'spare'
-       @score.calculate_spare_score
-    when 'normal'
-      @score.calculate_normal_score
-    end
+  def calculate_score
+      @frame_score = @score.calculate_score
   end
 end

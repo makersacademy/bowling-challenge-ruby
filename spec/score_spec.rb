@@ -27,6 +27,7 @@ describe Score do
   it 'scoring 10 across two rounds sets spare to true' do
     subject.first_roll(pins: 5)
     subject.second_roll(pins: 5)
+    expect(subject.first_roll_pins).to eq(5)
     expect(subject.spare).to eq(true)
   end
 end

@@ -50,7 +50,7 @@ describe Game do
     it 'is expected to record score normally without strike' do
       subject.start_game
       roll_an_eight
-      expect(subject.all_frames[0].calculate_score('normal')).to eq(8) 
+      expect(subject.all_frames[0].calculate_score).to eq(8)
     end
   end
 
@@ -74,8 +74,8 @@ describe Game do
       subject.start_game
       roll_a_spare
       roll_an_eight
-      expect(subject.all_frames[0].calculate_score).to eq(14)
-      expect(subject.total_score).to eq(22)
+      expect(subject.total_scores[0]).to eq(15)
+      expect(subject.total_score).to eq(23)
     end
   end
 

@@ -36,6 +36,14 @@
 31. Changed the name of calculate_score in Score to calculate_normal_score in anticipation of alternative ways of calculating scores. Created calculate_strike_score and calculate_spare_score (empty methods).
 32. Created a helper method for rolling a spare, and a helper method for rolling a strike.
 33. Created a game test where it expects game to pass to Frame whether the last round was a strike.
+34. Changed scoring to know whether previous round was a strike using index.
+35. Changed scoring to know whether previous round was a spare.
+36. Changed scoring to add bonus for spare.
+37. Changed scoring to add bonus for strike.
+## PANIC at the bowling alley! Big refactor
+38. Realised that strike and spare bonuses should be added to PRIOR rounds, meaning my current method of adding bonus to round score was incorrect. Would have to add it to prior score - though would need an overhaul of scoring to allow for this, as frame scores weren't exposed. 
+39. Fixed tests for scoring in game spec, by changing numbers to expect right amounts - and changed their expect subject to track the previous roll scores in the old scores array.
+40. Changed logic to target new scoring mechanism - added a conditional to scoring total, where if the prior round was a spare, the current round would go back into the array of past scores and edit using first roll (commit 15).
 
 
 Bowling Challenge in Ruby

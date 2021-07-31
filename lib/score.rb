@@ -27,16 +27,8 @@ class Score
     @spare = true if @first_roll_pins + @second_roll_pins == 10
   end
 
-  def calculate_normal_score
+  def calculate_score
     !@spare && !@strike ?
     @score = @first_roll_pins + @second_roll_pins : @score = 0
-  end
-
-  def calculate_spare_score
-    @score = @first_roll_pins
-  end
-
-  def calculate_strike_score
-
   end
 end
