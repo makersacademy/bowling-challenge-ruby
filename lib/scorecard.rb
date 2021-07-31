@@ -9,21 +9,11 @@ class Scorecard
   end
 
   def roll(number)
-    raise 'This score is invalid' if number > 10 || !no_rolls_in_frame && ((first_roll_score + number) > 10)
+    error_if_invalid_num(number)
 
-    if no_rolls_in_frame
-      @scorecard[@frame] = [number] 
-      @score += 10 if (@scorecard.length > 1) && (strike? || spare?) && number == 10
-      @frame += 1 if number == 10
-      # add a bit about if you get a strike and roll before was a spare/strike then double it
-    elsif first_roll_done
-      @scorecard[@frame] << number
-      if (@scorecard.length > 1) && strike?
-        @score += @scorecard[@frame].sum
-      elsif (@scorecard.length > 1) && spare?
-        @score += @scorecard[@frame][0]
-      end
-      @frame += 1
+    case roll_number
+    when 1 then roll_1_procedure(number)
+    when 2 then roll_2_procedure(number)
     end
     @score += number
   end
@@ -35,12 +25,24 @@ class Scorecard
 
   private
 
-  def no_rolls_in_frame
-    @scorecard[@frame].nil?
+  def roll_number
+    @scorecard[@frame].nil? ? 1 : 2
   end
 
-  def first_roll_done
-    @scorecard[@frame].length == 1
+  def roll_1_procedure(number)
+    @scorecard[@frame] = [number] 
+    @score += 10 if beyond_first_frame && (strike? || spare?) && number == 10
+    @frame += 1 if number == 10
+  end
+
+  def roll_2_procedure(number)
+    @scorecard[@frame] << number
+    if beyond_first_frame && strike?
+      @score += @scorecard[@frame].sum
+    elsif beyond_first_frame && spare?
+      @score += @scorecard[@frame][0]
+    end
+    @frame += 1
   end
 
   def first_roll_score
@@ -55,6 +57,12 @@ class Scorecard
     @scorecard[@frame - 1].length == 2 && @scorecard[@frame - 1].sum == 10
   end
 
+  def error_if_invalid_num(number)
+    raise 'This score is invalid' if number > 10 || roll_number == 2 && ((first_roll_score + number) > 10)
+  end
+
+  def beyond_first_frame
+    (@scorecard.length > 1)
+  end
+
 end
-
-
