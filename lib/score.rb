@@ -24,7 +24,7 @@ class Score
   end
 
   def determine_spare
-    @spare = true if @first_roll_pins + @second_roll_pins == 10
+    @spare = true if @first_roll_pins + @second_roll_pins == 10 && @strike == false
   end
 
   def calculate_score

@@ -11,5 +11,7 @@ def roll_a_spare
 end
 
 def roll_a_strike
-
+  subject.first_roll(pins: 10)
+  subject.second_roll(pins: 0)
+  subject.end_frame
 end

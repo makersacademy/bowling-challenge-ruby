@@ -77,6 +77,14 @@ describe Game do
       expect(subject.total_scores[0]).to eq(15)
       expect(subject.total_score).to eq(23)
     end
+
+    it 'totals the score across two rounds when the previous round is a strike' do
+      subject.start_game
+      roll_a_strike
+      roll_an_eight
+      expect(subject.total_scores[0]).to eq(18)
+      expect(subject.total_score).to eq(26)
+    end
   end
 
 

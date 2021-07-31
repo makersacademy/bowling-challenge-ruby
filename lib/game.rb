@@ -59,11 +59,18 @@ class Game
   def calc_total_score
     @total_scores[@current_frame_num - 1] = @current_frame_obj.frame_score
     calc_spare
+    calc_strike
   end
 
   def calc_spare
     if all_frames[@current_frame_num - 2].score.spare == true && @current_frame_num > 1
       @total_scores[@current_frame_num - 2] += (10 + (@current_frame_obj.score.first_roll_pins))
+    end
+  end
+
+  def calc_strike
+    if all_frames[@current_frame_num - 2].score.strike == true && @current_frame_num > 1
+      @total_scores[@current_frame_num - 2] += (10 + (@current_frame_obj.frame_score))
     end
   end
 
