@@ -1,4 +1,58 @@
-Bowling Challenge in Ruby
+# Bowling Scorecard in Ruby
+
+This app takes the input of rolls and outputs the total score of a 10 frame bowling game in the command line. The process started with taking the requirements from the instructions and creating a specification based on these. These were then developed into user stories. These stories were modelled before they were implemented. The stories were then realised by using test driven development to create tests and code to fulfill the specification.
+
+## Specification
+
+- Let player enter number of knocked down pins per roll
+- Show the summed score of a bowling game
+- Game has 10 frames
+- Frame has 2 rolls unless strike
+- Keeps track of n of knocked down pins p roll
+- Adds bonus for strike
+- Adds bonus for spare
+- Allows extra roles for strike and spare on 10th frame
+- Min points 0, max points 300
+
+## User stories
+
+```
+As a player,
+So that I can keep track of my score,
+I want to enter how many bowling pins I knocked down in a roll
+```
+
+```
+As a player,
+So that I can see how I did,
+I want to see my total game score
+```
+
+```
+As a player,
+So that I can get the correct score for rolling a strike,
+I want the next two roll scores to be doubled
+```
+
+```
+As a player,
+So that I can get the correct score for rolling a spare,
+I want my score on the next roll to be doubled
+```
+
+```
+As a user,
+So that I can get a score bonus on the 10th frame,
+I want to roll an extra roll when I get a spare on the 10th frame
+```
+
+```
+As a user,
+So that I can get a score bonus on the 10th frame,
+I want to roll two extra rolls when I get a strike on the 10th frame
+```
+
+
 =================
 
 * Feel free to use google, your notes, books, etc. but work on your own
