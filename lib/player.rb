@@ -8,11 +8,6 @@ class Player
   end
 
   def add(score)
-    # if 10 frames have been played and no spares or strikes, end the game
-    if (@scores.length == 10 && @scores.last.sum != 10)
-      return 'The game has finished'
-    end
-    
     if @scores.length <= 9
 
       # check if it's the start of the game or frame
@@ -27,9 +22,12 @@ class Player
         # check for strike or spare in previous frame
         if @scores.length >= 2
           if (@scores[@scores.length - 2].sum == 10)
+            # increase score of previous game
             @scores[@scores.length - 2][1] += score
           end
         end
+        return scores
+      # second roll of frame  
       else
         # push score into frame array
         @scores.last.push(score)
@@ -37,11 +35,23 @@ class Player
         # check for strike only in previous frame
         if @scores.length >= 2
           if (@scores[@scores.length - 2][0] == 10)
+            # increase score of previous game
             @scores[@scores.length - 2][1] += score
           end
         end
+        return scores
       end
     end 
+
+    # second roll of 10th frame
+    if (@scores.length == 10 && @scores.last.length == 1)
+      @scores.last.push(score)
+    end
+
+    # if 10 frames have been played and no spares or strikes, end the game
+    if (@scores.length == 10 && @scores.last.sum != 10)
+      return 'The game has finished'
+    end
 
     if @scores.length == 10
       # if a strike in the last frame of the game
