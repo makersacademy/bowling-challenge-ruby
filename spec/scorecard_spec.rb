@@ -1,18 +1,15 @@
 require 'scorecard'
 
 describe Scorecard do
-  describe 'initialize' do
-    it 'starts on frame 1' do
+  describe '#initialize' do
+    it 'starts with frame 1' do
       expect(subject.frame).to eq 1
     end
-    it 'increases frame by 1 after two rolls' do
-      subject.roll(1)
-      subject.roll(1)
-      expect(subject.frame).to eq 2
+    it 'starts with an empty scorecard' do
+      expect(subject.scorecard).to be_empty
     end
-    it 'keeps track of the score' do
-      subject.roll(5)
-      expect(subject.score).to eq 5
+    it 'starts with 0 as the score' do
+      expect(subject.score).to eq 0
     end
   end
 end
