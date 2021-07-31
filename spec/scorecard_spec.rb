@@ -40,11 +40,18 @@ describe Scorecard do
       subject.roll(10)
       expect(subject.frame).to eq 2
     end
-    it 'will double the score if person has got a strike/spare in the previous go' do
+    it 'will double the score if person has got a strike in the previous go' do
       subject.roll(10)
       subject.roll(2)
       subject.roll(3)
       expect(subject.score).to eq 20
+    end
+    it 'will double the score of first roll if person has got a spare in the previous go' do
+      subject.roll(7)
+      subject.roll(3)
+      subject.roll(2)
+      subject.roll(3)
+      expect(subject.score).to eq 17
     end
   end
 
