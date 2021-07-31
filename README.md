@@ -25,6 +25,8 @@
 21. Created test that checks frame num starts at 1. Created a start_game method that creates a Frame object with round = 1, and sets it to current_frame.
 22. REFACTOR: Game spec growing quickly, so split out init tests to nested describe block. 
 23. Created test that checks end_frame creates a new frame obj that is distinct from old one, pushes old one into array of old frames, and changes frame num. Created relevant method (commit 9).
+24. Created test that checks user input. Created test that rolls a non-strike, then stores the old frame with a completed score in array.
+25. Created methods for above. Created stub that mocks a roll of a non strike across two rolls to pass tests (commit 10).
 
 
 Bowling Challenge in Ruby

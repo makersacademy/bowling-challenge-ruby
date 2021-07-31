@@ -14,4 +14,8 @@ class Frame
   def second_roll(pins:)
     @score.second_roll(pins: pins)
   end
+
+  def calculate_score
+    @score.calculate_score
+  end
 end

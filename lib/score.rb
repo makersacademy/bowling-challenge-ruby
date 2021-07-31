@@ -5,6 +5,7 @@ class Score
     @second_roll_pins
     @spare = false
     @strike = false
+    @score
   end
 
   def first_roll(pins:)
@@ -23,5 +24,9 @@ class Score
 
   def determine_spare
     @spare = true if @first_roll_pins + @second_roll_pins == 10
+  end
+
+  def calculate_score
+    @score = @first_roll_pins + @second_roll_pins if !@spare && !@strike
   end
 end
