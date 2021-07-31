@@ -19,8 +19,12 @@
 15. Created game class spec with empty test.
 16. Created game class to satisft empty test.
 17. Added test that checks game class initis with current frame (nil expectation) and all frames (empty array expectation).
-18. Added instance variables to game class, enabling it to pass step 17. tests (commit 7). 
-
+18. Added instance variables to game class, enabling it to pass step 17. tests (commit 7).
+19. Realised that class couldn't meet all responsbilities laid out in CRC cards. Added round num var tests, and tests that against changed name of current round to better reflect what that var returns.
+20.  Updated game class to past new tests (with new var names) (commit 8).
+21. Created test that checks frame num starts at 1. Created a start_game method that creates a Frame object with round = 1, and sets it to current_frame.
+22. REFACTOR: Game spec growing quickly, so split out init tests to nested describe block. 
+23. Created test that checks end_frame creates a new frame obj that is distinct from old one, pushes old one into array of old frames, and changes frame num. Created relevant method (commit 9).
 
 
 Bowling Challenge in Ruby
