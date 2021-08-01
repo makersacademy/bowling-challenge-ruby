@@ -1,6 +1,6 @@
-require 'player'
+require 'game'
 
-describe Player do
+describe Game do
   describe '#scores' do
     it 'has a scores array' do
       expect(subject.scores).to eq([])
@@ -19,13 +19,13 @@ describe Player do
   end
 
   describe '#add' do
-    it 'only accepts a number between 1 and 10 for the first roll' do
-      expect { subject.add(11) }.to raise_error 'Please enter a number from 1 to 10'
+    it 'only accepts a number between 0 and 10 for the first roll' do
+      expect { subject.add(11) }.to raise_error 'Please enter a number from 0 to 10'
     end
 
-    it 'only accepts a number from 1 to 10 minus the first roll score for the second roll' do
+    it 'only accepts a number from 0 to 10 minus the first roll score for the second roll' do
       subject.add(4)
-      expect { subject.add(7) }.to raise_error 'Please enter a number from 1 to 6'
+      expect { subject.add(7) }.to raise_error 'Please enter a number from 0 to 6'
     end
 
     it 'adds a score to the scores array' do
@@ -81,6 +81,26 @@ describe Player do
 
         expect(subject.add(3)).to eq('The game has finished')
       end
+    end
+  end
+
+  describe 'strikes' do
+    it 'two strikes in a row to be added properly' do
+      3.times {subject.add(10)}
+      expect(subject.scores).to eq ([[10, 20], [10, 10], [10, 0]])
+    end
+
+    # it 'produces a perfect game' do
+    #   12.times {subject.add(10)}
+    #   p subject.scores
+    #   expect(subject.sum).to eq (300)
+    # end
+  end
+
+  describe 'gutter game' do
+    it 'expects to have zero score' do
+    20.times { subject.add(0) }
+    expect(subject.sum).to eq 0
     end
   end
 end
