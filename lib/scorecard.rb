@@ -1,4 +1,4 @@
-class BowlingScorecard
+class Scorecard
   def total
     10
   end

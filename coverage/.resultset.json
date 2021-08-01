@@ -1,27 +1,6 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/Pav/Desktop/Makers/Week 5/bowling-challenge-ruby/spec/bowling_scorecard_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/Pav/Desktop/Makers/Week 5/bowling-challenge-ruby/lib/bowling_scorecard.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
       "/Users/Pav/Desktop/Makers/Week 5/bowling-challenge-ruby/spec/player_spec.rb": {
         "lines": [
           1,
@@ -46,16 +25,12 @@
           null,
           1,
           1,
-          null,
           2,
           null,
           null,
           1,
           1,
-          null,
-          null,
           2,
-          null,
           null,
           null,
           1,
@@ -199,8 +174,29 @@
           null,
           null
         ]
+      },
+      "/Users/Pav/Desktop/Makers/Week 5/bowling-challenge-ruby/spec/scorecard_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/Pav/Desktop/Makers/Week 5/bowling-challenge-ruby/lib/scorecard.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1627760200
+    "timestamp": 1627802129
   }
 }

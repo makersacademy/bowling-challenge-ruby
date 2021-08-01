@@ -20,17 +20,13 @@ describe Player do
 
   describe '#add' do
     it 'only accepts a number between 1 and 10 for the first roll' do
-      # expect(subject.add(11)).to eq('Please enter a number from 1 to 10')
-      expect{ subject.add(11) }.to raise_error 'Please enter a number from 1 to 10'
+      expect { subject.add(11) }.to raise_error 'Please enter a number from 1 to 10'
     end
 
     it 'only accepts a number from 1 to 10 minus the first roll score for the second roll' do
       subject.add(4)
-      # expect(subject.add(7)).to eq('Please enter a number from 1 to 6')
-      # the line below won't work for some reason despite the other guard clause working
-      expect{ subject.add(7) }.to raise_error "Please enter a number from 1 to 6"
+      expect { subject.add(7) }.to raise_error 'Please enter a number from 1 to 6'
     end
-
 
     it 'adds a score to the scores array' do
       @score = 5
@@ -46,7 +42,7 @@ describe Player do
       subject.add(5)
       subject.add(4)
       subject.add(6)
-      expect(subject.scores).to eq([[5, 4],[6]])
+      expect(subject.scores).to eq([[5, 4], [6]])
     end
 
     context 'scoring of spares' do
@@ -54,7 +50,7 @@ describe Player do
         subject.add(5)
         subject.add(5)
         subject.add(6)
-        expect(subject.scores).to eq([[5,11],[6]])
+        expect(subject.scores).to eq([[5, 11], [6]])
       end
     end
 
@@ -67,23 +63,23 @@ describe Player do
         subject.add(10)
         subject.add(5)
         subject.add(3)
-        expect(subject.scores).to eq([[10, 8],[5, 3]])
+        expect(subject.scores).to eq([[10, 8], [5, 3]])
       end
     end
 
     context 'ending the game' do
       it 'while not getting spares or strikes, will not let you add a score after frame 10 is finished' do
-        20.times {subject.add(3)}
+        20.times { subject.add(3) }
         subject.add(3)
-        expect(subject.add(3)).to eq("The game has finished")
+        expect(subject.add(3)).to eq('The game has finished')
       end
 
       it 'after a strike or spare in frame 10, will not let you add a score after frame 10 is finished' do
-        19.times {subject.add(3)}
+        19.times { subject.add(3) }
         subject.add(10)
         subject.add(3)
 
-        expect(subject.add(3)).to eq("The game has finished")
+        expect(subject.add(3)).to eq('The game has finished')
       end
     end
   end
