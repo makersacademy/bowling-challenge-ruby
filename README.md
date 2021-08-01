@@ -1,3 +1,29 @@
+## Thought Process
+
+I want to have 3 classes, a Game, Frame and Score class.
+
+All score outcomes as well as identifying whether a score is a spare, strike or gutter will be handled by the Score class.
+
+The Frame class will take those scores and save them as that frame's score.
+To deal with spares or strikes, my idea is to store that score in a seperate 'hidden' variable that only gets added to the overall score when the next frame is played.
+
+The Game class will be in charge of starting a game and keeping track of which frame is currently being played as well as switching to the next frame. It will also deal with the input from the user and stop when the game ends at 10 frames (including extra bowls for strikes)
+
+![Class Diagram](images/class_diagram.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Bowling Challenge in Ruby
 =================
 

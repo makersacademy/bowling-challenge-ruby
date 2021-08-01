@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'score'
 
 describe Score do
@@ -36,4 +38,3 @@ describe Score do
     end
   end
 end
-
