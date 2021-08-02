@@ -1,4 +1,6 @@
 require_relative 'frame'
+require_relative 'final_frame'
+
 
 class Game
   attr_reader :current_frame_obj, :current_frame_num, :all_frames, :total_scores
@@ -33,9 +35,9 @@ class Game
   end
 
   def end_frame
-    @current_frame_obj.calculate_score
     store_frame
-    return if check_if_end
+    check_if_end
+    return if @finished
     puts "That's the end of Frame #{@current_frame_num}, you scored #{@current_frame_obj.calculate_score}, your total score is #{total_score}"
     next_frame
   end
@@ -47,8 +49,8 @@ class Game
   end
 
   def check_if_end
-    end_game if @current_frame_num == 10
-    @current_frame_num == 10
+    end_game if (@current_frame_num == 10 && @current_frame_obj.score.strike == false && @current_frame_obj.score.spare == false)
+    bonus_roll if @current_frame_num == 10 && (@current_frame_obj.score.strike == true || @current_frame_obj.score.spare == true )  
   end
 
   def next_frame
@@ -75,11 +77,38 @@ class Game
   end
 
   def end_game
-    puts 'Game over! Your total score is:'
+    @finished = true
+    if @current_frame_num == 10
+      puts 'Game over! Your total score is:'
+    end
   end
 
   def total_score
     @total_scores.sum
+  end
+
+  def bonus_roll
+    final_frame
+    if all_frames[9].score.spare == true
+      bonus_spare
+    elsif all_frames[9].score.strike == true
+      bonus_strike
+    end
+  end
+
+  def final_frame
+    @current_frame_num = 11
+    @current_frame_obj = FinalFrame.new(round: @current_frame_num)
+  end
+
+  def bonus_spare
+    @total_scores[9] = 10
+    @total_scores.append(first_roll_input)
+  end
+
+  def bonus_strike
+    @total_scores[9] = 10
+    @total_scores.append(first_roll_input + second_roll_input)
   end
 end
 

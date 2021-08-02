@@ -61,9 +61,21 @@ describe Game do
       expect{ roll_an_eight }.to output("Game over! Your total score is:\n").to_stdout
     end
 
-    
-    it 'is always expected to activate on the 11th round' do 
+    it 'is expected not to activate if 10th round was a spare' do
+      subject.start_game
+      9.times { roll_an_eight}
+      expect { roll_a_spare }.not_to output("Game over! Your total score is:\n").to_stdout
+    end
 
+    it 'is expected not to activate if 10th round was a spare' do
+      subject.start_game
+      9.times { roll_an_eight}
+      expect { roll_a_strike }.not_to output("Game over! Your total score is:\n").to_stdout
+    end
+
+
+    it 'is always expected to activate on the 11th round' do 
+      
     end 
   end
 
@@ -91,6 +103,21 @@ describe Game do
       expect(subject.total_score).to eq(26)
     end
   end
+
+  it 'calculates 10th round spare bonus correctly' do
+    subject.start_game
+    9.times { roll_an_eight }
+    roll_a_spare
+    expect(subject.total_scores).to eq([8,8,8,8,8,8,8,8,8,10,5])
+  end
+
+  it 'calculates 10th round strike bonus correctly' do
+    subject.start_game
+    9.times { roll_an_eight }
+    roll_a_strike
+    expect(subject.total_scores).to eq([8,8,8,8,8,8,8,8,8,10,8])
+  end
+
 
 
   
