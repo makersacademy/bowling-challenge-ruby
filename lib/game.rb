@@ -25,7 +25,7 @@ class Game
     puts 'How many pins did the second roll knock over?'
     gets.chomp.to_i
   end
-
+  
   def first_roll(pins: first_roll_input)
     @current_frame_obj.first_roll(pins: pins)
   end

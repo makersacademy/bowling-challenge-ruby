@@ -46,7 +46,9 @@
 40. Changed logic to target new scoring mechanism - added a conditional to scoring total, where if the prior round was a spare, the current round would go back into the array of past scores and edit using first roll (commit 16).
 41. Copied strike to logic to spares with a few tweaks. Strike works with full functionality (commit 17).
 ### Stage 7 - Being really good at Bowling - last round strikes and spares
-42. Created a test that played out 10 rounds - scoring a spare on the 10th round. Test expects game to be ongoing if 10th round is spare. 
+42. Created a test that played out 10 rounds - scoring a spare on the 10th round. Test expects game to be ongoing if 10th round is spare.
+43. Created a separate final frame method for distinct scoring methods to live in ('final frame'). Everything working!
+44. Uploaded miro and CRC cards to images. 
 
 
 
@@ -114,4 +116,5 @@ In the image below you can find some score examples.
 
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
+![CRC cards](images/crc_cards.png)
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
