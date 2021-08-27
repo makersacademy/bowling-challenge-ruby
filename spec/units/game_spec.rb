@@ -14,4 +14,10 @@ describe Game do
       expect(subject.score).to eq 0
     end
   end
+
+  describe '#roll' do
+    it 'takes the number of pins the user knocked down' do
+      expect(subject).to respond_to(:roll).with(1).argument
+    end
+  end
 end

@@ -5,4 +5,7 @@ class Game
     @score = 0
     @frame = 1
   end
+
+  def roll(pins)
+  end
 end
