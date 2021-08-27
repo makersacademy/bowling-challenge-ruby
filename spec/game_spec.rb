@@ -7,7 +7,7 @@ describe Game do
   end
 
   it 'tracks the frames' do
-    expect(subject.frames.length).to be >= 1
+    expect(subject.frames.length).to be >= 0
     expect(subject.frames.length).to be <= 10
   end
 
@@ -15,6 +15,11 @@ describe Game do
     it 'tracks the roll' do
       subject.roll(1)
       expect(subject.rolls.last).to eq 1
+    end
+
+    it 'opens a new frame unless last frame is still open' do
+      subject.roll(1) 
+      expect(subject.frames.length).to eq 1
     end
   end
 end
