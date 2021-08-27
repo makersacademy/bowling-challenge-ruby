@@ -22,4 +22,10 @@ describe Game do
       expect(subject.rolls).to eq [1, 2]
     end
   end
+
+  describe '#finished?' do
+    it 'checks if the game is finished' do
+      expect(subject.finished?).to eq false
+    end
+  end
 end

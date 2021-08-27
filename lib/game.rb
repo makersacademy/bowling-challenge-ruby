@@ -9,4 +9,8 @@ class Game
   def roll(pins)
     @rolls << pins
   end
+
+  def finished?
+    @finished
+  end
 end
