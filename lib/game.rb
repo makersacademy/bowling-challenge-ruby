@@ -1,7 +1,8 @@
 class Game 
-  attr_reader :rolls
+  attr_reader :finished, :rolls
 
   def initialize
+    @finished = false
     @rolls = []
   end
 
