@@ -4,11 +4,15 @@ class Game
   def initialize 
     @score = 0
     @frame = 1
-    @frame_results = [] # strike, spare, 0-9.
+    @frame_results = [] # Xstrike, \spare, 0-9.
     @frame_scores = []
   end
 
   def roll(pins)
+    if pins == 10
+      @frame += 1
+      @frame_results << 'X'
+    end
   end
 
   def gameover?

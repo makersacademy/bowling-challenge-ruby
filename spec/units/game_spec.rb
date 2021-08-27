@@ -25,6 +25,13 @@ describe Game do
     it 'takes the number of pins the user knocked down' do
       expect(subject).to respond_to(:roll).with(1).argument
     end
+
+    context 'user knocks 10 pins' do
+      it 'should record a strike' do
+        subject.roll(10)
+        expect(subject.frame_results.last).to eq 'X'
+      end
+    end
   end
 
   describe '#gameover?' do
