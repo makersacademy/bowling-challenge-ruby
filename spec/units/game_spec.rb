@@ -1,6 +1,10 @@
 require 'game' 
 
 describe Game do 
+  it 'tracks the game score' do
+    expect(subject.score).to eq 0
+  end
+
   it 'tracks the current frame' do
     expect(subject.frame).to eq 1
   end
@@ -9,14 +13,12 @@ describe Game do
     expect(subject.frame).to be <= 10
   end
 
-  it 'tracks frame scores' do
-    expect(subject.frame_scores).to eq []
+  it 'tracks frame results' do 
+    expect(subject.frame_results).to eq []
   end
 
-  describe '#score' do
-    it 'tracks the game score' do
-      expect(subject.score).to eq 0
-    end
+  it 'tracks frame scores' do
+    expect(subject.frame_scores).to eq []
   end
 
   describe '#roll' do
@@ -27,7 +29,7 @@ describe Game do
 
   describe '#gameover?' do
     it 'returns if game is over' do
-      expect(subject.gameover).to eq false
+      expect(subject.gameover?).to eq false
     end
   end
 end
