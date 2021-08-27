@@ -8,4 +8,10 @@ describe Game do
   it 'tracks frames up to 10' do
     expect(subject.frame).to be <= 10
   end
+
+  describe '#score' do
+    it 'tracks the game score' do
+      expect(subject.score).to eq 0
+    end
+  end
 end

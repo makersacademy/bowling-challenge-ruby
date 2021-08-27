@@ -7,11 +7,10 @@ Bowling Challenge in Ruby
 
 Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
 
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
-
+A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
 
 ## Focus for this challenge
-The focus for this challenge is to write high-quality code.
+High-quality code.
 
 In order to do this, you may pay particular attention to the following:
 * Using diagramming to plan your approach to the challenge
@@ -20,8 +19,6 @@ In order to do this, you may pay particular attention to the following:
 * Commit often, with good commit messages
 * Single Responsibility Principle and encapsulation
 * Clear and readable code
-
-## Bowling — how does it work?
 
 ### Strikes
 
@@ -44,10 +41,6 @@ A Gutter Game is when the player never hits a pin (20 zero scores).
 
 ### Perfect Game
 
-A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 strikes for the bonus in the 10th frame). The Perfect Game scores 300 points.
-
-In the image below you can find some score examples.
-
-More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
+A Perfect Game is when the player rolls 12 strikes and scores 300 points.
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
