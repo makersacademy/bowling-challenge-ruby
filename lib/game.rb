@@ -16,6 +16,11 @@ class Game
       @frame_results << [@frame_score, '/'] 
     else
       @frame_score += pins
+      if @frame_results.length == 0
+        @frame_results << [pins]
+      else
+        @frame_results.last << pins
+      end
     end
   end
 
