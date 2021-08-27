@@ -24,4 +24,10 @@ describe Game do
       expect(subject).to respond_to(:roll).with(1).argument
     end
   end
+
+  describe '#gameover?' do
+    it 'returns if game is over' do
+      expect(subject.gameover).to eq false
+    end
+  end
 end

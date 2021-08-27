@@ -9,4 +9,8 @@ class Game
 
   def roll(pins)
   end
+
+  def gameover?
+    @frame_scores.length == 10 ? true : false
+  end
 end
