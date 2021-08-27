@@ -3,6 +3,6 @@ class Game
 
   def initialize
     @total_score = 0
-    @frames = []
+    @frames = [Frame.new]
   end
 end
