@@ -7,7 +7,7 @@ describe Game do
   end
 
   it 'tracks the frames' do
-    expect(subject.current_frame).to be >= 1
-    expect(subject.current_frame).to be <= 10
+    expect(subject.frames.length).to be >= 1
+    expect(subject.frames.length).to be <= 10
   end
 end

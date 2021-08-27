@@ -1,8 +1,8 @@
 class Game 
-  attr_reader :total_score, :current_frame
+  attr_reader :total_score, :frames
 
   def initialize
     @total_score = 0
-    @current_frame = 1
+    @frames = []
   end
 end
