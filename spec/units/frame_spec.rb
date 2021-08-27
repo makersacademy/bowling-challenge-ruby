@@ -12,4 +12,8 @@ describe Frame do
   it 'has a bonus score' do
     expect(subject.bonus_score).to eq 0
   end
+
+  it 'tracks the rolls' do
+    expect(subject.rolls).to eq []
+  end
 end
