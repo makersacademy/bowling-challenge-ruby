@@ -24,8 +24,33 @@ describe Game do
   end
 
   describe '#finished?' do
-    it 'checks if the game is finished' do
+    it 'returns if the game is finished' do
       expect(subject.finished?).to eq false
+    end
+
+    context 'strike on 10th frame' do
+      it 'returns false after 11 rolls' do
+        10.times { subject.roll(10) }
+        subject.roll(10)
+        expect(subject.finished?).to eq false
+      end
+      it 'returns true after 12 rolls' do
+        10.times { subject.roll(10) }
+        subject.roll(10)
+        subject.roll(1)
+        expect(subject.finished?).to eq true
+      end
+    end
+
+    context 'not a strike on 10th frame' do
+      it 'returns true after 11 rolls' do
+        9.times { subject.roll(10) }
+        subject.roll(9)
+        subject.roll(1)
+        p subject.rolls
+
+        expect(subject.finished?).to eq true
+      end
     end
   end
 end

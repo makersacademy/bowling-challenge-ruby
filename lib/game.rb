@@ -11,6 +11,9 @@ class Game
   end
 
   def finished?
+    if @rolls.length == 12 || @rolls.length == 11 && @rolls[9] != 10
+      @finished = true
+    end
     @finished
   end
 end
