@@ -10,4 +10,11 @@ describe Game do
     expect(subject.frames.length).to be >= 1
     expect(subject.frames.length).to be <= 10
   end
+
+  context 'given a roll' do
+    it 'tracks the roll' do
+      subject.roll(1)
+      expect(subject.rolls.last).to eq 1
+    end
+  end
 end
