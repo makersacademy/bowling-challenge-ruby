@@ -32,6 +32,14 @@ describe Game do
         expect(subject.frame_results.last).to eq 'X'
       end
     end
+
+    context 'user rolls a split' do
+      it 'should record a split' do
+        subject.roll(7)
+        subject.roll(3)
+        expect(subject.frame_results.last).to eq [7, '/']
+      end
+    end
   end
 
   describe '#gameover?' do
