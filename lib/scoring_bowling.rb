@@ -1,10 +1,14 @@
 class Scoring_Bowling
 
-  attr_reader :rolls, :frame
+  attr_reader :bowls, :frame
 
   def initialize
-    @rolls = []
+    @bowls = []
     @frame = 0
+  end
+
+  def add_bowl(first_bowl, second_bowl)
+    @bowls << {frame: 1, bowls: [first_bowl, second_bowl]}
   end
 
 end
