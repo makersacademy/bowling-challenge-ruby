@@ -1,4 +1,4 @@
-require 'validity'
+require_relative 'validity'
 
 class Roll
 

@@ -5,7 +5,8 @@ describe Frame do
   let(:check) { double :check }
 
   it 'initialises @frame as a frame hash' do
-    expect(Frame.new(1).frame).to eq ({frame: 1, 1 => nil, spare: nil, strike: nil})
+    hash = { frame: 1, 1 => nil, spare: nil, strike: nil }
+    expect(Frame.new(1).frame).to eq hash
   end
 
   it 'checks frame number is valid' do
