@@ -1,3 +1,5 @@
+require_relative 'validity'
+
 class Frame
 
   FRAME_ID_MIN = 1
@@ -9,13 +11,17 @@ class Frame
     strike: nil
   }
 
-  attr_reader :frame
+  attr_reader :content
 
   def initialize(frame_id, check = Validity.new)
     raise ERROR_MESSAGE unless check.valid?(frame_id, FRAME_ID_MIN, FRAME_ID_MAX)
 
-    @frame = DEFAULT_FRAME
-    @frame[:frame] = frame_id
+    @content = DEFAULT_FRAME
+    @content[:frame] = frame_id
+  end
+
+  def add(roll)
+    content[1] = roll
   end
 
 end

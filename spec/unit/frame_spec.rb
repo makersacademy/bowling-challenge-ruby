@@ -6,7 +6,9 @@ describe Frame do
 
   it 'initialises @frame as a frame hash' do
     hash = { frame: 1, 1 => nil, spare: nil, strike: nil }
-    expect(Frame.new(1).frame).to eq hash
+    allow(check).to receive(:valid?) { true }
+    frame = Frame.new(1, check)
+    expect(frame.content).to eq hash
   end
 
   it 'checks frame number is valid' do
@@ -24,6 +26,15 @@ describe Frame do
     expect(check).to receive(:valid?) { false }
     message = 'Not a valid frame number'
     expect { Frame.new('a', check) }.to raise_error message
+  end
+
+  describe '#add' do
+    it 'adds first frame roll to the 1 key of frame hash' do
+      allow(check).to receive(:valid?) { true }
+      frame = Frame.new(1, check)
+      frame.add(4)
+      expect(frame.content).to include(1 => 4)
+    end
   end
 
 end
