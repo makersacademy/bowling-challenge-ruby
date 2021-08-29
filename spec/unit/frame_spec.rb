@@ -21,7 +21,7 @@ describe Frame do
   it 'raises error for an invalid frame number' do
     allow(check).to receive(:valid?) { false }
     message = 'Not a valid frame number'
-    expect { Frame.new(Frame::FIRST_FRAME-1, check) }.to raise_error message
+    expect { Frame.new(Frame::FIRST_FRAME - 1, check) }.to raise_error message
   end
 
   it 'does not allow non-integers as frame number' do
@@ -34,7 +34,7 @@ describe Frame do
 
     context "normal frames" do
 
-      let (:frame) { Frame.new(Frame::FIRST_FRAME, check) }
+      let(:frame) { Frame.new(Frame::FIRST_FRAME, check) }
 
       it 'adds first frame roll to the frame' do
         frame.add(4)
@@ -84,7 +84,7 @@ describe Frame do
 
   context 'final frame' do
 
-    let (:frame) { Frame.new(Frame::LAST_FRAME, check) }
+    let(:frame) { Frame.new(Frame::LAST_FRAME, check) }
     
     it 'allows an extra roll if rolls 1 & 2 are a spare' do
       output = '1st roll: 2 | 2nd roll: / | 3rd roll: 5'
