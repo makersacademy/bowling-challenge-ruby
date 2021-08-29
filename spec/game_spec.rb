@@ -1,12 +1,12 @@
 describe Game do 
 
-  let(:game) { described_class.new }
+  let(:game) { described_class.new(2) }
+  let(:player_one) { Player.new("Jack") }
+  let(:player_two) { Player.new("Jill") }
 
-  it "creates and instance of itself" do 
-    expect(game).to be_an_instance_of(Game)
+  it "creates a new game with 2 players" do 
+    expect(game.num_players).to eq(2) 
   end 
+
  
-  it "returns logical score from frame method" do 
-    expect(game.frame.sum).to be <=10
-  end 
 end 
