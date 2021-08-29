@@ -3,7 +3,12 @@ require './lib/game.rb'
 describe Game do 
 
   let(:player){ double :player, 
-                name: 'Radu'
+                name: 'Radu',
+                pins_rest: 5,
+                frame: 5,
+                roll: 1,
+                score: 100,
+                count_next: 1
               }
   let(:player_4_left){ double :player, 
                 name: 'Jake',
@@ -60,6 +65,25 @@ describe Game do
 
   it 'expects register_pins to register pins having an extra round' do
     expect(subject_game_has_extra_roll.register_pins(3)).to eq('extra roll')
+  end
+
+  it 'expects register_pins to raise error when initialized frame is a non-number' do
+    allow(player).to receive(:frame).and_return('a')
+    expect{ described_class.new(player.name, player.pins_rest, player.frame, player.roll, player.score, player.count_next) }.to raise_error('player has non-number frame')
+  end
+
+  it 'expects register_pins to raise error when initialized frame smaller than 0' do
+    allow(player).to receive(:frame).and_return(-1)
+    expect{ described_class.new(player.name, player.pins_rest, player.frame, player.roll, player.score, player.count_next) }.to raise_error('player has negative frame')
+  end
+
+  context "check all values are not greater than maximum allowed" do
+    described_class.new("name").list_boundaries.each do |arg, max|
+      it 'expects subject to raise error when initialized frame greater than #{max}' do
+        allow(player).to receive(arg).and_return(max + 1)
+        expect{ described_class.new(player.name, player.pins_rest, player.frame, player.roll, player.score, player.count_next) }.to raise_error('player has ' << arg.to_s << ' greater than ' << max.to_s)
+      end
+    end
   end
 
 end
