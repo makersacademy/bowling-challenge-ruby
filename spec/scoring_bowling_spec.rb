@@ -31,13 +31,14 @@ describe Scoring_Bowling do
       expect{ subject.add_bowl(9, 1) }.to raise_error{ 'Game Over, no more scores can be added' }
     end
 
-    # it "is expected to raise error if sum is greater than max pins " do
-    #   expect{ subject.add_bowl(10, 10) }.to raise_error{ 'Total sum of inputs cannot exceed 10, please enter the correct values' }
-    # end
-
   end
 
   describe '#calculate_score' do
+
+    it 'is expected not to update score if all gutter balls' do
+      10.times { subject.add_bowl(0, 0) }
+      expect{ subject.calculate_score }.not_to change{ subject.score }
+    end
 
     it 'is expected to produce the sum of all bowls made with no strikes or spares made' do
       3.times { subject.add_bowl(6, 3) }

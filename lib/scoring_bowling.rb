@@ -12,7 +12,6 @@ class Scoring_Bowling
 
   def add_bowl(*bowls)
     raise input_error_messages[0] if @rounds.length == 10
-    # raise input_error_messages[1] if !strike?(round(9)) || !spare?(round(9))
     
     @rounds << {frame: frame_count, bowls: [*bowls]}
   end
@@ -43,10 +42,8 @@ class Scoring_Bowling
         arr << round(current_frame)
       end
         current_frame += 1
-
     end
     @score += arr.flatten.sum
-    puts "Score: #{@score}"
   end
 
   private
