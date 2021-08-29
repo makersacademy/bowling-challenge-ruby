@@ -7,49 +7,64 @@ class Frame
   TOTAL_PINS = 10
   ERROR_MESSAGE = 'Not a valid frame number'
 
-  def initialize(frame_id, check = Validity.new)
-    raise ERROR_MESSAGE unless check.valid?(frame_id, FIRST_FRAME, LAST_FRAME)
-    
-    @content = { frame: frame_id, 1 => nil, spare: nil, strike: nil }
+  def initialize(frame_number, check = Validity.new)
+    valid_frame_number_check(frame_number, check)
+    @frame_content = { frame_id: frame_number }
   end
 
   def add(roll)
     raise 'Frame complete' if full?
   
-    @content[1].nil? ? first_roll(roll) : second_roll(roll)
+    @frame_content[:roll_one].nil? ? first_roll(roll) : second_roll(roll)
+  end
+
+  def frame_id
+    @frame_content[:frame_id]
+  end
+
+  def frame_score_1
+    @frame_content[:roll_one]
+  end
+
+  def frame_score_2
+    @frame_content[:roll_two]
+  end
+
+  def frame_bonus
+    @frame_content[:bonus]
   end
   
   def print_frame
-    "Frame: #{@content[:frame]} | 1st roll: #{@content[1]} |"\
-    " 2nd roll: #{@content[2]} | Bonus: #{check_bonus}"
+    "Frame: #{frame_id} | 1st roll: #{frame_score_1} |"\
+    " 2nd roll: #{frame_score_2} | Bonus: #{frame_bonus}"
   end
 
   private
-  
+
+  def valid_frame_number_check(frame_id, check)
+    raise ERROR_MESSAGE unless check.valid?(frame_id, FIRST_FRAME, LAST_FRAME)
+  end
+
   def first_roll(roll)
-    @content[:strike] = true && @content[2] = 0 if strike?(roll)
-    @content[1] = roll
+    @frame_content[:roll_one] = roll
+    @frame_content[:roll_two] = 0 && @frame_content[:bonus] = :X if strike?
   end
 
   def second_roll(roll)
-    @content[2] = roll
-    @content[:spare] = spare?
+    @frame_content[:roll_two] = roll
+    @frame_content[:bonus] = :/ if spare?
   end
 
   def spare?
-    @content[1] + @content[2] == TOTAL_PINS
+    @frame_content[:roll_one] + @frame_content[:roll_two] == TOTAL_PINS
   end
 
-  def strike?(roll)
-    @content[1].nil? && roll == TOTAL_PINS
-  end
-
-  def check_bonus
-    @content[:strike] ? 'X' : @content[:spare] ? '/' : nil
+  def strike?
+    @frame_content[:roll_one] == TOTAL_PINS
   end
 
   def full?
-    !@content[1].nil? && !@content[2].nil?
+    !@frame_content[:roll_one].nil? && !@frame_content[:roll_two].nil?
   end
 
 end
