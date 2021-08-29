@@ -18,8 +18,10 @@ class Game
     end
 
     def register_pins(pins_number = 0)
-      check_pins_number(pins_number)
-      chec_game_frame
+      @pins_number = pins_number
+      [chec_game_frame, check_pins_number]
+      
+      
       'extra roll'
     end
 
@@ -28,11 +30,11 @@ class Game
       raise 'pins registration failed, game has ended' if @frame == 10 && @roll == 3
     end
 
-    def check_pins_number(n)
-      raise 'pins registration failed, not a number' unless n.is_a?(Integer)
-      raise 'pins registration failed, number smaller than 0' if n < 0
-      raise 'pins registration failed, number greater than 10' if n > 10
-      raise 'pins registration failed, number greater than rest of pins' if n > @pins_rest
+    def check_pins_number
+      raise 'pins registration failed, not a number' unless @pins_number.is_a?(Integer)
+      raise 'pins registration failed, number smaller than 0' if @pins_number < 0
+      raise 'pins registration failed, number greater than 10' if @pins_number > 10
+      raise 'pins registration failed, number greater than rest of pins' if @pins_number > @pins_rest
     end
 
 end

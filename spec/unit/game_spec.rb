@@ -86,7 +86,8 @@ describe Game do
   end
 
   context "check all values are not greater than maximum allowed" do
-    described_class.new("name").list_boundaries.each do |arg, max|
+    player_name = "Jake"
+    described_class.new(player_name).list_boundaries.each do |arg, max|
       it 'expects subject to raise error when initialized frame greater than #{max}' do
         allow(player).to receive(arg).and_return(max + 1)
         expect{ described_class.new(player.name, player.pins_rest, player.frame, player.roll, player.score, player.count_next) }.to raise_error('player has ' << arg.to_s << ' greater than ' << max.to_s)
