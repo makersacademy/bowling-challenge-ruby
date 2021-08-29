@@ -12,8 +12,8 @@ class Frame
     @frame_content = { frame_id: frame_number }
   end
 
-  def add(roll)
-    raise 'Frame complete' if full?
+  def add(roll) # could build in validity checking here by dependency injecting Roll class
+    raise 'Frame complete' if frame_full?
   
     @frame_content[:roll_one].nil? ? first_roll(roll) : second_roll(roll)
   end
@@ -29,14 +29,10 @@ class Frame
   def frame_score_2
     @frame_content[:roll_two]
   end
-
-  def frame_bonus
-    @frame_content[:bonus]
-  end
   
   def print_frame
     "Frame: #{frame_id} | 1st roll: #{frame_score_1} |"\
-    " 2nd roll: #{frame_score_2} | Bonus: #{frame_bonus}"
+    " 2nd roll: #{frame_score_2}"
   end
 
   private
@@ -47,12 +43,12 @@ class Frame
 
   def first_roll(roll)
     @frame_content[:roll_one] = roll
-    @frame_content[:roll_two] = 0 && @frame_content[:bonus] = :X if strike?
+    @frame_content[:roll_one] = :X if strike?
   end
 
   def second_roll(roll)
     @frame_content[:roll_two] = roll
-    @frame_content[:bonus] = :/ if spare?
+    @frame_content[:roll_two] = :/ if spare?
   end
 
   def spare?
@@ -63,8 +59,8 @@ class Frame
     @frame_content[:roll_one] == TOTAL_PINS
   end
 
-  def full?
-    !@frame_content[:roll_one].nil? && !@frame_content[:roll_two].nil?
+  def frame_full?
+    @frame_content[:roll_one] == :X || !@frame_content[:roll_two].nil?
   end
 
 end
