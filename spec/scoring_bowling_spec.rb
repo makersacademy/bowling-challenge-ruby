@@ -10,9 +10,9 @@ describe Scoring_Bowling do
 
   end
 
-  describe '#add_roll' do
+  describe '#add_bowl' do
 
-    it 'is expected to add the roll to rolls array' do
+    it 'is expected to add the bowl to rounds array' do
       subject.add_bowl(9, 0)
       expect(subject.rounds).to include(frame: 1, bowls: [9, 0])
     end
@@ -31,9 +31,9 @@ describe Scoring_Bowling do
       expect{ subject.add_bowl(9, 1) }.to raise_error{ 'Game Over, no more scores can be added' }
     end
 
-    it "is expected to raise error if sum is greater than max pins " do
-      expect{ subject.add_bowl(10, 10) }.to raise_error{ 'Total sum of inputs cannot exceed 10, please enter the correct values' }
-    end
+    # it "is expected to raise error if sum is greater than max pins " do
+    #   expect{ subject.add_bowl(10, 10) }.to raise_error{ 'Total sum of inputs cannot exceed 10, please enter the correct values' }
+    # end
 
   end
 
@@ -43,18 +43,27 @@ describe Scoring_Bowling do
       3.times { subject.add_bowl(6, 3) }
       3.times { subject.add_bowl(0, 9) }
       3.times { subject.add_bowl(6, 0) }
-      1.times { subject.add_bowl(0, 0) }
+      1.times { subject.add_bowl(0, 0, 0) }
       expect{ subject.calculate_score }.to change{ subject.score }.by (72)
     end
 
     it 'is expected to produce the sum of all bowls made with only spares made' do
-      10.times { subject.add_bowl(9, 1) }
+      9.times { subject.add_bowl(9, 1) }
+      subject.add_bowl(9, 1, 9)
       expect{ subject.calculate_score }.to change{ subject.score }.by (190)
     end
 
     it 'is expected to produce the sum of all bowls made with only spares made' do
-      10.times { subject.add_bowl(5, 5) }
+      9.times { subject.add_bowl(5, 5) }
+      subject.add_bowl(5, 5, 5)
       expect{ subject.calculate_score }.to change{ subject.score }.by (150)
+    end
+
+    it 'is expected to calculate scores with spares and incomplete bowls' do
+      3.times { subject.add_bowl(6, 3) }
+      3.times { subject.add_bowl(9, 1) }
+      4.times { subject.add_bowl(6, 0, 0) }
+      expect{ subject.calculate_score }.to change{ subject.score }.by (105)
     end
 
     # it 'is expected to produce the sum of only strikes made' do

@@ -10,25 +10,31 @@ class Scoring_Bowling
     @score = 0
   end
 
-  def add_bowl(first_bowl = nil, second_bowl = nil)
-    raise input_error_messages[0] if frame == MAX_FRAMES
-    raise input_error_messages[1] if [first_bowl, second_bowl].sum > MAX_PINS
-
-    @rounds << {frame: frame_count, bowls: [first_bowl, second_bowl]}
+  def add_bowl(*bowls)
+    raise input_error_messages[0] if @rounds.length == 10
+    # raise input_error_messages[1] if !strike?(round(9)) || !spare?(round(9))
+    
+    @rounds << {frame: frame_count, bowls: [*bowls]}
   end
   
   def calculate_score
     current_frame = 0
     arr = []
-    until current_frame >= MAX_FRAMES
-      if spare?(round(current_frame))
-        arr << [round(current_frame), round(current_frame)[0]]
+    until current_frame == rounds.length
+      if spare?(@rounds[current_frame][:bowls])
+        if current_frame == 9
+          arr << @rounds[current_frame][:bowls][0..2]
+        else
+          arr << [@rounds[current_frame][:bowls], @rounds[current_frame +1][:bowls][0]]
+        end
       else
-        arr << round(current_frame)
+        arr << @rounds[current_frame][:bowls]
       end
-      current_frame += 1
+        current_frame += 1
+      puts "score: #{arr.flatten.sum}"
     end
     @score += arr.flatten.sum
+    puts "Score: #{@score}"
   end
 
   private
@@ -44,8 +50,12 @@ class Scoring_Bowling
     @rounds[which_frame][:bowls]
   end
 
+  def strike?(bowls)
+    bowls.include?(nil)
+  end
+
   def spare?(bowls)
-    bowls.sum == 10
+    bowls[0..1].sum == 10
   end
 
   def frame_count
