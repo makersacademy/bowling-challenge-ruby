@@ -59,17 +59,26 @@ describe Scoring_Bowling do
       expect{ subject.calculate_score }.to change{ subject.score }.by (150)
     end
 
-    it 'is expected to calculate scores with spares and incomplete bowls' do
+    it 'is expected to calculate scores with spares and no spare/strike bowls' do
       3.times { subject.add_bowl(6, 3) }
       3.times { subject.add_bowl(9, 1) }
-      4.times { subject.add_bowl(6, 0, 0) }
+      4.times { subject.add_bowl(6, 0) }
       expect{ subject.calculate_score }.to change{ subject.score }.by (105)
     end
 
-    # it 'is expected to produce the sum of only strikes made' do
-    #   10.times { subject.add_bowl }
-    #   expect{ subject.calculate_score }.to change{ subject.score }.by 300
-    # end
+    it 'is expected to produce the sum of only strikes made' do
+      9.times { subject.add_bowl(10, 0) }
+      subject.add_bowl(10, 10, 10)
+      expect{ subject.calculate_score }.to change{ subject.score }.by 300
+    end
+
+    it 'is expected to produce the sum of all types of bowls made' do
+      2.times { subject.add_bowl(6, 4) }
+      3.times { subject.add_bowl(9, 1) }
+      4.times { subject.add_bowl(6, 0) }
+      subject.add_bowl(5, 5, 10)
+      expect{ subject.calculate_score }.to change{ subject.score }.by (133)
+    end
 
   end
 

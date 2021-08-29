@@ -21,17 +21,29 @@ class Scoring_Bowling
     current_frame = 0
     arr = []
     until current_frame == rounds.length
-      if spare?(@rounds[current_frame][:bowls])
+      if strike?(round(current_frame))
+
         if current_frame == 9
-          arr << @rounds[current_frame][:bowls][0..2]
+          arr << round(current_frame)
+        elsif current_frame == 8
+          arr << [round(current_frame), round(current_frame + 1)[0..1]]
         else
-          arr << [@rounds[current_frame][:bowls], @rounds[current_frame +1][:bowls][0]]
+          arr << [round(current_frame), round(current_frame + 1)[0], round(current_frame + 2)[0]]
         end
+
+      elsif spare?(round(current_frame))
+
+        if current_frame == 9
+          arr << round(current_frame)
+        else
+          arr << [round(current_frame), round(current_frame + 1)[0]]
+        end
+
       else
-        arr << @rounds[current_frame][:bowls]
+        arr << round(current_frame)
       end
         current_frame += 1
-      puts "score: #{arr.flatten.sum}"
+
     end
     @score += arr.flatten.sum
     puts "Score: #{@score}"
@@ -51,7 +63,7 @@ class Scoring_Bowling
   end
 
   def strike?(bowls)
-    bowls.include?(nil)
+    bowls.first == 10
   end
 
   def spare?(bowls)
