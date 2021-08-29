@@ -12,13 +12,37 @@ class BowlingGame
     total_score = 0
     count = 0
     10.times do 
-      if @rolls[count] + @rolls[count + 1] == 10
-        total_score += @rolls[count] + @rolls[count + 1] + @rolls[count + 2]
+      if strike?(count)
+        total_score += strike_score(count)
+        count += 1
+      elsif spare?(count)
+        total_score += spare_score(count)
+        count += 2
       else
-        total_score += @rolls[count] + @rolls[count + 1]
+        total_score += frame_score(count)
+        count += 2
       end
-      count += 2
     end
     total_score
+  end
+
+  def spare?(count)
+    @rolls[count] + @rolls[count + 1] == 10
+  end
+
+  def spare_score(count)
+    10 + @rolls[count + 2]
+  end 
+
+  def strike?(count)
+    @rolls[count] == 10
+  end
+
+  def strike_score(count)
+    10 + @rolls[count + 1] + @rolls[count + 2]
+  end 
+
+  def frame_score(count)
+    @rolls[count] + @rolls[count + 1]
   end
 end
