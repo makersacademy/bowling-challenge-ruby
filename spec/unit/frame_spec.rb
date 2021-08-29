@@ -35,13 +35,6 @@ describe Frame do
         allow(check).to receive(:valid?) { true }
       end  
 
-      it 'raises an error for an invalid roll' do
-        frame = Frame.new(1, check)
-        allow(check).to receive(:valid?) { false }
-        expect { frame.add(11) }.to raise_error 'Invalid roll'
-
-      end
-
       it 'adds first frame roll to the frame' do
         frame = Frame.new(1, check)
         frame.add(4)
@@ -92,13 +85,6 @@ describe Frame do
         frame.add(2)
         frame.add(7)
         expect(frame.print_frame).not_to include '/'
-      end
-
-      it 'raises error if second roll higher than remaining pins' do
-        frame = Frame.new(1, check)
-        frame.add(2)
-        allow(check).to receive(:valid?) { false }
-        expect { frame.add(9) }.to raise_error 'Invalid roll'
       end
 
     end
