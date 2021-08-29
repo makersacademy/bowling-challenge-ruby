@@ -16,5 +16,16 @@ RSpec.describe 'BowlingGame' do
       expect(game.score).to eq 20
     end
   end
-  
+
+  context 'spare game' do 
+    it 'can roll a spare game' do
+      game = BowlingGame.new
+      game.roll 6
+      game.roll 4
+      game.roll 7
+      17.times{game.roll 0}
+      expect(game.score).to eq 24
+    end
+  end
+
 end
