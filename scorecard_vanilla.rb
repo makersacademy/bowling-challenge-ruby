@@ -36,7 +36,7 @@ def score(x,y)
       if running_score[-2][0] == 10
         total_score += ((x+y) * 2)
       elsif running_score[-2].sum == 10
-        puts 'would you look at that'
+        puts 'SPARE!!!'
         total_score += x
         total_score += x + y
       else

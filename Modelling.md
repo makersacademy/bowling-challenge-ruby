@@ -13,3 +13,5 @@ Score stores the latest input, and keeps a running total
 Scores are stored in an array of arrays. 
 
 This can also be done with classes but to start off I just want to use methods because that's a lot easier!
+
+(Yay hubris on chaining methods)
