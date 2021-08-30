@@ -25,7 +25,7 @@ class Game
 
   def check_frameover
     @frames.each do |frame|
-      if frame.frameover?
+      if frame.closed == false && frame.frameover?
         @frame_scores << frame.frame_score
         @score += frame.frame_score
         frame.closed = true

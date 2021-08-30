@@ -39,6 +39,14 @@ describe Game do
         expect(subject.frames.first.closed).to eq true
       end
     end
+
+    it 'adds a frame score only once' do
+      subject.roll(1)
+      subject.roll(0)
+      subject.roll(0)
+      subject.roll(0)
+      expect(subject.score).to eq 1
+    end
   end
 
   describe '#gameover?' do
