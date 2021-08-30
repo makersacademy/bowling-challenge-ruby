@@ -32,9 +32,9 @@ class Game
   end
 
   def spare?(frame_number)
-    @frames[frame_number].sum == 10
+    @frames[frame_number].sum == 10 && !strike?(frame_number)
   end
-  
+
   private
 
   def increment_game

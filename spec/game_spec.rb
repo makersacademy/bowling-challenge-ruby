@@ -69,4 +69,11 @@ describe Game do
     expect(subject.spare?(frame_number)).to eq true
   end
 
+  it "can workout if a previous frame wasn't a spare" do
+    subject.roll(2)
+    subject.roll(8)
+    subject.roll(10)
+    frame_number = 2
+    expect(subject.spare?(frame_number)).to eq false
+  end
 end
