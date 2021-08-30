@@ -1,9 +1,11 @@
+require_relative 'frame'
+
 class Game 
-  attr_reader :score, :frame, :frame_scores
+  attr_reader :score, :frames, :frame_scores
 
   def initialize 
     @score = 0
-    @frame = 1
+    @frames = [Frame.new]
     @frame_score = 0
     @frame_scores = []
   end

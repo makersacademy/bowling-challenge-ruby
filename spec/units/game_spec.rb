@@ -5,12 +5,12 @@ describe Game do
     expect(subject.score).to eq 0
   end
 
-  it 'tracks the current frame' do
-    expect(subject.frame).to eq 1
+  it 'tracks staret with frame' do
+    expect(subject.frames.length).to eq 1
   end
 
   it 'tracks frames up to 10' do
-    expect(subject.frame).to be <= 10
+    expect(subject.frames.length).to be <= 10
   end
 
   it 'tracks frame scores' do
