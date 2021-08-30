@@ -1,10 +1,25 @@
 Bowling Challenge in Ruby
 =================
+## Completed whilst keeping in mind
+* TDD
+* Focus on testing behaviour rather than state
+* Single Responsibility Principle and encapsulation
+* Clear and readable code
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+
+
+## The Game class
+
+* The Game class gets instantiated either at the begining of the game or at any stage within the game, loading(initialize) the state of the game(name of the player, pins left standing, frame number, roll number, current score, number of future rolls with bonus).
+* **The currents state of the game** gets checked and tested for invalid values and then the game continues registering new rolls, moving forward  with the frames or ending the game if the conditions are met.
+* The Game class does not need to be aware of the whole game but only the current state in order to continue **the pins registration** and complete the game.
+* The current state of the game can be stored in a database(recomended) or in a session.
+
+## Model and Unit testing
+
+* The Game class has 25 methods explicitly named to declare their behavior/funtionality.
+* 25 unit tests, testing for edge cases and behavior/functionality in one of the each: Perfect/Gutter/Normal game.
+* The testing coverage is 100%.
 
 ## The Task
 
@@ -21,17 +36,6 @@ As usual please start by
 * Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
 
 ___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
-
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
-
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
 
 ## Bowling — how does it work?
 
