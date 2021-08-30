@@ -11,7 +11,10 @@ class Game
   end
 
   def roll(pins)
+  end
 
+  def add_frame
+    @frames << Frame.new unless frames.length == 10
   end
 
   def gameover?

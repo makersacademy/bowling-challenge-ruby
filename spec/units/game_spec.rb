@@ -28,4 +28,20 @@ describe Game do
       expect(subject.gameover?).to eq false
     end
   end
+
+  describe '#add_frame' do
+    context 'fewer than 10 frames in the game' do
+      it 'adds a new frame' do
+        8.times { subject.add_frame }
+        expect{ subject.add_frame }.to change{ subject.frames.length }
+      end
+    end
+
+    context '10 frames in the game' do
+      it 'does not add a frame' do
+        10.times { subject.add_frame }
+        expect{ subject.add_frame }.not_to change{ subject.frames.length }
+      end
+    end
+  end
 end
