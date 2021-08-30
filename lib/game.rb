@@ -12,11 +12,10 @@ class Game
     @pins = pins
     if @ball_number == 1
       @frames[@current_frame] = [pins]
-      next_frame
-      # @ball_number += 1
+      increment_game
     elsif @ball_number == 2
       @frames[@current_frame] << pins
-      next_frame
+      increment_game
     end
   end
 
@@ -28,9 +27,17 @@ class Game
     end
   end
 
+  def strike?(frame_number)
+    @frames[frame_number].length == 1
+  end
+
+  def spare?(frame_number)
+    @frames[frame_number].sum == 10
+  end
+  
   private
 
-  def next_frame
+  def increment_game
     if (@ball_number == 1 && @pins == 10)
       @current_frame += 1
       @ball_number = 1
@@ -41,6 +48,8 @@ class Game
       @ball_number += 1
     end
   end
+
+
 
 
 end

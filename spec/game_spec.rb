@@ -27,15 +27,46 @@ describe Game do
     end
   end
 
-  it 'increases frame number on strike' do
-    subject.roll(10)
-    expect(subject.current_frame).to eq 2
+    context 'understands strikes' do
+      
+    it 'increases frame number on strike' do
+      subject.roll(10)
+      expect(subject.current_frame).to eq 2
+    end
+
+    it 'can correctly increase frame count for multiple strikes' do
+      subject.roll(10)
+      subject.roll(10)
+      expect(subject.current_frame).to eq 3
+    end
+
+    it 'can work out if a previous frame was a strike' do
+      subject.roll(2)
+      subject.roll(8)
+      subject.roll(10)
+      subject.roll(2)
+      subject.roll(8)
+      frame_number = 2
+      expect(subject.strike?(frame_number)).to eq true
+    end
+
+    it "can work out if a previous frame wasn't a strike" do
+      subject.roll(2)
+      subject.roll(8)
+      subject.roll(10)
+      subject.roll(2)
+      subject.roll(8)
+      frame_number = 1
+      expect(subject.strike?(frame_number)).to eq false
+    end
   end
 
-  it 'can correctly increase frame count for multiple strikes' do
+  it 'can workout if a previous frame was a spare' do
+    subject.roll(2)
+    subject.roll(8)
     subject.roll(10)
-    subject.roll(10)
-    expect(subject.current_frame).to eq 3
+    frame_number = 1
+    expect(subject.spare?(frame_number)).to eq true
   end
 
 end
