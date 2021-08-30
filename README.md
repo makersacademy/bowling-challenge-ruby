@@ -1,5 +1,14 @@
 Bowling Challenge in Ruby
 =================
+William's attempt at Bowling Challenge.
+
+My plan here is to ask the user for input for the first bowl, and the second bowl of each frame, and then output a scorecard up to that point. It appears the biggest problem here is deciding exactly how many classes to use. Part of me thinks the whole thing could be thrown into a single long and complicated class. But breaking it down perhaps each frame should be its own object class, the rolling score could also be it's own seperate class. And then a third class for the actual scoring input/output and interactive menu. Perhaps I am overcomplicating it here, perhaps not, we shall see.
+
+My first target will be what I feel the easiest entry point, and that is at the Frame class, setting up whilst considering the 10th frame and it's potential 3 bowls.
+
+
+Bowling Challenge in Ruby
+=================
 
 * Feel free to use google, your notes, books, etc. but work on your own
 * If you refer to the solution of another coach or student, please put a link to that in your README

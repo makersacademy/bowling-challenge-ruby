@@ -1,0 +1,82 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/william/Desktop/Projects/bowling-challenge-ruby/spec/frame_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          6,
+          6,
+          6,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/william/Desktop/Projects/bowling-challenge-ruby/lib/frame.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          18,
+          18,
+          18,
+          18,
+          null,
+          null,
+          1,
+          2,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          2,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/william/Desktop/Projects/bowling-challenge-ruby/spec/score_spec.rb": {
+        "lines": [
+
+        ]
+      }
+    },
+    "timestamp": 1630282016
+  }
+}
