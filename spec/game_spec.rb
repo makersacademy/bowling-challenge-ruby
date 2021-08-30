@@ -83,4 +83,20 @@ describe Game do
     end
   end
 
+  it 'can correctly calculate the score for a spare' do
+    subject.roll(2)
+    subject.roll(8)
+    subject.roll(3)
+    subject.score
+    expect(subject.currentscore).to eq(16)
+  end
+
+  it 'can correctly calculate the score for a spare' do
+    subject.roll(2)
+    subject.roll(8)
+    subject.roll(0)
+    subject.score
+    expect(subject.currentscore).to eq(10)
+  end
+
 end
