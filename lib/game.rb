@@ -6,7 +6,6 @@ class Game
   def initialize 
     @score = 0
     @frames = [Frame.new]
-    @frame_score = 0
     @frame_scores = []
   end
 
@@ -22,6 +21,12 @@ class Game
     add_frame
   end
 
+  def gameover?
+    @frame_scores.length == 10
+  end
+
+  private
+
   def add_frame
     if @frames.last.strike? || @frames.last.current_roll == 2
       @frames << Frame.new unless frames.length == 10
@@ -30,15 +35,11 @@ class Game
 
   def check_frameover
     @frames.each do |frame|
-      if frame.closed == false && frame.frameover?
+      if frame.frameover?
         @frame_scores << frame.frame_score
         @score += frame.frame_score
         frame.closed = true
       end
     end
-  end
-  
-  def gameover?
-    @frame_scores.length == 10 ? true : false
   end
 end
