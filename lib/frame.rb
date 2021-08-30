@@ -6,12 +6,10 @@ class Frame
     @rolls = []
   end
 
-  def store_first_roll(roll_1)
-    @rolls << roll_1
-  end
+  def store_roll_score(roll_score)
+    raise "Enter a score between 0-10" if roll_score.class != Integer || !roll_score.between?(0, 10)
 
-  def store_second_roll(roll_2)
-    @rolls << roll_2
+    @rolls << roll_score
   end
 
 end
