@@ -15,4 +15,8 @@ class Frame
   def strike?
     @current_roll == 1 && @frame_score == 10
   end
+
+  def split?
+    @current_roll == 2 && @frame_score == 10
+  end
 end

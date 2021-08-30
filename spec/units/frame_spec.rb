@@ -25,4 +25,14 @@ describe Frame do
       end
     end
   end
+
+  describe '#split?' do
+    context '10 pins over first and second roll' do
+      it 'returns true' do
+        subject.add_roll(5)
+        subject.add_roll(5)
+        expect(subject.split?).to eq true
+      end
+    end
+  end
 end
