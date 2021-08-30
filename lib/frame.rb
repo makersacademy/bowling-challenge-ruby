@@ -11,4 +11,8 @@ class Frame
     @current_roll += 1
     @frame_score += pins
   end
+
+  def strike?
+    @current_roll == 1 && @frame_score == 10
+  end
 end

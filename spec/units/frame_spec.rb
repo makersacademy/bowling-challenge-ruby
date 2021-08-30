@@ -16,4 +16,13 @@ describe Frame do
       expect{ subject.add_roll(5) }.to change{ subject.frame_score }.by(+5)
     end
   end
+
+  describe '#strike?' do
+    context '10 pins on first roll' do
+      it 'returns true' do
+        subject.add_roll(10)
+        expect(subject.strike?).to eq true
+      end
+    end
+  end
 end
