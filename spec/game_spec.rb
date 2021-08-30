@@ -39,4 +39,19 @@ RSpec.describe 'BowlingGame' do
     end
   end
 
+  context 'all spares' do
+    it 'can roll all spares' do 
+      game = BowlingGame.new
+      21.times{game.roll(5)}
+      expect(game.score).to eq 150
+    end
+  end
+
+  context 'perfect game' do
+    it 'can roll all 10 game' do 
+      game = BowlingGame.new
+      12.times{game.roll(10)}
+      expect(game.score).to eq 300
+    end
+  end
 end
