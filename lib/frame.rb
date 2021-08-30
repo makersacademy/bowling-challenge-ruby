@@ -1,4 +1,5 @@
 require_relative 'validity'
+require_relative 'roll'
 
 class Frame
 
@@ -12,10 +13,9 @@ class Frame
     @frame_content = { frame_id: frame_number }
   end
 
-  def add(roll) 
-    # could build in validity checking here by dependency injecting Roll class
+  def add(roll, roller=Roll.new) 
     frame_full_check
-    @roll = roll
+    @roll = roller.roll(roll, pins_remaining)
     roll_1.nil? ? add_roll(:roll_1) : roll_2.nil? ? add_roll(:roll_2) : add_roll(:roll_3)
   end
 
@@ -52,6 +52,10 @@ class Frame
     @frame_content[roll_no] = :X if (roll_no == :roll_1 || frame_id == LAST_FRAME) && strike?
   end
 
+  def pins_remaining
+    !roll_1.nil? && roll_1 != :X && roll_2.nil? ? TOTAL_PINS - roll_1 : TOTAL_PINS
+  end
+
   def spare?
     return if roll_1 == :X
     
@@ -63,11 +67,11 @@ class Frame
   end
 
   def frame_full_check
-    test = frame_id < LAST_FRAME ? normal_frame_full? : final_frame_full?
+    test = frame_id < LAST_FRAME ? frame_full? : final_frame_full?
     raise 'Frame complete' if test
   end
 
-  def normal_frame_full?
+  def frame_full?
     roll_1 == :X || !roll_2.nil?
   end
 
