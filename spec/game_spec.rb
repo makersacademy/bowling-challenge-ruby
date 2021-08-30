@@ -27,4 +27,8 @@ describe Game do
     end
   end
 
+  it 'knows if its a spare' do
+    subject.roll(5)
+  end
+
 end

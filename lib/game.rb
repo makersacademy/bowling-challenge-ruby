@@ -12,14 +12,16 @@ class Game
     roll
   end
 
-  def roll(value)
+  def roll(pins)
+    @pins = pins
     if @ball_number == 1
-      @frames[@current_frame] = [value]
+      @frames[@current_frame] = [pins]
+      next_frame
       @ball_number += 1
     elsif @ball_number == 2
       @ball_number = 1
-      @frames[@current_frame] << value
-      @current_frame += 1
+      @frames[@current_frame] << pins
+      next_frame
     end
   end
 
@@ -30,5 +32,16 @@ class Game
       end
     end
   end
+
+  private
+
+  def next_frame
+    if (@ball_number == 1 && @pins == 10)
+      @current_frame += 1
+    elsif @ball_number == 2
+      @current_frame += 1
+    end
+  end
+
 
 end
