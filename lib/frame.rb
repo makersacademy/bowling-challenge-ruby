@@ -1,10 +1,12 @@
 class Frame
   attr_reader :frame_score, :current_roll, :rolls_remaining
+  attr_accessor :closed
 
   def initialize 
     @frame_score = 0
     @current_roll = 0
     @rolls_remaining = 2
+    @closed = false
   end
 
   def add_roll(pins)

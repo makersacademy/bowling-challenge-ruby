@@ -28,6 +28,7 @@ class Game
       if frame.frameover?
         @frame_scores << frame.frame_score
         @score += frame.frame_score
+        frame.closed = true
       end
     end
   end

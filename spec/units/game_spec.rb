@@ -32,6 +32,12 @@ describe Game do
         subject.roll(10)
         expect(subject.score).to eq 30
       end
+
+      it 'updates the frame status to closed' do
+        subject.roll(1)
+        subject.roll(0)
+        expect(subject.frames.first.closed).to eq true
+      end
     end
   end
 
