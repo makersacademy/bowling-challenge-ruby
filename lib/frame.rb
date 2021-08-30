@@ -1,5 +1,5 @@
 class Frame
-  attr_reader :frame_score, :current_roll
+  attr_reader :frame_score, :current_roll, :rolls_remaining
 
   def initialize 
     @frame_score = 0
@@ -10,6 +10,7 @@ class Frame
   def add_roll(pins)
     @current_roll += 1
     @frame_score += pins
+    update_rolls_remaining
   end
 
   def strike?
@@ -18,5 +19,9 @@ class Frame
 
   def split?
     @current_roll == 2 && @frame_score == 10
+  end
+
+  def update_rolls_remaining
+    @rolls_remaining -= 1 unless strike? or split?
   end
 end

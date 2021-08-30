@@ -17,6 +17,25 @@ describe Frame do
     end
   end
 
+  describe '#update_rolls_remaining' do
+    context 'strike' do
+      it "doesn't change rolls remaining" do
+        expect{ subject.add_roll(10) }.not_to change{ subject.rolls_remaining }
+      end
+    end
+    context 'split' do
+      it "doesn't change rolls remaining" do
+        subject.add_roll(5)
+        expect{ subject.add_roll(5) }.not_to change{ subject.rolls_remaining }
+      end
+    end
+    context 'not a strike or split' do
+      it "reduces rolls remaining by 1" do
+        expect{ subject.add_roll(5) }.to change{ subject.rolls_remaining }.by(-1)
+      end
+    end
+  end
+
   describe '#strike?' do
     context '10 pins on first roll' do
       it 'returns true' do
