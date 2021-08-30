@@ -9,7 +9,7 @@ class Game
     check_input(num)
     @scores << num
   end
-  
+
   def last_score
     @scores.last
   end
