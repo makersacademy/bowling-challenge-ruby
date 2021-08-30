@@ -11,26 +11,15 @@ attr_reader :name, :score
 
   def frame
     fail "Game is complete no frames remaining" if @score.length == 10
-    current_frame = Array.new
     first_bowl = rand(0..10)
-    if first_bowl == 10 
-      current_frame << "X"
-      current_frame << "-"
-      @score << current_frame
-      return
-    else
-    end  
+    # case strike
+    return p @score << ["X", "-"] if first_bowl == 10
+    current_frame = Array.new 
     current_frame << first_bowl
     remaining_pins = 10 - first_bowl
     second_bowl = rand(0..remaining_pins)
-    if (first_bowl + second_bowl) == 10 
-      current_frame << "/"
-      @score << current_frame
-      return 
-    else
-    end
-    current_frame << second_bowl
-    @score << current_frame
+    return p @score << [first_bowl, "/"] if (first_bowl + second_bowl) == 10 
+    p @score << [first_bowl, second_bowl]
   end
 
 end
