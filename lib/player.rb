@@ -13,13 +13,11 @@ attr_reader :name, :score
     fail "Game is complete no frames remaining" if @score.length == 10
     first_bowl = rand(0..10)
     # case strike
-    return p @score << ["X", "-"] if first_bowl == 10
-    current_frame = Array.new 
-    current_frame << first_bowl
+    return @score << ["X", "-"] if first_bowl == 10
     remaining_pins = 10 - first_bowl
     second_bowl = rand(0..remaining_pins)
-    return p @score << [first_bowl, "/"] if (first_bowl + second_bowl) == 10 
-    p @score << [first_bowl, second_bowl]
+    return @score << [first_bowl, "/"] if (first_bowl + second_bowl) == 10 
+    @score << [first_bowl, second_bowl]
   end
 
 end
