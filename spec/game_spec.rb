@@ -27,7 +27,7 @@ describe Game do
     end
   end
 
-    context 'understands strikes' do
+  context 'understands strikes' do
       
     it 'increases frame number on strike' do
       subject.roll(10)
@@ -44,8 +44,6 @@ describe Game do
       subject.roll(2)
       subject.roll(8)
       subject.roll(10)
-      subject.roll(2)
-      subject.roll(8)
       frame_number = 2
       expect(subject.strike?(frame_number)).to eq true
     end
@@ -54,26 +52,35 @@ describe Game do
       subject.roll(2)
       subject.roll(8)
       subject.roll(10)
-      subject.roll(2)
-      subject.roll(8)
       frame_number = 1
       expect(subject.strike?(frame_number)).to eq false
     end
   end
 
-  it 'can workout if a previous frame was a spare' do
-    subject.roll(2)
-    subject.roll(8)
-    subject.roll(10)
-    frame_number = 1
-    expect(subject.spare?(frame_number)).to eq true
+  context 'understands spares' do
+    
+    it 'can workout if a previous frame was a spare' do
+      subject.roll(2)
+      subject.roll(8)
+      subject.roll(10)
+      frame_number = 1
+      expect(subject.spare?(frame_number)).to eq true
+    end
+
+    it "can workout if a previous frame wasn't a spare" do
+      subject.roll(2)
+      subject.roll(8)
+      subject.roll(10)
+      frame_number = 2
+      expect(subject.spare?(frame_number)).to eq false
+    end
+
+    it "can workout if a previous frame wasn't a spare" do
+      subject.roll(2)
+      subject.roll(7)
+      frame_number = 1
+      expect(subject.spare?(frame_number)).to eq false
+    end
   end
 
-  it "can workout if a previous frame wasn't a spare" do
-    subject.roll(2)
-    subject.roll(8)
-    subject.roll(10)
-    frame_number = 2
-    expect(subject.spare?(frame_number)).to eq false
-  end
 end
