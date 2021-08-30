@@ -3,10 +3,10 @@ describe Player do
   let(:player) { described_class.new("Graeme")}
   # score with no spares or strikes
   let(:test_score) { described_class.new("Graeme", {"1" => [2,3], "2" => [4,5], "3" => [6,1]})} 
-  # # score with single spare
-  # let(:spare_score) { described_class.new("Graeme", [[2,3], [4,6], [6,1]]) }
+  # score with single spare
+  let(:spare_score) { described_class.new("Graeme", {"1" => [2,3], "2" => [4,6], "3" => [6,1]}) }
   # # score with spares an no strikes 
-  # let(:spares_score) { described_class.new("Graeme", [[2,3], [4,5], [6,4], [7,0], [8,2], [3,7], [3,4], [3,5], [6,2]]) }
+  let(:spares_score) { described_class.new("Graeme", {"1" => [2,3], "2" => [4,5], "3" => [6,4], "4" =>[7,0], "5" => [8,2], "6" => [3,7], "7" => [3,4], "8" => [3,5], "9" => [6,2]}) }
   # # score with two strikes and some spares
   # let(:strike_score) { described_class.new("Graeme", [[2,3], [10,0], [6,4], [10,0], [8,2], [3,5]]) }
   # # score that includes a double 
@@ -29,10 +29,10 @@ describe Player do
     expect(test_score.total).to eq(21)
   end 
 
-  # it "calculates a score with spares and no strikes" do
-  #   expect(spare_score.total).to eq(28)
-  #   expect(spares_score.total).to eq(87)
-  # end 
+  it "calculates a score with spares" do
+    expect(spare_score.total).to eq(28)
+    expect(spares_score.total).to eq(87)
+  end 
 
   # it "calculates a score with spares and strikes separated" do 
   #   expect(strike_score.total).to eq(86)

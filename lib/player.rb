@@ -25,8 +25,16 @@ attr_reader :name, :frames, :strike_streak, :spare
 
   def total
     tally = 0
-    @frames.map do |key, value|
-      tally += value.sum
+    @frames.map do |key, frame|
+      # if we get a spare add first bowl to tally
+      p frame
+      if frame.sum == 10
+        bonus = @frames[(key.to_i + 1).to_s]
+        tally += (bonus[0] + frame.sum)
+      # if no spare procced to add frame score to tally  
+      else
+        tally += frame.sum
+      end 
     end
   tally
   end
