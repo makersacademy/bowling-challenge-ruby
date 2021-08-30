@@ -1,7 +1,7 @@
 class Game 
   attr_reader :scores
 
-  def initialize
+  def initialize(player)
     @scores = []
   end
 end
