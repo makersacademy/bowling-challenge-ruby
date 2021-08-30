@@ -3,7 +3,7 @@ class Game
     attr_reader :player, :frame, :roll, :score, :count_next, :pins_rest , :list_boundaries, :message
 
     def initialize(player, pins_rest = 10, frame = 1, roll = 0, score = 0, count_next = 0)
-      @player, @frame, @roll, @this_frame_count, @this_frame_bonus = capitalize_name(player), frame, roll, 0, 0
+      @player, @frame, @roll, @this_roll_count, @this_roll_bonus = capitalize_name(player), frame, roll, 0, 0
       @score, @count_next, @pins_rest, @this_roll_messg =  score, count_next, pins_rest, nil
       @list_boundaries = { pins_rest: 10, frame: 10, roll: 2, score: 300, count_next: 2 }
       check_initialize_arguments
@@ -18,41 +18,34 @@ class Game
     end
 
     def register_pins(pins_number = 0)
-      # puts '---------' << @score.to_s << '---------'
-      @pins_number, @this_roll_messg = pins_number, nil
-      [check_game_frame, check_pins_number]
-      new_roll
-      return 'Game ended. Well done, you got: ' << @score.to_s << ' points' if end_game?
-      frame_count if count_roll?
-      frame_bonus if bonus_roll?
-      roll_messg
-      future_bonus if ['Strike', 'Spare'].include?(@this_roll_messg)
-      left_pins
-      this_roll_info
-      change_frame
-      puts @this_roll_info.join(' ')
+      @pins_number, @this_roll_messg, @this_roll_count  = pins_number, nil, 0
+      [check_game_frame, check_pins_number, set_new_roll]
+      return if game_finished?
+      puts [plus_roll_count, plus_roll_bonus, get_roll_messg, future_bonus?, pins_left, get_roll_data, change_frame, @this_roll_data.join(' ')].last 
     end
 
-    def new_roll
+    def set_new_roll
       @roll += 1
+      @this_roll_bonus = 0
+      @this_roll_count = 0
     end
 
-    def end_game?
+    def game_finished?
       if @frame == 10
-        return true if (@roll == 2 && @pins_number != @pins_rest) || @roll > 3.2
+        return true if (@roll == 3 && @count_next < 1) || @roll > 3
       end
       false 
     end
 
-    def this_roll_info
-      @this_roll_messg.nil? ? (this_roll_messg = '') : (this_roll_messg = @this_roll_messg)
-      this_roll_messg = 'Extra roll due to spare in 10th frame' if @frame == 10 && @roll == 3.1
-      this_roll_messg = 'Extra roll due to strike in 10th frame' if @frame == 10 && [2.2, 3.2].include?(@roll)
-      @this_roll_info = [@frame.to_s, @roll.to_i.to_s, @pins_number.to_s, see_score, @this_frame_bonus, this_roll_messg]
+    def get_roll_data
+      @this_roll_messg.nil? ? (messg = '') : (messg = @this_roll_messg)
+      messg = 'Extra roll due to spare in 10th frame' if @frame == 10 && @roll == 3 && @count_next % 1 == 0
+      messg = 'Extra roll due to strike in 10th frame' if @frame == 10 && (@roll == 2 && @count_next == 1.1 || @roll == 3 && @count_next % 1 != 0)
+      @this_roll_data = [@frame.to_s, @roll.to_i.to_s, @pins_number.to_s, see_score, @this_roll_count, @this_roll_bonus, messg]
     end
 
     def see_score
-      return @score#  if change_frame == true || end_game?
+      return @score #  if change_frame == true || game_finished?
       return ' '
     end
 
@@ -62,19 +55,19 @@ class Game
 
     def count_roll?
       return true if @frame < 10 && [1,2].include?(@roll)
-      return true if @frame ==10 && @roll == 1
-      return true if @frame ==10 && @roll == 2 
+      return true if @frame == 10 && @roll == 1
+      return true if @frame == 10 && @roll == 2 && @count_next != 2.1
       false
     end
 
     def bonus_roll?
-      return true if @count_next > 0
+      return true if @count_next >= 1
       false
     end
 
     def new_frame
       @frame += 1
-      @pins_rest, @roll, @this_frame_bonus, @this_frame_count = 10, 0, 0, 0
+      @pins_rest, @roll = 10, 0
       true
     end
 
@@ -82,33 +75,36 @@ class Game
       (@roll == 2 || @pins_rest == 0) ? true : false
     end
 
-    def future_bonus
-      @count_next = 2 if @this_roll_messg == 'Strike'
+    def future_bonus?
+      return unless ['Strike', 'Spare'].include?(@this_roll_messg)
+      @count_next = 2.1 if @this_roll_messg == 'Strike'
       @count_next = 1 if @this_roll_messg == 'Spare'
-      @roll = @roll.to_f + 0.1 if @frame == 10 && [1, 2, 2.1].include?(@roll)
     end
 
-    def left_pins
-      @pins_rest = 10 - @pins_number if @roll <= 2
-      @pins_rest = 10 if [1.1, 2.2, 2.1].include?(@roll)
+    def pins_left
+      @pins_rest = 10 - @pins_number if @roll == 1
+      @pins_rest = 10 if @frame == 10 && @roll == 1 && @count_next == 2.1
+      @pins_rest = 10 if @frame == 10 && @roll == 2 && @count_next > 1
     end
 
-    def roll_messg
+    def get_roll_messg
       @this_roll_messg = nil
       @this_roll_messg = 'Strike' if @roll == 1 && @pins_number == 10
-      @this_roll_messg = 'Spare' if @roll == 2 && @pins_number == @pins_rest
+      @this_roll_messg = 'Spare' if @roll == 2 && @pins_number == @pins_rest &&  @this_roll_count != 0
       @this_roll_messg = 'Bad luck' if @pins_number == 0
     end
 
-    def frame_count
+    def plus_roll_count
+      return unless count_roll?
       @score += @pins_number
-      @this_frame_count += @pins_number
+      @this_roll_count = @pins_number
     end
 
-    def frame_bonus
+    def plus_roll_bonus
+      return unless bonus_roll?
       @score += @pins_number
       @count_next -= 1
-      @this_frame_bonus += @pins_number
+      @this_roll_bonus = @pins_number
     end
 
     def check_game_frame
@@ -130,7 +126,8 @@ class Game
 end
 
 game = Game.new('jake')
-[1,4,4,5,6,4,5,5,10,0,1,7,3,6,4,10,10,8,6].each do |pins|
+# [1,4,4,5,6,4,5,5,10,0,1,7,3,6,4,10,2,8,6].each do |pins|
+ [10,10,10,10,10,10,10,10,10,10,10,10].each do |pins|
   game.register_pins(pins)
 end
 puts game.score
