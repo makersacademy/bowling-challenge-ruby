@@ -24,4 +24,8 @@ class Frame
   def update_rolls_remaining
     @rolls_remaining -= 1 unless strike? or split?
   end
+
+  def frameover?
+    @rolls_remaining == 0
+  end
 end

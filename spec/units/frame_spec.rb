@@ -54,4 +54,21 @@ describe Frame do
       end
     end
   end
+
+  describe '#frameover?' do
+    context 'frame has rolls remaining' do
+      it 'returns false' do
+        subject.add_roll(5)
+        expect(subject.frameover?).to eq false
+      end
+    end
+
+    context 'frame has no rolls remaining' do
+      it 'returns true' do
+        subject.add_roll(5)
+        subject.add_roll(2)
+        expect(subject.frameover?).to eq true
+      end
+    end
+  end
 end

@@ -23,6 +23,18 @@ describe Game do
     end
   end
 
+  describe '#check_frameover' do
+    context '0 rolls remaining' do
+      it 'adds the frame score to the game' do
+        subject.roll(10)
+        subject.roll(10)
+        expect(subject.score).to eq 0
+        subject.roll(10)
+        expect(subject.score).to eq 30
+      end
+    end
+  end
+
   describe '#gameover?' do
     it 'returns if game is over' do
       expect(subject.gameover?).to eq false
