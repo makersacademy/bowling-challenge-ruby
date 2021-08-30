@@ -107,5 +107,5 @@ describe Game do
     subject.score
     expect(subject.currentscore).to eq(52)
   end
-
+  
 end

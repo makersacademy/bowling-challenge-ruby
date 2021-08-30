@@ -22,7 +22,7 @@ class Game
 
   def score
     @currentscore = 0
-    @frames.each do |frame|
+    @frames.each do |frame, _balls|
       @currentscore += frames[frame].sum
       if spare?(frame)
         @currentscore += frames[frame + 1][FIRST_BALL_INDEX]
