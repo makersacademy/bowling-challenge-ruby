@@ -21,13 +21,14 @@ class Game
       @pins_number, @this_roll_messg, @this_roll_count  = pins_number, nil, 0
       [check_game_frame, check_pins_number, set_new_roll]
       return if game_finished?
-      puts run_roll
+      run_game_roll
     end
 
-    def run_roll
-      [plus_bonus_on_top_of_bonus, plus_roll_count, plus_roll_bonus, 
+    def run_game_roll
+      puts [plus_bonus_on_top_of_bonus, plus_roll_count, plus_roll_bonus, 
       get_roll_messg, future_bonus?, pins_left, get_roll_data, 
-      change_frame, @this_roll_data.join(' ')].last 
+      change_frame, @this_roll_data.join(' ')].last
+      puts inform_game_ended if game_finished?(:before_roll)
     end
 
     def set_new_roll
@@ -36,10 +37,16 @@ class Game
       @this_roll_count = 0
     end
 
-    def game_finished?
-      if @frame == 10
-        return true if (@roll == 3 && @count_next < 1) || @roll > 3
-      end
+    def inform_game_ended(extra = '')
+      extra = '. The Perfect Game!' if @score == 300 
+      extra = '. Bad luck! the Gutter' if @score == 0 
+      'Game finished ' << @player << ', you scored: ' << @score.to_s << ' points' << extra
+    end
+
+    def game_finished?(before_or_after_roll = :after_roll)
+      before_or_after_roll == :before_roll ? end_at_roll = 2 : end_at_roll = 3
+      return true if @frame == 10 && @roll == end_at_roll && @count_next < 1
+      return true if @frame == 10 && @roll > end_at_roll
       false 
     end
 
@@ -47,8 +54,7 @@ class Game
       @this_roll_messg.nil? ? (messg = '') : (messg = @this_roll_messg)
       messg = 'Extra roll due to spare in 10th frame' if extra_roll_spare?
       messg = 'Extra roll due to strike in 10th frame' if extra_roll_strike?
-      @this_roll_data = [@frame.to_s, @roll.to_i.to_s, @pins_number.to_s, 
-                        see_score, @this_roll_count, @this_roll_bonus, messg]
+      @this_roll_data = [@frame.to_s, @roll.to_i.to_s, @pins_number.to_s, see_score, @this_roll_count, @this_roll_bonus, messg]
     end
 
     def extra_roll_strike?
@@ -60,8 +66,7 @@ class Game
     end
 
     def see_score
-      return @score #  if change_frame == true || game_finished?
-      return ' '
+      @score 
     end
 
     def change_frame
@@ -146,9 +151,4 @@ class Game
 
 end
 
-# game = Game.new('jake')
-# [1,4,4,5,6,4,5,5,10,0,1,7,3,6,4,10,2,8,6].each do |pins|
-# # [10,10,10,10,10,10,10,10,10,10,10,10].each do |pins|
-#   game.register_pins(pins)
-# end
-# puts game.score
+

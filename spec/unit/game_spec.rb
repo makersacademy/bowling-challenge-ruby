@@ -3,7 +3,7 @@ require './lib/game.rb'
 describe Game do 
 
   let(:player){ double :player, 
-                name: 'Radu',
+                name: 'Jake',
                 pins_rest: 5,
                 frame: 5,
                 roll: 1,
@@ -69,7 +69,7 @@ describe Game do
 
   context "check all values are numbers" do
     described_class.new("name").list_boundaries.each do |arg, max|
-      it 'expects subject to raise error when initialized frame is a non-number' do
+      it 'expects subject to raise error when initialized argument is a non-number' do
         allow(player).to receive(arg).and_return('a')
         expect{ described_class.new(player.name, player.pins_rest, player.frame, player.roll, player.score, player.count_next) }.to raise_error('player has non-number ' << arg.to_s)
       end
@@ -78,7 +78,7 @@ describe Game do
 
   context "check all values are not smaller than 0" do
     described_class.new("name").list_boundaries.each do |arg, max|
-      it 'expects subject to raise error when initialized frame smaller than 0' do
+      it 'expects subject to raise error when initialized argument smaller than 0' do
         allow(player).to receive(arg).and_return(-1)
         expect{ described_class.new(player.name, player.pins_rest, player.frame, player.roll, player.score, player.count_next) }.to raise_error('player has negative ' << arg.to_s)
       end
@@ -88,11 +88,35 @@ describe Game do
   context "check all values are not greater than maximum allowed" do
     player_name = "Jake"
     described_class.new(player_name).list_boundaries.each do |arg, max|
-      it 'expects subject to raise error when initialized frame greater than #{max}' do
+      it 'expects subject to raise error when initialized argument greater than #{max}' do
         allow(player).to receive(arg).and_return(max + 1)
         expect{ described_class.new(player.name, player.pins_rest, player.frame, player.roll, player.score, player.count_next) }.to raise_error('player has ' << arg.to_s << ' greater than ' << max.to_s)
       end
     end
+  end
+
+  it 'expects the be 300(perfect game) ' do
+    game = described_class.new(player.name)
+    12.times do 
+      game.register_pins(10)
+    end
+    expect(game.score).to eq(300)
+  end
+
+  it 'expects the be 0(gutter game) ' do
+    game = described_class.new(player.name)
+    20.times do 
+      game.register_pins(0)
+    end
+    expect(game.score).to eq(0)
+  end
+
+  it 'expects the be 133(known game) ' do
+    game = described_class.new(player.name)
+    [1,4,4,5,6,4,5,5,10,0,1,7,3,6,4,10,2,8,6].each do |pins|
+      game.register_pins(pins)
+    end
+    expect(game.score).to eq(133)
   end
 
 end
