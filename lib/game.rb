@@ -21,7 +21,13 @@ class Game
       @pins_number, @this_roll_messg, @this_roll_count  = pins_number, nil, 0
       [check_game_frame, check_pins_number, set_new_roll]
       return if game_finished?
-      puts [plus_roll_count, plus_roll_bonus, get_roll_messg, future_bonus?, pins_left, get_roll_data, change_frame, @this_roll_data.join(' ')].last 
+      puts run_roll
+    end
+
+    def run_roll
+      [plus_bonus_on_top_of_bonus, plus_roll_count, plus_roll_bonus, 
+      get_roll_messg, future_bonus?, pins_left, get_roll_data, 
+      change_frame, @this_roll_data.join(' ')].last 
     end
 
     def set_new_roll
@@ -39,9 +45,18 @@ class Game
 
     def get_roll_data
       @this_roll_messg.nil? ? (messg = '') : (messg = @this_roll_messg)
-      messg = 'Extra roll due to spare in 10th frame' if @frame == 10 && @roll == 3 && @count_next % 1 == 0
-      messg = 'Extra roll due to strike in 10th frame' if @frame == 10 && (@roll == 2 && @count_next == 1.1 || @roll == 3 && @count_next % 1 != 0)
-      @this_roll_data = [@frame.to_s, @roll.to_i.to_s, @pins_number.to_s, see_score, @this_roll_count, @this_roll_bonus, messg]
+      messg = 'Extra roll due to spare in 10th frame' if extra_roll_spare?
+      messg = 'Extra roll due to strike in 10th frame' if extra_roll_strike?
+      @this_roll_data = [@frame.to_s, @roll.to_i.to_s, @pins_number.to_s, 
+                        see_score, @this_roll_count, @this_roll_bonus, messg]
+    end
+
+    def extra_roll_strike?
+      @frame == 10 && (@roll == 2 && @count_next == 1.1 || @roll == 3 && @count_next % 1 != 0)
+    end
+
+    def extra_roll_spare?
+      @frame == 10 && @roll == 3 && @count_next % 1 == 0
     end
 
     def see_score
@@ -107,6 +122,12 @@ class Game
       @this_roll_bonus = @pins_number
     end
 
+    def plus_bonus_on_top_of_bonus
+      return unless @count_next == 2.1 && @roll == 1 && @pins_number == 10
+      @score += @pins_number
+      @this_roll_bonus = @pins_number
+    end
+
     def check_game_frame
       raise 'pins registration failed, game has ended' if @frame == 10 && @roll == 2 && @count_next == 0
       raise 'pins registration failed, game has ended' if @frame == 10 && @roll == 3
@@ -125,9 +146,9 @@ class Game
 
 end
 
-game = Game.new('jake')
+# game = Game.new('jake')
 # [1,4,4,5,6,4,5,5,10,0,1,7,3,6,4,10,2,8,6].each do |pins|
- [10,10,10,10,10,10,10,10,10,10,10,10].each do |pins|
-  game.register_pins(pins)
-end
-puts game.score
+# # [10,10,10,10,10,10,10,10,10,10,10,10].each do |pins|
+#   game.register_pins(pins)
+# end
+# puts game.score
