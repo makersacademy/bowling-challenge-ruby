@@ -1,9 +1,9 @@
-require_relative 'roll'
+require_relative 'frame'
 
 class Game
 
-  def roll(pins, roller = Roll.new)
-    roller.roll(pins)
+  def roll(pins)
+    
   end
 
 end

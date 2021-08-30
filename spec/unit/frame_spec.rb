@@ -12,7 +12,7 @@ describe Frame do
 
   it 'initialises @frame as a frame hash' do
     frame = Frame.new(1, check)
-    expect(frame.print_frame).to eq 'Frame: 1 | 1st roll:  | 2nd roll: '
+    expect(frame.frame_id).to eq 1
   end
 
   it 'checks frame number is valid' do
@@ -40,46 +40,46 @@ describe Frame do
 
       it 'adds first frame roll to the frame' do
         frame.add(4, roller)
-        expect(frame.print_frame).to include '1st roll: 4'
+        expect(frame.roll_1).to eq 4
       end
 
       it 'adds second frame roll to the frame' do
         frame.add(4, roller)
         frame.add(5, roller)
-        expect(frame.print_frame).to include '1st roll: 4 | 2nd roll: 5'
+        expect(frame.roll_2).to eq 5
       end
 
-      it 'does not enter a roll if frame full' do
+      it 'cannot enter roll if frame full' do
         frame.add(4, roller)
         frame.add(5, roller)
         expect { frame.add(3, roller) }.to raise_error 'Frame complete'
       end
 
-      it 'raises error if attempting to add a roll to frame after strike' do
+      it 'cannot add a roll after strike' do
         frame.add(10, roller)
         expect { frame.add(1, roller) }.to raise_error 'Frame complete'
       end
 
-      it 'sets strike flag if first roll is 10' do
+      it 'is strike if first roll is 10' do
         frame.add(10, roller)
-        expect(frame.print_frame).to include '1st roll: X'
+        expect(frame.roll_1).to eq :X
       end
 
-      it 'does not set strike flag if 1st roll is less than 10' do
+      it 'is not strike if 1st roll is less than 10' do
         frame.add(9, roller)
-        expect(frame.print_frame).not_to include 'X'
+        expect(frame.roll_1).not_to eq :X
       end
 
-      it 'sets spare flag if 1st & 2nd rolls total 10' do
+      it 'is a spare if 1st & 2nd rolls total 10' do
         frame.add(2, roller)
         frame.add(8, roller)
-        expect(frame.print_frame).to include '2nd roll: /'
+        expect(frame.roll_2).to eq :/
       end
 
-      it 'does not set spare flag if 1st & 2nd rolls total less than 10' do
+      it 'is not spare if 1st & 2nd rolls total less than 10' do
         frame.add(2, roller)
         frame.add(7, roller)
-        expect(frame.print_frame).not_to include '/'
+        expect(frame.roll_2).not_to eq :/
       end
     end
   end
@@ -88,32 +88,32 @@ describe Frame do
 
     let(:frame) { Frame.new(Frame::LAST_FRAME, check) }
     
-    it 'allows an extra roll if rolls 1 & 2 are a spare' do
-      output = '1st roll: 2 | 2nd roll: / | 3rd roll: 5'
+    it 'allows extra roll if rolls 1 & 2 are a spare' do
       frame.add(2, roller)
       frame.add(8, roller)
       frame.add(5, roller)
-      expect(frame.print_frame).to include output
+      expect(frame.roll_2).to eq :/
+      expect(frame.roll_3).to eq 5
     end
 
-    it 'allows an extra two rolls if roll 1 is a strike' do
-      output = '1st roll: X | 2nd roll: X | 3rd roll: X'
+    it 'allows extra two rolls if roll 1 is a strike' do
       3.times { frame.add(10, roller) }
-      expect(frame.print_frame).to include output
+      expect(frame.roll_2).to eq :X
+      expect(frame.roll_3).to eq :X
     end
     
-    it 'raises error if trying to add roll after two non-bonus rolls' do
+    it 'cannot add roll after two non-bonus rolls' do
       frame.add(4, roller)
       frame.add(5, roller)
       expect { frame.add(3, roller) }.to raise_error 'Frame complete'
     end
 
-    it 'raises error if trying to add roll after three strikes' do
+    it 'cannot add roll after three strikes' do
       3.times { frame.add(10, roller) }
       expect { frame.add(3, roller) }.to raise_error 'Frame complete'
     end
 
-    it 'raises error if trying to add roll after a spare and third roll' do
+    it 'cannot add roll after a spare and third roll' do
       2.times { frame.add(5, roller) }
       frame.add(10, roller)
       expect { frame.add(1, roller) }.to raise_error 'Frame complete'

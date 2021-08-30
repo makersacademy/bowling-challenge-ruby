@@ -35,10 +35,10 @@ class Frame
     @frame_content[:roll_3]
   end
   
-  def print_frame
-    "Frame: #{frame_id} | 1st roll: #{roll_1} |"\
-    " 2nd roll: #{roll_2}#{" | 3rd roll: #{roll_3}" if roll_3}"
-  end
+  # def print_frame
+  #   "Frame: #{frame_id} | 1st roll: #{roll_1} |"\
+  #   " 2nd roll: #{roll_2}#{" | 3rd roll: #{roll_3}" if roll_3}"
+  # end
 
   private
 
