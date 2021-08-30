@@ -20,6 +20,7 @@ class Game
   end
 
   def score
+    @currentscore = 0
     @frames.each do |_frame, balls|
       balls.each do |ball|
         @currentscore += ball
