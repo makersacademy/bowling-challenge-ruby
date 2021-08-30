@@ -8,13 +8,14 @@ class Frame
   TOTAL_PINS = 10
   ERROR = 'Not a valid frame number'
   
-  def initialize(frame_number, check = Validity.new)
+  def initialize(frame_number = FIRST_FRAME, check = Validity.new)
     valid_frame_number_check(frame_number, check)
     @frame_content = { frame_id: frame_number }
   end
 
   def add(roll, roller = Roll.new) 
-    frame_full_check
+    raise 'Frame complete' if full?
+
     @roll = roller.roll(roll, pins_remaining)
     roll_1.nil? ? add_roll(:roll_1) : roll_2.nil? ? add_roll(:roll_2) : add_roll(:roll_3)
   end
@@ -33,6 +34,10 @@ class Frame
 
   def roll_3
     @frame_content[:roll_3]
+  end
+
+  def full?
+    frame_id < LAST_FRAME ? frame_full? : final_frame_full?
   end
   
   # def print_frame
@@ -64,11 +69,6 @@ class Frame
 
   def strike?
     @roll == TOTAL_PINS
-  end
-
-  def frame_full_check
-    test = frame_id < LAST_FRAME ? frame_full? : final_frame_full?
-    raise 'Frame complete' if test
   end
 
   def frame_full?
