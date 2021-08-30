@@ -10,4 +10,8 @@ class Frame
     @rolls << roll_1
   end
 
+  def store_second_roll(roll_2)
+    @rolls << roll_2
+  end
+
 end
