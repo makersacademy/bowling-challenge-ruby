@@ -7,8 +7,8 @@ describe Player do
   let(:spare_score) { described_class.new("Graeme", {"1" => [2,3], "2" => [4,6], "3" => [6,1]}) }
   # # score with spares an no strikes 
   let(:spares_score) { described_class.new("Graeme", {"1" => [2,3], "2" => [4,5], "3" => [6,4], "4" =>[7,0], "5" => [8,2], "6" => [3,7], "7" => [3,4], "8" => [3,5], "9" => [6,2]}) }
-  # # score with two strikes and some spares
-  # let(:strike_score) { described_class.new("Graeme", [[2,3], [10,0], [6,4], [10,0], [8,2], [3,5]]) }
+  # score with two strikes and some spares
+  let(:strike_score) { described_class.new("Graeme", {"1" => [2,3], "2" => [10,0], "3" => [6,4], "4" => [10,0], "5" => [8,2], "6" => [3,5]}) }
   # # score that includes a double 
   # let(:double_score) { described_class.new("Graeme", [[7,0], [10,0], [10,0], [5,0]]) }
   # score that includes a turkey 
@@ -34,9 +34,9 @@ describe Player do
     expect(spares_score.total).to eq(87)
   end 
 
-  # it "calculates a score with spares and strikes separated" do 
-  #   expect(strike_score.total).to eq(86)
-  # end 
+  it "calculates a score with spares and single streak strikes" do 
+    expect(strike_score.total).to eq(86)
+  end 
 
   # it "calculates correst score when players scores a double" do 
   #   expect(double_score.total).to eq(52)
