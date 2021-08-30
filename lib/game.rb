@@ -11,6 +11,8 @@ class Game
   end
 
   def roll(pins)
+    raise "Game over. Final score: #{@score}" if gameover?
+
     @frames.each do |frame|
       if frame.rolls_remaining > 0
         frame.add_roll(pins)

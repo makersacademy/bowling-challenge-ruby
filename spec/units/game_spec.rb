@@ -5,7 +5,7 @@ describe Game do
     expect(subject.score).to eq 0
   end
 
-  it 'tracks staret with frame' do
+  it 'starts with first frame' do
     expect(subject.frames.length).to eq 1
   end
 
@@ -15,6 +15,20 @@ describe Game do
 
   it 'tracks frame scores' do
     expect(subject.frame_scores).to eq []
+  end
+
+  it 'ends after 10 frames' do
+    9.times { subject.roll(10) }
+    subject.roll(2)
+    subject.roll(3)
+    expect{ subject.roll(2) }.to raise_error.with_message("Game over. Final score: 252")
+  end
+
+  context '10th frame has bonus scoring' do
+    it 'allows bonus rolls' do
+      12.times { subject.roll(10) }
+      expect(subject.score).to eq 300
+    end
   end
 
   describe '#roll' do
