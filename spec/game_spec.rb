@@ -1,9 +1,9 @@
 require 'game'
 RSpec.describe 'BowlingGame' do
+  let(:game) {BowlingGame.new}
 
   context '#gutter game' do
     it 'can roll all zero game' do
-      game = BowlingGame.new
       20.times{game.roll(0)}
       expect(game.score).to eq 0
     end
@@ -11,7 +11,6 @@ RSpec.describe 'BowlingGame' do
 
   context 'all one game' do
     it 'can roll an all one game' do
-      game = BowlingGame.new
       20.times{game.roll(1)}
       expect(game.score).to eq 20
     end
@@ -19,7 +18,6 @@ RSpec.describe 'BowlingGame' do
 
   context 'spare game' do 
     it 'can roll a spare game' do
-      game = BowlingGame.new
       game.roll(6)
       game.roll(4)
       game.roll(7)
@@ -30,7 +28,6 @@ RSpec.describe 'BowlingGame' do
 
   context 'strike game' do
     it 'can roll a strike game' do
-      game = BowlingGame.new
       game.roll(10)
       game.roll(6)
       game.roll(3)
@@ -41,7 +38,6 @@ RSpec.describe 'BowlingGame' do
 
   context 'all spares' do
     it 'can roll all spares' do 
-      game = BowlingGame.new
       21.times{game.roll(5)}
       expect(game.score).to eq 150
     end
@@ -49,7 +45,6 @@ RSpec.describe 'BowlingGame' do
 
   context 'perfect game' do
     it 'can roll all 10 game' do 
-      game = BowlingGame.new
       12.times{game.roll(10)}
       expect(game.score).to eq 300
     end
