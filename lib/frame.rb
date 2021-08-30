@@ -40,11 +40,6 @@ class Frame
     frame_id < LAST_FRAME ? frame_full? : final_frame_full?
   end
   
-  # def print_frame
-  #   "Frame: #{frame_id} | 1st roll: #{roll_1} |"\
-  #   " 2nd roll: #{roll_2}#{" | 3rd roll: #{roll_3}" if roll_3}"
-  # end
-
   private
 
   def valid_frame_number_check(frame_id, check)
