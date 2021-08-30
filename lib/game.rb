@@ -1,7 +1,10 @@
 class Game
   NO_OF_PINS = 10
   FIRST_BALL_INDEX = 0
+  FINAL_FRAME = 10
+  
   attr_reader :currentscore, :frames, :current_frame
+  
   def initialize
     @currentscore = 0
     @ball_number = 1
@@ -27,12 +30,7 @@ class Game
       if spare?(frame)
         @currentscore += frames[frame + 1][FIRST_BALL_INDEX]
       elsif strike?(frame)
-        if !strike?(frame + 1)
-          @currentscore += frames[frame + 1].sum
-        else
-          @currentscore += frames[frame + 1][FIRST_BALL_INDEX]
-          @currentscore += frames[frame + 2][FIRST_BALL_INDEX]
-        end
+        score_strike(frame)
       end
     end
   end
@@ -56,6 +54,15 @@ class Game
       @ball_number = 1
     else 
       @ball_number += 1
+    end
+  end
+
+  def score_strike(frame)
+    if !strike?(frame + 1)
+      @currentscore += frames[frame + 1].sum
+    else
+      @currentscore += frames[frame + 1][FIRST_BALL_INDEX] 
+      @currentscore += frames[frame + 2][FIRST_BALL_INDEX]
     end
   end
 
