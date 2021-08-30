@@ -44,3 +44,28 @@ A Gutter Game is when the player never hits a pin (20 zero scores).
 A Perfect Game is when the player rolls 12 strikes and scores 300 points.
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+### Lizzy's plan
+
+A game starts with 1 frame. All new frames have: current_roll (0), rolls_remaining (2), score.
+
+Each turn the user enters their 'roll' (number of pins knocked down), the roll is added to the score of every frame with rolls_remaining > 0.
+
+Frame's current_roll == 1
+   && roll == 10, STRIKE rolls_remaining is unchanged, and a new frame is opened (if possible, up to 10 frames).
+   otherwise, rolls_remaining is decremented. 
+Frame's current_roll == 2
+   && roll 1 + roll 2 == 10, SPLIT rolls_remaining is unchanged, otherwise decremented.
+   In all cases, a new frame is opened (if possible, up to 10 frames).
+Frame's current_roll == 3, rolls_remaining decrements to 0
+
+Once a frame's rolls_remaining == 0, the score is calculated and added to the games frame scores.
+
+pseudocode
+.roll(pins) current_roll on 'open' frames goes up. score on 'open' frames goes up.
+    check for strike 
+    check for split
+    (.add_frame if possible)
+    check for 'closed' frames (add score to game's frame_scores)
+    check for game over (sum frame_scores)
+
