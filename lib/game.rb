@@ -36,7 +36,7 @@ class Game
   end
 
   def strike?(frame_number)
-    @frames[frame_number].length == 1 && @frames[frame_number].sum == NO_OF_PINS
+    @frames[frame_number][FIRST_BALL_INDEX] == NO_OF_PINS
   end
 
   def spare?(frame_number)
