@@ -7,7 +7,7 @@ describe Frame do
 
   before(:each) do
     allow(check).to receive(:valid?) { true }
-    allow(roller).to receive(:roll) { |roll, pins_remaining| roll }
+    allow(roller).to receive(:roll) { |roll, _pins_remaining| roll }
   end  
 
   it 'initialises @frame as a frame hash' do

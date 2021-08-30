@@ -13,7 +13,7 @@ class Frame
     @frame_content = { frame_id: frame_number }
   end
 
-  def add(roll, roller=Roll.new) 
+  def add(roll, roller = Roll.new) 
     frame_full_check
     @roll = roller.roll(roll, pins_remaining)
     roll_1.nil? ? add_roll(:roll_1) : roll_2.nil? ? add_roll(:roll_2) : add_roll(:roll_3)
