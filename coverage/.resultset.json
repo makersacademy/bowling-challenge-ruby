@@ -1,0 +1,53 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/ian/Documents/Projects/weekly_challenges/week_5_bowling/bowling-challenge-ruby/spec/unit/frame_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          3,
+          2,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/ian/Documents/Projects/weekly_challenges/week_5_bowling/bowling-challenge-ruby/lib/frame.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1630325718
+  }
+}
