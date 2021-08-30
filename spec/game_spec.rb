@@ -99,4 +99,13 @@ describe Game do
     expect(subject.currentscore).to eq(10)
   end
 
+  it 'can correctly calculate the score a strike' do
+    subject.roll(10)
+    subject.roll(10)
+    subject.roll(6)
+    subject.roll(2)
+    subject.score
+    expect(subject.currentscore).to eq(52)
+  end
+
 end

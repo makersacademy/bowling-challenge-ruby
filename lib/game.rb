@@ -1,5 +1,6 @@
 class Game
-
+  NO_OF_PINS = 10
+  FIRST_BALL_INDEX = 0
   attr_reader :currentscore, :frames, :current_frame
   def initialize
     @currentscore = 0
@@ -21,26 +22,33 @@ class Game
 
   def score
     @currentscore = 0
-    @frames.each do |frame, balls|
+    @frames.each do |frame|
       @currentscore += frames[frame].sum
       if spare?(frame)
-        @currentscore += frames[frame+1][0]
+        @currentscore += frames[frame + 1][FIRST_BALL_INDEX]
+      elsif strike?(frame)
+        if !strike?(frame + 1)
+          @currentscore += frames[frame + 1].sum
+        else
+          @currentscore += frames[frame + 1][FIRST_BALL_INDEX]
+          @currentscore += frames[frame + 2][FIRST_BALL_INDEX]
+        end
       end
     end
   end
 
   def strike?(frame_number)
-    @frames[frame_number].length == 1
+    @frames[frame_number].length == 1 && @frames[frame_number].sum == NO_OF_PINS
   end
 
   def spare?(frame_number)
-    @frames[frame_number].sum == 10 && !strike?(frame_number)
+    @frames[frame_number].sum == NO_OF_PINS && !strike?(frame_number)
   end
 
   private
 
   def increment_game
-    if (@ball_number == 1 && @pins == 10)
+    if (@ball_number == 1 && @pins == NO_OF_PINS)
       @current_frame += 1
       @ball_number = 1
     elsif @ball_number == 2
