@@ -27,8 +27,15 @@ describe Game do
     end
   end
 
-  it 'knows if its a spare' do
-    subject.roll(5)
+  it 'increases frame number on strike' do
+    subject.roll(10)
+    expect(subject.current_frame).to eq 2
+  end
+
+  it 'can correctly increase frame count for multiple strikes' do
+    subject.roll(10)
+    subject.roll(10)
+    expect(subject.current_frame).to eq 3
   end
 
 end
