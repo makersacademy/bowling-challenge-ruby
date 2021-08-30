@@ -15,16 +15,16 @@ class Frame
     update_rolls_remaining
   end
 
+  def update_rolls_remaining
+    @rolls_remaining -= 1 unless strike? or split?
+  end
+
   def strike?
     @current_roll == 1 && @frame_score == 10
   end
 
   def split?
     @current_roll == 2 && @frame_score == 10
-  end
-
-  def update_rolls_remaining
-    @rolls_remaining -= 1 unless strike? or split?
   end
 
   def frameover?

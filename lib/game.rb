@@ -17,10 +17,13 @@ class Game
       end
     end
     check_frameover
+    add_frame
   end
 
   def add_frame
-    @frames << Frame.new unless frames.length == 10
+    if @frames.last.strike? || @frames.last.current_roll == 2
+      @frames << Frame.new unless frames.length == 10
+    end
   end
 
   def check_frameover

@@ -49,25 +49,45 @@ describe Game do
     end
   end
 
-  describe '#gameover?' do
-    it 'returns if game is over' do
-      expect(subject.gameover?).to eq false
-    end
-  end
-
   describe '#add_frame' do
     context 'fewer than 10 frames in the game' do
       it 'adds a new frame' do
-        8.times { subject.add_frame }
-        expect{ subject.add_frame }.to change{ subject.frames.length }
+        8.times { subject.roll(10) }
+        expect{ subject.roll(10) }.to change{ subject.frames.length }.by(+1)
       end
     end
 
     context '10 frames in the game' do
       it 'does not add a frame' do
-        10.times { subject.add_frame }
-        expect{ subject.add_frame }.not_to change{ subject.frames.length }
+        10.times { subject.roll(10) }
+        expect{ subject.roll(10) }.not_to change{ subject.frames.length }
       end
+    end
+
+    context 'strike' do
+      it 'adds a new frame' do
+        expect{ subject.roll(10) }.to change{ subject.frames.length }.by(+1)
+      end
+    end
+
+    context 'split' do
+      it 'adds a new frame' do
+        subject.roll(5)
+        expect{ subject.roll(5) }.to change{ subject.frames.length }.by(+1)
+      end
+    end
+
+    context 'second roll in frame without knocking all pins' do
+      it 'adds a new frame' do
+        subject.roll(0)
+        expect{ subject.roll(0) }.to change{ subject.frames.length }.by(+1)
+      end
+    end
+  end
+
+  describe '#gameover?' do
+    it 'returns if game is over' do
+      expect(subject.gameover?).to eq false
     end
   end
 end
