@@ -14,4 +14,16 @@ describe Game do
       expect{ Game.new }.to raise_error ArgumentError
     end
   end
+
+  describe '#score' do
+    it 'should record my current score' do
+      game.score(6)
+      expect(game.last_score).to eq(6)
+    end
+
+    it 'should only accept scores from 1-10' do
+      expect{ game.score(11) }.to raise_error 'can only accept scores 1-10'
+      expect{ game.score(-11) }.to raise_error 'can only accept scores 1-10'
+    end
+  end
 end
