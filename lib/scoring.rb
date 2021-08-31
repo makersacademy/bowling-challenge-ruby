@@ -7,8 +7,8 @@ class Scoring
 
   def calculation
     calculation = []
-    (0...@scores.length).each do |index|
-      calculation << [frame_total(index)]
+    (0...@scores.length).each do |idx|
+      calculation << [frame_total(idx)]
     end
     calculation
   end
@@ -24,50 +24,50 @@ class Scoring
     score_array
   end
 
-  def frame_total(index)
-    return final_frame(index) unless @scores[index][2].nil?
+  def frame_total(idx)
+    return final_frame(idx) unless @scores[idx][2].nil?
 
-    return simple_add(index) if both_integers?(index)
+    return simple_add(idx) if both_integers?(idx)
 
-    return strike(index) if @scores[index][0] == :X
+    return strike(idx) if @scores[idx][0] == :X
 
-    return spare(index) if @scores[index][1] == :/
+    return spare(idx) if @scores[idx][1] == :/
 
-    @scores[index][0] if single_roll?(index)
+    @scores[idx][0] if single_roll?(idx)
   end
 
-  def both_integers?(index)
-    (@scores[index][0].is_a? Integer) && (@scores[index][1].is_a? Integer)
+  def both_integers?(idx, idx1 = 0, idx2 = 1)
+    (@scores[idx][idx1].is_a? Integer) && (@scores[idx][idx2].is_a? Integer)
   end
 
-  def simple_add(index)
-    @scores[index][0] + @scores[index][1]
+  def simple_add(idx, idx1 = 0, idx2 = 1)
+    @scores[idx][idx1] + @scores[idx][idx2]
   end
 
-  def strike(index)
-    next_index = index + 1
-    return 10 if @scores[next_index].nil?
+  def strike(idx)
+    nxt = next_index(idx)
+    return 10 if @scores[nxt].nil?
 
-    return 10 + simple_add(next_index) if both_integers?(next_index)
+    return 10 + simple_add(nxt) if both_integers?(nxt)
 
-    return 10 + 10 + two_ahead(next_index + 1) if double?(next_index)
+    return 10 + 10 + two_ahead(nxt + 1) if double?(idx)
 
-    return 10 + 10 if @scores[next_index][1] == :/
+    return 10 + 10 if @scores[nxt][1] == :/
 
-    10 + @scores[next_index][0]
+    10 + @scores[nxt][0]
   end
 
-  def spare(index)
-    next_index = index + 1
-    return 10 if @scores[next_index].nil?
+  def spare(idx)
+    nxt = next_index(idx)
+    return 10 if @scores[nxt].nil?
 
-    return 10 + 10 if @scores[next_index][0] == :X
-    
-    10 + @scores[next_index][0] 
+    return 10 + 10 if @scores[nxt][0] == :X
+
+    10 + @scores[nxt][0] 
   end
 
-  def double?(next_index)
-    @scores[next_index][0] == :X
+  def double?(idx)
+    @scores[next_index(idx)][0] == :X
   end
 
   def two_ahead(two_indexes_ahead)
@@ -75,12 +75,23 @@ class Scoring
     value == :X ? 10 : value 
   end
 
-  def single_roll?(index)
-    (@scores[index][0].is_a? Integer) && @scores[index][1].nil?
+  def single_roll?(idx)
+    (@scores[idx][0].is_a? Integer) && @scores[idx][1].nil?
   end
 
-  def final_frame(index)
-    # tbc
+  def final_frame(idx)
+    return 10 + 10 if @scores[idx][1] == :/ && @scores[idx][2] == :X
+
+    return 10 + @scores[idx][2] if @scores[idx][1] == :/
+    
+    return 30 if @scores[idx].all?(:X)
+    
+    return 10 + simple_add(idx, 1, 2) if both_integers?(idx, 1, 2)
+    
+    10 + 10 + @scores[idx][@scores[idx].index { |n| n.is_a? Integer }]
   end
 
+  def next_index(idx)
+    idx + 1
+  end
 end

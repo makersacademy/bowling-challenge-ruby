@@ -1,4 +1,5 @@
 require_relative 'frame'
+require_relative 'scoring'
 
 class Game
 
@@ -27,7 +28,7 @@ class Game
   
   def populate_frames_array(frame_type)
     (frame_type::FIRST_FRAME..frame_type::LAST_FRAME).map do |id|
-      @frames << frame_type.new(id)
+      @frames << frame_type.new(id) 
     end
   end
 
@@ -42,7 +43,14 @@ class Game
   def scorecard_string(frame)
     "Frame: #{frame.frame_id.to_s.ljust(2)} | #{frame.roll_1}"\
     " | #{frame.roll_2.to_s.ljust(1)} | "\
-    "#{"#{frame.roll_3}" if frame.roll_3}"
+    "#{"#{frame.roll_3}" if frame.roll_3}"\
+  end
+
+  def score_array(scorer = Scoring)
+    frame_array = @frames.map do |frame| 
+      { roll_1: frame.roll_1, roll_2: frame.roll_2, roll_3: frame.roll_3 }
+    end
+    scorer.new(frame_array).calculation
   end
 
 end
