@@ -15,7 +15,7 @@ attr_reader :name, :frames, :strike_streak, :spare
     first_bowl = rand(0..10)
     # case strike 
     index = ((@frames.length) + 1)
-    return @frames[index] = [10,0] if first_bowl == 10
+    return @frames[index] = [10, 0] if first_bowl == 10
     remaining_pins = 10 - first_bowl
     second_bowl = rand(0..remaining_pins)
     # case spare 
@@ -30,7 +30,7 @@ attr_reader :name, :frames, :strike_streak, :spare
       if false
         p "WE HAVE A TURKEY"
       # When we score a double 
-      elsif (@frames[key] == @frames[key+1]) && (frame == [10,0])
+      elsif (@frames[key] == @frames[key+1]) && (frame == [10, 0])
         score = 20 + @frames[key+2].sum 
         tally << score
       # if we get a strike include bonus points 

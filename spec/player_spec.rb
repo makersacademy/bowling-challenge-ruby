@@ -2,20 +2,18 @@ describe Player do
 
   let(:player) { described_class.new("Graeme")}
   # score with no spares or strikes
-  let(:test_score) { described_class.new("Graeme", {1 => [2,3], 2 => [4,5], 3 => [6,1]})} 
+  let(:test_score) { described_class.new("Graeme", {1 => [2, 3], 2 => [4, 5], 3 => [6, 1]})} 
   # score with single spare
-  let(:spare_score) { described_class.new("Graeme", {1 => [2,3], 2 => [4,6], 3 => [6,1]}) }
+  let(:spare_score) { described_class.new("Graeme", {1 => [2, 3], 2 => [4, 6], 3 => [6, 1]}) }
   # # score with spares an no strikes 
-  let(:spares_score) { described_class.new("Graeme", {1 => [2,3], 2 => [4,5], 3 => [6,4], 4 =>[7,0], 5 => [8,2], 6 => [3,7], 7 => [3,4], 8 => [3,5], 9 => [6,2]}) }
+  let(:spares_score) { described_class.new("Graeme", {1 => [2, 3], 2 => [4, 5], 3 => [6, 4], 4 =>[7, 0], 5 => [8, 2], 6 => [3, 7], 7 => [3, 4], 8 => [3, 5], 9 => [6, 2]}) }
   # score with two strikes and some spares
-  let(:strike_score) { described_class.new("Graeme", {1 => [2,3], 2 => [10,0], 3 => [6,4], 4 => [10,0], 5 => [8,2], 6 => [3,5]}) }
+  let(:strike_score) { described_class.new("Graeme", {1 => [2, 3], 2 => [10, 0], 3 => [6, 4], 4 => [10, 0], 5 => [8, 2], 6 => [3, 5]}) }
   # score that includes a double 
-  let(:double_score) { described_class.new("Graeme", { 1 => [7,0], 2 => [10,0], 3 => [10,0], 4 => [5,0]}) }
+  let(:double_score) { described_class.new("Graeme", { 1 => [7, 0], 2 => [10, 0], 3 => [10, 0], 4 => [5, 0]}) }
   # score that includes a turkey 
-  let(:turkey_score) { described_class.new("Graeme", [[7,0], [10,0], [10,0], [10,0], [3,2]]) }
+  let(:turkey_score) { described_class.new("Graeme", [[7, 0], [10, 0], [10, 0], [10, 0], [3, 2]]) }
   
-
-
   it "creates and instance of itself" do 
     expect(player).to be_an_instance_of(Player)
   end 
@@ -45,7 +43,4 @@ describe Player do
   # it "calculates correst score when players scores a turkey" do 
   #   expect(turkey_score.total).to eq(82)
   # end
-
 end 
-
-
