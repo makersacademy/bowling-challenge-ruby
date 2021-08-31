@@ -9,6 +9,10 @@ class Frame
     @scorecard = scorecard
   end
 
+  def after() = @scorecard.scores[@number]
+
+  def after_next() = after.after
+
   def base_score() = [@first_roll, @second_roll].compact.sum
       
   def boring?() = !(strike? || spare?)
