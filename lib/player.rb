@@ -16,7 +16,7 @@ class Player
         score = 20 + @frames[key+2].sum 
         tally << score
       # if we get a strike include bonus points 
-      elsif frame[0] == 10 
+      elsif frame == [10, 0] 
         bonus = @frames[(key + 1)]
         tally << (bonus.sum + 10) 
       # if we get a spare add first bowl to tally

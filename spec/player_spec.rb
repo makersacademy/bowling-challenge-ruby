@@ -18,7 +18,7 @@ describe Player do
   # score that includes a turkey 
   let(:turkey_score) { described_class.new("Graeme", [[7, 0], [10, 0], [10, 0], [10, 0], [3, 2]]) }
   #####################################
-  
+
   it "creates and instance of itself" do 
     expect(player).to be_an_instance_of(Player)
   end 
@@ -39,14 +39,4 @@ describe Player do
   it "calculates correst score when players scores a double" do 
     expect(double_score.total).to eq(52)
   end 
-
-  # it "calculates correst score when players scores a turkey" do 
-  #   expect(turkey_score.total).to eq(82)
-  # end
 end 
-
-  # unused test
-  # it "stop player trying to do more than ten frames" do 
-  #   10.times { player.frame }
-  #   expect { player.frame }.to raise_error("Game is complete no frames remaining")
-  # end 
