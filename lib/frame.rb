@@ -8,4 +8,16 @@ class Frame
     @second_roll = nil
     @scorecard = scorecard
   end
+
+  def base_score() = [@first_roll, @second_roll].compact.sum
+      
+  def boring?() = !(strike? || spare?)
+  
+  def spare?() = base_score == 10 && two_rolls?
+  
+  def strike?() = @first_roll == 10
+
+  private
+
+  def two_rolls?() = @second_roll != nil
 end
