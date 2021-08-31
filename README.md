@@ -1,3 +1,61 @@
+# Bowling Score Tracker
+
+This project focuses on the logic required in order to keep scores on individual frames of a bowling game and a overall total.
+
+
+## Project Notes and Domain Model draft
+
+Below are links to the hand written notes in order to understand a game of bowling, a draft domain model that sketches out<br>
+the classes and their potential attributes & methods, and rough workings to understand strike/spare bonus accumulation
+[Project Notes Page 1](https://github.com/Battery0/bowling-challenge-ruby/blob/main/public/notes1.jpg)
+[Project Notes Page 2](https://github.com/Battery0/bowling-challenge-ruby/blob/main/public/notes2.jpg)
+[Draft Domain Model](https://github.com/Battery0/bowling-challenge-ruby/blob/main/public/domain_model.jpg)
+[Understanding Strike / Spare maths](https://github.com/Battery0/bowling-challenge-ruby/blob/main/public/rough_workings_for_points.png)
+
+## To do
+
+1. Limit the game to 10 frames only. Including 2 bonus frames if a strike is scored on frame 10 in order to calculate the bonus points
+2. Account for spares and strikes (the bonus points aquired). Currently the game only accounts for pins being knockled down<br>
+without bonuses.
+
+## Getting started
+
+To get started please run:
+
+`git clone https://github.com/Battery0/bowling-challenge-ruby.git`
+
+In the project directly, please run:
+`bundle install`
+
+## Usage
+
+To start the program you will need to run the individual methods. In order:
+
+* Create a new GameScore object
+
+Run the following methods in order:
+
+* #input_frame_score(first_roll, second_roll)
+* #display_frame_points
+* #clear_frame_rolls
+
+To continue the game, repeat these methods in the same order.
+
+To see the total points for a player for the game, run:
+
+* display_total_points
+
+
+## Running tests
+
+To run the suite of tests, please run:
+
+`rspec`
+
+
+
+
+
 Bowling Challenge in Ruby
 =================
 

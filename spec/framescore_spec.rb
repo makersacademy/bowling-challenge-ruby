@@ -59,7 +59,5 @@ describe FrameScore do
       expect(frame.frame_rolls).to contain_exactly(6, 2)
     end
   end
-
   
-
 end
