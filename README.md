@@ -63,3 +63,29 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+I created the class bowlingGame that checks the rolls of each turns and gives the score for each frame, sums all rolls up to give the final score for the full game
+
+Here is the test i used to check my code
+:bowling-challenge-ruby blessingubogu$ irb
+
+.0.0 :001 > require './lib/game.rb'
+3.0.0 :002 > game = BowlingGame.new
+3.0.0 :003 > game.roll(10)
+3.0.0 :004 > 
+ => [10, 10] 
+ => [10, 10, 10] 
+ => [10, 10, 10, 10] 
+ => [10, 10, 10, 10, 10] 
+ => [10, 10, 10, 10, 10, 10] 
+ => [10, 10, 10, 10, 10, 10, 10] 
+ => [10, 10, 10, 10, 10, 10, 10, 10] 
+3.0.0 :012 > game.roll(10)
+ => [10, 10, 10, 10, 10, 10, 10, 10, 10] 
+3.0.0 :013 > game.roll(10)
+ => [10, 10, 10, 10, 10, 10, 10, 10, 10, 10] 
+3.0.0 :014 > game.roll(10)
+ => [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10] 
+3.0.0 :015 > game.roll(10)
+ => [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10] 
+3.0.0 :016 > game.score
+ => 300 
