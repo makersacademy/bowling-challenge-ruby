@@ -1,5 +1,3 @@
-require 'frame'
-
 class Game 
   attr_reader :scores, :frames
 
