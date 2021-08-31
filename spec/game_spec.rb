@@ -14,8 +14,8 @@ describe Game do
 
     it 'should initialize with an array with one new frame instance' do
       expect(frame_class).to receive(:new)
-      expect(game.frame).to be_a(Array)
-      expect(game.frame.size).to eq(1)
+      expect(game.frames).to be_a(Array)
+      expect(game.frames.size).to eq(1)
     end
 
     it 'should require a player argument' do
@@ -47,25 +47,41 @@ describe Game do
       game.score(10)
     end
 
-    it 'should call #increment_frame after a strike' do
-      expect(game).to receive(:increment_frame)
+    it 'should not call #new_frame after one non-strike roll' do
+      expect(game).not_to receive(:new_frame)
       game.score(5)
     end
   end
 
-  # describe '#check_bonus' do
-  #   it 'should add correct bonus to score if player rolls a spare' do
-  #     game.score(6)
-  #     game.score(4)
-  #     game.score(4)
-  #     expect(game.total_score).to eq(18)
-  #   end
+  describe '#new_frame' do
+    it 'should call #close_frame' do
+      expect(game.frames.last).to receive(:close_frame)
+      game.new_frame
+    end
 
-  #   it 'should not add any bonus if player fails to roll a spare' do
-  #     game.score(6)
-  #     game.score(3)
-  #     game.score(4)
-  #     expect(game.total_score).to eq(13)
-  #   end
-  # end
+    it 'should raise error if the game is over' do
+      9.times { game.new_frame }
+      expect{ game.new_frame }.to raise_error 'Game over with score x'
+    end
+
+    it 'should instantiate new frame with multiplier 2 after a strike' do
+      game
+      expect(frame_class).to receive(:new).with(2)
+      game.score(10)
+    end
+
+    it 'should instantiate new frame with multiplier 1 after a spare' do
+      game
+      expect(frame_class).to receive(:new).with(1)
+      game.score(5)
+      game.score(5)
+    end
+
+    it 'should instantiate new frame with multiplier 0 after non-strike/spare roll' do
+      game
+      expect(frame_class).to receive(:new)
+      game.score(3)
+      game.score(3)
+    end
+  end
 end
