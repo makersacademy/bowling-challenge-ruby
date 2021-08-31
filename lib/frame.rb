@@ -36,11 +36,20 @@ class Frame
     @frame_content[:roll_3]
   end
 
+  # def score
+  #   @frame_content[:score]
+  # end
+
   def full?
     frame_id < LAST_FRAME ? frame_full? : final_frame_full?
   end
   
   private
+
+  # def frame_score(scorer = Scoring)
+  #   frame = [{ roll_1: roll_1, roll_2: roll_2, roll_3: roll_3 }]
+  #   @frame_content[score] = scorer.new(frame).calculation.sum
+  # end
 
   def valid_frame_number_check(frame_id, check)
     raise ERROR unless check.valid?(frame_id, FIRST_FRAME, LAST_FRAME)
@@ -50,6 +59,7 @@ class Frame
     @frame_content[roll_no] = @roll
     @frame_content[roll_no] = :/ if roll_no == :roll_2 && spare?
     @frame_content[roll_no] = :X if (roll_no == :roll_1 || frame_id == LAST_FRAME) && strike?
+    # frame_score
   end
 
   def pins_remaining

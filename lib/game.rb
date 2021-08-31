@@ -46,11 +46,4 @@ class Game
     "#{"#{frame.roll_3}" if frame.roll_3}"\
   end
 
-  def score_array(scorer = Scoring)
-    frame_array = @frames.map do |frame| 
-      { roll_1: frame.roll_1, roll_2: frame.roll_2, roll_3: frame.roll_3 }
-    end
-    scorer.new(frame_array).calculation
-  end
-
 end
