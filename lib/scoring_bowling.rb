@@ -48,16 +48,14 @@ class ScoringBowling
     chosen_arr << choose_scenario(2, chosen_frame, 0) if chosen_frame < 9
   end
 
-  def choose_scenario(input, chosen_frame, *index)
-    case input
-      when 1
-        round(chosen_frame)
-      when 2
-        [round(chosen_frame), round(chosen_frame + 1)[0..index.pop]]
-      when 3
-        [round(chosen_frame), round(chosen_frame + 1)[0], round(chosen_frame + 2)[0]]
+  def choose_scenario(scenario, chosen_frame, *index)
+    case scenario
+    when 1 then round(chosen_frame)
+    when 2 then [round(chosen_frame), round(chosen_frame + 1)[0..index.pop]]
+    when 3 then [round(chosen_frame), round(chosen_frame + 1)[0], round(chosen_frame + 2)[0]]
     end
   end
+
 
   def round(which_frame)
     @rounds[which_frame][:bowls]
