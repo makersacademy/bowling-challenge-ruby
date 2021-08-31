@@ -7,6 +7,12 @@ class Scorecard
     create_frames
   end
 
+  def first_ten_frames
+    @scores.select { |frame| frame.number <= 10 }
+  end
+
+  private
+
   def create_frames
     frame_num = 1
     roll_pos = 1
