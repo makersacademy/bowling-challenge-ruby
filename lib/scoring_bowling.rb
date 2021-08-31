@@ -18,24 +18,36 @@ class ScoringBowling
   def calculate_score
     current_frame = 0
     arr = []
-    # Needs to be refactored, unsure how
+    # Needs to be refactored, unsure how.
     until current_frame == rounds.length
-      if strike?(round(current_frame))
-        arr << round(current_frame) if current_frame == 9
-        arr << [round(current_frame), round(current_frame + 1)[0..1]] if current_frame == 8
-        arr << [round(current_frame), round(current_frame + 1)[0], round(current_frame + 2)[0]] if current_frame < 8
-      elsif spare?(round(current_frame))
-        arr << round(current_frame) if current_frame == 9
-        arr << [round(current_frame), round(current_frame + 1)[0]] if current_frame < 9
-      else
-        arr << round(current_frame)
-      end
+      calculate_all_scenarios(current_frame, arr)
       current_frame += 1
     end
     @score += arr.flatten.sum
   end
 
   private
+
+  def calculate_all_scenarios(which_frame, arr)
+    if strike?(round(which_frame))
+      calculate_strike(which_frame, arr)
+    elsif spare?(round(which_frame))
+      calculate_spare(which_frame, arr)
+    else
+      arr << round(which_frame)
+    end
+  end
+
+  def calculate_strike(which_frame, arr)
+    arr << round(which_frame) if which_frame == 9
+    arr << [round(which_frame), round(which_frame + 1)[0..1]] if which_frame == 8
+    arr << [round(which_frame), round(which_frame + 1)[0], round(which_frame + 2)[0]] if which_frame < 8
+  end
+
+  def calculate_spare(which_frame, arr)
+    arr << round(which_frame) if which_frame == 9
+    arr << [round(which_frame), round(which_frame + 1)[0]] if which_frame < 9
+  end
 
   def round(which_frame)
     @rounds[which_frame][:bowls]
