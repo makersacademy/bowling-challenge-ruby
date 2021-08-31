@@ -1,7 +1,7 @@
 class Game 
   attr_reader :scores, :frames
 
-  def initialize(player)
+  def initialize
     @scores = []
     @frames = [Frame.new]
   end
@@ -22,7 +22,7 @@ class Game
 
   def new_frame
     @frames.last.close_frame
-    raise 'Game over with score x' if gameover? #need to add final score here
+    gameover?
     if strike?
       @frames << Frame.new(2)
     elsif spare?
@@ -32,10 +32,18 @@ class Game
     end
   end
 
+  def final_score
+    @frames.each do |frame| 
+      @scores << frame.bonus_score if frame.bonus_score != 0
+      @scores << frame.frame_score
+    end
+    @scores.flatten.sum
+  end
+
   private
 
   def check_input(num)
-    raise 'can only accept scores 1-10' unless num.positive? && num <= 10
+    raise 'can only accept scores 0-10' unless num >= 0 && num <= 10
   end
 
   def strike?
@@ -47,6 +55,6 @@ class Game
   end
 
   def gameover?
-    @frames.size == 10
+    raise "Game over with score #{final_score}" if @frames.size == 10
   end
 end

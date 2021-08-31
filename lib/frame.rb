@@ -1,5 +1,5 @@
 class Frame
-  attr_reader :frame_score, :bonus_score, :multiplier #hide inside methods?
+  attr_reader :frame_score, :bonus_score, :multiplier # hide inside methods?
 
   def initialize(multiplier = 0)
     @frame_score = []
@@ -9,12 +9,12 @@ class Frame
 
   def add_score(num)
     if @frame_score.empty?
-      @frame_score << num
       @bonus_score += num if @multiplier != 0
     else
-      @frame_score << num
       @bonus_score += num if @multiplier == 2
     end
+    
+    @frame_score << num
   end
 
   def last_score

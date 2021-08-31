@@ -1,11 +1,9 @@
 require_relative '../lib/game'
-require_relative '../lib/player'
 require_relative '../lib/frame'
 
 describe Game do
-  let(:player) { instance_double(Player) }
   let(:frame_class) { class_double(Frame).as_stubbed_const }
-  let(:game) { described_class.new(player) }
+  let(:game) { described_class.new }
 
   describe '#initialize' do
     it 'should initialize with empty scores array' do
@@ -17,10 +15,6 @@ describe Game do
       expect(game.frames).to be_a(Array)
       expect(game.frames.size).to eq(1)
     end
-
-    it 'should require a player argument' do
-      expect{ described_class.new }.to raise_error ArgumentError
-    end
   end
 
   describe '#score' do
@@ -30,8 +24,8 @@ describe Game do
     end
 
     it 'should only accept scores from 1-10' do
-      expect{ game.score(11) }.to raise_error 'can only accept scores 1-10'
-      expect{ game.score(-11) }.to raise_error 'can only accept scores 1-10'
+      expect { game.score(11) }.to raise_error 'can only accept scores 0-10'
+      expect { game.score(-11) }.to raise_error 'can only accept scores 0-10'
     end
   end
 
@@ -61,7 +55,7 @@ describe Game do
 
     it 'should raise error if the game is over' do
       9.times { game.new_frame }
-      expect{ game.new_frame }.to raise_error 'Game over with score x'
+      expect { game.new_frame }.to raise_error "Game over with score #{game.final_score}"
     end
 
     it 'should instantiate new frame with multiplier 2 after a strike' do
@@ -82,6 +76,17 @@ describe Game do
       expect(frame_class).to receive(:new)
       game.score(3)
       game.score(3)
+    end
+  end
+
+  describe '#final_score' do
+    it 'should return the final score' do
+      game.score(10)
+      game.score(7)
+      game.score(3)
+      game.score(4)
+      game.score(4)
+      expect(game.final_score).to eq(42)
     end
   end
 end
