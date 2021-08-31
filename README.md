@@ -67,6 +67,7 @@ I created the class bowlingGame that checks the rolls of each turns and gives th
 
 Here is the test i used to check my code
 :bowling-challenge-ruby blessingubogu$ irb
+
 .0.0 :001 > require './lib/game.rb'
 3.0.0 :002 > game = BowlingGame.new
 3.0.0 :003 > game.roll(10)
