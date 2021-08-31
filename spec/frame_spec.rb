@@ -52,7 +52,7 @@ describe Frame do
     expect(frame.spare?).to eq false
   end
 
-  it 'knows what the next two frames are' do
+  it 'knows what the next frame is' do
     frame = Frame.new(mixed_card, 0, 5)
 
     expect(frame.after.first_roll).to eq 1
