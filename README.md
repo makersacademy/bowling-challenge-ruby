@@ -1,0 +1,1 @@
+![Ten Pin Score Example](images/classes.png)
