@@ -1,0 +1,93 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/danroche/Documents/makers-projects/bowling-challenge-ruby/spec/game_spec.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          4,
+          4,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/danroche/Documents/makers-projects/bowling-challenge-ruby/lib/game.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          3,
+          3,
+          3,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/danroche/Documents/makers-projects/bowling-challenge-ruby/lib/frame.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1630432335
+  }
+}
