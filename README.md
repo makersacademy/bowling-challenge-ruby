@@ -7,9 +7,13 @@ This project focuses on the logic required in order to keep scores on individual
 
 Below are links to the hand written notes in order to understand a game of bowling, a draft domain model that sketches out<br>
 the classes and their potential attributes & methods, and rough workings to understand strike/spare bonus accumulation
+
 [Project Notes Page 1](https://github.com/Battery0/bowling-challenge-ruby/blob/main/public/notes1.jpg)
+
 [Project Notes Page 2](https://github.com/Battery0/bowling-challenge-ruby/blob/main/public/notes2.jpg)
+
 [Draft Domain Model](https://github.com/Battery0/bowling-challenge-ruby/blob/main/public/domain_model.jpg)
+
 [Understanding Strike / Spare maths](https://github.com/Battery0/bowling-challenge-ruby/blob/main/public/rough_workings_for_points.png)
 
 ## To do
@@ -43,7 +47,7 @@ To continue the game, repeat these methods in the same order.
 
 To see the total points for a player for the game, run:
 
-* display_total_points
+* #display_total_points
 
 
 ## Running tests
