@@ -1,10 +1,34 @@
 Bowling Challenge in Ruby
 =================
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+## Update
+
+This is a simple bowling scorecard program written in Ruby, and using RSpec for testing.
+
+This was a tough challenge and I'm disappointed not to finish it completely - I'm nearly done, but the scoring class doesn't currently talk to the frame/game classes. The scoring class calculates the scores per frame, I just need to hook it up so the frames obtain a score, and the game class totals them all up (or maybe the scoring class can also provide the total, which would make more sense). 
+
+This was diagrammed at the start (images to follow), and I wrote plenty of user stories, which I will also put up in the readme. I simply ran out of time, possibly through over-thinking and over-refactoring the earlier classes (the scoring class is a bit of a mess at the moment).
+
+It is fully tested, with 100% coverage using RSpec.
+
+## Installation instructions
+
+```
+git clone https://github.com/edpackard/bowling-challenge-ruby.git
+gem install bundler
+bundle
+```
+
+## How to use this program
+
+Open `irb` from the command line and `require` the `game.rb` file. If you are in the `bowling-challenge-ruby` directory, `require './lib/game.rb'` will open the program.
+
+* To start a new game type `game = Game.new`
+* To enter a score type `game.roll(4)` (the number in the brackets must be a valid roll)
+* To see the scorecard type `game.scorecard`
+* The scorecard currently shows the rolls entered and updates automatically per roll
+* You can only make valid rolls, and you cannot make further rolls when the game is complete
+* Coming soon: frame score and total score on the scorecard
 
 ## The Task
 
@@ -13,14 +37,6 @@ Bowling Challenge in Ruby
 Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
 
 A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
-
-As usual please start by
-
-* Forking this repo
-
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
-
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
 
 ## Focus for this challenge
 The focus for this challenge is to write high-quality code.
