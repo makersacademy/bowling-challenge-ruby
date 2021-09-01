@@ -2,33 +2,10 @@ require 'frame'
 
 describe Frame do
 
-  let(:check) { double :check }
-  
-  before(:each) do
-    allow(check).to receive(:valid?) { true }
-  end  
-
-  it 'initialises @frame as a frame hash' do
-    frame = Frame.new(1, check)
+  it 'initialises new frame with an id' do
+    frame = Frame.new(1, 10)
     expect(frame.frame_id).to eq 1
   end
-
-  # it 'checks frame number is valid' do
-  #   expect(check).to receive(:valid?) { true }
-  #   Frame.new(Frame::FIRST_FRAME, check)
-  # end
-
-  # it 'raises error for an invalid frame number' do
-  #   allow(check).to receive(:valid?) { false }
-  #   message = 'Not a valid frame number'
-  #   expect { Frame.new(Frame::FIRST_FRAME - 1, check) }.to raise_error message
-  # end
-
-  # it 'does not allow non-integers as frame number' do
-  #   expect(check).to receive(:valid?) { false }
-  #   message = 'Not a valid frame number'
-  #   expect { Frame.new('a', check) }.to raise_error message
-  # end
 
   describe '#add' do
 
@@ -84,7 +61,6 @@ describe Frame do
         expect(frame.roll_1).to eq :X
         expect(frame.roll_2).to eq nil
       end
-     
     end
   end
 
@@ -106,22 +82,17 @@ describe Frame do
       expect(frame.roll_3).to eq :X
     end
     
-    # it 'cannot add roll after two non-bonus rolls' do
-    #   frame.roll(4)
-    #   frame.roll(5)
-    #   expect { frame.roll(3) }.to raise_error 'Frame complete'
-    # end
+    it 'cannot add roll after two non-bonus rolls' do
+      3.times { frame.roll(3) }
+      expect(frame.roll_3).to eq nil
+    end
 
-    # it 'cannot add roll after three strikes' do
-    #   3.times { frame.roll(10) }
-    #   expect { frame.roll(3) }.to raise_error 'Frame complete'
-    # end
-
-    # it 'cannot add roll after a spare and third roll' do
-    #   2.times { frame.roll(5) }
-    #   frame.roll(10)
-    #   expect { frame.roll(1) }.to raise_error 'Frame complete'
-    # end
-
+    it 'will not add further rolls after third roll' do
+      3.times { frame.roll(5) }
+      frame.roll(2)
+      expect(frame.roll_1).to eq 5
+      expect(frame.roll_2).to eq :/
+      expect(frame.roll_3).to eq 5
+    end
   end
 end

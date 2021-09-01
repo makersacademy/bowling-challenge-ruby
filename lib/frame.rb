@@ -1,6 +1,3 @@
-require_relative 'validity'
-require_relative 'roll'
-
 class Frame
  
   def initialize(frame_id, total_frames)
@@ -11,10 +8,10 @@ class Frame
   def roll(roll) 
     @roll = roll
     @roll_no = roll_1.nil? ? :roll_1 : roll_2.nil? ? :roll_2 : :roll_3
-    frame_full? ? return : add
+    @frame_content[@roll_no] = add unless full?
   end
 
-  def frame_id # do we need frame id?
+  def frame_id
     @frame_content[:frame_id]
   end
 
@@ -30,20 +27,20 @@ class Frame
     @frame_content[:roll_3]
   end
 
-  def frame_full?
+  def full?
     frame_id < @last_frame ? frame_full? : final_frame_full?
   end
   
   private
 
   def add
-    @frame_content[@roll_no] = @roll 
-    @frame_content[@roll_no] = :/ if spare?
-    @frame_content[@roll_no] = :X if strike?
+    @frame_content[@roll_no] = @roll
+    spare? ? :/ : strike? ? :X : @roll
   end
 
   def spare?
-    @roll_no == :roll_2 && (roll_1 == :X ? false : roll_1 + roll_2 == 10 ? true : false)
+    @roll_no == :roll_2 && 
+    (roll_1 == :X ? false : roll_1 + @roll == 10)
   end
 
   def strike?
