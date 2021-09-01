@@ -16,6 +16,14 @@ class Frame
     @no_of_rolls += 1
   end
 
+  def add_roll_1_score(score)
+    @roll_1_score = score
+  end
+
+  def add_roll_2_score(score)
+    @roll_2_score = score
+  end
+
   def calc_frame_total
     @roll_1_score + @roll_2_score
   end
@@ -23,4 +31,5 @@ class Frame
   def set_frame_total
     @frame_total = calc_frame_total
   end
+
 end
