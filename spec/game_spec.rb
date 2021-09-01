@@ -28,7 +28,7 @@ describe Game do
     end
     # test for score update tbc
     # it 'adds score to current frame' do
-    #   new_game.update_score(6)
+    #   new_game.roll(6)
     # end
   end
 

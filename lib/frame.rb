@@ -8,7 +8,7 @@ class Frame
     @frame_number = 0
     @roll_1_score = 0
     @roll_2_score = 0
-    @bonus_roll_score = 0
+    @bonus_score = 0
     @frame_total = 0
   end
 
@@ -22,6 +22,10 @@ class Frame
 
   def add_roll_2_score(score)
     @roll_2_score = score
+  end
+
+  def add_bonus_score(roll_1_score, roll_2_score)
+    @bonus_score = score
   end
 
   def calc_frame_total
