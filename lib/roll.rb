@@ -1,4 +1,4 @@
-require_relative 'validity'
+require_relative 'validity' # probably don't need this class anymore if validation going to own class
 
 class Roll
 

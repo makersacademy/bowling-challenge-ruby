@@ -7,7 +7,7 @@ class Scoring
 
   def calculation
     calculation = []
-    (0...@scores.length).each do |idx|
+    (0...@scores.length).each do |idx| # rename idx throughout
       calculation << [frame_total(idx)]
     end
     calculation
@@ -15,7 +15,7 @@ class Scoring
 
   private
 
-  def scores
+  def scores  # refactor - this is an array of hashes
     score_array = []
     @frames.each do |frame|
       rolls = frame.values_at(:roll_1, :roll_2, :roll_3)

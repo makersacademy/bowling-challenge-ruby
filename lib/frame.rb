@@ -9,18 +9,19 @@ class Frame
   ERROR = 'Not a valid frame number'
   
   def initialize(frame_number = FIRST_FRAME, check = Validity.new)
-    valid_frame_number_check(frame_number, check)
+    valid_frame_number_check(frame_number, check) # do I need this? 
     @frame_content = { frame_id: frame_number }
   end
 
   def add(roll, roller = Roll.new) 
-    raise 'Frame complete' if full?
+    raise 'Frame complete' if full? # do i need this if in game class ?
 
     @roll = roller.roll(roll, pins_remaining)
+    # move onto own line i.e. add(:roll_1) if roll_1.nil? etc
     roll_1.nil? ? add_roll(:roll_1) : roll_2.nil? ? add_roll(:roll_2) : add_roll(:roll_3)
   end
 
-  def frame_id
+  def frame_id # do we need frame id?
     @frame_content[:frame_id]
   end
 
@@ -51,7 +52,7 @@ class Frame
   #   @frame_content[score] = scorer.new(frame).calculation.sum
   # end
 
-  def valid_frame_number_check(frame_id, check)
+  def valid_frame_number_check(frame_id, check) # prob get rid of this as we use indexes in game class
     raise ERROR unless check.valid?(frame_id, FIRST_FRAME, LAST_FRAME)
   end
 
@@ -59,7 +60,6 @@ class Frame
     @frame_content[roll_no] = @roll
     @frame_content[roll_no] = :/ if roll_no == :roll_2 && spare?
     @frame_content[roll_no] = :X if (roll_no == :roll_1 || frame_id == LAST_FRAME) && strike?
-    # frame_score
   end
 
   def pins_remaining
