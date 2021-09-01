@@ -4,6 +4,8 @@ require_relative 'scoring'
 class Game
 
   START_INDEX = 0
+  FIRST_FRAME = 1
+  LAST_FRAME = 10
 
   attr_reader :current_frame
 
@@ -19,7 +21,7 @@ class Game
     check_game   
     check_frame
     # check roll - using validity checker? (pins, remaining pins?)
-    @frame.add(pins)
+    @frame.roll(pins)
   end
 
   def scorecard
@@ -29,8 +31,8 @@ class Game
   private
   
   def populate_frames_array(frame_type)
-    (frame_type::FIRST_FRAME..frame_type::LAST_FRAME).map do |id|
-      @frames << frame_type.new(id) 
+    (FIRST_FRAME..LAST_FRAME).map do |frame_id|
+      @frames << frame_type.new(frame_id, LAST_FRAME) 
     end
   end
 
