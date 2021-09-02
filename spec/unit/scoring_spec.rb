@@ -132,6 +132,14 @@ describe Scoring do
       scoring = Scoring.new(frames)
       expect(scoring.calculation.first).to contain_exactly 20
     end
+
+    it 'checks if logic works for multistrike before final frame' do
+      frames = [{ roll_1: :X }, { roll_1: :X }, { roll_1: :X, roll_2: :X, roll_3: :X }]
+      scoring = Scoring.new(frames)
+      expect(scoring.calculation.first).to contain_exactly 30
+      expect(scoring.calculation[1]).to contain_exactly 30
+      expect(scoring.calculation.last).to contain_exactly 30
+    end
   end
 
 end

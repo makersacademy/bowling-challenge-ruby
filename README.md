@@ -1,13 +1,17 @@
 Bowling Challenge in Ruby
 =================
 
-## Update
+## Update 2/9/2021
 
-This is a simple bowling scorecard program written in Ruby, and using RSpec for testing.
+This is supposed to be a simple bowling scorecard program written in Ruby, and using RSpec for testing - it became quite complicated as I worked through it, however. This was a surprisingly tough challenge.
 
-This was a tough challenge and I'm disappointed not to finish it completely - I'm nearly done, but the scoring class doesn't currently talk to the frame/game classes. The scoring class calculates the scores per frame, I just need to hook it up so the frames obtain a score, and the game class totals them all up (or maybe the scoring class can also provide the total, which would make more sense). 
+The program has scoring functionality (per frame and total score) incorporated into the Game class scorecard method. It has full logic for bonus throws in the final frame.
 
-This was diagrammed at the start (images to follow), and I wrote plenty of user stories, which I will also put up in the readme. I simply ran out of time, possibly through over-thinking and over-refactoring the earlier classes (the scoring class is a bit of a mess at the moment).
+This was diagrammed at the start (images to follow), and I wrote plenty of user stories, which I will also put up in the readme. 
+
+The scoring class is rather unwieldy owing to the sheer number of possibilities - it can probably be refactored. 
+
+The validity class is not hooked up to the game class yet - it is going to test whether the roll entered is valid or not (i.e. 10 pins for the first roll (and third roll of final frame), or 10 pins - first roll for second roll).
 
 It is fully tested, with 100% coverage using RSpec.
 
@@ -26,9 +30,6 @@ Open `irb` from the command line and `require` the `game.rb` file. If you are in
 * To start a new game type `game = Game.new`
 * To enter a score type `game.roll(4)` (the number in the brackets must be a valid roll)
 * To see the scorecard type `game.scorecard`
-* The scorecard currently shows the rolls entered and updates automatically per roll
-* You can only make valid rolls, and you cannot make further rolls when the game is complete
-* Coming soon: frame score and total score on the scorecard
 
 ## The Task
 

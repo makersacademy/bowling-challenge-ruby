@@ -1,5 +1,6 @@
 require_relative 'frame'
 require_relative 'scorecard'
+require_relative 'scoring'
 require_relative 'validity'
 
 class Game
@@ -22,7 +23,8 @@ class Game
   end
 
   def scorecard(scorecard_printer = Scorecard.new)
-    scorecard_printer.scorecard(@frames)
+    scores = get_rolls
+    scorecard_printer.scorecard(@frames, scores.calculation)
   end
 
   private
@@ -39,6 +41,12 @@ class Game
 
   def check_frame
     @current_frame = @frames[@current_frame_index += 1] if @current_frame.full?
+  end
+
+  def get_rolls(scorer = Scoring)
+    scorer.new(@frames.map do |frame| 
+      { roll_1: frame.roll_1, roll_2: frame.roll_2, roll_3: frame.roll_3 }
+    end)
   end
 
 end
