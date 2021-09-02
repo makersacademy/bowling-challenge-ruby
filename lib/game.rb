@@ -10,44 +10,31 @@ class Game
   end
 
   def roll(score)
-    update_score(score)
-    @current_frame.add_roll
+    @current_frame.add_score(score)
     complete_frame if frame_complete?
   end
   
-  def check_roll
-    return @current_frame.no_of_rolls 
-  end
-
-  def update_score(score)
-    check_roll == 0 ? @current_frame.add_roll_1_score(score) : @current_frame.add_roll_2_score(score)
-  end
-
-  def strike?
-    return true if @current_frame.roll_1_score == 10
-  end
-
   def frame_complete?
     return true if strike?
-    return true if  @current_frame.no_of_rolls == 2
+    return true if  @current_frame.rolls.length == 2
   end
 
   def add_strike_bonus
-    strike_bonus = @current_frame.roll_1_score + @current_frame.roll_2_score
+    strike_bonus = @current_frame.rolls.sum
     @game.last.add_bonus_score(strike_bonus)
   end
 
   def add_spare_bonus
-    spare_bonus = @current_frame.roll_1_score
+    spare_bonus = @current_frame.rolls.first
     @game.last.add_bonus_score(spare_bonus)
   end
 
-  def strike_bonus?
-    return true if is_not_first_frame? && @game.last.roll_1_score == 10
+  def strike?
+    return true if is_not_first_frame? && @game.last.rolls.first == 10
   end
 
-  def spare_bonus?
-    return true if is_not_first_frame? && @game.last.frame_total == 10
+  def spare?
+    return true if is_not_first_frame? && @game.last.rolls.sum == 10 && !strike?
   end
 
   def is_not_first_frame?
@@ -61,11 +48,10 @@ class Game
   end
 
   def update_frame_total
-    add_strike_bonus if strike_bonus?
-    add_spare_bonus if spare_bonus?
+    add_strike_bonus if strike?
+    add_spare_bonus if spare?
     @current_frame.calc_frame_total && @current_frame.set_frame_total
-    @game.last.calc_frame_total && @game.last.set_frame_total if is_not_first_frame?
-    
+    @game.last.calc_frame_total && @game.last.set_frame_total if is_not_first_frame? 
   end
 
   def score_total
@@ -73,7 +59,6 @@ class Game
     @game.each { |frame| score += frame.frame_total }
     score
   end
-
 end
 
 my_game = Game.new
