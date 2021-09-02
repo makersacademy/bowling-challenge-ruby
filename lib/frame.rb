@@ -14,7 +14,7 @@ class Frame
   end
 
   def add_bonus_score(bonus)
-    @bonus_score = bonus
+    @bonus_score += bonus
   end
 
   def calc_frame_total
