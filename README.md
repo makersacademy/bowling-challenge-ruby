@@ -1,3 +1,11 @@
+Post feedback I decided to reset this project to create some better structure. To make sure I understand the directions I've created a domain model to allow me to plan classes before coding. 
+
+domain model: https://wireframe.cc/Pbz2nv
+
+This flowchart (evolving left to right) I used to follow the logic of calculating scores in bowling: https://miro.com/app/board/o9J_lzmlIa0=/
+
+
+
 Bowling Challenge in Ruby
 =================
 
