@@ -1,4 +1,3 @@
 describe Frame do 
 
-  
 end 
