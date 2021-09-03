@@ -24,28 +24,17 @@ class Game
   end
 
   def add_strike_bonus
-    if double_strike?
-      double_strike_bonus
-    elsif @game.length == 9
-      strike_bonus = @current_frame.rolls[0..1].sum
-    else
-      (strike_bonus = @current_frame.rolls.sum)
+    if @game.length > 1 && @game.last.rolls.first == 10 && @game[-2].rolls.first == 10
+      additional_bonus = @current_frame.rolls.first
+      @game[-2].add_bonus_score(additional_bonus)
     end
+    @game.length == 9 ? strike_bonus = @current_frame.rolls[0..1].sum : (strike_bonus = @current_frame.rolls.sum)
     @game.last.add_bonus_score(strike_bonus)
   end
 
   def add_spare_bonus
     spare_bonus = @current_frame.rolls.first
     @game.last.add_bonus_score(spare_bonus)
-  end
-
-  def double_strike_bonus
-    additional_bonus = @current_frame.rolls.first
-    @game[-2].add_bonus_score(additional_bonus)
-  end
-
-  def double_strike?
-    @game.length > 1 && @game.last.rolls.first == 10 && @game[-2].rolls.first == 10
   end
 
   def strike?
@@ -84,12 +73,12 @@ end
 
 my_game = Game.new
 
-
+12.times { my_game.roll(10)}
 
 my_game.roll(1)
 my_game.roll(4)
 
-# 12.times { my_game.roll(10)}
+
 
 # # puts my_game.score_total
 
