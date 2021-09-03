@@ -3,8 +3,8 @@ require 'frame'
 
 describe Game do
   
-  let(:frame) { double(:frame) }
-  let(:new_game) { described_class.new(frame)}
+  let(:frame_class) { class_double(Frame, :new => true).as_stubbed_const }
+  let(:new_game) { described_class.new(frame_class)}
 
   describe '#initialise' do
     it 'initializes with empty game array' do
@@ -15,7 +15,6 @@ describe Game do
   describe '#roll' do
     it 'updates score' do
       allow(new_game).to receive(:frame_complete?) { false }
-      allow(frame).to receive(:add_score)
       expect(new_game.roll(6)).to eq nil
     end
   end

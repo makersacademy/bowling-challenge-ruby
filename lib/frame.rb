@@ -8,7 +8,7 @@ class Frame
     @bonus_score = 0
     @frame_total = 0
   end
-
+  
   def add_score(score)
     @rolls << score
   end
