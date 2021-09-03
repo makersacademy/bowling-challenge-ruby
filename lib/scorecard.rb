@@ -1,12 +1,34 @@
 class Scorecard 
 
+  attr_reader :frames_completed
+  
+  def initialize(frames_completed)
+    @frames_completed = frames_completed
+  end 
+
+  def total 
+    @frames_completed.sum
+  end 
+
 end 
 
 
 
 
 
-  # This method wasn't needed but was fun to make
+
+
+
+
+
+
+
+
+
+
+
+
+# This method wasn't needed but was fun to make
 # def frame
 #   fail "Game is complete no frames remaining" if @frames.length == 10
 #   first_bowl = rand(0..10)
