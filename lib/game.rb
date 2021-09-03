@@ -5,7 +5,7 @@ class Game
 
   def initialize(frame = Frame.new)
     @no_of_frames_completed = 0
-    @current_frame = frame
+    @current_frame = Frame.new
     @game = []
   end
 
@@ -24,17 +24,28 @@ class Game
   end
 
   def add_strike_bonus
-    if @game.length > 1 && @game.last.rolls.first == 10 && @game[-2].rolls.first == 10
-      additional_bonus = @current_frame.rolls.first
-      @game[-2].add_bonus_score(additional_bonus)
+    if double_strike?
+      double_strike_bonus
+    elsif @game.length == 9
+      strike_bonus = @current_frame.rolls[0..1].sum
+    else
+      (strike_bonus = @current_frame.rolls.sum)
     end
-    @game.length == 9 ? (strike_bonus = @current_frame.rolls[0..1].sum) : (strike_bonus = @current_frame.rolls.sum)
     @game.last.add_bonus_score(strike_bonus)
   end
 
   def add_spare_bonus
     spare_bonus = @current_frame.rolls.first
     @game.last.add_bonus_score(spare_bonus)
+  end
+
+  def double_strike_bonus
+    additional_bonus = @current_frame.rolls.first
+    @game[-2].add_bonus_score(additional_bonus)
+  end
+
+  def double_strike?
+    @game.length > 1 && @game.last.rolls.first == 10 && @game[-2].rolls.first == 10
   end
 
   def strike?
