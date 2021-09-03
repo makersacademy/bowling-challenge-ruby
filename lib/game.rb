@@ -24,7 +24,7 @@ class Game
 
   private
 
-  def update_frame_total
+  def update_frame_totals
     add_strike_bonus if strike?
     add_spare_bonus if spare?
     @current_frame.calc_frame_total && @current_frame.set_frame_total
@@ -37,7 +37,7 @@ class Game
   end
 
   def complete_frame
-    update_frame_total
+    update_frame_totals
     @game << @current_frame
     @current_frame = @frame_class.new
   end
@@ -71,7 +71,7 @@ class Game
       additional_bonus = @current_frame.rolls.first
       @game[-2].add_bonus_score(additional_bonus)
     end
-    @game.length == 9 ? strike_bonus = @current_frame.rolls[0..1].sum : (strike_bonus = @current_frame.rolls.sum)
+    strike_bonus = @current_frame.rolls[0..1].sum
     @game.last.add_bonus_score(strike_bonus)
   end
 
@@ -88,7 +88,7 @@ end
 
 my_game = Game.new
 
-# 12.times { my_game.roll(10)}
+12.times { my_game.roll(10)}
 
 my_game.roll(1)
 my_game.roll(4)
