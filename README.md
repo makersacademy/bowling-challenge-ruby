@@ -16,8 +16,6 @@ How to install
 
 How to use this program
 -------
-- Create a new instance of the game class
-
 Below is an example of how to use the program:
 
 ```
@@ -27,6 +25,7 @@ new_game = Game.new
 12.times { new.game.roll(10) }
 
 ```
+To implement your own example:
 
 Call 'roll method' and 'new_game' instance as above. Pass in each score in the following example
 to achieve total score of 133: 
