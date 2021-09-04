@@ -1,28 +1,36 @@
 class Scorecard 
 
-  attr_reader :frames
+  attr_reader :frames, :last_frame, :current_score
   
   def initialize(frames)
     @frames = frames
+    @last_frame = false
+    @current_score = 0
   end 
 
   def total 
     tally = 0 
     @frames.each_with_index do |frame, index|
-      if frame.spare
-        tally += bonus_for_spare(frame, index)
-      else
-      end 
-      tally += frame.knocked_down_pins.sum
-    end 
-  tally
+      @last_frame = true if frame == @frames.last
+      bonus_for_strike(frame, index) if frame.strike
+      bonus_for_spare(frame, index) if frame.spare
+      @current_score += frame.knocked_down_pins.sum
+    end
+  last_frame = false
+  @current_score
   end 
 
   def bonus_for_spare(frame, index)
-    return 0 if @frames[index+1].nil?
-    return @frames[index+1].knocked_down_pins[0] 
+    return if @last_frame
+    @current_score += @frames[index+1].knocked_down_pins[0] 
   end
-end 
+
+  def bonus_for_strike(frame, index)
+    return if @last_frame
+    @current_score += @frames[index+1].knocked_down_pins.sum
+  end 
+
+end
 
 
 
