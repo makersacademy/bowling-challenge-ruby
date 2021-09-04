@@ -1,25 +1,17 @@
 class Scorecard 
 
-  attr_reader :frames_completed
+  attr_reader :frames
   
-  def initialize(frames_completed)
-    @frames = frames_completed
+  def initialize(frames)
+    @frames = frames
   end 
 
   def total 
     tally = 0 
-    @frames.knocked_down_pins.each_with_index do |frame, index|
-      tally += frame.sum
+    @frames.each do |frame|
+      tally += frame.knocked_down_pins.sum
     end 
   p tally
-  end 
-
-  def spare(index)
-    @frames.knocked_down_pins[index][0]
-  end 
-
-  def strike(index)
-    @frames[index].sum
   end 
 
 end 
