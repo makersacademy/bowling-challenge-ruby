@@ -46,6 +46,22 @@ describe Scorecard do
       scorecard = Scorecard.new(frames)
       expect(scorecard.total).to eq(75)
     end 
+
+    it "can calucate 10 frames with spares" do 
+      frames = [Frame.new([1,0]), Frame.new([1,0]), Frame.new([1,0]), Frame.new([1,0]), Frame.new([1,0]), 
+      Frame.new([1,0]), Frame.new([1,0]), Frame.new([1,0]), Frame.new([4,6]), Frame.new([4,6,10])]
+      scorecard = Scorecard.new(frames)
+      expect(scorecard.total).to eq(42)
+    end 
+
+    it "can calculate the perfect game" do 
+      frames = [Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,0]), 
+      Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,10,10])]
+      scorecard = Scorecard.new(frames)
+      expect(scorecard.total).to eq(300)
+    end 
+
+
   end
   
 end 
