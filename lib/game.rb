@@ -90,9 +90,53 @@ class Game
     spare_bonus = @current_frame.rolls.first
     @game.last.add_bonus_score(spare_bonus)
   end
-
-  def double_strike_bonus
-    additional_bonus = @current_frame.rolls.first
-    @game[-2].add_bonus_score(additional_bonus)
-  end
 end
+
+my_game = Game.new
+
+# 12.times { my_game.roll(10)}
+
+my_game.roll(1)
+my_game.roll(4)
+
+# # puts my_game.score_total
+
+my_game.roll(4)
+my_game.roll(5)
+# puts my_game.score_total
+
+my_game.roll(6)
+my_game.roll(4)
+# puts my_game.score_total
+# puts my_game.spare_bonus?
+
+my_game.roll(5)
+my_game.roll(5)
+# puts my_game.score_total
+# puts my_game.spare_bonus?
+
+my_game.roll(10)
+
+my_game.roll(0)
+my_game.roll(1)
+
+my_game.roll(7)
+my_game.roll(3)
+
+my_game.roll(6)
+my_game.roll(4)
+
+my_game.roll(10)
+
+
+my_game.roll(2)
+my_game.roll(8)
+my_game.roll(6)
+
+# print my_game.game
+
+# puts my_game.score_total
+# puts "----"
+# my_game.game.each { |frame| puts frame.frame_total }
+# puts "-----"
+# puts my_game.score_total
