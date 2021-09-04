@@ -35,11 +35,17 @@ describe Scorecard do
       expect(scorecard2.total).to eq(21)
     end
 
-    # it "returns bonus scores for doubles" do 
-    #   frames = [Frame.new([3,1]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([5,0])]
-    #   scorecard = Scorecard.new(frames)
-    #   expect(scorecard.total).to eq(49)
-    # end 
+    it "returns bonus scores for doubles" do 
+      frames = [Frame.new([3,1]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([5,0])]
+      scorecard = Scorecard.new(frames)
+      expect(scorecard.total).to eq(49)
+    end 
+
+    it "returns bonus scores for turkey" do 
+      frames = [Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([5,0])]
+      scorecard = Scorecard.new(frames)
+      expect(scorecard.total).to eq(75)
+    end 
   end
   
 end 

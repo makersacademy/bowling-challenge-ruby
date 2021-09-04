@@ -22,12 +22,20 @@ class Scorecard
 
   def bonus_for_spare(frame, index)
     return if @last_frame
+    # add next bowl onto @current_score when spare
     @current_score += @frames[index+1].knocked_down_pins[0] 
   end
 
   def bonus_for_strike(frame, index)
     return if @last_frame
+    bonus_for_double(index) if @frames[index+1].strike
+    # add sum of next frame onto @current_score when strike
     @current_score += @frames[index+1].knocked_down_pins.sum
+  end 
+
+  def bonus_for_double(index)
+    return @current_score += 20 if @frames[index+2].nil?
+    @current_score += @frames[index+2].knocked_down_pins.sum 
   end 
 
 end
