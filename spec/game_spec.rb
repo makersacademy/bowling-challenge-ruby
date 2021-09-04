@@ -1,28 +1,29 @@
 require 'game'
-require 'frame'
 
 describe Game do
   
-  let(:frame_class) { class_double(Frame, :new => true).as_stubbed_const }
-  let(:new_game) { described_class.new(frame_class)}
+  let(:frame) { instance_double(Frame, :frame_total => 5)}
+  let(:new_game) { described_class.new(frame)}
 
   describe '#initialise' do
     it 'initializes with empty game array' do
-      expect(new_game.game).to eq []
+      expect(new_game).to have_attributes(current_frame: frame, game: [])
     end
   end
 
   describe '#roll' do
-    it 'updates score' do
-      allow(new_game).to receive(:frame_complete?) { false }
-      expect(new_game.roll(6)).to eq nil
+    it 'call add_score method on current frame' do
+      expect(new_game.current_frame).to receive(:add_score)
+      allow(new_game.current_frame).to receive(:rolls) { [] }
+      new_game.roll(5) 
     end
   end
 
-  describe '#frame_complete?' do
-    it 'does not return true when strike' do
-      allow(new_game).to receive(:strike?) { true }
-      expect(new_game.frame_complete?).to eq true
+  describe '#score_total' do
+    it 'updates score' do
+      new_game.game << new_game.current_frame
+      expect(new_game.score_total).to eq (5)
     end
   end
+  
 end

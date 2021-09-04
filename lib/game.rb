@@ -1,12 +1,10 @@
 require_relative 'frame'
 class Game
 
-  attr_reader :no_of_frames_completed, :current_frame, :game
+  attr_reader :current_frame, :game
 
-  def initialize(frame_class = Frame)
-    @no_of_frames_completed = 0
-    @frame_class = frame_class
-    @current_frame = @frame_class.new
+  def initialize(frame = Frame.new)
+    @current_frame = frame
     @game = []
   end
 
@@ -25,21 +23,29 @@ class Game
   private
 
   def update_frame_totals
-    add_strike_bonus if strike?
-    add_spare_bonus if spare?
+    add_any_bonuses
+    recalculate_frame_totals
+  end
+
+  def recalculate_frame_totals
     @current_frame.calc_frame_total && @current_frame.set_frame_total
     @game.last.calc_frame_total && @game.last.set_frame_total if is_not_first_frame?
     @game[-2].calc_frame_total && @game[-2].set_frame_total if @game.length > 1 
+  end
+
+  def add_any_bonuses
+    add_strike_bonus if strike?
+    add_spare_bonus if spare?
   end
 
   def is_not_first_frame?
     @game == [] ? false : true
   end
 
-  def complete_frame
+  def complete_frame(frame = Frame.new)
     update_frame_totals
     @game << @current_frame
-    @current_frame = @frame_class.new
+    @current_frame = frame
   end
 
   def frame_complete?
@@ -50,6 +56,7 @@ class Game
   end
 
   def incomplete_frame?
+    return false if @current_frame.rolls == []
     return true if @current_frame.rolls.first == 10 && @game.length == 9
     return true if @current_frame.rolls.first + @current_frame.rolls.last == 10 && @game.length == 9
   end
@@ -66,10 +73,14 @@ class Game
     return true if is_not_first_frame? && @game.last.rolls.sum == 10 && !strike?
   end
 
+  def double_strike_bonus
+    additional_bonus = @current_frame.rolls.first
+    @game[-2].add_bonus_score(additional_bonus)
+  end
+
   def add_strike_bonus
     if double_strike?
-      additional_bonus = @current_frame.rolls.first
-      @game[-2].add_bonus_score(additional_bonus)
+      double_strike_bonus
     end
     strike_bonus = @current_frame.rolls[0..1].sum
     @game.last.add_bonus_score(strike_bonus)
