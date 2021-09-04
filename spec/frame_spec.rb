@@ -9,4 +9,5 @@ describe Frame do
     expect(Frame.new([10,0]).strike).to eq(true)
     expect(Frame.new([7,2]).strike).to eq(nil)
   end 
+
 end 
