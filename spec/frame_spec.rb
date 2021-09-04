@@ -8,10 +8,7 @@ describe Frame do
 
   it "Knows if knocked down pins is a strike or not" do 
     expect(Frame.new([10,0]).strike).to eq(true)
-    expect(Frame.new([9,0]).strike).to eq(nil)
+    expect(Frame.new([7,2]).strike).to eq(nil)
   end 
-
-  
-
 
 end 

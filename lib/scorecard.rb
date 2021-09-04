@@ -8,12 +8,20 @@ class Scorecard
 
   def total 
     tally = 0 
-    @frames.each do |frame|
+    @frames.each_with_index do |frame, index|
+      if frame.spare
+        tally += bonus_for_spare(frame, index)
+      else
+      end 
       tally += frame.knocked_down_pins.sum
     end 
-  p tally
+  tally
   end 
 
+  def bonus_for_spare(frame, index)
+    return 0 if @frames[index+1].nil?
+    return @frames[index+1].knocked_down_pins[0] 
+  end
 end 
 
 
