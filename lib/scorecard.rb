@@ -15,7 +15,10 @@ class Scorecard
       @last_frame = true if frame == @frames.last
       bonus_for_strike(index) if frame.strike
       bonus_for_spare(index) if frame.spare
-      p @current_score += frame.knocked_down_pins.sum 
+      # last frame edge case
+      @current_score += frame.knocked_down_pins[0] + frame.knocked_down_pins[1] unless last_frame
+      @current_score += frame.knocked_down_pins.sum if last_frame
+      p @current_score
     end
   @current_score
   end 
@@ -29,24 +32,24 @@ class Scorecard
   def bonus_for_strike(index)
     # no bonus on last throw
     return if @last_frame
-    bonus_for_double(index) if @frames[index+1].strike
+    return bonus_for_double(index) if @frames[index+1].strike
     # add sum of next frame onto @current_score when strike
-    return @current_score += 10 if @frames[index+1].knocked_down_pins.sum  > 10
-    p "HERE IS STRIKE METHOD"
-    p @current_score += @frames[index+1].knocked_down_pins.sum
+    p "STRIKE"
+    return @current_score += @frames[index+1].knocked_down_pins.sum 
+  
   end 
 
   def bonus_for_double(index)
     # this method is skipped if player is on a strike streak > 2 
-    return bonus_for_turkey if  @frames[index+2].nil? || @frames[index+2].strike
-    return @current_score += 10 if @frames[index+2].nil?
-    p "HERE IS DOUBLE METHOD"
-    p @current_score += @frames[index+2].knocked_down_pins.sum 
+    return bonus_for_turkey if @frames[index+2].strike
+    p "DOUBLE"
+    @current_score += @frames[index+2].knocked_down_pins.sum 
+    return @current_score += 10 
   end 
 
   def bonus_for_turkey
-    p "TURKEY METHOD"
-    p @current_score += 10 
+    p "TURKEY"
+    @current_score += 20 
   end 
 
 end
