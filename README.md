@@ -1,7 +1,7 @@
 Bowling Challenge in Ruby 
 =========================
 
-Post feedback I decided to reset this project to create some better structure. To make sure I understand the directions I've created a domain model to allow me to plan classes before coding. 
+Post feedback I decided to reset this project to create some better structure. To make sure I understand the direction the code is going in I created a domain model to allow me to plan classes before coding. 
 
 domain model: https://wireframe.cc/Pbz2nv
 
