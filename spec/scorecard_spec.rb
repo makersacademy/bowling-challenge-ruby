@@ -26,7 +26,7 @@ describe Scorecard do
       expect(scorecard.total).to eq(26)
     end
 
-    it "returns the sum of frames with a stirkes" do 
+    it "returns the sum of frames with a strikes" do 
       frames = [Frame.new([3,4]), Frame.new([10,0]), Frame.new([7,2])]
       frames2 = [Frame.new([3,4]), Frame.new([4,0]), Frame.new([10,0])]
       scorecard = Scorecard.new(frames)
@@ -61,33 +61,33 @@ describe Scorecard do
       expect(scorecard.total).to eq(300)
     end 
 
-    # it "can calculate a mixed game" do 
-    #   frames = [Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([6,0]), Frame.new([10,0]), 
-    #   Frame.new([10,0]), Frame.new([2,8]), Frame.new([10,0]), Frame.new([6,4]), Frame.new([6,4,10])]
-    #   scorecard = Scorecard.new(frames)
-    #   expect(scorecard.total).to eq(204)
-    # end 
+    it "can calculate a mixed game" do 
+      frames = [Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([6,0]), Frame.new([10,0]), 
+      Frame.new([10,0]), Frame.new([2,8]), Frame.new([10,0]), Frame.new([6,4]), Frame.new([6,4,10])]
+      scorecard = Scorecard.new(frames)
+      expect(scorecard.total).to eq(204)
+    end 
 
-    # it "can calculate a mixed game2" do 
-    #   frames = [Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([6,0]), Frame.new([10,0]), 
-    #   Frame.new([10,0]), Frame.new([2,8]), Frame.new([10,0]), Frame.new([6,4]), Frame.new([1,1])]
-    #   scorecard = Scorecard.new(frames)
-    #   expect(scorecard.total).to eq(181)
-    # end 
+    it "can calculate a mixed game2" do 
+      frames = [Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([6,0]), Frame.new([10,0]), 
+      Frame.new([10,0]), Frame.new([2,8]), Frame.new([10,0]), Frame.new([6,4]), Frame.new([1,1])]
+      scorecard = Scorecard.new(frames)
+      expect(scorecard.total).to eq(181)
+    end 
 
-    # it "can calculate a mixed game3" do 
-    #   frames = [Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([6,0]), Frame.new([10,0]), 
-    #   Frame.new([10,0]), Frame.new([2,8]), Frame.new([10,0]), Frame.new([6,4]), Frame.new([6,4,2])]
-    #   scorecard = Scorecard.new(frames)
-    #   expect(scorecard.total).to eq(196)
-    # end 
+    it "can calculate a mixed game3" do 
+      frames = [Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([6,0]), Frame.new([10,0]), 
+      Frame.new([10,0]), Frame.new([2,8]), Frame.new([10,0]), Frame.new([6,4]), Frame.new([6,4,2])]
+      scorecard = Scorecard.new(frames)
+      expect(scorecard.total).to eq(196)
+    end 
 
-    # it "can calculate a mixed game3" do 
-    #   frames = [Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([6,0]), Frame.new([10,0]), 
-    #   Frame.new([10,0]), Frame.new([2,8]), Frame.new([7,0]), Frame.new([10,0]), Frame.new([10,6,4])]
-    #   scorecard = Scorecard.new(frames)
-    #   expect(scorecard.total).to eq(225)
-    # end 
+    it "can calculate a mixed game4" do 
+      frames = [Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([6,0]), Frame.new([10,0]), 
+      Frame.new([10,0]), Frame.new([2,8]), Frame.new([7,0]), Frame.new([10,0]), Frame.new([10,6,4])]
+      scorecard = Scorecard.new(frames)
+      expect(scorecard.total).to eq(195)
+    end 
 
   end
   
