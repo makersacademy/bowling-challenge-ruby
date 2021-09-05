@@ -1,18 +1,11 @@
+Bowling Challenge in Ruby 
+=========================
+
 Post feedback I decided to reset this project to create some better structure. To make sure I understand the directions I've created a domain model to allow me to plan classes before coding. 
 
 domain model: https://wireframe.cc/Pbz2nv
 
 This flowchart (evolving left to right) I used to follow the logic of calculating scores in bowling: https://miro.com/app/board/o9J_lzmlIa0=/
-
-
-
-Bowling Challenge in Ruby
-=================
-
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
 
 ## The Task
 
