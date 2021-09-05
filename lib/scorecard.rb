@@ -13,15 +13,11 @@ class Scorecard
     tally = 0 
     # 10th_frame if @frames.length == 10
     @frames.each_with_index do |frame, index|
-      @last_frame = true if frame == @frames.last
-      @ninth_frame = true if index == 9
+      which_frame(index, frame)
       bonus_for_strike(index) if frame.strike
       bonus_for_spare(index) if frame.spare
       # last or ninth frame edge case
-      @current_score += frame.knocked_down_pins[0] + frame.knocked_down_pins[1] unless last_frame || ninth_frame
-
-      @current_score += frame.knocked_down_pins.sum if last_frame
-      p @current_score
+      add_frame(frame)
     end
   @current_score
   end 
@@ -48,8 +44,7 @@ class Scorecard
     else 
       return bonus_for_turkey if @frames[index+2].strike
       p "DOUBLE"
-      @current_score += @frames[index+2].knocked_down_pins.sum 
-      return @current_score += 10 
+      return @current_score += (10 + @frames[index+2].knocked_down_pins.sum) 
     end
   end 
 
@@ -58,5 +53,17 @@ class Scorecard
     p "TURKEY"
     @current_score += 20 
   end 
+
+  def which_frame(index, frame)
+    # sets true if condition met 
+    @last_frame = true if frame == @frames.last
+    @ninth_frame = true if index == 9
+  end 
+
+  def add_frame(frame)
+    @current_score += frame.knocked_down_pins[0] + frame.knocked_down_pins[1] unless last_frame || ninth_frame
+    @current_score += frame.knocked_down_pins.sum if last_frame
+    p @current_score
+  end
 
 end

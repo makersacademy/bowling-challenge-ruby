@@ -86,7 +86,7 @@ describe Scorecard do
       frames = [Frame.new([10,0]), Frame.new([10,0]), Frame.new([10,0]), Frame.new([6,0]), Frame.new([10,0]), 
       Frame.new([10,0]), Frame.new([2,8]), Frame.new([7,0]), Frame.new([10,0]), Frame.new([10,6,4])]
       scorecard = Scorecard.new(frames)
-      expect(scorecard.total).to eq(195)
+      expect(scorecard.total).to eq(202)
     end 
 
   end
