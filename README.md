@@ -7,6 +7,16 @@ domain model: https://wireframe.cc/Pbz2nv
 
 This flowchart (evolving left to right) I used to follow the logic of calculating scores in bowling: https://miro.com/app/board/o9J_lzmlIa0=/
 
+Changes to structure: 
+
+Frame should have rolls 
+Frame should have a bonus and calculate it 
+To calculate 10th frame we can add bonus "11th frame or roll" depending on strike or spare
+
+## How to use the application 
+
+To use the scorecard app you should activate IRB 
+
 ## The Task
 
 **THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
