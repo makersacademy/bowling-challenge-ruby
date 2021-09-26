@@ -34,6 +34,16 @@ describe Game do
         # total is 5+5+5 (+5 for bonus) = 15
       end
     end
+
+    context 'when a strike is thrown' do
+      it 'records the frame score as 10 + total knocked down in the next 2 rounds' do
+        game.roll(10) #rolling a strike moves straight to the next frame 
+        game.roll(7)
+        game.roll(1)
+        16.times { game.roll(0) }
+        expect(game.score).to eq(26)
+      end
+    end
   end
 end
 
