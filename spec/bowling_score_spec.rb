@@ -8,6 +8,6 @@ describe BowlingScore do
   end
 
   it 'returns the total score' do
-    expect(subject.score).to eq(42)
+    expect(subject.total_score).to eq(42)
   end
 end

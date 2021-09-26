@@ -4,7 +4,6 @@ Bowling Challenge in Ruby
 ## My approach
 
 * The first thing I did was think about the best way to get the user rolls as input. I opted to start with an array of 10 arrays containing 2 elements each.
-* 
 
 ## Instructions
 

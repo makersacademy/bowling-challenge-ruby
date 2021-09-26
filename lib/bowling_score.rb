@@ -5,7 +5,7 @@ class BowlingScore
     @user_rolls = user_rolls
   end
 
-  def score
+  def total_score
     @user_rolls.flatten.sum
   end
 end
