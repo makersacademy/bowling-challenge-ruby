@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-09-26T21:16:24+01:00">2021-09-26T21:16:24+01:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-09-26T21:28:29+01:00">2021-09-26T21:28:29+01:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -30,7 +30,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         3.28
+         5.1
        </span>
     </span> hits/line
     )
@@ -43,8 +43,8 @@
   </div>
 
   <div class="t-line-summary">
-    <b>18</b> relevant lines,
-    <span class="green"><b>18</b> lines covered</span> and
+    <b>21</b> relevant lines,
+    <span class="green"><b>21</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed. </span>
     (<span class="green">
   100.0%
@@ -73,22 +73,22 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#862075638156886863777f46d4ec2a945be23b98" class="src_link" title="lib/game.rb">lib/game.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">42</td>
-            <td class="cell--number">7</td>
-            <td class="cell--number">7</td>
+            <td class="cell--number">45</td>
+            <td class="cell--number">9</td>
+            <td class="cell--number">9</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">4.00</td>
+            <td class="cell--number">5.78</td>
             
           </tr>
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#ccaecc5bd8b51eca4c4348f3fb26f288497977ff" class="src_link" title="spec/game_spec.rb">spec/game_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">48</td>
-            <td class="cell--number">11</td>
-            <td class="cell--number">11</td>
+            <td class="cell--number">51</td>
+            <td class="cell--number">12</td>
+            <td class="cell--number">12</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">2.82</td>
+            <td class="cell--number">4.58</td>
             
           </tr>
         
@@ -123,8 +123,8 @@
     
 
     <div class="t-line-summary">
-      <b>7</b> relevant lines.
-      <span class="green"><b>7</b> lines covered</span> and
+      <b>9</b> relevant lines.
+      <span class="green"><b>9</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -191,8 +191,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="6">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="3" data-linenumber="6">
+            <span class="hits">3</span>
             
 
             
@@ -202,8 +202,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="7">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="3" data-linenumber="7">
+            <span class="hits">3</span>
             
 
             
@@ -246,13 +246,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="20" data-linenumber="11">
-            <span class="hits">20</span>
+          <li class="covered" data-hits="40" data-linenumber="11">
+            <span class="hits">40</span>
             
 
             
 
-            <code class="ruby">    @score += num</code>
+            <code class="ruby">    @rolls &lt;&lt; num</code>
           </li>
         </div>
       
@@ -279,24 +279,24 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="14">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="14">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  </code>
+            
+
+            <code class="ruby">  def score </code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="15">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="15">
+            <span class="hits">1</span>
             
 
-            <code class="ruby"></code>
+            
+
+            <code class="ruby">    @rolls.reduce(:+)</code>
           </li>
         </div>
       
@@ -307,7 +307,7 @@
 
             
 
-            <code class="ruby">  #   attr_reader :roll_one, :roll_two</code>
+            <code class="ruby">  end </code>
           </li>
         </div>
       
@@ -318,7 +318,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  </code>
           </li>
         </div>
       
@@ -329,7 +329,7 @@
 
             
 
-            <code class="ruby">  # def initialize(roll_one, roll_two)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -340,7 +340,7 @@
 
             
 
-            <code class="ruby">  #   @roll_one = roll_one</code>
+            <code class="ruby">  #   attr_reader :roll_one, :roll_two</code>
           </li>
         </div>
       
@@ -351,7 +351,7 @@
 
             
 
-            <code class="ruby">  #   @roll_two = roll_two</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -362,7 +362,7 @@
 
             
 
-            <code class="ruby">  # end</code>
+            <code class="ruby">  # def initialize(roll_one, roll_two)</code>
           </li>
         </div>
       
@@ -373,7 +373,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #   @roll_one = roll_one</code>
           </li>
         </div>
       
@@ -384,7 +384,7 @@
 
             
 
-            <code class="ruby">  # def total_of_frame</code>
+            <code class="ruby">  #   @roll_two = roll_two</code>
           </li>
         </div>
       
@@ -395,7 +395,7 @@
 
             
 
-            <code class="ruby">  #   roll_one + roll_two</code>
+            <code class="ruby">  # end</code>
           </li>
         </div>
       
@@ -406,7 +406,7 @@
 
             
 
-            <code class="ruby">  # end</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -417,7 +417,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  # def total_of_frame</code>
           </li>
         </div>
       
@@ -428,7 +428,7 @@
 
             
 
-            <code class="ruby">  # def spare?</code>
+            <code class="ruby">  #   roll_one + roll_two</code>
           </li>
         </div>
       
@@ -439,7 +439,7 @@
 
             
 
-            <code class="ruby">  #   if roll_one + roll_two == 10 &amp;&amp; roll_one != 10</code>
+            <code class="ruby">  # end</code>
           </li>
         </div>
       
@@ -450,7 +450,7 @@
 
             
 
-            <code class="ruby">  #     true</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -461,7 +461,7 @@
 
             
 
-            <code class="ruby">  #   else</code>
+            <code class="ruby">  # def spare?</code>
           </li>
         </div>
       
@@ -472,7 +472,7 @@
 
             
 
-            <code class="ruby">  #     false</code>
+            <code class="ruby">  #   if roll_one + roll_two == 10 &amp;&amp; roll_one != 10</code>
           </li>
         </div>
       
@@ -483,7 +483,7 @@
 
             
 
-            <code class="ruby">  #   end</code>
+            <code class="ruby">  #     true</code>
           </li>
         </div>
       
@@ -494,7 +494,7 @@
 
             
 
-            <code class="ruby">  # end</code>
+            <code class="ruby">  #   else</code>
           </li>
         </div>
       
@@ -505,7 +505,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #     false</code>
           </li>
         </div>
       
@@ -516,7 +516,7 @@
 
             
 
-            <code class="ruby">  # def strike?</code>
+            <code class="ruby">  #   end</code>
           </li>
         </div>
       
@@ -527,7 +527,7 @@
 
             
 
-            <code class="ruby">  #   if roll_one == 10 &amp;&amp; roll_two == 0</code>
+            <code class="ruby">  # end</code>
           </li>
         </div>
       
@@ -538,7 +538,7 @@
 
             
 
-            <code class="ruby">  #     true</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -549,7 +549,7 @@
 
             
 
-            <code class="ruby">  #   else</code>
+            <code class="ruby">  # def strike?</code>
           </li>
         </div>
       
@@ -560,7 +560,7 @@
 
             
 
-            <code class="ruby">  #     false</code>
+            <code class="ruby">  #   if roll_one == 10 &amp;&amp; roll_two == 0</code>
           </li>
         </div>
       
@@ -571,7 +571,7 @@
 
             
 
-            <code class="ruby">  #   end</code>
+            <code class="ruby">  #     true</code>
           </li>
         </div>
       
@@ -582,12 +582,45 @@
 
             
 
-            <code class="ruby">  # end</code>
+            <code class="ruby">  #   else</code>
           </li>
         </div>
       
         <div>
           <li class="never" data-hits="" data-linenumber="42">
+            
+            
+
+            
+
+            <code class="ruby">  #     false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="43">
+            
+            
+
+            
+
+            <code class="ruby">  #   end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="44">
+            
+            
+
+            
+
+            <code class="ruby">  # end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="45">
             
             
 
@@ -616,8 +649,8 @@
     
 
     <div class="t-line-summary">
-      <b>11</b> relevant lines.
-      <span class="green"><b>11</b> lines covered</span> and
+      <b>12</b> relevant lines.
+      <span class="green"><b>12</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -662,7 +695,18 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="4">
+          <li class="covered" data-hits="4" data-linenumber="4">
+            <span class="hits">4</span>
+            
+
+            
+
+            <code class="ruby">  let(:game) { Game.new } </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="5">
             
             
 
@@ -673,7 +717,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="5">
+          <li class="covered" data-hits="1" data-linenumber="6">
             <span class="hits">1</span>
             
 
@@ -684,24 +728,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="6">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    it &#39;sets @rolls to an empty array&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
           <li class="covered" data-hits="1" data-linenumber="7">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      game = Game.new</code>
+            <code class="ruby">    it &#39;sets @rolls to an empty array&#39; do</code>
           </li>
         </div>
       
@@ -772,18 +805,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="14">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      game = Game.new</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="21" data-linenumber="15">
+          <li class="covered" data-hits="21" data-linenumber="14">
             <span class="hits">21</span>
             
 
@@ -794,7 +816,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="16">
+          <li class="covered" data-hits="1" data-linenumber="15">
             <span class="hits">1</span>
             
 
@@ -805,7 +827,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="17">
+          <li class="never" data-hits="" data-linenumber="16">
             
             
 
@@ -816,24 +838,35 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="18">
-            
-            
-
-            
-
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="19">
+          <li class="never" data-hits="" data-linenumber="17">
             
             
 
             
 
             <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="18">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;scores the game as 20 when one pin is knocked down each roll&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="21" data-linenumber="19">
+            <span class="hits">21</span>
+            
+
+            
+
+            <code class="ruby">      20.times { game.roll(1) }</code>
           </li>
         </div>
       
@@ -844,7 +877,7 @@
 
             
 
-            <code class="ruby">  # it &#39;should provide the total score of a frame correctly&#39; do</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -855,7 +888,7 @@
 
             
 
-            <code class="ruby">  #   game.roll(3)</code>
+            <code class="ruby">  end </code>
           </li>
         </div>
       
@@ -866,7 +899,7 @@
 
             
 
-            <code class="ruby">  #   game.roll(6)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -877,7 +910,7 @@
 
             
 
-            <code class="ruby">  #   expect(game.score).to eq(9)</code>
+            <code class="ruby">  # it &#39;should provide the total score of a frame correctly&#39; do</code>
           </li>
         </div>
       
@@ -888,7 +921,7 @@
 
             
 
-            <code class="ruby">  # end</code>
+            <code class="ruby">  #   game.roll(3)</code>
           </li>
         </div>
       
@@ -899,7 +932,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #   game.roll(6)</code>
           </li>
         </div>
       
@@ -910,7 +943,7 @@
 
             
 
-            <code class="ruby">  # it &#39;should provide the total score of a frame correctly&#39; do</code>
+            <code class="ruby">  #   expect(game.score).to eq(9)</code>
           </li>
         </div>
       
@@ -921,7 +954,7 @@
 
             
 
-            <code class="ruby">  #   game = Game.new(:roll_one, :roll_two)</code>
+            <code class="ruby">  # end</code>
           </li>
         </div>
       
@@ -932,7 +965,7 @@
 
             
 
-            <code class="ruby">  #   allow(game).to receive(:roll_one) { 3 }</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -943,7 +976,7 @@
 
             
 
-            <code class="ruby">  #   allow(game).to receive(:roll_two) { 6 }</code>
+            <code class="ruby">  # it &#39;should provide the total score of a frame correctly&#39; do</code>
           </li>
         </div>
       
@@ -954,7 +987,7 @@
 
             
 
-            <code class="ruby">  #   expect(game.total_of_frame).to eq(9)</code>
+            <code class="ruby">  #   game = Game.new(:roll_one, :roll_two)</code>
           </li>
         </div>
       
@@ -965,7 +998,7 @@
 
             
 
-            <code class="ruby">  # end</code>
+            <code class="ruby">  #   allow(game).to receive(:roll_one) { 3 }</code>
           </li>
         </div>
       
@@ -976,7 +1009,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #   allow(game).to receive(:roll_two) { 6 }</code>
           </li>
         </div>
       
@@ -987,7 +1020,7 @@
 
             
 
-            <code class="ruby">  # it &#39;should determine when a spare is rolled&#39; do</code>
+            <code class="ruby">  #   expect(game.total_of_frame).to eq(9)</code>
           </li>
         </div>
       
@@ -998,7 +1031,7 @@
 
             
 
-            <code class="ruby">  #   game = Game.new(6, 4)</code>
+            <code class="ruby">  # end</code>
           </li>
         </div>
       
@@ -1009,7 +1042,7 @@
 
             
 
-            <code class="ruby">  #   expect(game.spare?).to be true</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -1020,7 +1053,7 @@
 
             
 
-            <code class="ruby">  # end</code>
+            <code class="ruby">  # it &#39;should determine when a spare is rolled&#39; do</code>
           </li>
         </div>
       
@@ -1031,7 +1064,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #   game = Game.new(6, 4)</code>
           </li>
         </div>
       
@@ -1042,7 +1075,7 @@
 
             
 
-            <code class="ruby">  # it &#39;should determine when a strike is rolled&#39; do</code>
+            <code class="ruby">  #   expect(game.spare?).to be true</code>
           </li>
         </div>
       
@@ -1053,7 +1086,7 @@
 
             
 
-            <code class="ruby">  #   game = Game.new(10, 0)</code>
+            <code class="ruby">  # end</code>
           </li>
         </div>
       
@@ -1064,7 +1097,7 @@
 
             
 
-            <code class="ruby">  #   expect(game.strike?).to be true</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -1075,7 +1108,7 @@
 
             
 
-            <code class="ruby">  # end</code>
+            <code class="ruby">  # it &#39;should determine when a strike is rolled&#39; do</code>
           </li>
         </div>
       
@@ -1086,7 +1119,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #   game = Game.new(10, 0)</code>
           </li>
         </div>
       
@@ -1097,7 +1130,7 @@
 
             
 
-            <code class="ruby">  # it &#39;can calculate a gutter game&#39; do</code>
+            <code class="ruby">  #   expect(game.strike?).to be true</code>
           </li>
         </div>
       
@@ -1108,7 +1141,7 @@
 
             
 
-            <code class="ruby">  #   game = Game.new(:roll_one, :roll_two)</code>
+            <code class="ruby">  # end</code>
           </li>
         </div>
       
@@ -1119,7 +1152,7 @@
 
             
 
-            <code class="ruby">  #   20.times(game.roll(0))</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -1130,7 +1163,7 @@
 
             
 
-            <code class="ruby">  #   expect(game.score).to eq 0</code>
+            <code class="ruby">  # it &#39;can calculate a gutter game&#39; do</code>
           </li>
         </div>
       
@@ -1141,12 +1174,45 @@
 
             
 
-            <code class="ruby">  # end</code>
+            <code class="ruby">  #   game = Game.new(:roll_one, :roll_two)</code>
           </li>
         </div>
       
         <div>
           <li class="never" data-hits="" data-linenumber="48">
+            
+            
+
+            
+
+            <code class="ruby">  #   20.times(game.roll(0))</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="49">
+            
+            
+
+            
+
+            <code class="ruby">  #   expect(game.score).to eq 0</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="50">
+            
+            
+
+            
+
+            <code class="ruby">  # end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="51">
             
             
 

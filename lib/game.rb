@@ -8,9 +8,12 @@ class Game
   end
 
   def roll(num)
-    @score += num
+    @rolls << num
   end
 
+  def score 
+    @rolls.reduce(:+)
+  end 
   
 
   #   attr_reader :roll_one, :roll_two

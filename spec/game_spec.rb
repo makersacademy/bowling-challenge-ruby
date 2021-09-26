@@ -1,21 +1,24 @@
 require 'game'
 
 describe Game do
+  let(:game) { Game.new } 
 
   describe '.initialize' do
     it 'sets @rolls to an empty array' do
-      game = Game.new
       expect(game.rolls).to eq([])
     end
   end
 
   describe '#score' do
     it 'scores the game as 0 when only gutter balls are thrown' do
-      game = Game.new
       20.times { game.roll(0) }
       expect(game.score).to eq(0)
     end
-  end
+
+    it 'scores the game as 20 when one pin is knocked down each roll' do
+      20.times { game.roll(1) }
+    end
+  end 
 
   # it 'should provide the total score of a frame correctly' do
   #   game.roll(3)
