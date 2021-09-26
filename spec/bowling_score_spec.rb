@@ -12,6 +12,6 @@ describe BowlingScore do
   end
 
   it 'returns scores per frames while detecting spares and strikes' do
-    expect(subject.scores).to eq(["spare", 4, 8, 2, "strike", "strike", "spare", 8, 2, 0])
+    expect(subject.scores).to eq([11, 4, 8, 2, 21, 20, 13, 8, 2, 0])
   end
 end
