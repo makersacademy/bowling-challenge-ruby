@@ -20,6 +20,6 @@ class BowlingScore
   end
 
   def total_score
-    @user_rolls.flatten.sum
+    scores.sum
   end
 end

@@ -8,7 +8,7 @@ describe BowlingScore do
   end
 
   it 'returns the total score' do
-    expect(subject.total_score).to eq(64)
+    expect(subject.total_score).to eq(89)
   end
 
   it 'returns scores per frames while detecting spares and strikes' do
