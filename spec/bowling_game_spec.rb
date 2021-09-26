@@ -17,31 +17,55 @@ describe 'bowling game' do
         let(:game) { game = BowlingGame.new }
 
         it 'allows us to obtain final game score' do
-            RollMany(times = 20, pins = 0)
+            rollMany(times = 20, pins = 0)
             expect { score = game.score }.not_to raise_error
         end
 
         it 'allows us to score null points' do
-            RollMany(times = 20, pins = 0)
+            rollMany(times = 20, pins = 0)
             assertScore 0
         end
 
         it 'allows us to score one point' do
             roll 1
-            RollMany(times = 19, pins = 0)
+            rollMany(times = 19, pins = 0)
             assertScore 1
         end
 
-        def RollMany(times, pins)
+        it 'allows us to score a spare game' do
+            rollSpare
+            roll 3
+            rollMany(times = 17, pins = 0)
+            assertScore 12
+        end
+
+        it 'allows us to score a strike game' do
+            rollStrike
+            roll 9
+            roll 3
+            rollMany(times = 17, pins = 0)
+            assertScore 34
+        end
+
+        def rollMany(times, pins)
             times.times { game.roll pins }
         end
 
         def roll(pins)
-            game.roll 1
+            game.roll pins
         end
 
         def assertScore(expected)
             expect(game.score).to eq(expected)
+        end
+
+        def rollSpare
+            roll 2
+            roll 7
+        end
+
+        def rollStrike
+            roll 10
         end
     end
 end
