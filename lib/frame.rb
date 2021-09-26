@@ -22,7 +22,9 @@ class Frame
         @roll_1 = gets.chomp.to_i
         puts "Your first roll: #{@roll_1}"
 
-        if @roll_1 == 10
+        if @roll_1 == 10 && frame_number == 10
+          @strike = true
+        elsif @roll_1 == 10
           @strike = true 
           @frame_finished = true
         end
@@ -34,11 +36,17 @@ class Frame
           end
         end
 
-      elsif @roll_1 != 10
+      elsif !@roll_1.nil?
 
         puts "Second roll of the frame"
         @roll_2 = gets.chomp.to_i
         puts "Your second roll: #{@roll_2}"
+
+        if (@roll_1 == 10 || @roll_1 + @roll_2 == 10) && frame_number == 10
+          puts "Your bonus 10th frame roll"
+          @roll_3 = gets.chomp.to_i
+
+        end
 
         if check_previous_frame_for_strike
           add_roll_2_to_previous_frame_score
@@ -97,18 +105,22 @@ class Frame
   def calculate_frame_score
     if @roll_2.nil?
       @frame_score = @roll_1
+    elsif !!@roll_3
+      @frame_score = @roll_1 + @roll_2 + @roll_3
     else
       @frame_score = @roll_1 + @roll_2
     end
   end
 
   def end_of_frame_message
-    if strike?
-        "You scored a Strike!"
+    if frame_number == 10
+      "You scored #{@frame_score} points in your final frame. Your final score was #{Scorecard.current_game.score}"
+    elsif strike?
+      "You scored a Strike!"
     elsif spare?
-        "You scored a Spare!"
+      "You scored a Spare!"
     else
-        "You scored #{@frame_score} point#{'s' if @frame_score > 1} this frame."
+      "You scored #{@frame_score} point#{'s' if @frame_score > 1} this frame."
     end
   end
 

@@ -11,11 +11,15 @@ class Scorecard
   end
 
   def self.bowl
-    if @game.frames[-1].frame_finished
-      @game.next_frame
-      @game.frames[-1].bowl
+    if @game.frames_played == 10 && @game.frames[-1].frame_finished
+      "The game has ended. Your final score was #{@game.score}"
     else
-      @game.frames[-1].bowl
+      if @game.frames[-1].frame_finished
+        @game.next_frame
+        @game.frames[-1].bowl
+      else
+        @game.frames[-1].bowl
+      end
     end
   end
 
