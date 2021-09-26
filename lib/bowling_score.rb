@@ -6,7 +6,13 @@ class BowlingScore
   end
 
   def scores
-    @user_rolls.map { |frame| frame.sum }
+    @user_rolls.map do |frame| 
+      if frame[0] != 10
+        frame.sum == 10 ? "spare" : frame.sum 
+      else
+        "strike"
+      end
+    end
   end
 
   def total_score
