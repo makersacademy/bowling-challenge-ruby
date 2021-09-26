@@ -1,21 +1,26 @@
 require 'scorecard'
 
 describe Scorecard do
-  context 'upon initialization' do
-    before(:each) do
-      @current_game = described_class.new("Mabon")
-    end
+  let(:game) { Scorecard.current_game }
+  let(:frame) { double :frame }
 
-    it 'has a player name' do
-      expect(@current_game.player_name).to eq "Mabon"
+  describe '.start_game' do
+    it 'creates an instance of Scorecard and passes a new frame instance into @frames' do
+      Scorecard.start_game("Mabon")
+      # frameobj = object_double(Frame)
+      # allow(frameobj).to receive(:new).and_return(frame)
+      expect(game).to be_a Scorecard
+      expect(game.name).to eq "Mabon"
+      expect(game.frames.count).to eq 1
+      # expect(game.frames).to include frame
     end
+  end
 
-    it 'has a starting score of 0' do
-      expect(@current_game.current_score).to eq 0
-    end
-
-    it 'starts at the first frame' do
-      expect(@current_game.current_frame).to eq 1
+  describe 'frames_played' do
+    it 'returns the number of frames played so far' do
+      Scorecard.start_game("Mabon")
+      game.next_frame
+      expect(game.frames_played).to eq 2
     end
   end
 end

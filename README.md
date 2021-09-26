@@ -1,3 +1,92 @@
+class Scorecard
+    def self.start_game
+        @game = Scorecard.new
+        #next_frame
+    end
+
+    def self.current_game
+        @game
+    end
+
+    INSTANCES
+
+    @frames = []
+    @current_score = @frames.map {|frame| frame.frame_score}.sum
+    -----
+    #start_game -> frames << Frame.new
+    #next_frame -> frames << Frame.new
+    #frames_played -> frames.count
+
+    def score
+        if @frames[-1].frame_score.nil?
+            "First frame hasn't been played yet"
+        else
+            @frames.map {|frame| frame.frame_score}.sum
+        end
+    end
+end
+
+class Frame
+    @roll_1 = nil
+    @roll_2 = nil
+    @frame_score = nil
+    @strike = false
+    @spare = false
+    -----
+    def bowl
+        break if Scorecard.current_game.frames_played >= 10
+        if @roll_1.nil?
+            puts "first roll of the frame"
+            @roll_1 = gets.chomp
+
+            @strike = true if @roll_1 == 10
+
+            if Scorecard.current_game.frames[-2].spare? (return false if doesn't exist) || Scorecard.current_game.frames[-2].strike? (return false if doesn't exist)
+                Scorecard.current_game.frame[-2].frame_score += @roll_1
+                if Scorecard.current_game.frames[-2].strike? && Scorecard.current_game.frames[-3].strike?
+                    Scorecard.current_game.frames[-3].frame_score += @roll_1
+                end
+            end
+
+        elsif @roll_1 != 10
+            @roll_2 = gets.chomp
+            @spare = true if @roll_1 + @roll_2 == 10
+        end
+
+        calculate_frame_score
+        end_of_frame_message
+    end
+
+    def calculate_frame_score
+        if @roll_2.nil?
+            @frame_score = @roll_1
+        else
+            @frame_score = @roll_1 + @roll_2
+        end
+    end
+
+    def end_of_frame_message
+        if strike?
+            "You scored a Strike!"
+        elsif spare?
+            "You scored a Spare!"
+        else
+            "You scored #{@frame_score} point#{'s' if @frame_score > 1'}."
+        end
+    end
+
+    def strike?
+        @strike
+    end
+
+    def spare?
+        @spare
+    end
+
+
+
+
+
 Bowling Challenge in Ruby
 =================
 
