@@ -12,10 +12,19 @@ class Game
   end
 
   def spare?
-    if (roll_one) + (roll_two) == 10 
+    if roll_one + roll_two == 10 && roll_one != 10 
       true 
     else 
       false
     end
   end 
+
+  def strike?
+    if roll_one == 10 && roll_two == 0
+      true 
+    else 
+      false 
+    end 
+  end 
+
 end 

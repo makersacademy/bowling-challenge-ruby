@@ -12,4 +12,9 @@ describe Game do
     game = Game.new(6, 4)
     expect(game.spare?).to be true
   end
+
+  it 'should determine when a strike is rolled' do 
+    game = Game.new(10, 0)
+    expect(game.strike?).to be true
+  end 
 end
