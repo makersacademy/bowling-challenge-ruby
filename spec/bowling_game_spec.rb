@@ -27,6 +27,12 @@ describe 'bowling game' do
             expect(game.score).to eq(0)
         end
 
+        it 'allows us to score one point' do
+            game.roll 1
+            RollMany(times = 19, pins = 0)
+            expect(game.score).to eq(1)
+        end
+
         def RollMany(times, pins)
             times.times { game.roll pins }
         end
