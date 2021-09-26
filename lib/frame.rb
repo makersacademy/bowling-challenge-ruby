@@ -17,7 +17,7 @@ class Frame
       return "This frame has finished"
     else
       if @roll_1.nil?
-
+        puts "This is frame number #{frame_number}"
         puts "First roll of the frame"
         @roll_1 = gets.chomp.to_i
         puts "Your first roll: #{@roll_1}"
@@ -87,6 +87,10 @@ class Frame
 
   def add_roll_2_to_previous_frame_score
     Scorecard.current_game.frames[-2].frame_score += @roll_2
+  end
+
+  def frame_number
+    Scorecard.current_game.frames.count
   end
 
 
