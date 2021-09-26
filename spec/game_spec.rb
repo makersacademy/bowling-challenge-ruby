@@ -26,6 +26,15 @@ describe Game do
       end
     end
 
+     # The test for a perfect game doesn't seem to be working. Receiving this error 'TypeError:
+     # nil can't be coerced into Integer' because it is unable to (+ next_roll + @rolls[current_roll + 2])
+    context 'when there is a perfect game' do
+       it 'scores 300' do
+         10.times { game.roll(10) }
+        expect(game.score).to eq(300)
+       end
+     end
+
     context 'when a spare is thrown' do
       it 'records the frame score as 10 + the number from the next round (twice to include the bonus)' do
         3.times  { game.roll(5) }
@@ -37,7 +46,7 @@ describe Game do
 
     context 'when a strike is thrown' do
       it 'records the frame score as 10 + total knocked down in the next 2 rounds' do
-        game.roll(10) #rolling a strike moves straight to the next frame 
+        game.roll(10) # rolling a strike moves straight to the next frame
         game.roll(7)
         game.roll(1)
         16.times { game.roll(0) }

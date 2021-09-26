@@ -17,6 +17,10 @@ A solution by @deangerber (on GitHib) was useful in working through this challen
 
 5. Strike: The player has a strike if he knocks down all 10 pins with the first roll in a frame. The frame ends immediately (since there are no pins left for a second roll). The bonus for that frame is the number of pins knocked down by the next two rolls. That would be the next frame, unless the player rolls another strike.
 
+### Comments 
+
+All specification have been met apart from 'perfect game'. The test for a perfect game doesn't pass and is receiving this error 'TypeError: nil can't be coerced into Integer' because it is unable to (+ next_roll + @rolls[current_roll + 2]). 
+
 =================
 
 ## Bowling — how does it work?
