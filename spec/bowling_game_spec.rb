@@ -22,19 +22,26 @@ describe 'bowling game' do
         end
 
         it 'allows us to score null points' do
-            game = BowlingGame.new
             RollMany(times = 20, pins = 0)
-            expect(game.score).to eq(0)
+            assertScore 0
         end
 
         it 'allows us to score one point' do
-            game.roll 1
+            roll 1
             RollMany(times = 19, pins = 0)
-            expect(game.score).to eq(1)
+            assertScore 1
         end
 
         def RollMany(times, pins)
             times.times { game.roll pins }
+        end
+
+        def roll(pins)
+            game.roll 1
+        end
+
+        def assertScore(expected)
+            expect(game.score).to eq(expected)
         end
     end
 end
