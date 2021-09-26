@@ -10,4 +10,8 @@ describe BowlingScore do
   it 'returns the total score' do
     expect(subject.total_score).to eq(42)
   end
+
+  it 'returns scores per frames' do
+    expect(subject.scores).to eq([7, 4, 8, 2, 0, 7, 4, 8, 2, 0])
+  end
 end
