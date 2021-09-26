@@ -1,65 +1,123 @@
-Bowling Challenge in Ruby
-=================
+# bowling-scorecard
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+In this project I will be creating the logic behind a scorecard for a game of bowling for an individual player.
 
-## The Task
+---
 
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
+#### How to run
 
-Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
+- Install Ruby on your computer
+- Clone my repository: `git clone https://github.com/EMDevelop/bowling-scorecard.git`
+- Navigate into the `bowling-scorecard` repository
+- Run `bundle install` to install dependencies required for the testing framework.
+- In the root folder of the directory, start the game by running: `ruby ./lib/game.rb`
+- Enter your scores frame by frame:
+  - 1 game has 10 frames
+  - Each frame has 2 rolls each, except
+    - if you get a strike you move onto the next frame
+    - if it is the last game, then you have 3 rolls if roll 1 & 2 are a strike/spare
 
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
+#### My Approach
 
-As usual please start by
+I decided to map out the requirements into User Stories, breaking down the various rules and features of the game into testable and client readable step (see `User Stories`).
 
-* Forking this repo
+I have ordered the user stories in terms of complexity, each test will increase in complexity allowing while allowing my tests to be in keeping with the rules of the game.
 
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
+Tests will provide an accurate assessment of the behavior of my application, I will not be testing specific implementation.
 
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
+- This application is 100% tested.
+- I've used encapsulation to keep responsibility contained within the relevant domain
+- I used class inheritance to handle the additional functionality of the last game
+- Tested various edge cases to ensure my calculator is functioning correctly.
 
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
+---
 
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
+#### Planning
 
-## Bowling — how does it work?
+##### User Stories
 
-### Strikes
+```
+As a Player
+So that I can finish a game of bowling
+I want the game to have 10 frames
 
-The player has a strike if he knocks down all 10 pins with the first roll in a frame. The frame ends immediately (since there are no pins left for a second roll). The bonus for that frame is the number of pins knocked down by the next two rolls. That would be the next frame, unless the player rolls another strike.
+As a Player
+So that I can start a game of bowling
+I want to be able to knock over 10 pins in a roll
 
-### Spares
+As a Player
+so that I can play again
+I want the pins to reset after every frame
 
-The player has a spare if the knocks down all 10 pins with the two rolls of a frame. The bonus for that frame is the number of pins knocked down by the next roll (first roll of next frame).
+As a Player
+So that I can have a second chance to hit 10 pins
+I want to be able to have a second roll
 
-### 10th frame
+As a Player
+So that I know how well I am playing
+I want to be able to keep track of my scores
 
-If the player rolls a strike or spare in the 10th frame they can roll the additional balls for the bonus. But they can never roll more than 3 balls in the 10th frame. The additional rolls only count for the bonus not for the regular frame count.
+As a Player
+So that I can move onto my next turn after a knocking all 10 pins in one go
+I want my current frame to be marked complete after a strike
 
-    10, 10, 10 in the 10th frame gives 30 points (10 points for the regular first strike and 20 points for the bonus).
-    1, 9, 10 in the 10th frame gives 20 points (10 points for the regular spare and 10 points for the bonus).
+As a Player
+So that everyone can see how I played
+I want to be informed of my final score
 
-### Gutter Game
+As a Player
+So that I can be rewarded for hitting all 10 pins in one go
+I want to receive a bonus for a Strike, my roll score should be incremented by the number of pins knocked in the next 2 rolls
 
-A Gutter Game is when the player never hits a pin (20 zero scores).
+As a Player
+So that I can be rewarded for hitting all 10 pins in 2 goes (in a frame)
+I want to receive a bonus for my Spare, my roll score should be incremented by the number of pins knocked in the next 1 roll
 
-### Perfect Game
+As a Player
+So that I can finish the game
+My 10th frame should go for no longer than 3 rolls in total
 
-A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 strikes for the bonus in the 10th frame). The Perfect Game scores 300 points.
+As a Player
+So that I know how well I am playing
+I want to know my score so far after each frame
 
-In the image below you can find some score examples.
+As a Player
+So that I can brag to my friends for hitting 12 strikes
+I want to be informed that I scored a Perfect Game
 
-More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
+As a Player
+So that I can laugh at my performance hitting 20 zeros
+I want to be informed that I scored a Gutter Game
 
-![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+```
+
+##### Domain / Class Model
+
+`class: Player`
+|Methods|Attributes|
+|-|-|
+|roll()||
+|current_score(Game.calculate)||
+
+`class: Game`
+|Methods|Attributes|
+|-|-|
+|start_game()|NUMBER_OF_PINS Constant = 10|
+|setup_frames()|
+|calculate_score()|NUMBER_OF_FRAMES Constant = 10|
+|end_game()|@frames Array[frame,frame]|
+||@player|
+
+`class: Frame`
+|Methods|Attributes|
+|-|-|
+|play()|
+|end_frame?()|MAX_ROLLS Constant = 3|
+||@frame_number|
+||@first_roll_score Integer|
+||@second_roll_score Integer|
+||@remaining_pins Integer|
+
+##### Questions
+
+- How well did I conform to Behavioral testing? I feel like at parts I had no choice but to test instance variables
