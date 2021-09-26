@@ -1,3 +1,6 @@
+This website came in handy when experimenting with bowling scores: https://www.bowlinggenius.com/
+
+
 Bowling Challenge in Ruby
 =================
 
