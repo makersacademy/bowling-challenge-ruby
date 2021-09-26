@@ -21,7 +21,7 @@ describe 'bowling game' do
             expect { score = game.score }.not_to raise_error
         end
 
-        it 'allows us to score null points' do
+        it 'allows us to score a gutter points' do
             rollMany(times = 20, pins = 0)
             assertScore 0
         end
@@ -34,9 +34,10 @@ describe 'bowling game' do
 
         it 'allows us to score a spare game' do
             rollSpare
+            roll 7
             roll 3
             rollMany(times = 17, pins = 0)
-            assertScore 12
+            assertScore 19
         end
 
         it 'allows us to score a strike game' do
@@ -45,6 +46,14 @@ describe 'bowling game' do
             roll 3
             rollMany(times = 17, pins = 0)
             assertScore 34
+        end
+
+        it 'allows us to score a perfect strike game' do
+            rollPerfectStrike
+            roll 10
+            roll 10
+            rollMany(times = 17, pins = 10)
+            assertScore 300
         end
 
         def rollMany(times, pins)
@@ -65,6 +74,10 @@ describe 'bowling game' do
         end
 
         def rollStrike
+            roll 10
+        end
+
+        def rollPerfectStrike
             roll 10
         end
     end
