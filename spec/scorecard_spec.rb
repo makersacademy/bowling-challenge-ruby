@@ -23,4 +23,12 @@ describe Scorecard do
       expect(game.frames_played).to eq 2
     end
   end
+
+  # describe 'score' do
+  #   it 'returns the score total score across all frames played' do
+  #     Scorecard.start_game("Mabon")
+  #     allow(frame).to receive(:frame_score).and_return(5)
+  #     expect(game.score).to eq 11
+  #   end
+  # end
 end

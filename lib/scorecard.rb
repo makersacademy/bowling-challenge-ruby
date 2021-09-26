@@ -17,6 +17,10 @@ class Scorecard
     @frames = []
   end
 
+  def score
+    @frames.map { |frame| frame.frame_score }.sum
+  end
+
   def next_frame
     @frames << Frame.new
   end
