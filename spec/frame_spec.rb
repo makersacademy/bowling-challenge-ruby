@@ -41,6 +41,14 @@ describe Frame do
       frame.bowl
       expect(frame.spare?).to eq true
     end
+
+    it 'finishes the frame once bowling is finished' do
+      allow(frame).to receive(:gets).and_return("5", "3")
+      frame.bowl
+      frame.bowl
+      expect(frame.frame_finished).to eq true
+      expect(frame.bowl).to eq "This frame has finished"
+    end
   end
 
   describe '#calculate_frame_score' do
@@ -50,15 +58,13 @@ describe Frame do
       frame.bowl
       expect(frame.calculate_frame_score).to eq 8
     end
-
-    # it ''
   end
 
   describe '#end_of_frame_message' do
     it 'returns a message with your scoring at the end of the frame' do
       allow(frame).to receive(:gets).and_return("5", "3")
       frame.bowl
-      expect(frame.bowl).to eq "You scored 8 points."
+      expect(frame.bowl).to eq "You scored 8 points this frame."
     end
   end
 end

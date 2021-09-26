@@ -2,7 +2,7 @@ require 'scorecard'
 
 describe Scorecard do
   let(:game) { Scorecard.current_game }
-  let(:frame) { double :frame }
+  # let(:frame) { Frame.new }
 
   describe '.start_game' do
     it 'creates an instance of Scorecard and passes a new frame instance into @frames' do
@@ -16,6 +16,11 @@ describe Scorecard do
     end
   end
 
+  # describe '.bowl' do
+  #   it 'initiates a bowl if frame is not finished' do
+  #     Scorecard.start_game("Mabon")
+  #     expect(Scorecard.bowl)
+
   describe 'frames_played' do
     it 'returns the number of frames played so far' do
       Scorecard.start_game("Mabon")
@@ -26,8 +31,11 @@ describe Scorecard do
 
   # describe 'score' do
   #   it 'returns the score total score across all frames played' do
+  #     # allow(frame).to receive(:frame_score).and_return(11)
+  #     allow(frame).to receive(:gets).and_return("5", "6")
   #     Scorecard.start_game("Mabon")
-  #     allow(frame).to receive(:frame_score).and_return(5)
+  #     Scorecard.bowl
+  #     Scorecard.bowl
   #     expect(game.score).to eq 11
   #   end
   # end

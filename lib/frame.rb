@@ -1,5 +1,6 @@
 class Frame
-  attr_reader :roll_1, :roll_2, :frame_score, :strike, :spare
+  attr_reader :roll_1, :roll_2, :strike, :spare, :frame_finished
+  attr_accessor :frame_score
 
   def initialize
     @roll_1 = nil
@@ -7,32 +8,87 @@ class Frame
     @frame_score = nil
     @strike = false
     @spare = false
+    @frame_finished = false
   end
 
   def bowl
     # break if Scorecard.current_game.frames_played >= 10
-    if @roll_1.nil?
+    if @frame_finished
+      return "This frame has finished"
+    else
+      if @roll_1.nil?
 
-      puts "First roll of the frame"
-      @roll_1 = gets.chomp.to_i
+        puts "First roll of the frame"
+        @roll_1 = gets.chomp.to_i
+        puts "Your first roll: #{@roll_1}"
 
-      @strike = true if @roll_1 == 10
+        if @roll_1 == 10
+          @strike = true 
+          @frame_finished = true
+        end
 
-      # if Scorecard.current_game.frames[-2].spare? (return false if doesn't exist) || Scorecard.current_game.frames[-2].strike? (return false if doesn't exist)
-      #   Scorecard.current_game.frame[-2].frame_score += @roll_1
-      #   if Scorecard.current_game.frames[-2].strike? && Scorecard.current_game.frames[-3].strike?
-      #     Scorecard.current_game.frames[-3].frame_score += @roll_1
-      #   end
-      # end
-    elsif @roll_1 != 10
-      puts "Second roll of the frame"
-      @roll_2 = gets.chomp.to_i
-      @spare = true if @roll_1 + @roll_2 == 10
+        if check_previous_frame_for_spare || check_previous_frame_for_strike
+          add_roll_1_to_previous_frame_score
+          if check_previous_frame_for_strike && check_2nd_previous_frame_for_strike
+            Scorecard.current_game.frames[-3].frame_score += @roll_1
+          end
+        end
+
+      elsif @roll_1 != 10
+
+        puts "Second roll of the frame"
+        @roll_2 = gets.chomp.to_i
+        puts "Your second roll: #{@roll_2}"
+
+        if check_previous_frame_for_strike
+          add_roll_2_to_previous_frame_score
+        end
+
+        @spare = true if @roll_1 + @roll_2 == 10
+        @frame_finished = true
+      end
+
+      if @frame_finished
+        calculate_frame_score
+        end_of_frame_message
+      else
+        "Bowl again to finish the frame"
+      end
     end
-
-    calculate_frame_score
-    end_of_frame_message
   end
+
+  def check_previous_frame_for_spare
+    if Scorecard.current_game.frames[-2].nil?
+      false
+    else
+      Scorecard.current_game.frames[-2].spare?
+    end
+  end
+
+  def check_previous_frame_for_strike
+    if Scorecard.current_game.frames[-2].nil?
+      false
+    else
+      Scorecard.current_game.frames[-2].strike?
+    end
+  end
+
+  def check_2nd_previous_frame_for_strike
+    if Scorecard.current_game.frames[-3].nil?
+      false
+    else
+      Scorecard.current_game.frames[-3].strike?
+    end
+  end
+
+  def add_roll_1_to_previous_frame_score
+    Scorecard.current_game.frames[-2].frame_score += @roll_1
+  end
+
+  def add_roll_2_to_previous_frame_score
+    Scorecard.current_game.frames[-2].frame_score += @roll_2
+  end
+
 
   def calculate_frame_score
     if @roll_2.nil?
@@ -48,7 +104,7 @@ class Frame
     elsif spare?
         "You scored a Spare!"
     else
-        "You scored #{@frame_score} point#{'s' if @frame_score > 1}."
+        "You scored #{@frame_score} point#{'s' if @frame_score > 1} this frame."
     end
   end
 

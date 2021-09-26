@@ -10,6 +10,15 @@ class Scorecard
     @game
   end
 
+  def self.bowl
+    if @game.frames[-1].frame_finished
+      @game.next_frame
+      @game.frames[-1].bowl
+    else
+      @game.frames[-1].bowl
+    end
+  end
+
   attr_reader :name, :frames
 
   def initialize(name)
