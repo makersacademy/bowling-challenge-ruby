@@ -14,10 +14,21 @@ describe 'bowling game' do
     end
 
     context 'completed game' do
-        it 'allows us to obtain game score' do
-            game = BowlingGame.new
-            20.times { game.roll 0 }
+        let(:game) { game = BowlingGame.new }
+
+        it 'allows us to obtain final game score' do
+            RollMany(times = 20, pins = 0)
             expect { score = game.score }.not_to raise_error
+        end
+
+        it 'allows us to score null points' do
+            game = BowlingGame.new
+            RollMany(times = 20, pins = 0)
+            expect(game.score).to eq(0)
+        end
+
+        def RollMany(times, pins)
+            times.times { game.roll pins }
         end
     end
 end
