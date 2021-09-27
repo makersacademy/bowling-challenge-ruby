@@ -35,7 +35,7 @@ describe 'Bowling_scorecard' do
     expect(@game.score).to eq(300)
   end 
 
-  it 'do' do 
+  it 'simulate a game' do 
     @game.roll(1)
     @game.roll(4)
     @game.roll(4)
