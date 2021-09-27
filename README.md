@@ -5,19 +5,40 @@ This was a tricky project that required very careful and thoughtful planning. Th
 The bowling scores are recorded as follows: 
 
 ```
-Scorecard.start_game("player name"
-Scorecard.bowl
-
+3.0.0 :002 > Scorecard.start_game('Player name')
+ => [#<Frame:0x00007ff4e39fb4a8 @roll_1=nil, @roll_2=nil, @frame_score=nil, @strike=false, @spare=false, @frame_finished=false>] 
+3.0.0 :003 > Scorecard.bowl
+This is frame number 1
 First roll of the frame
-5
-Your first roll: 5
- => "Bowl again to finish the frame" 
- Scorecard.bowl
- Second roll of the frame
 4
-Your second roll: 4
+Your first roll: 4
+ => "Bowl again to finish the frame" 
+3.0.0 :004 > Scorecard.bowl
+Second roll of the frame
+5
+Your second roll: 5
  => "You scored 9 points this frame." 
 ```
+
+Until you get to the end of the frame where a bonus roll applies if you've scored a strike or a spare in that frame:
+
+```
+3.0.0 :012 > Scorecard.bowl
+This is frame number 10
+First roll of the frame
+10
+Your first roll: 10
+ => "Bowl again to finish the frame" 
+
+3.0.0 :013 > Scorecard.bowl
+Second roll of the frame
+10
+Your second roll: 10
+Your bonus 10th frame roll
+10
+ => "You scored 30 points in your final frame. Your final score was 300" 
+ ```
+
 
 
 
