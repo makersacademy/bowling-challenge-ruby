@@ -46,7 +46,7 @@ private
   end
 
   def strike_score
-    10 + @rolls[@i + 1] + @rolls[@i + 2]
+    @rolls[@i] + @rolls[@i + 1] + @rolls[@i + 2]
   end
 
   def frame_score 
