@@ -12,7 +12,6 @@ class Frame
   end
 
   def bowl
-    # break if Scorecard.current_game.frames_played >= 10
     if @frame_finished
       return "This frame has finished"
     else
@@ -45,7 +44,6 @@ class Frame
         if (@roll_1 == 10 || @roll_1 + @roll_2 == 10) && frame_number == 10
           puts "Your bonus 10th frame roll"
           @roll_3 = gets.chomp.to_i
-
         end
 
         if check_previous_frame_for_strike
@@ -64,6 +62,16 @@ class Frame
       end
     end
   end
+
+  def strike?
+    @strike
+  end
+
+  def spare?
+    @spare
+  end
+
+  private
 
   def check_previous_frame_for_spare
     if Scorecard.current_game.frames[-2].nil?
@@ -122,13 +130,5 @@ class Frame
     else
       "You scored #{@frame_score} point#{'s' if @frame_score > 1} this frame."
     end
-  end
-
-  def strike?
-    @strike
-  end
-
-  def spare?
-    @spare
   end
 end
