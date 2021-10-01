@@ -41,5 +41,17 @@ describe Scorecard do
       scorecard.bowl(4, 2)
       expect(scorecard.running_score).to eq(12)
     end
+
+    xit 'adds bonus points from next roll if spare' do
+      scorecard.bowl(5, 5)
+      scorecard.bowl(5, 2)
+      expect(scorecard.running_score).to eq(22)
+    end
+
+    xit 'adds bonus points from next frame if strike' do
+      scorecard.bowl(5, 5)
+      scorecard.bowl(5, 2)
+      expect(scorecard.running_score).to eq(24)
+    end
   end
 end
