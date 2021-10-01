@@ -15,39 +15,43 @@ class Game
 
   def score
     total_score  = 0
-    current_roll = 0
+    frame = 0
 
-    while current_roll < @rolls.size - 1 #.size returns the number of elements in the set
-      roll = @rolls[current_roll]
-      next_roll = @rolls[current_roll + 1]
-      if  strike?(current_roll) #roll == 10
-        total_score += 10 + strike_bonus(current_roll)
-        current_roll += 1
-      elsif spare?(current_roll) #roll + next_roll == 10 #spare
-        total_score += 10 + @rolls[current_roll + 2]
-        current_roll += 2
+    while frame < @rolls.size - 1 #.size returns the number of elements in the set
+      roll = @rolls[frame]
+      next_roll = @rolls[frame+ 1]
+      if  strike?(frame) #roll == 10
+        total_score += 10 + strike_bonus(frame)
+        frame += 1
+      elsif spare?(frame) #roll + next_roll == 10 #spare
+        total_score += 10 + spare_bonus(frame)
+        frame += 2
       else #not a spare or strike 
-        total_score += roll + next_roll 
-        current_roll += 2
+        total_score += regular_scoring(frame)
+        frame += 2
       end
     end
     total_score
   end
 
-  def strike?(current_roll)
-    @rolls[current_roll] == 10
+  def strike?(frame)
+    @rolls[frame] == 10
   end
 
-  def spare?(current_roll)
-    @rolls[current_roll] + @rolls[current_roll + 1] == 10
+  def spare?(frame)
+    @rolls[frame] + @rolls[frame + 1] == 10
   end 
 
-  def regular_frame?(current_roll)
-    @rolls[current_roll] + @rolls[current_roll + 1] 
+  def regular_scoring(frame)
+    @rolls[frame] + @rolls[frame + 1] 
   end 
 
-  def strike_bonus(current_roll)
-    @rolls[current_roll +1] + @rolls[current_roll + 2]
+  def strike_bonus(frame)
+    @rolls[frame + 1] + @rolls[frame + 2]
+  end 
+
+  def spare_bonus(frame)
+    @rolls[frame + 2]
   end 
 
 
