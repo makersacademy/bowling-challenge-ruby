@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class Game
-  attr_reader :rolls
+  attr_accessor :rolls
 
   def initialize
     @rolls = []
-    @current_roll = 0
     @total_score = 0
   end
 
@@ -16,11 +15,10 @@ class Game
   def score
     total_score  = 0
     frame = 0
-
     while frame < @rolls.size - 1 #.size returns the number of elements in the set
-      roll = @rolls[frame]
-      next_roll = @rolls[frame+ 1]
-      if  strike?(frame) #roll == 10
+      # roll = @rolls[frame]
+      # next_roll = @rolls[frame+ 1]
+      if strike?(frame) && frame <= 9
         total_score += 10 + strike_bonus(frame)
         frame += 1
       elsif spare?(frame) #roll + next_roll == 10 #spare
@@ -30,7 +28,7 @@ class Game
         total_score += regular_scoring(frame)
         frame += 2
       end
-    end
+  end 
     total_score
   end
 
@@ -54,4 +52,7 @@ class Game
     @rolls[frame + 2] #frame and frame+1 has already been added with (10)
   end 
 
-end
+  # def final_frame(frame)
+  #   @rolls[10]
+  # end
+end 

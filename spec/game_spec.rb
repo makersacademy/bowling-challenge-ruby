@@ -35,13 +35,6 @@ describe Game do
        end
      end
 
-    # context 'perfect game' do
-    #   it do
-    #     roll_many 12, 10
-    #     expect(game.score).to eq 300
-    #   end
-    # end
-
     context 'when a spare is thrown' do
       it 'records the frame score as 10 + the number from the next round (twice to include the bonus)' do
         game.roll(5)
