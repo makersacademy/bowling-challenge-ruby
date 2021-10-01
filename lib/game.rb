@@ -21,7 +21,7 @@ class Game
       roll = @rolls[current_roll]
       next_roll = @rolls[current_roll + 1]
       if  strike?(current_roll) #roll == 10
-        total_score += 10 + next_roll + @rolls[current_roll + 2]
+        total_score += 10 + strike_bonus(current_roll)
         current_roll += 1
       elsif spare?(current_roll) #roll + next_roll == 10 #spare
         total_score += 10 + @rolls[current_roll + 2]
@@ -42,8 +42,13 @@ class Game
     @rolls[current_roll] + @rolls[current_roll + 1] == 10
   end 
 
-  def regular_frame(current_roll)
+  def regular_frame?(current_roll)
     @rolls[current_roll] + @rolls[current_roll + 1] 
   end 
+
+  def strike_bonus(current_roll)
+    @rolls[current_roll +1] + @rolls[current_roll + 2]
+  end 
+
 
 end
