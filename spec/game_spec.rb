@@ -30,21 +30,31 @@ describe Game do
      # nil can't be coerced into Integer' because it is unable to (+ next_roll + @rolls[current_roll + 2])
     context 'when there is a perfect game' do
        it 'scores 300' do
-         10.times { game.roll(10) }
+         12.times { game.roll(10) }
         expect(game.score).to eq(300)
        end
      end
 
+    # context 'perfect game' do
+    #   it do
+    #     roll_many 12, 10
+    #     expect(game.score).to eq 300
+    #   end
+    # end
+
     context 'when a spare is thrown' do
       it 'records the frame score as 10 + the number from the next round (twice to include the bonus)' do
-        3.times  { game.roll(5) }
+        game.roll(5)
+        game.roll(5)
+        game.roll(3)
+        # 3.times  { game.roll(5) }
         17.times { game.roll(0) }
-        expect(game.score).to eq(20)
-        # total is 5+5+5 (+5 for bonus) = 15
+        expect(game.score).to eq(16)
+        # total is 5+5 (+3 for bonus) = 16
       end
     end
 
-    context 'when a strike is thrown' do
+    context 'when one strike is thrown' do
       it 'records the frame score as 10 + total knocked down in the next 2 rounds' do
         game.roll(10) # rolling a strike moves straight to the next frame
         game.roll(7)

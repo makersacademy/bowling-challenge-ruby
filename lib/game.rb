@@ -35,7 +35,7 @@ class Game
   end
 
   def strike?(frame)
-    @rolls[frame] == 10
+      @rolls[frame] == 10
   end
 
   def spare?(frame)
@@ -51,8 +51,7 @@ class Game
   end 
 
   def spare_bonus(frame)
-    @rolls[frame + 2]
+    @rolls[frame + 2] #frame and frame+1 has already been added with (10)
   end 
-
 
 end
