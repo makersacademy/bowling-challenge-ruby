@@ -28,6 +28,7 @@ describe Scorecard do
 
     it 'determines if bowl is a spare' do
       scorecard.bowl(5, 5)
+      scorecard.bowl(3, 4)
       expect(scorecard.spare?).to be(true)
     end
 
@@ -42,16 +43,16 @@ describe Scorecard do
       expect(scorecard.running_score).to eq(12)
     end
 
-    xit 'adds bonus points from next roll if spare' do
+    it 'adds bonus points from next roll if spare' do
       scorecard.bowl(5, 5)
-      scorecard.bowl(5, 2)
-      expect(scorecard.running_score).to eq(22)
+      scorecard.bowl(6, 2)
+      expect(scorecard.running_score).to eq(24)
     end
 
-    xit 'adds bonus points from next frame if strike' do
-      scorecard.bowl(5, 5)
-      scorecard.bowl(5, 2)
-      expect(scorecard.running_score).to eq(24)
+    it 'adds bonus points from next frame if strike' do
+      scorecard.bowl(10, 0)
+      scorecard.bowl(4, 4)
+      expect(scorecard.running_score).to eq(26)
     end
   end
 end
