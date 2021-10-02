@@ -14,7 +14,7 @@ class Scorecard
     frame = [first_bowl, second_bowl]
     @bowl_card << frame
     score
-    roll_total
+    @bowl_card.length == 10 ? gameover : roll_total
   end
 
   def roll_total
@@ -49,4 +49,7 @@ class Scorecard
     @running_score += strike_points
   end
 
+  def gameover
+    @running_score == 0 ? "Gutter game!" : "Gameover, you scored: #{@running_score}"
+  end
 end

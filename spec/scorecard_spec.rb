@@ -2,9 +2,6 @@ require 'scorecard'
 
 describe Scorecard do
 
-  # before(:each) do
-  # end
-
   let(:scorecard) { Scorecard.new }
 
   context 'Initialize' do
@@ -53,6 +50,17 @@ describe Scorecard do
       scorecard.bowl(10, 0)
       scorecard.bowl(4, 4)
       expect(scorecard.running_score).to eq(26)
+    end
+
+    it 'signals the game has ended after ten bowls' do
+      10.times { scorecard.bowl(3, 5)}
+      expect(scorecard.gameover). to eq("Gameover, you scored: 80")
+    end
+
+    it 'signals the game has ended after ten bowls' do
+      9.times { scorecard.bowl(5, 5)}
+      scorecard.bowl(5, 0)
+      expect(scorecard.gameover). to eq("Gameover, you scored: 140")
     end
   end
 end
