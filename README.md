@@ -1,3 +1,9 @@
+-setup
+-being with basic 10 round / 2 bowls per round setup
+
+
+
+
 Bowling Challenge in Ruby
 =================
 
