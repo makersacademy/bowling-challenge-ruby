@@ -33,7 +33,7 @@ class Bowling
     return "Incomplete" if game_array.length < round
     if strike?(round)
       return "Incomplete" if game_array.length < round + 1
-      game_array[round_index].sum + game_array[round].sum
+      return game_array[round_index].sum + game_array[round].sum
     end
     if spare?(round)
       if game_array.length >= round + 1
@@ -44,7 +44,7 @@ class Bowling
         return "Incomplete"
       end
     end
-    game_array[round_index].sum
+    return game_array[round_index].sum
   end
 
   def calculate_total_score
