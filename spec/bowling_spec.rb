@@ -51,4 +51,10 @@ describe Bowling do
 
     expect(game.score).to eq 257
   end
+
+  it 'loves the gutter' do
+    20.times { game.roll(0) }
+
+    expect(game.score).to eq 0
+  end
 end

@@ -1,12 +1,13 @@
 class Bowling
   MAX_PINS = 10
   MAX_ROUNDS = 10
-  attr_reader :rolls
+  attr_reader :rolls, :frame, :score, :turn
 
   def initialize
     @rolls = []
     @frame = 0
     @score = 0
+    @turn = 1
   end
 
   def roll(pins)
@@ -14,7 +15,6 @@ class Bowling
   end
 
   def score
-    turn = 1
     loop do
       if spare?(@frame)
         spare
@@ -23,7 +23,7 @@ class Bowling
       else
         sum_points
       end
-      turn += 1
+      @turn += 1
       final_round(@frame) if turn == MAX_ROUNDS
       break if gameover
     end
