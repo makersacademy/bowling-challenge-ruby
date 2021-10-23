@@ -1,0 +1,2 @@
+class ScoreCard
+end 
