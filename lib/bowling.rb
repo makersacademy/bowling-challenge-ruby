@@ -9,9 +9,9 @@ class Bowling
     @frame_class = frame_class
   end
 
-  def frames_and_totals
+  def frames_and_totals # for testing purposes only, easier to visualise
     @frames.each do |frame|
-      p frame
+      p frame.pins
       puts frame.total
     end
   end
@@ -32,13 +32,12 @@ class Bowling
 
   def active_bonus?
     return if @frames.empty? # for the first roll
-    @frames.last.active_bonus?
+    previous_frame.active_bonus?
   end
 
   def update_previous_frame(pins)
-    p "updating previous frame with #{pins} pins"
-    @frames.last.update_total(pins)
-    @frames.last.deduct_bonus_roll
+    previous_frame.update_total(pins)
+    previous_frame.deduct_bonus_roll
   end
 
   def update_current_frame(pins)
@@ -51,6 +50,10 @@ class Bowling
     @current_frame.calculate_bonus
     @frames << @current_frame
     @current_frame = nil
+  end
+
+  def previous_frame
+    @frames.last
   end
 
 end
