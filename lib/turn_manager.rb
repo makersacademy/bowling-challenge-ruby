@@ -17,8 +17,12 @@ class TurnManager
         @frame += 1
       end
     else
-      @turn = STARTING_POINT
-      @frame += 1
+      end_of_turn
     end
+  end
+
+  def end_of_turn
+    @turn = STARTING_POINT
+    @frame += 1
   end
 end

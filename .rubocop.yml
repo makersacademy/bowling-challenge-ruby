@@ -1,0 +1,2 @@
+inherit_from:
+  - https://raw.githubusercontent.com/makersacademy/scaffolint/v2.2.0/.rubocop.yml

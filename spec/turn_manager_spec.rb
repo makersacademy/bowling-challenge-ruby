@@ -26,5 +26,13 @@ describe TurnManager do
       turns.move(10)
       expect(turns.frame).to eq frame_two
     end
+
+    it 'irb edge case' do
+      turns.move(5)
+      turns.move(5)
+      turns.move(10)
+
+      expect(turns.frame).to eq 3
+    end
   end
 end
