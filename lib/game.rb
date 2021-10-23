@@ -4,7 +4,7 @@ class Game
 
   def initialize(frame = Frame)
     @frames = []
-    10.times { @frames << frame.new }
+    set_up_frames(frame)
 
   end
 
@@ -12,6 +12,16 @@ class Game
     score = 0
     frames.each { |frame| score += frame.score if frame.score }
     score
+  end
+
+  private
+
+  def set_up_frames(frame)
+    number = 1
+    10.times do
+      @frames << frame.new(number) 
+      number += 1
+    end
   end
 
 end

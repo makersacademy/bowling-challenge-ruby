@@ -4,6 +4,14 @@ describe Frame do
 
   let(:frame) { Frame.new }
 
+  describe '#number' do
+
+    it 'knows which frame it is' do
+      expect(frame.number).to be_an Integer
+    end
+  
+  end
+
   describe '#score' do
     it 'should have score' do
       expect(Frame.new).to respond_to(:score)

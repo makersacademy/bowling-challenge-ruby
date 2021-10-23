@@ -1,10 +1,12 @@
 class Frame
 
-  attr_reader :score, :rolls
+  attr_reader :rolls, :number
+  attr_accessor :score
 
-  def initialize
+  def initialize(number = 0)
     @score = nil
     @rolls = []
+    @number = number
   end
   
   def record_roll(roll)
