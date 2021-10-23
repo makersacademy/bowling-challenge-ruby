@@ -44,4 +44,17 @@ describe Bowling do
       expect(subject.calculate_total_score).to eq(36)
     end
   end
+  describe ".strike?" do
+    it "should return true if first bowl was 10 " do
+      subject.add_first_bowl(10)
+      expect(subject.strike?).to eq(true)
+    end
+  end
+  describe ".spare?" do
+    it "should return true if first bowl and second bowl together were 10 " do
+      subject.add_first_bowl(4)
+      subject.add_second_bowl(6)
+      expect(subject.spare?).to eq(true)
+    end
+  end
 end

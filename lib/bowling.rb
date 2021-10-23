@@ -32,4 +32,12 @@ class Bowling
     score
   end
 
+  def strike?
+    @first_bowl == 10
+  end
+
+  def spare?
+    @first_bowl + @second_bowl == 10
+  end
+
 end
