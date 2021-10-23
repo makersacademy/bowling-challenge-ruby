@@ -33,6 +33,11 @@ class Bowling
     return nil if game_array.length < round
     if strike?(round)
       return nil if game_array.length < round + 1
+      return nil if strike?(round + 1) && game_array.length < round + 2
+      if strike?(round + 1)
+        puts "#{game_array[round_index].sum} + #{game_array[round][0]} + #{game_array[round + 1][0]}"
+        return game_array[round_index].sum + game_array[round][0] + game_array[round + 1][0]
+      end
       return game_array[round_index].sum + game_array[round].sum
     end
     if spare?(round)
@@ -51,6 +56,7 @@ class Bowling
     score = 0
     (1...round_counter).each do |round|
       score += calculate_round_score(round)
+      puts score
     end
     score
   end
@@ -67,6 +73,11 @@ class Bowling
     return false if strike?(round)
     return false unless game_array[round_index].sum == 10
     true
+  end
+
+  def end_game
+    game_array.freeze
+    return "You have finished your game! Your final score was: #{calculate_total_score}"
   end
 
 end

@@ -54,6 +54,10 @@ describe Bowling do
       expect(subject.calculate_round_score(1)).to eq(15)
     end
     it "should return add scores and give bonus points if round was a strike" do
+      subject.add_first_bowl(10)
+      subject.add_first_bowl(5)
+      subject.add_second_bowl(4)
+      expect(subject.calculate_round_score(1)).to eq(19)
     end
   end
   describe ".calculate_total_score" do
@@ -65,6 +69,14 @@ describe Bowling do
       subject.add_first_bowl(5)
       subject.add_second_bowl(4)
       expect(subject.calculate_total_score).to eq(27)
+    end
+  end
+  describe ".end_game" do
+    it "should end the game after 10 rounds have been completed" do
+      (9).times {subject.add_first_bowl(10)}
+      subject.add_first_bowl(5)
+      subject.add_second_bowl(4)
+      expect(subject.end_game).to eq("You have finished your game! Your final score was: 263")
     end
   end
   # describe ".strike?" do
