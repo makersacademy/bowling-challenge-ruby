@@ -30,9 +30,9 @@ class Bowling
 
   def calculate_round_score(round)
     round_index = round - 1
-    return "Incomplete" if game_array.length < round
+    return nil if game_array.length < round
     if strike?(round)
-      return "Incomplete" if game_array.length < round + 1
+      return nil if game_array.length < round + 1
       return game_array[round_index].sum + game_array[round].sum
     end
     if spare?(round)
@@ -41,7 +41,7 @@ class Bowling
       elsif !@first_bowl.nil?
         return game_array[round_index].sum + @first_bowl
       else
-        return "Incomplete"
+        return nil
       end
     end
     return game_array[round_index].sum
@@ -49,8 +49,8 @@ class Bowling
 
   def calculate_total_score
     score = 0
-    @game_array.each do |round|
-       score += round.sum
+    (1...round_counter).each do |round|
+      score += calculate_round_score(round)
     end
     score
   end

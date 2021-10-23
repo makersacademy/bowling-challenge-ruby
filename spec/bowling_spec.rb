@@ -41,11 +41,11 @@ describe Bowling do
     end
     it "should return incomplete if round is not finished" do
       subject.add_first_bowl(5)
-      expect(subject.calculate_round_score(1)).to eq("Incomplete")
+      expect(subject.calculate_round_score(1)).to eq(nil)
     end
     it "should return incomplete if bonus points are not calculated by next round yet" do
       subject.add_first_bowl(10)
-      expect(subject.calculate_round_score(1)).to eq("Incomplete")
+      expect(subject.calculate_round_score(1)).to eq(nil)
     end
     it "should return add scores and give bonus point if round was a spare" do
       subject.add_first_bowl(5)
