@@ -1,9 +1,9 @@
 class Frame
-  attr_reader :bonus, :pins
+  attr_reader :pins, :bonus_rolls, :total
 
   def initialize
     @pins = []
-    @bonus = 0
+    @bonus_rolls = 0
     @total = 0
   end
 
@@ -20,25 +20,29 @@ class Frame
   end
 
   def calculate_bonus
-    @bonus = 0 unless strike? || spare?
-    @bonus = 1 if spare?
-    @bonus = 2 if strike?
+    @bonus_rolls = 0 unless strike? || spare?
+    @bonus_rolls = 1 if spare?
+    @bonus_rolls = 2 if strike?
   end
 
   def active_bonus?
-    @bonus > 0
+    @bonus_rolls > 0
   end
 
-  def deduct_bonus
-    @bonus -= 1
+  def deduct_bonus_roll
+    @bonus_rolls -= 1
   end
 
-  def total
+  def calculate_total
     @total = @pins.sum # + bonus
   end
 
+  def update_total(number = 0)
+    @total += number
+  end
+
   def complete?
-    (@pins.count == 2 || strike?)
+    @pins.count == 2 || strike?
   end
 
 end
