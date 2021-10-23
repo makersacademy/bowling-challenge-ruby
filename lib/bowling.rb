@@ -11,7 +11,7 @@ class Bowling
   def add_first_bowl(bowl)
     @first_bowl = bowl
     @round_array << @first_bowl
-    finish_round if @first_bowl == 10
+    finish_round if @first_bowl == 10 || @round_counter > 10
   end
 
   def add_second_bowl(bowl)
@@ -26,6 +26,15 @@ class Bowling
     @second_bowl = nil
     @round_array = []
     @round_counter += 1
+    if @round_counter == 11
+      end_game unless (strike?(@round_counter - 1) || spare?(@round_counter - 1))
+    end
+    if @round_counter == 12
+      end_game unless strike?(@round_counter - 1)
+    end
+    if @round_counter == 13
+      end_game
+    end
   end
 
   def calculate_round_score(round)
@@ -35,7 +44,6 @@ class Bowling
       return nil if game_array.length < round + 1
       return nil if strike?(round + 1) && game_array.length < round + 2
       if strike?(round + 1)
-        puts "#{game_array[round_index].sum} + #{game_array[round][0]} + #{game_array[round + 1][0]}"
         return game_array[round_index].sum + game_array[round][0] + game_array[round + 1][0]
       end
       return game_array[round_index].sum + game_array[round].sum
@@ -57,7 +65,6 @@ class Bowling
     (1...round_counter).each do |round|
       break if round > 10
       score += calculate_round_score(round)
-      puts score
     end
     score
   end

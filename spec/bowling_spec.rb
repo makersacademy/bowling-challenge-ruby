@@ -15,6 +15,15 @@ describe Bowling do
       subject.add_first_bowl(5)
       expect(subject.first_bowl).to eq(5)
     end
+    it "should call finish_round if a strike is bowled" do
+      expect(subject).to receive(:finish_round)
+      subject.add_first_bowl(10)
+    end
+    it "should call finish_round if it is a bonus round " do
+      (10).times {subject.add_first_bowl(10)}
+      expect(subject).to receive(:finish_round)
+      subject.add_first_bowl(5)
+    end
   end
   describe ".add_second_bowl" do
     # it "should give the second_bowl a value" do
@@ -31,6 +40,44 @@ describe Bowling do
       subject.add_first_bowl(5)
       subject.finish_round
       expect(subject.game_array).to(eq([[5]]))
+    end
+    it "should call end_game if it is round 10 without a spare or strike" do
+      (9).times {subject.add_first_bowl(10)}
+      subject.add_first_bowl(5)
+      expect(subject).to receive(:end_game)
+
+      subject.add_second_bowl(4)
+    end
+    it "should not call end_game if it is round 10 with a strike" do
+      (9).times {subject.add_first_bowl(10)}
+      expect(subject).not_to receive(:end_game)
+
+      subject.add_first_bowl(10)
+    end
+    it "should not call end_game if it is round 10 with a spare" do
+      (9).times {subject.add_first_bowl(10)}
+      subject.add_first_bowl(5)
+      expect(subject).not_to receive(:end_game)
+
+      subject.add_second_bowl(5)
+    end
+    it "should call end game after 11 round if first bonus was not a strike" do
+      (10).times {subject.add_first_bowl(10)}
+      expect(subject).to receive(:end_game)
+
+      subject.add_first_bowl(5)
+    end
+    it "should not call end game after 11 round if first bonus was a strike" do
+      (10).times {subject.add_first_bowl(10)}
+      expect(subject).not_to receive(:end_game)
+
+      subject.add_first_bowl(10)
+    end
+    it "should call end game after 12th round regardless of score" do
+      (11).times {subject.add_first_bowl(10)}
+      expect(subject).to receive(:end_game)
+
+      subject.add_second_bowl(10)
     end
   end
   describe ".calculate_round_score" do
