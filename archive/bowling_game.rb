@@ -10,12 +10,14 @@ class BowlingGame
 
   def start
     loop do
-      break if check_frame > MAX_FRAMES
+      break if check_frame > MAX_FRAMES 
       puts "Please enter your score for frame #{check_frame}, turn #{check_turn}:"
-      if check_frame < 10
-        roll(gets.chomp.to_i)
-      else
-        final_frame(gets.chomp.to_i)
+      roll(gets.chomp.to_i)
+      if check_frame == MAX_FRAMES
+        loop do
+          final(gets.chomp.to_i)
+          break if check_frame > MAX_FRAMES
+        end
       end
     end
   end
@@ -26,7 +28,7 @@ class BowlingGame
     @turn_manager.move(number)
   end
 
-  def final_frame(number)
+  def final(number)
     @turn_manager.final(number)
   end
 
