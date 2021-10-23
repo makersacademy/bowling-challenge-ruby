@@ -55,6 +55,7 @@ class Bowling
   def calculate_total_score
     score = 0
     (1...round_counter).each do |round|
+      break if round > 10
       score += calculate_round_score(round)
       puts score
     end
