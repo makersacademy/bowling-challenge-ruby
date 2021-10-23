@@ -14,10 +14,15 @@ class Bowling
 
   def add_second_bowl(bowl)
     @second_bowl = bowl
+    finish_round
   end
 
   def finish_round
-    @round_array = [@first_bowl, @second_bowl]
+    if @second_bowl.nil?
+      @round_array = [@first_bowl]
+    else
+      @round_array = [@first_bowl, @second_bowl]
+    end
     @game_array << @round_array
   end
 

@@ -21,26 +21,26 @@ describe Bowling do
       subject.add_second_bowl(7)
       expect(subject.second_bowl).to eq(7)
     end
+    it "should call finish_round before completion" do
+      expect(subject).to receive(:finish_round)
+      subject.add_second_bowl(6)
+    end
   end
   describe ".finish_round" do
     it "should add scores to round_array and push round_array to game_array" do
       subject.add_first_bowl(5)
-      subject.add_second_bowl(7)
       subject.finish_round
-      expect(subject.game_array).to(eq([[5,7]]))
+      expect(subject.game_array).to(eq([[5]]))
     end
   end
   describe ".calculate_total_score" do
     it "should sum all elements of the game_array and save to total_score " do
       subject.add_first_bowl(5)
       subject.add_second_bowl(7)
-      subject.finish_round
       subject.add_first_bowl(5)
       subject.add_second_bowl(7)
-      subject.finish_round
       subject.add_first_bowl(5)
       subject.add_second_bowl(7)
-      subject.finish_round
       expect(subject.calculate_total_score).to eq(36)
     end
   end
