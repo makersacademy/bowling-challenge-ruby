@@ -17,10 +17,10 @@ describe Bowling do
     end
   end
   describe ".add_second_bowl" do
-    it "should give the first_bowl a value" do
-      subject.add_second_bowl(7)
-      expect(subject.second_bowl).to eq(7)
-    end
+    # it "should give the second_bowl a value" do
+    #   subject.add_second_bowl(7)
+    #   expect(subject.second_bowl).to eq(7)
+    # end
     it "should call finish_round before completion" do
       expect(subject).to receive(:finish_round)
       subject.add_second_bowl(6)
@@ -33,28 +33,51 @@ describe Bowling do
       expect(subject.game_array).to(eq([[5]]))
     end
   end
+  describe ".calculate_round_score" do
+    it "should add scores from round with any bonus points" do
+      subject.add_first_bowl(5)
+      subject.add_second_bowl(4)
+      expect(subject.calculate_round_score(1)).to eq(9)
+    end
+    it "should return incomplete if round is not finished" do
+      subject.add_first_bowl(5)
+      expect(subject.calculate_round_score(1)).to eq("Incomplete")
+    end
+    it "should return incomplete if bonus points are not calculated by next round yet" do
+      subject.add_first_bowl(10)
+      expect(subject.calculate_round_score(1)).to eq("Incomplete")
+    end
+    it "should return add scores and give bonus point if round was a spare" do
+      subject.add_first_bowl(5)
+      subject.add_second_bowl(5)
+      subject.add_first_bowl(5)
+      expect(subject.calculate_round_score(1)).to eq(15)
+    end
+    it "should return add scores and give bonus points if round was a strike" do
+    end
+  end
   describe ".calculate_total_score" do
     it "should sum all elements of the game_array and save to total_score " do
       subject.add_first_bowl(5)
-      subject.add_second_bowl(7)
+      subject.add_second_bowl(4)
       subject.add_first_bowl(5)
-      subject.add_second_bowl(7)
+      subject.add_second_bowl(4)
       subject.add_first_bowl(5)
-      subject.add_second_bowl(7)
-      expect(subject.calculate_total_score).to eq(36)
+      subject.add_second_bowl(4)
+      expect(subject.calculate_total_score).to eq(27)
     end
   end
-  describe ".strike?" do
-    it "should return true if first bowl was 10 " do
-      subject.add_first_bowl(10)
-      expect(subject.strike?).to eq(true)
-    end
-  end
-  describe ".spare?" do
-    it "should return true if first bowl and second bowl together were 10 " do
-      subject.add_first_bowl(4)
-      subject.add_second_bowl(6)
-      expect(subject.spare?).to eq(true)
-    end
-  end
+  # describe ".strike?" do
+  #   it "should return true if first bowl was 10 " do
+  #     subject.add_first_bowl(10)
+  #     expect(subject.strike?).to eq(true)
+  #   end
+  # end
+  # describe ".spare?" do
+  #   it "should return true if first bowl and second bowl together were 10 " do
+  #     subject.add_first_bowl(4)
+  #     subject.add_second_bowl(6)
+  #     expect(subject.spare?).to eq(true)
+  #   end
+  # end
 end
