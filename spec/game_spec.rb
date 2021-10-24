@@ -63,12 +63,16 @@ describe Game do
     end
   end
 
-  describe '#go_turn' do
+  describe '#all_rolls' do
+    it 'shows the rolls in once place' do
+      game.current_frame.record_roll(4)
+      game.current_frame.record_roll(3)
+      game.next_frame
+      game.current_frame.record_roll(7)
+      game.current_frame.record_roll(3)
+      expect(game.all_rolls).to eq [4,3,7,'/']
+    end
 
   end
-
-  
-
-
 
 end

@@ -36,6 +36,16 @@ class Game
     find_frame(@current_frame_number )
   end
 
+  def all_rolls
+
+    rolls = @frames.map do |frame|
+      frame.rolls
+    end 
+
+    rolls.flatten
+
+  end
+  
   private
 
   def set_up_frames(frame)
