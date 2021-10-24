@@ -1,4 +1,4 @@
-require 'frame'
+require_relative 'frame'
 
 class Bowling
 
@@ -9,14 +9,7 @@ class Bowling
     @frame_class = frame_class
   end
 
-  def frames_and_totals # for testing purposes only, easier to visualise
-    @frames.each do |frame|
-      p frame.pins
-      puts frame.total
-    end
-  end
-
-  def scorecard
+  def scorecard # to be extracted
     @frames.map{|frame| frame.total}
   end
 
@@ -25,19 +18,23 @@ class Bowling
   end
 
   def roll(pins) # integer
+    unless last_frame?
+      update_frames(pins)
+    else
+      update_last_frame(pins)
+    end
+    @frames
+  end
+
+  def update_frames(pins)
     @current_frame ||= @frame_class.new
-    update_previous_frame(pins) if active_bonus?
+    update_bonus_frames(pins) if bonus_frames
     update_current_frame(pins)
   end
 
-  def active_bonus?
-    return if @frames.empty? # for the first roll
-    previous_frame.active_bonus?
-  end
-
-  def update_previous_frame(pins)
-    previous_frame.update_total(pins)
-    previous_frame.deduct_bonus_roll
+  def update_bonus_frames(pins)
+    bonus_frames.each { |frame| frame.update_total(pins) }
+    bonus_frames.each  { |frame| frame.deduct_bonus_roll }
   end
 
   def update_current_frame(pins)
@@ -46,14 +43,34 @@ class Bowling
     store_frame if @current_frame.complete?
   end
 
+  def update_last_frame(pins)
+    @current_frame ||= @frame_class.new
+    @current_frame.add(pins)
+    update_bonus_frames(pins)
+    @current_frame.calculate_bonus
+    end_game if @current_frame.pins.length == 3
+  end
+
+  def end_game
+    @current_frame.calculate_total
+    @frames << @current_frame if @current_frame.pins.length == 3
+    p "GAME OVER"
+  end
+
+  def last_frame?
+    return if @frames.empty?
+    @frames.length == 9
+  end
+
   def store_frame
     @current_frame.calculate_bonus
     @frames << @current_frame
     @current_frame = nil
   end
 
-  def previous_frame
-    @frames.last
+  def bonus_frames
+    return if @frames.empty?
+    @frames.select {|frame| frame.active_bonus? }
   end
 
 end
