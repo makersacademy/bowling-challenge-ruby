@@ -1,24 +1,42 @@
-Bowling Challenge in Ruby
-=================
+# Bowling Challenge in Ruby
+![code-size](https://img.shields.io/github/languages/code-size/hamstercat007/bowling-challenge-ruby )
+![last-commit](https://img.shields.io/github/last-commit/hamstercat007/bowling-challenge-ruby)
+![languages-count](https://img.shields.io/github/languages/count/hamstercat007/bowling-challenge-ruby)
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+
+# How to install
+## Clone the repo
+```sh
+% git clone https://github.com/hamstercat007/bowling-challenge-ruby.git
+```
+
+## Install the dependencies 
+From inside the project folder, run 
+```
+% bundle install
+```
+
+# Usage
+## Run the example
+From inside the project folder:
+```sh
+% ruby app.rb
+```
+
+## Run the tests
+From inside the project folder:
+```sh
+% rspec 
+```
 
 ## The Task
 
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
+This is a class which sums the scores of a bowling game. 
 
-Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
+Count and sum the scores of a bowling game for one player. 
 
 A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
 
-As usual please start by
-
-* Forking this repo
-
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
 
 ___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
 

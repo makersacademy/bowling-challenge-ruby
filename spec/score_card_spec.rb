@@ -67,5 +67,21 @@ describe ScoreCard do
                                 ])
       expect(scorecard.result).to eq 67
     end
+
+    it 'will return the score for the example game' do
+      scorecard = ScoreCard.new([
+                                  [1, 4],
+                                  [4, 5],
+                                  [6, 4],
+                                  [5, 5],
+                                  [10],
+                                  [0, 1],
+                                  [7, 3],
+                                  [6, 4],
+                                  [10],
+                                  [2, 8, 6]
+                                ])
+      expect(scorecard.result).to eq 133
+    end
   end
 end

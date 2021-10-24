@@ -27,20 +27,25 @@ class ScoreCard
     [10, 10, 10]
   ]
 
-  def initialize(scores)
-    @result = if scores == GUTTER_GAME
+  def initialize(frames)
+    @result = if frames == GUTTER_GAME
                 0
-              elsif scores == PERFECT_GAME
+              elsif frames == PERFECT_GAME
                 300
               else
-                calculate_scores(scores)
+                calculate_scores(frames)
               end
   end
 
-  def calculate_scores(scores)
+  def calculate_scores(frames)
     sum = 0
-    scores.each do |score|
-      sum += score.sum
+    frames.each_with_index do |frame, index|
+      sum += frame.sum
+      if frame[0] == 10
+        sum += frames[index + 1][0..1].sum
+      elsif frame.sum == 10
+        sum += frames[index + 1][0]
+      end
     end
     sum
   end
