@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Scoring
   def initialize(scorecard)
     @scorecard = scorecard
@@ -10,28 +12,29 @@ class Scoring
   # the below should be made private, but this will make unit tests fail
 
   def regular_score_per_frame
-    score = @scorecard.map { |x| x.sum }
+    score = @scorecard.map(&:sum)
     if @scorecard[9][0] == 10
       score[9] = 10
-    elsif @scorecard[9][0] < 10 
+    elsif @scorecard[9][0] < 10
       score[0] = (@scorecard[9][0] + @scorecard[9][1])
     end
     score
   end
 
-  def bonus_score_per_frame # frames 9 and 10 handled in separate methods
-    score = [] 
+  # frames 9 and 10 handled in separate methods
+  def bonus_score_per_frame
+    score = []
     n = 0
     while n < 8
       bonus = 0
       if @scorecard[n][0] == 10
-        if @scorecard[n + 1][0] == 10
-          if @scorecard[n + 2][0] == 10 # 3 strikes in a row
-            bonus += 20
-          else bonus += 10 + @scorecard[n + 2][0] # 2 strikes in a row
-          end
-        else bonus += @scorecard[n + 1].sum # 1 strike
-        end
+        bonus += if @scorecard[n + 1][0] == 10
+                   if @scorecard[n + 2][0] == 10 # 3 strikes in a row
+                     20
+                   else 10 + @scorecard[n + 2][0] # 2 strikes in a row
+                   end
+                 else @scorecard[n + 1].sum # 1 strike
+                 end
       elsif @scorecard[n].sum == 10 # a split
         bonus += @scorecard[n + 1][0]
       end
@@ -42,18 +45,18 @@ class Scoring
   end
 
   def bonus_score_9th_frame(score)
-      bonus = 0
-      if @scorecard[8][0] == 10
-        if @scorecard[8 + 1][0] == 10
-          if @scorecard[8 + 1][1] == 10 # 3 strikes in a row
-            bonus += 20
-          else bonus += 10 + @scorecard[8 + 1][1] # 2 strikes
-          end
-        else bonus += @scorecard[8 + 1][0] + @scorecard[8 + 1][1]# 1 strike
-        end
-      elsif @scorecard[8].sum == 10 # a split
-        bonus += @scorecard[8 + 1][0]
-      end
+    bonus = 0
+    if @scorecard[8][0] == 10
+      bonus += if @scorecard[8 + 1][0] == 10
+                 if @scorecard[8 + 1][1] == 10 # 3 strikes in a row
+                   20
+                 else 10 + @scorecard[8 + 1][1] # 2 strikes
+                 end
+               else @scorecard[8 + 1][0] + @scorecard[8 + 1][1] # 1 strike
+               end
+    elsif @scorecard[8].sum == 10 # a split
+      bonus += @scorecard[8 + 1][0]
+    end
     score.append(bonus)
     bonus_score_10th_frame(score)
   end
@@ -80,5 +83,4 @@ class Scoring
     end
     score
   end
-
 end

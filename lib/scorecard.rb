@@ -21,6 +21,7 @@ class Scorecard
 
   def record_pins(pins, frame, bowl)
     return if pins > 14
+
     @pins_knocked_down[frame - 1][bowl - 1] = pins
   end
 end
