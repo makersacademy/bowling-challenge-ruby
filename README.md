@@ -63,3 +63,39 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+
+Aprroach:
+
+ Bowling 
+
+it is a game of 
+    10 frames
+        2 roll each frame 
+            10 pins each roll
+
+
+
+frames
+    if strike 
+        bonus of the pins knocked down by next 2 rolls 
+
+    elsif spare
+        bonus of the pins knocked
+        down on the first roll
+
+    elsif reaches the 10 scores
+    bonus of 5
+
+    else no hits
+end
+
+gutter game 
+    no hits
+
+perfect game
+    10 strikes plus 2 strikes on the 10th frame
+        300 points total
+
+10th frame 
+    2 additional balls never more then 3 rolls
