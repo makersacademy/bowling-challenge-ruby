@@ -1,6 +1,7 @@
 require 'frame'
 
 describe Frame do
+
   it 'stores the number of pins for a roll' do
     subject.add(5)
     expect(subject.pins).to eq([5])
@@ -39,8 +40,8 @@ describe Frame do
     subject.calculate_bonus
     expect(subject.bonus_rolls).to eq(2)
   end
-
-  it 'knows if it is a complete frame' do
+  
+  it 'knows if it is a complete frame' do # should this be separate tests?
     subject.add(3)
     expect(subject.complete?).to eq false
 
@@ -69,4 +70,5 @@ describe Frame do
   it 'can update the total by a specified amount' do
     expect { subject.update_total(5) }.to change { subject.total }.by(5)
   end
+
 end

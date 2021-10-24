@@ -26,7 +26,7 @@ class Frame
   end
 
   def active_bonus?
-    @bonus_rolls > 0
+    @bonus_rolls.positive?
   end
 
   def deduct_bonus_roll
@@ -34,7 +34,7 @@ class Frame
   end
 
   def calculate_total
-    @total = @pins.sum # + bonus
+    @total = @pins.sum
   end
 
   def update_total(number = 0)
