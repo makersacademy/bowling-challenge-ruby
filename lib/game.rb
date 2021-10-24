@@ -47,10 +47,25 @@ class Game
   end
 
   def total
-    all_rolls
+    total = 0
+    spares = '/'
+
+    all_rolls.each_with_index do |val, i|
+     
+      if val == '/'
+        total += ((10 - all_rolls[i-1]) + all_rolls[i+1]) if all_rolls[i+1]
+      elsif val.integer?
+        total += val           
+      end
+
+    end
+
+    total
+
   end
 
   private
+
 
   def set_up_frames(frame)
     number = 1
