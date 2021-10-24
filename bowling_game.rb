@@ -35,6 +35,12 @@ def bowlinggame(bowling = Bowling.new)
     puts "Please enter your roll:"
     turn_two = gets.chomp.to_i
     @bowling.roll(turn_two)
+    if turn_one + turn_two == 10
+      puts "Spare! Bonus shot!"
+      puts "Please enter your roll:"
+      turn_three = gets.chomp.to_i
+      @bowling.roll(turn_three)
+    end
   else
     puts "Strike! Go again!"
     puts "Please enter your roll:"
