@@ -15,21 +15,21 @@ describe Bowling do
 
     it 'calculates spares' do
       game.roll(6)
-      game.roll(4)
-      game.roll(5)
-      game.roll(0)
-      expect(game.total_score).to eq(25)
+      game.roll(4)  # spare
+      game.roll(5)  # spare bonus + 5, total 15, plus the 5 for this frame
+      game.roll(0) 
+      expect(game.total_score).to eq(25) # + 20 overall
     end
 
     it 'calculates strikes' do
-      game.roll(10)
-      game.roll(1)
-      game.roll(2)
-      expect(game.total_score).to eq(41)
+      game.roll(10) # strike
+      game.roll(1)  # strike bonus + 1, total 11
+      game.roll(2)  # strike bonus + 2, total 13, plus 3 for this frame
+      expect(game.total_score).to eq(41) # + 16 overall
     end
     
     it "won't continue the game after 10 frames" do
-      10.times { game.roll(3) } # completing another 5 frames, totalling 10
+      10.times { game.roll(3) } # completing another 5 frames, now finished 10th frame
       expect { game.roll(3) }.to raise_error "Game Over!"
     end
 
@@ -52,7 +52,7 @@ describe Bowling do
       expect(subject.total_score).to eq(300)
     end
 
-    it 'calculates a score of 133' do
+    it 'calculates a score of 133' do # example from README
       subject.roll(1)
       subject.roll(4)
       subject.roll(4)
