@@ -37,7 +37,7 @@ class Game
   end 
 
   def play(hits)
-    #return "Game is completed" if complete? 
+    return "Game is completed" if complete? 
     current.bowl(hits)
     puts "#{current.name} hit #{hits} pin(s)!"
     next_player
@@ -48,11 +48,7 @@ class Game
   end 
 
   def print_player(player)
-    board = player.scoreboard
-    board_line = "-" * board.size
-    puts board_line
-    puts board
-    puts board_line
+    player.scoreboard
   end
 
   def scoreboard

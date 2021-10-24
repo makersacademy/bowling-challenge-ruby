@@ -63,23 +63,25 @@ class Player
   end
  
   def scoreboard
-    scoreboard_string = "#{name}:".ljust(15)
+    score = 0
     frames.each do |frame|
-      scoreboard_string << frame.to_s.ljust(6)
+      frame.bowls.each do |bowl| 
+        score += bowl
+      end 
+      puts "#{@name} scored #{score}"
     end
-    scoreboard_string << "|".ljust(6) << "#{score}"
-    scoreboard_string
+
   end
   
   def complete?
-    frames.size == 10 && frames.last.complete?
+    frames.length == 10 && frames.last.complete?
   end
 
   attr_reader :current
   attr_writer :frames
 
   def next_frame
-    if frames.size == 10 - 1
+    if frames.length == 10 - 1
       frames << BonusFrame.new
     else
       frames << Frame.new

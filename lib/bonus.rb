@@ -6,6 +6,13 @@ class BonusFrame < Frame
     bowls.take(2).reduce(:+) == MAX_PINS || strike?
   end
   
+  def bowl(hits)
+    remaining = @pins - hits
+    raise "Error, please enter a valid number of hits" if hits > MAX_PINS || (remaining_pins < 0 && extra_bowls == 0)
+    @pins = remaining unless bonus?
+    bowls << hits
+  end  
+
   def extra_bowls
     if strike?
       2
@@ -15,16 +22,9 @@ class BonusFrame < Frame
       0
     end
   end
-
-  def bowl(hits)
-    remaining = remaining_pins - hits
-    raise ArgumentError.new("Invalid number of pins") if (remaining < 0 && extra_bowls == 0) || pins > MAX_PINS
-    @remaining_pins = remaining unless bonus?
-    bowls << pins
-  end  
-
+  
   def finished?
-    (bowls.size == 2 && !bonus?) || (bonus? && bowls.size == 3)
+    (bonus? && bowls.size == 3) || (bowls.size == 2 && !bonus?)
   end
   
   def to_s
