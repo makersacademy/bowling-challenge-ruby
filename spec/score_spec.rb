@@ -3,7 +3,7 @@
 require './lib/score'
 
 describe Scoring do
-  it 'calculates regular score per frame' do
+  it 'calculates regular score per frame for perfect game' do
     s = Scoring.new(
       [
         [10, 0],
@@ -33,7 +33,7 @@ describe Scoring do
       ]
     )
   end
-  it 'calculates bonus score per frame' do
+  it 'calculates bonus score per frame for perfect game' do
     s = Scoring.new(
       [
         [10, 0],
@@ -63,7 +63,7 @@ describe Scoring do
       ]
     )
   end
-  it 'calculates total score per frame' do
+  it 'calculates total score per frame for perfect game' do
     s = Scoring.new(
       [
         [10, 0],
@@ -93,7 +93,7 @@ describe Scoring do
       ]
     )
   end
-  it 'calculates total' do
+  it 'calculates total for a perfect game' do
     s = Scoring.new(
       [
         [10, 0],
@@ -110,6 +110,44 @@ describe Scoring do
     )
     expect(s.total_score).to eq(
       300
+    )
+  end
+  it 'calculates total when a spare is scored in frame 2' do
+    s = Scoring.new(
+      [
+        [1, 9],
+        [10, 0],
+        [10, 0],
+        [10, 0],
+        [10, 0],
+        [10, 0],
+        [10, 0],
+        [10, 0],
+        [10, 0],
+        [10, 10, 10]
+      ]
+    )
+    expect(s.total_score).to eq(
+      290
+    )
+  end
+  it 'calculates total when there is no frame 1 bonus' do
+    s = Scoring.new(
+      [
+        [1, 8],
+        [10, 0],
+        [10, 0],
+        [10, 0],
+        [10, 0],
+        [10, 0],
+        [10, 0],
+        [10, 0],
+        [10, 0],
+        [10, 10, 10]
+      ]
+    )
+    expect(s.total_score).to eq(
+      279
     )
   end
 end
