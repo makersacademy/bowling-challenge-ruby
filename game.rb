@@ -5,7 +5,7 @@ class Game
   attr_reader :frames
 
   def initialize
-    @frames = [[1,4],[4,5],[6,4],[5,5],[10],[0,1],[7,3],[6,4],[10],[2,8,6]] #Array.new(10){ [] }
+    @frames = Array.new(10){ [] }
     @frame_number = 1
     @roll_number = 1
     @score = Score.new
@@ -29,8 +29,12 @@ class Game
     end
   end
 
+  def 
+
   def score
     @score.game_total(frames)
   end
 
 end
+
+# test @frames =  [[1,4],[4,5],[6,4],[5,5],[10],[0,1],[7,3],[6,4],[10],[2,8,6]]
