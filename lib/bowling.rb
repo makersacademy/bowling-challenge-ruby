@@ -23,7 +23,6 @@ class Bowling
     else
       update_last_frame(pins)
     end
-    @frames
   end
 
   def update_frames(pins)
