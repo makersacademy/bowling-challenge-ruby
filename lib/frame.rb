@@ -36,11 +36,7 @@ class Frame
       if pins == 10 && @current_frame_score.length == 2
         write_points_on_scorecard(pins)
 
-
-        ten_strike_checker
-        ten_spare_checker
-        ten_open_frame_checker
-
+        calculate_frame_ten_total
 
         @frame_number += 1
         reset_pins
@@ -48,19 +44,13 @@ class Frame
           if @current_frame_score.length == 2
             write_points_on_scorecard(pins)
 
-            ten_strike_checker
-            ten_spare_checker
-            ten_open_frame_checker
+            calculate_frame_ten_total
          
             @frame_number += 1
             reset_pins
           else
             write_points_on_scorecard(pins)
-
-            ten_strike_checker
-            ten_spare_checker
-            ten_open_frame_checker
-
+            calculate_frame_ten_total
           end
       end
      # END OF TENTH FRAME CODE, THE CODE BELOW IS FOR FRAMES 1-9
@@ -90,6 +80,21 @@ class Frame
     p "EACH FRAME SCORES: #{@total_scores}"
   end
 
+  def game_finished
+    if @frames[10][0] != 10 && @frames[10][1] != nil && @frames[10].sum != 10 
+      p '10-1 plus 10-2 ARE LESS THAN 10 THE GAME IS OVER'
+      @frame_number += 1
+      @frames[11] = [1]
+    end
+
+    if @frames[10][2] != nil  
+      p '10-3 is finished, game is over'
+      @frame_number += 1
+      @frames[11] = [1]
+    end
+
+  end
+
   def write_points_on_scorecard(pins)
     @current_frame_score << pins
     @frames[@frame_number] = @current_frame_score
@@ -97,6 +102,13 @@ class Frame
 
   def reset_pins
     @current_frame_score = []
+  end
+
+  def calculate_frame_ten_total
+    ten_strike_checker
+    ten_spare_checker
+    open_frame_checker
+    game_finished
   end
 
   def ten_strike_checker
@@ -116,10 +128,6 @@ class Frame
       if @frames[10][0] != 10 && @frames[10].sum == 10 && @current_frame_score[2] == true
         @total_scores[10] = 10 + @current_frame_score[2]
       end
-  end
-
-  def ten_open_frame_checker
-      @total_scores[@frame_number] = @frames[@frame_number].sum
   end
 
   def calculate_frame_total
