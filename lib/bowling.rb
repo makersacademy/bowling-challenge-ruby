@@ -10,12 +10,8 @@ class Bowling
     @final_frame_class = final_frame_class
   end
 
-  def scorecard # to be extracted
-    @frames.map { |frame| frame.total }
-  end
-
   def total_score
-    scorecard.sum
+    @frames.sum(&:total)
   end
 
   def roll(pins) # integer
