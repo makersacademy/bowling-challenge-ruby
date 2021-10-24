@@ -1,6 +1,15 @@
 class Frame
 
-  attr_accessor :frames, :current_frame_score, :frame_number, :total_scores, :pins 
+  def self.create
+    @frame = Frame.new
+  end
+
+  def self.instance
+    @frame
+  end
+
+  attr_accessor :frames, :current_frame_score, :frame_number, 
+  :total_scores, :pins, :bowl, :player_score, :sc
 
   def initialize
     @frames = {
@@ -17,9 +26,9 @@ class Frame
       10 => []
     }
 
-
     @current_frame_score = []
     @frame_number = 1
+    @sc = 0
   end
 
   def bowl(pins)
@@ -32,6 +41,7 @@ class Frame
       p @frames
 
       strike_checker
+      player_score
 
       @frame_number += 1
       reset_pins
@@ -45,6 +55,7 @@ class Frame
           strike_checker
           spare_checker
           open_frame_checker
+          player_score
 
           @frame_number += 1
           reset_pins
@@ -57,11 +68,16 @@ class Frame
           strike_checker
           spare_checker
           open_frame_checker
+          player_score
 
         end
 
       # check_valid_frame
     end
+  end
+
+  def player_score
+    @sc = @total_scores.values[@frame_number - 1].sum + @sc
   end
 
   def reset_pins

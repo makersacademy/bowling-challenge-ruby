@@ -1,0 +1,53 @@
+<h2>
+<iframe src="https://giphy.com/embed/pOcTaM6LgFOH45AvKL" width="480" height="190" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/audible-audiobook-audiobooks-pOcTaM6LgFOH45AvKL"></a></p>
+</h2>
+
+          <form action='/result' method='get'>
+            <td><input type='submit' value=0 name='player_1_choice'></td>
+            <td><input type='submit' value=1 name='player_1_choice'></td>
+            <td><input type='submit' value=2 name='player_1_choice'></td>
+            <td><input type='submit' value=3 name='player_1_choice'></td>
+            <td><input type='submit' value=4 name='player_1_choice'></td>
+            <td><input type='submit' value=5 name='player_1_choice'></td>
+            <td><input type='submit' value=6 name='player_1_choice'></td>
+            <td><input type='submit' value=7 name='player_1_choice'></td>
+            <td><input type='submit' value=8 name='player_1_choice'></td>
+            <td><input type='submit' value=9 name='player_1_choice'></td>
+            <td><input type='submit' value=10 name='player_1_choice'></td>
+          </form>
+
+<h2>You bowled a <%=@choice %>! </h2>
+
+     <table>
+        <tr>
+          <td>Frame 1</td>
+          <td>Frame 2</td>
+          <td>Frame 3</td>
+          <td>Frame 4</td>
+          <td>Frame 5</td>
+          <td>Frame 6</td>
+          <td>Frame 7</td>
+          <td>Frame 8</td>
+          <td>Frame 9</td>
+          <td>Frame 10</td>
+        </tr>
+
+          <tr>
+           <td><%=@frame.frames.values[0]%></td>
+           <td><%=@frame.frames.values[1]%></td>
+           <td><%=@frame.frames.values[2]%></td>
+           <td><%=@frame.frames.values[3]%></td>
+           <td><%=@frame.frames.values[4]%></td>
+           <td><%=@frame.frames.values[5]%></td>
+           <td><%=@frame.frames.values[6]%></td>
+           <td><%=@frame.frames.values[7]%></td>
+           <td><%=@frame.frames.values[8]%></td>
+           <td><%=@frame.frames.values[9]%></td>
+          </tr>
+          <tr>
+
+          Hey <%= @running_total %><br><br>
+          You chose: <%= @bowl %><br><br>
+          "Frame <%=@frame.frame_number%>: <%=@frame.current_frame_score%>"<br><br>
+       
+          </tr></table>
