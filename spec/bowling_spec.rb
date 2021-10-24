@@ -30,7 +30,7 @@ describe Bowling do
     
     it "won't continue the game after 10 frames" do
       10.times { game.roll(3) } # completing another 5 frames, totalling 10
-      expect{ game.roll(3) }.to raise_error "Game Over!"
+      expect { game.roll(3) }.to raise_error "Game Over!"
     end
 
   end
