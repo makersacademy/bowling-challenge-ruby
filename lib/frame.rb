@@ -17,6 +17,7 @@ class Frame
       10 => []
     }
 
+
     @current_frame_score = []
     @frame_number = 1
   end
@@ -95,12 +96,14 @@ class Frame
   def open_frame_checker
     if @frames[@frame_number].sum < 10 && @current_frame_score.length == 2
       p 'open frame'
-      @total_scores[@frame_number] = @frames[@frame_number].sum    
+      @total_scores[@frame_number] = @frames[@frame_number].sum   
       p @total_scores
     else
-      @total_scores[@frame_number] = @frames[@frame_number]
+      @total_scores[@frame_number] = @frames[@frame_number].sum
+      p @total_scores
     end
   end
+
 
 
   def extendable?
