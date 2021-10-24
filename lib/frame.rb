@@ -9,7 +9,7 @@ class Frame
   end
 
   attr_accessor :frames, :current_frame_score, :frame_number, 
-  :total_scores, :pins, :bowl, :player_score, :sc
+  :total_scores, :pins, :bowl, :player_score
 
   def initialize
     @frames = {
@@ -28,66 +28,65 @@ class Frame
 
     @current_frame_score = []
     @frame_number = 1
-    @sc = 0
   end
 
   def bowl(pins)
-    fail 'frame is over' unless @current_frame_score.length < 2 
-    if pins == 10
-      @current_frame_score << pins
-      @current_frame_score << 0 
-      p "Frame #{@frame_number}: #{@current_frame_score}"
-      @frames[@frame_number] = @current_frame_score
-      p @frames
-
-      strike_checker
-      player_score
-
-      @frame_number += 1
-      reset_pins
+    if @frame_number == 10
+      p 'this is the 10th frame'
+     
     else
-        if @current_frame_score.length == 1
-          @current_frame_score << pins
-          p "Frame #{@frame_number}: #{@current_frame_score}"
-          @frames[@frame_number] = @current_frame_score
-          p @frames
-
-          strike_checker
-          spare_checker
-          open_frame_checker
-    
-
-          @frame_number += 1
-          reset_pins
-        else
-          @current_frame_score << pins
-          p "Frame #{@frame_number}: #{@current_frame_score}"
-          @frames[@frame_number] = @current_frame_score
-          p @frames
-
-          strike_checker
-          spare_checker
-          open_frame_checker
       
-        end
+      if pins == 10
+        write_points_on_scorecard(pins)
+        write_points_on_scorecard(0)
+        @frames[@frame_number] = @current_frame_score
 
+        calculate_frame_total
+
+        @frame_number += 1
+        reset_pins
+      else
+          if @current_frame_score.length == 1
+
+            write_points_on_scorecard(pins)
+            calculate_frame_total
+         
+            @frame_number += 1
+            reset_pins
+          else
+            write_points_on_scorecard(pins)
+
+            calculate_frame_total
+          end
+      end
     end
+
+    p "Current Frame #{@frame_number}: #{@current_frame_score}"
+    p "Scorecard: #{@frames}"
+    p "EACH FRAME SCORES: #{@total_scores}"
+  end
+
+  def write_points_on_scorecard(pins)
+    @current_frame_score << pins
+    @frames[@frame_number] = @current_frame_score
   end
 
   def reset_pins
     @current_frame_score = []
   end
 
+  def calculate_frame_total
+    strike_checker
+    spare_checker
+    open_frame_checker
+  end
+
   def strike_checker
     if @frames[@frame_number - 1] == [10, 0] && @frames[@frame_number - 2] == [10, 0]
-      p '2 prev strike'
       @total_scores[@frame_number-2] = 20 + @current_frame_score[0]
-      p @total_scores
     end
     if @frames[@frame_number - 1] == [10, 0] && @current_frame_score.length == 2
-      p '1 prev strike'
       @total_scores[@frame_number-1] = 10 + @current_frame_score[0] + @current_frame_score[1] 
-      p @total_scores  
     end
   end
 
@@ -95,9 +94,7 @@ class Frame
     if @frame_number >= 2
 
       if @frames[@frame_number - 1][0] != 10 && @frames[@frame_number - 1].sum == 10
-        p '1 prev spare'
         @total_scores[@frame_number-1] = 10 + @current_frame_score[0]
-        p @total_scores
       end
 
     end
@@ -105,12 +102,9 @@ class Frame
 
   def open_frame_checker
     if @frames[@frame_number].sum < 10 && @current_frame_score.length == 2
-      p 'open frame'
       @total_scores[@frame_number] = @frames[@frame_number].sum   
-      p @total_scores
     else
       @total_scores[@frame_number] = @frames[@frame_number].sum
-      p @total_scores
     end
   end
 

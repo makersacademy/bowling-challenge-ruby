@@ -1,14 +1,19 @@
 <center>
 <td><% if @choice == '10' %>
-<iframe src="https://giphy.com/embed/cLSr57lBHcr4gg2RIL" width="480" height="160" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/workingtitlefilms-the-big-lebowski-coen-brothers-joel-cLSr57lBHcr4gg2RIL"></a></p>
+<iframe src="https://giphy.com/embed/cLSr57lBHcr4gg2RIL" width="480" height="190" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/workingtitlefilms-the-big-lebowski-coen-brothers-joel-cLSr57lBHcr4gg2RIL"></a></p>
 
 <% elsif @choice == '0' %>
-<iframe src="https://giphy.com/embed/5zxNfK9mRiT0BneqSL" width="480" height="160" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/HBOMax-romance-hbomax-made-for-love-5zxNfK9mRiT0BneqSL"></a></p>
+<iframe src="https://giphy.com/embed/5zxNfK9mRiT0BneqSL" width="480" height="190" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/HBOMax-romance-hbomax-made-for-love-5zxNfK9mRiT0BneqSL"></a></p>
 <% else %>
- <iframe src="https://giphy.com/embed/cM3CB6FbkEI26ibTuX" width="480" height="160" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bowlero-ball-bowling-bowl-cM3CB6FbkEI26ibTuX"></a></p>
+ <iframe src="https://giphy.com/embed/cM3CB6FbkEI26ibTuX" width="480" height="190" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bowlero-ball-bowling-bowl-cM3CB6FbkEI26ibTuX"></a></p>
 <% end %></table>
 
-          <form action='/result' method='get'>
+          
+
+ <% if @frame.frames.values[9].any? %>
+<h1>Game Finished.  Final Score: <%= @frame.total_scores.values.flatten.sum %><h1>
+<% else %>
+         <form action='/result' method='get'>
             <td><input type='submit' value=0 name='player_1_choice'></td>
             <td><input type='submit' value=1 name='player_1_choice'></td>
             <td><input type='submit' value=2 name='player_1_choice'></td>
@@ -21,9 +26,6 @@
             <td><input type='submit' value=9 name='player_1_choice'></td>
             <td><input type='submit' value=10 name='player_1_choice'></td>
           </form>
-
- <% if @frame.frames.values[9].any? %>
-<h1>Game Finished.  Final Score: <%= @frame.total_scores.values.flatten.sum %><h1>
 <% end %>
 
 <h2>You bowled a <%=@choice %>! </h2>
