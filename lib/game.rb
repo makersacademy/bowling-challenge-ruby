@@ -45,7 +45,11 @@ class Game
     rolls.flatten
 
   end
-  
+
+  def total
+    all_rolls
+  end
+
   private
 
   def set_up_frames(frame)

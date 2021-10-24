@@ -75,4 +75,11 @@ describe Game do
 
   end
 
+  describe '#total' do
+    it 'can handle a spare' do
+      allow(game).to receive(:all_rolls).and_return [2,3,5,'/', 3, 4]
+      expect(game.total).to eq (25) # three frames 5 + 13 + 7
+    end
+  end
+
 end
