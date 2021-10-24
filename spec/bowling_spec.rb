@@ -27,6 +27,11 @@ describe Bowling do
       game.roll(2)
       expect(game.total_score).to eq(41)
     end
+    
+    it "won't continue the game after 10 frames" do
+      10.times { game.roll(3) } # completing another 5 frames, totalling 10
+      expect{ game.roll(3) }.to raise_error "Game Over!"
+    end
 
   end
 
@@ -77,7 +82,6 @@ describe Bowling do
       subject.roll(9)
       subject.roll(2)
       subject.roll(8)
-      subject.roll(0)
       subject.roll(10)
       subject.roll(6)
       subject.roll(3)
@@ -85,14 +89,12 @@ describe Bowling do
       subject.roll(0)
       subject.roll(5)
       subject.roll(2)
-      subject.roll(0)
       subject.roll(10)
       subject.roll(0)
       subject.roll(6)
       subject.roll(2)
       subject.roll(8)
       subject.roll(10)
-      subject.frame_data
       expect(subject.total_score).to eq(122)
     end
 

@@ -1,4 +1,5 @@
 class Frame
+
   attr_reader :pins, :bonus_rolls, :total
 
   def initialize
@@ -17,7 +18,7 @@ class Frame
 
   def spare?
     return false unless @pins.length >= 2
-    @pins.max <= 9 && @pins.sum == 10
+    @pins.first < 10 && @pins.sum == 10
   end
 
   def calculate_bonus
@@ -44,6 +45,16 @@ class Frame
 
   def complete?
     @pins.count == 2 || strike?
+  end
+
+end
+
+class FinalFrame < Frame
+
+  def complete?
+    return false if @pins.empty?
+    return true if @pins.length == 3
+    @pins.length == 2 unless active_bonus?
   end
 
 end
