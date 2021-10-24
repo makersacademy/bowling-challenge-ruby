@@ -17,7 +17,6 @@ class Bowling
   def roll(pins) # integer
     raise "Game Over!" if @game_over
     if final_frame?
-      @current_frame ||= @final_frame_class.new
       update_final_frame(pins)
     else
       update_frames(pins)
@@ -49,6 +48,7 @@ class Bowling
   end
 
   def update_final_frame(pins)
+    @current_frame ||= @final_frame_class.new
     update_frames(pins)
     @current_frame.calculate_bonus
     # calculate bonus here because it won't be checked after if game over 
