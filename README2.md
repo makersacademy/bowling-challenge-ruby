@@ -25,6 +25,10 @@ Score.rb breaks down the scoring into several logical steps:
 4- Inform each player what frame and ball they are on, and their current score breakdown
 5- Declare the end of the game and the winner
 
+Reflections
+
+In hindsight, it would have been better to produce a method (or even a class) for the bonus points for each of the 10 frames. The content for the methods for frames 1-8 would be virtually identical, and I could have used a module. This would have increased readability. The methods for frames 9 and 10 would have had more different content. 
+
 
 
 
