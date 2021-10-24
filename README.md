@@ -13,16 +13,7 @@ george to bowl
  => nil 
 3.0.0 :009 > game.current
  => #<Player:0x000000013fabacf8 @name="george", @frames=[#<Frame:0x000000013fabaca8 @bowls=[9], @pins=1>], @current=#<Frame:0x000000013fabaca8 @bowls=[9], @pins=1>> 
-3.0.0 :010 > game.scoreboard
--------------------------------------------------
-peter:         #<Frame:0x000000013fabad48>|     8
--------------------------------------------------
--------------------------------------------------
-george:        #<Frame:0x000000013fabaca8>|     0
--------------------------------------------------
-luke:          #<Frame:0x000000013fabac08>|     0
--------------------------------------------------
- => [#<Player:0x000000013fabae10 @name="peter", @frames=[#<Frame:0x000000013fabad48 @bowls=[3, 5], @pins=2>], @current=#<Frame:0x000000013fabad48 @bowls=[3, 5], @pins=2>>, #<Player:0x000000013fabacf8 @name="george", @frames=[#<Frame:0x000000013fabaca8 @bowls=[9], @pins=1>], @current=#<Frame:0x000000013fabaca8 @bowls=[9], @pins=1>>, #<Player:0x000000013fabac58 @name="luke", @frames=[#<Frame:0x000000013fabac08 @bowls=[], @pins=10>], @current=#<Frame:0x000000013fabac08 @bowls=[], @pins=10>>] 
+
 
 Included logic to ensure that only valid numbers are entered as the number of pins hit. An error is raised below as I attempted to have two goes that together are more than the max number of pins (10).
 
