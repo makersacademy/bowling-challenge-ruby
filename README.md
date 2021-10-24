@@ -2,8 +2,6 @@ Anthony's Bowling Challenge
 =================
 [Readme adapted from here](https://github.com/makersacademy/bowling-challenge-ruby)
 
-
-
 ## Introduction
 
 My attempt at the week 5 Bowling challenge in Ruby. 
@@ -26,37 +24,29 @@ To run the mini-interface, in the command line, do:
 * Follow the promts to input your scores.
 * A score will be shown at the end of your game.
 
-## Focus for this challenge
+## Breakdown of this challenge
 
+I initially determined that I would need three classes - a bowling game model, a turn calculator and a score calculator. I soon started to get lost, however, in the interactions between the classes, especially when it came to dealing with frame 10. Especially since the score being calculated was dependent on the turn, I decided that the two classes would have overlapping methods; they then became one class.
 
+The bowling_game.rb file is not necessary for the game to be played - it is simply a model file to give it a nicer interface. As such, I have not added the file to the testing suite, as I intend to replace it with a Javascript front end in the following weeks. You can run the Bowling class, execute `.roll(number)` for each of your bowling rolls, then run `.score` at the end to get an overall score.
 
-## Bowling — how does it work?
+Given more time, I would like to refactor the bowling class to see if I can extract a score class from the Bowling class. I beleive it would give me more power to calculate scores for previous rolls and update a score card in real-time. However, I believe this would still be possible with how I've laid out the challenge.
 
-### Strikes
+Code Review
+-----------
 
-The player has a strike if he knocks down all 10 pins with the first roll in a frame. The frame ends immediately (since there are no pins left for a second roll). The bonus for that frame is the number of pins knocked down by the next two rolls. That would be the next frame, unless the player rolls another strike.
+In code review we'll be hoping to see:
 
-### Spares
+* All tests passing - 9 examples, 0 failures
+* High [TEST COVERAGE: 100.00% -- 115/115 lines in 2 files](https://github.com/makersacademy/course/blob/main/pills/test_coverage.md)
 
-The player has a spare if the knocks down all 10 pins with the two rolls of a frame. The bonus for that frame is the number of pins knocked down by the next roll (first roll of next frame).
-
-### 10th frame
-
-If the player rolls a strike or spare in the 10th frame they can roll the additional balls for the bonus. But they can never roll more than 3 balls in the 10th frame. The additional rolls only count for the bonus not for the regular frame count.
-
-    10, 10, 10 in the 10th frame gives 30 points (10 points for the regular first strike and 20 points for the bonus).
-    1, 9, 10 in the 10th frame gives 20 points (10 points for the regular spare and 10 points for the bonus).
-
-### Gutter Game
-
-A Gutter Game is when the player never hits a pin (20 zero scores).
-
-### Perfect Game
-
-A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 strikes for the bonus in the 10th frame). The Perfect Game scores 300 points.
-
-In the image below you can find some score examples.
+Examples
+-----------
 
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+  
+Example of the above:  
+
+![Ten Pin bowlinggame Example](images/example_bowlinggame.png)
