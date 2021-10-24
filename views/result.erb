@@ -10,7 +10,7 @@
 
           
 
- <% if @frame.frames.values[9].any? %>
+ <% if @frame.frames.values[10].any? %>
 <h1>Game Finished.  Final Score: <%= @frame.total_scores.values.flatten.sum %><h1>
 <% else %>
          <form action='/result' method='get'>
@@ -32,6 +32,7 @@
 
      <table>
         <tr>
+          <td></td>
           <td>Frame 1</td>
           <td>Frame 2</td>
           <td>Frame 3</td>
@@ -45,6 +46,7 @@
         </tr>
 
           <tr>
+           <td></td>
            <td><%=@frame.frames.values[0]%></td>
            <td><%=@frame.frames.values[1]%></td>
            <td><%=@frame.frames.values[2]%></td>
@@ -58,6 +60,7 @@
           </tr>
 
           <tr>
+          <td>Frame totals:</td>
            <td><%= @frame.total_scores.values[0] %></td>
            <td><%= @frame.total_scores.values[1] %></td>
            <td><%= @frame.total_scores.values[2] %></td>
