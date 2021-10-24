@@ -8,6 +8,8 @@ I started this by spending a good amount of time writing out bowling score board
 
 I did a domain model thinking to have a game and a frame and a user input.
 
+![Domain Model](domain_model.png)
+
 I perhaps could have spent longer thnking this through.
 
 # Starting Coding
