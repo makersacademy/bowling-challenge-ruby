@@ -1,6 +1,12 @@
-<h2>
-<iframe src="https://giphy.com/embed/pOcTaM6LgFOH45AvKL" width="480" height="190" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/audible-audiobook-audiobooks-pOcTaM6LgFOH45AvKL"></a></p>
-</h2>
+<center>
+<td><% if @choice == '10' %>
+<iframe src="https://giphy.com/embed/cLSr57lBHcr4gg2RIL" width="480" height="160" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/workingtitlefilms-the-big-lebowski-coen-brothers-joel-cLSr57lBHcr4gg2RIL"></a></p>
+
+<% elsif @choice == '0' %>
+<iframe src="https://giphy.com/embed/5zxNfK9mRiT0BneqSL" width="480" height="160" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/HBOMax-romance-hbomax-made-for-love-5zxNfK9mRiT0BneqSL"></a></p>
+<% else %>
+ <iframe src="https://giphy.com/embed/cM3CB6FbkEI26ibTuX" width="480" height="160" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bowlero-ball-bowling-bowl-cM3CB6FbkEI26ibTuX"></a></p>
+<% end %></table>
 
           <form action='/result' method='get'>
             <td><input type='submit' value=0 name='player_1_choice'></td>
@@ -15,6 +21,10 @@
             <td><input type='submit' value=9 name='player_1_choice'></td>
             <td><input type='submit' value=10 name='player_1_choice'></td>
           </form>
+
+ <% if @frame.frames.values[9].any? %>
+<h1>Game Finished.  Final Score: <%= @frame.total_scores.values.flatten.sum %><h1>
+<% end %>
 
 <h2>You bowled a <%=@choice %>! </h2>
 
@@ -44,10 +54,31 @@
            <td><%=@frame.frames.values[8]%></td>
            <td><%=@frame.frames.values[9]%></td>
           </tr>
-          <tr>
 
-          Hey <%= @running_total %><br><br>
-          You chose: <%= @bowl %><br><br>
-          "Frame <%=@frame.frame_number%>: <%=@frame.current_frame_score%>"<br><br>
-       
-          </tr></table>
+          <tr>
+           <td><%= @frame.total_scores.values[0] %></td>
+           <td><%= @frame.total_scores.values[1] %></td>
+           <td><%= @frame.total_scores.values[2] %></td>
+           <td><%= @frame.total_scores.values[3] %></td>
+           <td><%= @frame.total_scores.values[4] %></td>
+           <td><%= @frame.total_scores.values[5] %></td>
+           <td><%= @frame.total_scores.values[6] %></td>
+           <td><%= @frame.total_scores.values[7] %></td>
+           <td><%= @frame.total_scores.values[8] %></td>
+           <td><%= @frame.total_scores.values[9] %></td>
+          </tr>
+          </table>
+
+
+            <form action='/' method='get'>
+            <td><input type='submit' value='Play a New Game' name='play_again'></td>
+            </form>
+
+          
+<% if @choice == '10' %>
+<iframe src="https://giphy.com/embed/U7ayKkXNUCAxTq6P4U" width="480" height="160" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bowlero-ball-bowling-bowl-U7ayKkXNUCAxTq6P4U"></a></p>
+<% elsif @choice == '0' %>
+<iframe src="https://giphy.com/embed/jOPZOOMckuH0wHUuPW" width="480" height="190" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/afv-fail-oops-whoops-jOPZOOMckuH0wHUuPW"></a></p>
+<% else %>
+<iframe src="https://giphy.com/embed/4oRJQxUk9mDv2" width="480" height="190" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bowling-cleveland-tn-4oRJQxUk9mDv2"></a></p>
+<% end %>

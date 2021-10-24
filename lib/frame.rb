@@ -55,7 +55,7 @@ class Frame
           strike_checker
           spare_checker
           open_frame_checker
-          player_score
+    
 
           @frame_number += 1
           reset_pins
@@ -68,16 +68,11 @@ class Frame
           strike_checker
           spare_checker
           open_frame_checker
-          player_score
+      
 
         end
 
-      # check_valid_frame
     end
-  end
-
-  def player_score
-    @sc = @total_scores.values[@frame_number - 1].sum + @sc
   end
 
   def reset_pins

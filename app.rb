@@ -21,7 +21,7 @@ class Bowling < Sinatra::Base
   get '/result' do
     @choice = params[:player_1_choice]
     @bowl = @frame.bowl(@choice.to_i)
-    @running_total = @frame.player_score
+    
   erb (:result)
 
   end
