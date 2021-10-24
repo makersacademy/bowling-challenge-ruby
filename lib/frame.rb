@@ -12,11 +12,12 @@ class Frame
   end
 
   def strike?
-    @pins.first == 10
+    @pins.include?(10)
   end
 
   def spare?
-    @pins.first < 10 && @pins.sum == 10
+    return false unless @pins.length >= 2
+    @pins.max <= 9 && @pins.sum == 10
   end
 
   def calculate_bonus
@@ -37,7 +38,7 @@ class Frame
     @total = @pins.sum
   end
 
-  def update_total(number = 0)
+  def update_total(number)
     @total += number
   end
 
