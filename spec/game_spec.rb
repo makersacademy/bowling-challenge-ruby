@@ -25,4 +25,11 @@ describe 'game' do
       expect(game.scoreboard[0]).to be_a Player
     end 
   end 
+
+  describe 'next player' do 
+    it 'returns a message saying the game is completed after the last turn' do 
+      30.times {game.play(10)}
+      expect(game.play(5)).to eq "Game is completed"
+    end 
+  end 
 end 

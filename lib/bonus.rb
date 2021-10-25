@@ -3,12 +3,14 @@ require_relative 'frame'
 class BonusFrame < Frame  
   
   def bonus?
-    bowls.take(2).reduce(:+) == MAX_PINS || strike?
+    b = 0
+    bowls.each do |bowl| b += bowl end 
+    b == MAX_PINS || strike?
   end
   
   def bowl(hits)
     remaining = @pins - hits
-    raise "Error, please enter a valid number of hits" if hits > MAX_PINS || (remaining_pins < 0 && extra_bowls == 0)
+    raise "Error, please enter a valid number of hits" if hits > MAX_PINS || (remaining < 0 && extra_bowls == 0)
     @pins = remaining unless bonus?
     bowls << hits
   end  
@@ -25,20 +27,5 @@ class BonusFrame < Frame
   
   def finished?
     (bonus? && bowls.size == 3) || (bowls.size == 2 && !bonus?)
-  end
-  
-  def to_s
-    remaining_bowls = bowls.dup
-    bowl_string = ""
-    frame = Frame.new
-    until remaining_bowls.empty?
-      frame.bowl(remaining_bowls.shift)
-      if frame.finished?
-        bowl_string << frame.to_s
-        frame = Frame.new
-      end
-    end
-    bowl_string << frame.to_s unless frame.finished?
-    bowl_string
   end
 end
