@@ -47,13 +47,13 @@ class Scoring
   def bonus_score_9th_frame(score)
     bonus = 0
     if @scorecard[8][0] == 10
-      bonus += if @scorecard[8 + 1][0] == 10
-                 if @scorecard[8 + 1][1] == 10 # 3 strikes in a row
-                   20
-                 else 10 + @scorecard[8 + 1][1] # 2 strikes
-                 end
-               else @scorecard[8 + 1][0] + @scorecard[8 + 1][1] # 1 strike
-               end
+      if @scorecard[8 + 1][0] == 10
+        if @scorecard[8 + 1][1] == 10 # 3 strikes in a row
+          bonus += 20
+        else 10 + @scorecard[8 + 1][1] # 2 strikes
+        end
+      else @scorecard[8 + 1][0] + @scorecard[8 + 1][1] # 1 strike
+      end
     elsif @scorecard[8].sum == 10 # a split
       bonus += @scorecard[8 + 1][0]
     end
