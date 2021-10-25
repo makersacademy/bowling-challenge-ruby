@@ -9,21 +9,21 @@
 Frames 1 - 9 can accept 2 rolls.
 Frame 10 can accept up to 3.
 
-# - user enters roll
-# - roll added to the array in scorecard equivalent to (frame number - 1) - frame 1 would access array at index 0
-# - when 2 entries (or 1 strike) are in the array, the frame is complete
-# - if the sum of the two entries in a frame array = 10 (strike or spare) score calculation waits until the next roll to calculate bonuses
+* - user enters roll
+* - roll added to the array in scorecard equivalent to (frame number - 1) - frame 1 would access array at index 0
+* - when 2 entries (or 1 strike) are in the array, the frame is complete
+* - if the sum of the two entries in a frame array = 10 (strike or spare) score calculation waits until the next roll to calculate bonuses
 
-# initialize with array of 10 arrays to represent frames
-# initialize with frame_number of zero
-# initialize with score of 0
+* initialize with array of 10 arrays to represent frames
+* initialize with frame_number of zero
+* initialize with score of 0
 
-# user enters first roll (r1)
-#   frame number updated to 1
-#   roll pushed into scorecard array with index of 0 (frame_number - 1)
-#   if r1 = 10, end of turn, completed frame with strike
-#   else loop for turn 2
-#     if r1 + r2 = 10, completed frame with spare
+* user enters first roll (r1)
+*   frame number updated to 1
+*   roll pushed into scorecard array with index of 0 (frame_number - 1)
+*   if r1 = 10, end of turn, completed frame with strike
+*   else loop for turn 2
+*   - if r1 + r2 = 10, completed frame with spare
 
 
 Order of play
@@ -44,9 +44,9 @@ if spare
   4) end turn
   5) don't calculate score until r1 of the next frame
 
-  # Scoring
+# Scoring
 
-  ## Traditional Scoring
+## Traditional Scoring
 
 In traditional scoring, one point is scored for each pin that is knocked over, and when less than all ten pins are knocked down in two rolls in a frame (an open frame), the frame is scored with the total number of pins knocked down. However, when all ten pins are knocked down with either the first or second rolls of a frame (a mark), bonus pins are awarded as follows.
 
