@@ -1,6 +1,6 @@
 require_relative 'frame'
 
-class BonusFrame < Frame  
+class Bonus < Frame  
   
   def bonus?
     b = 0

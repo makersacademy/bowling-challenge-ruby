@@ -34,7 +34,7 @@ class Player
 
   def next_frame
     if frames.length == 10 - 1
-      frames << BonusFrame.new
+      frames << Bonus.new
     else
       frames << Frame.new
     end
