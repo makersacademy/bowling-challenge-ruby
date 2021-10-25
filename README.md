@@ -23,7 +23,7 @@ Frame 10 can accept up to 3.
 *   roll pushed into scorecard array with index of 0 (frame_number - 1)
 *   if r1 = 10, end of turn, completed frame with strike
 *   else loop for turn 2
-*     if r1 + r2 = 10, completed frame with spare
+*   - if r1 + r2 = 10, completed frame with spare
 
 
 Order of play
