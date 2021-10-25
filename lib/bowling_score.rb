@@ -27,21 +27,26 @@ class BowlingScore
   def score(pins)
     if @frame_status.nil?
       @gamescore += pins
-      if @gamescore == 10
+      add_pins_to_frame(pins)
+      if @gamescore == 10x
         @frame_status = :strike
+        increment_frame
       else
         @frame_status = :incomplete
       end
       print_score
     elsif @frame_status == :incomplete
       @gamescore += pins
+      add_pins_to_frame(pins)
       if @gamescore > 10
         raise "Illegal roll."
       end
       if @gamescore == 10
         @frame_status = :spare
+        increment_frame
       else
         @frame_status = :open
+        increment_frame
       end
     end
   end
@@ -51,13 +56,13 @@ class BowlingScore
     p "Frame: #{@frame_number}"
   end
   
-  def frame_complete?
-    @scorecard[@frame_index].length == 2
-    #   frame_status = :complete
-    # else
-    #   frame_status = :incomplete
-    # end
-  end
+  # def frame_complete?
+  #   @scorecard[@frame_index].length == 2
+  #   #   frame_status = :complete
+  #   # else
+  #   #   frame_status = :incomplete
+  #   # end
+  # end
 
   def print_score
     p "Your score is #{@score}"
