@@ -2,3 +2,4 @@ language: ruby
 
 script:
   - bundle exec rspec
+
