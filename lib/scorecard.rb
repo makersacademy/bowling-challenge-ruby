@@ -11,18 +11,13 @@ class Scorecard
   end
 
   def frames
-    framed_bowls = []
-    i = 0
-    while i < @bowls.length
-      frame = []
-      frame << @bowls[i]
-      if @bowls[i] < 10
-        i += 1
-        frame << @bowls[i] unless @bowls[i].nil?
-      end
-      framed_bowls << frame
-      i += 1
-    end
-    framed_bowls
+    check_strikes(@bowls).each_slice(2).to_a
+  end
+
+  private
+
+  # Ensures each frame will have two values by adding a 0 after each 10
+  def check_strikes(bowls)
+    bowls.each_with_index { |v, i| bowls.insert(i + 1, 0) if v == 10 }
   end
 end
