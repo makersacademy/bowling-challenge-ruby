@@ -25,6 +25,7 @@
 # #    d) If the frame values contain a 10 AND so does the next frame, convert to 10 + 10 + first value in nextx2 frame
 # # 3. Convert values 10 and up to 0
 # # 4. Sum all values
+# # 5. Count bowls at the end of every new scored_bowl added
 # scored_bowls = []
 # count_bowls = []
 # j = 0
