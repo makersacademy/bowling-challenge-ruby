@@ -9,4 +9,20 @@ class Scorecard
   def initialize(bowls = DEFAULT_BOWLS)
     @bowls = bowls
   end
+
+  def frames
+    framed_bowls = []
+    i = 0
+    while i < @bowls.length
+      frame = []
+      frame << @bowls[i]
+      if @bowls[i] < 10
+        i += 1
+        frame << @bowls[i] unless @bowls[i].nil?
+      end
+      framed_bowls << frame
+      i += 1
+    end
+    framed_bowls
+  end
 end

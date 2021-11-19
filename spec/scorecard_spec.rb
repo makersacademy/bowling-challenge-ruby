@@ -20,4 +20,10 @@ describe Scorecard do
   it 'sets @bowls to the default value if initialized with no arguments passed ' do
     expect(game_default.bowls).to eq Scorecard::DEFAULT_BOWLS
   end
+
+  describe '#frames' do
+    it 'sorts the @bowls list into frames' do
+      expect(game133.frames).to eq [[1, 4], [4, 5], [6, 4], [5, 5], [10], [0, 1], [7, 3], [6, 4], [10], [2, 8], [6]]
+    end
+  end
 end
