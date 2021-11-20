@@ -20,4 +20,11 @@ describe Game do
       20.times{@game.roll(1)}
       expect(@game.score).to eq 20
   end
+
+  it ('can roll a spare') do
+    @game.roll(5)
+    @game.roll(5)
+    @game.roll(6)
+    expect(@game.score).to eq 22
+  end
 end

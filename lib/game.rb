@@ -11,7 +11,16 @@ class Game
   end
 
   def score
-    @rolls.sum
+    @bonus = []
+    @rolls.each_with_index{|roll,index|
+      if index.odd?
+        if roll + @rolls[index-1] == 10
+         @bonus << @rolls[index+1]
+        end
+      end
+    }
+    @rolls.sum + @bonus.sum
   end
+
 
 end
