@@ -14,6 +14,32 @@ Count and sum the scores of a bowling game for one player. For this challenge, y
 
 A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
 
+### My Approach
+
+In order to start this project I decided to map out my approach, starting with listing user stories I wanted to implement going from easiest to hardest.
+
+```
+As a player
+I want the scorecard to have my name
+So I know the scorecard is mine
+
+As a player
+I want to be able to enter my roll score 
+So I can record my score
+
+As a player
+I want a second roll if I don't get all ten pins on my first attempt
+So I can try to knock all ten pins down
+
+As a player
+I want play ten frames
+So I can complete a game of bowling
+
+
+
+
+```
+
 As usual please start by
 
 * Forking this repo
