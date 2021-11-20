@@ -6,11 +6,11 @@ describe Scorecard do
   let(:score133) { [1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6] }
   let(:score300) { [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10] }
   let(:score0) { [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] }
-  let(:score_unfinished) { [4, 5, 2, 2, 6, 0, 10, 5, 2, 10, 10 ] }
   let(:game133) { Scorecard.new(score133) }
   let(:game300) { Scorecard.new(score300) }
   let(:game0) { Scorecard.new(score0) }
-  let(:game_unfinished) { Scorecard.new(score_unfinished) }
+  let(:game_unfinishedstrike) { Scorecard.new([4, 5, 2, 2, 6, 0, 10, 5, 2, 10, 10]) }
+  let(:game_unfinishedspare) { Scorecard.new([4, 5, 2, 2, 6, 0, 10, 5, 2, 10, 4, 6]) }
   let(:game_default) { Scorecard.new }
 
   it 'sets @bowls to the passed argument value when initialized' do
@@ -39,7 +39,7 @@ describe Scorecard do
     end
 
     it 'works with unfinished games' do
-      expect(game_unfinished.score).to eq 73
+      expect(game_unfinishedstrike.score).to eq 73
     end
   end
 
@@ -51,7 +51,8 @@ describe Scorecard do
     end
 
     it 'works with unfinished games' do
-      expect(game_unfinished.accumulative_scores).to eq [ 9, 13, 19, 36, 43, 63, 73 ]
+      expect(game_unfinishedstrike.accumulative_scores).to eq [9, 13, 19, 36, 43, 63, 73]
+      expect(game_unfinishedspare.accumulative_scores).to eq [9, 13, 19, 36, 43, 63, 73]
     end
   end
 end
