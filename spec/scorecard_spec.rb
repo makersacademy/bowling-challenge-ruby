@@ -31,27 +31,27 @@ describe Scorecard do
     end
   end
 
-  describe '#final_score' do
+  describe '#score' do
     it 'returns the final score value' do
-      expect(game133.final_score).to eq 133
-      expect(game300.final_score).to eq 300
-      expect(game0.final_score).to eq 0
+      expect(game133.score).to eq 133
+      expect(game300.score).to eq 300
+      expect(game0.score).to eq 0
     end
 
     it 'works with unfinished games' do
-      expect(game_unfinished.final_score).to eq 73
+      expect(game_unfinished.score).to eq 73
     end
   end
 
-  describe '#final_scorecard' do
+  describe '#accumulative_scores' do
     it 'returns an array counting up to the final score with each frame' do
-      expect(game133.final_scorecard).to eq [
+      expect(game133.accumulative_scores).to eq [
         5, 14, 29, 49, 60, 61, 77, 97, 117, 133
       ]
     end
 
     it 'works with unfinished games' do
-      expect(game_unfinished.final_scorecard).to eq [ 9, 13, 19, 36, 43, 63, 73 ]
+      expect(game_unfinished.accumulative_scores).to eq [ 9, 13, 19, 36, 43, 63, 73 ]
     end
   end
 end

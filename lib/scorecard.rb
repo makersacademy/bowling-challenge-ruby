@@ -15,11 +15,11 @@ class Scorecard
     presliced_bowls.each_slice(2).to_a
   end
 
-  def final_score
+  def score
     frame_scores.sum
   end
 
-  def final_scorecard
+  def accumulative_scores
     frame_scores.map.with_index { |_f, i| add_up_to_index(frame_scores, i) }
   end
 
