@@ -44,7 +44,7 @@ describe Game do
     expect(@game.score).to eq 44
   end
 
-  it('can roll multi strikes') do
+  it('can roll multiple strikes in a row') do
     @game.roll(10)
     @game.roll(10)
     @game.roll(10)
