@@ -7,11 +7,3 @@ describe Frame do
     end
   end
 end
-
-# As a player
-# So I can complete a frame
-# I want a frame to have 10 pins
-
-# As a player
-# So I can complete a frame
-# I want to be able to knock down 10 pins in a roll
