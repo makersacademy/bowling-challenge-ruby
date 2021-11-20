@@ -34,7 +34,7 @@ describe Game do
     expect(@game.score).to eq 20
   end
 
-  it('can roll 2 strikes') do
+  it('can roll 2 strikes seperatly') do
     @game.roll(10)
     @game.roll(2)
     @game.roll(3)
@@ -54,8 +54,19 @@ describe Game do
     expect(@game.score).to eq 108
   end
 
+  it('can roll a strike first turn and then a spare') do
+    @game.roll(10)
+    @game.roll(3)
+    @game.roll(7)
+    @game.roll(5)
+    @game.roll(4)
+    expect(@game.score).to eq 44
+  end
+
   it('can roll a perfect game') do
     12.times { @game.roll(10) }
     expect(@game.score).to eq 300
   end
+
+  
 end

@@ -14,7 +14,7 @@ class Game
 
     # spare
     @rolls.each_with_index do |roll, index|
-      next unless index.odd?
+      # next unless index.odd?
 
       @bonus << @rolls[index + 1] if roll + @rolls[index - 1] == 10
     end
