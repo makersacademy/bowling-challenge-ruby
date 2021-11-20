@@ -3,19 +3,21 @@
 require_relative '../lib/game'
 
 describe Game do
+
+    before do
+      @game = Game.new
+    end
   it('can create a new game') do
     Game.new
   end
 
   it('can roll a gutter game') do
-      game = Game.new
-      20.times{game.roll(0)}
-      expect(game.score).to eq 0
+      20.times{@game.roll(0)}
+      expect(@game.score).to eq 0
   end
 
   it('can roll all ones') do
-      game = Game.new
-      20.times{game.roll(1)}
-      expect(game.score).to eq 20
+      20.times{@game.roll(1)}
+      expect(@game.score).to eq 20
   end
 end
