@@ -40,35 +40,20 @@ class Scorecard
     case
       when frame.sum < 10 then frame.sum
       when up_frame.nil? then 10 # i.e. a spare/strike, but no bonus points available
-      when spare?(frame) then (frame.sum + up_frame.first)
-      when strike?(frame) && strike?(up_frame) && !upup_frame.nil? then 20 + upup_frame.first
-      else 10 + up_frame.sum
+      when spare?(frame) then calculate_spare(frame, up_frame)
+      else calculate_strike(frame, up_frame, upup_frame)
     end
   end
 
-  # def temp_check_frame_score(ind, frame_sum = frames[ind].sum)
-  #   # returns this value if the frame is not a strike or a spare
-  #   return frame_sum if frame_sum < 10
+  def calculate_spare(frame, next_frame)
+    frame.sum + next_frame.first
+  end
 
-  #   resolve_spare_or_strike(ind)
-  # end
+  def calculate_strike(frame, next_frame, next_next_frame)
+    return 20 + next_next_frame.first if strike?(next_frame) && !next_next_frame.nil?
 
-  # def resolve_spare_or_strike(ind, frame = frames[ind], next_frame = frames[ind + 1])
-  #   # returns this value if the frame is a spare
-  #   return (frame.sum + next_frame.first) if spare?(frame)
-
-  #   resolve_strike(ind)
-  # end
-
-  # def resolve_strike(ind, next_frame = frames[ind + 1], next_next_frame = frames[ind + 2])
-  #   return 10 if next_frame.nil?
-
-  #   # returns this value if the frame is a strike followed by another strike
-  #   return 20 + next_next_frame.first if strike?(next_frame) && !next_next_frame.nil?
-
-  #   # returns this value for a strike not followed by another strike
-  #   10 + next_frame.sum
-  # end
+    10 + next_frame.sum
+  end
 
   def add_up_to_index(frame_scores, index)
     frame_scores.first(index + 1).sum
