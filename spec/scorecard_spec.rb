@@ -36,4 +36,12 @@ describe Scorecard do
       expect(game0.final_score).to eq 0
     end
   end
+
+  describe '#final_scorecard' do
+    it 'returns an array counting up to the final score with each frame' do
+      expect(game133.final_scorecard).to eq [
+        5, 14, 29, 49, 60, 61, 77, 97, 117, 133
+      ]
+    end
+  end
 end

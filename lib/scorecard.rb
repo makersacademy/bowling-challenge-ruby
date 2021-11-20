@@ -18,11 +18,15 @@ class Scorecard
     frame_scores.sum
   end
 
+  def final_scorecard
+    frame_scores.map.with_index { |_f, i| add_up_to_index(frame_scores, i) }
+  end
+
   private
 
   # Ensures each frame will have two values by adding a 0 after each 10
   def check_strikes(bowls)
-    bowls.map.with_index { |v, i| v == 10 ? [10, 0] : v }.flatten
+    bowls.map { |v| v == 10 ? [10, 0] : v }.flatten
   end
 
   # Maps the individual scores of frames 0 - 9
@@ -30,21 +34,27 @@ class Scorecard
     (0..9).to_a.map { |i| check_frame_score(i) if i < 10 }
   end
 
-  def check_frame_score(i, framesum = frames[i].sum)
-    framesum < 10 ? framesum : resolve_spare_strike(i)
+  def check_frame_score(ind, framesum = frames[ind].sum)
+    framesum < 10 ? framesum : resolve_spare_strike(ind)
   end
 
-  def resolve_spare_strike(i)
-    spare?(frames[i]) ? frames[i].sum + frames[i + 1].first : resolve_strike(i)
+  def resolve_spare_strike(ind)
+    spare?(frames[ind]) ? frames[ind].sum + frames[ind + 1].first : resolve_strike(ind)
   end
 
   def spare?(frame)
-    (frame.sum == 10) && !(frame.include?(10))
+    frame.sum == 10 && !strike?(frame)
   end
 
-  def resolve_strike(i)
-    return 20 + frames[i + 2].first if frames[i + 1].include?(10)
-    return 10 + frames[i + 1].sum
+  def resolve_strike(ind, next_frame = frames[ind + 1])
+    10 + (strike?(next_frame) ? 10 + frames[ind + 2].first : next_frame.sum)
   end
 
+  def add_up_to_index(frame_scores, index)
+    frame_scores.first(index + 1).sum
+  end
+
+  def strike?(frame)
+    frame.include?(10)
+  end
 end
