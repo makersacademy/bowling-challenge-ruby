@@ -43,5 +43,19 @@ describe Game do
     @game.roll(3)
     expect(@game.score).to eq 44
   end
-  
+
+  it('can roll multi strikes') do
+    @game.roll(10)
+    @game.roll(10)
+    @game.roll(10)
+    @game.roll(10)
+    @game.roll(4)
+    @game.roll(3)
+    expect(@game.score).to eq 108
+  end
+
+  it ('can roll a perfect game') do
+    12.times {@game.roll(10)}
+    expect(@game.score).to eq 300
+  end
 end

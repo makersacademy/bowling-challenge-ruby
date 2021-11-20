@@ -11,6 +11,7 @@ class Game
 
   def score
     @bonus = []
+   
     #spare
     @rolls.each_with_index do |roll, index|
       next unless index.odd?
@@ -21,12 +22,12 @@ class Game
     #strike
     @rolls.each_with_index do |roll, index|
       if roll == 10 && @rolls[index + 1] != nil && @rolls[index + 2] != nil && @rolls[index + 1] != 10
-        @bonus << @rolls[index + 1] + @rolls[index + 2]
+        @bonus << (@rolls[index + 1] + @rolls[index + 2])
       end
-
-      @bonus << 20 if roll == 10 && @rolls[index + 1] == 10
+      @bonus << 20 if roll == 10 && @rolls[index + 1] == 10 && @rolls[index+2] == 10
+      @bonus << 10 + @rolls[index+2] if roll == 10 && @rolls[index + 1] == 10 && @rolls[index+2] != 10
     end
-
+  
     @rolls.sum + @bonus.sum
   end
 end
