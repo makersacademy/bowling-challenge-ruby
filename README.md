@@ -1,4 +1,4 @@
-Bowling Challenge in Ruby
+Bowling Challenge in Ruby :bowling:
 =================
 
 * Feel free to use google, your notes, books, etc. but work on your own
