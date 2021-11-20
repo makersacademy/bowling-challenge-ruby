@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class Game
-
-    def initialize
-      @rolls = []
-    end
+  def initialize
+    @rolls = []
+  end
 
   def roll(pins)
     @rolls << pins
@@ -12,15 +11,22 @@ class Game
 
   def score
     @bonus = []
-    @rolls.each_with_index{|roll,index|
-      if index.odd?
-        if roll + @rolls[index-1] == 10
-         @bonus << @rolls[index+1]
-        end
+    #spare
+    @rolls.each_with_index do |roll, index|
+      next unless index.odd?
+
+      @bonus << @rolls[index + 1] if roll + @rolls[index - 1] == 10
+    end
+    
+    #strike
+    @rolls.each_with_index do |roll, index|
+      if roll == 10 && @rolls[index + 1] != nil && @rolls[index + 2] != nil && @rolls[index + 1] != 10
+        @bonus << @rolls[index + 1] + @rolls[index + 2]
       end
-    }
+
+      @bonus << 20 if roll == 10 && @rolls[index + 1] == 10
+    end
+
     @rolls.sum + @bonus.sum
   end
-
-
 end
