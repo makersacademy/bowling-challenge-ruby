@@ -19,9 +19,14 @@ A bowling game consists of 10 frames in which the player tries to knock down the
 In order to start this project I decided to map out my approach, starting with listing user stories I wanted to implement going from easiest to hardest.
 
 ```
+:white_check_mark:
 As a player
 So I can complete a game of bowling
 I want my game to have 10 frames
+
+As a player
+So I can complete a frame
+I want a frame to have 10 pins
 
 As a player
 So I can complete a frame

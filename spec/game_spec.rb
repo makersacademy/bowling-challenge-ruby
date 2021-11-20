@@ -7,10 +7,3 @@ describe Game do
     end
   end
 end
-
-
-
-
-# As a player
-# So I can complete a game of bowling
-# I want my game to have 10 frames    
