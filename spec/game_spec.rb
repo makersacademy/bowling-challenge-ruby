@@ -54,8 +54,8 @@ describe Game do
     expect(@game.score).to eq 108
   end
 
-  it ('can roll a perfect game') do
-    12.times {@game.roll(10)}
+  it('can roll a perfect game') do
+    12.times { @game.roll(10) }
     expect(@game.score).to eq 300
   end
 end
