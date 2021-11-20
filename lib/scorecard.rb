@@ -32,7 +32,8 @@ class Scorecard
 
   # Maps the individual scores of frames 0 - 9
   def frame_scores
-    (0..9).to_a.map { |i| check_frame_score(i) }
+    max = (frames.count >= 10 ? 10 : frames.count) - 1
+    (0..max).to_a.map { |i| check_frame_score(i) }
   end
 
   def check_frame_score(ind, frame_sum = frames[ind].sum)
@@ -50,8 +51,10 @@ class Scorecard
   end
 
   def resolve_strike(ind, next_frame = frames[ind + 1], next_next_frame = frames[ind + 2])
+    return 10 if next_frame.nil?
+
     # returns this value if the frame is a strike followed by another strike
-    return 20 + next_next_frame.first if strike?(next_frame)
+    return 20 + next_next_frame.first if strike?(next_frame) && !next_next_frame.nil?
 
     # returns this value for a strike not followed by another strike
     10 + next_frame.sum
@@ -62,10 +65,12 @@ class Scorecard
   end
 
   def spare?(frame)
+    return false if frame.nil?
     frame.sum == 10 && !strike?(frame)
   end
 
   def strike?(frame)
+    return false if frame.nil?
     frame.include?(10)
   end
 end
