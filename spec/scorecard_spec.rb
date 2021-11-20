@@ -28,4 +28,12 @@ describe Scorecard do
       ]
     end
   end
+
+  describe '#final_score' do
+    it 'returns the final score value' do
+      expect(game133.final_score).to eq 133
+      expect(game300.final_score).to eq 300
+      expect(game0.final_score).to eq 0
+    end
+  end
 end
