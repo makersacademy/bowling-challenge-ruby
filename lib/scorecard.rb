@@ -25,36 +25,26 @@ class Scorecard
     bowls.map.with_index { |v, i| v == 10 ? [10, 0] : v }.flatten
   end
 
+  # Maps the individual scores of frames 0 - 9
   def frame_scores
-    scores = []
-    wc = 0
-    max = frames.length
-    while wc < max
-      if wc < 10
-        if frames[wc].sum == 0
-          # puts "i:#{wc}, gutter ball"
-          scores << 0
-        elsif frames[wc].sum < 10
-          # puts "i:#{wc}, normal ball"
-          scores << frames[wc].sum
-        elsif spare?(frames[wc])
-          # puts "i:#{wc}, spare"
-          scores << frames[wc].sum + frames[wc + 1].first
-        elsif frames[wc + 1].include?(10)
-          # puts "i:#{wc}, STRIKE, next one also a strike"
-          scores << 20 + frames[wc + 2].first
-        else
-          # puts "i:#{wc}, STRIKE, followed by other"
-          scores << 10 + frames[wc + 1].sum
-        end
-      end
-      wc += 1
-    end
-    scores
+    (0..9).to_a.map { |i| check_frame_score(i) if i < 10 }
+  end
+
+  def check_frame_score(i, framesum = frames[i].sum)
+    framesum < 10 ? framesum : resolve_spare_strike(i)
+  end
+
+  def resolve_spare_strike(i)
+    spare?(frames[i]) ? frames[i].sum + frames[i + 1].first : resolve_strike(i)
   end
 
   def spare?(frame)
     (frame.sum == 10) && !(frame.include?(10))
+  end
+
+  def resolve_strike(i)
+    return 20 + frames[i + 2].first if frames[i + 1].include?(10)
+    return 10 + frames[i + 1].sum
   end
 
 end
