@@ -32,12 +32,12 @@ So I can have two goes to knock 10 pins down
 I want a second roll
 
 As a player
-So I can move to the next frame after scoring a strike
-I want the current frame to complete after knocking 10 pins down
-
-As a player
 So I can start the next frame
 I want the number of pins to reset to 10 after my second roll
+
+As a player
+So I can move to the next frame after scoring a strike
+I want the current frame to complete after knocking 10 pins down
 
 As a player
 So I can see how the game is going
