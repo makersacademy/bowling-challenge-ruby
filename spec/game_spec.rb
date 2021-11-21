@@ -23,4 +23,14 @@ describe Game do
     expect(game.points).to eq 16
   end
 
+  it 'calculates a strike' do
+    game = Game.new
+    game.roll(10)
+    game.roll(5)
+    game.roll(3)
+    16.times { game.roll(0) }
+    expect(game.points).to eq 26
+
+  end
+
 end
