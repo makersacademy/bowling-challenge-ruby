@@ -1,6 +1,6 @@
 class Scorecard
 
-  attr_reader :name, :roll_1, :roll_2, :frames, :frame_total, :current_frame, :frame_number, :bonus_points, :current_frame
+  attr_reader :name, :roll_1, :roll_2, :frames, :frame_total, :current_frame, :frame_number, :bonus_points, :current_frame, :previous_frame_total
 
   def initialize(name)
     @name = name
@@ -16,6 +16,7 @@ class Scorecard
     @frame_number = 0
     @total_score = 0
     @bonus_points = 0
+    @previous_frame_total = 0
     loop do
       if @frame_number < 9
         @frame_number += 1
@@ -27,6 +28,7 @@ class Scorecard
         check_for_spare
         end_of_frame_updates
         add_strike_bonus
+        add_spare_bonus
       elsif @frame_number < 10
         @frame_number += 1
         roll_reset
@@ -88,15 +90,9 @@ private
   end
 
   def self.add_strike_bonus
-    # if @frame_number > 1 && (@frames[@frame_number-3][0] == 10) && (@frames[@frame_number-2][0] == 10)
-    #   @bonus_points += @frame_total + 10
-    # elsif @frames[@frame_number-2][0] == 10
-    #   @bonus_points += @frame_total
-    # end
-
-    puts @frames[@frame_number - 1]
     if ((@frames[@frame_number - 1] != 0) && (@frame_number > 2)) && ((@frames[@frame_number-3][0] == 10) && (@frames[@frame_number-2][0] == 10))
-      @bonus_points += @frame_total + 10
+      @previous_frame_total = (@frames[@frame_number - 2].sum + @frames[@frame_number - 3].sum)
+      @bonus_points += @previous_frame_total + @roll_2
     elsif ((@frames[@frame_number - 1] != 0) && (@frame_number > 2)) && (@frames[@frame_number-2][0] == 10)
       @bonus_points += @frame_total
     else
@@ -104,12 +100,11 @@ private
     end
   end
 
-  # def self.add_spare_bonus
-  #   puts @frames[@frame_number - 2]
-  #   if @frames[@frame_number-2] == 10 && @frames[@frame_number-2][0] != 10
-  #     @bonus_points += @roll_1
-  #   end
-  # end
+  def self.add_spare_bonus
+    if ((@frame_total != 0) && (@frame_number > 2)) && (@frames[@frame_number-2][0] != 10)
+      @bonus_points += @frame_total
+    end
+  end
 
   def self.check_for_spare
     if @roll_1 != 10 && @roll_1 + @roll_2 == 10
@@ -122,6 +117,7 @@ private
     @roll_2 = 0
     @current_frame = []
     @frame_total = 0
+    @previous_frame_total = @frames[@frame_number - 1]
   end
 
   def self.update_frame_score
