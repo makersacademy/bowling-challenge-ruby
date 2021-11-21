@@ -2,9 +2,12 @@ require 'bowling'
 
 describe Bowling do
   describe '#roll' do
-    it 'takes an argument of the amount of pins hit by the player and adds it the frames array' do
+    it 'takes an argument of the amount of pins hit by the player and adds it to the frames array' do
       subject.roll(3)
-      expect(subject.frames.length).to eq 1
+      subject.roll(5)
+      subject.roll(6)
+      subject.roll(2)
+      expect(subject.frames).to eq [[3, 5], [6, 2]]
     end
   end
 
@@ -20,4 +23,6 @@ describe Bowling do
       expect(subject.is_spare?(3)).to eq true
     end
   end
+
+  
 end
