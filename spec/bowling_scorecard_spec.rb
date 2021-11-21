@@ -30,4 +30,10 @@ describe Scorecard do
     end
   end
   
+  describe '#strike' do
+    it 'check if it is a strike' do
+      game.roll(10)
+      expect(game.strike?).to eq true
+    end
+  end
 end

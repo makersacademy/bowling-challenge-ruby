@@ -15,8 +15,18 @@ class Scorecard
   end
 
   def scores
-    @total_scores = @frame_scores.reduce(:+)
+    strike_bonus if strike?
+    @total_scores += @frame_scores.reduce(:+)
   end
+
+  def strike?
+    @scorecard[@frame_index - 1][0] == 10 ? true : false
+  end
+
+  def strike_bonus 
+    @frame_scores[@frame_index - 1] += @frame_scores[@frame_index] 
+  end
+
 end
 
 a = Scorecard.new
@@ -24,3 +34,6 @@ a.roll(2,5)
 a.roll(10)
 a.roll(4,8)
 p a.scores
+p a
+
+
