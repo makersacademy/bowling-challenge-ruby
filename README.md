@@ -1,4 +1,4 @@
-Bowling Challenge in Ruby
+Bowling Challenge in Ruby :bowling:
 =================
 
 * Feel free to use google, your notes, books, etc. but work on your own
@@ -13,6 +13,39 @@ Bowling Challenge in Ruby
 Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
 
 A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
+
+### My Approach
+
+Unfortunately I had very limited time this weekend so was unable to commit nearly as much time as I would have liked to this task. Due to being time limited I compelted the user stories below. The next task on my list was to update the way the game applies the spare bonus score to account for how the tenth frame works with the potential third roll.
+
+Testing is almost non-existent as I started off doing the task incorrectly to begin with. When I come back to this task I MUST add testing throughout.
+
+```
+As a player
+I want the scorecard to have my name
+So I know the scorecard is mine
+
+As a player
+I want to be able to enter my roll score 
+So I can record my score
+
+As a player
+I want a second roll if I don't get all ten pins on my first attempt
+So I can try to knock all ten pins down
+
+As a player
+I want play ten frames
+So I can complete a game of bowling
+
+As a player
+I want to see my score after ten frames
+So I know how well I've done
+
+As a player
+I want to have a third roll if I get at least ten pins down on my first two attempts
+To roll for a perfect game
+
+```
 
 As usual please start by
 
