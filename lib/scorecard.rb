@@ -24,15 +24,15 @@ class Scorecard
 
   # Maps the individual scores of frames 0 - 9
   def frame_scores
-    (0...max_frames).to_a.map { |i| get_frame_score(i) }
+    (0...max_frames).to_a.map { |i| get_frame_score(frames[i]) }
   end
 
   def max_frames
     frames.count >= 10 ? 10 : frames.count
   end
 
-  def get_frame_score(ind)
-    ENV['ENVIRONMENT'] == 'test' ? frames[ind] : frames[ind].score
+  def get_frame_score(frame)
+    ENV['ENVIRONMENT'] == 'test' ? frame.sum : frame.score
   end
 
   # Converts a sliced bowls array into an array of Frame objects
@@ -45,7 +45,7 @@ class Scorecard
   end
 
   def create_frame(sliced_bowls, ind)
-    ENV['ENVIRONMENT'] == 'test' ? 1 : Frame.new(sliced_bowls[ind], sliced_bowls[ind + 1], sliced_bowls[ind + 2])
+    ENV['ENVIRONMENT'] == 'test' ? [1] : Frame.new(sliced_bowls[ind], sliced_bowls[ind + 1], sliced_bowls[ind + 2])
   end
 
   # Slices a bowls array into 2-value arrays, e.g. [1,2,10,3,4] => [[1,2],[10,0],[3,4]]
