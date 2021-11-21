@@ -18,7 +18,7 @@ A bowling game consists of 10 frames in which the player tries to knock down the
 
 Unfortunately I had very limited time this weekend so was unable to commit nearly as much time as I would have liked to this task. Due to being time limited I compelted the user stories below. The next task on my list was to update the way the game applies the spare bonus score to account for how the tenth frame works with the potential third roll.
 
-My next steps would be to implement bonus points for strikes and spares, followed by an additional third turn on the tenth frame if certain conditions were met.
+Testing is almost non-existent as I started off doing the task incorrectly to begin with. When I come back to this task I MUST add testing throughout.
 
 ```
 As a player
