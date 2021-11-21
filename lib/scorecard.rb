@@ -40,7 +40,7 @@ class Scorecard
     array_arg.map.with_index { |frame, i| Frame.new(frame, array_arg[i + 1], array_arg[i + 2]) }
   end
 
-  # Slices a bowls array into 2-value arrays, e.g. [1,2,3,4] => [[1,2],[3,4]]
+  # Slices a bowls array into 2-value arrays, e.g. [1,2,10,3,4] => [[1,2],[10,0],[3,4]]
   def slice_bowls_array
     presliced_bowls = add_zeros_after_tens(@bowls)
     presliced_bowls.each_slice(2).to_a
