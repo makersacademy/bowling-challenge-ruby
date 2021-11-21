@@ -21,5 +21,13 @@ describe Scorecard do
       expect(game.frame_index).to eq 2
     end
   end
+
+  describe '#scores' do
+    it "updates total scores" do
+      game.roll(5,3)
+      game.roll(7,2)
+      expect(game.scores).to eq 17
+    end
+  end
   
 end

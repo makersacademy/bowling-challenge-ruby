@@ -13,10 +13,14 @@ class Scorecard
     @scorecard << [first_roll, second_roll]
     @frame_scores << first_roll + second_roll
   end
+
+  def scores
+    @total_scores = @frame_scores.reduce(:+)
+  end
 end
 
 a = Scorecard.new
 a.roll(2,5)
 a.roll(10)
-# a.roll(4,8)
-p a
+a.roll(4,8)
+p a.scores
