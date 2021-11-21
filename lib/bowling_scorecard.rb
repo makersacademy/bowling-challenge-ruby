@@ -27,7 +27,7 @@ class Scorecard
         check_for_spare
         end_of_frame_updates
       else
-        add_bonus_points
+        # add_bonus_points - ran out of time to get this working
         end_game
         break
       end
@@ -113,18 +113,18 @@ private
     puts "Frame number: #{@frame_total} scored" 
   end
 
-  def self.add_bonus_points
-    @frames.each do |roll_1, roll_2|
-      frame = roll_1, roll_2
-      if frame[0] == 10
-        @bonus_points += 10
-      end
-      puts @bonus_points
-    end
-  end
+  # def self.add_bonus_points
+  #   @frames.each do |roll_1, roll_2|
+  #     frame = roll_1, roll_2
+  #     if frame[0] == 10
+  #       @bonus_points += 10
+  #     end
+  #     puts @bonus_points
+  #   end
+  # end
 
   def self.end_game
-    puts "Your final score is #{@total_score + @bonus_points}"
+    puts "Your final score is #{@total_score}"
     puts "Frame by frame score breakdown - {#@frames}"
   end
 end
