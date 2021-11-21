@@ -33,23 +33,30 @@ class Scorecard
   # Maps the individual scores of frames 0 - 9
   def frame_scores
     max = (frames.count >= 10 ? 10 : frames.count)
-    (0...max).to_a.map { |i| check_frame_score(i) }
+    (0...max).to_a.map { |i| check_frame_score(frames[i], [frames[i + 1], frames[i + 2]]) }
   end
 
-  def check_frame_score(ind, frame = frames[ind], up_frame = frames[ind + 1], upup_frame = frames[ind + 2])
-    case
-      when frame.sum < 10 then frame.sum
-      when up_frame.nil? then 10 # i.e. a spare/strike, but no bonus points available
-      when spare?(frame) then calculate_spare(frame, up_frame)
-      else calculate_strike(frame, up_frame, upup_frame)
+  def check_frame_score(frame, next_frames)
+    case frame_type(frame, next_frames.first)
+    when :no_bonus then frame.sum
+    when :spare then calculate_spare(next_frames.first)
+    when :strike then calculate_strike(next_frames.first, next_frames.last)
     end
   end
 
-  def calculate_spare(frame, next_frame)
-    frame.sum + next_frame.first
+  def frame_type(frame, next_frame)
+    return :no_bonus if next_frame.nil? || frame.nil?
+    return :strike if strike?(frame)
+    return :spare if spare?(frame)
+
+    :no_bonus
   end
 
-  def calculate_strike(frame, next_frame, next_next_frame)
+  def calculate_spare(next_frame)
+    10 + next_frame.first
+  end
+
+  def calculate_strike(next_frame, next_next_frame)
     return 20 + next_next_frame.first if strike?(next_frame) && !next_next_frame.nil?
 
     10 + next_frame.sum
@@ -60,14 +67,10 @@ class Scorecard
   end
 
   def spare?(frame)
-    return false if frame.nil?
-
     frame.sum == 10 && !strike?(frame)
   end
 
   def strike?(frame)
-    return false if frame.nil?
-
     frame.include?(10)
   end
 end
