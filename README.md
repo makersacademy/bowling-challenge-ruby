@@ -1,5 +1,20 @@
 Bowling Challenge in Ruby
 =================
+William's attempt at Bowling Challenge.
+
+My plan here is to ask the user for input for the first bowl, and the second bowl of each frame, and then output a scorecard up to that point. It appears the biggest problem here is deciding exactly how many classes to use. Part of me thinks the whole thing could be thrown into a single long and complicated class. But breaking it down perhaps each frame should be its own object class, the rolling score and how it is calculated could also be it's own seperate class. And then a third class for the actual scoring input/output and interactive menu. Perhaps I am overcomplicating it here, perhaps not, we shall see.
+
+My first target will be what I feel the easiest entry point, and that is at the Frame class, setting up whilst considering the 10th frame and it's potential 3 bowls. After some deliberation I decided not to go with a third class, and overcomplicating it, and going with two, Frame and Score. I am very happy at how the Frame is set up, and I am also happy with how it is built using the user input.
+
+All the groundwork seems in place to now just delve into the very annoying maths/algebra behind the score formula. The hard part here is essentially having to account for values you don't actually know yet. Finally it seems like I more or less have it. I have stopped writing tests as I am running out of time, and no idea how to test for gets.chomp anyway and would rather spend what little time I have left actually trying to crack the code.
+
+Due to the absence of tests I have been using IRB extensively to test everything. The code works, but the score for some reason doesn't, even though it reads correct to me. It almost feels like the code I am written is being ignored at this point, as it clearly says if the frame is a spare or strike score 0, yet it scores 15. And after a test then decided to some how deduct score from one round to the next, even though there is absolutely no subtractions or deletes anywhere in the method, I decided it was time to call it a night as once again it's 1am on a Monday night, and my brain is far too switched off and relaxed from a much needed long weekend to deal with this any further.
+
+Conclusion, felt extremely close, what I have written I have re read many times and still feel it should work, and cannot see any reason to suggest why it doesn't. But spoiler: it doesn't.
+
+
+Bowling Challenge in Ruby
+=================
 
 * Feel free to use google, your notes, books, etc. but work on your own
 * If you refer to the solution of another coach or student, please put a link to that in your README
