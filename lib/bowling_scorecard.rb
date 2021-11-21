@@ -1,6 +1,6 @@
 class Scorecard
 
-  attr_reader :name, :roll_1, :roll_2, :frames, :frame_total, :current_frame, :frame_number, :bonus_points
+  attr_reader :name, :roll_1, :roll_2, :frames, :frame_total, :current_frame, :frame_number, :bonus_points, :current_frame
 
   def initialize(name)
     @name = name
@@ -26,8 +26,11 @@ class Scorecard
         update_frame_score
         check_for_spare
         end_of_frame_updates
+        add_strike_bonus
+        # add_spare_bonus
       else
-        # add_bonus_points - ran out of time to get this working
+        puts @bonus_points
+        add_bonus_points
         end_game
         break
       end
@@ -76,6 +79,22 @@ private
     end
   end
 
+  def self.add_strike_bonus
+    if @frames[@frame_number-2][0] == 10
+      @bonus_points += @frame_total
+    end
+    if @frames[@frame_number-1][0] == 10
+      @bonus_points += @frame_total
+    end
+  end
+
+  # def self.add_spare_bonus
+  #   puts @frames[@frame_number - 2]
+  #   if @frames[@frame_number-2] == 10 && @frames[@frame_number-2][0] != 10
+  #     @bonus_points += @roll_1
+  #   end
+  # end
+
   def self.check_for_spare
     if @roll_1 != 10 && @roll_1 + @roll_2 == 10
       puts "End of frame, nice spare!"
@@ -110,21 +129,15 @@ private
     update_score(@frame_total)
     frame_score
     add_frame_score
-    puts "Frame number: #{@frame_total} scored" 
+    puts "Frame number #{@frame_number}: #{@frame_total} scored" 
   end
 
-  # def self.add_bonus_points
-  #   @frames.each do |roll_1, roll_2|
-  #     frame = roll_1, roll_2
-  #     if frame[0] == 10
-  #       @bonus_points += 10
-  #     end
-  #     puts @bonus_points
-  #   end
-  # end
+  def self.add_bonus_points
+    @total_score += @bonus_points
+  end
 
   def self.end_game
     puts "Your final score is #{@total_score}"
-    puts "Frame by frame score breakdown - {#@frames}"
+    puts "Frame by frame score breakdown - #{@frames}"
   end
 end
