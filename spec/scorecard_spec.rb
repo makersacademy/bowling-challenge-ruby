@@ -23,14 +23,6 @@ describe Scorecard do
     expect(game_default.bowls).to eq Scorecard::DEFAULT_BOWLS
   end
 
-  describe '#frames' do
-    it 'sorts the @bowls list into frames' do
-      expect(game133.frames).to eq [
-        [1, 4], [4, 5], [6, 4], [5, 5], [10, 0], [0, 1], [7, 3], [6, 4], [10, 0], [2, 8], [6]
-      ]
-    end
-  end
-
   describe '#score' do
     it 'returns the final score value' do
       expect(game133.score).to eq 133
