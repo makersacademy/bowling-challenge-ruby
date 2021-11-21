@@ -1,6 +1,6 @@
 class Bowling
 
-  attr_reader :frames, :current_frame, :frame_index, :previous_bowl
+  attr_reader :frames, :current_frame, :score
 
   def initialize
     @frames = []
@@ -12,15 +12,19 @@ class Bowling
   end
 
   def roll(pins_hit)
-    #if is_strike?(pins_hit) == true
-      #set_frame_index(1)
-    #elsif is_spare?(pins_hit) == true
-      #set_frame_index(1)
-    #else
-      #set_frame_index(1)
-    @previous_bowl = pins_hit
-    @current_frame << pins_hit
-    @score += @previous_bowl
+    if @frames.length < 10
+      if is_strike?(pins_hit) == true
+        @frame_count = 2
+      end
+      @previous_bowl = pins_hit
+      @current_frame << pins_hit
+      set_frame
+    else
+      p "Your score was #{calculate_score}"
+    end
+  end
+
+  def set_frame
     if @frame_count == 2
       @frames << @current_frame
       @current_frame = []
@@ -28,6 +32,7 @@ class Bowling
     else
       @frame_count += 1
     end
+    @frame_index += 1
   end
 
   def is_strike?(pins_hit)
@@ -37,15 +42,17 @@ class Bowling
   def is_spare?(pins_hit)
     @previous_bowl + pins_hit == 10 ? true : false
   end
-
-  def set_frame_index(frame_index)
-    @frame_index == 1 ? @frame_index = 0 : @frame_index = 1
-  end
-
-  def info
-    p "@frames = #{@frames}"
-    p "@current_frame = #{@current_frame}"
-    p "@frame_index = #{@frame_index}"
-    p "@previous_bowl = #{@previous_bowl}"
+  
+  def calculate_score
+    @frames.each_with_index do |frame, index|
+      frame.each do |current_frame|
+        @score += current_frame.to_i
+        if current_frame == 10
+          @score += @frames[index+1][index].to_i
+          @score += @frames[index+1][index+1].to_i
+        end
+      end
+    end
+    @score
   end
 end
