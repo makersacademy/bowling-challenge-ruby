@@ -16,7 +16,7 @@ A bowling game consists of 10 frames in which the player tries to knock down the
 
 ### My Approach
 
-Unfortunately I had very limited time this weekend so was unable to commit nearly as much time as I would have liked to this task. Due to being time limited I compelted the five user stories below so that a user can play ten frames of the game knocking down up to ten pins at a time.
+Unfortunately I had very limited time this weekend so was unable to commit nearly as much time as I would have liked to this task. Due to being time limited I compelted the user stories below. The next task on my list was to update the way the game applies the spare bonus score to account for how the tenth frame works with the potential third roll.
 
 My next steps would be to implement bonus points for strikes and spares, followed by an additional third turn on the tenth frame if certain conditions were met.
 
@@ -40,6 +40,10 @@ So I can complete a game of bowling
 As a player
 I want to see my score after ten frames
 So I know how well I've done
+
+As a player
+I want to have a third roll if I get at least ten pins down on my first two attempts
+To roll for a perfect game
 
 ```
 

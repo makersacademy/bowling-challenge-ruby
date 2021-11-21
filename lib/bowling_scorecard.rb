@@ -17,6 +17,12 @@ class Scorecard
     @total_score = 0
     @bonus_points = 0
     @previous_frame_total = 0
+    run_all_frames
+  end  
+
+private
+
+  def self.run_all_frames
     loop do
       if @frame_number < 9
         @frame_number += 1
@@ -47,9 +53,7 @@ class Scorecard
         break
       end
     end
-  end  
-
-private
+  end
 
   def self.turn_1
     puts "Roll 1"
@@ -92,7 +96,7 @@ private
   end
 
   def self.turn_3
-    if (@frame_number == 10 && (@roll_1 + @roll_2 > 10))
+    if (@frame_number == 10 && (@roll_1 + @roll_2 >= 10))
       loop do
         puts "Roll 3"
         @roll_3 = gets.chomp.to_i
@@ -143,7 +147,9 @@ private
   end
 
   def self.add_spare_bonus
-    if ((@frame_total != 0) && (@frame_number > 2)) && (@frames[@frame_number-2][0] != 10)
+    if ((@roll_1 + @roll_2 == 10) && (@frame_number == 10)) && (@frames[@frame_number-2][0] == 10) #WORKING ON THIS WHEN TIME RAN OUT
+      @bonus_points += @frame_total + @roll_3
+    elsif ((@frame_total != 0) && (@frame_number > 2)) && (@frames[@frame_number-2][0] != 10)
       @bonus_points += @frame_total
     end
   end
@@ -157,6 +163,7 @@ private
   def self.roll_reset
     @roll_1 = 0
     @roll_2 = 0
+    @roll_3 = 0
     @current_frame = []
     @frame_total = 0
     @previous_frame_total = @frames[@frame_number - 1]
@@ -200,4 +207,5 @@ private
     puts "Your final score is #{@total_score}"
     puts "Frame by frame score breakdown - #{@frames}"
   end
+
 end
