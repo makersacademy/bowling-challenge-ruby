@@ -1,28 +1,39 @@
+require 'rgeo'
+
 class Bowling
 
-    attr_reader :ball1, :ball2, :score, :frame_scores
+    attr_accessor :ball1, :ball2, :score, :frame_score
 
     STARTINGSCORE = 0
     
     def initialize
-        @score = []
+        @score = 0
         @frame_score = 0
-        @ball1 = ball1
-        @ball2 = ball2
+        # @ball1 = ball1
+        # @ball2 = ball2
     end
 
+    # def ball1
+    #     ball1 = gets.chomp
+    # end
+
+    # def ball2
+    #     ball2 = gets.chomp
+    # end
+
     def strike
-        if @ball1 == 10
-          return "You Scored A Srike!"
+        if ball1 == 10
+          return "You Scored A Strike!"
         end
     end
 
     def test_points
-        @score << 10
+        @score = 10
     end
 
     def spare
-        if @ball1 + @ball2 == 10
+        score = ball1 + ball2
+        if score == 10
           return "Spare!"
         end
     end
@@ -35,12 +46,12 @@ class Bowling
         end
     end
   
-    def score
+    def points
         @score << @frame_score
     end
 
     def perfect_game
-        if @score == 300
+        if @score = 300
             return "PERFECT GAME!!!"
         end
     end
