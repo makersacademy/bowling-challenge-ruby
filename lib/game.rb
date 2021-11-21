@@ -1,10 +1,14 @@
 class Game
-  
+  def initialize
+    @rolls = [] 
+  end
+
   def roll(pins)
+    @rolls.push(pins)
   end
 
   def points
-    0
+    points = @rolls.sum
   end
 
 end
