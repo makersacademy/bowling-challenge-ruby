@@ -54,4 +54,20 @@ describe Scorecard do
     end
   end
 
+  it 'adds the number of pins when no strikes or a spares' do
+    scorecard = Scorecard.new([
+      [3, 2],
+      [7, 1],
+      [5, 3],
+      [2, 3],
+      [4, 5],
+      [2, 5],
+      [4, 5],
+      [3, 1],
+      [2, 4],
+      [3, 3]
+    ])
+    expect(scorecard.result).to eq 67
+  end
+
 end
