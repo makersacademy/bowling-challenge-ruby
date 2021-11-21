@@ -1,16 +1,130 @@
-require_relative 'frame'
+class Scorecard
 
-class BowlingScorecard
-
-  attr_reader :name, :frames, :current_game
+  attr_reader :name, :roll_1, :roll_2, :frames, :frame_total, :current_frame, :frame_number, :bonus_points
 
   def initialize(name)
     @name = name
+    @roll_1 = nil
+    @roll_2 = nil
+    @frame_total = nil
+    @current_frame = []
     @frames = []
   end
 
-  def self.start_bowling(name)
-    @current_game = BowlingScorecard.new(name)
-    @current_game.frames << Frame.new
+  def self.start(name)
+    @frames = []
+    @frame_number = 0
+    @total_score = 0
+    @bonus_points = 0
+    loop do
+      if @frame_number < 10
+        @frame_number += 1
+        roll_reset
+        puts "Frame number #{@frame_number}"
+        turn_1
+        check_for_strike
+        update_frame_score
+        check_for_spare
+        end_of_frame_updates
+      else
+        add_bonus_points
+        end_game
+        break
+      end
+    end
+  end  
+
+private
+
+  def self.turn_1
+    puts "Roll 1"
+    @roll_1 = gets.chomp.to_i
+    puts "Roll 1: #{@roll_1} pins knocked down"
+    if @roll_1 > 10
+      loop do
+        puts "Roll 1"
+        @roll_1 = gets.chomp.to_i
+        if @roll_1 > 10 - @roll_1
+          puts "C'mon now. That's cheating. Enter what you really scored."
+        else
+          return @roll_1
+        end
+      end
+    end
+  end
+
+  def self.turn_2
+    if @roll_1 != 10
+      loop do
+        puts "Roll 2"
+        @roll_2 = gets.chomp.to_i
+        if @roll_2 > 10 - @roll_1
+          puts "C'mon now. That's cheating. Enter what you really scored."
+        else
+          return @roll_2
+        end
+      end
+    end
+  end
+
+  def self.check_for_strike
+    if @roll_1 == 10
+      puts "End of frame, you scored a strike!"
+    else 
+      turn_2
+      puts "Roll 2: #{@roll_2} pins knocked down"
+    end
+  end
+
+  def self.check_for_spare
+    if @roll_1 != 10 && @roll_1 + @roll_2 == 10
+      puts "End of frame, nice spare!"
+    end
+  end
+
+  def self.roll_reset
+    @roll_1 = 0
+    @roll_2 = 0
+    @current_frame = []
+    @frame_total = 0
+  end
+
+  def self.update_frame_score
+    @frame_total = @roll_1 + @roll_2
+  end
+
+  def self.frame_score
+    @current_frame << @roll_1
+    @current_frame << @roll_2
+  end
+
+  def self.add_frame_score
+    @frames << @current_frame
+  end
+
+  def self.update_score(input)
+    @total_score += input
+  end
+
+  def self.end_of_frame_updates
+    update_score(@frame_total)
+    frame_score
+    add_frame_score
+    puts "Frame number: #{@frame_total} scored" 
+  end
+
+  def self.add_bonus_points
+    @frames.each do |roll_1, roll_2|
+      frame = roll_1, roll_2
+      if frame[0] == 10
+        @bonus_points += 10
+      end
+      puts @bonus_points
+    end
+  end
+
+  def self.end_game
+    puts "Your final score is #{@total_score + @bonus_points}"
+    puts "Frame by frame score breakdown - {#@frames}"
   end
 end
