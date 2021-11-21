@@ -11,13 +11,6 @@ describe Frame do
   let(:strike_no_next) { Frame.new([10, 0]) }
   let(:strike_then_strike) { Frame.new([10, 0], [10, 0], [3, 3]) }
 
-  describe '#sum' do
-    it 'returns the sum of the passed in frame array' do
-      expect(gutter_frame.sum).to eq 0
-      expect(normal_frame.sum).to eq 8
-      expect(strike_frame.sum).to eq 10
-    end
-  end
 
   describe '#bonus_type' do
     it 'returns the type of bonus the frame should receive' do

@@ -12,10 +12,6 @@ class Frame
     @next_next_frame = next_next_frame
   end
 
-  def sum
-    @first_bowl + @second_bowl
-  end
-
   def bonus_type
     return :no_bonus if @next_frame.nil? || @frame.sum < 10
     return :spare unless @frame.include?(10)
@@ -25,7 +21,7 @@ class Frame
 
   def score
     case bonus_type
-    when :no_bonus then sum
+    when :no_bonus then @first_bowl + @second_bowl
     when :spare then calculate_spare
     when :strike then calculate_strike
     end
