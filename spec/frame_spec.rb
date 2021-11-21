@@ -3,35 +3,25 @@
 require 'frame'
 
 describe Frame do
-  let(:gutter_frame) { Frame.new([0, 0], [3, 3], [3, 3]) }
-  let(:normal_frame) { Frame.new([5, 3], [3, 3], [3, 3]) }
-  let(:spare_frame) { Frame.new([5, 5], [3, 3], [3, 3]) }
-  let(:spare_no_next) { Frame.new([5, 5]) }
-  let(:strike_frame) { Frame.new([10, 0], [3, 3], [3, 3]) }
-  let(:strike_no_next) { Frame.new([10, 0]) }
-  let(:strike_then_strike) { Frame.new([10, 0], [10, 0], [3, 3]) }
-
+  let(:test_frames) do
+    [
+      Frame.new([0, 0], [3, 3], [3, 3]), Frame.new([5, 3], [3, 3], [3, 3]), # normal frames
+      Frame.new([5, 5], [3, 3], [3, 3]), Frame.new([5, 5]), # spares
+      Frame.new([10, 0], [3, 3], [3, 3]), Frame.new([10, 0]), Frame.new([10, 0], [10, 0], [3, 3]) # strikes
+    ]
+  end
 
   describe '#bonus_type' do
     it 'returns the type of bonus the frame should receive' do
-      expect(gutter_frame.bonus_type).to eq :no_bonus
-      expect(normal_frame.bonus_type).to eq :no_bonus
-      expect(spare_no_next.bonus_type).to eq :no_bonus
-      expect(strike_no_next.bonus_type).to eq :no_bonus
-      expect(spare_frame.bonus_type).to eq :spare
-      expect(strike_frame.bonus_type).to eq :strike
+      values = %i[no_bonus no_bonus spare no_bonus strike no_bonus strike]
+      values.each_with_index { |value, i| expect(test_frames[i].bonus_type).to eq value }
     end
   end
 
   describe '#score' do
     it 'returns the score value of the frame' do
-      expect(gutter_frame.score).to eq 0
-      expect(normal_frame.score).to eq 8
-      expect(spare_frame.score).to eq 13
-      expect(spare_no_next.score).to eq 10
-      expect(strike_frame.score).to eq 16
-      expect(strike_no_next.score).to eq 10
-      expect(strike_then_strike.score).to eq 23
+      values = [0, 8, 13, 10, 16, 10, 23]
+      values.each_with_index { |value, i| expect(test_frames[i].score).to eq value }
     end
   end
 end
