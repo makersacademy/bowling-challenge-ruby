@@ -63,3 +63,8 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+Below are my notes prior to starting the challenge.
+I was having difficulty thinking through exactly how strikes & spares would be scored in code - although I fully understand how to do it in pen & paper.  
+I also ran into rspec issues and was fighting illness through the weekend. 
+![img.png](img.png)
