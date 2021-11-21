@@ -30,7 +30,12 @@ describe Game do
     game.roll(3)
     16.times { game.roll(0) }
     expect(game.points).to eq 26
+  end
 
+  it 'calculates a perfect game' do
+    game = Game.new
+    12.times { game.roll(10) }
+    expect(game.points).to eq 300
   end
 
 end
