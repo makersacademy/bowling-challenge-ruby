@@ -6,6 +6,7 @@ class Frame
     @frame = frame
     @next_frame = next_frame
     @next_next_frame = next_next_frame
+    puts "Frame: #{@frame}, next:#{@next_frame}, next next:#{@next_next_frame}"
   end
 
   def bonus_type
