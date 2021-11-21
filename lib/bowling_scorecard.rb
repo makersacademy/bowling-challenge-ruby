@@ -38,6 +38,8 @@ class Scorecard
         update_frame_score
         check_for_spare
         end_of_frame_updates
+        add_strike_bonus
+        add_spare_bonus
       else
         puts @bonus_points
         add_bonus_points
@@ -67,7 +69,16 @@ private
   end
 
   def self.turn_2
-    if @roll_1 != 10
+    if (@frame_number == 10 && @roll_1 == 10)
+      puts "Roll 2"
+      @roll_2 = gets.chomp.to_i
+      if @roll_2 > 10
+        puts "C'mon now. That's cheating. Enter what you really scored."
+      else
+        @roll_2
+        turn_3
+      end
+    elsif @roll_1 != 10
       loop do
         puts "Roll 2"
         @roll_2 = gets.chomp.to_i
@@ -80,8 +91,26 @@ private
     end
   end
 
+  def self.turn_3
+    if (@frame_number == 10 && (@roll_1 + @roll_2 > 10))
+      loop do
+        puts "Roll 3"
+        @roll_3 = gets.chomp.to_i
+        if @roll_3 > 10
+          puts "C'mon now. That's cheating. Enter what you really scored."
+        else
+          @frame_total += @roll_3
+          return @roll_3
+        end
+      end
+    end
+  end
+
   def self.check_for_strike
-    if @roll_1 == 10
+    if (@frame_number == 10 && @roll_1 == 10)
+      turn_2
+      puts "Roll 2: #{@roll_2} pins knocked down"
+    elsif @roll_1 == 10
       puts "End of frame, you scored a strike!"
     else 
       turn_2
@@ -90,13 +119,26 @@ private
   end
 
   def self.add_strike_bonus
-    if ((@frames[@frame_number - 1] != 0) && (@frame_number > 2)) && ((@frames[@frame_number-3][0] == 10) && (@frames[@frame_number-2][0] == 10))
+    if ((@roll_1 == 10) && (@frame_number == 10)) && ((@frames[@frame_number-3][0] == 10) && (@frames[@frame_number-2][0] == 10))
+      @previous_frame_total = (@frames[@frame_number - 2].sum + @frames[@frame_number - 3].sum)
+      @bonus_points += @previous_frame_total
+    elsif ((@frames[@frame_number - 1] != 0) && (@frame_number > 2)) && ((@frames[@frame_number-3][0] == 10) && (@frames[@frame_number-2][0] == 10))
       @previous_frame_total = (@frames[@frame_number - 2].sum + @frames[@frame_number - 3].sum)
       @bonus_points += @previous_frame_total + @roll_2
     elsif ((@frames[@frame_number - 1] != 0) && (@frame_number > 2)) && (@frames[@frame_number-2][0] == 10)
       @bonus_points += @frame_total
     else
       @bonus_points += 0
+    end
+
+    if ((@roll_2 == 10) && (@frame_number == 10)) && (@frames[@frame_number-2][0] == 10)
+      @previous_frame_total = (@frames[@frame_number - 2].sum + @frames[@frame_number - 3].sum)
+      @bonus_points += @previous_frame_total
+    end
+
+    if ((@roll_3 == 10) && (@frame_number == 10)) && (@roll_2 == 10)
+      @previous_frame_total = @roll_2
+      @bonus_points += @previous_frame_total
     end
   end
 
@@ -125,8 +167,14 @@ private
   end
 
   def self.frame_score
-    @current_frame << @roll_1
-    @current_frame << @roll_2
+    if @frame_number == 10
+      @current_frame << @roll_1
+      @current_frame << @roll_2
+      @current_frame << @roll_3
+    else
+      @current_frame << @roll_1
+      @current_frame << @roll_2
+    end
   end
 
   def self.add_frame_score
