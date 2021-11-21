@@ -32,9 +32,25 @@ describe Scorecard do
         [0,0],
         [0,0],
         [0,0],
-        [0,0],
+        [0,0]
       ])
       expect(scorecard.result).to eq 0
+    end
+
+    it "returns the result for a perfect game" do
+      scorecard = Scorecard.new([
+        [10],
+        [10],
+        [10],
+        [10],
+        [10],
+        [10],
+        [10],
+        [10],
+        [10],
+        [10, 10, 10]
+      ])
+      expect(scorecard.result).to eq 300
     end
   end
 
