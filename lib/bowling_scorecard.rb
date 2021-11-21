@@ -17,7 +17,7 @@ class Scorecard
     @total_score = 0
     @bonus_points = 0
     loop do
-      if @frame_number < 10
+      if @frame_number < 9
         @frame_number += 1
         roll_reset
         puts "Frame number #{@frame_number}"
@@ -27,7 +27,15 @@ class Scorecard
         check_for_spare
         end_of_frame_updates
         add_strike_bonus
-        # add_spare_bonus
+      elsif @frame_number < 10
+        @frame_number += 1
+        roll_reset
+        puts "Frame number #{@frame_number}"
+        turn_1
+        check_for_strike
+        update_frame_score
+        check_for_spare
+        end_of_frame_updates
       else
         puts @bonus_points
         add_bonus_points
@@ -80,11 +88,19 @@ private
   end
 
   def self.add_strike_bonus
-    if @frames[@frame_number-2][0] == 10
+    # if @frame_number > 1 && (@frames[@frame_number-3][0] == 10) && (@frames[@frame_number-2][0] == 10)
+    #   @bonus_points += @frame_total + 10
+    # elsif @frames[@frame_number-2][0] == 10
+    #   @bonus_points += @frame_total
+    # end
+
+    puts @frames[@frame_number - 1]
+    if ((@frames[@frame_number - 1] != 0) && (@frame_number > 2)) && ((@frames[@frame_number-3][0] == 10) && (@frames[@frame_number-2][0] == 10))
+      @bonus_points += @frame_total + 10
+    elsif ((@frames[@frame_number - 1] != 0) && (@frame_number > 2)) && (@frames[@frame_number-2][0] == 10)
       @bonus_points += @frame_total
-    end
-    if @frames[@frame_number-1][0] == 10
-      @bonus_points += @frame_total
+    else
+      @bonus_points += 0
     end
   end
 
