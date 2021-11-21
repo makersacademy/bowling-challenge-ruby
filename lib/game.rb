@@ -12,7 +12,7 @@ class Game
     rollIndex = 0
     # calculates points per game frames(ten)
     10.times do
-      if @rolls[rollIndex] == 10
+      if isStrike?(rollIndex)
         frame_points +=  @rolls[rollIndex] + @rolls[rollIndex + 1] + @rolls[rollIndex + 2]
         rollIndex += 1
       elsif isSpare?(rollIndex)
@@ -34,6 +34,9 @@ def sparePoints(rollIndex)
   @rolls[rollIndex] + @rolls[rollIndex + 1] + @rolls[rollIndex + 2]
 end
 
+def isStrike?(rollIndex)
+  @rolls[rollIndex] == 10
+end
 
 
 
