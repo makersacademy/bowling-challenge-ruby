@@ -25,8 +25,16 @@ class Scorecard
 
   def strike_bonus 
     @frame_scores[@frame_index - 1] += @frame_scores[@frame_index] 
+    # @total_scores += @frame_scores[@frame_index] 
   end
 
+  def spare?
+    @scorecard[@frame_index - 1][0] + @scorecard[@frame_index - 1][1] == 10 ? true : false
+  end
+
+  def spare_bonus
+    @frame_scores[@frame_index - 1] += @frame_scores[@frame_index][0] 
+  end
 end
 
 a = Scorecard.new

@@ -36,4 +36,11 @@ describe Scorecard do
       expect(game.strike?).to eq true
     end
   end
+
+  describe '#spare' do
+    it 'check if it is a spare' do
+      game.roll(4,6)
+      expect(game.spare?).to eq true
+    end
+  end
 end
