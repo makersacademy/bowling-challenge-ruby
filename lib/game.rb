@@ -15,8 +15,8 @@ class Game
       if @rolls[rollIndex] == 10
         frame_points +=  @rolls[rollIndex] + @rolls[rollIndex + 1] + @rolls[rollIndex + 2]
         rollIndex += 1
-      elsif @rolls[rollIndex] + @rolls[rollIndex + 1] == 10
-        frame_points += @rolls[rollIndex] + @rolls[rollIndex + 1] + @rolls[rollIndex + 2]
+      elsif isSpare?(rollIndex)
+        frame_points += sparePoints(rollIndex)
         rollIndex += 2
       else
         frame_points += @rolls[rollIndex] + @rolls[rollIndex + 1]
@@ -25,5 +25,16 @@ class Game
     end
     frame_points
   end
+
+def isSpare?(rollIndex)
+  @rolls[rollIndex] + @rolls[rollIndex + 1] == 10
+end
+
+def sparePoints(rollIndex)
+  @rolls[rollIndex] + @rolls[rollIndex + 1] + @rolls[rollIndex + 2]
+end
+
+
+
 
 end
