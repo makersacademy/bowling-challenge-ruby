@@ -11,9 +11,14 @@ class BowlingGame
     count = 0
     score = 0
     while count < 20
-      score += @rolls[count]
-      count += 1
+      if @rolls[count] + @rolls[count + 1] == 10
+        score += @rolls[count] + @rolls[count + 1] + @rolls[count + 2]
+      else
+        score += @rolls[count] + @rolls[count + 1]
+      end
+      count += 2
     end
+    p score
     score
   end
 end
