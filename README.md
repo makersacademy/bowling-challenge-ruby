@@ -63,3 +63,57 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+
+
+As a Player
+So that I can finish a game of bowling
+I want the game to have 10 frames
+
+As a Player
+So that I can start a game of bowling
+I want to be able to knock over 10 pins in a roll
+
+As a Player
+so that I can play again
+I want the pins to reset after every frame
+
+As a Player
+So that I can have a second chance to hit 10 pins
+I want to be able to have a second roll
+
+As a Player
+So that I know how well I am playing
+I want to be able to keep track of my scores
+
+As a Player
+So that I can move onto my next turn after a knocking all 10 pins in one go
+I want my current frame to be marked complete after a strike
+
+As a Player
+So that everyone can see how I played
+I want to be informed of my final score
+
+As a Player
+So that I can be rewarded for hitting all 10 pins in one go
+I want to receive a bonus for a Strike, my roll score should be incremented by the number of pins knocked in the next 2 rolls
+
+As a Player
+So that I can be rewarded for hitting all 10 pins in 2 goes (in a frame)
+I want to receive a bonus for my Spare, my roll score should be incremented by the number of pins knocked in the next 1 roll
+
+As a Player
+So that I can finish the game
+My 10th frame should go for no longer than 3 rolls in total
+
+As a Player
+So that I know how well I am playing
+I want to know my score so far after each frame
+
+As a Player
+So that I can brag to my friends for hitting 12 strikes
+I want to be informed that I scored a Perfect Game
+
+As a Player
+So that I can laugh at my performance hitting 20 zeros
+I want to be informed that I scored a Gutter Game
