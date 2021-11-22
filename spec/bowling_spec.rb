@@ -7,6 +7,11 @@ describe BowlingGame do
     game.roll(6)
     game.roll(7)
   end
+  let(:strike) do
+    game.roll(10)
+    game.roll(5)
+    game.roll(3)
+  end
 
   it 'can roll a gutter game' do
     20.times { game.roll(0) }
@@ -22,5 +27,11 @@ describe BowlingGame do
     spare
     17.times { game.roll(0) }
     expect(game.score).to eq 24
+  end
+
+  it 'can roll a strike' do
+    strike
+    16.times { game.roll 0 }
+    expect(game.score).to eq 26
   end
 end
