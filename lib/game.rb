@@ -2,19 +2,18 @@ require './lib/frame'
 require './lib/scorecard'
 
 class Game
-  
-  @@current_score = 0
 
-  def self.run_game
+  def run_game
     count = 0
     while count < 10
       count += 1
       puts "Frame #{count}"
       frame = Frame.new
-      Frame.all_frames << frame
-      puts @@frames
+      frame.run_frame
+      Frame.frames << frame
       Scorecard.current_score
     end
+    Scorecard.final_score
   end
 
 end
