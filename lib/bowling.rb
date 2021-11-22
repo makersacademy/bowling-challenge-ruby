@@ -7,18 +7,18 @@ class Bowling
     STARTINGSCORE = 0
     
     def initialize
-        @score = 0
-        @frame_score = 0
-        # @ball1 = ball1
-        # @ball2 = ball2
+        @score = Array.new
+        @frame_score = Array.new
+        @ball1 = 4 # example balls 
+        @ball2 = 6
     end
 
     # def ball1
-    #     ball1 = gets.chomp
+    #     ball1 #= gets.chomp # gets.chomp not working
     # end
 
     # def ball2
-    #     ball2 = gets.chomp
+    #     ball2 #= gets.chomp
     # end
 
     def strike
@@ -32,7 +32,7 @@ class Bowling
     end
 
     def spare
-        score = ball1 + ball2
+        score = (ball1 + ball2)
         if score == 10
           return "Spare!"
         end
@@ -40,7 +40,7 @@ class Bowling
      
     def frame
         if spare? @frame_score << (ball1 + ball1 + ball2)
-        elsif strike? @frame_score << (ball1 + ball2) * 2
+        elsif strike? @frame_score << ((ball1 + ball2) * 2)
         else
         @frame_score << ball1 + ball2
         end
@@ -57,7 +57,7 @@ class Bowling
     end
 
     def gutter_game
-        if @score == 0
+        if @score = 0
             return "BAD LUCK!!!"
         end
     end
