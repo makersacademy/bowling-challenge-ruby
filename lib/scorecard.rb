@@ -12,11 +12,11 @@ class Scorecard
 
   def self.current_score
     @@current_score = 0
-    Frame.frames.each_with_index do |frame, num|
-      #add rolls to current score unless its the last frame
-      @@current_score += frame.rolls.map(&:to_f).reduce(0,:+) if frame.rolls.count < 3
-      #add first roll to current score if its last frame
-      @@current_score += frame.rolls[0].to_i if frame.rolls.count >= 3
+    Frame.frames.each_with_index do |frame, ind|
+      # add regular scores (different rules for last frame)
+      @@current_score += frame.rolls.map(&:to_f).reduce(0,:+) unless ind == 9
+      @@current_score += frame.rolls[0].to_i if ind == 9
+      @@current_score += frame.rolls[1].to_i if ind == 9 && frame.rolls[0].to_i != 10
       #add strike bonus
       strike_bonus(frame) if frame.rolls[0].to_i == 10
       #add spare bonus
@@ -45,7 +45,7 @@ class Scorecard
     Roll.rolls.each_with_index do |roll, ind|
       if roll.object_id == frame.rolls[1].object_id
         if Roll.rolls.length >= ind+2
-          #add next roll for strike bonus...
+          #add next roll for spare bonus...
           @@current_score += (Roll.rolls[ind+1].to_i)
         else
           #unless there aren't yet enough rolls
