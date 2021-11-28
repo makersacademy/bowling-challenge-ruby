@@ -10,6 +10,11 @@ class Bowling
     @final_frame_class = final_frame_class
   end
 
+  def calculate_full_game(rolls)
+    rolls.each { |pins| roll(pins) }
+    return total_score
+  end
+
   def total_score
     @frames.sum(&:total)
   end
@@ -23,6 +28,8 @@ class Bowling
       store_frame if @current_frame.complete?
     end
   end
+
+  private
 
   def update_frames(pins)
     @current_frame ||= @frame_class.new
