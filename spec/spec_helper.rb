@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ENV['RACK_ENV'] = 'test'
 
 require 'simplecov'
@@ -10,8 +11,8 @@ SimpleCov.formatter =
     [
       SimpleCov::Formatter::Console,
       # Want a nice code coverage website? Uncomment this next line!
-      SimpleCov::Formatter::HTMLFormatter,
-    ],
+      SimpleCov::Formatter::HTMLFormatter
+    ]
   )
 SimpleCov.start
 

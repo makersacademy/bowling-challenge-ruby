@@ -1,6 +1,15 @@
+# frozen_string_literal: true
+
 class Bowling
 
-  def initialize()
+  attr_reader :score
+
+  def initialize(results)
+
+    @results = results
+    @score = 0
+
   end
+
   
 end

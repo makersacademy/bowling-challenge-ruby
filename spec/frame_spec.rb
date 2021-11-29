@@ -1,11 +1,10 @@
 require_relative '../lib/frame'
 
 describe Frame do 
-  
-  describe '' do
-    it '' do
-    end
-  end
 
-  
+    # it 'returns the number of pins left in the frame' do
+    #   frame_1 = Frame.new
+    #   expect(frame_1.pins).to eq 10
+    # end
+
 end

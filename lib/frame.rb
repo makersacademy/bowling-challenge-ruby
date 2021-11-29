@@ -1,5 +1,6 @@
-class Frame
-  def initialize()
-  end
+# frozen_string_literal: true
 
+class Frame
+  def initialize
+  end
 end
