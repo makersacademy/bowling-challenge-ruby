@@ -39,10 +39,6 @@ If the player rolls a strike or spare in the 10th frame they can roll the additi
     10, 10, 10 in the 10th frame gives 30 points (10 points for the regular first strike and 20 points for the bonus).
     1, 9, 10 in the 10th frame gives 20 points (10 points for the regular spare and 10 points for the bonus).
 
-### Gutter Game
-
-A Gutter Game is when the player never hits a pin (20 zero scores).
-
 ### Perfect Game
 
 A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 strikes for the bonus in the 10th frame). The Perfect Game scores 300 points.
@@ -52,3 +48,27 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+
+### Planning
+
+*potential input* 
+```
+{ frame_1: [1, 4],
+  frame_2: [4, 5],
+  frame_3: [6, 4],
+  frame_4: [5, 5],
+  frame_5: [10], 
+  frame_6: [0, 1], 
+  frame_7: [7, 3], 
+  frame_8: [6, 4], 
+  frame_9: [10], 
+  frame_10: [2, 8, 6]
+}
+
+```
+*score output* 
+
+``` 
+Total score: 133
+```
