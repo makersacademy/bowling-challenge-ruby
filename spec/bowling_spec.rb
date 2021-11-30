@@ -7,19 +7,21 @@ describe Bowling do
     it 'calculates the total score of a gutter game to be 0:' do
       game = Bowling.new()
       game.calculate_score({ 
-        frame_1: [1, 4],
-        frame_2: [4, 5],
-        frame_3: [6, 4],
-        frame_4: [5, 5],
-        frame_5: [10], 
-        frame_6: [0, 1], 
-        frame_7: [7, 3], 
-        frame_8: [6, 4], 
-        frame_9: [10], 
-        frame_10: [2, 8, 6]
+        frame_1: [0, 0],
+        frame_2: [0, 0],
+        frame_3: [0, 0],
+        frame_4: [0, 0],
+        frame_5: [0, 0], 
+        frame_6: [0, 0], 
+        frame_7: [0, 0], 
+        frame_8: [0, 0], 
+        frame_9: [0, 0], 
+        frame_10: [0, 0]
       })
       
       expect(game.score).to eq 0
     end
+
+    
   end
 end
