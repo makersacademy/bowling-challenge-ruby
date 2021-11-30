@@ -22,6 +22,22 @@ describe Bowling do
       expect(game.score).to eq 0
     end
 
-    
+    it 'calculates the total score of a perfect game to be 300:' do
+      game = Bowling.new()
+      game.calculate_score({ 
+        frame_1: [10],
+        frame_2: [10],
+        frame_3: [10],
+        frame_4: [10],
+        frame_5: [10], 
+        frame_6: [10], 
+        frame_7: [10], 
+        frame_8: [10], 
+        frame_9: [10], 
+        frame_10: [10, 10, 10]
+      })
+      
+      expect(game.score).to eq 300
+    end
   end
 end
