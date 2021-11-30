@@ -18,6 +18,7 @@ class Bowling
       frame_9: [0, 0], 
       frame_10: [0, 0]
     }
+
     @perfect_game = { 
       frame_1: [10],
       frame_2: [10],
@@ -39,6 +40,8 @@ class Bowling
       @score = 0
     elsif results === @perfect_game
       @score = 300
+    else # no spares or strikes, just sum the scores for each frame
+      results.each_value{|frame| @score += frame.sum}
     end
   end
   

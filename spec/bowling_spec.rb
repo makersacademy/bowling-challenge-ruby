@@ -39,5 +39,23 @@ describe Bowling do
       
       expect(game.score).to eq 300
     end
+
+    it 'calculates the total score of a game with no spares:' do
+      game = Bowling.new()
+      game.calculate_score({ 
+        frame_1: [2,5],
+        frame_2: [2,5],
+        frame_3: [2,5],
+        frame_4: [7,1],
+        frame_5: [3,0], 
+        frame_6: [1,1], 
+        frame_7: [1,5], 
+        frame_8: [9,0], 
+        frame_9: [6,1], 
+        frame_10: [5,2]
+      })
+      
+      expect(game.score).to eq 63
+    end
   end
 end
