@@ -4,8 +4,9 @@ require_relative '../lib/bowling'
 
 describe Bowling do
   describe '.score' do
-    it 'returns the total score of the game' do
-      game = Bowling.new({ 
+    it 'calculates the total score of a gutter game to be 0:' do
+      game = Bowling.new()
+      game.calculate_score({ 
         frame_1: [1, 4],
         frame_2: [4, 5],
         frame_3: [6, 4],
@@ -17,7 +18,8 @@ describe Bowling do
         frame_9: [10], 
         frame_10: [2, 8, 6]
       })
-      expect(game.score).to eq 133
+      
+      expect(game.score).to eq 0
     end
   end
 end
