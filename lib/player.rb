@@ -13,6 +13,7 @@ class Player
     points.update_roll(@current_frame, @current_roll, number)
     if @current_frame == 10 && @current_roll == 2
       points.score_breakdown
+      #points.reset
     else
       update_roll_return_score(number, points)
     end

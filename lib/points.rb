@@ -1,22 +1,34 @@
 # frozen_string_literal: true
-require 'frame'
+require_relative 'frame'
 
 class Points
   attr_reader :current_score, :frames
 
-  def initialize(frame = Frame.new)
+  def initialize
     @current_score = 0
 
     @frames = []
 
-    10.times { @frames << frame }
+    10.times { @frames << Frame.new }
   end
 
   def update_roll(current_frame, current_roll, pins_knocked_down)
-    @frames[current_frame - 1].update_roll(current_roll, pins_knocked_down)
+    frame_index = current_frame - 1
+    @frames[frame_index].update_roll(current_roll, pins_knocked_down)
+    if current_roll == 2
+      update_total(@frames[frame_index].rolls.sum)
+    end
   end
 
   def update_total(score)
     @current_score += score
+  end
+
+  def score_breakdown
+    breakdown = "Frame | Pins | Bonus    \n=====================\n"
+    @frames.each_with_index do |frame, index|
+      breakdown += "  #{index + 1}  | #{frame.rolls[0]} , #{frame.rolls[1]} |\n"
+    end
+    breakdown
   end
 end
