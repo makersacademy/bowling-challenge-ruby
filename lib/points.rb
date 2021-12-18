@@ -11,4 +11,8 @@ class Points
 
     10.times { @frames << frame }
   end
+
+  def update_roll(current_frame, current_roll, pins_knocked_down)
+    @frames[current_frame - 1].update_roll(current_roll, pins_knocked_down)
+  end
 end

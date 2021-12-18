@@ -3,7 +3,7 @@
 require 'points'
 
 describe Points do
-  let(:frame) { double('frame') }
+  let(:frame) { double('frame', :update_roll => true) }
   let(:points) { Points.new(frame) }
 
   describe '#initialize' do
@@ -16,10 +16,10 @@ describe Points do
   end
 
   describe '#update_roll(current_frame, current_roll, pins_knocked_down)' do
-    it 'sends a message to relevant frame instance to update roll score' do
-      points.update_roll(1, 1, 4)
-      
+    it 'sends a message to relevant frame instance to update roll score' do      
       expect(frame).to receive(:update_roll)
+
+      points.update_roll(1, 1, 4)
     end
   end
 end
