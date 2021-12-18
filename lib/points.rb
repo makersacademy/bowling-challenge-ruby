@@ -31,4 +31,10 @@ class Points
     end
     breakdown
   end
+
+  def reset
+    @current_score = 0
+    @frames = []
+    10.times { @frames << Frame.new }
+  end
 end

@@ -34,17 +34,28 @@ describe Points do
   describe '#score_breakdown' do
     it 'offers a visual breakdown of the games scores' do
       # cant work out how to do this with a stub on frames
-      points2 = Points.new
-      points2.update_roll(1, 1, 4)
-      points2.update_roll(1, 2, 3)
+      points.update_roll(1, 1, 4)
+      points.update_roll(1, 2, 3)
 
-      expect(points2.score_breakdown).to eq "Frame | Pins | Bonus    \n=====================\n  1  | 4 , 3 |\n  2  |  ,  |\n  3  |  ,  |\n  4  |  ,  |\n  5  |  ,  |\n  6  |  ,  |\n  7  |  ,  |\n  8  |  ,  |\n  9  |  ,  |\n  10  |  ,  |\n"
+      expect(points.score_breakdown).to eq "Frame | Pins | Bonus    \n=====================\n  1  | 4 , 3 |\n  2  |  ,  |\n  3  |  ,  |\n  4  |  ,  |\n  5  |  ,  |\n  6  |  ,  |\n  7  |  ,  |\n  8  |  ,  |\n  9  |  ,  |\n  10  |  ,  |\n"
     end
   end
 
   describe '#reset' do
     it 'resets the score instance variables back to zero' do
       # ideally - a new instance of points would be made so that the whole round is kept together
+      points.update_roll(1, 1, 4)
+      points.update_roll(1, 2, 3)
+
+      expect(points.current_score).to eq 7
+      expect(points.frames.first.rolls.length).to eq 2
+      expect(points.frames.first.rolls[0]).to eq 4
+      expect(points.frames.first.rolls[1]).to eq 3
+
+      points.reset
+
+      expect(points.current_score).to eq 0
+      expect(points.frames.first.rolls).to be_empty
     end
   end
 end

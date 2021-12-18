@@ -3,7 +3,7 @@
 require 'player'
 
 describe Player do
-  let(:points) { double('points', update_roll: true, current_score: true, score_breakdown: true) }
+  let(:points) { double('points', update_roll: true, current_score: true, score_breakdown: true, reset: true) }
   let(:player) { Player.new('John Smith') }
 
   describe '#initialize' do
