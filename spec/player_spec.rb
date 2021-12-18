@@ -1,7 +1,7 @@
 require 'player'
 
 describe Player do
-  let(:points) { double('points', :update_roll => true) }
+  let(:points) { double('points', :update_roll => true, :current_score => true) }
 
   before :each do
     @player = Player.new('John Smith')
@@ -19,6 +19,18 @@ describe Player do
       expect(points).to receive(:update_roll)
 
       @player.pins_knocked_down(7, points)
+    end
+
+    it 'returns the number of pins knocked doown if on roll 1' do
+      expect(@player.pins_knocked_down(7, points)).to eq 7
+    end
+
+    it 'returns the current score at the end of each frame' do
+      @player.pins_knocked_down(7, points)
+      
+      expect(points).to receive(:current_score)
+
+      @player.pins_knocked_down(1, points)
     end
   end
 end
