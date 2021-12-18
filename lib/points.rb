@@ -15,4 +15,8 @@ class Points
   def update_roll(current_frame, current_roll, pins_knocked_down)
     @frames[current_frame - 1].update_roll(current_roll, pins_knocked_down)
   end
+
+  def update_total(score)
+    @total += score
+  end
 end

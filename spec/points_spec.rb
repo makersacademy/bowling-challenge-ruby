@@ -22,4 +22,10 @@ describe Points do
       points.update_roll(1, 1, 4)
     end
   end
+
+  describe '#update_total' do
+    it 'adds score for completed frame onto total score instance variable' do
+      expect { points.update_total(9) }.to change { points.total }.from(0).to(9)
+    end
+  end
 end
