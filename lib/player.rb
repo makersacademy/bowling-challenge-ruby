@@ -3,6 +3,8 @@
 class Player
   attr_reader :name, :current_frame
 
+  GAME_OVER = 'GAME OVER'
+
   def initialize(name)
     @name = name
     @current_frame = 1
@@ -12,8 +14,9 @@ class Player
   def pins_knocked_down(number, points)
     points.update_roll(@current_frame, @current_roll, number)
     if @current_frame == 10 && @current_roll == 2
-      points.score_breakdown
-      points.reset
+      puts points.score_breakdown(GAME_OVER)
+      @current_frame = 1
+      @current_roll = 1
     else
       update_roll_return_score(number, points)
     end

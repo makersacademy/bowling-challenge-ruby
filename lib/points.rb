@@ -4,6 +4,9 @@ require_relative 'frame'
 class Points
   attr_reader :current_score, :frames
 
+  USER_REQUEST = 'USER REQUEST'
+  GAME_OVER = 'GAME OVER'
+
   def initialize
     @current_score = 0
 
@@ -24,10 +27,14 @@ class Points
     @current_score += score
   end
 
-  def score_breakdown
+  def score_breakdown(reason = USER_REQUEST)
     breakdown = "Frame | Pins | Bonus    \n=====================\n"
     @frames.each_with_index do |frame, index|
       breakdown += "  #{index + 1}  | #{frame.rolls[0]} , #{frame.rolls[1]} |\n"
+    end
+    if reason == GAME_OVER
+      breakdown += " *** GAME OVER *** "
+      reset
     end
     breakdown
   end
