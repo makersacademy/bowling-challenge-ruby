@@ -1,5 +1,6 @@
-class Player
+# frozen_string_literal: true
 
+class Player
   attr_reader :name, :current_frame
 
   def initialize(name)
@@ -20,10 +21,11 @@ class Player
   private
 
   def update_roll_return_score(number, points)
-    if @current_roll == 1
+    case @current_roll
+    when 1
       @current_roll += 1
       number
-    elsif @current_roll == 2
+    when 2
       @current_roll -= 1
       update_frame
       points.current_score

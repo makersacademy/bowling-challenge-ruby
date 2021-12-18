@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'player'
 
 describe Player do
-  let(:points) { double('points', :update_roll => true, :current_score => true, :score_breakdown => true) }
+  let(:points) { double('points', update_roll: true, current_score: true, score_breakdown: true) }
   let(:player) { Player.new('John Smith') }
 
   describe '#initialize' do
@@ -24,7 +26,7 @@ describe Player do
 
     it 'returns the current score at the end of each frame' do
       player.pins_knocked_down(7, points)
-      
+
       expect(points).to receive(:current_score)
 
       player.pins_knocked_down(1, points)

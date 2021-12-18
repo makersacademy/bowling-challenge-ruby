@@ -1,18 +1,14 @@
-class Points
+# frozen_string_literal: true
+require 'frame'
 
+class Points
   attr_reader :total, :frames
 
-  def initialize
+  def initialize(frame = Frame.new)
     @total = 0
 
-    @frames = [] 
+    @frames = []
 
-    frame_hash = {
-      roll_1: 0,
-      roll_2: 0,
-      bonus: []
-    }
-    
-    10.times { @frames << frame_hash }
+    10.times { @frames << frame }
   end
 end
