@@ -8,7 +8,7 @@ describe Points do
 
   describe '#initialize' do
     it 'sets up instance variables for the total score summation and a score breakdown per frame' do
-      expect(points.total).to eq 0
+      expect(points.current_score).to eq 0
       expect(points.frames).to be_an Array
       expect(points.frames.length).to eq 10
       expect(points.frames.first).to eq frame
@@ -23,9 +23,9 @@ describe Points do
     end
   end
 
-  describe '#update_total' do
+  describe '#update_total(score)' do
     it 'adds score for completed frame onto total score instance variable' do
-      expect { points.update_total(9) }.to change { points.total }.from(0).to(9)
+      expect { points.update_total(9) }.to change { points.current_score }.from(0).to(9)
     end
   end
 end

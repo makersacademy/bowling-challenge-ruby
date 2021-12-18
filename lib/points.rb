@@ -2,10 +2,10 @@
 require 'frame'
 
 class Points
-  attr_reader :total, :frames
+  attr_reader :current_score, :frames
 
   def initialize(frame = Frame.new)
-    @total = 0
+    @current_score = 0
 
     @frames = []
 
@@ -17,6 +17,6 @@ class Points
   end
 
   def update_total(score)
-    @total += score
+    @current_score += score
   end
 end
