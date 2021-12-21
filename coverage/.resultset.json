@@ -1,7 +1,38 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/rikytraveller/Projects/bowling-challenge-ruby/spec/frame_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          2,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/rikytraveller/Projects/bowling-challenge-ruby/lib/frame.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      }
     },
-    "timestamp": 1640036785
+    "timestamp": 1640110572
   }
 }
