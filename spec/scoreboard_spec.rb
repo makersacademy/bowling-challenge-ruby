@@ -19,10 +19,12 @@ describe Scoreboard do
 
   context '#spare' do
     it 'return true when spare' do
-      expect(@scoreboard.spare?(8, 2)).to be true
+      spare_index = 4
+      expect(@scoreboard.spare?(spare_index)).to be true
     end
     it 'return false when not spare' do
-      expect(@scoreboard.spare?(3, 6)).to be_falsey
+      not_spare_index = 0
+      expect(@scoreboard.spare?(not_spare_index)).to be_falsey
     end
   end
 

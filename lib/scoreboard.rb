@@ -9,7 +9,7 @@ class Scoreboard
     10.times do
       if strike?(index)
         @score += 10 + strike_bonus_points(index)
-      elsif spare?(@rolls[index], @rolls[index + 1])
+      elsif spare?(index)
         @score += 10 + spare_bonus_points(index)
       else
         @score += @rolls[index] + @rolls[index + 1]
@@ -23,8 +23,8 @@ class Scoreboard
     true if @rolls[index] == 10
   end
 
-  def spare?(pin1, pin2)
-    true if pin1 + pin2 == 10
+  def spare?(index)
+    true if @rolls[index] + @rolls[index + 1] == 10
   end
 
   def strike_bonus_points(index)
