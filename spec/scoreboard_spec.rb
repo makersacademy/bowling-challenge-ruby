@@ -58,4 +58,11 @@ describe Scoreboard do
     end
   end
 
+  context '#regular_points' do
+    it 'return the points for a frame when not strike or spare' do
+      frame_index = 0
+      expect(@scoreboard.regular_points(frame_index)).to eq 5
+    end
+  end
+
 end

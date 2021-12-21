@@ -12,7 +12,7 @@ class Scoreboard
       elsif spare?(index)
         @score += 10 + spare_bonus_points(index)
       else
-        @score += @rolls[index] + @rolls[index + 1]
+        @score += regular_points(index)
       end
       strike?(index) ? index += 1 : index += 2
     end
@@ -33,6 +33,10 @@ class Scoreboard
 
   def spare_bonus_points(index)
     @rolls[index + 2]
+  end
+
+  def regular_points(index)
+    @rolls[index] + @rolls[index + 1]
   end
 
 end
