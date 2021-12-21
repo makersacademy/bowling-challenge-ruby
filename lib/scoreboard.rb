@@ -1,22 +1,22 @@
 class Scoreboard
   def initialize(rolls)
     @rolls = rolls
-    @score = 0
   end
 
   def score
     index = 0
+    score = 0
     10.times do
       if strike?(index)
-        @score += 10 + strike_bonus_points(index)
+        score += 10 + strike_bonus_points(index)
       elsif spare?(index)
-        @score += 10 + spare_bonus_points(index)
+        score += 10 + spare_bonus_points(index)
       else
-        @score += regular_points(index)
+        score += regular_points(index)
       end
       strike?(index) ? index += 1 : index += 2
     end
-    @score
+    score
   end
 
   def strike?(index)
