@@ -8,10 +8,12 @@ describe Scoreboard do
 
   context '#strike' do
     it 'return true when strike' do
-      expect(@scoreboard.strike?(10)).to be true
+      strike_index = 8 
+      expect(@scoreboard.strike?(strike_index)).to be true
     end
     it 'return false when not strike' do
-      expect(@scoreboard.strike?(3)).to be_falsey
+      not_strike_index = 0
+      expect(@scoreboard.strike?(not_strike_index)).to be_falsey
     end
   end
 
@@ -42,15 +44,15 @@ describe Scoreboard do
 
   context '#strike_bonus_points' do
     it 'return the bonus points when strike' do
-      strike_index_value = 8
-      expect(@scoreboard.strike_bonus_points(strike_index_value)).to eq 1
+      strike_index = 8
+      expect(@scoreboard.strike_bonus_points(strike_index)).to eq 1
     end
   end
 
   context '#spare_bonus_points' do
     it 'return the bonus points when spare' do
-      spare_index_value = 4
-      expect(@scoreboard.spare_bonus_points(spare_index_value)).to eq 5
+      spare_index = 4
+      expect(@scoreboard.spare_bonus_points(spare_index)).to eq 5
     end
   end
 
