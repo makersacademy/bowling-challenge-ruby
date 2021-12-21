@@ -40,4 +40,11 @@ describe Scoreboard do
     end
   end
 
+  context '#strike_bonus_points' do
+    it 'return the bonus points when strike' do
+      strike_index_value = 8
+      expect(@scoreboard.strike_bonus_points(strike_index_value)).to eq 1
+    end
+  end
+
 end
