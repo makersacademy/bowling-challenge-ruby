@@ -24,4 +24,20 @@ describe Scoreboard do
     end
   end
 
+  context '#score' do
+    it 'return the score of a game' do
+      expect(@scoreboard.score).to eq 133
+    end
+    it 'return a perfect game score' do
+      perfect_rolls = [10,10,10,10,10,10,10,10,10,10,10,10]
+      scoreboard = Scoreboard.new(perfect_rolls)
+      expect(scoreboard.score).to eq 300
+    end
+    it 'return a gutter game score' do
+      gutter_rolls = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      scoreboard = Scoreboard.new(gutter_rolls)
+      expect(scoreboard.score).to eq 0
+    end
+  end
+
 end
