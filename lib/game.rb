@@ -1,4 +1,4 @@
-class Frame
+class Game
   attr_reader :frames
 
   def initialize
