@@ -47,4 +47,11 @@ describe Scoreboard do
     end
   end
 
+  context '#spare_bonus_points' do
+    it 'return the bonus points when spare' do
+      spare_index_value = 4
+      expect(@scoreboard.spare_bonus_points(spare_index_value)).to eq 5
+    end
+  end
+
 end
