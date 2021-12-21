@@ -15,4 +15,13 @@ describe Scoreboard do
     end
   end
 
+  context '#spare' do
+    it 'return true when spare' do
+      expect(@scoreboard.spare?(8, 2)).to be true
+    end
+    it 'return false when not spare' do
+      expect(@scoreboard.spare?(3, 6)).to be_falsey
+    end
+  end
+
 end
