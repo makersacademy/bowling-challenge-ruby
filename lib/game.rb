@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# game class
 class Game
   attr_reader :frames
 
