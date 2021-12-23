@@ -6,16 +6,14 @@ class Score
     @total = 0
   end
 
-  def get_total(current_frame)
-    result = current_frame.reduce(0, :+)
-    @total += if @game.spare?(@game.frames[-2]) || @game.strike?(@game.frames[-2])
-                (result + add_bonus(current_frame))
-              else
-                result
-              end
+  def add_to_total
+    current_frame = @game.frames[-1]
+    prev_frame = @game.frames[-2]
+    res = current_frame.reduce(0, :+)
+    @total += @game.spare?(prev_frame) || @game.strike?(prev_frame) ? (res + add_bonus(current_frame)) : res
   end
 
   def add_bonus(current_frame)
-    @game.spare?(@game.frames[-2]) ? current_frame[0] : current_frame.reduce(0, :+)
+    @game.spare?(@game.frames[-2]) ? current_frame[0] : (current_frame[0] + current_frame[1])
   end
 end
