@@ -4,6 +4,8 @@ class Bowling
 
   def initialize
     @score = []
+    @frame = 1
+    @roll = 1
   end
 
   def enter_score(pins)
@@ -11,6 +13,16 @@ class Bowling
       raise 'Outside of Range'
     else
       score << pins
+      @roll = 2
+    end
+  end
+
+  def game
+    until @frame == 11
+      puts "Enter how many pins you knocked down:"
+      pins = gets.chomp.to_i
+      enter_score(pins)
+      @frame += 1
     end
   end
 end

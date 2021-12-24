@@ -14,4 +14,13 @@ describe Bowling do
       expect(bowling.score.first).to eq 8
     end
   end
+  describe '#game' do
+    it 'Stops after 10 Frames' do
+      bowling = Bowling.new
+      10.times do 
+        bowling.enter_score(6)
+      end
+      expect(bowling.score.length).to eq 10
+    end
+  end
 end
