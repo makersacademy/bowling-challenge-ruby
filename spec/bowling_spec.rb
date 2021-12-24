@@ -23,4 +23,13 @@ describe Bowling do
       expect(bowling.score.length).to eq 10
     end
   end
+  describe '#total_score' do
+    it 'returns the total score as a string' do
+      bowling = Bowling.new
+      5.times do
+        bowling.enter_score(7)
+      end
+      expect(bowling.total_score).to eq 'TOTAL: 35'
+    end
+  end 
 end

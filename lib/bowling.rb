@@ -17,6 +17,10 @@ class Bowling
     end
   end
 
+  def total_score
+    "TOTAL: " + @score.reduce(:+).to_s
+  end
+
   def game
     until @frame == 11
       puts "Enter how many pins you knocked down:"
@@ -24,5 +28,6 @@ class Bowling
       enter_score(pins)
       @frame += 1
     end
+    total_score
   end
 end
