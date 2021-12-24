@@ -9,12 +9,9 @@ class Bowling
   end
 
   def enter_score(pins)
-    unless (0..10).include? pins
-      raise 'Outside of Range'
-    else
-      score << pins
-      @roll = 2
-    end
+    raise 'Outside of Range' unless valid_score?(pins)
+    score << pins
+    @roll = 2
   end
 
   def total_score
@@ -29,5 +26,9 @@ class Bowling
       @frame += 1
     end
     total_score
+  end
+
+  def valid_score?(pins)
+    (0..10).include? pins
   end
 end
