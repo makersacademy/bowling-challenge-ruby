@@ -12,8 +12,9 @@ class Game
     count = 0
     while count < 10
       count += 1
-      puts "Frame #{count}"
+      puts "Frame #{count}\n--------"
       frame = Frame.new
+      frame.final_frame = true if count == 10
       frame.run_frame
       Frame.frames << frame
       @scorecard.current_score

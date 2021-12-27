@@ -4,7 +4,7 @@ class Scorecard
 
   def final_score
     current_score
-    puts "your final score is: #{@current_score}"
+    puts "\n\nYour final score is: #{@current_score}!\n"
     @current_score
   end
 
@@ -22,7 +22,7 @@ class Scorecard
         spare_bonus(frame) if (frame.rolls[0].to_i + frame.rolls[1].to_i) == 10
       end
     end
-    puts "your current score is: #{@current_score}"
+    puts "\nYour current score is: #{@current_score}\n\n"
   end
 
   def strike_bonus(frame)  
@@ -33,7 +33,7 @@ class Scorecard
           @current_score += (Roll.rolls[ind+1].to_i + Roll.rolls[ind+2].to_i)
         else
           #unless there aren't yet enough rolls
-          puts "strike bonus pending..." 
+          puts "Strike bonus pending..." 
         end
       end
     end
@@ -47,7 +47,7 @@ class Scorecard
           @current_score += (Roll.rolls[ind+1].to_i)
         else
           #unless there aren't yet enough rolls
-          puts "spare bonus pending..." 
+          puts "Spare bonus pending..." 
         end
       end
     end
