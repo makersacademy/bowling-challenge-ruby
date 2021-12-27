@@ -3,6 +3,11 @@ require './lib/scorecard'
 
 class Game
 
+  def initialize
+    @current_score = 0
+    @scorecard = Scorecard.new
+  end
+
   def run_game
     count = 0
     while count < 10
@@ -11,9 +16,9 @@ class Game
       frame = Frame.new
       frame.run_frame
       Frame.frames << frame
-      Scorecard.current_score
+      @scorecard.current_score
     end
-    Scorecard.final_score
+    @scorecard.final_score
   end
 
 end
