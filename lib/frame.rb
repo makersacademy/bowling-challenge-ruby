@@ -3,7 +3,7 @@ require './lib/roll'
 class Frame
   
   attr_reader :rolls
-  attr_writer :final_frame
+  attr_accessor :final_frame
 
   @@frames = []
 

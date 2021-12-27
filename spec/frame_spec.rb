@@ -12,8 +12,8 @@ describe Frame do
   end
 
   it 'allows third role on final frame' do
-    allow(Frame.frames).to receive(:length).and_return(9)
     frame = Frame.new
+    frame.final_frame = true
     allow(frame).to receive(:first_roll).and_return(6)
     allow(frame).to receive(:second_roll).and_return(4)
     allow(frame).to receive(:third_roll).and_return(8)

@@ -10,29 +10,38 @@ class Scorecard
 
   def current_score
     @current_score = 0
+    score_pins
+    score_bonuses
+    puts "\nYour current score is: #{@current_score}\n\n"
+  end
+
+  def score_pins
     Frame.frames.each_with_index do |frame, ind|
-      # add regular scores (different rules for last frame)
-      @current_score += frame.rolls.map(&:to_f).reduce(0,:+) unless ind == 9
-      @current_score += frame.rolls[0].to_i if ind == 9
-      @current_score += frame.rolls[1].to_i if ind == 9 && frame.rolls[0].to_i != 10
-      #add strike bonus
-      strike_bonus(frame) if frame.rolls[0].to_i == 10
-      #add spare bonus
-      if frame.rolls.length >= 2
+      if frame.final_frame
+        @current_score += frame.rolls[0].to_i 
+        @current_score += frame.rolls[1].to_i if frame.rolls[0].to_i != 10
+      else
+        @current_score += frame.rolls.map(&:to_f).reduce(0,:+)
+      end
+    end
+  end
+
+  def score_bonuses
+    Frame.frames.each_with_index do |frame, ind|
+      if frame.rolls[0].to_i == 10
+        strike_bonus(frame)
+      else
         spare_bonus(frame) if (frame.rolls[0].to_i + frame.rolls[1].to_i) == 10
       end
     end
-    puts "\nYour current score is: #{@current_score}\n\n"
   end
 
   def strike_bonus(frame)  
     Roll.rolls.each_with_index do |roll, ind|
       if roll.object_id == frame.rolls[0].object_id
         if Roll.rolls.length >= ind+3
-          #add next 2 rolls for strike bonus...
           @current_score += (Roll.rolls[ind+1].to_i + Roll.rolls[ind+2].to_i)
         else
-          #unless there aren't yet enough rolls
           puts "Strike bonus pending..." 
         end
       end
@@ -43,10 +52,8 @@ class Scorecard
     Roll.rolls.each_with_index do |roll, ind|
       if roll.object_id == frame.rolls[1].object_id
         if Roll.rolls.length >= ind+2
-          #add next roll for spare bonus...
           @current_score += (Roll.rolls[ind+1].to_i)
         else
-          #unless there aren't yet enough rolls
           puts "Spare bonus pending..." 
         end
       end
