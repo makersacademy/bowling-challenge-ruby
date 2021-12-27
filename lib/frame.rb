@@ -30,10 +30,7 @@ class Frame
     puts "Second roll:"
     @roll = Roll.new.roll
     puts "Spare" if (@roll.to_i + @rolls[0].to_i) == 10
-    if (@roll.to_i + @rolls[0].to_i) > 10  && !@final_frame
-      puts "\tThe sum of both rolls is greater than 10. Play second roll again"
-      second_roll
-    end
+    valid?
     strike?
     @roll
   end
@@ -43,6 +40,13 @@ class Frame
     @roll = Roll.new.roll
     strike?
     @roll
+  end
+
+  def valid?
+    if (@roll.to_i + @rolls[0].to_i) > 10  && !@final_frame
+      puts "\tThe sum of both rolls is greater than 10. Play second roll again"
+      second_roll
+    end
   end
 
   def strike?
