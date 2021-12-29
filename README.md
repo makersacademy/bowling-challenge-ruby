@@ -70,7 +70,7 @@ More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 Specifications for Bowling Scorecard Program:
 
 - can start a game (bowl 10 frames)
-- promt for player's name
+  (- promt for player's name)
   (- if 2 or more players, players can take turns)
 - count number of pins knocked down: .roll(number_of_knockdown_pins)
 - get user's input to enter the number of pins knockdown for each roll
@@ -144,3 +144,52 @@ for a perfect score, there will only be 12 elements in `@roll_list`: 10 strikes 
 Example based on ref: ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
 
 not sure we need a player from the start. I will implement all the features with just the game class and extract a player class later.
+
+### TDD BowlingGame class
+
+As we are only creating a scorecard for a 10 frames game I realised it would be tedious to enter each roll manually when testing though we will need `roll(num)` when we have player class to get the player's roll.
+
+```
+describe 'roll_list' do
+    it 'can store several rolls in an array' do
+      game.roll(6)
+      game.roll(8)
+      game.roll(2)
+
+      expect(game.roll_list[0]).to eq 6
+      expect(game.roll_list[1]).to eq 8
+      expect(game.roll_list[2]).to eq 2
+    end
+  end
+```
+
+we can add a default value to `@roll_list` when we initalize `BowlingGame`to make the testing easier as we are testing a full game of 10 frames
+
+```
+describe BowlingGame do
+  it 'can initialize a game' do
+    game = BowlingGame.new
+  end
+
+  context 'it can be initialized with 1 default argument' do
+    it 'receives no argument' do
+      game = BowlingGame.new
+      expect(game.roll_list).to be_empty
+    end
+
+    it 'receives 1 argument' do
+      game = BowlingGame.new([1,4,7])
+      expect(game.roll_list).to eq [ 1, 4, 7]
+    end
+  end
+
+  describe 'roll_list' do
+    it 'can store several rolls in an array' do
+      game = BowlingGame.new([6, 8, 2])
+
+      expect(game.roll_list[0]).to eq 6
+      expect(game.roll_list[1]).to eq 8
+      expect(game.roll_list[2]).to eq 2
+    end
+  end
+```

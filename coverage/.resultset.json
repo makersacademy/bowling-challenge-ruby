@@ -1,0 +1,63 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/Swa/Desktop/Projects/solo-challenges/bowling-challenge-ruby/spec/bowlingGame_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          2,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/Swa/Desktop/Projects/solo-challenges/bowling-challenge-ruby/lib/BowlingGame.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          5,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1640792534
+  }
+}
