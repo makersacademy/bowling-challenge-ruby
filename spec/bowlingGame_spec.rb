@@ -36,4 +36,12 @@ describe BowlingGame do
     end
   end
 
+  describe '#score' do
+    it 'can roll a gutter game' do
+      20.times{ game.roll(0) }
+
+      expect(game.outcome).to eq 0
+    end
+  end
+
 end
