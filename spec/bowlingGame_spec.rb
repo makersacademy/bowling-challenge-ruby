@@ -34,9 +34,19 @@ describe BowlingGame do
       expect(game.roll_list[1]).to eq 8
       expect(game.roll_list[2]).to eq 2
     end
+
+    it 'can store several rolls in an array' do
+      game.roll(9)
+      game.roll(0)
+      game.roll(3)
+
+      expect(game.roll_list[0]).to eq 9
+      expect(game.roll_list[1]).to eq 0
+      expect(game.roll_list[2]).to eq 3
+    end
   end
 
-  describe '#score' do
+  describe '#outcome' do
     it 'can roll a gutter game' do
       20.times{ game.roll(0) }
 
@@ -49,11 +59,20 @@ describe BowlingGame do
         game.roll(8)  # spare
         game.roll(4)  # bonus points from 1st roll of 2nd frame
         game.roll(2)  # 2nd roll for 2nd frame
-        16.times{game.roll(0)}  # we test a whole game of 10 frames
-        # p game.roll_list => [2, 8, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        16.times{ game.roll(0) }  # we test a whole game of 10 frames => if missing rolls, error message: undefined method `+' for nil:NilClass
+        
         expect(game.outcome).to eq (2+8+4+4+2)
       end
     end
   end
 
+  context 'player rolls a strike' do
+    it 'calculate the total points' do
+      game = BowlingGame.new([10, 2, 6])
+      16.times{ game.roll(0) }
+      p game.roll_list
+
+      expect(game.outcome).to eq (10+2+6+2+6)
+    end
+  end
 end

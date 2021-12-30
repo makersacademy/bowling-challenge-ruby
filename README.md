@@ -193,3 +193,15 @@ describe BowlingGame do
     end
   end
 ```
+
+While TDD, this error message came back a few times :
+
+```
+ 1) BowlingGame player rolls a strike calculate the total points
+     Failure/Error: roll_list[@index] + roll_list[@index+1] == 10
+
+     TypeError:
+       nil can't be coerced into Integer
+```
+
+I guess it is just because the @roll_list what missing some items (index)?
