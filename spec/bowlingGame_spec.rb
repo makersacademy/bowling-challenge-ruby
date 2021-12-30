@@ -53,8 +53,8 @@ describe BowlingGame do
       expect(game.outcome).to eq 0
     end
 
-    context 'player rolls a spare' do
-      it 'calculate the total points' do
+    context 'spare' do
+      it 'calculate the total points for 1 spare' do
         game.roll(2)
         game.roll(8)  # spare
         game.roll(4)  # bonus points from 1st roll of 2nd frame
@@ -66,12 +66,18 @@ describe BowlingGame do
     end
   end
 
-  context 'player rolls a strike' do
-    it 'calculate the total points' do
+  context 'strike' do
+    it 'calculate the total points for 1 strike' do
       game = BowlingGame.new([10, 2, 6])
       16.times{ game.roll(0) }
 
       expect(game.outcome).to eq (10+2+6+2+6)
+    end
+
+    it 'is a perfect game!' do
+      12.times { game.roll(10) } # 10 rolls + 2 bonus rolls for 10th frame
+
+      expect(game.outcome).to eq 300
     end
   end
 
