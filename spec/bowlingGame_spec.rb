@@ -70,9 +70,16 @@ describe BowlingGame do
     it 'calculate the total points' do
       game = BowlingGame.new([10, 2, 6])
       16.times{ game.roll(0) }
-      p game.roll_list
 
       expect(game.outcome).to eq (10+2+6+2+6)
+    end
+  end
+
+  context 'test given 10 pin scoring example' do
+    it 'calculate the total points' do
+      game = BowlingGame.new([1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6])
+
+      expect(game.outcome).to eq 133
     end
   end
 end
