@@ -42,6 +42,18 @@ describe BowlingGame do
 
       expect(game.outcome).to eq 0
     end
+
+    context 'player rolls a spare' do
+      it 'calculate the total points' do
+        game.roll(2)
+        game.roll(8)  # spare
+        game.roll(4)  # bonus points from 1st roll of 2nd frame
+        game.roll(2)  # 2nd roll for 2nd frame
+        16.times{game.roll(0)}  # we test a whole game of 10 frames
+        # p game.roll_list => [2, 8, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        expect(game.outcome).to eq (2+8+4+4+2)
+      end
+    end
   end
 
 end
