@@ -1,0 +1,34 @@
+each frame is an array of length 2 (2 rolls)
+each frame is an array of length 1 (when roll 1 is a strike) 
+there are 10 frames in a bowling game each with up to 2 rolls
+
+
+Use Cases for one frame
+If frame[0] equals 10
+  frame_points = 10 + nextframe_roll_1 + nextframe_roll_2
+Else if frame[0] plus frame[1] equals 10
+  frame_points = 10 + nextframe_roll_1
+Else 
+  frame_points = frame[0] + frame[1]
+End if
+
+Initialize points to 0 
+For i in (1..10)
+   if frames[i][0] equals 10 and frames[i+1][0] equals 10
+      assign 10 to nextframe_roll_1.
+      assign frames[i+2][0] to nextframe_roll_2. 
+   elsif frames[i][0] equals 10 and frames[i+1][0] < 10
+      assign frames[i+1][0] to nextframe_roll_1.
+      assign frames[i+1][1] to nextframe_roll_2.
+   elsif frames[i][0] + frames[i][1] equals 10
+      assign frames[i+1][0] to nextframe_roll_1.
+      assign zero to nextframe_roll_2.
+   else
+      assign zero to nextframe_roll_1.
+      assign zero to nextframe_roll_2
+   end if
+ 
+   points += frame_points(frames[i], next_ball_1, next_ball_2)
+End 
+
+puts points
