@@ -22,4 +22,21 @@ class Player
     calculate_total()
   end
 
+  def calculate_bonus
+
+  end
+
+  def calculate_points
+    frame = 0
+    @points = 0
+    (@score.size).times do
+      @points += @score[frame][:total] if frame != 10
+      frame += 1
+    end
+  end
+
+  def calculate_total
+    @total = @points + @bonus
+  end
+
 end
