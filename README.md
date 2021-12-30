@@ -141,7 +141,6 @@ for a perfect score, there will only be 12 elements in `@roll_list`: 10 strikes 
 
 [Diagram for the Classes ] : (images/diagram1.png)
 [Diagram for the methods ] : (images/diagram2.png)
-Example based on ref: ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
 
 not sure we need a player from the start. I will implement all the features with just the game class and extract a player class later.
 
@@ -204,4 +203,4 @@ While TDD, this error message came back a few times :
        nil can't be coerced into Integer
 ```
 
-I guess it is just because the @roll_list what missing some items (index)?
+I guess it is just because the @roll_list was missing some items (index)? we need a whole game for the #outcome method to work
