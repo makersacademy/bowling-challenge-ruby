@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class BowlingGame
-  attr_reader :scorecard, :frame
+  attr_reader :scorecard
 
   def initialize(scorecard = [])
     @scorecard = scorecard
@@ -17,16 +17,13 @@ class BowlingGame
     score = index = 0
 
     @scorecard.each do |frame|
-      if strike?(frame)
+      if strike?(frame) || spare?(frame) 
+        # In either case we need to add up a total of 3 rolls
         score += @scorecard.flatten[index] + @scorecard.flatten[index + 1] + @scorecard.flatten[index + 2]
-        index += 1
-      elsif spare?(frame)
-        score += @scorecard.flatten[index] + @scorecard.flatten[index + 1] + @scorecard.flatten[index + 2]
-        index += 2
       else
         score += frame.sum
-        index += 2
       end
+      index += advance_index(frame)
     end
     score
   end
@@ -40,6 +37,11 @@ class BowlingGame
   end
 
   private
+
+  def advance_index(frame) 
+    # If the current frame is an strike the next frame is just the next roll or else its in 2 rolls
+    strike?(frame) ? 1 : 2
+  end 
 
   def add_to_scorecard
     if @scorecard.length < 9
