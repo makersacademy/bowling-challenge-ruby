@@ -28,8 +28,10 @@ describe Frame do
       expect(frame.strike).to eq true
     end
 
-    it 'voids the second roll and ends the frame if strike' do
-      
+    it 'voids the second roll if the first roll was a strike' do
+      frame.update_roll(1, 10)
+
+      expect(frame.rolls[1]).to eq 0
     end
   end
 end

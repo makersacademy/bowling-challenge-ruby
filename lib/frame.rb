@@ -11,6 +11,7 @@ class Frame
     @rolls[current_roll - 1] = pins_knocked_down
     if current_roll == 1 && pins_knocked_down == 10
       @strike = true
+      @rolls[1] = 0
     end
   end
 end
