@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class BowlingGame
+  MAX_FRAMES = 10
   attr_reader :scorecard
 
   def initialize(scorecard = [])
@@ -46,18 +47,17 @@ class BowlingGame
   end
 
   def add_to_scorecard
-    if @scorecard.length < 9
+    if @scorecard.length < MAX_FRAMES - 1
       if strike?(@frame) || @frame.length == 2
         @scorecard << @frame
         @frame = []
       end
-    elsif @scorecard.length == 9
+    elsif @scorecard.length == MAX_FRAMES - 1
       add_final_frame
     end
   end
 
   def add_final_frame
-
     if !strike?(@frame) && !spare?(@frame) && @frame.length == 2 || @frame.length == 3
       @scorecard << @frame
       @frame = []
