@@ -9,5 +9,8 @@ class Frame
 
   def update_roll(current_roll, pins_knocked_down)
     @rolls[current_roll - 1] = pins_knocked_down
+    if current_roll == 1 && pins_knocked_down == 10
+      @strike = true
+    end
   end
 end

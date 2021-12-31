@@ -21,5 +21,15 @@ describe Frame do
       expect(frame.rolls[0]).to eq 7
       expect(frame.rolls[1]).to eq 1
     end
+
+    it 'records if the roll was a strike' do
+      frame.update_roll(1, 10)
+
+      expect(frame.strike).to eq true
+    end
+
+    it 'voids the second roll and ends the frame if strike' do
+      
+    end
   end
 end
