@@ -15,11 +15,12 @@ class BowlingGame
 
   def score
     score = index = 0
+    scorecard = @scorecard.flatten
 
     @scorecard.each do |frame|
       if strike?(frame) || spare?(frame) 
         # In either case we need to add up a total of 3 rolls
-        score += @scorecard.flatten[index] + @scorecard.flatten[index + 1] + @scorecard.flatten[index + 2]
+        score += scorecard[index] + scorecard[index + 1] + scorecard[index + 2]
       else
         score += frame.sum
       end
@@ -39,7 +40,7 @@ class BowlingGame
   private
 
   def advance_index(frame) 
-    # If the current frame is an strike the next frame is just the next roll or else its in 2 rolls
+    # If the current frame is a strike the next frame is just the next roll or else its in 2 rolls
     strike?(frame) ? 1 : 2
   end 
 
