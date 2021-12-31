@@ -1,5 +1,5 @@
 class BowlingGame
-  attr_reader :scorecard
+  attr_reader :scorecard, :frame
 
   def initialize(scorecard = [])
     @scorecard = scorecard
@@ -7,25 +7,42 @@ class BowlingGame
   end
 
   def add_roll(roll)
-    @frame << roll
-    if @frame.length == 2 || @frame.any? { |n| n == 10 }
-      @scorecard << @frame
-      @frame = []
-    end  
+    @frame << roll      
+ 
+    if @scorecard.length < 9 
+      if strike?(@frame) || @frame.length == 2
+        @scorecard << @frame
+        @frame = []
+      end
+  
+    elsif @scorecard.length == 9
+      if !strike?(@frame) && !spare?(@frame) && @frame.length == 2
+        @scorecard << @frame 
+        @frame = []
+      end
+
+      if @frame.length == 3
+        @scorecard << @frame 
+        @frame = []
+      end
+    end
   end
 
   def score
-    score = 0
-    @scorecard.each_with_index do |frame,index|
+    score = index = 0 
+    
+    @scorecard.each do |frame|
       if strike?(frame)
-       score += frame.sum + @scorecard[index + 1].sum 
+       score += @scorecard.flatten[index] + @scorecard.flatten[index + 1] + @scorecard.flatten[index + 2]
+       index += 1
       elsif spare?(frame)
-       score += frame.sum + @scorecard[index + 1].first
+       score += @scorecard.flatten[index] + @scorecard.flatten[index + 1] + @scorecard.flatten[index + 2]
+       index += 2
       else
        score += frame.sum
+       index += 2
       end
-    p score
-    end
+    end    
     score
   end
 
