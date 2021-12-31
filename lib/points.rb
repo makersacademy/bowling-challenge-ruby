@@ -18,7 +18,7 @@ class Points
   def update_roll(current_frame, current_roll, pins_knocked_down)
     frame_index = current_frame - 1
     @frames[frame_index].update_roll(current_roll, pins_knocked_down)
-    if current_roll == 2
+    if current_roll == 2 || @frames[frame_index].strike == true
       update_total(@frames[frame_index].rolls.sum)
     end
   end

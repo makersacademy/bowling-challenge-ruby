@@ -23,6 +23,19 @@ describe Points do
 
       points.update_roll(1, 1, 4)
     end
+
+    it 'updates current score if on roll 2' do
+      expect(points).to receive(:update_total)
+
+      points.update_roll(1, 1, 5)
+      points.update_roll(1, 2, 5)
+    end
+
+    it 'updates current score if a strike occured' do
+      expect(points).to receive(:update_total)
+
+      points.update_roll(1, 1, 10)
+    end
   end
 
   describe '#update_total(score)' do
