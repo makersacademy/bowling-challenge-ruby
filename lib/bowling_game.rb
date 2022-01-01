@@ -47,22 +47,20 @@ class BowlingGame
   end
 
   def add_to_scorecard
-    if @scorecard.length < MAX_FRAMES - 1 
+    if @scorecard.length < MAX_FRAMES - 1
       if strike?(@frame) || @frame.length == 2
         @scorecard << @frame
         @frame = []
       end
-    else 
+    elsif @scorecard.length == MAX_FRAMES - 1
       add_final_frame
     end
   end
 
   def add_final_frame
-    if @scorecard.length == MAX_FRAMES - 1
-      if !strike?(@frame) && !spare?(@frame) && @frame.length == 2 || @frame.length == 3
-        @scorecard << @frame
-        @frame = []
-      end
+    if !strike?(@frame) && !spare?(@frame) && @frame.length == 2 || @frame.length == 3
+      @scorecard << @frame
+      @frame = []
     end
   end
 end
