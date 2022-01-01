@@ -1,0 +1,24 @@
+Bowling Scorecard Requirements:
+
+10 frames (F), up to 2 rolls (R1, R2) per frames
+
+Strikes
+Scores 10 in F0-R1
+Skips F0-R2
+Bonus score for F0 is calculated using next 2 rolls 
+  E.g. F1-R1,R2 or F1-R1 (strike), F2-R1 
+
+Spares
+Scores 10 within F0-R1,R2
+Bonus score for F0 is always F1-R1
+
+Frame 10
+F10 can have R3 if R2 = spare
+F10 cannot have R3 if R2 != spare
+F10 can have R3 if R1 = strike 
+
+Perfect Game
+F1..F9-R1 are all strikes 
+F10-R1,R2,R3 are also all strikes
+
+
