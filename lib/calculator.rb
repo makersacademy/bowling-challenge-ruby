@@ -1,5 +1,6 @@
-class Calculator
+# frozen_string_literal: true
 
+class Calculator
   def initialize
     @rolls = {}
     @strikes = {}
@@ -7,7 +8,7 @@ class Calculator
     @current_score
   end
 
-  def calculate_score(rolls,strikes,turn)
+  def calculate_score(rolls, strikes, turn)
     @rolls = rolls
     @strikes = strikes
     @turn = turn
@@ -16,15 +17,15 @@ class Calculator
       @scores_per_turn[@checking_turn] = score_on_turn
       @checking_turn += 1
     end
-    return sum_of_scores
+    sum_of_scores
   end
 
   def sum_of_scores
     score = 0
-    @scores_per_turn.each do |key, val|
+    @scores_per_turn.each do |_key, val|
       score += val
     end
-    return score
+    score
   end
 
   def score_on_turn
@@ -33,17 +34,18 @@ class Calculator
       score += ele
     end
     score += strikes_scores
-    return score
+    score
   end
 
   def strikes_scores
-    if (@rolls[(@checking_turn + 1)] == nil || @checking_turn == 10)
+    if @rolls[(@checking_turn + 1)].nil? || @checking_turn == 10
       0
     else
-      if @strikes[@checking_turn] == "X"
+      case @strikes[@checking_turn]
+      when 'X'
         strikes
-      elsif @strikes[@checking_turn] == "/"
-          @rolls[(@checking_turn + 1)][0]
+      when '/'
+        @rolls[(@checking_turn + 1)][0]
       else
         0
       end
@@ -52,13 +54,12 @@ class Calculator
 
   def strikes
     to_add = 0
-      if @rolls[(@checking_turn + 1)].count == 2
-        to_add = @rolls[(@checking_turn + 1)][0] + @rolls[(@checking_turn + 1)][1]
-      elsif @rolls[(@checking_turn + 2)] != nil
-        to_add = @rolls[(@checking_turn + 1)][0] + @rolls[(@checking_turn + 2)][0]
-      else
-        to_add = @rolls[(@checking_turn + 1)][0]
-      end
+    to_add = if @rolls[(@checking_turn + 1)].count == 2
+               @rolls[(@checking_turn + 1)][0] + @rolls[(@checking_turn + 1)][1]
+             elsif @rolls[(@checking_turn + 2)] != nil
+               @rolls[(@checking_turn + 1)][0] + @rolls[(@checking_turn + 2)][0]
+             else
+               @rolls[(@checking_turn + 1)][0]
+             end
   end
-
 end

@@ -44,53 +44,58 @@ describe Bowling do
     expect(subject.turn).to eq 2
   end
 
-  it "A ten on the first go is stored as a strike" do
+  it 'A ten on the first go is stored as a strike' do
     subject.input(10)
-    expect(subject.strikes[1]).to eq "X"
+    expect(subject.strikes[1]).to eq 'X'
   end
 
-  it "A strike means that turn only has 1 roll" do
+  it 'A strike means that turn only has 1 roll' do
     subject.input(10)
     expect(subject.turn).to eq 2
   end
 
-  it "If the second go makes it add up to 10, it is a spare" do
+  it 'If the second go makes it add up to 10, it is a spare' do
     subject.input(5)
     subject.input(5)
-    expect(subject.strikes[1]).to eq "/"
+    expect(subject.strikes[1]).to eq '/'
   end
 
-  it "After 10 turns, the game is over" do
-    scorecard = Bowling.new
+  it 'After 10 turns, the game is over' do
+    calculator = double
+    allow(calculator).to receive(:calculate_score).and_return(5)
+    scorecard = Bowling.new(calculator)
     scorecard.instance_variable_set(:@turn, 11)
     expect(scorecard.turn_check).to eq 5
   end
 
-  it "If a strike or spare is rolled on the 10th go, that go gets 3 rolls" do
-    scorecard = Bowling.new
+  it 'If a strike or spare is rolled on the 10th go, that go gets 3 rolls' do
+    calculator = double
+    allow(calculator).to receive(:calculate_score).and_return(5)
+    scorecard = Bowling.new(calculator)
     scorecard.instance_variable_set(:@turn, 10)
     scorecard.input(5)
     scorecard.input(5)
     scorecard.input(6)
-    expect(scorecard.rolls[10]).to eq [5,5,6]
+    expect(scorecard.rolls[10]).to eq [5, 5, 6]
   end
 
-  it "After your final go, the app presents you with your score" do
-    scorecard = Bowling.new
+  it 'After your final go, the app presents you with your score' do
+    calculator = double
+    allow(calculator).to receive(:calculate_score).and_return(5)
+    scorecard = Bowling.new(calculator)
     scorecard.instance_variable_set(:@turn, 11)
     score = scorecard.current_score
     expect(scorecard.turn_check).to eq score
   end
 
-  it "A strike on the first roll of turn 10 counts as a strike for turn 10" do
+  it 'A strike on the first roll of turn 10 counts as a strike for turn 10' do
     scorecard = Bowling.new
     scorecard.instance_variable_set(:@turn, 10)
     scorecard.input(10)
-    expect(scorecard.strikes[10]).to eq "X"
-
+    expect(scorecard.strikes[10]).to eq 'X'
   end
 
-  it "Invalid scores are still invalid on turn ten" do
+  it 'Invalid scores are still invalid on turn ten' do
     scorecard = Bowling.new
     scorecard.instance_variable_set(:@turn, 10)
     expect { scorecard.input(11) }.to raise_error('Not a valid score!')
@@ -104,12 +109,23 @@ describe Bowling do
     expect { scorecard2.input(6) }.to raise_error('Not a valid score!')
   end
 
-  it "If there are no spares or strikes on turn 10, the only 2 rolls are completed" do
-    scorecard = Bowling.new
+  it 'If there are no spares or strikes on turn 10, the only 2 rolls are completed' do
+    calculator = double
+    allow(calculator).to receive(:calculate_score).and_return(5)
+    scorecard = Bowling.new(calculator)
     scorecard.instance_variable_set(:@turn, 10)
     scorecard.input(5)
     scorecard.input(4)
     scorecard.input(6)
-    expect(scorecard.rolls[10]).to eq([5,4])
+    expect(scorecard.rolls[10]).to eq([5, 4])
+  end
+
+  it 'Feature test 1' do
+  end
+
+  it 'Feature test 2' do
+  end
+
+  it 'Feature test 3' do
   end
 end
