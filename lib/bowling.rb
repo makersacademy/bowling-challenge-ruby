@@ -1,13 +1,15 @@
 # frozen_string_literal: true
+require_relative 'calculator.rb'
 
 class Bowling
   attr_reader :turn, :roll, :rolls, :strikes
 
-  def initialize
+  def initialize(calculator = Calculator.new)
     @turn = 1
     @roll = 1
     @rolls = {}
     @strikes = {}
+    @calculator = calculator
   end
 
   def input(score)
@@ -70,7 +72,7 @@ class Bowling
   end
 
   def current_score
-    5
+    @calculator.calculate_score(@rolls,@strikes,@turn)
   end
 
   def end_game
