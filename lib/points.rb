@@ -6,6 +6,7 @@ class Points
 
   USER_REQUEST = 'USER REQUEST'
   GAME_OVER = 'GAME OVER'
+  END_OF_FRAME = true
 
   def initialize
     @current_score = 0
@@ -20,6 +21,9 @@ class Points
     @frames[frame_index].update_roll(current_roll, pins_knocked_down)
     if current_roll == 2 || @frames[frame_index].strike == true
       update_total(@frames[frame_index].rolls.sum)
+      END_OF_FRAME
+    else
+      !END_OF_FRAME
     end
   end
 

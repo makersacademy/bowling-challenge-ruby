@@ -3,7 +3,8 @@
 require 'player'
 
 describe Player do
-  let(:points) { double('points', update_roll: true, current_score: true, score_breakdown: true, reset: true) }
+  let(:points) { double('points', update_roll: false, current_score: 'current score', score_breakdown: 'score breakdown', reset: 'reset') }
+  let(:points_end_of_frame) { double('points', update_roll: true, current_score: 'current score', score_breakdown: 'score breakdown', reset: 'reset') }
   let(:player) { Player.new('John Smith') }
 
   describe '#initialize' do
@@ -24,20 +25,31 @@ describe Player do
       expect(player.pins_knocked_down(7, points)).to eq 7
     end
 
-    it 'returns the current score at the end of each frame' do
+    it 'returns the current score at the end of each frame (2 rolls)' do
       player.pins_knocked_down(7, points)
 
-      expect(points).to receive(:current_score)
+      expect(points_end_of_frame).to receive(:current_score)
 
-      player.pins_knocked_down(1, points)
+      player.pins_knocked_down(1, points_end_of_frame)
+    end    
+    
+    it 'returns the current score at the end of each frame (strike)' do
+      expect(points_end_of_frame).to receive(:current_score)
+
+      player.pins_knocked_down(10, points_end_of_frame)
     end
 
     it 'informs player game has ended after frame 10 by returning the score breakdown' do
-      19.times { player.pins_knocked_down(4, points) }
-
-      expect(points).to receive(:score_breakdown)
+      9.times do
+        player.pins_knocked_down(4, points)
+        player.pins_knocked_down(4, points_end_of_frame)
+      end
 
       player.pins_knocked_down(4, points)
+
+      expect(points_end_of_frame).to receive(:score_breakdown)
+
+      player.pins_knocked_down(4, points_end_of_frame)
     end
   end
 end

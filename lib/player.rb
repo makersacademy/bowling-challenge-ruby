@@ -12,27 +12,26 @@ class Player
   end
 
   def pins_knocked_down(number, points)
-    points.update_roll(@current_frame, @current_roll, number)
+    end_of_frame = points.update_roll(@current_frame, @current_roll, number)
     if @current_frame == 10 && @current_roll == 2
       puts points.score_breakdown(GAME_OVER)
       @current_frame = 1
       @current_roll = 1
     else
-      update_roll_return_score(number, points)
+      update_roll_return_score(number, points, end_of_frame)
     end
   end
 
   private
 
-  def update_roll_return_score(number, points)
-    case @current_roll
-    when 1
-      @current_roll += 1
-      number
-    when 2
-      @current_roll -= 1
+  def update_roll_return_score(number, points, end_of_frame)
+    if end_of_frame == true
+      @current_roll = 1
       update_frame
       points.current_score
+    elsif @current_roll == 1
+      @current_roll = 2
+      number
     end
   end
 
