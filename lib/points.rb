@@ -41,7 +41,7 @@ class Points
   def score_breakdown(reason = USER_REQUEST)
     breakdown = "Frame | Pins | Bonus    \n=====================\n"
     @frames.each_with_index do |frame, index|
-      breakdown += "  #{index + 1}  | #{frame.rolls[0]} , #{frame.rolls[1]} |\n"
+      breakdown += "  #{index + 1}  | #{frame.rolls[0]} , #{frame.rolls[1]} |  #{frame.bonus}\n"
     end
     if reason == GAME_OVER
       breakdown += " *** GAME OVER *** "

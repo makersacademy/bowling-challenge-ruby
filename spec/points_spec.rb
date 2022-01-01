@@ -45,7 +45,7 @@ describe Points do
   end
 
   describe '#add_bonus_points_for_last_frame(current_frame_number)' do
-    it 'updates current score with any bonus points' do
+    it 'updates current score with any bonus points from a strike' do
       points.update_roll(1, 1, 10)
       points.update_roll(2, 1, 3)
       points.update_roll(2, 2, 4)
@@ -60,7 +60,7 @@ describe Points do
       points.update_roll(1, 1, 4)
       points.update_roll(1, 2, 3)
 
-      expect(points.score_breakdown).to eq "Frame | Pins | Bonus    \n=====================\n  1  | 4 , 3 |\n  2  |  ,  |\n  3  |  ,  |\n  4  |  ,  |\n  5  |  ,  |\n  6  |  ,  |\n  7  |  ,  |\n  8  |  ,  |\n  9  |  ,  |\n  10  |  ,  |\n"
+      expect(points.score_breakdown).to eq "Frame | Pins | Bonus    \n=====================\n  1  | 4 , 3 |  0\n  2  |  ,  |  0\n  3  |  ,  |  0\n  4  |  ,  |  0\n  5  |  ,  |  0\n  6  |  ,  |  0\n  7  |  ,  |  0\n  8  |  ,  |  0\n  9  |  ,  |  0\n  10  |  ,  |  0\n"
     end
   end
 
