@@ -13,11 +13,9 @@ class Calculator
     @strikes = strikes
     @turn = turn
     @checking_turn = 1
-    p @rolls
     until @checking_turn == @turn
       @scores_per_turn[@checking_turn] = score_on_turn
       @checking_turn += 1
-      p @scores_per_turn
     end
     sum_of_scores
   end

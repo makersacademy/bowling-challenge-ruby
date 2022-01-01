@@ -72,3 +72,5 @@ To input a score, please use bowling.input(score)
 To input check your final score, please use bowling.final_score
 
 If you wish to check your score at any time, please use bowling.my_score
+
+The scoreboard_controller file is an interface ONLY added for easy testing and checking purposes. If this program is further built out in the future to have a front-end, this should be removed. If a score is typed in that will raise an error, this will currently cause this to break. Therefore, this is mainly to be used to confirm scores when the inputs are known to be correct
