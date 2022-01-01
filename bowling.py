@@ -43,14 +43,17 @@ def calculate_score(list_of_scores):
     i = 0
     # Iterate until 9th frame
     while i < 9:
-        print(total)
+        print(f"Frame {i+1} - {total}")
         # Spare bonus
         if len(list_of_scores[i]) == 2 and sum(list_of_scores[i]) == 10:
             spare_bonus = list_of_scores[i+1][0]
             total += spare_bonus
         # Strike bonus
         elif len(list_of_scores[i]) == 1:
-            strike_bonus = sum(list_of_scores[i+1][0:2])
+            if len(list_of_scores[i+1]) != 1:
+                strike_bonus = sum(list_of_scores[i+1][0:2])
+            else:
+                strike_bonus = sum(list_of_scores[i+1], list_of_scores[i+2][0])
             total += strike_bonus
         # Frame score
         total += sum(list_of_scores[i])
