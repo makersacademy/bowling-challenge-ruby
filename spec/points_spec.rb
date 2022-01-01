@@ -44,6 +44,16 @@ describe Points do
     end
   end
 
+  describe '#add_bonus_points_for_last_frame(current_frame_number)' do
+    it 'updates current score with any bonus points' do
+      points.update_roll(1, 1, 10)
+      points.update_roll(2, 1, 3)
+      points.update_roll(2, 2, 4)
+
+      expect { points.add_bonus_points_for_last_frame(2) }.to change { points.current_score }.from(17).to(24)
+    end
+  end
+
   describe '#score_breakdown' do
     it 'offers a visual breakdown of the games scores' do
       # cant work out how to do this with a stub on frames
