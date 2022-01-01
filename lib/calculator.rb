@@ -12,15 +12,24 @@ class Calculator
     @strikes = strikes
     @turn = turn
     @checking_turn = 1
-    until @checking_turn == @turn
-      @scores_per_turn[@turn] = score_on_turn
+    until @checking_turn - 1 == @turn
+      @scores_per_turn[@checking_turn] = score_on_turn
       @checking_turn += 1
     end
+    return sum_of_scores
+  end
+
+  def sum_of_scores
+    score = 0
+    @scores_per_turn.each do |key, val|
+      score += val
+    end
+    return score
   end
 
   def score_on_turn
     score = 0
-    @rolls[@turn].each do |ele|
+    @rolls[@checking_turn].each do |ele|
       score += ele
     end
     score += strikes_scores
@@ -28,13 +37,13 @@ class Calculator
   end
 
   def strikes_scores
-    if (@rolls[(@turn + 1)] != nil || @turn == 10)
+    if (@rolls[(@checking_turn + 1)] == nil || @checking_turn == 10)
       0
     else
-      if @strikes[@turn] == "X"
+      if @strikes[@checking_turn] == "X"
         strikes
-      elsif @strikes[@turn] == "/"
-          @rolls[(@turn + 1)][0]
+      elsif @strikes[@checking_turn] == "/"
+          @rolls[(@checking_turn + 1)][0]
       else
         0
       end
@@ -43,12 +52,12 @@ class Calculator
 
   def strikes
     to_add = 0
-      if @rolls[(@turn + 1)].count = 2
-        to_add = @rolls[(@turn + 1)][0] + @rolls[(@turn + 1)][1]
-      elsif @rolls[(@turn + 2)] != nil
-        to_add = @rolls[(@turn + 1)][0] + @rolls[(@turn + 2)][0]
+      if @rolls[(@checking_turn + 1)].count == 2
+        to_add = @rolls[(@checking_turn + 1)][0] + @rolls[(@checking_turn + 1)][1]
+      elsif @rolls[(@checking_turn + 2)] != nil
+        to_add = @rolls[(@checking_turn + 1)][0] + @rolls[(@checking_turn + 2)][0]
       else
-        to_add = @rolls[(@turn + 1)][0]
+        to_add = @rolls[(@checking_turn + 1)][0]
       end
   end
 
