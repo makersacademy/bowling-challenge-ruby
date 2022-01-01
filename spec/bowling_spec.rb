@@ -67,10 +67,49 @@ describe Bowling do
   end
 
   it "If a strike or spare is rolled on the 10th go, that go gets 3 rolls" do
-
+    scorecard = Bowling.new
+    scorecard.instance_variable_set(:@turn, 10)
+    scorecard.input(5)
+    scorecard.input(5)
+    scorecard.input(6)
+    expect(scorecard.rolls[10]).to eq [5,5,6]
   end
 
   it "After your final go, the app presents you with your score" do
+    scorecard = Bowling.new
+    scorecard.instance_variable_set(:@turn, 11)
+    score = scorecard.current_score
+    expect(scorecard.turn_check).to eq score
+  end
 
+  it "A strike on the first roll of turn 10 counts as a strike for turn 10" do
+    scorecard = Bowling.new
+    scorecard.instance_variable_set(:@turn, 10)
+    scorecard.input(10)
+    expect(scorecard.strikes[10]).to eq "X"
+
+  end
+
+  it "Invalid scores are still invalid on turn ten" do
+    scorecard = Bowling.new
+    scorecard.instance_variable_set(:@turn, 10)
+    expect { scorecard.input(11) }.to raise_error('Not a valid score!')
+    scorecard.input(5)
+    expect { scorecard.input(6) }.to raise_error('Not a valid score!')
+    scorecard.input(5)
+    scorecard2 = Bowling.new
+    scorecard2.instance_variable_set(:@turn, 10)
+    scorecard2.input(10)
+    scorecard2.input(6)
+    expect { scorecard2.input(6) }.to raise_error('Not a valid score!')
+  end
+
+  it "If there are no spares or strikes on turn 10, the only 2 rolls are completed" do
+    scorecard = Bowling.new
+    scorecard.instance_variable_set(:@turn, 10)
+    scorecard.input(5)
+    scorecard.input(4)
+    scorecard.input(6)
+    expect(scorecard.rolls[10]).to eq([5,4])
   end
 end
