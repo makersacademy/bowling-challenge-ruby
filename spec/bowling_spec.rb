@@ -44,5 +44,33 @@ describe Bowling do
     expect(subject.turn).to eq 2
   end
 
-  
+  it "A ten on the first go is stored as a strike" do
+    subject.input(10)
+    expect(subject.strikes[1]).to eq "X"
+  end
+
+  it "A strike means that turn only has 1 roll" do
+    subject.input(10)
+    expect(subject.turn).to eq 2
+  end
+
+  it "If the second go makes it add up to 10, it is a spare" do
+    subject.input(5)
+    subject.input(5)
+    expect(subject.strikes[1]).to eq "/"
+  end
+
+  it "After 10 turns, the game is over" do
+    scorecard = Bowling.new
+    scorecard.instance_variable_set(:@turn, 11)
+    expect(scorecard.turn_check).to eq 5
+  end
+
+  it "If a strike or spare is rolled on the 10th go, that go gets 3 rolls" do
+
+  end
+
+  it "After your final go, the app presents you with your score" do
+
+  end
 end
