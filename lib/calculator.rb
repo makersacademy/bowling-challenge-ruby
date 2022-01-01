@@ -13,9 +13,11 @@ class Calculator
     @strikes = strikes
     @turn = turn
     @checking_turn = 1
-    until @checking_turn - 1 == @turn
+    p @rolls
+    until @checking_turn == @turn
       @scores_per_turn[@checking_turn] = score_on_turn
       @checking_turn += 1
+      p @scores_per_turn
     end
     sum_of_scores
   end
@@ -54,7 +56,7 @@ class Calculator
 
   def strikes
     to_add = 0
-    to_add = if @rolls[(@checking_turn + 1)].count == 2
+    to_add = if @rolls[(@checking_turn + 1)].count >= 2
                @rolls[(@checking_turn + 1)][0] + @rolls[(@checking_turn + 1)][1]
              elsif @rolls[(@checking_turn + 2)] != nil
                @rolls[(@checking_turn + 1)][0] + @rolls[(@checking_turn + 2)][0]

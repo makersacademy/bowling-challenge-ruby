@@ -50,7 +50,7 @@ describe Calculator do
   it 'Will add up all scores and present the current total score' do
     rolls = { 1 => [1, 7], 2 => [10], 3 => [5, 2] }
     calculator = Calculator.new
-    @turn = 3
+    @turn = 4
     @strikes = { 2 => 'X' }
     @rolls = rolls
     expect(calculator.calculate_score(@rolls, @strikes, @turn)).to eq 32

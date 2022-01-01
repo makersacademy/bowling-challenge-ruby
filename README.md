@@ -63,3 +63,12 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+
+### Details on this project:
+
+To input a score, please use bowling.input(score)
+
+To input check your final score, please use bowling.final_score
+
+If you wish to check your score at any time, please use bowling.my_score

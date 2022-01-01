@@ -3,7 +3,7 @@
 require_relative 'calculator'
 
 class Bowling
-  attr_reader :turn, :roll, :rolls, :strikes
+  attr_reader :turn, :roll, :rolls, :strikes, :final_score
 
   def initialize(calculator = Calculator.new)
     @turn = 1
@@ -15,7 +15,7 @@ class Bowling
 
   def input(score)
     unless @turn > 10
-      if (1..10).include? score
+      if (0..10).include? score
         rolling(score)
       else
         raise 'Not a valid score!'
@@ -26,7 +26,7 @@ class Bowling
   end
 
   def turn_check
-    end_game if @turn > 10
+    my_score if @turn > 10
   end
 
   def rolling(score)
@@ -72,9 +72,8 @@ class Bowling
     @calculator.calculate_score(@rolls, @strikes, @turn)
   end
 
-  def end_game
-    puts 'Thank you for playing! Your score is:'
-    current_score
+  def my_score
+    @final_score = current_score
   end
 
   def turn_ten(score)

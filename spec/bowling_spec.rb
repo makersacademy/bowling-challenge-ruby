@@ -17,11 +17,6 @@ describe Bowling do
     expect(subject.turn).to eq 1
   end
 
-  it 'I can ask for the current score after a roll' do
-    subject.input(5)
-    expect(subject.current_score).to eq 5
-  end
-
   it 'The rolls are inputted onto a hash' do
     subject.input(5)
     expect(subject.rolls[1][0]).to eq 5
@@ -121,11 +116,92 @@ describe Bowling do
   end
 
   it 'Feature test 1' do
+    scorecard = Bowling.new
+    scorecard.input(5)
+    scorecard.input(4)
+    scorecard.input(7)
+    scorecard.input(2)
+    scorecard.input(8)
+    scorecard.input(2)
+    scorecard.input(10)
+    scorecard.input(7)
+    scorecard.input(2)
+    scorecard.input(8)
+    scorecard.input(1)
+    scorecard.input(6)
+    scorecard.input(4)
+    scorecard.input(9)
+    scorecard.input(1)
+    scorecard.input(5)
+    scorecard.input(3)
+    scorecard.input(3)
+    scorecard.input(5)
+    expect(scorecard.final_score).to eq 125
   end
 
-  it 'Feature test 2' do
+  it 'Feature test 2 - Perfect Game' do
+    scorecard = Bowling.new
+    scorecard.input(10)
+    scorecard.input(10)
+    scorecard.input(10)
+    scorecard.input(10)
+    scorecard.input(10)
+    scorecard.input(10)
+    scorecard.input(10)
+    scorecard.input(10)
+    scorecard.input(10)
+    scorecard.input(10)
+    scorecard.input(10)
+    scorecard.input(10)
+    expect(scorecard.final_score).to eq 300
   end
 
   it 'Feature test 3' do
+    scorecard = Bowling.new
+    scorecard.input(0)
+    scorecard.input(5)
+    scorecard.input(3)
+    scorecard.input(4)
+    scorecard.input(10)
+    scorecard.input(7)
+    scorecard.input(2)
+    scorecard.input(4)
+    scorecard.input(6)
+    scorecard.input(9)
+    scorecard.input(1)
+    scorecard.input(10)
+    scorecard.input(5)
+    scorecard.input(5)
+    scorecard.input(3)
+    scorecard.input(6)
+    scorecard.input(10)
+    scorecard.input(7)
+    scorecard.input(2)
+    expect(scorecard.final_score).to eq 140
+  end
+
+  it 'Feature test 4 - Gutter game' do
+    scorecard = Bowling.new
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    scorecard.input(0)
+    expect(scorecard.final_score).to eq 0
   end
 end
