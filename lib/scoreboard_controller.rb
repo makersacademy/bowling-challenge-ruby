@@ -13,11 +13,16 @@ class Scoreboard_Controller
     puts "You are on turn #{@bowling.turn} and roll #{@bowling.roll}"
     choice = gets.chomp
     if (1..10).include? choice.to_i || choice == "0"
-      @bowling.input(choice.to_i)
-      if @bowling.turn == 11
-        game_over
+      begin
+        @bowling.input(choice.to_i)
+      rescue
+        rescuer
       else
-        interface
+        if @bowling.turn == 11
+          game_over
+        else
+          interface
+        end
       end
     elsif choice.downcase == "my score"
       puts @bowling.my_score
@@ -30,5 +35,10 @@ class Scoreboard_Controller
 
   def game_over
     puts "Your score is: #{@bowling.final_score}!"
+  end
+
+  def rescuer
+    puts "Invalid input! Please try again"
+    interface
   end
 end
