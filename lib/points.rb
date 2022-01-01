@@ -31,6 +31,15 @@ class Points
     @current_score += score
   end
 
+  def add_bonus_points_for_last_frame(current_frame_number)
+    prev_frame = @frames[current_frame_number - 2] 
+    current_frame = @frames[current_frame_number - 1] 
+    if prev_frame.strike == true
+      bonus = prev_frame.add_bonus(current_frame)
+      update_total(bonus)
+    end
+  end
+
   def score_breakdown(reason = USER_REQUEST)
     breakdown = "Frame | Pins | Bonus    \n=====================\n"
     @frames.each_with_index do |frame, index|

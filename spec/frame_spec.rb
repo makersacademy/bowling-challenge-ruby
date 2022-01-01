@@ -2,6 +2,7 @@ require 'frame'
 
 describe Frame do
   let(:frame) { Frame.new }
+  let(:next_frame) { Frame.new }
 
   describe '#initialize' do
     it 'sets up instance variables to hold scores per roll' do
@@ -32,6 +33,18 @@ describe Frame do
       frame.update_roll(1, 10)
 
       expect(frame.rolls[1]).to eq 0
+    end
+  end
+
+  describe '#add_bonus' do
+    it 'calculates bonus points from a strike and saves them in a bonus instance variable' do
+      frame.update_roll(1, 10)
+      next_frame.update_roll(1, 3)
+      next_frame.update_roll(2, 4)
+
+      frame.add_bonus(next_frame)
+
+      expect(frame.bonus).to eq 7
     end
   end
 end
