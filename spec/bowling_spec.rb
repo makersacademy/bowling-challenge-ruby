@@ -26,13 +26,13 @@ describe BowlingGame do
 		it 'has a #roll method' do
 			expect(game).to respond_to(:roll)
 		end
-
-		it 'takes an argument `pins` and adds it to the frames array' do
+		
+		it 'takes `pins` as args and adds it to the score array with a total length of 10' do
 			game.roll(7)
-			expect(game.score[0].length).to eq 1
+			game.roll(2)
+			expect(game.score[0].length).to eq 2
 		end
 	end
-
 
 
 end
