@@ -31,20 +31,27 @@ class Points
     @current_score += score
   end
 
-  def add_bonus_points_for_last_frame(current_frame_number)
-    prev_frame = @frames[current_frame_number - 2] 
+  def add_bonus_points_for_prev_frames(current_frame_number)
     current_frame = @frames[current_frame_number - 1] 
-    prev_frame.add_bonus(current_frame)
-    update_total(prev_frame.bonus)
+    prev_frame1 = @frames[current_frame_number - 2] 
+    prev_frame2 = @frames[current_frame_number - 3]
+
+    if current_frame_number > 1 && (prev_frame1.strike || prev_frame1.spare)
+      add_bonus_for_last_frame(current_frame, prev_frame1)
+    end
+
+    if current_frame_number > 2 && (prev_frame1.strike && prev_frame2.strike)
+      add_bonus_for_two_frames_ago(current_frame, prev_frame1, prev_frame2)
+    end
   end
 
   def score_breakdown(reason = USER_REQUEST)
     breakdown = "Frame | Pins | Bonus    \n=====================\n"
     @frames.each_with_index do |frame, index|
-      breakdown += "  #{index + 1}  | #{frame.rolls[0]} , #{frame.rolls[1]} |  #{frame.bonus}\n"
+      breakdown += "  #{index + 1}  | #{frame.rolls[0]} , #{frame.rolls[1]} |  #{frame.bonus.sum}\n"
     end
     if reason == GAME_OVER
-      breakdown += " *** GAME OVER *** "
+      breakdown += "=====================\n FINAL SCORE: #{@current_score}\n=====================\n *** GAME OVER *** "
       reset
     end
     breakdown
@@ -55,4 +62,16 @@ class Points
     @frames = []
     10.times { @frames << Frame.new }
   end
+end
+
+private
+
+def add_bonus_for_last_frame(current_frame, prev_frame1)
+  prev_frame1.add_bonus(current_frame)
+  update_total(prev_frame1.bonus.sum)
+end
+
+def add_bonus_for_two_frames_ago(current_frame, prev_frame1, prev_frame2)
+  prev_frame2.add_bonus(current_frame, prev_frame1)
+  update_total(prev_frame2.bonus.sum)
 end

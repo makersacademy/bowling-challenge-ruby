@@ -26,7 +26,7 @@ class Player
 
   def update_roll_return_score(number, points, end_of_frame)
     if end_of_frame == true
-      points.add_bonus_points_for_last_frame(@current_frame)
+      points.add_bonus_points_for_prev_frames(@current_frame)
       @current_roll = 1
       update_frame
       points.current_score

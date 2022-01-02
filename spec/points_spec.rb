@@ -44,13 +44,30 @@ describe Points do
     end
   end
 
-  describe '#add_bonus_points_for_last_frame(current_frame_number)' do
+  describe '#add_bonus_points_for_prev_frames(current_frame_number)' do
     it 'updates current score with any bonus points from a strike' do
       points.update_roll(1, 1, 10)
       points.update_roll(2, 1, 3)
       points.update_roll(2, 2, 4)
 
-      expect { points.add_bonus_points_for_last_frame(2) }.to change { points.current_score }.from(17).to(24)
+      expect { points.add_bonus_points_for_prev_frames(2) }.to change { points.current_score }.from(17).to(24)
+    end
+
+    it 'updates current score with bonus points from consecutive strikes once two rolls are complete' do
+      points.update_roll(1, 1, 10)
+      points.update_roll(2, 1, 10)
+      points.update_roll(3, 1, 3)
+      points.update_roll(3, 2, 4)
+      
+      expect { points.add_bonus_points_for_prev_frames(3) }.to change { points.current_score }.from(27).to(47)
+    end
+
+    it 'updates current score with bonus points from consecutive strikes once two rolls are complete' do
+      points.update_roll(1, 1, 10)
+      points.update_roll(2, 1, 10)
+      points.update_roll(3, 1, 10)
+      
+      expect { points.add_bonus_points_for_prev_frames(3) }.to change { points.current_score }.from(30).to(50)
     end
   end
 
@@ -61,6 +78,15 @@ describe Points do
       points.update_roll(1, 2, 3)
 
       expect(points.score_breakdown).to eq "Frame | Pins | Bonus    \n=====================\n  1  | 4 , 3 |  0\n  2  |  ,  |  0\n  3  |  ,  |  0\n  4  |  ,  |  0\n  5  |  ,  |  0\n  6  |  ,  |  0\n  7  |  ,  |  0\n  8  |  ,  |  0\n  9  |  ,  |  0\n  10  |  ,  |  0\n"
+    end
+
+    it 'provides a score breakdown at the end of the game' do
+      10.times do |frame|
+        points.update_roll(frame, 1, 4)
+        points.update_roll(frame, 2, 3)
+      end
+
+      expect(points.score_breakdown('GAME OVER')).to eq "Frame | Pins | Bonus    \n=====================\n  1  | 4 , 3 |  0\n  2  | 4 , 3 |  0\n  3  | 4 , 3 |  0\n  4  | 4 , 3 |  0\n  5  | 4 , 3 |  0\n  6  | 4 , 3 |  0\n  7  | 4 , 3 |  0\n  8  | 4 , 3 |  0\n  9  | 4 , 3 |  0\n  10  | 4 , 3 |  0\n=====================\n FINAL SCORE: 70\n=====================\n *** GAME OVER *** "
     end
   end
 

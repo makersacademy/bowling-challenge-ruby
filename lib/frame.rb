@@ -5,7 +5,7 @@ class Frame
     @rolls = []
     @strike = false
     @spare = false
-    @bonus = 0
+    @bonus = []
   end
 
   def update_roll(current_roll, pins_knocked_down)
@@ -16,9 +16,15 @@ class Frame
     end
   end
 
-  def add_bonus(current_frame)
+  def add_bonus(current_frame, prev_frame1 = 'not entered')
     if @strike == true
-      @bonus = current_frame.rolls.sum
+      if prev_frame1 == 'not entered' && current_frame.strike == false
+        @bonus << current_frame.rolls[0]
+        @bonus << current_frame.rolls[1]
+      elsif prev_frame1.instance_of? Frame
+        @bonus << prev_frame1.rolls[0]
+        @bonus << current_frame.rolls[0]
+      end
     end
   end
 end

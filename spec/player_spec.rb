@@ -4,7 +4,7 @@ require 'player'
 
 describe Player do
   let(:points) { double('points', update_roll: false, current_score: 'current score', score_breakdown: 'score breakdown', reset: 'reset') }
-  let(:points_end_of_frame) { double('points', update_roll: true, current_score: 'current score', score_breakdown: 'score breakdown', reset: 'reset') }
+  let(:points_end_of_frame) { double('points', update_roll: true, current_score: 'current score', score_breakdown: 'score breakdown', reset: 'reset', add_bonus_points_for_prev_frames: 'add_bonus_points_for_prev_frames') }
   let(:player) { Player.new('John Smith') }
 
   describe '#initialize' do
@@ -50,6 +50,15 @@ describe Player do
       expect(points_end_of_frame).to receive(:score_breakdown)
 
       player.pins_knocked_down(4, points_end_of_frame)
+    end
+
+    it 'resets the current frame back to 1 after frame 10 complete' do
+      10.times do
+        player.pins_knocked_down(4, points)
+        player.pins_knocked_down(4, points_end_of_frame)
+      end
+
+      expect(player.current_frame).to eq 1
     end
   end
 end
