@@ -11,11 +11,6 @@ describe BowlingGame do
 			expect(game).to be_a BowlingGame
 		end
 
-		it 'starts a game with a score of zero' do
-			game_score = BowlingGame::STARTINGSCORE
-			expect(game_score).to eq 0
-		end
-
 		it 'starts a game with an empty array with a length of 10' do
 			expect(game.score.length).to eq 10
 		end

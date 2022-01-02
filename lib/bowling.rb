@@ -1,6 +1,5 @@
 
 class BowlingGame
-	STARTINGSCORE = 0
 
 	attr_reader :score
 
