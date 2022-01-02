@@ -43,9 +43,21 @@ class Points
     if current_frame_number > 2 && (prev_frame1.strike && prev_frame2.strike)
       add_bonus_for_two_frames_ago(current_frame, prev_frame1, prev_frame2)
     end
+  end
 
-    # if current_frame_number == 10 && (current_frame.strike || current_frame.spare)
-    # add bonus points for the tenth frame (2 rolls strike, 1 roll spare)
+  def add_final_round_bonus_points(current_frame_number, number)
+    current_frame = @frames[current_frame_number - 1] 
+    if current_frame_number == 10 && current_frame.spare
+      current_frame.final_round_bonus(number)
+      update_total(current_frame.bonus.sum)
+      END_OF_FRAME
+    elsif current_frame_number == 10 && current_frame.strike && current_frame.bonus.empty?
+      current_frame.final_round_bonus(number)
+    elsif current_frame_number == 10 && current_frame.strike && current_frame.bonus.length == 1
+      current_frame.final_round_bonus(number)
+      update_total(current_frame.bonus.sum)
+      END_OF_FRAME
+    end
   end
 
   def score_breakdown(reason = USER_REQUEST)

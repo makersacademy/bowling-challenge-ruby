@@ -3,7 +3,7 @@
 require 'player'
 
 describe Player do
-  let(:points) { double('points', update_roll: false, current_score: 'current score', score_breakdown: 'score breakdown', reset: 'reset') }
+  let(:points) { double('points', update_roll: false, current_score: 'current score', score_breakdown: 'score breakdown', reset: 'reset', add_final_round_bonus_points: 'add_final_round_bonus_points') }
   let(:points_end_of_frame) { double('points', update_roll: true, current_score: 'current score', score_breakdown: 'score breakdown', reset: 'reset', add_bonus_points: 'add_bonus_points') }
   let(:player) { Player.new('John Smith') }
 
@@ -59,6 +59,14 @@ describe Player do
       end
 
       expect(player.current_frame).to eq 1
+    end
+  end
+
+  describe '#bonus_roll(number, points)' do
+    it 'calls on points to save bonus points for frame 10' do
+      expect(points).to receive(:add_final_round_bonus_points)
+
+      player.bonus_roll(5, points)
     end
   end
 end

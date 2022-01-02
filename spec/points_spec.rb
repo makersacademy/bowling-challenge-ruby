@@ -80,6 +80,31 @@ describe Points do
     end
   end
 
+  describe '#add_final_round_bonus_points(current_frame, number)' do
+    it 'saves bonus roll scores in frame instance and updates current score when bonus rolls end (strike)' do
+      points.update_roll(10, 1, 10)
+      points.add_final_round_bonus_points(10, 5)
+      points.add_final_round_bonus_points(10, 4)
+
+      expect(points.current_score).to eq 19
+    end
+
+    it 'saves bonus roll scores in frame instance and does not update current score if bonus rolls not finished (strike)' do
+      points.update_roll(10, 1, 10)
+      points.add_final_round_bonus_points(10, 5)
+
+      expect(points.current_score).to eq 10
+    end
+
+    it 'saves bonus roll scores in frame instance and updates current score when bonus rolls end (spare)' do
+      points.update_roll(10, 1, 5)
+      points.update_roll(10, 2, 5)
+      points.add_final_round_bonus_points(10, 5)
+
+      expect(points.current_score).to eq 15
+    end
+  end
+
   describe '#score_breakdown' do
     it 'offers a visual breakdown of the games scores' do
       # cant work out how to do this with a stub on frames
