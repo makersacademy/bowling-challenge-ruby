@@ -47,6 +47,14 @@ class BowlingGame
 		end
 	end
 
+	def calc_score
+		if perfect_game?
+			(@score.flatten.compact.sum + bonus_score.flatten.compact.sum)
+		else
+			bonus_score.flatten.compact.sum
+		end
+	end
+
 	private 
 	def perfect_game?
 		@score.flatten.all? {|el| el == 10} 

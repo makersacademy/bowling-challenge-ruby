@@ -41,5 +41,24 @@ describe BowlingGame do
 		end
 	end
 
+	describe "#calc_score" do
+		it 'has a #calc_score method' do
+			expect(game).to respond_to(:calc_score)
+		end
+
+		it 'knows if the someone is having a perfect_game and calculates the score accordingly' do
+			10.times{game.roll(10)}
+			expect(game.calc_score).to eq 300
+		end
+
+		it "calculates the score based on user's results" do
+			game.roll(1)
+			game.roll(4)
+			game.roll(4)
+			game.roll(5)
+			expect(game.calc_score).to eq 14
+		end
+	end
+
 
 end
