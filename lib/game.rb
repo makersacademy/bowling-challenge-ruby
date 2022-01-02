@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'frame'
 
 class Game
@@ -5,7 +7,7 @@ class Game
 
   attr_reader :score, :frames
 
-  def initialize(frame = Frame)
+  def initialize(_frame = Frame)
     @score = 0
     @frames = []
   end
@@ -18,9 +20,9 @@ class Game
     MAX_FRAMES.times do |index|
       frame = Frame.new
       puts "Round #{index + 1}"
-      puts "Enter score for Roll 1:"
+      puts 'Enter score for Roll 1:'
       frame.set_roll1(gets.chomp.to_i)
-      puts "Enter score for Roll 2:"
+      puts 'Enter score for Roll 2:'
       frame.set_roll2(gets.chomp.to_i)
       frames << frame
       puts "Total score: #{score}"

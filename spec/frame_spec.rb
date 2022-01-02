@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'frame'
 
 describe Frame do
@@ -20,5 +22,4 @@ describe Frame do
       expect(subject.roll2).to eq(2)
     end
   end
-
 end

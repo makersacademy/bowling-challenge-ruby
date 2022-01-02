@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Frame
   attr_reader :score
   attr_accessor :roll1, :roll2
 
   def initialize
-    @score 
+    @score
     @roll1 = 0
     @roll2 = 0
   end
