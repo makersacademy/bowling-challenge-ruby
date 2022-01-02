@@ -24,6 +24,7 @@ class Frame
         @bonus << current_frame.rolls[0]
       end
     elsif @spare == true
+      @bonus << current_frame.rolls[0]
     end
   end
 end
