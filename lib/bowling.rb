@@ -28,13 +28,17 @@ class Bowling
         first_roll = gets.chomp.to_i
       end
       # @roll == 2
-      puts "Enter how many pins you knocked down on your second roll:"
-      second_roll = gets.chomp.to_i
-      while valid_score?(first_roll + second_roll) == false
-        puts 'Outside of Range' 
+      if strike?(first_roll)
+        enter_score(first_roll)
+      else
+        puts "Enter how many pins you knocked down on your second roll:"
         second_roll = gets.chomp.to_i
+        while valid_score?(first_roll + second_roll) == false
+          puts 'Outside of Range' 
+          second_roll = gets.chomp.to_i
+        end
+        enter_score(first_roll + second_roll)
       end
-      enter_score(first_roll + second_roll)
       print_score
       @frame += 1
     end
@@ -48,9 +52,17 @@ class Bowling
   def print_score
     print "{|"
     @score.each do |score|
-      print score.to_s + "|"
+      if strike?(score)
+        print "X|"
+      else
+        print score.to_s + "|"
+      end
     end
     print "}"
     puts ""
+  end
+
+  def strike?(roll)
+    roll == 10
   end
 end

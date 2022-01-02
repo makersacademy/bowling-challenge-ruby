@@ -41,4 +41,9 @@ describe Bowling do
       expect(@bowling.valid_score?(3)).to be_truthy
     end
   end
+  describe '#strike?' do
+    it 'returns true if you knock down 10 pins' do
+      expect(@bowling.strike?(10)).to eq true
+    end
+  end
 end
