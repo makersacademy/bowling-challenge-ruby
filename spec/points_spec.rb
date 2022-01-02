@@ -69,6 +69,15 @@ describe Points do
       
       expect { points.add_bonus_points_for_prev_frames(3) }.to change { points.current_score }.from(30).to(50)
     end
+
+    it 'updates current score with any bonus points from a spare' do
+      points.update_roll(1, 1, 5)
+      points.update_roll(1, 2, 5)
+      points.update_roll(2, 1, 4)
+      points.update_roll(2, 2, 3)
+
+      expect { points.add_bonus_points_for_prev_frames(2) }.to change { points.current_score }.from(17).to(21)
+    end
   end
 
   describe '#score_breakdown' do

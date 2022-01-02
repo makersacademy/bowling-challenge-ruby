@@ -33,7 +33,14 @@ describe Frame do
     it 'voids the second roll if the first roll was a strike' do
       frame1.update_roll(1, 10)
 
-      expect(frame1.rolls[1]).to eq 0
+      expect(frame1.rolls.length).to eq 1
+    end
+
+    it 'records if the roll was a spare' do
+      frame1.update_roll(1, 5)
+      frame1.update_roll(2, 5)
+
+      expect(frame1.spare).to eq true
     end
   end
 
@@ -67,6 +74,17 @@ describe Frame do
       frame1.add_bonus(frame3, frame2)
 
       expect(frame1.bonus).to eq [10, 10]
+    end
+
+    it 'calculates bonus points from a spare and saves them in a bonus instance variable' do
+      frame1.update_roll(1, 5)
+      frame1.update_roll(2, 5)
+      frame2.update_roll(1, 4)
+      frame2.update_roll(2, 3)
+
+      frame1.add_bonus(frame2)
+
+      expect(frame1.bonus).to eq [4]
     end
   end
 end
