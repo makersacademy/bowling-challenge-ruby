@@ -10,4 +10,18 @@ describe Game do
       expect(subject.score).to eq(3)
     end
   end
+
+  describe '#play' do
+    it 'plays 10 rounds' do
+      allow(subject).to receive(:gets).and_return("1")
+      subject.play
+      expect(subject.frames.length).to eq(Game::MAX_FRAMES)
+    end
+
+    it 'takes user input for a score and records it' do
+      allow(subject).to receive(:gets).and_return("1")
+      subject.play
+      expect(subject.score).to eq(20)
+    end
+  end
 end
