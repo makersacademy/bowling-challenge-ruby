@@ -9,7 +9,7 @@ class Bowling
   end
 
   def enter_score(pins = [])
-    raise 'Outside of Range' unless valid_score?(pins.reduce(:+))
+    # raise 'Outside of Range' unless valid_score?(pins.reduce(:+))
     score << pins
     @roll = 2
   end
@@ -29,7 +29,7 @@ class Bowling
       end
       # @roll == 2
       if strike?(first_roll)
-        enter_score([first_roll, 0])
+        enter_score([first_roll, 0, bonus_points(first_roll)])
       else
         puts "Enter how many pins you knocked down on your second roll:"
         second_roll = gets.chomp.to_i
@@ -37,7 +37,7 @@ class Bowling
           puts 'Outside of Range' 
           second_roll = gets.chomp.to_i
         end
-        enter_score([first_roll, second_roll])
+        enter_score([first_roll, second_roll, bonus_points(first_roll)])
       end
       print_score
       @frame += 1
@@ -53,9 +53,9 @@ class Bowling
     print "{|"
     @score.each do |score|
       if strike?(score[0])
-        print "[X, -]|"
+        print "[X, -, " + score[2].to_s + "]|"
       elsif spare?(score[0], score[1])
-        print "[" + score[0].to_s + ", /]|"
+        print "[" + score[0].to_s + ", /," + score[2].to_s + "]|"
       else
         print score.to_s + "|"
       end
@@ -70,5 +70,19 @@ class Bowling
 
   def spare?(first_roll, second_roll)
     first_roll + second_roll == 10
+  end
+
+  def bonus_points(roll)
+    if @frame == 1
+      return 0
+    end
+
+    if strike?(@score.last[0])
+      return 0
+    elsif spare?(@score.last[0], @score.last[1])
+      return roll
+    else
+      return 0
+    end
   end
 end

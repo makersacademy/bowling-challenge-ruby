@@ -32,4 +32,4 @@ https://miro.com/app/board/uXjVOZQzCjc=/
 
 1. Create a game which assumes no split or strike. Just 10 frames, frame ends if you knock 10 over. This allows for a max score of 100.
 
-2. Introduce a split bonus. 
+2. Introduce a split bonus. Bonus is the next roll.
