@@ -4,7 +4,7 @@ require 'player'
 
 describe Player do
   let(:points) { double('points', update_roll: false, current_score: 'current score', score_breakdown: 'score breakdown', reset: 'reset') }
-  let(:points_end_of_frame) { double('points', update_roll: true, current_score: 'current score', score_breakdown: 'score breakdown', reset: 'reset', add_bonus_points_for_prev_frames: 'add_bonus_points_for_prev_frames') }
+  let(:points_end_of_frame) { double('points', update_roll: true, current_score: 'current score', score_breakdown: 'score breakdown', reset: 'reset', add_bonus_points: 'add_bonus_points') }
   let(:player) { Player.new('John Smith') }
 
   describe '#initialize' do

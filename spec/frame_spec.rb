@@ -87,4 +87,33 @@ describe Frame do
       expect(frame1.bonus).to eq [4]
     end
   end
+
+  describe '#final_round_bonus' do
+    it 'adds bonus scores for a strike on frame 10' do
+      frame1.update_roll(1, 10)
+
+      frame1.final_round_bonus(6)
+      frame1.final_round_bonus(2)
+
+      expect(frame1.bonus).to eq [6, 2]
+    end    
+
+    it 'adds bonus scores for a strike on frame 10' do
+      frame1.update_roll(1, 10)
+
+      frame1.final_round_bonus(10)
+      frame1.final_round_bonus(10)
+
+      expect(frame1.bonus).to eq [10, 10]
+    end  
+    
+    it 'adds bonus scores for a spare on frame 10' do
+      frame1.update_roll(1, 8)
+      frame1.update_roll(2, 2)
+
+      frame1.final_round_bonus(4)
+
+      expect(frame1.bonus).to eq [4]     
+    end
+  end
 end

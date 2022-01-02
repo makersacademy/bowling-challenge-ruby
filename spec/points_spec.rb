@@ -44,13 +44,13 @@ describe Points do
     end
   end
 
-  describe '#add_bonus_points_for_prev_frames(current_frame_number)' do
+  describe '#add_bonus_points(current_frame_number)' do
     it 'updates current score with any bonus points from a strike' do
       points.update_roll(1, 1, 10)
       points.update_roll(2, 1, 3)
       points.update_roll(2, 2, 4)
 
-      expect { points.add_bonus_points_for_prev_frames(2) }.to change { points.current_score }.from(17).to(24)
+      expect { points.add_bonus_points(2) }.to change { points.current_score }.from(17).to(24)
     end
 
     it 'updates current score with bonus points from consecutive strikes once two rolls are complete' do
@@ -59,7 +59,7 @@ describe Points do
       points.update_roll(3, 1, 3)
       points.update_roll(3, 2, 4)
       
-      expect { points.add_bonus_points_for_prev_frames(3) }.to change { points.current_score }.from(27).to(47)
+      expect { points.add_bonus_points(3) }.to change { points.current_score }.from(27).to(47)
     end
 
     it 'updates current score with bonus points from consecutive strikes once two rolls are complete' do
@@ -67,7 +67,7 @@ describe Points do
       points.update_roll(2, 1, 10)
       points.update_roll(3, 1, 10)
       
-      expect { points.add_bonus_points_for_prev_frames(3) }.to change { points.current_score }.from(30).to(50)
+      expect { points.add_bonus_points(3) }.to change { points.current_score }.from(30).to(50)
     end
 
     it 'updates current score with any bonus points from a spare' do
@@ -76,7 +76,7 @@ describe Points do
       points.update_roll(2, 1, 4)
       points.update_roll(2, 2, 3)
 
-      expect { points.add_bonus_points_for_prev_frames(2) }.to change { points.current_score }.from(17).to(21)
+      expect { points.add_bonus_points(2) }.to change { points.current_score }.from(17).to(21)
     end
   end
 
