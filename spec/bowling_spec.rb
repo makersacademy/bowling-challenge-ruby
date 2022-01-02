@@ -26,11 +26,18 @@ describe BowlingGame do
 		it 'has a #roll method' do
 			expect(game).to respond_to(:roll)
 		end
-		
+
 		it 'takes `pins` as args and adds it to the score array with a total length of 10' do
 			game.roll(7)
 			game.roll(2)
 			expect(game.score[0].length).to eq 2
+		end
+	end
+
+	describe "#bonus_score" do
+		it "calculates the bonus score from strikes & spares" do
+			10.times {game.roll(10)}
+			expect(game.bonus_score.flatten.compact.sum).to eq 200
 		end
 	end
 
