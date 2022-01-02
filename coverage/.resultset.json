@@ -11,6 +11,21 @@
           1,
           null,
           null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
           null
         ]
       },
@@ -18,6 +33,21 @@
         "lines": [
           1,
           1,
+          1,
+          null,
+          1,
+          null,
+          3,
+          3,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
           null,
           1,
           1,
@@ -25,7 +55,7 @@
           null
         ]
       },
-      "/Users/sherwinpanganiban/Desktop/Projects/Makers/week-5/bowling/spec/score_spec.rb": {
+      "/Users/sherwinpanganiban/Desktop/Projects/Makers/week-5/bowling/spec/game_spec.rb": {
         "lines": [
           1,
           null,
@@ -35,20 +65,31 @@
           1,
           null,
           null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
           null
         ]
       },
-      "/Users/sherwinpanganiban/Desktop/Projects/Makers/week-5/bowling/lib/score.rb": {
+      "/Users/sherwinpanganiban/Desktop/Projects/Makers/week-5/bowling/lib/game.rb": {
         "lines": [
           1,
+          null,
+          1,
+          1,
+          null,
           1,
           1,
           1,
+          null,
           null,
           null
         ]
       }
     },
-    "timestamp": 1641078800
+    "timestamp": 1641089078
   }
 }
