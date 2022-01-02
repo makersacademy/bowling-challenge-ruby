@@ -22,4 +22,19 @@ describe Frame do
       expect(subject.roll2).to eq(2)
     end
   end
+
+  describe '#strike?' do
+    it 'returns true if it is a strike' do
+      subject.set_roll1(10)
+      expect(subject.strike?).to be_truthy 
+    end
+  end
+  
+  describe '#spare?' do
+    it 'returns true if it is a spare' do
+      subject.set_roll1(4)
+      subject.set_roll2(6)
+      expect(subject.spare?).to be_truthy 
+    end
+  end
 end

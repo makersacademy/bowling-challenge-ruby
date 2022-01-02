@@ -19,13 +19,22 @@ class Game
   def play
     MAX_FRAMES.times do |index|
       frame = Frame.new
+
       puts "Round #{index + 1}"
+
       puts 'Enter score for Roll 1:'
       frame.set_roll1(gets.chomp.to_i)
+
       puts 'Enter score for Roll 2:'
       frame.set_roll2(gets.chomp.to_i)
+      
       frames << frame
-      puts "Total score: #{score}"
+
+      frames[-2].score += frame.roll_1 + frame.roll_2 if frames[-2] && frames[-2].strike?
+        
+      frames[-2].score += frame.roll_1 if frames[-2] && frames[-2].spare?
+
+      puts "\nTotal score: #{score}\n\n"
     end
   end
 end
