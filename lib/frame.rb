@@ -1,22 +1,22 @@
 class Frame
   attr_reader :score
-  attr_accessor :roll_1, :roll_2
+  attr_accessor :roll1, :roll2
 
   def initialize
     @score 
-    @roll_1 = 0
-    @roll_2 = 0
+    @roll1 = 0
+    @roll2 = 0
   end
 
   def score
-    @roll_1 + @roll_2
+    @roll1 + @roll2
   end
 
-  def set_roll_1(pins)
-    @roll_1 = pins
+  def set_roll1(pins)
+    @roll1 = pins
   end
 
-  def set_roll_2(pins)
-    @roll_2 = pins
+  def set_roll2(pins)
+    @roll2 = pins
   end
 end
