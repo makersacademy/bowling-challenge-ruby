@@ -20,9 +20,22 @@ class Bowling
 
   def game
     until @frame == 11
-      puts "Enter how many pins you knocked down:"
-      pins = gets.chomp.to_i
-      enter_score(pins)
+      # @roll == 1
+      puts "Enter how many pins you knocked down on your first roll:"
+      first_roll = gets.chomp.to_i
+      while valid_score?(first_roll) == false
+        puts 'Outside of Range' 
+        first_roll = gets.chomp.to_i
+      end
+      # @roll == 2
+      puts "Enter how many pins you knocked down on your second roll:"
+      second_roll = gets.chomp.to_i
+      while valid_score?(first_roll + second_roll) == false
+        puts 'Outside of Range' 
+        second_roll = gets.chomp.to_i
+      end
+      enter_score(first_roll + second_roll)
+      print_score
       @frame += 1
     end
     total_score
@@ -30,5 +43,14 @@ class Bowling
 
   def valid_score?(pins)
     (0..10).include? pins
+  end
+
+  def print_score
+    print "{|"
+    @score.each do |score|
+      print score.to_s + "|"
+    end
+    print "}"
+    puts ""
   end
 end
