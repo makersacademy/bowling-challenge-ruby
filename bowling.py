@@ -1,5 +1,6 @@
-with open('input.txt','r') as f:
+with open('input.txt', 'r') as f:
     print(sum([int(line.strip()) for line in f]))
+
 
 def read_score_of_roll(roll_num, frame_num):
     score = int(
@@ -25,7 +26,7 @@ def record_10_frames():
                 record_scores(scores, score1, score2)
             elif score1 == 10:
                 record_scores(scores, 10)
-            
+
         if frame == 10:
             score2 = read_score_of_roll(2, frame)
             if score1 + score2 < 10:
@@ -33,10 +34,11 @@ def record_10_frames():
                 break
             score3 = read_score_of_roll(3, frame)
             record_scores(scores, score1, score2, score3)
-            
+
         frame += 1
 
     return scores
+
 
 def calculate_score(list_of_scores):
     total = 0
@@ -46,25 +48,24 @@ def calculate_score(list_of_scores):
         print(f"Frame {i+1} - {total}")
         # Spare bonus
         if len(list_of_scores[i]) == 2 and sum(list_of_scores[i]) == 10:
-            spare_bonus = list_of_scores[i+1][0]
+            spare_bonus = list_of_scores[i + 1][0]
             total += spare_bonus
         # Strike bonus
         elif len(list_of_scores[i]) == 1:
-            if len(list_of_scores[i+1]) != 1:
-                strike_bonus = sum(list_of_scores[i+1][0:2])
+            if len(list_of_scores[i + 1]) != 1:
+                strike_bonus = sum(list_of_scores[i + 1][0:2])
             else:
-                strike_bonus = sum(list_of_scores[i+1], list_of_scores[i+2][0])
+                strike_bonus = sum(
+                    list_of_scores[i + 1], list_of_scores[i + 2][0])
             total += strike_bonus
         # Frame score
         total += sum(list_of_scores[i])
         i += 1
     total += sum(list_of_scores[-1])
-    
+
     return total
 
 
 game = record_10_frames()
 print(game)
 print(calculate_score(game))
-
-
