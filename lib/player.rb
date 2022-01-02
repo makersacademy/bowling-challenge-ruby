@@ -13,28 +13,25 @@ class Player
 
   def pins_knocked_down(number, points)
     end_of_frame = points.update_roll(@current_frame, @current_roll, number)
-    if @current_frame == 10 && @current_roll == 2
-      # check if any bonus rolls need to take place, if not, end game
-
-
-      # could be a strike with 1/2 bonus rolls
-      # could be a spare with 0/1 bonus rolls
-      # could be end of game
-
-
-      # if current roll == 1 and strike  --> 2 bonus rolls
-      # if current roll == 2 and spare --> 1 bonus roll
-      # if current roll == 2 and no strike or spare --> end game
+    if @current_frame == 10 && @current_roll == 2 && bonus_rolls?(points) == false
       puts points.score_breakdown(GAME_OVER)
       @current_frame = 1
       @current_roll = 1
+    elsif @current_frame == 10 && bonus_rolls?(points) == true
+      puts "INPUT BONUS ROLLS"
+      puts "e.g. player.bonus_roll(5, points)"
     else
       update_roll_return_score(number, points, end_of_frame)
     end
   end
 
   def bonus_roll(number, points)
-    points.add_final_round_bonus_points(@current_frame, number)
+    end_of_frame = points.add_final_round_bonus_points(@current_frame, number)
+    if end_of_frame == true
+      puts points.score_breakdown(GAME_OVER)
+      @current_frame = 1
+      @current_roll = 1
+    end
   end
 
   private
@@ -57,5 +54,9 @@ class Player
     else
       @current_frame == 1
     end
+  end
+
+  def bonus_rolls?(points)
+    points.frames[9].strike || points.frames[9].spare
   end
 end
