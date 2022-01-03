@@ -23,11 +23,11 @@ describe Game do
   describe '#score' do
     context 'when player never hits a pin' do
       it 'rolls a gutter game' do
-      20.times { game.roll(0) }
-      expect(game.score).to eq 0
+        20.times { game.roll(0) }
+        expect(game.score).to eq 0
       end
     end
-    
+
     context 'when player rolls a spare' do
       it 'calculates the running score after a spare is rolled' do
         game.roll(6)
