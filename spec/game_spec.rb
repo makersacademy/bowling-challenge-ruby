@@ -21,10 +21,20 @@ describe Game do
   end
 
   describe '#score' do
-    it 'adds two rolls together for a frame' do
+    # it 'adds two rolls together for a frame' do
+    #   game.roll(4)
+    #   game.roll(2)
+    #   expect(game.score).to eq(6)
+    # end
+
+    it 'gives a total running score after each frame' do
       game.roll(4)
       game.roll(2)
-      expect(game.score).to eq(6)
+      game.score
+      game.roll(5)
+      game.roll(3)
+      game.score
+      expect(game.score).to include(14)
     end
   end
 end
