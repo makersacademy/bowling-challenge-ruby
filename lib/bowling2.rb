@@ -30,6 +30,7 @@ class Bowling2
 
   def increase_frame
     raise 'Game Over. 10 Frames completed' unless @frame < 11
+    
     @frame += 1
   end
 
@@ -45,6 +46,7 @@ class Bowling2
 
   def valid_input(pins)
     return false unless (0..10).include? pins
+
     if @turn == 1
       true
     elsif (0..10).include?(@score[-1] + pins)

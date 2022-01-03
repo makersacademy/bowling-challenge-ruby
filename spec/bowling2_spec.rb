@@ -1,31 +1,31 @@
 require 'bowling2'
 
 describe Bowling2 do
-
   before(:each) do
     @bowling = Bowling2.new
   end
+  
   describe '#input' do
     it 'raises error for invalid input' do
-      expect{ @bowling.input(11) }.to raise_error "Invalid input"
+      expect { @bowling.input(11) }.to raise_error 'Invalid input'
     end
   end
+
   describe '#increase_turn' do
     it 'starts at 1' do
       expect(@bowling.turn).to eq 1
     end
-  
     it 'goes to 2 after a input' do
       @bowling.input(5)
       expect(@bowling.turn).to eq 2
     end
-  
     it 'goes back to 1 after 2nd input' do
       @bowling.input(5)
       @bowling.input(2)
       expect(@bowling.turn).to eq 1
     end
   end
+
   describe '#increase_frame' do
     it 'starts at 1' do
       expect(@bowling.frame).to eq 1
@@ -47,6 +47,7 @@ describe Bowling2 do
       expect { @bowling.input(2) }.to raise_error 'Game Over. 10 Frames completed'
     end
   end
+
   describe 'total_score' do
     it 'starts at 0' do
       expect(@bowling.total_score).to eq 0
@@ -67,13 +68,13 @@ describe Bowling2 do
       expect(@bowling.total_score).to eq 20
     end
     it 'gutter game scores 0' do
-      20.times do 
+      20.times do
         @bowling.input(0)
       end
       expect(@bowling.total_score).to eq 0
     end
-
   end
+
   describe 'score' do
     it 'starts empty' do
       expect(@bowling.score).to be_empty
@@ -89,6 +90,7 @@ describe Bowling2 do
       expect(@bowling.score).to eq [3, 2, 7]
     end
   end
+
   describe '#check_spare' do
     it 'returns true when there is a spare' do
       @bowling.input(3)
@@ -124,5 +126,4 @@ describe Bowling2 do
       expect(@bowling.valid_input(7)).to eq true
     end
   end
-  
 end
