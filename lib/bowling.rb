@@ -15,16 +15,12 @@ class Bowling
     game_over
     raise 'Invalid input' unless valid_input(pins)
   
-    if @turn == 1 && pins == 10
-      @strike_frames << @frame
+    if strike?(pins)
+      record_strike
     end
-    if check_spare && @turn == 1
-      @total_score += pins
-    elsif check_strike(@frame - 1) && @turn == 2
-      @total_score += pins + @score[-1]
-    end
-    @score << pins
-    @total_score += pins
+    bonus_points(pins)
+    add_to_score(pins)
+    add_to_total_score(pins)
     increase_turn
   end
 
@@ -50,11 +46,17 @@ class Bowling
 
     if @turn == 1
       true
-    elsif (0..10).include?(@score[-1] + pins)
-      true
-    else
-      false
+    else 
+      (0..10).include?(@score[-1] + pins)
     end
+  end
+
+  def add_to_score(pins)
+    @score << pins
+  end
+
+  def add_to_total_score(pins)
+    @total_score += pins
   end
 
   def check_spare
@@ -67,8 +69,24 @@ class Bowling
     end
   end
 
+  def strike?(pins)
+    @turn == 1 && pins == 10
+  end
+
+  def record_strike
+    @strike_frames << @frame
+  end
+
   def check_strike(given_frame)
     @strike_frames.include?(given_frame)
+  end
+
+  def bonus_points(pins)
+    if check_spare && @turn == 1
+      add_to_total_score(pins)
+    elsif check_strike(@frame - 1) && @turn == 2
+      add_to_total_score(pins + @score[-1])
+    end
   end
 
   def game_over
