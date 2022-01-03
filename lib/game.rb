@@ -22,6 +22,7 @@ class Game
 
       puts "Round #{index + 1}"
 
+      # User input for rolls
       puts 'Enter score for Roll 1:'
       frame.set_roll1(gets.chomp.to_i)
 
@@ -29,6 +30,23 @@ class Game
         puts 'Enter score for Roll 2:'
         frame.set_roll2(gets.chomp.to_i)
       end
+      
+      # Edge cases for multiple strikes in a row
+      if frame.strike? && index.zero?
+        puts 'Enter score for Roll 2:'
+        frame.bonus(gets.chomp.to_i)
+      end
+
+      if frame.strike? && frames[-2]&.strike? && index != 9
+        puts 'Enter score for Roll 2:'
+        frame.bonus(gets.chomp.to_i)
+      end
+
+      # Round 10 bonuses
+      if frame.spare? && index == 9
+        puts 'Enter score for Roll 3:'
+        frame.bonus(gets.chomp.to_i)
+      end
 
       if frame.strike? && index == 9
         puts 'Enter score for Roll 2:'
@@ -38,25 +56,13 @@ class Game
         frame.bonus(gets.chomp.to_i)
       end
 
-      if frame.spare? && index == 9
-        puts 'Enter score for Roll 3:'
-        frame.bonus(gets.chomp.to_i)
-      end
+      # Push frame into frames array
+      frames << frame
 
-      if frame.strike? && index == 9
-        puts 'Enter score for Roll 2:'
-        points = frame.set_roll2(gets.chomp.to_i)
-        frame.bonus(points)
-        
-        puts 'Enter score for Roll 3:'
-        frame.bonus(gets.chomp.to_i)
-      end
-      
-      frames << frame 
+      # Add bonus to previous frame
+      frames[-2].bonus(frame.roll1 + frame.roll2) if frames[-2]&.strike?
 
-      frames[-2].bonus(frame.roll1 + frame.roll2) if frames[-2] && frames[-2].strike?
-        
-      frames[-2].bonus(frame.roll1) if frames[-2] && frames[-2].spare?
+      frames[-2].bonus(frame.roll1) if frames[-2]&.spare?
 
       puts "\nTotal score: #{score}\n\n"
     end

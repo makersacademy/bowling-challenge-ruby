@@ -23,7 +23,7 @@ class Frame
   end
 
   def strike?
-    @roll1 == 10 && @roll2 == 0
+    @roll1 == 10 && @roll2.zero?
   end
 
   def spare?

@@ -25,5 +25,11 @@ describe Game do
       subject.play
       expect(subject.score).to eq(20)
     end
+
+    it 'can record a perfect game' do
+      allow(subject).to receive(:gets).and_return('10')
+      subject.play
+      expect(subject.score).to eq(300)
+    end
   end
 end
