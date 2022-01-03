@@ -1,15 +1,17 @@
 class Bowling2
 
-  attr_reader :turn, :frame, :score
+  attr_reader :turn, :frame, :total_score, :score
 
   def initialize
     @turn = 1
     @frame = 1
-    @score = 0
+    @total_score = 0
+    @score = []
   end
 
   def input(pins)
-    @score += pins
+    @score << pins
+    @total_score += pins
     increase_turn
   end
 
@@ -23,7 +25,18 @@ class Bowling2
   end
 
   def increase_frame
+    raise 'Game Over. 10 Frames completed' unless @frame < 11
     @frame += 1
+  end
+
+  def check_spare
+    if @frame == 1
+      return false
+    elsif @score[-1] + @score[-2] == 10
+      return true
+    else
+      return false
+    end
   end
 
 end

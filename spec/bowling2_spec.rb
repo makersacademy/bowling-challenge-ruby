@@ -34,19 +34,47 @@ describe Bowling2 do
       @bowling.input(2)
       expect(@bowling.frame).to eq 2
     end
+    it 'raises a error when 10 frames have already been completed' do
+      20.times do 
+        @bowling.input(3)
+      end
+      expect(@bowling.input(5))
+      expect {@bowling.input(2)}.to raise_error 'Game Over. 10 Frames completed'
+    end
   end
-  describe 'score' do
+  describe 'total_score' do
     it 'starts at 0' do
-      expect(@bowling.score).to eq 0
+      expect(@bowling.total_score).to eq 0
     end
     it 'has a score of 5 if you input 5' do
       @bowling.input(5)
-      expect(@bowling.score).to eq 5
+      expect(@bowling.total_score).to eq 5
     end
     it 'has a score of 7 if you input 5 and then 2' do
       @bowling.input(5)
       @bowling.input(2)
-      expect(@bowling.score).to eq 7
+      expect(@bowling.total_score).to eq 7
+    end
+    it 'has a score of 20 if you score a spare and then a 5 on the next turn' do
+      @bowling.input(5)
+      @bowling.input(5)
+      @bowling.input(5)
+      expect(@bowling.total_score).to eq 20
+    end
+  end
+  describe 'score' do
+    it 'starts empty' do
+      expect(@bowling.score).to be_empty
+    end
+    it 'stores a first input' do
+      @bowling.input(5)
+      expect(@bowling.score).to eq [5]
+    end
+    it 'stores multiple inputs' do
+      @bowling.input(3)
+      @bowling.input(2)
+      @bowling.input(7)
+      expect(@bowling.score).to eq [3, 2, 7]
     end
   end
   
