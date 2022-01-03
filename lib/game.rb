@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'frame'
+require_relative './frame'
 
 class Game
   MAX_FRAMES = 10
@@ -25,14 +25,38 @@ class Game
       puts 'Enter score for Roll 1:'
       frame.set_roll1(gets.chomp.to_i)
 
-      puts 'Enter score for Roll 2:'
-      frame.set_roll2(gets.chomp.to_i)
-      
-      frames << frame
+      unless frame.strike?
+        puts 'Enter score for Roll 2:'
+        frame.set_roll2(gets.chomp.to_i)
+      end
 
-      frames[-2].score += frame.roll_1 + frame.roll_2 if frames[-2] && frames[-2].strike?
+      if frame.strike? && index == 9
+        puts 'Enter score for Roll 2:'
+        frame.set_roll2(gets.chomp.to_i)
+
+        puts 'Enter score for Roll 3:'
+        frame.bonus(gets.chomp.to_i)
+      end
+
+      if frame.spare? && index == 9
+        puts 'Enter score for Roll 3:'
+        frame.bonus(gets.chomp.to_i)
+      end
+
+      if frame.strike? && index == 9
+        puts 'Enter score for Roll 2:'
+        points = frame.set_roll2(gets.chomp.to_i)
+        frame.bonus(points)
         
-      frames[-2].score += frame.roll_1 if frames[-2] && frames[-2].spare?
+        puts 'Enter score for Roll 3:'
+        frame.bonus(gets.chomp.to_i)
+      end
+      
+      frames << frame 
+
+      frames[-2].bonus(frame.roll1 + frame.roll2) if frames[-2] && frames[-2].strike?
+        
+      frames[-2].bonus(frame.roll1) if frames[-2] && frames[-2].spare?
 
       puts "\nTotal score: #{score}\n\n"
     end
