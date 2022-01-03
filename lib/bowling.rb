@@ -14,12 +14,31 @@ class Bowling
   
   def roll(pins)
     @frame << pins
-    if @strike_counter.length == 2 && strike_counter2.length == 1
+    if @strike_counter.length == 2 && @strike_counter2.length == 1 && @frame != [10]
+      puts "strike"
       @strike_counter << pins
       @strike_counter2 << pins
       @frames << [@strike_counter.sum]
       @frames << @frame
-      @strike_counter = strike_counter2
+      @strike_counter = @strike_counter2
+      @strike_counter2 = []
+      @frame = []
+    elsif @strike_counter.length == 2 && @strike_counter2.length == 1 && @frame == [10]
+      puts "strike"
+      @strike_counter << pins
+      @strike_counter2 << pins
+      @frames << [@strike_counter.sum]
+      # @frames << @frame
+      @strike_counter = [10, 10]
+      @strike_counter2 =[10]
+      @frame = []
+    elsif @strike_counter.length == 2 && @strike_counter2.length == 1
+      puts "strike"
+      @strike_counter << pins
+      @strike_counter2 << pins
+      @frames << [@strike_counter.sum]
+      # @frames << @frame
+      @strike_counter = @strike_counter2
       @strike_counter2 = []
       @frame = []
     elsif @strike_counter.length == 1 && @frame == [10]
@@ -62,6 +81,8 @@ class Bowling
     end
     score
   end 
+
+  private
 
   def spare?(frame)
     frame.length == 2 && frame.sum == 10 
