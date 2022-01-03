@@ -25,4 +25,27 @@ describe Game do
     expect(subject.total_score).to eq 10
   end
 
+  it 'should be able to add a spare bonus (not last frame)' do
+    subject.input_roll(1)
+    subject.input_roll(9)
+    subject.input_roll(1)
+    subject.input_roll(1)
+    expect(subject.total_score).to eq 13
+  end
+
+  it 'should be able to add a strike bonus (not last frame, next frame vanilla)' do
+    subject.input_roll(10)
+    subject.input_roll(1)
+    subject.input_roll(1)
+    expect(subject.total_score).to eq 14
+  end
+
+  it 'should be able to add a strike bonus (not last frame, next frame strike)' do
+    subject.input_roll(10)
+    subject.input_roll(10)
+    subject.input_roll(1)
+    subject.input_roll(1)
+    expect(subject.total_score).to eq 36
+  end
+
 end

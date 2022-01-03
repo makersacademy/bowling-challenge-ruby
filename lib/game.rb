@@ -28,8 +28,26 @@ class Game
     @frames.dup
   end
 
+  def calculate_bonus
+    @frames.each_with_index { |frame, index| 
+                              if frame.spare?
+                                frame.add_bonus(@frames[index + 1].rolls[0])
+                              elsif frame.strike?
+                                rolls_left_to_count = 2
+                                i = 1
+                                while rolls_left_to_count > 0
+                                  @frames[index + i].rolls.each { |roll| frame.add_bonus(roll)
+                                  rolls_left_to_count -= 1 }
+                                  i += 1
+                                end
+                                # frame.add_bonus(@frames[index+1].score)
+                              end
+                            }
+  end
+
   def total_score
-    @frames.map{ |frame| frame.score }.reduce(:+)
+    calculate_bonus
+    @frames.map{ |frame| frame.score + frame.bonus }.reduce(:+)
   end
 
 end
