@@ -1,5 +1,6 @@
-class Bowling
+# frozen_string_literal: true
 
+class Bowling
   attr_reader :turn, :frame, :total_score, :score, :strike_frames
 
   def initialize
@@ -13,7 +14,8 @@ class Bowling
   def input(pins)
     game_over
     raise 'Invalid input' unless valid_input(pins)
-    if @turn == 1 && pins == 10 
+  
+    if @turn == 1 && pins == 10
       @strike_frames << @frame
     end
     if check_spare && @turn == 1
@@ -24,12 +26,6 @@ class Bowling
     @score << pins
     @total_score += pins
     increase_turn
-  end
-
-  
-
-  def game_over
-    raise 'Game Over. 10 Frames completed' if @frame == 11
   end
 
   private
@@ -51,6 +47,7 @@ class Bowling
 
   def valid_input(pins)
     return false unless (0..10).include? pins
+
     if @turn == 1
       true
     elsif (0..10).include?(@score[-1] + pins)
@@ -65,10 +62,8 @@ class Bowling
       false
     elsif @score[-1] == 10
       false
-    elsif @score[-1] + @score[-2] == 10
-      true
     else
-      false
+      @score[-1] + @score[-2] == 10
     end
   end
 
@@ -76,4 +71,7 @@ class Bowling
     @strike_frames.include?(given_frame)
   end
 
+  def game_over
+    raise 'Game Over. 10 Frames completed' if @frame == 11
+  end
 end
