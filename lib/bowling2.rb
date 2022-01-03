@@ -10,6 +10,9 @@ class Bowling2
   end
 
   def input(pins)
+    if check_spare && @turn == 1
+      @total_score += pins
+    end
     @score << pins
     @total_score += pins
     increase_turn
@@ -18,7 +21,7 @@ class Bowling2
   def increase_turn
     if @turn == 1
       @turn += 1
-    else 
+    else
       increase_frame
       @turn = 1
     end
@@ -31,11 +34,11 @@ class Bowling2
 
   def check_spare
     if @frame == 1
-      return false
+      false
     elsif @score[-1] + @score[-2] == 10
-      return true
+      true
     else
-      return false
+      false
     end
   end
 

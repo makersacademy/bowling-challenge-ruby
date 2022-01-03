@@ -35,11 +35,11 @@ describe Bowling2 do
       expect(@bowling.frame).to eq 2
     end
     it 'raises a error when 10 frames have already been completed' do
-      20.times do 
+      20.times do
         @bowling.input(3)
       end
       expect(@bowling.input(5))
-      expect {@bowling.input(2)}.to raise_error 'Game Over. 10 Frames completed'
+      expect { @bowling.input(2) }.to raise_error 'Game Over. 10 Frames completed'
     end
   end
   describe 'total_score' do
@@ -61,6 +61,13 @@ describe Bowling2 do
       @bowling.input(5)
       expect(@bowling.total_score).to eq 20
     end
+    it 'gutter game scores 0' do
+      20.times do 
+        @bowling.input(0)
+      end
+      expect(@bowling.total_score).to eq 0
+    end
+    
   end
   describe 'score' do
     it 'starts empty' do
@@ -75,6 +82,21 @@ describe Bowling2 do
       @bowling.input(2)
       @bowling.input(7)
       expect(@bowling.score).to eq [3, 2, 7]
+    end
+  end
+  describe '#check_spare' do
+    it 'returns true when there is a spare' do
+      @bowling.input(3)
+      @bowling.input(7)
+      expect(@bowling.check_spare).to eq true
+    end
+    it 'returns false when no turns have been takes' do
+      expect(@bowling.check_spare).to eq false
+    end
+    it 'returns false when turns have been taken but it is not a spare' do
+      @bowling.input(2)
+      @bowling.input(7)
+      expect(@bowling.check_spare).to eq false
     end
   end
   
