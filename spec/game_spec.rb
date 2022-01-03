@@ -21,12 +21,13 @@ describe Game do
   end
 
   describe '#score' do
-    context 'when player never hits a pin'
-    it 'rolls a gutter game' do
+    context 'when player never hits a pin' do
+      it 'rolls a gutter game' do
       20.times { game.roll(0) }
       expect(game.score).to eq 0
+      end
     end
-
+    
     context 'when player rolls a spare' do
       it 'calculates the running score after a spare is rolled' do
         game.roll(6)
@@ -45,6 +46,13 @@ describe Game do
         game.roll(2)
         17.times { game.roll(0) }
         expect(game.score).to eq 22
+      end
+    end
+
+    context 'when player rolls 12 strikes' do
+      it 'scores a perfect game with 300 points ' do
+        12.times { game.roll(10) } # 10 rolls + 2 strikes for bonus in 10th frame
+        expect(game.score).to eq 300
       end
     end
   end
