@@ -29,4 +29,21 @@ describe Frame do
     expect(subject.spare?).to be false
   end
 
+  it 'should know if it is complete' do
+    subject.roll(1)
+    subject.roll(2)
+    expect(subject.complete?).to be true
+  end
+
+  it 'should be able to give a score' do
+    subject.roll(1)
+    subject.roll(2)
+    expect(subject.score).to eq 3
+  end
+
+  it 'should be able to add a bonus' do
+    subject.add_bonus(3)
+    expect(subject.bonus).to eq 3
+  end
+
 end
