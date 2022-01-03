@@ -26,23 +26,7 @@ class Bowling
     increase_turn
   end
 
-  def check_spare
-    if @frame == 1
-      false
-    elsif @score[-1] == 10
-      false
-    elsif @score[-1] + @score[-2] == 10
-      true
-    else
-      false
-    end
-  end
-
-  def check_strike(given_frame)
-    @strike_frames.include?(given_frame)
-  end
-
- 
+  
 
   def game_over
     raise 'Game Over. 10 Frames completed' if @frame == 11
@@ -74,6 +58,22 @@ class Bowling
     else
       false
     end
+  end
+
+  def check_spare
+    if @frame == 1
+      false
+    elsif @score[-1] == 10
+      false
+    elsif @score[-1] + @score[-2] == 10
+      true
+    else
+      false
+    end
+  end
+
+  def check_strike(given_frame)
+    @strike_frames.include?(given_frame)
   end
 
 end
