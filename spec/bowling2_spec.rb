@@ -5,6 +5,11 @@ describe Bowling2 do
   before(:each) do
     @bowling = Bowling2.new
   end
+  describe '#input' do
+    it 'raises error for invalid input' do
+      expect{ @bowling.input(11) }.to raise_error "Invalid input"
+    end
+  end
   describe '#increase_turn' do
     it 'starts at 1' do
       expect(@bowling.turn).to eq 1
@@ -67,7 +72,7 @@ describe Bowling2 do
       end
       expect(@bowling.total_score).to eq 0
     end
-    
+
   end
   describe 'score' do
     it 'starts empty' do
@@ -97,6 +102,26 @@ describe Bowling2 do
       @bowling.input(2)
       @bowling.input(7)
       expect(@bowling.check_spare).to eq false
+    end
+  end
+
+  describe '#valid_input' do
+    it 'returns false for a value outside of 0 to 10' do
+      expect(@bowling.valid_input(12)).to eq false
+    end
+    it 'returns false for a string' do
+      expect(@bowling.valid_input('not a number')).to eq false
+    end
+    it 'returns true for a turn 1 value between 0 and 10' do
+      expect(@bowling.valid_input(3)).to eq true
+    end
+    it 'returns false if sum of turn 1 and turn 2 greater than 10' do
+      @bowling.input(4)
+      expect(@bowling.valid_input(7)).to eq false
+    end
+    it 'returns true if sum of turn 1 and turn 2 within range of 0 to 10' do
+      @bowling.input(1)
+      expect(@bowling.valid_input(7)).to eq true
     end
   end
   

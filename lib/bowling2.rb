@@ -10,6 +10,7 @@ class Bowling2
   end
 
   def input(pins)
+    raise 'Invalid input' unless valid_input(pins)
     if check_spare && @turn == 1
       @total_score += pins
     end
@@ -36,6 +37,17 @@ class Bowling2
     if @frame == 1
       false
     elsif @score[-1] + @score[-2] == 10
+      true
+    else
+      false
+    end
+  end
+
+  def valid_input(pins)
+    return false unless (0..10).include? pins
+    if @turn == 1
+      true
+    elsif (0..10).include?(@score[-1] + pins)
       true
     else
       false
