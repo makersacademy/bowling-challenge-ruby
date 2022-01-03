@@ -1,9 +1,9 @@
 Bowling Challenge in Ruby
 =================
 
-I decided to approach this challenge by attempting to replicate how a bowling scoring card would actually look like in order to be able to more easily display if this was needed. This is why I decided to store the rolls in a 2d Array rather than just a 1d array which would have been more straightforward. 
+I decided to approach this challenge by attempting to replicate how a bowling scoring card would actually look like in order to be able to more easily display if this was needed. This is why I decided to store the rolls in a 2d Array which I also think was the easiest way to track the scores.
 
-I did end up having to `flatten` the array back into a 1d array when calculating the score due to the fact that consecutive strikes would be hard to track in a 2d array. This might have made the whole solution a little messier than it should have been.
+I did end up having to `flatten` the array back into a 1d array when calculating the score due to the fact that consecutive strikes would be hard to score in a 2d array, I wanted to avoid bloating the program with multiple if else conditions.
 
 ## Example of how adding rolls works
 
