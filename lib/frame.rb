@@ -12,4 +12,12 @@ class Frame
     @rolls.dup
   end
 
+  def strike?
+    @rolls[0] == 10
+  end
+
+  def spare?
+    strike? ? false : @rolls.sum == 10
+  end
+
 end
