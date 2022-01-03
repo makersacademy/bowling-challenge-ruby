@@ -4,7 +4,7 @@ describe Bowling2 do
   before(:each) do
     @bowling = Bowling2.new
   end
-  
+
   describe '#input' do
     it 'raises error for invalid input' do
       expect { @bowling.input(11) }.to raise_error 'Invalid input'
@@ -24,6 +24,10 @@ describe Bowling2 do
       @bowling.input(2)
       expect(@bowling.turn).to eq 1
     end
+    it 'goes to 1 if there is a strike' do
+      @bowling.input(10)
+      expect(@bowling.turn).to eq 1
+    end
   end
 
   describe '#increase_frame' do
@@ -39,11 +43,14 @@ describe Bowling2 do
       @bowling.input(2)
       expect(@bowling.frame).to eq 2
     end
+    it 'goes to 2 after 1 turn if there has been a strike' do
+      @bowling.input(10)
+      expect(@bowling.frame).to eq 2
+    end
     it 'raises a error when 10 frames have already been completed' do
       20.times do
         @bowling.input(3)
       end
-      expect(@bowling.input(5))
       expect { @bowling.input(2) }.to raise_error 'Game Over. 10 Frames completed'
     end
   end
@@ -104,6 +111,29 @@ describe Bowling2 do
       @bowling.input(2)
       @bowling.input(7)
       expect(@bowling.check_spare).to eq false
+    end
+    it 'returns false when a strike is thrown' do
+      @bowling.input(10)
+      expect(@bowling.check_spare).to eq false
+    end
+  end
+
+  describe '#check_strike' do
+    it 'returns true when first turn knocks down 10 pins' do
+      @bowling.input(10)
+      expect(@bowling.strike_frames).to include 1
+    end
+    it 'returns false when no turns have been taken' do
+      expect(@bowling.check_strike).to eq false
+    end
+    it 'returns false when first turn is less than 10' do
+      @bowling.input(1)
+      expect(@bowling.check_strike).to eq false
+    end
+    it 'returns false when 10 pins are knocked down on turn 2' do
+      @bowling.input(0)
+      @bowling.input(10)
+      expect(@bowling.check_strike).to eq false
     end
   end
 
