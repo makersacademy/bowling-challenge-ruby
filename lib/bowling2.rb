@@ -1,13 +1,15 @@
 class Bowling2
 
-  attr_reader :turn, :frame
+  attr_reader :turn, :frame, :score
 
   def initialize
     @turn = 1
     @frame = 1
+    @score = 0
   end
 
   def input(pins)
+    @score += pins
     increase_turn
   end
 

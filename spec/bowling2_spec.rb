@@ -35,5 +35,19 @@ describe Bowling2 do
       expect(@bowling.frame).to eq 2
     end
   end
+  describe 'score' do
+    it 'starts at 0' do
+      expect(@bowling.score).to eq 0
+    end
+    it 'has a score of 5 if you input 5' do
+      @bowling.input(5)
+      expect(@bowling.score).to eq 5
+    end
+    it 'has a score of 7 if you input 5 and then 2' do
+      @bowling.input(5)
+      @bowling.input(2)
+      expect(@bowling.score).to eq 7
+    end
+  end
   
 end
