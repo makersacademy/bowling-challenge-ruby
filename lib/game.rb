@@ -15,12 +15,15 @@ class Game
     running_score = 0
     @index = 0
     10.times do
-      if spare?
+      if @rolls[@index] == 10
+        running_score += 10 + @rolls[@index + 1] + @rolls[@index + 2]
+        @index += 1
+      elsif spare?
         running_score += spare_score
         @index += 2 # move to next frame
       else
         running_score += sum_of_frame
-        @index += 2  
+        @index += 2
       end
     end
     running_score
@@ -40,4 +43,3 @@ class Game
     @rolls[@index] + @rolls[@index + 1]
   end
 end
-

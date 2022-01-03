@@ -37,5 +37,15 @@ describe Game do
         expect(game.score).to eq 18
       end
     end
+
+    context 'when player rolls a strike' do
+      it 'calculates the running score after a strike is rolled' do
+        game.roll(10)
+        game.roll(4)
+        game.roll(2)
+        17.times { game.roll(0) }
+        expect(game.score).to eq 22
+      end
+    end
   end
 end
