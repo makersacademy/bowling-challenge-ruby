@@ -1,4 +1,4 @@
-class Bowling2
+class Bowling
 
   attr_reader :turn, :frame, :total_score, :score, :strike_frames
 
@@ -26,21 +26,6 @@ class Bowling2
     increase_turn
   end
 
-  def increase_turn
-    if check_strike(@frame)
-      increase_frame
-    elsif @turn == 1
-      @turn += 1
-    else
-      increase_frame
-      @turn = 1
-    end
-  end
-
-  def increase_frame
-    @frame += 1
-  end
-
   def check_spare
     if @frame == 1
       false
@@ -57,9 +42,31 @@ class Bowling2
     @strike_frames.include?(given_frame)
   end
 
+ 
+
+  def game_over
+    raise 'Game Over. 10 Frames completed' if @frame == 11
+  end
+
+  private
+
+  def increase_frame
+    @frame += 1
+  end
+
+  def increase_turn
+    if check_strike(@frame)
+      increase_frame
+    elsif @turn == 1
+      @turn += 1
+    else
+      increase_frame
+      @turn = 1
+    end
+  end
+
   def valid_input(pins)
     return false unless (0..10).include? pins
-
     if @turn == 1
       true
     elsif (0..10).include?(@score[-1] + pins)
@@ -67,10 +74,6 @@ class Bowling2
     else
       false
     end
-  end
-
-  def game_over
-    raise 'Game Over. 10 Frames completed' if @frame == 11
   end
 
 end
