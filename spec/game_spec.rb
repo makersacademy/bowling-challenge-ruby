@@ -48,9 +48,14 @@ describe Game do
     end
   end
 
-  describe '#max_ten_pins' do
-    it 'raises an error if the frame exceedes 10' do
+  describe '#max_ten' do
+    it "raises an error if the frame's sum exceedes 10" do
       expect { game.add_rolls(5, 6) }.to raise_error 'Sum of the rolls cannot exceede 10'
+    end
+
+    it 'raises an error if there are already 10 frames' do
+      10.times { game.add_rolls(4, 5) }
+      expect { game.add_rolls(5,3) }.to raise_error 'Game Over - start a new one'
     end
   end
 

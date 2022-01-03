@@ -27,13 +27,13 @@ describe Score do
     end
 
     context 'returns score with added bonus'
-    it 'adds a spare bonus if in previous frame scored a spare' do
+    it 'adds a spare bonus if previous frame is a spare' do
       game_frames = [[6, 4], [10, 0]]
       allow(game).to receive(:frames).and_return(game_frames)
       allow(game).to receive(:spare?).and_return(true)
       expect(score.add_to_total).to eq 20
     end
-    it 'adds a strike bonus if in previous frame scored a strike' do
+    it 'adds a strike bonus if previous frame is a strike' do
       game_frames = [[10, 0], [0, 1]]
       allow(game).to receive(:frames).and_return(game_frames)
       allow(game).to receive(:spare?).and_return(false)
@@ -44,7 +44,7 @@ describe Score do
 
   describe '#add_bonus' do
     context 'a spare is scored'
-    it 'adds bonus points if spare' do
+    it 'adds spare bonus points' do
       game_frames = [[6, 4], [5, 5]]
       allow(game).to receive(:frames).and_return(game_frames)
       allow(game).to receive(:spare?).and_return(true)
@@ -53,7 +53,7 @@ describe Score do
     end
 
     context 'a strike is scored'
-    it 'adds bonus points if strike' do
+    it 'adds strike bonus points' do
       game_frames = [[10, 1], [0, 1]]
       allow(game).to receive(:frames).and_return(game_frames)
       allow(game).to receive(:spare?).and_return(false)

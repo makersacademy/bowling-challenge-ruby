@@ -6,7 +6,7 @@ class Game
   end
 
   def add_rolls(roll1, roll2, bonus_roll = 0)
-    max_ten_pins(roll1, roll2)
+    max_ten(roll1, roll2)
     @frames << if last_frame? && spare?([roll1, roll2]) || last_frame? && strike?([roll1, 0])
                  [roll1, roll2, bonus_roll]
                else
@@ -15,9 +15,8 @@ class Game
   end
 
   def spare?(current_frame)
-    first_roll = current_frame[0]
     !current_frame.nil? && current_frame.reduce(0,
-                                                :+) == 10 && first_roll.positive? && first_roll < 10
+                                                :+) == 10 && current_frame[0].positive? && current_frame[0] < 10
   end
 
   def strike?(current_frame)
@@ -25,8 +24,9 @@ class Game
     frame_exist && current_frame[0] == 10 || frame_exist && current_frame[1] == 10
   end
 
-  def max_ten_pins(roll1, roll2)
+  def max_ten(roll1, roll2)
     raise 'Sum of the rolls cannot exceede 10' if [roll1, roll2].reduce(0, :+) > 10 && !last_frame?
+    raise 'Game Over - start a new one' if @frames.count == 10
   end
 
   def last_frame?
