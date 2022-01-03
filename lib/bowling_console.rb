@@ -5,6 +5,7 @@ require './lib/bowling'
 class BowlingConsole
   def initialize
     @bowling = Bowling.new
+    start_game
   end
 
   def welcome

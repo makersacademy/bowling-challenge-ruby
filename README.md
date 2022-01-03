@@ -63,3 +63,14 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+### Instructions on how to run
+
+1. Run bowling_console.rb in irb by entering irb -r ./lib/bowling_console
+2. Create an instance of bowling_console e.g new_game = BowlingConsole.new
+
+### Known issues
+
+1. The scorecard does not account for multiple strikes in a row.
+2. The 10th Frame only has 2 turns instead of accounting for a strike or spare.
+3. bowling_console is not tested. Need to know how to do this without user input.

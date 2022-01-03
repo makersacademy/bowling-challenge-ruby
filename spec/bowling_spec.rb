@@ -127,4 +127,8 @@ describe Bowling do
       expect(@bowling.score).to eq [3, 2, 7]
     end
   end
+
+  describe '#last_frame' do
+    it 
+  end
 end
