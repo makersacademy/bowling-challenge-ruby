@@ -19,13 +19,16 @@ class Bowling2
     if check_spare && @turn == 1
       @total_score += pins
     end
+    if @strike_frames.include?(@frame - 1) && @turn == 2
+      @total_score += pins + score[-1]
+    end
     @score << pins
     @total_score += pins
     increase_turn
   end
 
   def increase_turn
-    if check_strike 
+    if check_strike(@frame)
       increase_frame
     elsif @turn == 1
       @turn += 1
@@ -51,8 +54,8 @@ class Bowling2
     end
   end
 
-  def check_strike
-    @strike_frames.include?(@frame)
+  def check_strike(given_frame)
+    @strike_frames.include?(given_frame)
   end
 
   def valid_input(pins)

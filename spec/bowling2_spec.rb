@@ -80,6 +80,12 @@ describe Bowling2 do
       end
       expect(@bowling.total_score).to eq 0
     end
+    it 'has a score of 24 if you score a strike and then a 7 on your next frame' do
+      @bowling.input(10)
+      @bowling.input(5)
+      @bowling.input(2)
+      expect(@bowling.total_score).to eq 24
+    end
   end
 
   describe 'score' do
@@ -124,16 +130,16 @@ describe Bowling2 do
       expect(@bowling.strike_frames).to include 1
     end
     it 'returns false when no turns have been taken' do
-      expect(@bowling.check_strike).to eq false
+      expect(@bowling.check_strike(@bowling.frame)).to eq false
     end
     it 'returns false when first turn is less than 10' do
       @bowling.input(1)
-      expect(@bowling.check_strike).to eq false
+      expect(@bowling.check_strike(@bowling.frame)).to eq false
     end
     it 'returns false when 10 pins are knocked down on turn 2' do
       @bowling.input(0)
       @bowling.input(10)
-      expect(@bowling.check_strike).to eq false
+      expect(@bowling.check_strike(@bowling.frame)).to eq false
     end
   end
 
