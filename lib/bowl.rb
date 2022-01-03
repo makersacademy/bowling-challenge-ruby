@@ -4,16 +4,16 @@ class Bowl
 
   def initialize
     @rolls = [ 
-      {frame: 1, roll_one: nil, roll_two: nil, total_roll: nil},
-      {frame: 2, roll_one: nil, roll_two: nil, total_roll: nil}, 
-      {frame: 3, roll_one: nil, roll_two: nil, total_roll: nil},
-      {frame: 4, roll_one: nil, roll_two: nil, total_roll: nil},
-      {frame: 5, roll_one: nil, roll_two: nil, total_roll: nil},
-      {frame: 6, roll_one: nil, roll_two: nil, total_roll: nil},
-      {frame: 7, roll_one: nil, roll_two: nil, total_roll: nil},
-      {frame: 8, roll_one: nil, roll_two: nil, total_roll: nil},
-      {frame: 9, roll_one: nil, roll_two: nil, total_roll: nil},
-      {frame: 10, roll_one: nil, roll_two: nil, total_roll: nil}  ]
+      {frame: 1, roll_one: 0, roll_two: 0, total_roll: 0},
+      {frame: 2, roll_one: 0, roll_two: 0, total_roll: 0}, 
+      {frame: 3, roll_one: 0, roll_two: 0, total_roll: 0},
+      {frame: 4, roll_one: 0, roll_two: 0, total_roll: 0},
+      {frame: 5, roll_one: 0, roll_two: 0, total_roll: 0},
+      {frame: 6, roll_one: 0, roll_two: 0, total_roll: 0},
+      {frame: 7, roll_one: 0, roll_two: 0, total_roll: 0},
+      {frame: 8, roll_one: 0, roll_two: 0, total_roll: 0},
+      {frame: 9, roll_one: 0, roll_two: 0, total_roll: 0},
+      {frame: 10, roll_one: 0, roll_two: 0, total_roll: 0}  ]
       @frames = 1
   end
 
@@ -22,6 +22,7 @@ class Bowl
       if strike?
         @frames += 1
       end
+      calculate_total_roll_spare if previous_spare?
   end
 
   def second_roll(pins_two)
@@ -57,6 +58,15 @@ class Bowl
 
   def calculate_total_roll_strike
     @rolls[@frames -2][:total_roll] = @rolls[@frames -2][:roll_one]  +  @rolls[@frames -1 ][:roll_one] + @rolls[@frames -1][:roll_two]
+
+  end
+
+  def previous_spare?
+    @rolls[@frames -2][:roll_one] + @rolls[@frames -2][:roll_two] == 10
+  end
+
+  def calculate_total_roll_spare
+    @rolls[@frames -2][:total_roll] = @rolls[@frames -2][:roll_one] + @rolls[@frames -2][:roll_two]  +  @rolls[@frames -1 ][:roll_one] 
 
   end
 

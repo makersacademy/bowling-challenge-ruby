@@ -47,4 +47,22 @@ describe Bowl do
     
   end
 
+  it 'can accurately calculate spare' do
+    bowl.first_roll(5)
+    bowl.second_roll(5)
+    bowl.first_roll(3)
+    expect(bowl.rolls[0][:total_roll]).to eq 13
+
+  end
+
+  it 'can accurately calculate spare' do
+    bowl.first_roll(5)
+    bowl.second_roll(5)
+    bowl.first_roll(3)
+    bowl.second_roll(3)
+    expect(bowl.rolls[1][:total_roll]).to eq 6
+
+    
+  end
+
 end
