@@ -59,7 +59,7 @@ describe Bowling do
     expect(@game.score).to eq 26
   end
 
-  xit 'can roll 2 strike in a row' do
+  it 'can roll 2 strike in a row' do
     @game.roll(10)
     @game.roll(10)
     @game.roll(5)
@@ -67,4 +67,10 @@ describe Bowling do
     17.times{@game.roll(0)}
     expect(@game.score).to eq 51
   end
+
+  it 'can play a perfect game' do
+    11.times{@game.roll(10)}
+    expect(@game.score).to eq 300
+  end
 end
+
