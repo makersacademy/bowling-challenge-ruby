@@ -81,6 +81,10 @@ So that I can keep track of my scores throughout the game
 I would like to see my total score in each frame
 
 As a Player
+So that I can sabotage my game as a joke by hitting no pins
+I want to be able to play a Gutter Game with 20 zero scores
+
+As a Player
 So that I can be rewarded if I get a strike (all 10 pins knocked down in one roll)
 I would like the points scored in my next frame to be added to my roll score as a bonus
 
