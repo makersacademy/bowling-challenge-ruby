@@ -2,6 +2,9 @@
 
 require 'game'
 
+PERFECT_SCORE = 300
+HIGHEST_NO_STRIKES = 190
+
 describe Game do
   describe '#score' do
     it 'returns the total score' do
@@ -26,10 +29,17 @@ describe Game do
       expect(subject.score).to eq(20)
     end
 
-    it 'can record a perfect game' do
+    it 'can record a perfect game (multiple strikes in a row)' do
       allow(subject).to receive(:gets).and_return('10')
       subject.play
-      expect(subject.score).to eq(300)
+      expect(subject.score).to eq(PERFECT_SCORE)
+    end
+
+    it 'can record multiple spares in a row' do
+      allow(subject).to receive(:gets).and_return('9', '1', '9', '1', '9', '1', '9', '1', '9', '1', '9', '1', '9', '1',
+                                                  '9', '1', '9', '1', '9', '1', '9')
+      subject.play
+      expect(subject.score).to eq(HIGHEST_NO_STRIKES)
     end
   end
 end

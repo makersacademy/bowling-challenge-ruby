@@ -30,7 +30,7 @@ class Game
         puts 'Enter score for Roll 2:'
         frame.set_roll2(gets.chomp.to_i)
       end
-      
+
       # Edge cases for multiple strikes in a row
       if frame.strike? && index.zero?
         puts 'Enter score for Roll 2:'
