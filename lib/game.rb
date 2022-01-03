@@ -28,4 +28,8 @@ class Game
     @frames.dup
   end
 
+  def total_score
+    @frames.map{ |frame| frame.score }.reduce(:+)
+  end
+
 end

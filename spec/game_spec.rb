@@ -17,4 +17,12 @@ describe Game do
     expect(subject.frames[1].rolls).to match_array [3,4]
   end
 
+  it 'should be able to score two vanilla rounds' do
+    subject.input_roll(1)
+    subject.input_roll(2)
+    subject.input_roll(3)
+    subject.input_roll(4)
+    expect(subject.total_score).to eq 10
+  end
+
 end
