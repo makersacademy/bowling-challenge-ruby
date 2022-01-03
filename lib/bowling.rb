@@ -36,11 +36,7 @@ class BowlingGame
 				else 
 					frame.push(@score[idx][0])
 				end
-			end
-		end
-
-		@score.each_with_index do |frame, idx|
-			if is_spare?(frame)
+			elsif is_spare?(frame)
 				frame.push(@score[idx + 1][0])
 			end
 		end
@@ -68,3 +64,39 @@ class BowlingGame
 	end
 
 end
+
+game = BowlingGame.new
+# game.roll(1)
+# game.roll(4)
+
+# game.roll(4)
+# game.roll(5)
+
+# game.roll(6)
+# game.roll(4)
+
+# game.roll(5)
+# game.roll(5)
+
+# game.roll(10)
+
+# game.roll(0)
+# game.roll(1)
+
+# game.roll(7)
+# game.roll(3)
+
+# game.roll(6)
+# game.roll(4)
+
+# game.roll(10)
+
+# game.roll(2)
+# game.roll(8)
+# game.roll(6)
+
+# 10.times do
+# 	game.roll(10)
+# end
+
+# p game.calc_score
