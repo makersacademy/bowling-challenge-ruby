@@ -86,6 +86,28 @@ describe Bowling2 do
       @bowling.input(2)
       expect(@bowling.total_score).to eq 24
     end
+    it 'has a score of if you score 2 strikes and then a 0 on your next frame' do
+      2.times do
+        @bowling.input(10)
+      end
+      @bowling.input(0)
+      expect(@bowling.total_score).to eq 30
+    end
+    it 'has a score of 240 if you score 9 strikes and then a 0 on your next frame' do
+      9.times do
+        @bowling.input(10)
+      end
+      @bowling.input(0)
+      expect(@bowling.total_score).to eq 240
+    end
+    it 'has a score of 42 if you score a strike, followed by a 5, another 5, a 4 and a 4' do
+      @bowling.input(10)
+      @bowling.input(5)
+      @bowling.input(5)
+      @bowling.input(4)
+      @bowling.input(4)
+      expect(@bowling.total_score).to eq 42
+    end
   end
 
   describe 'score' do

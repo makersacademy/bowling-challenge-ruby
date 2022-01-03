@@ -18,9 +18,8 @@ class Bowling2
     end
     if check_spare && @turn == 1
       @total_score += pins
-    end
-    if @strike_frames.include?(@frame - 1) && @turn == 2
-      @total_score += pins + score[-1]
+    elsif check_strike(@frame - 1) && @turn == 2
+      @total_score += pins + @score[-1]
     end
     @score << pins
     @total_score += pins
