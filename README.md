@@ -63,3 +63,31 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+Planning/notes
+
+I started writing user stories to try and help plan to do the basic stuff first then work my way up.
+
+As a Player
+So that I can start playing a game of bowling
+I want to be able to knock down 10 pins in a roll
+
+As a Player
+So that I can see the total score of my first frame
+I would like the sum of my rolls
+
+As a Player
+So that I can keep track of my scores throughout the game
+I would like to see my total score in each frame
+
+As a Player
+So that I can be rewarded if I get a strike (all 10 pins knocked down in one roll)
+I would like the points scored in my next frame to be added to my roll score as a bonus
+
+As a Player
+So that I can be rewarded if I get a spare (all 10 pins knocked down in two rolls)
+I would like the points scored in the next 1 roll to be added to my spare score as a bonus
+
+As a Player
+So that I can have another turn
+I want the pins to reset after every frame
