@@ -19,4 +19,12 @@ describe Game do
       expect(game.roll(10)).to include 10
     end
   end
+
+  describe '#score' do
+    it 'adds two rolls together for a frame' do
+      game.roll(4)
+      game.roll(2)
+      expect(game.score).to eq(6)
+    end
+  end
 end
