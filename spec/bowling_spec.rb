@@ -72,5 +72,48 @@ describe Bowling do
     12.times{@game.roll(10)}
     expect(@game.score).to eq 300
   end
+
+  it 'can play a spare followed by a strike' do
+    @game.roll(5)
+    @game.roll(5)
+    @game.roll(10)
+    @game.roll(3)
+    @game.roll(3)
+    14.times{@game.roll(0)}
+    expect(@game.score).to eq 42
+  end
+
+  it 'can play a strike followed by a spare' do
+    @game.roll(10)
+    @game.roll(5)
+    @game.roll(5)
+    @game.roll(3)
+    @game.roll(3)
+    14.times{@game.roll(0)}
+    expect(@game.score).to eq 39
+  end
+
+  it 'can play a random game' do
+    @game.roll(1)
+    @game.roll(4)
+    @game.roll(4)
+    @game.roll(5)
+    @game.roll(6)
+    @game.roll(4)
+    @game.roll(5)
+    @game.roll(5)
+    @game.roll(10)
+    @game.roll(0)
+    @game.roll(1)
+    @game.roll(7)
+    @game.roll(3)
+    @game.roll(6)
+    @game.roll(4)
+    @game.roll(10)
+    @game.roll(2)
+    @game.roll(8)
+    @game.roll(6)
+    expect(@game.score).to eq 133
+  end
 end
 

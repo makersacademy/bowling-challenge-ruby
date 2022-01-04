@@ -4,7 +4,6 @@ class Bowling
   attr_reader :frames, :frame, :spare_counter, :strike_counter, :strike_counter2
   
   def initialize
-    @rolls = []
     @frames = []
     @frame = []
     @spare_counter = []
@@ -14,7 +13,23 @@ class Bowling
   
   def roll(pins)
     @frame << pins
-    if @strike_counter.length == 2 && @strike_counter2.length == 1 && @frame != [10]
+    if @strike_counter == [10] && @frame.length == 1 && @frame != [10]
+      @strike_counter << pins
+    elsif spare?(@frame) && @strike_counter.length == 2
+      puts "spare"
+      @spare_counter << 10
+      @strike_counter << pins
+      @frame = []
+      @frames << [@strike_counter.sum]
+      @strike_counter = []
+    elsif strike?(@frame) && @spare_counter == [10]
+      @spare_counter << pins
+      @frames << [@spare_counter.sum]
+      @spare_counter = []
+      puts "strike"
+      @strike_counter << 10
+      @frame = []
+    elsif @strike_counter.length == 2 && @strike_counter2.length == 1 && @frame != [10]
       puts "strike"
       @strike_counter << pins
       @strike_counter2 << pins
