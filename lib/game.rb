@@ -68,7 +68,7 @@ class Game
           while rolls_left_to_count > 0
             @frames[index + i].rolls.each { |roll| frame.add_bonus(roll)
             rolls_left_to_count -= 1
-            break if rolls_left_to_count == 0}
+            break if rolls_left_to_count == 0 }
             i += 1
           end
         end
