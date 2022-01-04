@@ -47,22 +47,33 @@ class Game
   end
 
   def calculate_bonus
+    spare_bonus
+    strike_bonus
+  end
+
+  def spare_bonus
     @frames.each_with_index { |frame, index| 
-                              if frame.spare?
-                                frame.add_bonus(@frames[index + 1].rolls[0]) unless index == 9
-                              elsif frame.strike?
-                                unless index == 9
-                                  rolls_left_to_count = 2
-                                  i = 1
-                                  while rolls_left_to_count > 0
-                                    @frames[index + i].rolls.each { |roll| frame.add_bonus(roll)
-                                    rolls_left_to_count -= 1
-                                    break if rolls_left_to_count == 0}
-                                    i += 1
-                                  end
-                                end
-                              end
-                            }
+      if frame.spare?
+        frame.add_bonus(@frames[index + 1].rolls[0]) unless index == 9
+      end
+    }
+  end
+
+  def strike_bonus
+    @frames.each_with_index { |frame, index|
+      if frame.strike?
+        unless index == 9
+          rolls_left_to_count = 2
+          i = 1
+          while rolls_left_to_count > 0
+            @frames[index + i].rolls.each { |roll| frame.add_bonus(roll)
+            rolls_left_to_count -= 1
+            break if rolls_left_to_count == 0}
+            i += 1
+          end
+        end
+      end
+    }
   end
 
   def total_score
