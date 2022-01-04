@@ -11,8 +11,26 @@ class Game
   end
 
   def input_roll(pins)
-    @current_frame.roll(pins)
+    @current_frame.extra ? extra_roll(pins) : normal_roll(pins)
+    decision_on_extra_roll
     next_frame if @current_frame.complete?
+  end
+
+  def normal_roll(pins)
+    @current_frame.roll(pins)
+  end
+
+  def extra_roll(pins)
+    @current_frame.non_scoring_roll(pins)
+    @current_frame.add_bonus(pins)
+  end
+
+  def last_frame?
+    @frames.length == 9
+  end
+
+  def decision_on_extra_roll
+    @current_frame.extra_roll if last_frame? && (@current_frame.strike? || @current_frame.spare?)
   end
 
   def next_frame
@@ -31,16 +49,18 @@ class Game
   def calculate_bonus
     @frames.each_with_index { |frame, index| 
                               if frame.spare?
-                                frame.add_bonus(@frames[index + 1].rolls[0])
+                                frame.add_bonus(@frames[index + 1].rolls[0]) unless index == 9
                               elsif frame.strike?
-                                rolls_left_to_count = 2
-                                i = 1
-                                while rolls_left_to_count > 0
-                                  @frames[index + i].rolls.each { |roll| frame.add_bonus(roll)
-                                  rolls_left_to_count -= 1 }
-                                  i += 1
+                                unless index == 9
+                                  rolls_left_to_count = 2
+                                  i = 1
+                                  while rolls_left_to_count > 0
+                                    @frames[index + i].rolls.each { |roll| frame.add_bonus(roll)
+                                    rolls_left_to_count -= 1
+                                    break if rolls_left_to_count == 0}
+                                    i += 1
+                                  end
                                 end
-                                # frame.add_bonus(@frames[index+1].score)
                               end
                             }
   end
@@ -49,5 +69,6 @@ class Game
     calculate_bonus
     @frames.map{ |frame| frame.score + frame.bonus }.reduce(:+)
   end
+
 
 end

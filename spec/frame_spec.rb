@@ -46,4 +46,12 @@ describe Frame do
     expect(subject.bonus).to eq 3
   end
 
+  it 'should be complete if strike with two extra rolls' do
+    subject.roll(10)
+    subject.extra_roll
+    subject.roll(0)
+    subject.roll(0)
+    expect(subject.complete?).to be true
+  end
+
 end

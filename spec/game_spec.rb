@@ -45,7 +45,123 @@ describe Game do
     subject.input_roll(10)
     subject.input_roll(1)
     subject.input_roll(1)
-    expect(subject.total_score).to eq 36
+    expect(subject.total_score).to eq 35
+  end
+
+  it 'can play six rounds and score correctly' do
+    subject.input_roll(1)
+    subject.input_roll(4)
+    subject.input_roll(4)
+    subject.input_roll(5)
+    subject.input_roll(6)
+    subject.input_roll(4)
+    subject.input_roll(5)
+    subject.input_roll(5)
+    subject.input_roll(10)
+    subject.input_roll(0)
+    subject.input_roll(1)
+    expect(subject.total_score).to eq 61
+  end
+
+  it 'can play 10 rounds (vanilla last round) and score correctly' do
+    subject.input_roll(1)
+    subject.input_roll(4)
+
+    subject.input_roll(4)
+    subject.input_roll(5)
+
+    subject.input_roll(6)
+    subject.input_roll(4)
+
+    subject.input_roll(5)
+    subject.input_roll(5)
+
+    subject.input_roll(10)
+
+    subject.input_roll(0)
+    subject.input_roll(1)
+
+    subject.input_roll(7)
+    subject.input_roll(3)
+
+    subject.input_roll(6)
+    subject.input_roll(4)
+
+    subject.input_roll(10)
+
+    subject.input_roll(2)
+    subject.input_roll(7)
+
+    expect(subject.total_score).to eq 125
+  end
+
+  it 'gives an extra roll for a spare in the final frame' do
+    18.times{
+      subject.input_roll(0)
+    }
+    subject.input_roll(1)
+    subject.input_roll(9)
+    subject.input_roll(1)
+    expect(subject.frames.length).to eq 10
+  end
+
+  it 'gives an extra roll for a strike in the final frame' do
+    18.times{
+      subject.input_roll(0)
+    }
+    subject.input_roll(10)
+    subject.input_roll(1)
+    subject.input_roll(1)
+    expect(subject.frames.length).to eq 10
+  end
+
+  it 'can calculate a 10th round spare bonus' do
+    18.times{
+      subject.input_roll(0)
+    }
+    subject.input_roll(1)
+    subject.input_roll(9)
+    subject.input_roll(1)
+    expect(subject.total_score).to eq 11
+  end
+
+  it 'can play 10 frames and score correctly (last frame spare)' do
+    subject.input_roll(1)
+    subject.input_roll(4)
+    subject.input_roll(4)
+    subject.input_roll(5)
+    subject.input_roll(6)
+    subject.input_roll(4)
+    subject.input_roll(5)
+    subject.input_roll(5)
+    subject.input_roll(10)
+    subject.input_roll(0)
+    subject.input_roll(1)
+    subject.input_roll(7)
+    subject.input_roll(3)
+    subject.input_roll(6)
+    subject.input_roll(4)
+    subject.input_roll(10)
+    subject.input_roll(2)
+    subject.input_roll(8)
+    subject.input_roll(6)
+    expect(subject.total_score).to eq 133
+  end
+
+  it 'can correctly calculate an all-strikes except for last round' do
+    9.times {
+      subject.input_roll(10)
+    }
+    subject.input_roll(0)
+    subject.input_roll(0)
+    expect(subject.total_score).to eq 240
+  end
+
+  it 'can score a perfect game correctly' do
+    12.times {
+      subject.input_roll(10)
+    }
+    expect(subject.total_score).to eq 300
   end
 
 end
