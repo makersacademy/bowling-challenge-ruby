@@ -34,7 +34,7 @@ class Frame
   end
 
   def complete?
-    (@max_rolls == DEFAULT_MAX && strike?) || @rolls.length == @max_rolls
+    (!@extra && strike?) || @rolls.length == @max_rolls
   end
 
   def score
