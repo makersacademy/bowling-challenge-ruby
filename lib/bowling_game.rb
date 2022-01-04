@@ -17,12 +17,12 @@ class BowlingGame
   def score
     score = index = 0
     # transform 2d array back into a 1d array
-    scorecard = @scorecard.flatten
+    scorecard_flattened = @scorecard.flatten
 
     @scorecard.each do |frame|
       if strike?(frame) || spare?(frame)
         # In either case we need to add up a total of 3 rolls
-        score += scorecard[index..index + 2].sum
+        score += scorecard_flattened[index..index + 2].sum
       else
         score += frame.sum
       end
