@@ -47,6 +47,11 @@ class Points
 
   def add_final_round_bonus_points(current_frame_number, number)
     current_frame = @frames[current_frame_number - 1] 
+    previous_frame = @frames[current_frame_number - 2]
+    if previous_frame.strike && current_frame.strike && current_frame_number == 10 
+      previous_frame.final_round_bonus(current_frame.rolls[0])
+      previous_frame.final_round_bonus(number)
+    end
     if current_frame_number == 10 && current_frame.spare
       current_frame.final_round_bonus(number)
       update_total(current_frame.bonus.sum)

@@ -14,10 +14,12 @@ class Player
   def pins_knocked_down(number, points)
     end_of_frame = points.update_roll(@current_frame, @current_roll, number)
     if @current_frame == 10 && @current_roll == 2 && bonus_rolls?(points) == false
+      points.add_bonus_points(@current_frame)
       puts points.score_breakdown(GAME_OVER)
       @current_frame = 1
       @current_roll = 1
     elsif @current_frame == 10 && bonus_rolls?(points) == true
+      points.add_bonus_points(@current_frame)
       puts "INPUT BONUS ROLLS"
       puts "e.g. player.bonus_roll(5, points)"
     else
