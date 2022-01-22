@@ -19,6 +19,11 @@ class Frame
         @second_input = gets.chomp
     end 
 
+    def save_rolls
+        frame_record = []
+        frame_record << @first_input
+        frame_record << @second_input
+    end 
 end 
 
 # This class Frame is only responsible for asking the user for their input for the 1st Roll &
