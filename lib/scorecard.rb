@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class Scorecard
-  attr_reader :total_score
-  
-  def initialize(*frames)
-    @total_score = frames.inject(:+)
+  def initialize(frames:, last_frame:)
+    @frames = frames
+    @last_frame = last_frame
+  end
+
+  def total_score
+    @frames + @last_frame
   end
 end
