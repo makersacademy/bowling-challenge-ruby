@@ -1,10 +1,9 @@
 require 'frame'
 
 describe Frame do 
-    it 'responds to the method calculate' do
+    describe '#save_rolls' do
+        it 'stores the rolls within an array' do
+            expect(subject).to respond_to(:save_rolls)
+        end 
     end 
 end 
-
-
-# What do we want this test to actually do?
-# 1. Whatever is entered as 1st roll & 2nd roll is recorded within the hash as such. 
