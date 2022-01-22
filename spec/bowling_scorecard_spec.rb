@@ -32,13 +32,21 @@ describe BowlingScorecard do
       subject.add_knocked_pins(10)
       expect(subject.rolls).to eq []
     end
-    
   end
 
   describe '.total_score' do
     it 'shows the total score from knocked pins input' do
       subject.add_knocked_pins(5)
       expect(subject.total_score).to eq 5
+    end
+  end
+
+  context 'player does a strike' do
+    it 'adds bonus strike points' do
+      subject.add_knocked_pins(10)
+      subject.add_knocked_pins(7)
+      subject.add_knocked_pins(1)
+      expect(subject.total_score).to eq 26
     end
   end
 end

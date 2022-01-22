@@ -4,7 +4,11 @@ class Frame
     @roll_two = roll_two
   end
 
-  def total_points
+  def points
     @roll_one + @roll_two
+  end
+
+  def strike?
+    @roll_one == 10
   end
 end
