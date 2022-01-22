@@ -5,7 +5,7 @@ class Bowling_game
   end
 
   def roll(pins)
-    @rolls.push(pins)
+    @rolls.push(pins) 
   end
 
   def score
@@ -15,15 +15,16 @@ class Bowling_game
     # There are 10 frames in total. 
     10.times do
       if strike?(roll_count)
-        result += strike_score(roll_count)
+        result += strike_bonus(roll_count)
         roll_count += 1
       elsif spare?(roll_count)
-        result += spare_score(roll_count)
+        result += spare_bonus(roll_count)
         roll_count += 2
       else
         result += frame_count(roll_count)
         roll_count += 2
       end
+      puts result
     end
     result
   end
@@ -33,7 +34,7 @@ class Bowling_game
     @rolls[roll_count] + @rolls[roll_count + 1] == 10
   end
 
-  def spare_score(roll_count)
+  def spare_bonus(roll_count)
     # if both your rolls equate to 10, your next shot in the next frame is added on to the toal of the last.
     10 + @rolls[roll_count + 2]
   end 
@@ -43,7 +44,7 @@ class Bowling_game
     @rolls[roll_count] == 10
   end 
 
-  def strike_score(roll_count)
+  def strike_bonus(roll_count)
     # if both your rolls equate to 10, your next shot in the next frame is added on to the toal of the last.
     10 + @rolls[roll_count + 1] + @rolls[roll_count + 2]
   end 
