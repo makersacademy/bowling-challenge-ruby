@@ -13,7 +13,7 @@ class Frame
 
   def total
     @score.inject(0){|sum,x| sum+x} 
-  end 
+  end
 
-
+  attr_reader :score
 end

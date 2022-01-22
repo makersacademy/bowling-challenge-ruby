@@ -1,10 +1,12 @@
+require './lib/frame.rb'
+
 class Game
   def initialize 
-    frames = []
+    @frames = []
   end 
 
-  def add_frame 
-    frames << Frame.new
+  def add_frame(frame)
+    @frames << frame
   end 
 
   attr_reader :frames

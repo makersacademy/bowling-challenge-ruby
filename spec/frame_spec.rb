@@ -6,7 +6,6 @@ describe Frame do
     subject.roll(5)
     expect(subject.total).to eq 10
   end 
-
   #exception needs to be built for 10th frame
   it 'prevents user from rolling more than twice per frame' do 
     subject.roll(3)
