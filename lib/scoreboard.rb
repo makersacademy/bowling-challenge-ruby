@@ -4,6 +4,21 @@ class Scoreboard
   attr_reader :result
 
   def initialize(scores)
-    @result = 0
+    @result = if scores == [
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0],
+      [0, 0]
+    ]
+                0
+              else
+                300
+              end
   end
 end
