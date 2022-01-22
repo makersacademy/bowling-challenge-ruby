@@ -1,8 +1,11 @@
-class BowlingScorecard
+require 'frame'
 
+class BowlingScorecard
+  
   attr_reader :rolls
   
-  def initialize
+  def initialize(frame = Frame)
+    @frame = frame
     @rolls = []
     @total_score = 0
   end
@@ -10,8 +13,9 @@ class BowlingScorecard
   def add_knocked_pins(pins)
     raise "This is a 10 pin bowling game!" if too_many_pins?(pins)
     @rolls << pins
+    @rolls << 0 if pins == 10
     @total_score += pins
-    reset_frame
+    set_frame if @rolls.count == 2
   
   end
 
@@ -21,9 +25,9 @@ class BowlingScorecard
 
   private
 
-  def reset_frame
-    @rolls = [] if @rolls.sum == 10
-    @rolls = [] if @rolls.count == 2
+  def set_frame
+    @current_frame = @frame.new(@rolls[0], @rolls[1])
+    @rolls = []
     
   end
 
