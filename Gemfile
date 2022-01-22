@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby '3.0.0'
+ruby '3.0.2'
 
 group :test do
   gem 'simplecov', require: false, group: :test
