@@ -1,12 +1,15 @@
 class BowlingGame
-attr_reader :score, :roll
-
-  def score()
-    return 0
-  end
-
-  def roll(roll)
+    def initialize
+      @rolls = []
+    end
     
-  end
+    def roll pins
+      @rolls.push pins
+    end
+    
+    def score
+        @rolls.reduce(:+)
+    end
+ 
 
 end
