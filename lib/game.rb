@@ -9,6 +9,10 @@ class Game
     @frames << frame
   end 
 
+  def total_score
+    @frames.flatten.sum
+  end
+
   attr_reader :frames
 end 
 
