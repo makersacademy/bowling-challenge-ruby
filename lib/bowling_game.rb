@@ -8,8 +8,14 @@ class BowlingGame
     end
     
     def score
-        @rolls.reduce(:+)
+      res = 0
+      roll = 0
+      20.times do
+        res += @rolls[roll]
+        roll += 1   
+      end
+      res
+
     end
- 
 
 end
