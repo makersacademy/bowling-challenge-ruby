@@ -49,4 +49,23 @@ describe BowlingScorecard do
       expect(subject.total_score).to eq 26
     end
   end
+
+  context 'player does a spare' do
+    it 'adds bonus strike points' do
+      subject.add_knocked_pins(3)
+      subject.add_knocked_pins(7)
+      subject.add_knocked_pins(1)
+      subject.add_knocked_pins(3)
+      expect(subject.total_score).to eq 15
+    end
+  end
+
+  # context 'match ends at the tenth frame' do
+
+  #   it 'lets player roll again after strike on frame 10' do
+  #     19.times { subject.add_knocked_pins(3) }
+  #     expect(subject).to receive(:add_knocked_pins).with(10)
+  #     subject.add_knocked_pins(10)
+  #   end
+  # end
 end

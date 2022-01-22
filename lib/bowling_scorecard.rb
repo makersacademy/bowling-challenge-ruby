@@ -30,14 +30,15 @@ class BowlingScorecard
   end
 
   def reset_frame
-    @total_score += @rolls.sum if last_frame_strike?
+    add_bonus_points if @current_frame
 
     @current_frame = @frame.new(@rolls[0], @rolls[1])
     @rolls = []
   end
 
-  def last_frame_strike?
-    @current_frame and @current_frame.strike?
+  def add_bonus_points
+    @total_score += @rolls.sum if @current_frame.strike?
+    @total_score += @rolls[0] if @current_frame.spare?
   end
 
   def too_many_pins?(pins)

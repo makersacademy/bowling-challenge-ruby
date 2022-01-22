@@ -10,4 +10,12 @@ describe Frame do
     frame = Frame.new(10, 0)
     expect(frame.strike?).to eq true
   end
+
+  it 'recognises a spare' do
+    frame = Frame.new(3, 7)
+    frame_2 = Frame.new(9, 1)
+
+    expect(frame.spare?).to eq true
+    expect(frame_2.spare?).to eq true
+  end
 end
