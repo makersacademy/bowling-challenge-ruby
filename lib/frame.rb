@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Frame
   attr_reader :roll1, :roll2
 
@@ -5,5 +7,4 @@ class Frame
     @roll1 = roll1
     @roll2 = roll2
   end
-
 end

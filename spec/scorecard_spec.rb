@@ -34,8 +34,33 @@ describe Scorecard do
                                           {"frame 2"=>{"roll1"=>4, "roll2"=>2}})
     end
 
-    it 'raises an error if an ivalid score is entered' do
+    it 'raises an InvalidScoreError if an ivalid score is entered' do
       expect{ scorecard.add_frame(9, 9) }.to raise_error(InvalidScoreError)
+    end
+
+    context 'when it is the final frame and a strike or spare is scored' do
+      before do
+        9.times do
+            scorecard.add_frame(3, 2)
+        end
+      end
+
+      it 'adds a final_frame hash to the frames array with 3 rolls' do
+        scorecard.add_frame(1, 9, 10)
+        expect(scorecard.frames[-1]).to eq("frame 10"=>{"roll1"=>1, "roll2"=>9, "roll3" => 10})
+      end
+
+      context 'if the total of the final frame score is invalid' do
+        
+        it 'raises an InvalidScoreError (2 valid strikes and invalid enntry)' do
+          expect { scorecard.add_frame(10, 10, 12) }.to raise_error(InvalidScoreError)
+        end
+
+        it 'raises an InvalidScoreError (no spair and bowler takes bonus roll)' do
+          expect { scorecard.add_frame(1, 1, 10) }.to raise_error(InvalidScoreError)
+        end
+
+      end
     end
   end
   
