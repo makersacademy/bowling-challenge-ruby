@@ -1,0 +1,64 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/elliottzaki/Desktop/Projects/bowling-challenge-ruby/spec/scoreboard_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/elliottzaki/Desktop/Projects/bowling-challenge-ruby/lib/scoreboard.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1642853589
+  }
+}
