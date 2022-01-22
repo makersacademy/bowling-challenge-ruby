@@ -1,9 +1,12 @@
+require './lib/score_card'
+
 class Frames
   attr_reader :round
 
   def initialize
     @round = 0
     new_round
+    @score_card = ScoreCard.new
   end
 
   def new_round
@@ -12,7 +15,7 @@ class Frames
   end
 
   def end_game
-    # will call ScoreCard.new or whatever
+    @score_card.end_game
   end
 
   def new_roll
