@@ -19,4 +19,22 @@ describe Scoreboard do
       expect(scoreboard).to be_a Scoreboard
     end
   end
+
+  describe '.result' do
+    it 'returns the result of game' do
+      scoreboard = Scoreboard.new([
+                                    [0, 0],
+                                    [0, 0],
+                                    [0, 0],
+                                    [0, 0],
+                                    [0, 0],
+                                    [0, 0],
+                                    [0, 0],
+                                    [0, 0],
+                                    [0, 0],
+                                    [0, 0]
+                                  ])
+      expect(scoreboard.result).to eq 0
+    end
+  end
 end
