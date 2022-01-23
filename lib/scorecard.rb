@@ -1,39 +1,33 @@
 class Scorecard
 
-attr_reader :total_score, :bonus_points
+attr_reader :frames, :total_score, :bonus_points
 
-  def initialize
-    @score = [] #Array.new(10) {Array.new(2,0)}
-    @bonus_points = 0 #this will store the bonus points resulting each frame from stikes or spares through the roll_score method
+  def initialize(frames = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]])
+    @frames = frames # Array.new(10) {Array.new(2,0)}
+    @bonus_points = 0 # this will store the bonus points resulting each frame from stikes or spares through the roll_score method
   end
 
-  # def frame_score
-  #   n = 1
-  #   while 0 < n <= 9 
-  #     n + 1
-  #   end
-  #   # final frame code here?
+  def strike?(frame: ) # input an element within @frames i.e. frame: @frames[0] or @frames[1]
+    p frame[0]
+    true if frame[0] == 10
+  end
+
+  def spare?(frame: ) 
+    frame[0] != 10 && frame.sum == 10 
+  end
+
+  # def bonus_points
+  #   @frames.each_with_index do |frame, index|
+  #     if frame.strike? # assuming frame is instance of Frame class
+  #       if @frames[index + 1].strike? 
+  #         @frames[index + 1].sum
+  #       else 
+  #         bonus = @frames[index]
+  #     elsif frame.spare?
+      
+  #     end
+
   # end
-
-  def frame_scores # 
-    total = @score.map{ |frame| frame.sum }.sum #map returns a new array with the results. sum 
-    total += @bonus_points
-  end
-
-  def roll_score(a = 0, b = 0) 
-    frame = [a, b]
-    if @score.length > 1
-      if @score[-1][0] == 10 && @score[-2][0] == 10 #access the previous frame's first roll score to check if strike 
-        @bonus_points += (a+b+10)
-      elsif @score[-1][0] == 10
-        @bonus_points += (a+b)
-      elsif @score[-1].sum == 10
-        @bonus_points += a
-      end
-    end
-    p @score << frame
-    p @bonus_points
-  end
 
   def outcome 
     if frame_scores == 0  
@@ -50,7 +44,9 @@ attr_reader :total_score, :bonus_points
     @score.sum
   end
 end
-
+p s = Scorecard.new([[4, 5], [3, 2], [3, 1], [2, 1], [4, 4], [10, 0], [2, 0], [10, 0], [4, 0], [0, 0]])
+p f = s.frames[5]
+p s.strike?(frame: f)
 # p s= Scorecard.new
 # p s.roll_score(10,0) #strike. #returns @score array
 # p s.bonus_points #should be 0
