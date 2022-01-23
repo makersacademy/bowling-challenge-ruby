@@ -1,32 +1,14 @@
-class Frame
+class Frame 
 
-    attr :first_input, :second_input
 
-    def play
-        first_message
-        if @first_input != "strike" then 
-        second_message
-        end 
+    def save_input 
+    frame_record = {
+
+    }
+
+    frame_record[:frame_number] = frame_number
+    frame_record[:roll_1] = roll_1
+    frame_record[:roll_2] = roll_2
     end 
 
-    def first_message 
-        puts "Please enter the result of your 1st Roll"
-        @first_input = gets.chomp
-    end
-
-    def second_message
-        puts "Please enter the result of your 2nd Roll"
-        @second_input = gets.chomp
-    end 
-
-    def save_rolls
-        frame_record = []
-        frame_record << @first_input
-        frame_record << @second_input
-    end 
 end 
-
-# This class Frame is only responsible for asking the user for their input for the 1st Roll &
-# the 2nd roll. 
-# It records the 1st roll and 2nd roll as a hash 
-# It should do nothing else but that!
