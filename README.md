@@ -12,56 +12,61 @@ For the purpose of the demo, I put some p statements. The script currently only 
 The user should input  a roll at a time. When 10 is submitted, the script deducts that it was a STRIKE.
 
 ```ruby
-3.0.0 :002 > game = Game.new
-3.0.0 :003 > game.add_roll(5)
-3.0.0 :004 > game.add_roll(10)
-[Traceback deleted]
-RuntimeError (invalid roll)
+3.0.0 :001 > game = Game.new
+ => #<Game:0x00007fefee9e8578 @frames=[]> 
+3.0.0 :002 > game.add_roll(10)
 "Frame 1 complete"
  => "Total score: 10" 
-3.0.0 :006 > game.add_roll(10)
+3.0.0 :003 > game.add_roll(3)
+ => "Total score: 13" 
+3.0.0 :004 > game.add_roll(7)
 "Frame 2 complete"
  => "Total score: 30" 
-3.0.0 :007 > game.add_roll(10)
+3.0.0 :005 > game.add_roll(10)
 "Frame 3 complete"
  => "Total score: 50" 
-3.0.0 :008 > game.add_roll(3)
- => "Total score: 56" 
-3.0.0 :009 > game.add_roll(7)
+3.0.0 :006 > game.add_roll(10)
 "Frame 4 complete"
- => "Total score: 73" 
-3.0.0 :010 > game.add_roll(7)
- => "Total score: 80" 
-3.0.0 :011 > game.add_roll(2)
+ => "Total score: 70" 
+3.0.0 :007 > game.add_roll(3)
+ => "Total score: 76" 
+3.0.0 :008 > game.add_roll(7)
 "Frame 5 complete"
- => "Total score: 89" 
-3.0.0 :012 > game.add_roll(10)
+ => "Total score: 93" 
+3.0.0 :009 > game.add_roll(2)
+ => "Total score: 95" 
+3.0.0 :010 > game.add_roll(8)
 "Frame 6 complete"
- => "Total score: 99" 
-3.0.0 :013 > game.add_roll(5)
- => "Total score: 104" 
-3.0.0 :014 > game.add_roll(4)
+ => "Total score: 105" 
+3.0.0 :011 > game.add_roll(5)
+ => "Total score: 110" 
+3.0.0 :012 > game.add_roll(3)
 "Frame 7 complete"
- => "Total score: 117" 
-3.0.0 :015 > game.add_roll(4)
- => "Total score: 117" 
-3.0.0 :016 > game.add_roll(6)
+ => "Total score: 118" 
+3.0.0 :013 > game.add_roll(10)
 "Frame 8 complete"
- => "Total score: 127" 
-3.0.0 :017 > game.add_roll(10)
+ => "Total score: 128" 
+3.0.0 :014 > game.add_roll(8)
+ => "Total score: 136" 
+3.0.0 :015 > game.add_roll(2)
 "Frame 9 complete"
- => "Total score: 147" 
-3.0.0 :018 > game.add_roll(10)
+ => "Total score: 148" 
+3.0.0 :016 > game.add_roll(10)
 "Frame 10 complete"
- => "Total score: 167" 
-3.0.0 :019 > game.add_roll(2)
- => "Total score: 171" 
-3.0.0 :020 > game.add_roll(5)
- => "Total score: 176" 
-3.0.0 :021 > game.add_roll(5)
-[Traceback deleted]   
+ => "Total score: 168" 
+3.0.0 :017 > game.add_roll(10)
+ => "Total score: 178" 
+3.0.0 :018 > game.add_roll(10)
+ => "Total score: 188" 
+3.0.0 :019 > game.add_roll(0)
+[Traceback DELETED]
 RuntimeError (round complete)
+3.0.0 :020 > 
 ```
+
+![alt text](https://i.imgur.com/UKGzL69.png)
+
+
 
 ## Features:
 
