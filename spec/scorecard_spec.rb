@@ -38,14 +38,14 @@ describe Scorecard do
   describe '#add_frame' do
     it 'adds a frame hash to the frames array' do
       scorecard.add_frame(3, 5)
-      expect(scorecard.frames.first).to eq({ 'frame 1' => { 'roll1' => 3, 'roll2' => 5 } })
+      expect(scorecard.frames.first).to eq({ 'roll1' => 3, 'roll2' => 5 })
     end
 
     it 'lets user add multiple frame hashes (frame key increments)' do
       scorecard.add_frame(3, 5)
       scorecard.add_frame(4, 2)
-      expect(scorecard.frames).to include({ 'frame 1' => { 'roll1' => 3, 'roll2' => 5 } },
-                                          { 'frame 2' => { 'roll1' => 4, 'roll2' => 2 } })
+      expect(scorecard.frames).to include({ 'roll1' => 3, 'roll2' => 5 },
+                                          { 'roll1' => 4, 'roll2' => 2 })
     end
 
     it 'raises an InvalidScoreError if an ivalid score is entered' do
