@@ -1,21 +1,45 @@
 require 'frame'
 
-describe Frame do
-  it 'takes two rolls input to form a score for the frame' do
-    frame = Frame.new(4, 5)
-    expect(frame.points).to eq 9
+describe Frames do
+  it 'checks if last frame has a strike' do
+    subject.create_new([10])
+    expect(subject.previous_was_strike?).to eq true
   end
 
-  it 'recognises a strike' do
-    frame = Frame.new(10, 0)
-    expect(frame.strike?).to eq true
+  it 'checks if last frame was a spare' do
+    subject.create_new([4, 6])
+    expect(subject.previous_was_spare?).to eq true
   end
 
-  it 'recognises a spare' do
-    frame = Frame.new(3, 7)
-    frame_2 = Frame.new(9, 1)
+  it 'can return the total points from all frames' do
+    subject.create_new([4, 2])
+    subject.create_new([4, 2])
+    expect(subject.total_points).to eq 12
+  end
 
-    expect(frame.spare?).to eq true
-    expect(frame_2.spare?).to eq true
+  it 'add bonus points for strikes' do
+    subject.create_new([10])
+    subject.create_new([4, 2])
+    expect(subject.total_points).to eq 22
+  end
+
+  it 'add bonus points for spares' do
+    subject.create_new([6, 4])
+    subject.create_new([4, 2])
+    expect(subject.total_points).to eq 20
+  end
+
+  it 'strike on tenth frame adds bonus points' do
+    9.times { subject.create_new([3, 4]) }
+    subject.create_new([10])
+    subject.create_new([5])
+    expect(subject.total_points).to eq 78
+  end
+
+  it 'spare on tenth frame adds bonus points' do
+    9.times { subject.create_new([3, 4]) }
+    subject.create_new([4, 6])
+    subject.create_new([7])
+    expect(subject.total_points).to eq 80
   end
 end

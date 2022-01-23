@@ -1,18 +1,45 @@
-class Frame
-  def initialize(roll_one, roll_two = 0)
-    @roll_one = roll_one
-    @roll_two = roll_two
+class Frames
+
+  attr_accessor :frames
+  def initialize
+    @frames = []
   end
 
-  def points
-    @roll_one + @roll_two
+  def create_new(rolls)
+    add_bonus_points(rolls)
+
+    if !tenth_frame?
+      @frames << { 'rolls' => rolls, 'points' => rolls.sum }
+    else
+      @frames.last['rolls'] << rolls
+    end
   end
 
-  def strike?
-    @roll_one == 10
+  def total_points
+    @frames.sum { |frame| frame['points'] }
   end
 
-  def spare?
-    points == 10 and @roll_two != 0
+  def tenth_frame?
+    @frames.count == 10
+  end
+
+  def previous_was_strike?
+    @frames.count > 0 and @frames.last['rolls'].last == 10
+  end
+
+  def previous_was_spare?
+    @frames.count > 0 and 
+    @frames.last['points'] == 10 and
+    @frames.last['rolls'][0] != 10
+  end
+
+  private
+
+  def add_bonus_points(rolls)
+    if previous_was_strike?
+      @frames.last['points'] += rolls.sum
+    elsif previous_was_spare?
+      @frames.last['points'] += rolls[0]
+    end
   end
 end
