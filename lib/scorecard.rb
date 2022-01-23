@@ -7,26 +7,28 @@ attr_reader :frames, :total_score, :bonus_points
     @bonus_points = 0 # this will store the bonus points resulting each frame from stikes or spares through the roll_score method
   end
 
-  def strike?(frame: ) # input an element within @frames i.e. frame: @frames[0] or @frames[1]
-    frame[0] == 10
+  def bonus(num) # gives bonus points per particular frame
+    frame = @frames[num]
+    next_frame = @frames[num+1]
+    next_next_frame = @frames[num+2]
+    if strike?(frame: frame) && strike?(frame: next_frame)
+      10 + next_next_frame[0]
+    elsif strike?(frame: frame)
+      next_frame.sum
+    elsif spare?(frame: frame)
+      next_frame[0]
+    else 
+      0
+    end
   end
 
-  def spare?(frame: ) 
-    frame[0] != 10 && frame.sum == 10 
+  def frame_scores
+    scores = []
+    @frames.each_with_index do |frame, idx|
+      scores << frame.sum + bonus(idx)
+    end
+    scores
   end
-
-  # def bonus_points
-  #   @frames.each_with_index do |frame, index|
-  #     if frame.strike? # assuming frame is instance of Frame class
-  #       if @frames[index + 1].strike? 
-  #         @frames[index + 1].sum
-  #       else 
-  #         bonus = @frames[index]
-  #     elsif frame.spare?
-      
-  #     end
-
-  # end
 
   def perfect_game? 
     @frames == [[10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 10, 10]]
@@ -36,26 +38,31 @@ attr_reader :frames, :total_score, :bonus_points
     @frames == [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0, 0]]
   end  
 
-    def outcome 
-    if frame_scores == 0  
-      'gutter game'
-    elsif frame_scores == 300
-      'perfect game'
-    else
-      'your score is #{total_score}'
-    end
+  def score 
+
+  end
+ 
+  def strike?(frame: ) # input an element within @frames i.e. frame: @frames[0] or @frames[1]
+    frame[0] == 10
   end
 
-  #private 
-  def total_score
-    @score.sum
+  def spare?(frame: ) 
+    frame[0] != 10 && frame.sum == 10 
   end
 end
-p s = Scorecard.new([[4, 5], [3, 2], [3, 1], [2, 1], [4, 4], [10, 0], [2, 0], [10, 0], [4, 0], [0, 0]])
+p s = Scorecard.new([[4, 5], [3, 2], [3, 1], [2, 8], [4, 4], [10, 0], [2, 0], [10, 0], [4, 4], [0, 0]])
 p f = s.frames[5]
 p s.strike?(frame: f)
-p perfect = Scorecard.new([[10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 10, 10]])
+p perfect = Scorecard.new([[10, 0], [10, 0], [0, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 10, 10]])
 p perfect.perfect_game?
+p perfect.bonus(3) #should be 20. yes
+p perfect.bonus(1) #0. yes
+p s.bonus(5) #2
+p s.bonus(3) #4
+p s2 = Scorecard.new([[4, 5], [3, 2], [3, 1], [2, 8], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]])
+p s2.frame_scores
+p s.frame_scores 
+
 # p s= Scorecard.new
 # p s.roll_score(10,0) #strike. #returns @score array
 # p s.bonus_points #should be 0
@@ -68,25 +75,7 @@ p perfect.perfect_game?
 # p s.bonus_points #should be 7+8 = 15 
 
 
-# frames = [
-#   [0,1]
-#   [2,3] etc. i.e. array of 10 2-element arrays
-# ]
-
-
-# perfect game 
-# [10,0]  
-# [10,0]
-# [10,0]
-# [10,0]
-# [10,0]
-# [10,0]
-# [10,0]
-# [10,0]
-# [10,0]
-# [10,0]
-# [10,0]
-# [10,0]
+# perfect game scores with bonuses: 
 
 # [30,0]
 # [30,0]

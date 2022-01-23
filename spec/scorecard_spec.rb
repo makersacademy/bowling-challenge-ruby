@@ -1,23 +1,56 @@
 require 'scorecard'
 
 describe Scorecard do 
-  subject(:no_bonus_game) { described_class.new([[4, 5], [3, 2], [3, 1], [2, 1], [4, 4], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]) }
-  subject(:strikes_game) { described_class.new([[4, 5], [3, 2], [3, 1], [2, 1], [4, 4], [10, 0], [2, 0], [10, 0], [4, 0], [0, 0]]) }
-  subject(:spares_game) { described_class.new([[4, 5], [3, 2], [3, 1], [2, 1], [4, 4], [8, 2], [2, 0], [10, 0], [0, 0], [0, 0]]) }
+  subject(:no_bonus_game) { described_class.new([[4, 5], [3, 2], [3, 1], [2, 1], [4, 4], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0, 0]]) }
+  subject(:bonus_game) { described_class.new([[10, 0], [10, 0], [3, 1], [9, 1], [4, 4], [10, 0], [2, 0], [10, 0], [0, 0], [0, 0, 0]]) }
+  subject(:spares_game) { described_class.new([[4, 5], [3, 2], [3, 1], [2, 1], [4, 4], [8, 2], [2, 0], [10, 0], [0, 0], [0, 0, 0]]) }
   subject(:perfect_game) { described_class.new([[10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 10, 10]]) }
   subject(:all_zero) { described_class.new([[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0, 0]]) }
-  it 'begins with an array of 10 frames i.e. each element has 2 rolls' do 
-
+  
+  it 'has 10 frames' do 
+    expect(subject.frames.length).to eq 10
   end
 
-  it 'can calculate bonus score without consecutive strikes' do 
-   
+  it 'has an array of frames' do 
+    expect(subject.frames).to be_a_kind_of(Array)
   end
+  
+  it 'can calculate and display the scores for each frame, including bonuses' do 
+    expect(no_bonus_game.frame_scores).to eq [9, 5, 4, 3, 8, 0, 0, 0, 0, 0]
+  end 
+  it 'can calculate and display the scores for each frame, including bonuses' do 
+    expect(bonus_game.frame_scores).to eq [23, 14, 4, 14, 8, 12, 2, 10, 0, 0]
+  end 
+
+  describe '#bonus' do
+    context 'when strike' do 
+      it 'if followed by another strike, bonus is 10 plus the 1st roll of the frame that comes after the subsequent strike' do 
+        expect(bonus_game.bonus(0)).to eq 13
+      end
+
+      it 'is sum of next frame if followed by a non-strike frame' do 
+        expect(bonus_game.bonus(1)).to eq 4
+        expect(bonus_game.bonus(5)).to eq 2
+      end
+    end
+
+    context 'when spare' do 
+      it 'is 1st roll of the next frame' do 
+        expect(bonus_game.bonus(3)).to eq 4
+      end
+    end
+
+    context 'when neither spare nor strike ' do 
+      it 'is zero' do 
+        expect(bonus_game.bonus(2)).to eq 0
+      end
+    end
+  end 
   
   describe '#is_strike?' do 
     it 'identifies if frame is a strike' do 
-      strike_frame = strikes_game.frames[5]
-      expect(strikes_game.strike?(frame: strike_frame)).to be true
+      strike_frame = bonus_game.frames[5]
+      expect(bonus_game.strike?(frame: strike_frame)).to be true
     end
   end
 
@@ -36,35 +69,6 @@ describe Scorecard do
     end
   end
   
-  #describe '#frames' do 
-  #   it 'returns 10 element array when all rolls are 0' do 
-  #     10.times {subject.roll_score(0,0)} # player inputs the roll score using roll_score method
-  #     expect(subject.frame_scores).to eq [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-  #     #expect(subject.outcome).to eq 'gutter game'
-  #   end
-  #   
-  #it 'returns 0 when all rolls are 0' do 
-  #     10.times {subject.roll_score(0,0)} # player inputs the roll score using roll_score method
-  #     expect(subject.frame_scores).to eq 0
-  #     #expect(subject.outcome).to eq 'gutter game'
-  #   end
-
-  #   it 'returns 300 when all rolls are 10, meaning 2 extra rolls of 10' do 
-  #     12.times {subject.roll_score(10,0)} # player inputs the roll score using roll_score method
-  #     expect(subject.frame_scores).to eq 300
-  #     #expect(subject.outcome).to eq 'gutter game'
-  #   end
-    
-  # describe '#outcome' do 
-  #   it 'returns gutter game when all rolls are 0' do 
-  #     10.times {subject.roll_score(0,0)} # player inputs the roll score using roll_score method
-  #     expect(subject.outcome).to eq 'gutter game'
-  #   end
-  # end
-
-    # it 'returns perfect game when all rolls are 0' do 
-    #   12.times {subject.roll_score(10,10)} # player inputs the roll score using roll_score method
-    #   expect(subject.outcome).to eq 'perfect game'
-    #  end    
+  
 end
 
