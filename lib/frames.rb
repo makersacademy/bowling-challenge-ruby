@@ -1,25 +1,15 @@
 require './lib/score_card'
+require './lib/roll'
 
 class Frames
-  attr_reader :round
 
-  def initialize
-    @round = 0
-    new_round
-    @score_card = ScoreCard.new
-  end
-
-  def new_round
-    @round +=1
-    @round >= 11 ? end_game : new_roll
-  end
-
-  def end_game
-    @score_card.end_game
-  end
-
-  def new_roll
-
+  def self.new_round(round: , score_count: , strike_count: , bonus: )
+    round += 1
+    if round >= 11
+      ScoreCard.new(score_count, @Strike_count)
+    else
+      Roll.new(round: round, score_count: score_count, strike_count: strike_count)
+    end
   end
 
 end
