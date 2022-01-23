@@ -18,6 +18,20 @@ describe BowlingGame do
           20.times { @game.roll(1) }
           expect(@game.score).to eq (20)
         end
-    end
+    
+        it 'Can roll spare' do
+            @game.roll(5)
+            @game.roll(5)
+            @game.roll(3)
+            17.times { @game.roll(0) }
+            expect(@game.score).to eq (16)
+        end
+    
+        it 'All 5 score should be 150' do
+          (1..21).each { @game.roll(5) }
+          expect(@game.score).to eq (150)
+        end
+
+      end
     end
 end
