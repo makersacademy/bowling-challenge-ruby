@@ -1,0 +1,21 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/ckapihya/Projects/bowling-challenge-ruby/spec/score_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/ckapihya/Projects/bowling-challenge-ruby/lib/score.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      }
+    },
+    "timestamp": 1642977687
+  }
+}
