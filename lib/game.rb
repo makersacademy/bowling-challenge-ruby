@@ -5,6 +5,7 @@ class Game
   end   
 
   def roll(pins)
+    raise("This is not valid input.") if pins > 10
     @scores << pins
   end
 
