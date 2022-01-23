@@ -7,7 +7,7 @@ irb -r './lib/game'
 
 ## Demo:
 
-For the purpose of the demo, I put some p statements. The script currently only updates the total score each frame is completed- a string ‘Frame complete’ will be printed to confirm this.
+For the purpose of the demo, I put down some p statements. The script currently only updates the total score each frame is completed- a string ‘Frame complete’ will be printed to confirm this.
 
 The user should input  a roll at a time. When 10 is submitted, the script deducts that it was a STRIKE.
 
