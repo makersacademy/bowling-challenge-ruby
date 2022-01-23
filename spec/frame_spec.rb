@@ -7,26 +7,67 @@ describe Frame do
   let(:open_frame) { Frame.new(0, 0) }
   let(:open_frame_2) { Frame.new(7, 2)}
 
-  describe '#bonus_throws?' do
+  describe 'roll_1' do
+    it 'returns the first roll' do
+      expect(open_frame_2.roll_1).to eq 7
+    end
+  end
+  describe 'roll_1' do
+    it 'returns the second roll' do
+      expect(open_frame_2.roll_2).to eq 2
+    end
+  end
+  describe '#strike?' do
+    
+    it 'returns true' do
+      expect(strike_frame.strike?).to eq true
+    end
+
+    it 'returns false' do
+      expect(spare_frame.strike?).to eq false
+    end
+
+    it 'returns false' do
+      expect(open_frame.strike?).to eq false
+    end
+  end
+
+  describe '#spare?' do
+    
+    it 'returns true' do
+      expect(spare_frame.spare?).to eq true
+    end
+
+    it 'returns false' do
+      expect(strike_frame.spare?).to eq false
+    end
+
+    it 'returns false' do
+      expect(open_frame.spare?).to eq false
+    end
+
+  end
+
+  describe '#bonus_rolls?' do
     it 'returns 2' do
-      expect(strike_frame.bonus_throws).to eq 2
+      expect(strike_frame.bonus_rolls).to eq 2
     end
 
     it 'returns 1' do
-      expect(spare_frame.bonus_throws).to eq 1
+      expect(spare_frame.bonus_rolls).to eq 1
     end
 
     it 'returns 1' do
       frame = Frame.new(3, 7)
-      expect(frame.bonus_throws).to eq 1
+      expect(frame.bonus_rolls).to eq 1
     end
 
     it 'returns 0' do
-      expect(open_frame.bonus_throws).to eq 0
+      expect(open_frame.bonus_rolls).to eq nil
     end
     
     it 'returns 0' do
-      expect(open_frame_2.bonus_throws).to eq 0
+      expect(open_frame_2.bonus_rolls).to eq nil
     end
   end
   
