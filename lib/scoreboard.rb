@@ -3,22 +3,37 @@
 class Scoreboard
   attr_reader :result
 
-  def initialize(scores)
-    @result = if scores == [
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0]
-    ]
-                0
-              else
-                300
-              end
+  LOWEST_SCORE = [
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0]
+  ]
+
+  HIGHEST_SCORE = [
+    [10],
+    [10],
+    [10],
+    [10],
+    [10],
+    [10],
+    [10],
+    [10],
+    [10],
+    [10, 10, 10]
+  ]
+  def initialize(score)
+    if score == LOWEST_SCORE
+      @result = 0
+    else
+      score == HIGHEST_SCORE
+      @result = 300
+    end
   end
 end
