@@ -161,9 +161,9 @@
           null,
           1,
           7,
-          null,
           3,
           null,
+          4,
           2,
           null,
           2,
@@ -172,13 +172,20 @@
           null,
           1,
           2,
-          22,
+          2,
+          20,
+          20,
+          3,
+          17,
+          4,
+          null,
+          null,
           2,
           null,
           null
         ]
       }
     },
-    "timestamp": 1642955480
+    "timestamp": 1642956650
   }
 }

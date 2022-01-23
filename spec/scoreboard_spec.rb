@@ -90,7 +90,7 @@ describe Scoreboard do
     it 'calculate the numbers of pin when there is not any strikes and spares' do
       scoreboard = Scoreboard.new([
                                     [3, 6],
-                                    [4, 6],
+                                    [4, 3],
                                     [1, 5],
                                     [7, 2],
                                     [5, 4],
@@ -100,7 +100,7 @@ describe Scoreboard do
                                     [7, 1],
                                     [3, 2]
                                   ])
-      expect(scoreboard.result).to eq 77
+      expect(scoreboard.result).to eq 74
     end
     it 'calculate the score of a game includes spare and strike' do
       scoreboard = Scoreboard.new([
