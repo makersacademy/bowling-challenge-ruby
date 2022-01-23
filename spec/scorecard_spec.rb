@@ -9,8 +9,10 @@ describe Scorecard do
     end
   end
 
+
+
   describe '#turn' do
-    it 'adds a turn to frames ' do
+    it 'adds a turn array to frames ' do
       scorecard.turn(2, 2)
       expect(scorecard.frames).to eq([[2, 2]])
     end
@@ -28,6 +30,21 @@ describe Scorecard do
     it 'raises an InvalidScoreError if an ivalid score is entered' do
       expect { scorecard.turn(9, 9) }.to raise_error(InvalidScoreError)
     end
+
+    context 'if it is the final frame and a strike or spare occurs' do
+      it 'adds a bonus ball' do
+        9.times do 
+          scorecard.turn(5,0)
+        end
+        scorecard.turn(10, 0, 1)
+        expect(scorecard.frames[-1]).to eq([10, 0, 1])
+      end
+
+      it 'raises an InvalidScoreError if an ivalid score is entered' do
+        expect { scorecard.turn(11, 2, 11) }.to raise_error(InvalidScoreError)
+      end 
+    end
+
   end
 
 end
