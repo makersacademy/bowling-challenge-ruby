@@ -4,26 +4,34 @@ require 'game'
 
 describe Game do
   describe '.play' do
+    let(:game) { Game.new }
+    
     it 'handles non-strikes' do
-      21.times { expect(subject).to receive(:gets).and_return('5') }
-      subject.play
+      21.times { expect(game).to receive(:gets).and_return('5') }
+      game.play
 
-      expect(subject.frames).to be_a Array
-      expect(subject.frame_number).to eq 11
+      expect(game.frames).to be_a Array
+      expect(game.frame_number).to eq 11
     end
 
     it 'handles strikes' do
-      11.times { expect(subject).to receive(:gets).and_return('10') }
-      subject.play
+      11.times { expect(game).to receive(:gets).and_return('10') }
+      game.play
 
-      expect(subject.frames).to be_a Array
-      expect(subject.frame_number).to eq 11
+      expect(game.frames).to be_a Array
     end
 
     it 'raises error when too many pins have been knocked down' do
-      expect(subject).to receive(:gets).and_return('42').and_raise 'There aren\'t that many pins!'
+      allow(game).to receive(:gets).and_return('42')
 
-      # expect(subject.play).to raise_error 'There aren\'t that many pins!'
+      expect(game.play).to raise_error 'There aren\'t that many pins!'
+    end
+
+    it 'creates a new scorecard at the end of the game' do
+      11.times { expect(game).to receive(:gets).and_return('10') }
+      scorecard = game.play
+
+      expect(scorecard).to be_a Scorecard
     end
   end
 end

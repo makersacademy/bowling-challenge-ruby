@@ -15,8 +15,10 @@ class Game
   end
 
   def play
+    reset_game
     turn until frame_number == 11
     bonus_roll if bonus?(@frames.last)
+    Scorecard.new(@frames)
   end
 
   private
@@ -55,5 +57,10 @@ class Game
 
   def roll
     gets.chomp.to_i
+  end
+
+  def reset_game
+    @frame_number = 1
+    @frames = []
   end
 end
