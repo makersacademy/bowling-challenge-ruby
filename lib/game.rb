@@ -14,44 +14,37 @@ class Game
   end
 
   def play
-    turn until frame_number == 10
-    last_turn
-    @frames
-    # Scorecard.new(@frames)
+    turn until frame_number == 11
+    bonus_roll if bonus?(@frames.last)
   end
 
   private
 
   def turn
-    p frame_message
-    p message1
+    frame_message
+    message1
     score1 = roll
     if score1 == 10
       @frames << Frame.create([@frame_number, score1])
-      p strike_message
+      strike_message
     else
-      p message2
+      message2
       score2 = roll
-      p spare_message if score1 + score2 == 10
+      spare_message if score1 + score2 == 10
       @frames << Frame.create([@frame_number, score1, score2])
     end
     @frame_number += 1
   end
 
-  def last_turn
-    p last_frame_message
-    p message1
-    score1 = roll
-    if score1 == 10
-      p strike_message
-      p message2
-      score2 = roll
-      @frames << Frame.create([@frame_number, score1, score2])
-    else
-      p message3
-      score3 = roll
-      @frames << Frame.create([@frame_number, score1, score2])
-    end
+
+  def bonus?(frame)
+    frame[:roll1] == 10 || frame[:roll1] + frame[:roll2] == 10
+  end
+
+  def bonus_roll
+    bonus_roll_message
+    score = roll
+    @frames << Frame.create([:bonus_roll, score])
   end
 
   def roll
