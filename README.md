@@ -1,3 +1,8 @@
+<h1>Bowling Scorecard</h1>
+
+To start the scorecard, please run 'Start_Scorecard.rb' using ruby.
+
+=================
 Bowling Challenge in Ruby
 =================
 
