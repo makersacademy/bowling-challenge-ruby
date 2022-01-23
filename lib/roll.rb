@@ -2,16 +2,14 @@ require './lib/frames'
 
 class Roll
   # do you need these attr_readers???
-  attr_reader :first_roll, :frame_number, :pins_knocked, :score_count, :this_frame_count, :strike_count, :bonus
+  attr_reader :first_roll, :frame_number, :pins_knocked, :score_count, :this_frame_count, :strike_count, :bonus, :roll_again
 
-  def initialize(round: , score_count:, strike_count:)
-    @first_roll = true
-    @this_frame_count = 0
-    @round = round
+  def initialize(score_count:, strike_count:, first_roll:, this_frame_count: )
+    @first_roll = first_roll
+    @this_frame_count = this_frame_count
     @score_count = score_count
     @strike_count = strike_count
     @bonus = nil
-    receive_next_score
   end
 
   def scoring(pins)
@@ -22,8 +20,8 @@ class Roll
 
   def strike_or_spare
      if @pins_knocked == 10
-      @bonus = 'strike'
       @strike_count += 1
+      @bonus = 'strike'
      elsif @this_frame_count == 10
       @bonus = 'spare'
      end
@@ -32,20 +30,10 @@ class Roll
   def next_roll?
     if (@bonus == nil) && (@first_roll == true)
       @first_roll = false
-      receive_next_score
+      @roll_again = true
     else
-      end_roll
+      @roll_again = false
     end
   end
-
-  def receive_next_score
-    #receives number of pins from Frames??? and ccalls scoring(pins)
-  end
-  
-
-  def end_roll
-    Frames.new_round(round: @round, score_count: @score_count, strike_count: @strike_count, bonus: @bonus)
-  end
-
 
 end
