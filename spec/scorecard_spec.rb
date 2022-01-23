@@ -1,9 +1,9 @@
 require 'scorecard'
 
 describe Scorecard do 
-  subject(:no_bonus_game) { described_class.new([[4, 5], [3, 2], [3, 1], [2, 1], [4, 4], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0, 0]]) }
-  subject(:bonus_game) { described_class.new([[10, 0], [10, 0], [3, 1], [9, 1], [4, 4], [10, 0], [2, 0], [10, 0], [0, 0], [0, 0, 0]]) }
-  subject(:spares_game) { described_class.new([[4, 5], [3, 2], [3, 1], [2, 1], [4, 4], [8, 2], [2, 0], [10, 0], [0, 0], [0, 0, 0]]) }
+  subject(:no_bonus_game) { described_class.new([[4, 5], [3, 2], [3, 1], [2, 1], [4, 4], [0, 0], [0, 0], [0, 0], [0, 0], [10, 2, 10]]) }
+  subject(:bonus_game) { described_class.new([[10, 0], [10, 0], [3, 1], [9, 1], [4, 4], [10, 0], [2, 0], [10, 0], [10, 0], [10, 2, 1]]) }
+  
   subject(:perfect_game) { described_class.new([[10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 10, 10]]) }
   subject(:all_zero) { described_class.new([[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0, 0]]) }
   
@@ -14,13 +14,25 @@ describe Scorecard do
   it 'has an array of frames' do 
     expect(subject.frames).to be_a_kind_of(Array)
   end
+
+  describe '#total_score' do 
+    it 'calculates correctly when game has strikes and spares' do 
+      expect(bonus_game.total_score).to eq 142
+    end
+    it 'calculates correctly when game has no strikes or spares' do 
+      expect(no_bonus_game.total_score).to eq 51
+    end
+  end
   
-  it 'can calculate and display the scores for each frame, including bonuses' do 
-    expect(no_bonus_game.frame_scores).to eq [9, 5, 4, 3, 8, 0, 0, 0, 0, 0]
-  end 
-  it 'can calculate and display the scores for each frame, including bonuses' do 
-    expect(bonus_game.frame_scores).to eq [23, 14, 4, 14, 8, 12, 2, 10, 0, 0]
-  end 
+  describe '#frame scores' do
+    it 'can calculate and display the scores for each frame, if no strikes or spares' do 
+      expect(no_bonus_game.frame_scores).to eq [9, 5, 4, 3, 8, 0, 0, 0, 0, 22]
+    end 
+    it 'can calculate and display the scores for each frame, including bonuses' do 
+      expect(bonus_game.frame_scores).to eq [23, 14, 4, 14, 8, 12, 2, 30, 22, 13]
+    end 
+  
+  end
 
   describe '#bonus' do
     context 'when strike' do 
@@ -45,6 +57,10 @@ describe Scorecard do
         expect(bonus_game.bonus(2)).to eq 0
       end
     end
+    context 'when in penultimate frame' do 
+      it 'correctly calculates bonus' do 
+      end
+    end
   end 
   
   describe '#is_strike?' do 
@@ -62,10 +78,10 @@ describe Scorecard do
     expect(all_zero.gutter_game?).to eq true
   end
 
-  describe '#is_spare? identifies if frame is a spare' do 
+  describe '#is_spare?' do 
     it 'identifies if frame is a spare' do 
-      spare_frame = spares_game.frames[5]
-      expect(spares_game.spare?(frame: spare_frame)).to be true
+      spare_frame = bonus_game.frames[3]
+      expect(bonus_game.spare?(frame: spare_frame)).to eq true
     end
   end
   
