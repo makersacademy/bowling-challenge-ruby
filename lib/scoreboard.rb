@@ -14,7 +14,7 @@ class Scoreboard
     [0, 0],
     [0, 0],
     [0, 0]
-  ]
+  ].freeze
 
   HIGHEST_SCORE = [
     [10],
@@ -27,16 +27,16 @@ class Scoreboard
     [10],
     [10],
     [10, 10, 10]
-  ]
+  ].freeze
   def initialize(scores)
-    if scores == LOWEST_SCORE
-      @result = 0
-		elsif
-      scores == HIGHEST_SCORE
-      @result = 300
-		else
-			@result = calculate_score(scores)
-    end
+    @result = case scores
+              when LOWEST_SCORE
+                0
+              when HIGHEST_SCORE
+                300
+              else
+                calculate_score(scores)
+              end
   end
 
   def calculate_score(scores)
