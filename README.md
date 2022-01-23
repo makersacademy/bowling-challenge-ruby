@@ -64,9 +64,8 @@ RuntimeError (round complete)
 3.0.0 :020 > 
 ```
 
+## Table of scores for the demo above:
 ![alt text](https://i.imgur.com/UKGzL69.png)
-
-
 
 ## Features:
 
