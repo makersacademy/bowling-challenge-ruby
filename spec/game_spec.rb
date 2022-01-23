@@ -5,7 +5,7 @@ describe Game do
   let(:frame2) { [4, 5] }
   let(:frame3) { [6, 4] }
   let(:frame4) { [5, 5] }
-  let(:frame5) { [10] }
+  let(:frame5) { [10,0] }
   let(:frame6) { [0, 1] }
   let(:frame7) { [7, 3] }
   let(:frame8) { [6, 4] }
@@ -31,12 +31,18 @@ describe Game do
         expect(subject.total_score).to eq 14
       end 
     end 
-  end
 
-  describe 'detect_strike' do
-    it 'identifies a 10 in the first roll of a frame' do 
-      # expect(subject.add_frame(frame3)).to eq
-    end 
-  end 
+    context 'there is a spare in the game' do 
+      it 'calculates the score with the spare' do
+        subject.add_frame(frame1)
+        subject.add_frame(frame2)
+        subject.add_frame(frame3)
+        subject.add_frame(frame4)
+        subject.add_frame(frame5)
+        subject.add_frame(frame6)
+        expect(subject.total_score). to eq 61
+      end 
+    end
+  end
 end
     

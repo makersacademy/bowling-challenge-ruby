@@ -12,8 +12,8 @@ class Game
   
   def total_score
     frameindex = 0
-    i = frames.length
-    while i > 0 do
+
+    while frameindex  < frames.length do
       #strike
       if @frames[frameindex][0] == 10
         if @frames[frameindex+1][0] == 10
@@ -26,7 +26,7 @@ class Game
       else
         @score += @frames[frameindex][0] + @frames[frameindex][1]
       end
-      i -= 1
+      frameindex += 1
     end
     @score
   end
