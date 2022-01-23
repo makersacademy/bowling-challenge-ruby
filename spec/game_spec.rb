@@ -1,11 +1,10 @@
 require 'game'
 
 describe Game do
- 
-  let(:frame) { instance_double(Frame, 'frame', add_roll: nil) }
+  subject { described_class.new(frame_class)}
+  let(:frame) { instance_double(Frame, 'frame', add_roll: nil, over?: false) }
   let(:frame_class) { class_double(Frame, 'Frame', new: frame) }
 
-  subject { described_class.new(frame_class) }
 
   describe 'score' do
     it 'starts at zero' do
@@ -17,10 +16,18 @@ describe Game do
     it 'holds an instance of frame' do
       expect(subject.current_frame).to be frame
     end
+
+    it 'becomes a new frame after frame is over' do
+      allow(frame).to receive(:over?).and_return(true)
+      expect(frame_class).to receive(:new).twice
+      subject.add_roll(3)
+    end
   end
 
+  
+
   describe 'add_roll' do
-    it 'adds roll score to current frame score' do
+    it 'adds roll to current frame score' do
       expect(frame).to receive(:add_roll).with(1)
       subject.add_roll(1)
     end
