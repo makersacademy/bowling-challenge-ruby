@@ -1,17 +1,40 @@
- # def bonus_rolls?
-  #   strike? ? 2 : spare? ? 1 : 0
-  # end
+require './lib/frame'
 
 class Game
 
-  attr_reader :total_score, :closed_frames, :awaiting_frames
+  attr_reader :frames
 
-  def initialize(closed_frames = [], awaiting_frames = [])
-    @closed_frames = closed_frames
-    @awaiting_frames = awaiting_frames
+  def initialize(frames = [])
+    @frames = frames
   end
 
-  def check_status(frame)
-    frame.bonus_rolls.nil? ? @closed_frames << frame : @awaiting_frames << frame
+  def total_score
+    @frames.sum { |frame| frame.score }
+  end
+
+  def add_frame(frame)
+    analyse_frame(frame)
+    @frames << frame
+    p total_score
+  end
+
+  private
+  def analyse_frame(analysed_frame)
+    @frames.each do |frame| 
+      if analysed_frame.strike? 
+        if frame.bonus_rolls > 0
+          frame.score += analysed_frame.roll_1
+          frame.bonus_rolls -= 1
+        end
+      else
+        if frame.bonus_rolls == 2
+          frame.score += analysed_frame.roll_1 + analysed_frame.roll_2
+          frame.bonus_rolls -= 2
+        elsif frame.bonus_rolls == 1
+          frame.score += analysed_frame.roll_1
+          frame.bonus_rolls -= 1
+        end
+      end
+    end
   end
 end

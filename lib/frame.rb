@@ -29,6 +29,6 @@ class Frame
   end
 
   def bonus_rolls?
-    strike? ? 2 : spare? ? 1 : nil
+    strike? ? 2 : spare? ? 1 : 0
   end
 end

@@ -63,11 +63,11 @@ describe Frame do
     end
 
     it 'returns 0' do
-      expect(open_frame.bonus_rolls).to eq nil
+      expect(open_frame.bonus_rolls).to eq 0
     end
     
     it 'returns 0' do
-      expect(open_frame_2.bonus_rolls).to eq nil
+      expect(open_frame_2.bonus_rolls).to eq 0
     end
   end
   
