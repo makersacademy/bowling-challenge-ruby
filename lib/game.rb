@@ -2,7 +2,7 @@ require './lib/frame'
 
 class Game
 
-  attr_reader :frames
+  attr_reader :frames, :current_frame
 
   def initialize(frames = [])
     @frames = frames
@@ -16,6 +16,19 @@ class Game
     analyse_frame(frame)
     @frames << frame
   end
+
+  def add_roll(knocked_pins)
+    if knocked_pins == 10 
+      add_frame(Frame.new(10, nil))
+    else
+      @current_frame ? @current_frame << knocked_pins : @current_frame = [knocked_pins]
+      if @current_frame.length == 2
+        add_frame(Frame.new(@current_frame.first, @current_frame.last))
+        @current_frame = nil
+      end
+    end
+  end
+
 
   private
 

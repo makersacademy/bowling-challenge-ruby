@@ -33,6 +33,28 @@ describe Game do
     score: 10)
   }
 
+  describe '#add_roll' do
+    context 'when roll is 0-9' do
+      it 'returns first roll' do
+        game.add_roll(2)
+        expect(game.current_frame).to eq [2]
+      end
+    end
+    context 'whens strike' do
+      it 'returns nil' do
+        game.add_roll(10)
+        expect(game.current_frame).to eq nil
+      end
+    end
+    context 'when there is an outstanding roll' do
+      it 'returns nil' do
+        game.add_roll(2)
+        game.add_roll(5)
+        expect(game.current_frame).to eq nil
+      end
+    end
+  end
+
   describe '#add_frame' do
     it 'adds the frame' do
       expect(game).to receive(:analyse_frame)
