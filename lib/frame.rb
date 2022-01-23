@@ -12,6 +12,7 @@ class Frame
     self.roll2 = pins if roll1
     self.roll1 = pins unless roll2
     self.score += pins
+    self.remaining_pins -= pins
   end
 
   def over?
@@ -20,5 +21,5 @@ class Frame
 
   private
   
-  attr_writer :score, :roll1, :roll2
+  attr_writer :score, :roll1, :roll2, :remaining_pins
 end
