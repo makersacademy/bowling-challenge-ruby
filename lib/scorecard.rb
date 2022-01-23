@@ -7,8 +7,8 @@ attr_reader :frames
   end
 
   def bonus(num) # gives bonus points per particular frame when given frame index as an argument      
-    return 0 if num > 8 
-      if num == 8
+    return 0 if num > 8 # there is no bonus for the 10th frame i.e. index 9
+      if num == 8 # 9th frame
         frame = @frames[num]
         next_frame = @frames[num+1]
         if strike?(frame: frame) && strike?(frame: next_frame)
