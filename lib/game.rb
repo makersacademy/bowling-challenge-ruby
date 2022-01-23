@@ -18,8 +18,8 @@ class Game
   end
 
   def add_roll(knocked_pins)
-    raise 'invalid roll' unless valid_roll?(knocked_pins)
     raise 'round complete' if round_finished?
+    raise 'invalid roll' unless valid_roll?(knocked_pins)
     if knocked_pins == 10 
       add_frame(Frame.new(10, nil))
     else
