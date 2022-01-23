@@ -18,6 +18,8 @@ class Game
   end
 
   def add_roll(knocked_pins)
+    raise 'invalid roll' unless valid_roll?(knocked_pins)
+    raise 'round complete' if round_finished?
     if knocked_pins == 10 
       add_frame(Frame.new(10, nil))
     else
@@ -31,6 +33,25 @@ class Game
 
 
   private
+
+  def round_finished?
+    # it is finished if the frames.length is 10 and the last frame has no bonus points
+    if @frames.empty?
+      false
+    else
+      @frames.length == 10 && @frames.last.bonus_rolls == 0
+    end
+  end
+
+  def valid_roll?(knocked_pins)
+    if knocked_pins > 10 
+      false
+    elsif @current_frame 
+      @current_frame.first + knocked_pins <= 10 
+    else
+      true
+    end
+  end
 
   def analyse_frame(analysed_frame)
     @frames.each do |frame| 

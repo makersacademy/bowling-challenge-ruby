@@ -35,22 +35,70 @@ describe Game do
 
   describe '#add_roll' do
     context 'when roll is 0-9' do
-      it 'returns first roll' do
+      it 'awaits another roll' do
         game.add_roll(2)
-        expect(game.current_frame).to eq [2]
+        expect(game.frames.length).to eq 0
       end
     end
+    
     context 'whens strike' do
-      it 'returns nil' do
+      it 'completes a frame' do
         game.add_roll(10)
-        expect(game.current_frame).to eq nil
+        expect(game.frames.length).to eq 1
       end
     end
+    
     context 'when there is an outstanding roll' do
       it 'returns nil' do
         game.add_roll(2)
         game.add_roll(5)
         expect(game.current_frame).to eq nil
+      end
+    end
+    
+    context 'when roll is higher than 10' do
+      it 'raises an error' do
+        expect { game.add_roll(11) }.to raise_error 'invalid roll'
+      end
+    end
+    
+    context 'when the sum of both rolls is higher than 10' do
+      it 'raises an error' do
+        game.add_roll(5)
+        expect { game.add_roll(6) }.to raise_error 'invalid roll'
+      end
+    end
+    
+    context 'when the sum is 10' do
+      it 'does not raise an error' do
+        game.add_roll(4)
+        expect {game.add_roll(6)}.not_to raise_error 'invalid roll'
+      end
+    end
+    
+    context 'after 10 frames with last as strike' do
+      it 'does not raise an error' do
+        10.times { game.add_roll(10) }
+        game.add_roll(10)
+        expect { game.add_roll(10) }.not_to raise_error 'round complete'
+      end
+    end
+    
+    context 'after 10 frames with last one as spare' do
+      it 'raises an error' do
+        9.times { game.add_roll(10) }
+        game.add_roll(5)
+        game.add_roll(5)
+        expect { game.add_roll(5) }.not_to raise_error 'round complete'
+      end
+    end
+
+    context 'after 10 frames with last NOT as strike or spare' do
+      it 'raises an error' do
+        9.times { game.add_roll(10) }
+        game.add_roll(5)
+        game.add_roll(4)
+        expect { game.add_roll(5) }.to raise_error 'round complete'
       end
     end
   end
