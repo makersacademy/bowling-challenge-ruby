@@ -1,3 +1,19 @@
+My Approach
+* Test scoreboard class initilization
+* Create scoreboard class
+* Test if Scoreboard class has result attribute
+* Create result attribute (public)
+* Test result for lowest score which is 0
+* Create lowest score frames
+* Test result for highest score which is 300
+* Create highest score frames
+* Test calculate score method
+* Create calculate score method
+* Test result for a game which does not have any strike and spare frames
+* Update calculate score method according to test for game which does not have any strike and spare frames
+* Test result for a game which has multiple strakes and spares
+* Update calculate score method according to test for game which has multiple strike and spare frames
+
 Bowling Challenge in Ruby
 =================
 
