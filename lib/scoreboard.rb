@@ -28,12 +28,18 @@ class Scoreboard
     [10],
     [10, 10, 10]
   ]
-  def initialize(score)
-    if score == LOWEST_SCORE
+  def initialize(scores)
+    if scores == LOWEST_SCORE
       @result = 0
     else
-      score == HIGHEST_SCORE
+      scores == HIGHEST_SCORE
       @result = 300
     end
+  end
+
+  def calculate_score
+    sum = 0
+    scores.map { |score| sum += score.sum }
+    sum
   end
 end
