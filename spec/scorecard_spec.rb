@@ -61,7 +61,7 @@ describe Scorecard do
 
       it 'adds a final_frame hash to the frames array with 3 rolls' do
         scorecard.add_frame(1, 9, 10)
-        expect(scorecard.frames[-1]).to eq('frame 10' => { 'roll1' => 1, 'roll2' => 9, 'roll3' => 10 })
+        expect(scorecard.frames[-1]).to eq({ 'roll1' => 1, 'roll2' => 9, 'roll3' => 10 })
       end
 
       context 'if the total of the final frame score is invalid' do
@@ -73,6 +73,14 @@ describe Scorecard do
           expect { scorecard.add_frame(1, 1, 10) }.to raise_error(InvalidScoreError)
         end
       end
+    end
+  end
+
+  # private method ? but logic requires testing
+  describe '#calculate_score' do
+    it 'calculates the score of the frame' do
+      scorecard.add_frame(3, 4)
+      expect(scorecard.total_score).to eq(7)
     end
   end
 end
