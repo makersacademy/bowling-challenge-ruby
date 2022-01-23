@@ -1,5 +1,15 @@
 class Game
-  def play
-    puts "What is your roll?"
+
+  def initialize
+    @scores = []
+  end   
+
+  def roll(pins)
+    @scores << pins
   end
+
+  def score 
+    @scores.inject(0, :+)
+  end
+
 end

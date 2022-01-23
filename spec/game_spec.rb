@@ -2,7 +2,17 @@ require 'game'
 
 describe Game do 
   let(:game) { Game.new }
-  it 'asks for user input' do
-    expect{ game.play }.to output("What is your roll?\n").to_stdout
+  # gutter game
+  # all ones
+  # input scores are valid
+  # spare
+  # strike
+  it 'rolls a gutter game' do
+    20.times { game.roll(0) }
+    expect(game.score).to eq(0)
   end
+  # it 'rolls a game of all ones' do
+  #   20.times { game.roll(1) }
+  #   expect(game.score).to eq(20)
+  # end
 end

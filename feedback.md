@@ -1,0 +1,1 @@
+* Am I effectively testing the user input? If not, how would I do that?
