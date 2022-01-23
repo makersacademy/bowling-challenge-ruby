@@ -1,37 +1,44 @@
-Bowling Challenge in Ruby
+Bowling Scorecard Challenge in Ruby
 =================
 
-* My game assumes the player is inputting their score for each roll. If they input nothing, the array's element will take a 0 value
+My bowling scorecard program calculates the scores of a bowling game for one player. For this challenge, I was instructed to just focus on the logic for bowling, following the scoring rules below. Take a look at my Bowling Challenge Game so see a built user interface in Javascript for this Bowling scorecard game. 
 
+## Questions/uncertainties
+1. I hope I've interpreted the challenge instructions correctly - instructions did not seem to specify a requirement that a player can input rolls one by one, so I have assumed the scorecard can be entered in its entirety. Or should the scorecard allow players to enter an individual frame roll?!
+2. I did debate about creating a Frame class, but couldn't think of how to 'inject' a total frames array into the Scorecard class so left it as is (see frame.rb for early thoughts)
+3. Not sure about my tests - would appreciate feedback. I believe/hope I'm testing behaviour over state...?! Also I think I've ended up with redundant tests and wondered if perhaps the only test I needed was to check that total_score is calculated correctly for various potential score inputs
 
-## The Task
+## Instructions and Functionality
+1. The Scorecard is initialised with a @frames array containing 10 arrays, with each inner array comprising of 2 values, or 3 if it is the 10th frame e.g. Scorecard.new([[4, 5], [3, 2], [3, 1], [2, 8], [4, 4], [10, 0], [2, 0], [10, 0], [10, 0], [10, 10, 3]]
+2. Rolls should be entered into each frame array as individual elements and a strike is entered as [10, 0]. Example format:   
+- [2, 3] if the 1st roll is 2 pins and 2nd roll is 3 pins 
+- [5, 10, 4] if a strike is rolled as the 2nd roll of the final frame
+- [5, 4, 0] if no strike or spare is rolled in the final frame
+- [4, 6] is a spare
+3. See examples of manual feature testing 
+4. To see the bonus points of a particular frame, run the #bonus method with the frame index as the parameter i.e. to see the 3rd frame's bonus points, run .bonus(2)
+5. To see the scores for each frame, run the #frame_scores method
+6. To check if a frame is a strike or a spare, run the #strike? or #spare? methods respectively, giving the frame as a parameter i.e. strike?(frame: [10, 0]) or strike?(frame: scorecard.frames[5])
 
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
+## Manual feature testing examples: 
+p s = Scorecard.new([[4, 5], [3, 2], [3, 1], [2, 8], [4, 4], [10, 0], [2, 0], [10, 0], [10, 0], [10, 10, 3]])
+p f = s.frames[5]
+p s.strike?(frame: f)
+p perfect = Scorecard.new([[10, 0], [10, 0], [0, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 10, 10]])
+p perfect.perfect_game?
+p perfect.bonus(3) #should be 20
+p perfect.bonus(1) #0
+p s.bonus(5) #2
+p s.bonus(3) #4
+p s2 = Scorecard.new([[4, 5], [3, 2], [3, 1], [2, 8], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]])
+p s2.frame_scores #should be [9, 5, 4, 10, 0, 0, 0, 0, 0, 0]
+p s.frame_scores #should be [9, 5, 4, 14, 8, 12, 2, 30, 30, 23]
+p s.bonus(8) #should be 20
+p s.bonus(9) #should be 0 
 
-Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
+## Bowling scoring rules
 
 A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
-
-As usual please start by
-
-* Forking this repo
-
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
-
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
-
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
-
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
-
-## Bowling — how does it work?
 
 ### Strikes
 
@@ -54,10 +61,40 @@ A Gutter Game is when the player never hits a pin (20 zero scores).
 
 ### Perfect Game
 
-A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 strikes for the bonus in the 10th frame). The Perfect Game scores 300 points.
+A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 strikes for the bonus in the 10th frame). The Perfect Game scores 300 points. The scorecard for this game would have @frames array and @scores arrays as follows: 
+
+``
+@frames = [
+    [30,0]
+    [30,0]
+    [30,0]
+    [30,0]
+    [30,0]
+    [30,0]
+    [30,0]
+    [30,0]
+    [30,0]
+    [10,0]
+    [10,0]
+    [10,0]
+]
+
+@scores = [
+    [30,0]
+    [30,0]
+    [30,0]
+    [30,0]
+    [30,0]
+    [30,0]
+    [30,0]
+    [30,0]
+    [30,0]
+    [10,0]
+    [10,0]
+    [10,0]
+]
+``
 
 In the image below you can find some score examples.
-
-More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)

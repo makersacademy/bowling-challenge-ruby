@@ -22,6 +22,9 @@ describe Scorecard do
     it 'calculates correctly when game has no strikes or spares' do 
       expect(no_bonus_game.total_score).to eq 51
     end
+    it 'calculates perfect game score correctly to 300' do 
+      expect(perfect_game.total_score).to eq 300
+    end
   end
   
   describe '#frame scores' do
@@ -62,13 +65,6 @@ describe Scorecard do
       end
     end
   end 
-  
-  describe '#is_strike?' do 
-    it 'identifies if frame is a strike' do 
-      strike_frame = bonus_game.frames[5]
-      expect(bonus_game.strike?(frame: strike_frame)).to be true
-    end
-  end
 
   it 'knows if the game score is a perfect game' do 
     expect(perfect_game.perfect_game?).to eq true
@@ -84,6 +80,12 @@ describe Scorecard do
       expect(bonus_game.spare?(frame: spare_frame)).to eq true
     end
   end
+
+  describe '#is_strike?' do 
+  it 'identifies if frame is a strike' do 
+    expect(bonus_game.strike?(frame: bonus_game.frames[5])).to be true
+  end
+end
   
   
 end
