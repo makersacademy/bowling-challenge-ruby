@@ -12,10 +12,12 @@ describe Frame do
       expect(open_frame_2.roll_1).to eq 7
     end
   end
+  
   describe 'roll_1' do
     it 'returns the second roll' do
       expect(open_frame_2.roll_2).to eq 2
     end
+
   end
   describe '#strike?' do
     
