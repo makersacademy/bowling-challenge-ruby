@@ -2,14 +2,13 @@ class Scorecard
 
 attr_reader :frames, :total_score, :bonus_points
 
-  def initialize(frames = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]])
+  def initialize(frames = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0, 0]])
     @frames = frames # Array.new(10) {Array.new(2,0)}
     @bonus_points = 0 # this will store the bonus points resulting each frame from stikes or spares through the roll_score method
   end
 
   def strike?(frame: ) # input an element within @frames i.e. frame: @frames[0] or @frames[1]
-    p frame[0]
-    true if frame[0] == 10
+    frame[0] == 10
   end
 
   def spare?(frame: ) 
@@ -29,7 +28,15 @@ attr_reader :frames, :total_score, :bonus_points
 
   # end
 
-  def outcome 
+  def perfect_game? 
+    @frames == [[10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 10, 10]]
+  end  
+
+  def gutter_game? 
+    @frames == [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0, 0]]
+  end  
+
+    def outcome 
     if frame_scores == 0  
       'gutter game'
     elsif frame_scores == 300
@@ -47,6 +54,8 @@ end
 p s = Scorecard.new([[4, 5], [3, 2], [3, 1], [2, 1], [4, 4], [10, 0], [2, 0], [10, 0], [4, 0], [0, 0]])
 p f = s.frames[5]
 p s.strike?(frame: f)
+p perfect = Scorecard.new([[10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 10, 10]])
+p perfect.perfect_game?
 # p s= Scorecard.new
 # p s.roll_score(10,0) #strike. #returns @score array
 # p s.bonus_points #should be 0
