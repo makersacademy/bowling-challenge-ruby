@@ -16,6 +16,8 @@ class Game
     validate_roll(knocked_pins)
     assign_bonus_points(knocked_pins)
     combine_frame(knocked_pins) unless tenth_frame?
+    # uncomment for irb demo
+    "Total score: #{total_score}"
   end
 
   private  
@@ -63,11 +65,15 @@ class Game
   def combine_frame(knocked_pins)
     if knocked_pins == 10 
       add_frame(Frame.new(10, nil))
+      # uncomment for irb demo
+      p "Frame #{frames.length} complete"
     else
       @current_frame ? @current_frame << knocked_pins : @current_frame = [knocked_pins]
       if @current_frame.length == 2
         add_frame(Frame.new(@current_frame.first, @current_frame.last))
         @current_frame = nil
+        # uncomment for irb demo
+        p "Frame #{frames.length} complete"
       end
     end
   end
