@@ -24,18 +24,17 @@ class Game
   private
 
   def turn
-    frame_message
-    message1
+    p frame_message
+    p message1
     score1 = roll
     raise pins_error if score1 > 10
 
     if score1 == 10
       @frames << Frame.create([@frame_number, score1])
-      strike_message
+      p strike_message
     else
-      message2
+      p message2
       score2 = roll
-      spare_message if score1 + score2 == 10
       raise pins_error if score1 + score2 > 10
 
       @frames << Frame.create([@frame_number, score1, score2])
@@ -48,7 +47,7 @@ class Game
   end
 
   def bonus_roll
-    bonus_roll_message
+    p bonus_roll_message
     score = roll
     raise pins_error if score > 10
 
@@ -64,3 +63,5 @@ class Game
     @frames = []
   end
 end
+# game = Game.new
+# game.play
