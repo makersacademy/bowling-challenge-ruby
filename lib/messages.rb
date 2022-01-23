@@ -24,4 +24,8 @@ module Messages
   def bonus_roll_message
     'Enter your score for your bonus roll'
   end
+
+  def pins_error
+    'There aren\'t that many pins!'
+  end
 end
