@@ -86,5 +86,22 @@ describe Scoreboard do
                                   ])
       expect(scoreboard).to respond_to(:calculate_score)
     end
+
+		it 'calculate the numbers of pin when there is not any strikes and spares' do 
+			scoreboard = Scoreboard.new([
+				[3, 6],
+				[4, 6],
+				[1, 5],
+				[7, 2],
+				[5, 4],
+				[1, 3],
+				[2, 6],
+				[8, 1],
+				[7, 1],
+				[3, 2]
+			])
+			expect(scoreboard.result).to eq 77
+		end
+
   end
 end

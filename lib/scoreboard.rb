@@ -31,13 +31,15 @@ class Scoreboard
   def initialize(scores)
     if scores == LOWEST_SCORE
       @result = 0
-    else
+		elsif
       scores == HIGHEST_SCORE
       @result = 300
+		else
+			@result = calculate_score(scores)
     end
   end
 
-  def calculate_score
+  def calculate_score(scores)
     sum = 0
     scores.map { |score| sum += score.sum }
     sum
