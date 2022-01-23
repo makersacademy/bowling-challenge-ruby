@@ -1,10 +1,12 @@
 class Frame
 
   attr_reader :score, :roll1, :roll2, :remaining_pins
+  attr_accessor :bonus
 
   def initialize 
     @score = 0
     @remaining_pins = 10
+    @bonus = 0
   end
 
   def add_roll(pins)
@@ -19,7 +21,15 @@ class Frame
     !!roll2 || roll1 == 10
   end
 
+  def strike?
+    roll1 == 10
+  end
+
+  def spare?
+    roll1 + roll2 == 10
+  end
+
   private
   
-  attr_writer :score, :roll1, :roll2, :remaining_pins
+  attr_writer :score, :roll1, :roll2, :remaining_pins, :remaining_pins
 end

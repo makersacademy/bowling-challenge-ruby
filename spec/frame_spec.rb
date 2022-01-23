@@ -87,5 +87,45 @@ describe Frame do
         expect { subject.add_roll(5) }.to change { subject.remaining_pins }.by(-5)
       end
     end
+
+    describe 'bonus' do
+      it 'starts at 0' do
+        expect(subject.bonus).to be_zero
+      end
+    end 
+
+    describe 'strike' do
+      context 'when player rolls a strike' do
+        it 'returns true' do
+          subject.add_roll(10)
+          expect(subject).to be_strike
+        end
+      end
+
+      context 'when player does not roll a strike' do
+        it 'returns false' do
+          subject.add_roll(9)
+          expect(subject).not_to be_strike
+        end
+      end
+    end
+
+    describe 'spare' do
+      context 'when plater rolls a spare' do
+        it 'returns true' do
+          subject.add_roll(7)
+          subject.add_roll(3)
+          expect(subject).to be_spare
+        end
+      end
+
+      context 'when player does not roll a spare' do
+        it 'returns false' do
+          subject.add_roll(7)
+          subject.add_roll(2)
+          expect(subject).not_to be_spare
+        end
+      end
+    end
   end
 end

@@ -1,6 +1,6 @@
 class Game
 
-  attr_reader :score, :current_frame, :frames
+  attr_reader :current_frame, :frames
 
   def initialize(frame_class = Frame)
     @score = 0
@@ -14,6 +14,10 @@ class Game
     return unless current_frame.over?
     frames << current_frame
     new_frame
+  end
+
+  def score
+    0
   end
 
   private
