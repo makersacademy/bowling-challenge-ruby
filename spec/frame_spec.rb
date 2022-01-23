@@ -39,6 +39,12 @@ describe Frame do
         expect(subject.roll1).to be 3
       end
     end
+
+    context 'when player inputs > 10 on first roll' do
+      it 'raises error' do
+        expect { subject.add_roll(11) }.to raise_error PinError
+      end
+    end
   end
 
   describe 'over?' do

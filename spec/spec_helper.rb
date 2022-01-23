@@ -1,6 +1,8 @@
 require 'simplecov'
 require 'simplecov-console'
 require './lib/frame'
+require './lib/game'
+require './lib/exceptions'
 # require_relative '../lib/game'
 
 

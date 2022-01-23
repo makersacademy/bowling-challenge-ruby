@@ -1,6 +1,17 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/vanessaflorio/Desktop/bowling-challenge-ruby/spec/exceptions_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
       "/Users/vanessaflorio/Desktop/bowling-challenge-ruby/spec/frame_spec.rb": {
         "lines": [
           1,
@@ -45,6 +56,12 @@
           null,
           null,
           null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          null,
           null,
           1,
           1,
@@ -79,9 +96,9 @@
           1,
           null,
           1,
-          5,
-          5,
-          5,
+          7,
+          7,
+          7,
           null,
           null,
           1,
@@ -110,38 +127,25 @@
           1,
           null,
           null,
-          null
-        ]
-      },
-      "/Users/vanessaflorio/Desktop/bowling-challenge-ruby/lib/game.rb": {
-        "lines": [
+          1,
+          1,
+          1,
           1,
           null,
-          1,
-          null,
-          1,
-          4,
-          4,
-          4,
-          null,
-          null,
-          1,
-          2,
-          2,
           null,
           null,
           1,
           1,
           1,
-          null,
           1,
-          5,
+          1,
+          null,
           null,
           null,
           null
         ]
       }
     },
-    "timestamp": 1642947788
+    "timestamp": 1642975493
   }
 }
