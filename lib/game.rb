@@ -26,6 +26,7 @@ class Game
     message1
     score1 = roll
     raise pins_error if score1 > 10
+
     if score1 == 10
       @frames << Frame.create([@frame_number, score1])
       strike_message
@@ -34,11 +35,11 @@ class Game
       score2 = roll
       spare_message if score1 + score2 == 10
       raise pins_error if score1 + score2 > 10
+
       @frames << Frame.create([@frame_number, score1, score2])
     end
     @frame_number += 1
   end
-
 
   def bonus?(frame)
     frame[:roll1] == 10 || frame[:roll1] + frame[:roll2] == 10
@@ -48,6 +49,7 @@ class Game
     bonus_roll_message
     score = roll
     raise pins_error if score > 10
+
     @frames << Frame.create([:bonus_roll, score])
   end
 
