@@ -38,4 +38,12 @@ describe Frame do
       expect(Frame).to be_current_is_a_strike
     end
   end
+
+  describe '.current_is_a_spare?' do
+    it 'returns true if the last roll was a spare' do
+      Frame.fallen_pins(7)
+      Frame.fallen_pins(3)
+      expect(Frame).to be_current_is_a_spare
+    end
+  end
 end

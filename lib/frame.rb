@@ -1,37 +1,48 @@
 class Frame
   attr_reader :frame_no
-  attr_accessor :roll_two
+  attr_accessor :roll_two, :bonus
 
   @@log = []
+
+  def self.log
+    @@log
+  end
 
   def initialize(no_pins)
     @frame_no = @@log.length + 1
     @roll_one = no_pins
     @roll_two = nil
+    @bonus = 0
     @@log << self
   end
 
   def self.fallen_pins(no_pins)
-    if @@log.empty? || @@log.last.is_complete?
-      self.new(no_pins)
+    if @@log.empty? || @@log.last.complete?
+      new(no_pins)
     else
       @@log.last.roll_two = no_pins
     end
   end
 
   def self.current_is_a_strike?
-    @@log.last.is_a_strike?
+    @@log.last.a_strike?
   end
 
   def self.current_is_a_spare?
-    @@log.last.is_a_spare?
+    @@log.last.a_spare?
   end
 
   def self.no
     @@log.last.frame_no
   end
- 
-  def is_complete?
+
+  def self.add_bonuses(frames_to_add_bonus, no_pins)
+    frames_to_add_bonus.each do |frame_no|
+      @@log[frame_no - 1].bonus += no_pins
+    end
+  end
+
+  def complete?
     if @frame_no == 10
       (@roll_two && (@roll_one + @roll_two < 10)) || (@roll_two && @roll_three)
     else
@@ -39,11 +50,11 @@ class Frame
     end
   end
 
-  def is_a_strike?
+  def a_strike?
     @roll_one == 10
   end
 
-  def is_a_spare?
+  def a_spare?
     @roll_two && @roll_one + @roll_two == 10 && @roll_one != 10
   end
 end
