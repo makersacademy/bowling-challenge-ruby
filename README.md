@@ -1,7 +1,7 @@
 Bowling Challenge in Ruby
 =================
 
-* This is the weekend challenge for week 5 of Makers Academy. All weekend challenges are meant to be completed
+* This is the weekend challenge for week 5 of Makers Academy.
 * This is the logic written for a bowling scorecard. This project was written in Ruby and is meant to be translated to a different language on a futre challenge.
 * The project doesn't have an interface just yet, but you can interact with it by running IRB.
 
