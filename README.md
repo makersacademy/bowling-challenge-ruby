@@ -14,6 +14,15 @@ My Approach
 * Test result for a game which has multiple strakes and spares
 * Update calculate score method according to test for game which has multiple strike and spare frames
 
+
+
+## MAIN USER STORY
+```
+As a bowling player 
+So I can see the results
+I want to be able to see score of my bowling game.
+```
+
 Bowling Challenge in Ruby
 =================
 
