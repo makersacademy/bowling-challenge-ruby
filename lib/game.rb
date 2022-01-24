@@ -17,10 +17,7 @@ class Game
     @frames << [roll] if @frames[-2][0] == 10
     scoring
     return @scorecard
-    reset
   end
-
-  private
 
   def reset
     @frame_number = 1
@@ -28,25 +25,38 @@ class Game
     @scorecard = []
   end
 
+  private
+  
   def scoring
-    frame = 1
+    frame_number = 1
     @frames.each do |score|
-      break if frame == 11
+      break if frame_number == 11
       result = 0
       case roll_type(score)
       when 'strike'
         result += 10
-        strike?(@frames[frame]) ? result += 10 + @frames[frame + 1][0] : result += @frames[frame].sum
+        strike?(@frames[frame_number]) ? result += multi_strike_score(frame_number) : result += single_strike_score
       when 'spare'
-        result += 10
-        result += @frames[frame][0]
+        result += spare_score(frame_number)
       when 'normal'
-        result += @score.sum
+        result += score.sum
       end
       @scorecard << result
-      frame += 1
+      frame_number += 1
     end
     @scorecard << @scorecard.sum
+  end
+
+  def spare_score(frame_number)
+    10 + @frames[frame_number][0]
+  end
+
+  def single_strike_score(frame_number)
+    @frames[frame_number].sum
+  end
+
+  def multi_strike_score(frame_number)
+    10 + @frames[frame_number + 1][0]
   end
 
   def strike?(score)
