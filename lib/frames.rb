@@ -58,7 +58,7 @@ class Frames
     if (bonus == 'strike') && (round == 10)
       bonus_roll
       bonus_roll
-    elsif (bonus == 'strike') && (round == 10)
+    elsif (bonus == 'spare') && (round == 10)
       bonus_roll
     elsif bonus == 'strike'
       # bonus is the next 2 rolls
