@@ -9,15 +9,15 @@ To start the scorecard, please run 'start_scorecard.rb' using ruby.
 
 Status
 =================
-This program calculates score for bowling, giving feedback after each frame.
+- This program calculates score for bowling, giving feedback after each frame.
 
-It provides a summary of all frames and the total score at the end.
+- It provides a summary of all frames and the total score at the end.
 
-It calculates strikes, spares and covers some edge cases.
+- It calculates strikes, spares and covers some edge cases.
 
-Program requires user to enter accurate information.
+- Program requires user to enter accurate information.
 
-Not fully tested or refactored.
+- Not fully tested or refactored.
 
 
 
