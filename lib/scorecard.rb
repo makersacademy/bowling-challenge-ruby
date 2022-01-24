@@ -1,6 +1,5 @@
 # frozen_string_literal: trues
 
-
 class Scorecard
   attr_reader :frames, :total_score, :bonus_score
 
@@ -19,9 +18,9 @@ class Scorecard
     unless game_over?
 
       if final_frame?
-        
         raise InvalidScoreError if final_frame_score_invalid?(ball1, ball2, ball3)
         @frames << [ball1, ball2, ball3]
+
       else
         raise InvalidScoreError if score_invalid?(ball1, ball2)
         if ball1 == MAX_PINS
@@ -29,29 +28,43 @@ class Scorecard
         else
           @frames << [ball1, ball2]
         end
+        
       end
+      calculate_score
     end
-
   end
 
-  # def turn(ball1, ball2=0, ball3=0)
 
-  #   if @frames.length == 10 
-  #     raise InvalidScoreError if final_frame_score_invalid?(ball1, ball2, ball3)
-  #     @frames << [ball1, ball2, ball3] 
-    
-  #   elsif @frames.length <= 9
-  #     raise InvalidScoreError if score_invalid?(ball1, ball2)
-  #     if ball1 == MAX_PINS
-  #       @frames << [ball1]
-  #     else
-  #       @frames << [ball1, ball2]
-  #     end 
-  #   end
-    
-  # end
- 
+  def calculate_score
+    if first_frame? || final_frame?
+      @total_score += current_frame.sum
+    else
+      check_for_bonus 
+      puts "bonus score: #{@bonus_score}"
+      @total_score += current_frame.sum + @bonus_score
+      @bonus_score = 0
+    end
+  end
+
   private
+
+  def check_for_bonus 
+    # consecutive-strike
+    if current_frame[0] == MAX_PINS && previous_frame[0] == MAX_PINS 
+      @bonus_score += current_frame.sum + previous_frame.sum
+    # strike
+    elsif previous_frame[0] == MAX_PINS 
+      @bonus_score += current_frame.sum 
+    
+    # #consecutive-spares
+    # elsif previous_frame[0] + previous_frame[1] == MAX_PINS && current_frame.sum == MAX_PINS
+    #   @bonus_score += current_frame[0]
+    
+    #spare
+    elsif previous_frame[0] + previous_frame[1] == MAX_PINS
+      @bonus_score += current_frame[0]
+    end
+  end
 
 
   def score_invalid?(ball1, ball2)
@@ -70,18 +83,6 @@ class Scorecard
     @frames[-2]
   end
 
-  def check_for_spare_bonus
-    if (previous_frame['roll1'] + previous_frame['roll2']) == MAX_PINS && previous_frame['roll1'] < MAX_PINS
-      @bonus_score += current_frame['roll1']
-    end
-  end
-
-  def check_for_strike_bonus
-    if previous_frame['roll1'] == MAX_PINS 
-      @bonus_score += (current_frame['roll1'] + current_frame['roll2'])
-    end
-  end
-
   def first_frame?
     @frames.length <= 1
   end
@@ -98,13 +99,3 @@ end
 
 class InvalidScoreError < StandardError
 end
-
-
-x = Scorecard.new
-9.times do
-  x.turn(2, 4) 
-end 
-
-x.turn(10, 10, 10)
-x.turn(3, 5)
-print x.frames
