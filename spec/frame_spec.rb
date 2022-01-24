@@ -46,4 +46,14 @@ describe Frame do
       expect(Frame).to be_current_is_a_spare
     end
   end
+
+  describe '.calculate_score' do
+    it 'reutrns the total of all frames' do
+      2.times{ Frame.fallen_pins(10) }
+      2.times{ Frame.fallen_pins(5) }
+      Frame.fallen_pins(7)
+      expect(Frame.calculate_score).to eq 64
+
+    end
+  end
 end

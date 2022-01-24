@@ -12,6 +12,7 @@ class Frame
     @frame_no = @@log.length + 1
     @roll_one = no_pins
     @roll_two = nil
+    @roll_three = nil
     @bonus = 0
     @@log << self
   end
@@ -42,6 +43,10 @@ class Frame
     end
   end
 
+  def self.calculate_score
+    @@log.map { |frame| frame.add_total }.sum
+  end
+
   def complete?
     if @frame_no == 10
       (@roll_two && (@roll_one + @roll_two < 10)) || (@roll_two && @roll_three)
@@ -56,5 +61,12 @@ class Frame
 
   def a_spare?
     @roll_two && @roll_one + @roll_two == 10 && @roll_one != 10
+  end
+
+  def add_total
+    total = @roll_one 
+    total += @roll_two if @roll_two 
+    total += @roll_three if @roll_three
+    total += @bonus if @bonus
   end
 end

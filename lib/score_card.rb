@@ -17,6 +17,7 @@ class ScoreCard
     @frame.fallen_pins(no_pins)
     add_to_bonus_log
     @frame.add_bonuses(frames_to_add_bonus, no_pins) if frames_to_add_bonus
+    @frame.calculate_score
   end
 
   def valid_entry?(no_pins)
@@ -30,5 +31,9 @@ class ScoreCard
 
   def frames_to_add_bonus
     @bonus_log.check_for_frames(@roll_no)
+  end
+
+  def end_game?
+    @frame.final_complete?
   end
 end
