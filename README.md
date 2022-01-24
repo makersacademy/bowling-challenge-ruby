@@ -2,6 +2,7 @@ Bowling Challenge in Ruby
 =================
 
 ![Bowling Domain Model](images/Bowling - Domain Model.jpg)
+![Bowling Scoring Domain Model](images/Bowling Scoring - Domain Model.jpg)
 
 ## The Task
 
