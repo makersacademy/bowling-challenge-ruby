@@ -3,6 +3,7 @@
 How to run
 =================
 To start the scorecard, please run 'start_scorecard.rb' using ruby.
+
 (ruby './start_scorecard.rb')
 
 
