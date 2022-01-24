@@ -64,7 +64,7 @@ RuntimeError (round complete)
 3.0.0 :020 > 
 ```
 
-## Table of scores for the demo above:
+## Table of scores for the demo above (not part of the program):
 ![alt text](https://i.imgur.com/UKGzL69.png)
 
 ## Features:
@@ -78,18 +78,28 @@ RuntimeError (round complete)
 - user can print breakdown of the scores
 - the total score should be updated each time a roll is added
 
+## How the score is counted
+
+1. The user inputs the roll
+2. The program checks all existing frames for outstanding bonus rolls
+3. The program creates a Frame if it is a strike, awaits another roll otherwise.
+
 ## Reflections:
 
-I started the project with thoroughly understanding the rules of bowling and considered edge cases such as:
-- the strike getting bonus for the next 2 rolls- in case of 2 strikes in a row, the first strike will get the second strike but also from the next roll
+Edge cases:
 
-I started the project with already established ideas of the Frame and Game classes. Having started coding, I realised I needed to get a better idea for the structure so I created a table demonstrating possible bowling round.
+- given 2 strikes in a row, the first strike still has one bonus roll left
 
-It seems that my Game class became dependent on the Frame class and not sure how to go about this. 
+- given a strike in the 10th frame, 2 bonus rolls are allowed
 
-Moreover, I tried to keep most of the methods private and allowed user to have access only to necessary methods. This is in consideration for potentially applying some UI to it.
+(TBC)...
 
-Testing- I tried to keep 'test behaviour rather than state' in mind, however, it seems to be that I ended up testing state lots of the time.
+Notes:
+- Frame and Game class- Game class seems dependent on Frame and not sure how to isolate tests
+
+- Having made most methods private, not sure how to go about testing. Should the not-private methods be tested for calling the private methods? 
+
+- still unsure about 'testing behaviour over test in this exercise'
 
 ## Bowling rules model:
 
