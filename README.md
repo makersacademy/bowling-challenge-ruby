@@ -1,11 +1,15 @@
 <h1>Bowling Scorecard</h1>
 
-=== How to run ===
+=================
+How to run
+=================
 To start the scorecard, please run 'start_scorecard.rb' using ruby.
 (ruby './start_scorecard.rb')
 
 
-=== Status ===
+=================
+Status
+=================
 This program calculates score for bowling, giving feedback after each frame.
 It provides a summary of all frames and the total score at the end.
 
