@@ -1,67 +1,66 @@
 # frozen_string_literal: true
 
 require_relative 'scorecard'
-require_relative 'frame'
-require_relative 'messages'
 
 class Game
-  attr_reader :frames, :frame_number
-
-  include Messages
+  attr_reader :scorecard
 
   def initialize
     @frame_number = 1
     @frames = []
+    @scorecard = []
   end
 
   def play
-    reset_game
-    turn until frame_number == 11
-    bonus_roll if bonus?(@frames.last)
-    Scorecard.new(@frames)
+    turn until @frame_number == 11
+    @frames << [roll] if @frames[-1].sum == 10
+    @frames << [roll] if @frames[-2][0] == 10
+    scoring(@frames)
+    return @scorecard
   end
 
   private
 
+  def scoring(scores)
+    frame = 1
+    scores.each do |score|
+      break if frame == 11
+      result = 0
+      if strike?(score)
+        result += 10
+        strike?(scores[frame]) ? result += 10 + scores[frame + 1][0] : result += scores[frame].sum
+      elsif spare?(score)
+        result += 10
+        result += scores[frame][0]
+      else
+        result += score.sum
+      end
+      @scorecard << result
+      frame += 1
+    end
+    @scorecard
+  end
+
+  def strike?(score)
+    score[0] == 10
+  end
+
+  def spare?(score)
+    score.sum == 10
+  end
+
   def turn
-    p frame_message
-    p message1
     score1 = roll
-    raise pins_error if score1 > 10
-
     if score1 == 10
-      @frames << Frame.create([@frame_number, score1])
-      p strike_message
+      @frames << [score1]
     else
-      p message2
       score2 = roll
-      raise pins_error if score1 + score2 > 10
-
-      @frames << Frame.create([@frame_number, score1, score2])
+      @frames << [score1, score2]
     end
     @frame_number += 1
-  end
-
-  def bonus?(frame)
-    frame[:roll1] == 10 || frame[:roll1] + frame[:roll2] == 10
-  end
-
-  def bonus_roll
-    p bonus_roll_message
-    score = roll
-    raise pins_error if score > 10
-
-    @frames << Frame.create([:bonus_roll, score])
   end
 
   def roll
     gets.chomp.to_i
   end
-
-  def reset_game
-    @frame_number = 1
-    @frames = []
-  end
 end
-# game = Game.new
-# game.play

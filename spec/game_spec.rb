@@ -19,6 +19,7 @@ describe Game do
       game.play
 
       expect(game.frames).to be_a Array
+      expect(game.scorecard.sum).to eq 300
     end
 
     it 'raises error when too many pins have been knocked down' do
