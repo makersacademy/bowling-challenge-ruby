@@ -15,4 +15,13 @@ describe BonusLog do
       BonusLog.log_spare_bonus(7, 4)
     end
   end
+
+  describe '.check_for_frames' do
+    it 'returns the frames acssociated with the curent roll' do
+      BonusLog.log_strike_bonus(7, 4)
+      BonusLog.log_spare_bonus(8, 6)
+      BonusLog.log_spare_bonus(7, 3)
+      expect(BonusLog.check_for_frames(9)).to eq [4, 6]
+    end
+  end
 end

@@ -1,4 +1,4 @@
-require 'scorecard'
+require 'score_card'
 
 describe ScoreCard do
   let(:frame) { double 'Frame', fallen_pins: nil, current_is_a_strike?: nil, 
@@ -32,6 +32,13 @@ describe ScoreCard do
         expect(bonus_log).to receive(:log_spare_bonus)
         scorecard.add_to_bonus_log
       end
+    end
+  end
+
+  describe '#frames_to_add_bonus' do
+    it 'checks the BonusLog for frames' do
+      expect(bonus_log).to receive(:check_for_frames)
+      scorecard.frames_to_add_bonus  
     end
   end
 end
