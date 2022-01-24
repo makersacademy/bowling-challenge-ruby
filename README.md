@@ -1,11 +1,6 @@
 Bowling Challenge in Ruby
 =================
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
-
 ## The Task
 
 **THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
@@ -13,6 +8,39 @@ Bowling Challenge in Ruby
 Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
 
 A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
+
+## DIAGRAM
+
+![Bowling Game Diagram](./images/bowling_game_diagram.png)
+
+## USER STORIES
+
+As a Player
+So that I can play a bowling game
+I want to roll a ball
+
+As a Player
+So that I know my score
+I want to count the pins I throw
+
+As a Player
+So that I know if I have to throw once or twice in a frame
+I want to know if I have knock down all 10 pins on current frame
+
+As a Player 
+So I that I can update my score throughout the game
+I want to sum the score of each frame
+
+As a player
+So that I can keep my score thru the game
+I want to know what's the current frame
+
+As a player
+So that I know if the game ended
+I want to know if I reached the 10th frame
+
+----
+## EXTRA INFO
 
 As usual please start by
 
