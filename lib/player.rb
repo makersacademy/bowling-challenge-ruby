@@ -1,8 +1,10 @@
 class Player 
 
-  attr_reader :roll_score
-
-  def roll(pins)
+  attr_reader :roll
+  
+  def roll
+    puts "Enter pins to throw:"
+    pins = STDIN.gets.chomp
     pins
   end
 
