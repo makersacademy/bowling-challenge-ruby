@@ -30,10 +30,12 @@ class Frames
     @roll = Roll.new(score_count: @score_count, strike_count: @strike_count, first_roll: @first_roll, this_frame_count: @this_frame_count)
     @roll.scoring(pins_knocked)
     @bonus = @roll.strike_or_spare
+    roll_again?
+  end
+
+  def roll_again?
     @roll.next_roll?
-    roll_again = @roll.roll_again
-    puts "roll_again #{roll_again}"
-    if roll_again == true
+    if @roll.roll_again == true
       @first_roll = false
       new_roll
     else
