@@ -1,3 +1,4 @@
-require './lib'
+require './lib/game.rb'
 
-Game.new
+game = Game.new
+game.start
