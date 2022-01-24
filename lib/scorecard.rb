@@ -1,5 +1,4 @@
 # frozen_string_literal: trues
-
 class Scorecard
   attr_reader :frames, :total_score, :bonus_score
 
@@ -37,10 +36,9 @@ class Scorecard
 
   def calculate_score
     if first_frame? || final_frame?
-      @total_score += current_frame.sum
+      @total_score += current_frame.sum 
     else
       check_for_bonus 
-      puts "bonus score: #{@bonus_score}"
       @total_score += current_frame.sum + @bonus_score
       @bonus_score = 0
     end
@@ -55,13 +53,8 @@ class Scorecard
     # strike
     elsif previous_frame[0] == MAX_PINS 
       @bonus_score += current_frame.sum 
-    
-    # #consecutive-spares
-    # elsif previous_frame[0] + previous_frame[1] == MAX_PINS && current_frame.sum == MAX_PINS
-    #   @bonus_score += current_frame[0]
-    
     #spare
-    elsif previous_frame[0] + previous_frame[1] == MAX_PINS
+    elsif previous_frame.sum == MAX_PINS 
       @bonus_score += current_frame[0]
     end
   end
@@ -94,7 +87,6 @@ class Scorecard
   def game_over?
     @frames.length == MAX_FRAMES
   end
-
 end
 
 class InvalidScoreError < StandardError

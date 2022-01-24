@@ -1,3 +1,41 @@
+This is currently unfinished. I am part way through building the calculations functionality. 
+
+## MAIN USER STORY
+```
+As a bowler 
+So I can see my results
+I want to be able to count and sum the scores of my bowling game.
+```
+
+## User Stories
+```
+As a bowler
+So I can track my total score
+I want to be able to enter my score for each roll. √
+
+As a bowler
+So I cannot mistakenly enter an invalid score
+I want to not be able to enter a score < 0 or > 10. √
+
+As a bowler
+So I can see my scorecard is tracking correctly
+I want the total score to reflect a strike. 
+
+As a bowler
+So I can see my scorecard is tracking correctly
+I want the total score to reflect a spare.
+
+As a bowler
+So I can track the score of a full game
+I want to be able to score exactly 10 frames. 
+
+As a bowler
+So I can accurately record the 10nth frame
+I want an additional 3rd roll to account for bonus(es). √
+
+```
+
+
 Bowling Challenge in Ruby
 =================
 
