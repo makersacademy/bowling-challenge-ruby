@@ -15,13 +15,21 @@ class Frame
     else
       @@log.last.roll_two = no_pins
     end
-  end 
-  
+  end
+
+  def self.current_is_a_strike?
+    @@log.last.is_a_strike?
+  end
+
   def is_complete?
     if @frame_no == 10
       (@roll_two && (@roll_one + @roll_two < 10)) || (@roll_two && @roll_three)
     else
       @roll_two || @roll_one == 10 
     end
+  end
+
+  def is_a_strike?
+    @roll_one == 10
   end
 end

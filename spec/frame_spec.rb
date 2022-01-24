@@ -21,5 +21,21 @@ describe Frame do
       expect(Frame).to receive(:new).with 1
       Frame.fallen_pins(1)
     end
+
+    context 'first roll is a strike' do
+      it 'creates a new frame on second roll' do
+        expect(Frame).to receive(:new).with 10
+        Frame.fallen_pins(10)
+        expect(Frame).to receive(:new).with 1
+        Frame.fallen_pins(1)
+      end
+    end
+  end
+
+  describe '.current_is_a_strike?' do
+    it 'returns true if the last roll was a strike' do
+      Frame.fallen_pins(10)
+      expect(Frame).to be_current_is_a_strike
+    end
   end
 end
