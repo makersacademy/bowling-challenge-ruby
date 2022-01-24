@@ -15,30 +15,38 @@ class Game
     turn until @frame_number == 11
     @frames << [roll] if @frames[-1].sum == 10
     @frames << [roll] if @frames[-2][0] == 10
-    scoring(@frames)
+    scoring
     return @scorecard
+    reset
   end
 
   private
 
-  def scoring(scores)
+  def reset
+    @frame_number = 1
+    @frames = []
+    @scorecard = []
+  end
+
+  def scoring
     frame = 1
-    scores.each do |score|
+    @frames.each do |score|
       break if frame == 11
       result = 0
-      if strike?(score)
+      case roll_type(score)
+      when 'strike'
         result += 10
-        strike?(scores[frame]) ? result += 10 + scores[frame + 1][0] : result += scores[frame].sum
-      elsif spare?(score)
+        strike?(@frames[frame]) ? result += 10 + @frames[frame + 1][0] : result += @frames[frame].sum
+      when 'spare'
         result += 10
-        result += scores[frame][0]
-      else
-        result += score.sum
+        result += @frames[frame][0]
+      when 'normal'
+        result += @score.sum
       end
       @scorecard << result
       frame += 1
     end
-    @scorecard
+    @scorecard << @scorecard.sum
   end
 
   def strike?(score)
@@ -47,6 +55,16 @@ class Game
 
   def spare?(score)
     score.sum == 10
+  end
+
+  def roll_type(score)
+    if strike?(score)
+      roll_type = 'strike'
+    elsif spare?(score)
+      roll_type = 'spare'
+    else
+      roll_type = 'normal'
+    end
   end
 
   def turn

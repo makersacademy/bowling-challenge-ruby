@@ -53,7 +53,6 @@ at least kind of useable.
 The user inputs their scores for a game, and it spits out an array of their scores for each frame.
 
 ## To Do 
-- Add a final score to the end of the scorecard
 - Format all the info properly into a nice, helpful scorecard
 - Refactoring!!
 - Redo all the tests!!
