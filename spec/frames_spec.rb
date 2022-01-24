@@ -12,13 +12,6 @@ describe Frames do
     expect(frames.new_round).to be_an_instance_of(ScoreCard)
     frames.new_round
   end
-
-  # it 'new_round calls new_roll if frame_rounds < 11' do
-  #   roll  = class_double"Roll"
-  #   allow_any_instance_of(Object).to receive(:gets).and_return("4\n")
-  #   expect(frames.new_round).to include_an_instance_of(Roll)
-  #   frames.new_round
-  # end
   
 
   describe '#pins_knocked' do

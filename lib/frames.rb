@@ -39,6 +39,7 @@ class Frames
       @first_roll = false
       new_roll
     else
+      bonus(@bonus, @round)
       new_frame
     end
   end
@@ -51,6 +52,26 @@ class Frames
     @first_roll = true
     @this_frame_count = 0
     new_round
+  end
+
+  def bonus(bonus, round)
+    if (bonus == 'strike') && (round == 10)
+      bonus_roll
+      bonus_roll
+    elsif (bonus == 'strike') && (round == 10)
+      bonus_roll
+    elsif bonus == 'strike'
+      # bonus is the next 2 rolls
+    else
+      # bonus is the next roll
+    end
+  end
+
+  def bonus_roll
+      @roll = Roll.new(score_count: @score_count, strike_count: @strike_count, first_roll: @first_roll, this_frame_count: @this_frame_count)
+      @roll.scoring(pins_knocked)
+      @score_count = @roll.score_count
+      @strike_count = @roll.strike_count
   end
 
 end
