@@ -49,11 +49,15 @@ describe Frame do
 
   describe '.calculate_score' do
     it 'reutrns the total of all frames' do
-      2.times{ Frame.fallen_pins(10) }
-      2.times{ Frame.fallen_pins(5) }
-      Frame.fallen_pins(7)
-      expect(Frame.calculate_score).to eq 64
-
+      Frame.fallen_pins(10)
+      Frame.fallen_pins(10)
+      Frame.fallen_pins(5)
+      Frame.add_bonuses([1], 15)
+      Frame.fallen_pins(5)
+      Frame.add_bonuses([2], 10)
+      Frame.fallen_pins(4)
+      Frame.add_bonuses([3], 4)
+      expect(Frame.calculate_score).to eq 63
     end
   end
 end

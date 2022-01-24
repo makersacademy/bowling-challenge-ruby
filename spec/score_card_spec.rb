@@ -3,7 +3,7 @@ require 'score_card'
 describe ScoreCard do
   let(:frame) { 
     double 'Frame', fallen_pins: nil, current_is_a_strike?: nil, 
-    no: 1, current_is_a_spare?: nil, calculate_score: nil 
+    no: 1, current_is_a_spare?: nil, calculate_score: nil, end_game?: nil
   }
   let(:bonus_log) { double 'BonusLog', log_strike_bonus: nil, check_for_frames: nil }
   let(:scorecard) { described_class.new(frame: frame, bonus_log: bonus_log) }

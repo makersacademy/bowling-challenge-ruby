@@ -1,39 +1,13 @@
 Bowling Challenge in Ruby
 =================
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
-
 ## The Task
 
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
-
-Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
-
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
-
-As usual please start by
-
-* Forking this repo
-
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
-
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
-
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
-
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
+The task for the week 5 Makers Weekend Challenge was to create a Bowling Score Card for a single player to keep track of their game as to the rules below:
 
 ## Bowling — how does it work?
+
+A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
 
 ### Strikes
 
@@ -63,3 +37,54 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+Planning Diagramming
+===
+![Planning UML Diagram](images/bowling_score_card.png)
+
+## Installation
+
+1. Clone this repo
+2. Run the command ```gem install bundler``` (if you don't have bundler already)
+3. When the installation completes, run ```bundle```
+
+
+## Running Tests
+
+Run ```rspec```
+
+
+## Usage
+Launch ```irb``` and use as below:
+```ruby
+:001 > require './lib/score_card'
+ => true 
+ :002 > sc = ScoreCard.new
+ => #<ScoreCard:0x00007fc2671daa48 @bonus_log=BonusLog, @frame=Frame, @roll_no=0> 
+ :003 > sc.enter_pins(10)
+ => 10 
+ :004 > sc.enter_pins(10)
+ => 30 
+ :005 > sc.enter_pins(10)
+ => 60 
+ :006 > sc.enter_pins(10)
+ => 90 
+ :007 > sc.enter_pins(10)
+ => 120 
+ :008 > sc.enter_pins(10)
+ => 150 
+ :009 > sc.enter_pins(10)
+ => 180 
+ :010 > sc.enter_pins(10)
+ => 210 
+ :011 > sc.enter_pins(10)
+ => 240 
+ :012 > sc.enter_pins(10)
+ => 250 
+ :013 > sc.enter_pins(10)
+ => 270 
+ :014 > sc.enter_pins(10)
+ => 300 
+ :015 > sc.enter_pins(10)
+ => "You scored 300. Conratulations!" 
+ ```

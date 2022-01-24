@@ -2,11 +2,14 @@ class BonusLog
   @@bonuses = []
 
   def self.log_strike_bonus(roll_no, frame_no)
+    return if roll_no == 9
     log_bonus([roll_no + 1, frame_no])
+    return if roll_no == 8
     log_bonus([roll_no + 2, frame_no])
   end
 
   def self.log_spare_bonus(roll_no, frame_no)
+    return if roll_no == 9
     log_bonus([roll_no + 1, frame_no])
   end
 

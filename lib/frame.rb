@@ -1,6 +1,6 @@
 class Frame
-  attr_reader :frame_no
-  attr_accessor :roll_two, :bonus
+  attr_reader :frame_no, :roll_one
+  attr_accessor :roll_two, :roll_three, :bonus
 
   @@log = []
 
@@ -18,7 +18,9 @@ class Frame
   end
 
   def self.fallen_pins(no_pins)
-    if @@log.empty? || @@log.last.complete?
+    if @@log[9]&.roll_two && @@log[9].add_total > 10
+      @@log.last.roll_three = no_pins
+    elsif @@log.empty? || @@log.last.complete?
       new(no_pins)
     else
       @@log.last.roll_two = no_pins
@@ -33,6 +35,10 @@ class Frame
     @@log.last.a_spare?
   end
 
+  def self.current_is_complete?
+    @@log.last.complete?
+  end
+
   def self.no
     @@log.last.frame_no
   end
@@ -45,6 +51,10 @@ class Frame
 
   def self.calculate_score
     @@log.map { |frame| frame.add_total }.sum
+  end
+
+  def self.end_game?
+    @@log[9]&.complete?
   end
 
   def complete?

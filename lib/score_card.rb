@@ -2,8 +2,6 @@ require_relative 'frame'
 require_relative 'bonus_log'
 
 class ScoreCard
-  attr_reader :frame 
-
   def initialize(frame: Frame, bonus_log: BonusLog)
     @roll_no = 0
     @frame = frame
@@ -12,6 +10,7 @@ class ScoreCard
 
   def enter_pins(no_pins)
     return 'Invalid Entry' unless valid_entry?(no_pins)
+    return game_over if @frame.end_game?
 
     @roll_no += 1
     @frame.fallen_pins(no_pins)
@@ -21,7 +20,11 @@ class ScoreCard
   end
 
   def valid_entry?(no_pins)
-    no_pins <= 10
+    if @roll_no.zero? || @frame.current_is_complete? || @frame.no == 10 && @frame.log[-1].roll_one == 10
+      no_pins <= 10
+    else 
+      no_pins + @frame.log[-1].roll_one <= 10
+    end
   end
 
   def add_to_bonus_log
@@ -33,7 +36,7 @@ class ScoreCard
     @bonus_log.check_for_frames(@roll_no)
   end
 
-  def end_game?
-    @frame.final_complete?
+  def game_over
+    "You scored #{@frame.calculate_score}. Conratulations!"
   end
 end
