@@ -1,5 +1,5 @@
 class Bowling
-  attr_reader :rolls
+  attr_reader :rolls, :frames
   
   def initialize
     @rolls = []
@@ -7,10 +7,19 @@ class Bowling
   end
 
   def roll(pins)
-    @rolls << pins
+    # @rolls << pins
+    if @rolls.length == 2
+      @first_Score = @rolls.first
+      @last_Score = @rolls.last
+      @frames << (@first_Score + @last_Score)
+      @rolls = []
+      @rolls << pins
+    else
+      @rolls << pins
+    end
   end 
 
   def score
-    @rolls.sum
+    total = (@frames.sum + @rolls.sum)
   end
 end
