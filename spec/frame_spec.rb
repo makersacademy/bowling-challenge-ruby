@@ -10,7 +10,7 @@ describe Frame do
 
     it 'new class instance has expected instance variables' do
       expect(Frame.new(1).frame_number).to eq 1
-      expect(Frame.new(1).complete).to eq nil
+      expect(Frame.new(1).score).to eq 0
       expect(Frame.new(1).bowl1).to eq nil
       expect(Frame.new(1).bowl2).to eq nil
       expect(Frame.new(1).bowl3).to eq nil
