@@ -3,11 +3,6 @@ Bowling Scorecard Challenge in Ruby
 
 My bowling scorecard program calculates the scores of a bowling game for one player. For this challenge, I was instructed to just focus on the logic for bowling, following the scoring rules below. Take a look at my Bowling Challenge Game so see a built user interface in Javascript for this Bowling scorecard game. 
 
-## Questions/uncertainties
-1. I hope I've interpreted the challenge instructions correctly - instructions did not seem to specify a requirement that a player can input rolls one by one, so I have assumed the scorecard can be entered in its entirety. Or should the scorecard allow players to enter an individual frame roll?!
-2. I did debate about creating a Frame class, but couldn't think of how to 'inject' a total frames array into the Scorecard class so left it as is (see frame.rb for early thoughts)
-3. Not sure about my tests - would appreciate feedback. I believe/hope I'm testing behaviour over state...?! Also I think I've ended up with redundant tests and wondered if perhaps the only test I needed was to check that total_score is calculated correctly for various potential score inputs
-
 ## Instructions and Functionality
 1. The Scorecard is initialised with a @frames array containing 10 arrays, with each inner array comprising of 2 values, or 3 if it is the 10th frame e.g. Scorecard.new([[4, 5], [3, 2], [3, 1], [2, 8], [4, 4], [10, 0], [2, 0], [10, 0], [10, 0], [10, 10, 3]]
 2. Rolls should be entered into each frame array as individual elements and a strike is entered as [10, 0]. Example format:   
