@@ -12,8 +12,8 @@ class Game
   def play
     reset
     turn until @frame_number == 11
-    @frames << [roll] if @frames[-1].sum == 10
-    @frames << [roll] if @frames[-2][0] == 10
+    penultimate_roll(@frames)
+    last_roll(@frames)
     scoring
     return @scorecard
   end
@@ -25,6 +25,14 @@ class Game
   end
 
   private
+
+  def penultimate_roll(frames)
+    frames << [roll] if frames[-1].sum == 10
+  end
+
+  def last_roll(frames)
+    @frames << [roll] if @frames[-2][0] == 10
+  end
 
   def scoring
     frame_number = 1
