@@ -3,18 +3,15 @@ class Frame
   attr_accessor :bonus_rolls
   attr_reader :roll_1, :roll_2, :score
 
-  def initialize(roll_1)
-    validate_roll(roll_1)
-    @roll_1 = roll_1
-    @score = roll_1
-    check_completion
-    summarise_frame if complete? 
+  def initialize
+    @score = 0
   end
 
-  def add_roll_2(knocked_pins)
+  def add_roll(knocked_pins)
     validate_roll(knocked_pins)
-    @roll_2 = knocked_pins
-    summarise_frame
+    @roll_1 ? @roll_2 = knocked_pins : @roll_1 = knocked_pins
+    check_completion
+    summarise_frame if complete?
   end
   
   def add_points(points)

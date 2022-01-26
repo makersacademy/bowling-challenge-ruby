@@ -2,42 +2,85 @@ require 'frame'
 
 describe Frame do
   
-  let(:strike_frame) { Frame.new(10) }
-  let(:incomplete_frame) { Frame.new(7)}
-  
-  let(:spare_frame) do
-    frame = Frame.new(2)
-    frame.add_roll_2(8)
-    frame
-  end
-  
-  let(:open_frame) do
-    frame = Frame.new(3)
-    frame.add_roll_2(6)
+
+  let(:strike_frame) do 
+    frame = Frame.new
+    frame.add_roll(10)
     frame
   end
 
-  context 'when initialised' do
-    context 'when roll invalid' do
-      it 'throws an error' do
-        expect { Frame.new(11) }.to raise_error 'invalid roll'
-      end
+  let(:spare_frame) do
+    frame = Frame.new
+    frame.add_roll(2)
+    frame.add_roll(8)
+    frame
+  end
+
+  let(:open_frame) do
+    frame = Frame.new
+    frame.add_roll(3)
+    frame.add_roll(6)
+    frame
+  end
+
+  let(:incomplete_frame) do
+    frame = Frame.new
+    frame.add_roll(7)
+    frame
+  end 
+  
+  let(:empty_frame) { Frame.new }
+
+  describe 'add_roll' do
+
+    # Should I be testing that it calls the validate method?
+    it 'validates the roll' do
+      expect(incomplete_frame).to receive(:validate_roll).with(3)
+      incomplete_frame.add_roll(3)
     end
     
-    context 'when roll valid' do
+    # or should I test whether the error is raised when the method is(not) called?
+    context 'when roll invalid' do
+      it 'raises an error' do
+        expect { empty_frame.add_roll(11) }.to raise_error 'invalid roll'
+      end
 
-      it 'has score equal to roll_1' do
-        expect(Frame.new(7).score).to eq 7
+      it 'raises an error' do
+        expect { incomplete_frame.add_roll(4) }.to raise_error 'invalid roll'
+      end
+    end    
+
+    context 'when the roll is valid' do
+      
+      it 'completes the frame' do
+        incomplete_frame.add_roll(3)
+        expect(incomplete_frame).to be_complete
+      end  
+      
+      it 'adds first roll to grame' do
+        empty_frame.add_roll(9)
+        expect(empty_frame.roll_1).to eq 9
+      end
+
+      context 'when first roll in frame' do
+        it 'adds second roll to frame' do
+          incomplete_frame.add_roll(3)
+          expect(incomplete_frame.roll_2).to eq 3
+        end
       end
 
       context 'when strike' do
-        it 'summarises frame' do
-          expect(strike_frame.score).to eq 10
-          expect(strike_frame.bonus_rolls).to eq 2
+        context 'summarise' do
+          it 'adds 10 to score and adds 2 bonus rolls' do
+            expect(strike_frame.score).to eq 10
+            expect(strike_frame.bonus_rolls).to eq 2
+          end
         end
         
-        it 'checks completion' do
-          expect(strike_frame).to be_complete
+        context 'checks completion' do
+          it 'is complete' do
+            expect(strike_frame).to be_complete
+          end
         end
       end
 
@@ -48,52 +91,20 @@ describe Frame do
           end
         end
       end
-    end
-  end
 
-
-
-  describe 'add_roll_2' do
-    
-    # Should I be testing that it calls the validate method?
-    it 'validates the roll' do
-      expect(incomplete_frame).to receive(:validate_roll).with(3)
-      incomplete_frame.add_roll_2(3)
-    end
-    
-    # or should I test whether the error is raised when the method is(not) called?
-    context 'when roll invalid' do
-      it 'raises an error' do
-        expect { incomplete_frame.add_roll_2(4) }.to raise_error 'invalid roll'
-      end
-    end
-
-    context 'when the roll is valid' do
-      it 'does not throw an error' do
-        expect { incomplete_frame.add_roll_2(3) }.not_to raise_error 'invalid roll'
-      end
-      
-      it 'completes the frame' do
-        incomplete_frame.add_roll_2(3)
-        expect(incomplete_frame).to be_complete
-      end  
-      
-      it 'adds 2nd roll to frame' do
-        incomplete_frame.add_roll_2(3)
-        expect(incomplete_frame.roll_2).to eq 3
-      end
-
-      # again do I check if the method summarise_frame is called?
-      # or if the frame is actually summarised
-      it 'summarises the frame' do
-        expect(incomplete_frame).to receive(:summarise_frame)
-        incomplete_frame.add_roll_2(2)
-      end
-
-      it 'summarises the frame' do
-        incomplete_frame.add_roll_2(3)
-        expect(incomplete_frame.score).to eq 10
-        expect(incomplete_frame.bonus_rolls).to eq 1
+      context 'if complete' do
+        # again do I check if the method summarise_frame is called?
+        # or if the frame is actually summarised
+        it 'summarises the frame' do
+          expect(incomplete_frame).to receive(:summarise_frame)
+          incomplete_frame.add_roll(2)
+        end
+  
+        it 'summarises the frame' do
+          incomplete_frame.add_roll(3)
+          expect(incomplete_frame.score).to eq 10
+          expect(incomplete_frame.bonus_rolls).to eq 1
+        end
       end
     end
   end
@@ -101,7 +112,7 @@ describe Frame do
   describe '#complete' do
     context 'when strike' do
       it 'is complete' do
-        expect(Frame.new(10)).to be_complete
+        expect(strike_frame).to be_complete
       end
     end
 
