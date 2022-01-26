@@ -1,16 +1,22 @@
 class Game
 
-  def initialize
-    @scores = []
-  end   
+  MAX_PINS = 10
 
-  def roll(pins)
-    raise("This is not valid input.") if pins > 10
-    @scores << pins
+  def initialize
+    @rolls = [] 
   end
 
-  def score 
-    @scores.inject(0, :+)
+  def roll(pins) 
+    raise ("This is not valid input.") if pins > MAX_PINS
+    @rolls << pins
+  end
+
+  def pins_score 
+    @rolls.inject(0, :+)
+  end
+
+  def spare
+  
   end
 
 end
