@@ -12,6 +12,7 @@ class Game
   end
 
   def play
+    reset
     turn until @frame_number == 11
     @frames << [roll] if @frames[-1].sum == 10
     @frames << [roll] if @frames[-2][0] == 10
@@ -26,7 +27,7 @@ class Game
   end
 
   private
-  
+
   def scoring
     frame_number = 1
     @frames.each do |score|
@@ -35,7 +36,7 @@ class Game
       case roll_type(score)
       when 'strike'
         result += 10
-        strike?(@frames[frame_number]) ? result += multi_strike_score(frame_number) : result += single_strike_score
+        strike?(@frames[frame_number]) ? result += multi_strike_score(frame_number) : result += single_strike_score(frame_number)
       when 'spare'
         result += spare_score(frame_number)
       when 'normal'
