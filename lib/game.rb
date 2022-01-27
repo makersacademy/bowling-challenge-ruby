@@ -12,28 +12,30 @@ class Game
     @frames.sum { |frame| frame.score }
   end
 
-  def add_roll(knocked_pins)
-    validate_roll(knocked_pins)
+  def add_roll(knocked_pins, frame = Frame.new)
+    raise 'round complete' if round_finished?
     assign_bonus_points(knocked_pins)
-    combine_frame(knocked_pins) unless tenth_frame?
-    # uncomment for irb demo
-    "Total score: #{total_score}"
+    fill_or_create_frame(knocked_pins, frame)
   end
 
   private  
+
+  def fill_or_create_frame(knocked_pins, frame)
+    if @frames.empty? || @frames.last.complete? && !tenth_frame?
+      add_frame(frame)
+      @frames.last.add_roll(knocked_pins)
+    elsif !@frames.last.complete?
+      @frames.last.add_roll(knocked_pins)  
+    end
+  end
 
   def tenth_frame?
     @frames.length == 10
   end
 
-  def validate_roll(knocked_pins)
-    raise 'round complete' if round_finished?
-    raise 'invalid roll' unless valid_roll?(knocked_pins)
-  end
-
   def assign_bonus_points(points)
     @frames.each do |frame|
-      if frame.bonus_rolls > 0
+      if frame.complete? && frame.bonus_rolls > 0
         frame.add_points(points)
         frame.bonus_rolls -= 1
       end
@@ -48,33 +50,7 @@ class Game
     if @frames.empty?
       false
     else
-      @frames.length == 10 && @frames.last.bonus_rolls == 0
-    end
-  end
-
-  def valid_roll?(knocked_pins)
-    if knocked_pins > 10 
-      false
-    elsif @current_frame 
-      @current_frame.first + knocked_pins <= 10 
-    else
-      true
-    end
-  end
-
-  def combine_frame(knocked_pins)
-    if knocked_pins == 10 
-      add_frame(Frame.new(10, nil))
-      # uncomment for irb demo
-      p "Frame #{frames.length} complete"
-    else
-      @current_frame ? @current_frame << knocked_pins : @current_frame = [knocked_pins]
-      if @current_frame.length == 2
-        add_frame(Frame.new(@current_frame.first, @current_frame.last))
-        @current_frame = nil
-        # uncomment for irb demo
-        p "Frame #{frames.length} complete"
-      end
+      @frames.length == 10 && @frames.last.bonus_rolls == 0 && frames.last.complete?
     end
   end
 end

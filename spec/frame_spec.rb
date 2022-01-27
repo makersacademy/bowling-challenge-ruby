@@ -3,31 +3,13 @@ require 'frame'
 describe Frame do
   
 
-  let(:strike_frame) do 
-    frame = Frame.new
-    frame.add_roll(10)
-    frame
-  end
+  let(:strike_frame) { Frame.new.add_roll(10) }
 
-  let(:spare_frame) do
-    frame = Frame.new
-    frame.add_roll(2)
-    frame.add_roll(8)
-    frame
-  end
+  let(:spare_frame) { Frame.new.add_roll(2).add_roll(8) }
 
-  let(:open_frame) do
-    frame = Frame.new
-    frame.add_roll(3)
-    frame.add_roll(6)
-    frame
-  end
+  let(:open_frame) { Frame.new.add_roll(3).add_roll(6) }
 
-  let(:incomplete_frame) do
-    frame = Frame.new
-    frame.add_roll(7)
-    frame
-  end 
+  let(:incomplete_frame) { Frame.new.add_roll(7) }
   
   let(:empty_frame) { Frame.new }
 
@@ -37,6 +19,10 @@ describe Frame do
     it 'validates the roll' do
       expect(incomplete_frame).to receive(:validate_roll).with(3)
       incomplete_frame.add_roll(3)
+    end
+
+    it 'returns the frame' do
+      expect(empty_frame.add_roll(5)).to be_a Frame
     end
     
     # or should I test whether the error is raised when the method is(not) called?

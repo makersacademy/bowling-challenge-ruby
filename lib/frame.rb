@@ -12,6 +12,7 @@ class Frame
     @roll_1 ? @roll_2 = knocked_pins : @roll_1 = knocked_pins
     check_completion
     summarise_frame if complete?
+    return self
   end
   
   def add_points(points)
