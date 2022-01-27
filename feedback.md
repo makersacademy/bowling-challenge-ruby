@@ -1,1 +1,1 @@
-* Am I effectively testing the user input? If not, how would I do that?
+* There was a LOT of coding between my tests for a game with no spares or strikes, and the spares and strikes tests. Which made me nervous that I wasn't TDDing enough (even though I know that I have good tests). It almost felt as though they were feature tests and not unit tests. Is it legit to manually test methods in `irb` instead?
