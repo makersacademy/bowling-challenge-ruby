@@ -8,27 +8,41 @@ describe Game do
   let(:strike_frame_2) { double(:strike_frame_2, bonus_rolls: 2, complete?: true) }
   let(:strike_frame_3) { double(:strike_frame_3, bonus_rolls: 2, complete?: true) }
   
-  let(:open_frame_1) { double(:open_frame_1, bonus_rolls: 0, complete?: true) }
-  
   let(:spare_frame_1) { double(:spare_frame_1, bonus_rolls: 1, complete?: true) }
+  
+  let(:open_frame_1) { double(:open_frame_1, bonus_rolls: 0, complete?: true) }
   
   let(:incomplete_frame_1) { spy(:incomplete_frame_1, complete?: false) }
 
   let(:empty_frame) { double(:empty_frame, score: 0) }
 
+  let(:frame_setup_9) {
+    frames = []
+    9.times { frames << open_frame_1 }
+    frames
+  }
+
   describe '#add_roll' do
     
     #  What happens when I add a roll?
     #   checks if round complete
-      #   assigns bonus points
-      #   fills or creates frame
+    #   assigns bonus points
+    #   fills or creates frame
 
-    # round_finished? - CHECK IF ROUND COMPLETE
+    # CHECK IF ROUND COMPLETE
     context 'round_finished?' do
+      context 'when there is no frames' do
+        it 'does not raise an error' do
+          game = Game.new
+          expect(empty_frame).to receive(:add_roll).with(7)
+          expect { game.add_roll(7, empty_frame) }.not_to raise_error
+        end
+      end
+      
+      
       context 'after 10 open frames' do
         it 'raises and error' do
-          frames = []
-          10.times { frames << open_frame_1 }
+          frames = frame_setup_9 << open_frame_1
           game = Game.new(frames)
           expect { game.add_roll(3) }.to raise_error 'round complete'
         end 
@@ -36,7 +50,7 @@ describe Game do
       
       
       context 'after 10 frames with last as strike' do
-        it 'does not raise an error' do
+        it 'does not raise an error- allows 2 more rolls' do
           frames = []
           10.times { frames.push(strike_frame_1) }
           game = Game.new(frames)
@@ -63,18 +77,14 @@ describe Game do
       
       context 'after 10 frames with last one as spare' do
         it 'does not raise an error' do
-          frames = []
-          9.times { frames.push(strike_frame_1) }
-          frames.push(spare_frame_1)
+          frames = frame_setup_9 << spare_frame_1
           game = Game.new(frames)
           expect { game.add_roll(5) }.not_to raise_error 'round complete'
         end
         
         context 'after 1 bonus roll' do
           it 'does raise an error' do
-            frames = []
-            9.times { frames.push(open_frame_1) }
-            frames.push(spare_frame_1)
+            frames = frame_setup_9 << spare_frame_1
             game = Game.new(frames)
             expect(spare_frame_1).to receive(:add_points).with(5)
             expect(spare_frame_1).to receive(:bonus_rolls=).with(0)
@@ -87,9 +97,7 @@ describe Game do
   
       context 'after 10 frames with last NOT as strike or spare' do
         it 'raises an error' do
-          frames = []
-          9.times { frames.push(strike_frame_1) }
-          frames.push(open_frame_1)
+          frames = frame_setup_9 << open_frame_1
           game = Game.new(frames)
           expect { game.add_roll(5) }.to raise_error 'round complete'
         end
@@ -99,7 +107,7 @@ describe Game do
     # ASSIGN BONUS POINTS - add points from current roll to previous frames with bonus rolls
 
     context 'assign bonus points' do
-      context 'when strike-->strike-->roll' do
+      context 'when strike-->strike-->roll-->roll2' do
         it 'adds 10 to the first and second strike' do
           game = Game.new([strike_frame_1, strike_frame_2])
           expect(strike_frame_1).to receive(:add_points).with(5)
@@ -129,11 +137,9 @@ describe Game do
           expect(empty_frame).to receive(:add_roll).with(10)
           game.add_roll(10, empty_frame)
           allow(empty_frame).to receive(:complete?) { false }
-          # I wanted to check whether the value actually changed
-          # not sure how to do it with a double?
-          # here the bonus_rolls of the spare roll should change to 0
-          # then we could double check that nothing is added
-          # is this the right way?
+          
+          # the bonus rolls of each frame are modified after a roll
+          # am I okay to keep on testing and stub the bonus_rolls out?
           allow(spare_frame_1).to receive(:bonus_rolls) { 0 }
           expect(spare_frame_1).not_to receive(:add_points).with(6)
           expect(strike_frame_1).not_to receive(:bonus_rolls=).with(0)
@@ -156,25 +162,14 @@ describe Game do
 
       context 'when previous frame complete' do
         it 'creates a frame' do
-          incomplete_frame = spy()
           game = Game.new([strike_frame_1])
           expect(strike_frame_1).to receive(:add_points).with(8)
           expect(strike_frame_1).to receive(:bonus_rolls=).with(1)
-          game.add_roll(8, incomplete_frame)
+          game.add_roll(8, incomplete_frame_1)
           expect(game.frames.length).to eq 2
-          expect(game.frames).to include incomplete_frame
+          expect(game.frames).to include incomplete_frame_1
         end
       end
-    end
-
-    context 'when perfect score' do
-      it 'returns 300' do
-        strike_frame_with_bonus = double(score: 30)
-        frames = []
-        10.times { frames << strike_frame_with_bonus }
-        game = Game.new(frames)
-        expect(game.total_score).to eq 300
-     end
     end
   end
 
