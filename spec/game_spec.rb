@@ -2,11 +2,6 @@ require 'game'
 
 describe Game do 
   let(:game) { Game.new }
-  # gutter game
-  # all ones
-  # input scores are valid
-  # spare
-  # strike
   it 'rolls a gutter game' do
     20.times { game.roll(0) }
     expect(game.total_score).to eq(0)
@@ -28,5 +23,9 @@ describe Game do
     game.roll(5)
     17.times { game.roll(0) }
     expect(game.total_score).to eq(20)
+  end
+  it 'scores a perfect game' do
+    12.times { game.roll(10) }
+    expect(game.total_score).to eq(300)
   end
 end
