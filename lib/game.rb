@@ -9,8 +9,8 @@ class Game
   end
 
   def roll(pins) 
-    raise ("This is not valid input.") if pins > MAX_PINS
-    raise ("Game Over. Ask for your score!") if completed_all_rolls
+    check_pin_number
+    check_game_status
     @rolls << pins
       if @rolls.count == 19 && (pins == 10) || @rolls.count == 20 && (@rolls[-1] + @rolls[-2]) == 10
         @max_rolls += 1
@@ -19,8 +19,8 @@ class Game
       end
   end
 
-  def completed_all_rolls
-    @rolls.count == @max_rolls
+  def check_game_status
+    raise ("Game Over. Ask for your score!") if completed_all_rolls
   end
 
   def total_score
@@ -28,6 +28,14 @@ class Game
   end
   
   private
+
+  def check_pin_number
+    raise ("This is not valid input.") if pins > MAX_PINS
+  end
+
+  def completed_all_rolls
+    @rolls.count == @max_rolls
+  end
 
   def pins_score 
     @scores = @rolls - ["-"]
@@ -70,12 +78,10 @@ class Game
     frames.each_with_index do |frame, i| 
       if frame.include?("-") 
         i += 1
-        first_bowl = frames[i][0]
-        second_bowl = frames[i][1]
-        if second_bowl == "-" || second_bowl = 10
-          sum += first_bowl
+        if frames[i][1] == "-" || frames[i][1] = 10
+          sum += frames[i][0]
           i += 1
-          sum += first_bowl
+          sum += frames[i][0]
         end
       end
     end
