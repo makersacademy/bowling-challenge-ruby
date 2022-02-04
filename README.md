@@ -48,11 +48,9 @@ Planning Diagramming
 2. Run the command ```gem install bundler``` (if you don't have bundler already)
 3. When the installation completes, run ```bundle```
 
-
 ## Running Tests
 
 Run ```rspec```
-
 
 ## Usage
 Launch ```irb``` and use as below:
@@ -88,3 +86,4 @@ Launch ```irb``` and use as below:
  :015 > sc.enter_pins(10)
  => "You scored 300. Conratulations!" 
  ```
+ 

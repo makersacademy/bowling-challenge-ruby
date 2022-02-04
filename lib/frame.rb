@@ -4,10 +4,6 @@ class Frame
 
   @@log = []
 
-  def self.log
-    @@log
-  end
-
   def initialize(no_pins)
     @frame_no = @@log.length + 1
     @roll_one = no_pins
@@ -17,8 +13,28 @@ class Frame
     @@log << self
   end
 
+  def self.accept_roll?(no_pins)
+    if @@log.last&.frame_no == 10
+      frame10_valid?(no_pins)
+    elsif @@log.empty? || @@log.last.complete?
+      no_pins <= 10
+    else 
+      no_pins + @@log.last.roll_one <= 10
+    end
+  end
+
+  def self.frame10_valid?(no_pins)
+    if @@log.last.complete?
+      false
+    elsif strike? || spare?
+      no_pins <= 10
+    else   
+      no_pins + @@log.last.roll_one <= 10
+    end
+  end
+
   def self.fallen_pins(no_pins)
-    if @@log[9]&.roll_two && @@log[9].add_total > 10
+    if @@log[9]&.roll_two && @@log[9].add_total >= 10
       @@log.last.roll_three = no_pins
     elsif @@log.empty? || @@log.last.complete?
       new(no_pins)
@@ -27,34 +43,30 @@ class Frame
     end
   end
 
-  def self.current_is_a_strike?
-    @@log.last.a_strike?
-  end
-
-  def self.current_is_a_spare?
-    @@log.last.a_spare?
-  end
-
-  def self.current_is_complete?
-    @@log.last.complete?
-  end
-
-  def self.no
-    @@log.last.frame_no
-  end
-
   def self.add_bonuses(frames_to_add_bonus, no_pins)
     frames_to_add_bonus.each do |frame_no|
       @@log[frame_no - 1].bonus += no_pins
     end
   end
 
-  def self.calculate_score
-    @@log.map { |frame| frame.add_total }.sum
+  def self.frame_totals
+    @@log.map { |frame| frame.add_total }
   end
 
-  def self.end_game?
-    @@log[9]&.complete?
+  def self.no
+    @@log.last.frame_no
+  end
+
+  def self.strike?
+    @@log.last.roll_one == 10
+  end
+
+  def self.spare?
+    @@log.last.roll_two && @@log.last.roll_one + @@log.last.roll_two == 10
+  end
+
+  def self.no10_complete?
+    @@log.last.frame_no == 10 && @@log.last.complete?
   end
 
   def complete?
@@ -63,14 +75,6 @@ class Frame
     else
       @roll_two || @roll_one == 10 
     end
-  end
-
-  def a_strike?
-    @roll_one == 10
-  end
-
-  def a_spare?
-    @roll_two && @roll_one + @roll_two == 10 && @roll_one != 10
   end
 
   def add_total
