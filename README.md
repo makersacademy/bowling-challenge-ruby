@@ -1,65 +1,110 @@
-Bowling Challenge in Ruby
-=================
+## To run:
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+```ruby
+bundle install
+irb -r './lib/game'
+```
 
-## The Task
+## Demo:
 
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
+For the purpose of the demo, I put down some p statements. The script currently only updates the total score each frame is completed- a string ‘Frame complete’ will be printed to confirm this.
 
-Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
+The user should input  a roll at a time. When 10 is submitted, the script deducts that it was a STRIKE.
 
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
+```ruby
+3.0.0 :001 > game = Game.new
+ => #<Game:0x00007fefee9e8578 @frames=[]> 
+3.0.0 :002 > game.add_roll(10)
+"Frame 1 complete"
+ => "Total score: 10" 
+3.0.0 :003 > game.add_roll(3)
+ => "Total score: 13" 
+3.0.0 :004 > game.add_roll(7)
+"Frame 2 complete"
+ => "Total score: 30" 
+3.0.0 :005 > game.add_roll(10)
+"Frame 3 complete"
+ => "Total score: 50" 
+3.0.0 :006 > game.add_roll(10)
+"Frame 4 complete"
+ => "Total score: 70" 
+3.0.0 :007 > game.add_roll(3)
+ => "Total score: 76" 
+3.0.0 :008 > game.add_roll(7)
+"Frame 5 complete"
+ => "Total score: 93" 
+3.0.0 :009 > game.add_roll(2)
+ => "Total score: 95" 
+3.0.0 :010 > game.add_roll(8)
+"Frame 6 complete"
+ => "Total score: 105" 
+3.0.0 :011 > game.add_roll(5)
+ => "Total score: 110" 
+3.0.0 :012 > game.add_roll(3)
+"Frame 7 complete"
+ => "Total score: 118" 
+3.0.0 :013 > game.add_roll(10)
+"Frame 8 complete"
+ => "Total score: 128" 
+3.0.0 :014 > game.add_roll(8)
+ => "Total score: 136" 
+3.0.0 :015 > game.add_roll(2)
+"Frame 9 complete"
+ => "Total score: 148" 
+3.0.0 :016 > game.add_roll(10)
+"Frame 10 complete"
+ => "Total score: 168" 
+3.0.0 :017 > game.add_roll(10)
+ => "Total score: 178" 
+3.0.0 :018 > game.add_roll(10)
+ => "Total score: 188" 
+3.0.0 :019 > game.add_roll(0)
+[Traceback DELETED]
+RuntimeError (round complete)
+3.0.0 :020 > 
+```
 
-As usual please start by
+## Table of scores for the demo above (not part of the program):
+![alt text](https://i.imgur.com/UKGzL69.png)
 
-* Forking this repo
+## Features:
 
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
+- user starts a round
+- user can add a roll at a time using ‘#add_roll(knocked_pins) method’
+- the total score is currently calculated after each complete frame
 
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
+## Features in development:
 
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
+- user can print breakdown of the scores
+- the total score should be updated each time a roll is added
 
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
+## How the score is counted
 
-## Bowling — how does it work?
+1. The user inputs the roll
+2. The program checks all existing frames for outstanding bonus rolls
+3. The program creates a Frame if it is a strike, awaits another roll otherwise.
 
-### Strikes
+## Reflections:
 
-The player has a strike if he knocks down all 10 pins with the first roll in a frame. The frame ends immediately (since there are no pins left for a second roll). The bonus for that frame is the number of pins knocked down by the next two rolls. That would be the next frame, unless the player rolls another strike.
+Edge cases:
 
-### Spares
+- given 2 strikes in a row, the first strike still has one bonus roll left
 
-The player has a spare if the knocks down all 10 pins with the two rolls of a frame. The bonus for that frame is the number of pins knocked down by the next roll (first roll of next frame).
+- given a strike in the 10th frame, 2 bonus rolls are allowed
 
-### 10th frame
+(TBC)...
 
-If the player rolls a strike or spare in the 10th frame they can roll the additional balls for the bonus. But they can never roll more than 3 balls in the 10th frame. The additional rolls only count for the bonus not for the regular frame count.
+Notes:
+- Frame and Game class- Game class seems dependent on Frame and not sure how to isolate tests
 
-    10, 10, 10 in the 10th frame gives 30 points (10 points for the regular first strike and 20 points for the bonus).
-    1, 9, 10 in the 10th frame gives 20 points (10 points for the regular spare and 10 points for the bonus).
+- Having made most methods private, not sure how to go about testing. Should the not-private methods be tested for calling the private methods? 
 
-### Gutter Game
+- still unsure about 'testing behaviour over test in this exercise'
 
-A Gutter Game is when the player never hits a pin (20 zero scores).
+## Bowling rules model:
 
-### Perfect Game
+![alt text](https://i.imgur.com/z4arXW4.jpg)
 
-A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 strikes for the bonus in the 10th frame). The Perfect Game scores 300 points.
+## Domain model (TBC):
 
-In the image below you can find some score examples.
-
-More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
-
-![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+![alt text](https://i.imgur.com/54Dmq6h.jpg)
