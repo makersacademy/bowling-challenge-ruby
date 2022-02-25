@@ -1,0 +1,12 @@
+Bowling scorecard tracker
+
+Classes
+
+@Total_Score - Counts/returns score / end game after 10
+
+Frame(turn) - runs game logic for one turn
+  Roll (Multiple rolls)
+    @pins_knocked_down = (User enters how many pins were knocked down)
+      Less than 10 knocked down? ^ Enter second roll 
+
+Factor in 10th frame, possible 3 rolls
