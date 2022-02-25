@@ -16,8 +16,16 @@ describe Scorecard do
       end
 
       it 'can roll a gutter game' do
-        20.times { scorecard.roll(0)}
+        20.times { scorecard.roll(0) }
         expect(scorecard.score).to eq 0
+      end
+
+      it 'can roll all 1s' do
+        20.times { scorecard.roll(1) }
+        expect(scorecard.score).to eq 20
+      end
+
+      it 'can roll a spare' do
       end
 
 

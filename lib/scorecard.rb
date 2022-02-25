@@ -1,14 +1,15 @@
 class Scorecard
 
     def initialize
-      @score = score
+      @rolls = []
     end
 
     def roll(pins)
+      @rolls << pins
     end
 
     def score
-      score = 0
+      @rolls.reduce(:+)
     end
 
 end
