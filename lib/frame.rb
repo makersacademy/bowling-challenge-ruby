@@ -36,6 +36,10 @@ class Frame
 
   private
 
+  def invalid_roll?(roll)
+    roll.negative? || (roll > @rolls.count )
+  end
+
   def invalid_pins?(pins_downed)
     pins_downed.negative? || pins_downed > TEN_PINS
   end

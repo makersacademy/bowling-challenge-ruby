@@ -21,6 +21,7 @@ class ScoreCard
   end
 
   def log_roll(pins_downed)
+    return :game_complete if game_complete?
     current_frame.log_roll(pins_downed)
   end
 
@@ -33,6 +34,9 @@ class ScoreCard
   end
 
   private
+  def game_complete?
+    @frames.count == LAST_FRAME && @frames[LAST_FRAME].frame_complete?
+  end
 
   def process_frame(frame_no, frame)
     if frame.strike_frame?

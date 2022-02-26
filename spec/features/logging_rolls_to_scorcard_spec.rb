@@ -32,44 +32,18 @@ describe 'logging rolls to the scorecard' do
 
   it "You're awesome, a perfect game" do
     scorecard = ScoreCard.new
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
+    12.times do
+      scorecard.log_roll(10)
+    end
     expect(scorecard.score).to eq 300
     expect(scorecard.current_frame_number).to eq 10
   end
 
   it 'having a bad day.. Gutter Game!' do
     scorecard = ScoreCard.new
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
+    20.times do
+      scorecard.log_roll(0)
+    end
 
     expect(scorecard.score).to eq 0
     expect(scorecard.current_frame_number).to eq 10

@@ -1,10 +1,17 @@
 # frozen_string_literal: true
 
-require './lib/scorecard'
-require './lib/frame'
-
 describe ScoreCard do
   subject(:scorecard) { described_class.new }
+
+  describe "#log_roll" do
+    it "returns game complete if trying to add a roll after 10 frams are done" do
+      12.times do
+        scorecard.log_roll(10)
+      end
+      expect(scorecard.log_roll(10)).to eq :game_complete
+    end
+
+  end
 
   it 'gives frame number at the start of the game' do
     expect(scorecard.current_frame_number).to eq 0
@@ -90,19 +97,6 @@ describe ScoreCard do
     expect(scorecard.score).to eq 20
   end
 
-  it 'Strikes and spares all over the place.. up to 7 frames' do
-    scorecard.log_roll(10)
-    scorecard.log_roll(3)
-    scorecard.log_roll(7)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(5)
-    scorecard.log_roll(5)
-    scorecard.log_roll(6)
-
-    expect(scorecard.score).to eq 131
-  end
 
   it 'is a full game no end bonus' do
     scorecard.log_roll(3)
@@ -129,85 +123,35 @@ describe ScoreCard do
   end
 
   it "You're awesome, strikes in every frame" do
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
+    12.times do
+      scorecard.log_roll(10)
+    end
     expect(scorecard.score).to eq 300
   end
 
   it 'a spare and strike on the last frame of the game' do
-    scorecard.log_roll(4)
-    scorecard.log_roll(6) # Spare 1
-
-    scorecard.log_roll(5)
-    scorecard.log_roll(5) # Spare 2
-
-    scorecard.log_roll(10)
-
-    scorecard.log_roll(6)
-    scorecard.log_roll(4) # Spare 3
-
-    scorecard.log_roll(3)
-    scorecard.log_roll(4)
-
-    scorecard.log_roll(5)
-    scorecard.log_roll(5) # Spare 4
-
-    scorecard.log_roll(10)
-
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-
-    scorecard.log_roll(3)
-    scorecard.log_roll(6)
+    9.times do
+      scorecard.log_roll(10)
+    end
 
     scorecard.log_roll(7)
-    scorecard.log_roll(3) # Spare 5
+    scorecard.log_roll(3) 
     scorecard.log_roll(10)
 
-    expect(scorecard.score).to eq 134
+    expect(scorecard.score).to eq 277
   end
 
   it 'having a bad day.. Gutter Game!' do
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-    scorecard.log_roll(0)
-
+    20.times do
+      scorecard.log_roll(0)
+    end
     expect(scorecard.score).to eq 0
   end
 
   it 'almost all strikes and spares, full game' do
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
-    scorecard.log_roll(10)
+    5.times do
+      scorecard.log_roll(10)
+    end
     scorecard.log_roll(7)
     scorecard.log_roll(3)
     scorecard.log_roll(10)
