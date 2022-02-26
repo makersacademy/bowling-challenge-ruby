@@ -41,11 +41,12 @@ class Frame
 
   def to_many_pins?(pins_downed)
     return false if @frame_type == :strike
+
     pins_downed > pins_left
   end
 
   def pins_left
-    return TEN_PINS - @rolls[FIRST_ROLL]
+    TEN_PINS - @rolls[FIRST_ROLL]
   end
 
   def process_roll(pins_downed)
@@ -54,7 +55,6 @@ class Frame
     process_second_roll(pins_downed)
     process_first_roll(pins_downed)
   end
-
 
   def process_final_roll(pins_downed)
     return unless last_roll?
@@ -65,6 +65,7 @@ class Frame
   def process_second_roll(pins_downed)
     return unless second_roll?
     raise "Pins downed must be between 0 and #{pins_left}" if to_many_pins?(pins_downed)
+
     @rolls[SECOND_ROLL] = pins_downed
   end
 
@@ -73,7 +74,7 @@ class Frame
 
     @rolls[FIRST_ROLL] = pins_downed
   end
-  
+
   def process_frame_type(pins_downed)
     return unless @frame_type.nil?
 

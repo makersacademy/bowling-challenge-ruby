@@ -10,8 +10,9 @@ class ScoreCard
   TEN_PINS = 10
   ZERO_SCORE = 0
 
-  def initialize(frame_class = Frame)
+  def initialize(frame_class = Frame, last_frame_class = LastFrame)
     @frame_class = frame_class
+    @last_frame_class = last_frame_class
     @frames = {}
   end
 
@@ -26,9 +27,7 @@ class ScoreCard
   def score
     score = 0
     @frames.each do |frame_no, frame|
-      if frame_no == LAST_FRAME || frame.frame_complete?
-        score += process_frame(frame_no, frame)
-      end
+      score += process_frame(frame_no, frame) if frame.frame_complete?
     end
     score
   end
@@ -46,11 +45,13 @@ class ScoreCard
   end
 
   def current_frame
-    @frames[@frames.count + 1] = @frame_class.new if new_frame?
+    if next_frame?
+      @frames[@frames.count + 1] = last_frame_next? ? @last_frame_class.new : @frame_class.new
+    end
     @frames[@frames.keys.last]
   end
 
-  def new_frame?
+  def next_frame?
     return true if @frames.empty?
     return false if @frames.count == LAST_FRAME
     return true if @frames[@frames.keys.last].frame_complete?
@@ -58,6 +59,11 @@ class ScoreCard
     false
   end
 
+  def last_frame_next?
+    @frames.count + 1 == LAST_FRAME
+  end
+
+  # For the sake of readability I have decided not to split this function any further
   def strike_points(frame_no)
     if frame_no == LAST_FRAME
       last_frame = @frames[frame_no]
@@ -66,12 +72,11 @@ class ScoreCard
 
     if @frames.key?(frame_no + 1)
       next_frame = @frames[frame_no + 1]
-      # 2 rolls for this frame
-      if next_frame.roll_score(SECOND_ROLL); return TEN_PINS + next_frame.roll_score(FIRST_ROLL) + next_frame.roll_score(SECOND_ROLL);end
-      # Look ahead to next next frame
-      if @frames.key?(frame_no + 2); return TEN_PINS + next_frame.roll_score(FIRST_ROLL) + @frames[frame_no + 2].roll_score(FIRST_ROLL); end
+      if next_frame.roll_score(SECOND_ROLL)
+        return TEN_PINS + next_frame.roll_score(FIRST_ROLL) + next_frame.roll_score(SECOND_ROLL); end
+      if @frames.key?(frame_no + 2)
+        return TEN_PINS + next_frame.roll_score(FIRST_ROLL) + @frames[frame_no + 2].roll_score(FIRST_ROLL); end
     end
-    # Nothing to match on..yet
     ZERO_SCORE
   end
 

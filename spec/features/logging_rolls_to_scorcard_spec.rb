@@ -14,7 +14,7 @@ describe 'logging rolls to the scorecard' do
     expect(scorecard.score).to eq 9
   end
 
-  it "is having a great mid game" do
+  it 'is having a great mid game' do
     scorecard = ScoreCard.new
     scorecard.log_roll(10)
     scorecard.log_roll(3)
@@ -28,7 +28,6 @@ describe 'logging rolls to the scorecard' do
 
     expect(scorecard.current_frame_number).to eq 7
     expect(scorecard.score).to eq 131
-
   end
 
   it "You're awesome, a perfect game" do
@@ -47,7 +46,6 @@ describe 'logging rolls to the scorecard' do
     scorecard.log_roll(10)
     expect(scorecard.score).to eq 300
     expect(scorecard.current_frame_number).to eq 10
-    
   end
 
   it 'having a bad day.. Gutter Game!' do
@@ -76,5 +74,4 @@ describe 'logging rolls to the scorecard' do
     expect(scorecard.score).to eq 0
     expect(scorecard.current_frame_number).to eq 10
   end
-
 end
