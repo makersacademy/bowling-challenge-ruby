@@ -63,3 +63,30 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+
+User Stories:
+
+As a lover of bowling
+So I can play a game
+I want to input my score (frame 1: roll 1, roll 2)
+
+As a lover of bowling
+So I can see how well I am doing
+I want to be able to see my total score
+
+As a lover of bowling
+So I can show off my skills
+I want to score a spare
+
+As a lover of bowling
+So I can impress my friends
+I want to score a strike
+
+As a lover of bowling
+So I can get an extra roll
+I want to score a spare/strike on the final frame
+
+As a lover of bowling
+To see how well I did throughout
+I want to see a running total of my score after each frame
