@@ -21,7 +21,7 @@ class Game
     end
     p @frames_total.sum
     p @roll_counter
-    "Great game, you scored #{@frames_total.sum}" if @roll_counter == 21 && @strike == false && @spare == false
+    "Great game, you scored #{@frames_total.sum}" if tenth_frame_is_normal
   end
 
 
@@ -92,6 +92,10 @@ class Game
 
   def add_score_to_previous_frame_total(score)
     @frames_total[@frame_counter - 2] += score 
+  end
+
+  def tenth_frame_is_normal
+    @roll_counter == 21 && @strike == false && @spare == false
   end
 
   
