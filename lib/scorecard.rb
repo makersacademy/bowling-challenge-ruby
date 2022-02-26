@@ -66,7 +66,7 @@ class ScoreCard
 
     if @frames.key?(frame_no + 1)
       next_frame = @frames[frame_no + 1]
-      # 2 rolls for this frame?
+      # 2 rolls for this frame
       if next_frame.roll_score(SECOND_ROLL); return TEN_PINS + next_frame.roll_score(FIRST_ROLL) + next_frame.roll_score(SECOND_ROLL);end
       # Look ahead to next next frame
       if @frames.key?(frame_no + 2); return TEN_PINS + next_frame.roll_score(FIRST_ROLL) + @frames[frame_no + 2].roll_score(FIRST_ROLL); end
