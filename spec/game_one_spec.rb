@@ -24,6 +24,9 @@ describe GameOne do
     it 'has a game total set to 0' do
       expect(game.game_total).to eq 0
     end
+    it 'has a double strike boolean variable that begings as false"' do
+      expect(game.double_strike).to eq false
+    end
   end
   describe '#roll' do
     it "adds the score to the scorecard at index 'roll_counter - 1'" do
@@ -55,6 +58,11 @@ describe GameOne do
     it 'adds the score to the score card on second go of frame' do
       game.roll(3)
       expect { game.roll(5) }.to change { game.scorecard.sum }.by 5
+    end
+    it "changes double_strike to true if two strikes happen in a row" do
+      game.roll(10)
+      game.roll(10)
+      expect(game.double_strike).to eq true
     end
     it 'changes spare to true if 1st plus second roll of frame equal 10' do
       game.roll(5)
@@ -100,9 +108,7 @@ describe GameOne do
       expect(game.game_total).to eq 267
     end
     it 'returns the correct final score if last frame is a strike' do
-      10.times { game.roll(10) }
-      game.roll(10)
-      game.roll(10)
+      12.times { game.roll(10) }
       expect(game.game_total).to eq 300
     end
   end
