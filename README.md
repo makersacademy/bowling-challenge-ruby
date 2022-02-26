@@ -69,5 +69,5 @@ My attempt at the bowling challenge.
 
 Before attempting the challenge, I created a table to incorporate the main bits of information about the bowling game. This consists of the idea of strikes and spares, as well as scenarios which may occur in the game. The ones I have included are rolling a strike/spare in the 10th frame, a gutter game and the perfect game. There are many other scenarios which can occur in this game, however these are the main ones I have included. I have attached the table below. 
 
-<img src='bowling_challenge_table.png'>
+<img src='./images/bowling_challenge_table.png'>
 
