@@ -16,8 +16,7 @@ class Game
     strike_bonus(score)
     if first_roll_of_frame
      score == 10 ? its_a_strike(score) : normal_first_role(score)
-    else
-      frame_total(score) == 10 ? its_a_spare(score) : normal_second_role(score)
+    else frame_total(score) == 10 ? its_a_spare(score) : normal_second_role(score)
     end
   end
 
@@ -90,5 +89,7 @@ class Game
   def add_score_to_previous_frame_total(score)
     @frames_total[@frame_counter - 2] += score 
   end
+
+  
 
 end
