@@ -1,11 +1,21 @@
 class Bowling
   
-  def rollball(pins)
+  def initialize
+    @rolls = []
+  end
 
+  def rollball(pins)
+    @rolls << pins
   end
 
   def score
-    0
+    result = 0
+    number_of_roll = 0
+    20.times{
+      result += @rolls[number_of_roll]
+      number_of_roll +=1
+  }
+    result
   end
 
 end
