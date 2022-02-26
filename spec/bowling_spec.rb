@@ -13,4 +13,12 @@ describe 'bowling' do
     expect(@game.score).to eq(20)
   end  
 
+  it 'can roll a spare' do
+    @game.rollball(6)
+    @game.rollball(4)
+    @game.rollball(2)
+    17.times{@game.rollball(0)}
+    expect(@game.score).to eq(14)
+  end
+
 end
