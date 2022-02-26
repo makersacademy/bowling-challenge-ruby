@@ -12,6 +12,8 @@ class Game
   end
 
   def roll(score)
+    spare_bonus(score)
+    strike_bonus(score)
     if first_roll_of_frame
      score == 10 ? its_a_strike(score) : normal_first_role(score)
     else
@@ -74,6 +76,14 @@ class Game
     next_roll
     end_of_frame
     @strike = false
+  end
+
+  def strike_bonus(score)
+    @frames_total[@frame_counter - 2] += score if @strike == true
+  end
+
+  def spare_bonus(score)
+    @frames_total[@frame_counter - 2] += score if @spare == true
   end
 
 end

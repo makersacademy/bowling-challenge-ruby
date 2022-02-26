@@ -66,5 +66,16 @@ describe Game do
       game.roll(7)
       expect(game.spare).to eq false
     end
+    it "adds the score to the previous frame total if spare equals true" do
+      game.roll(4)
+      game.roll(6)
+      expect{ game.roll(7) }.to change{ game.frames_total[0] }.by 7
+    end
+    it "adds the score to the previous frame if strike equals true" do
+      game.roll(10)
+      game.roll(6)
+      game.roll(3)
+      expect(game.frames_total[0]).to eq 19
+    end
   end
 end
