@@ -7,7 +7,8 @@ class ScoreCard
   SECOND_ROLL = 2
   FINAL_ROLL = 3
   LAST_FRAME = 10
-  TEN_PINS_DOWN = 10
+  TEN_PINS = 10
+  ZERO_SCORE = 0
 
   def initialize(frame_class = Frame)
     @frame_class = frame_class
@@ -25,9 +26,7 @@ class ScoreCard
   def score
     score = 0
     @frames.each do |frame_no, frame|
-      if frame_no == LAST_FRAME
-        score += process_frame(frame_no, frame)
-      elsif frame.frame_complete?
+      if frame_no == LAST_FRAME || frame.frame_complete?
         score += process_frame(frame_no, frame)
       end
     end
@@ -42,7 +41,7 @@ class ScoreCard
     elsif frame.spare_frame?
       spare_points(frame_no)
     else
-      frame.roll_score(FIRST_ROLL).to_i + frame.roll_score(SECOND_ROLL).to_i
+      frame.roll_score(FIRST_ROLL) + frame.roll_score(SECOND_ROLL)
     end
   end
 
@@ -62,25 +61,25 @@ class ScoreCard
   def strike_points(frame_no)
     if frame_no == LAST_FRAME
       last_frame = @frames[frame_no]
-      return 10 + last_frame.roll_score(SECOND_ROLL) + last_frame.roll_score(FINAL_ROLL)
+      return TEN_PINS + last_frame.roll_score(SECOND_ROLL) + last_frame.roll_score(FINAL_ROLL)
     end
 
     if @frames.key?(frame_no + 1)
       next_frame = @frames[frame_no + 1]
       # 2 rolls for this frame?
-      if next_frame.roll_score(SECOND_ROLL); return 10 + next_frame.roll_score(FIRST_ROLL) + next_frame.roll_score(SECOND_ROLL);end
-      if @frames.key?(frame_no + 2); return 10 + next_frame.roll_score(FIRST_ROLL) + @frames[frame_no + 2].roll_score(FIRST_ROLL); end
+      if next_frame.roll_score(SECOND_ROLL); return TEN_PINS + next_frame.roll_score(FIRST_ROLL) + next_frame.roll_score(SECOND_ROLL);end
+      # Look ahead to next next frame
+      if @frames.key?(frame_no + 2); return TEN_PINS + next_frame.roll_score(FIRST_ROLL) + @frames[frame_no + 2].roll_score(FIRST_ROLL); end
     end
-    # Nothing to match on..
-    0
+    # Nothing to match on..yet
+    ZERO_SCORE
   end
 
   def spare_points(frame_no)
     if frame_no == LAST_FRAME
-      last_frame = @frames[frame_no]
-      last_frame.roll_score(FINAL_ROLL) + TEN_PINS_DOWN
+      @frames[frame_no].roll_score(FINAL_ROLL) + TEN_PINS
     else
-      @frames.key?(frame_no + 1) ? @frames[frame_no + 1].roll_score(FIRST_ROLL) + TEN_PINS_DOWN : 0
+      @frames.key?(frame_no + 1) ? @frames[frame_no + 1].roll_score(FIRST_ROLL) + TEN_PINS : ZERO_SCORE
     end
   end
 end

@@ -55,10 +55,11 @@ class Frame
     process_first_roll(pins_downed)
   end
 
-  def process_first_roll(pins_downed)
-    return unless first_roll?
 
-    @rolls[FIRST_ROLL] = pins_downed
+  def process_final_roll(pins_downed)
+    return unless last_roll?
+
+    @rolls[LAST_ROLL] = pins_downed
   end
 
   def process_second_roll(pins_downed)
@@ -67,12 +68,12 @@ class Frame
     @rolls[SECOND_ROLL] = pins_downed
   end
 
-  def process_final_roll(pins_downed)
-    return unless last_roll?
+  def process_first_roll(pins_downed)
+    return unless first_roll?
 
-    @rolls[LAST_ROLL] = pins_downed
+    @rolls[FIRST_ROLL] = pins_downed
   end
-
+  
   def process_frame_type(pins_downed)
     return unless @frame_type.nil?
 
