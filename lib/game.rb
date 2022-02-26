@@ -1,6 +1,7 @@
 class Game
 
   attr_reader :scorecard, :frames_total, :roll_counter, :frame_counter, :spare, :strike
+
   def initialize
     @scorecard = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     @frames_total = [0,0,0,0,0,0,0,0,0,0]
@@ -11,41 +12,23 @@ class Game
   end
 
   def roll(score)
-    if @roll_counter.odd?
-      case score
-      when 10
-        @roll_counter += 2
-        mark_roll_score(score)
-        add_score_to_frame(score)
-        @frame_counter += 1
-        @spare = false
-        @strike = true
-      when 0..9
-        mark_roll_score(score)
-        @roll_counter += 1
-        add_score_to_frame(score)
-        @spare = false
-      end
+    if first_roll_of_frame
+     score == 10 ? its_a_strike(score) : normal_first_role(score)
     else
-      if @frames_total[@frame_counter - 1] + score == 10
-        mark_roll_score(score)
-        @roll_counter += 1
-        add_score_to_frame(score)
-        @frame_counter += 1
-        @spare = true
-        @strike = false
-      else
-        mark_roll_score(score)
-        @roll_counter += 1
-        add_score_to_frame(score)
-        @frame_counter += 1
-        @strike = false
-      end
+      frame_total(score) == 10 ? its_a_spare(score) : normal_second_role(score)
     end
   end
 
 
   private
+
+  def first_roll_of_frame
+    @roll_counter.odd?
+  end
+
+  def frame_total(score)
+    @frames_total[@frame_counter - 1] + score
+  end
 
   def mark_roll_score(score)
     @scorecard[@roll_counter - 1] += score
@@ -53,30 +36,44 @@ class Game
   def add_score_to_frame(score)
     @frames_total[@frame_counter - 1] += score
   end
+  def end_of_frame
+    @frame_counter += 1
+  end
+  def next_roll
+    @roll_counter += 1
+  end
+  def its_a_strike(score)
+    mark_roll_score(score)
+    add_score_to_frame(score)
+    next_roll
+    next_roll
+    end_of_frame
+    @spare = false
+    @strike = true
+  end
+
+  def normal_first_role(score)
+    mark_roll_score(score)
+    add_score_to_frame(score)
+    next_roll
+    @spare = false
+  end
+
+  def its_a_spare(score)
+    mark_roll_score(score)
+    add_score_to_frame(score)
+    next_roll
+    end_of_frame
+    @spare = true
+    @strike = false
+  end
+
+  def normal_second_role(score)
+    mark_roll_score(score)
+    add_score_to_frame(score)
+    next_roll
+    end_of_frame
+    @strike = false
+  end
+
 end
-
-
-# def bowling
-#   p "what was roll_one?"
-#   roll_one = gets.chomp
-#   p roll_one
-#   if roll_one == 10
-#     @strike = true
-#     @frame << roll_one
-#     @frame << 0
-#     @frame.sum
-#   else
-#     @frame << roll_one
-#     p "what was roll two?"
-#     roll_two = gets.chomp
-#     if (roll_two + roll_one) == 10
-#       @frame << roll_two
-#       @spare = true
-#       @frame.sum
-#     else
-#       @frame << roll_two
-#       @frame.sum
-#     end
-#   end
-# end
-# end
