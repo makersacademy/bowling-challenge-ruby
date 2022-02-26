@@ -77,5 +77,10 @@ describe Game do
       game.roll(3)
       expect(game.frames_total[0]).to eq 19
     end
+    it "ends the game at the 20th go if spare and strike equal false" do
+      9.times{ game.roll(10) }
+        game.roll(2)
+        expect(game.roll(3)).to eq "Great game, you scored 260"
+    end
   end
 end

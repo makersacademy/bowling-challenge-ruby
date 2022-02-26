@@ -11,16 +11,7 @@ describe "a bowling match" do
     expect(game.frames_total.sum).to eq 130
   end
   it "a player scores 5 gutter frames in a row" do
-    game.roll(0)
-    game.roll(0)
-    game.roll(0)
-    game.roll(0)
-    game.roll(0)
-    game.roll(0)
-    game.roll(0)
-    game.roll(0)
-    game.roll(0)
-    game.roll(0)
+    20.times{ game.roll(0) }
     expect(game.frames_total.sum).to eq 0
   end
   it "a player scores 5 4's and a 2 and a 10" do

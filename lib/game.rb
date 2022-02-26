@@ -12,12 +12,16 @@ class Game
   end
 
   def roll(score)
+   
     spare_bonus(score)
     strike_bonus(score)
     if first_roll_of_frame
      score == 10 ? its_a_strike(score) : normal_first_role(score)
     else frame_total(score) == 10 ? its_a_spare(score) : normal_second_role(score)
     end
+    p @frames_total.sum
+    p @roll_counter
+    "Great game, you scored #{@frames_total.sum}" if @roll_counter == 21 && @strike == false && @spare == false
   end
 
 
