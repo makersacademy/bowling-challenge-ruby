@@ -5,6 +5,72 @@ require './lib/frame'
 describe Frame do
   subject(:frame) { described_class.new }
 
+  describe "#frame_completed" do
+    it "shows a frame is completed" do
+      frame.log_roll(6)
+      frame.log_roll(3)
+      expect(frame.frame_complete?).to be true
+    end
+
+    it "shows a frame is not completed" do
+      frame.log_roll(6)
+      expect(frame.frame_complete?).to be false
+    end
+
+    it "shows a frame complete after a strike" do
+      frame.log_roll(10)
+      expect(frame.frame_complete?).to be true
+    end
+  end
+
+  describe "#strike_frame?" do
+    it "shows a game as a strike frame" do
+      frame.log_roll(10)
+      expect(frame.strike_frame?).to be true
+    end
+
+    it "shows a game is not a strike frame" do
+      frame.log_roll(9)
+      expect(frame.strike_frame?).to be false
+    end
+
+    it "shows a game is not a strike frame after a spare" do
+      frame.log_roll(9)
+      frame.log_roll(1)
+      expect(frame.strike_frame?).to be false
+    end
+
+    it "shows a game is not a strike frame after an open frame " do
+      frame.log_roll(7)
+      frame.log_roll(2)
+      expect(frame.strike_frame?).to be false
+    end
+  end
+
+  describe "#spare_frame?" do
+    it "shows a game as a spare frame" do
+      frame.log_roll(1)
+      frame.log_roll(9)
+      expect(frame.spare_frame?).to be true
+    end
+
+    it "shows a game is not a spare frame" do
+      frame.log_roll(9)
+      expect(frame.spare_frame?).to be false
+    end
+
+    it "shows a game is not a spare frame after a strike" do
+      frame.log_roll(10)
+      expect(frame.spare_frame?).to be false
+    end
+
+    it "shows a game is not a spare frame after an open frame" do
+      frame.log_roll(7)
+      frame.log_roll(1)
+      expect(frame.spare_frame?).to be false
+    end
+  end
+
   context 'invalid input' do
     it 'does not allow rolls less than 0' do
       expect { frame.log_roll(-1) }.to raise_error('Pins downed must be between 0 and 10')
@@ -18,6 +84,12 @@ describe Frame do
       frame.log_roll(5)
       expect{frame.log_roll(6)}.to raise_error("Pins downed must be between 0 and 5")
     end
+
+    it "does not allow rolls greater than what pins are left, 3rd ball" do
+      frame.log_roll(5)
+      frame.log_roll(5)
+      expect{frame.log_roll(11)}.to raise_error("Pins downed must be between 0 and 10")
+    end
   end
 
   context 'no rolls' do
@@ -27,42 +99,26 @@ describe Frame do
   end
 
   context 'No bonuses' do
-    it 'scores a roll' do
-      frame.log_roll(5)
-      expect(frame.roll_score(1)).to eq 5
-    end
-
-    it 'logged the first roll' do
+    it 'logs the first roll' do
       frame.log_roll(6)
       expect(frame.roll_score(1)).to eq 6
     end
 
-    it 'logged the second roll' do
+    it 'logs the second roll' do
       frame.log_roll(6)
       frame.log_roll(3)
       expect(frame.roll_score(2)).to eq 3
       expect(frame.roll_score(1)).to eq 6
     end
+
   end
 
   context 'With bonuses' do
-    it 'scores a spare on the second roll' do
-      frame.log_roll(3)
-      frame.log_roll(7)
-      expect(frame.spare_frame?).to be true
-    end
-
     it 'scores a spare on the second roll if first roll zero' do
       frame.log_roll(0)
       frame.log_roll(10)
       expect(frame.roll_score(2)).to eq 10
       expect(frame.spare_frame?).to be true
-    end
-
-    it 'scores a strike on the first roll' do
-      frame.log_roll(10)
-      expect(frame.roll_score(1)).to eq 10
-      expect(frame.strike_frame?).to be true
     end
 
     it 'scores two strikes on 2 rolls' do
@@ -83,13 +139,16 @@ describe Frame do
       expect(frame.strike_frame?).to be true
     end
 
-    xit 'scores spare and strikes over 3 rolls' do
+    it 'scores spare and strikes over 3 rolls' do
       frame.log_roll(3)
       frame.log_roll(7)
       frame.log_roll(10)
       expect(frame.roll_score(1)).to eq 3
-      expect(frame.roll_score(2)).to eq :spare
-      expect(frame.roll_score(3)).to eq :strike
+      expect(frame.roll_score(2)).to eq 7
+      expect(frame.spare_frame?).to be true
+      expect(frame.roll_score(3)).to eq 10
+      expect(frame.spare_frame?).to be true
+      expect(frame.strike_frame?).to be false
     end
   end
 end
