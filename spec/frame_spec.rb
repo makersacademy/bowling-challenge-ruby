@@ -90,6 +90,12 @@ describe Frame do
       frame.log_roll(5)
       expect { frame.log_roll(11) }.to raise_error('Pins downed must be between 0 and 10')
     end
+
+    it 'raises an error if the frame is completed and a roll is logged against the frame' do
+      frame.log_roll(5)
+      frame.log_roll(5)
+      expect { frame.log_roll(5) }.to raise_error('Frame complete. Cannot roll again')
+    end
   end
 
   context 'no rolls' do
@@ -118,36 +124,6 @@ describe Frame do
       frame.log_roll(10)
       expect(frame.roll_score(2)).to eq 10
       expect(frame.spare_frame?).to be true
-    end
-
-    it 'scores two strikes on 2 rolls' do
-      frame.log_roll(10)
-      frame.log_roll(10)
-      expect(frame.roll_score(1)).to eq 10
-      expect(frame.roll_score(2)).to eq 10
-      expect(frame.strike_frame?).to be true
-    end
-
-    it 'scores threes strikes on 3 rolls' do
-      frame.log_roll(10)
-      frame.log_roll(10)
-      frame.log_roll(10)
-      expect(frame.roll_score(1)).to eq 10
-      expect(frame.roll_score(2)).to eq 10
-      expect(frame.roll_score(3)).to eq 10
-      expect(frame.strike_frame?).to be true
-    end
-
-    it 'scores spare and strikes over 3 rolls' do
-      frame.log_roll(3)
-      frame.log_roll(7)
-      frame.log_roll(10)
-      expect(frame.roll_score(1)).to eq 3
-      expect(frame.roll_score(2)).to eq 7
-      expect(frame.spare_frame?).to be true
-      expect(frame.roll_score(3)).to eq 10
-      expect(frame.spare_frame?).to be true
-      expect(frame.strike_frame?).to be false
     end
   end
 end

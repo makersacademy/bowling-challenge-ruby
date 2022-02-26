@@ -13,7 +13,8 @@ class Frame
 
   def log_roll(pins_downed)
     raise 'Pins downed must be between 0 and 10' if invalid_pins?(pins_downed)
-
+    raise 'Frame complete. Cannot roll again' if frame_complete?
+    process_frame_type(pins_downed)
     process_roll(pins_downed)
   end
 
@@ -50,16 +51,9 @@ class Frame
   end
 
   def process_roll(pins_downed)
-    process_frame_type(pins_downed)
-    process_final_roll(pins_downed)
+    #process_final_roll(pins_downed)
     process_second_roll(pins_downed)
     process_first_roll(pins_downed)
-  end
-
-  def process_final_roll(pins_downed)
-    return unless last_roll?
-
-    @rolls[LAST_ROLL] = pins_downed
   end
 
   def process_second_roll(pins_downed)
@@ -81,13 +75,6 @@ class Frame
     @frame_type = :strike if pins_downed == TEN_PINS && first_roll?
     @frame_type = :spare if second_roll? && pins_downed + @rolls[FIRST_ROLL] == TEN_PINS
     @frame_type = :open_frame if second_roll? && pins_downed + @rolls[FIRST_ROLL] != TEN_PINS
-  end
-
-  def last_roll?
-    return false if second_roll?
-    return false if first_roll?
-
-    @rolls[LAST_ROLL].nil?
   end
 
   def second_roll?

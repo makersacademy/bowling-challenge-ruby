@@ -8,9 +8,34 @@ class LastFrame < Frame
     super
   end
 
+  def log_roll(pins_downed)
+    raise 'Pins downed must be between 0 and 10' if invalid_pins?(pins_downed)
+    raise 'Frame complete. Cannot roll again' if frame_complete?
+    process_frame_type(pins_downed)
+    process_roll(pins_downed)
+  end
+
   private
+
+  def process_roll(pins_downed)
+    process_final_roll(pins_downed)
+    super
+  end
+  
+  def last_roll?
+    return false if second_roll?
+    return false if first_roll?
+
+    @rolls[LAST_ROLL].nil?
+  end
 
   def bonus_frame?
     strike_frame? || spare_frame?
+  end
+
+  def process_final_roll(pins_downed)
+    return unless last_roll?
+
+    @rolls[LAST_ROLL] = pins_downed
   end
 end
