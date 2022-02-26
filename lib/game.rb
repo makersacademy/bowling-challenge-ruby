@@ -79,11 +79,16 @@ class Game
   end
 
   def strike_bonus(score)
-    @frames_total[@frame_counter - 2] += score if @strike == true
+    add_score_to_previous_frame_total(score) if @strike == true && @scorecard[@roll_counter - 3] == 10 && score == 10
+    add_score_to_previous_frame_total(score) if @strike == true
   end
 
   def spare_bonus(score)
-    @frames_total[@frame_counter - 2] += score if @spare == true
+    add_score_to_previous_frame_total(score) if @spare == true
+  end
+
+  def add_score_to_previous_frame_total(score)
+    @frames_total[@frame_counter - 2] += score 
   end
 
 end
