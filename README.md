@@ -17,7 +17,8 @@ $> bundle install
 ~~~~
 To install code from the latest source
 ~~~~
-git@github.com:nyahehnagi/bowling-challenge-ruby.git
+git clone git@github.com:nyahehnagi/bowling-challenge-ruby.git
+~~~~
 
 ## Testing
 -----------------------
