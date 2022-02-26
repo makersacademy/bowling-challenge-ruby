@@ -4,15 +4,21 @@ class Bowlinggame
     @rolls = []
   end
 
-  def pins(pin_number)
-    @rolls << pin_number
+  def roll(pin)
+    @rolls.push pin
 
   end
 
   def score
-
-    0 
-
+   #retult is score_counter
+    score_counter = 0
+    rollIndex = 0
+    20.times do     
+    score_counter += @rolls[rollIndex].to_i
+    rollIndex += 1
+   
+  end
+  score_counter
   end
 
 end

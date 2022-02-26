@@ -1,3 +1,8 @@
+# My Bowling Game Challenge
+
+My attempt at creating a score card for a bowling game using Ruby. With reference to: 
+https://www.youtube.com/watch?v=wrr16PdgHPM
+
 Bowling Challenge in Ruby
 =================
 
