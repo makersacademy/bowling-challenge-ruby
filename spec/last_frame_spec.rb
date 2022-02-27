@@ -48,7 +48,7 @@ describe LastFrame do
     it 'scores two strikes on 2 rolls' do
       frame.log_roll(10)
       frame.log_roll(10)
-      expect(frame.all_rolls).to eq [10,10]
+      expect(frame.all_rolls).to eq [10, 10]
     end
 
     it 'scores threes strikes on 3 rolls' do
@@ -56,14 +56,14 @@ describe LastFrame do
       frame.log_roll(10)
       frame.log_roll(10)
       frame.all_rolls
-      expect(frame.all_rolls).to eq [10,10,10]
+      expect(frame.all_rolls).to eq [10, 10, 10]
     end
 
     it 'scores spare and strikes over 3 rolls' do
       frame.log_roll(3)
       frame.log_roll(7)
       frame.log_roll(10)
-      expect(frame.all_rolls).to eq [3,7,10]
+      expect(frame.all_rolls).to eq [3, 7, 10]
     end
   end
 

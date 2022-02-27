@@ -23,11 +23,19 @@ describe Frame do
     end
   end
 
-  describe "#sum_frame" do
-    it "sums a frame" do
+  describe '#sum_frame' do
+    it 'sums a frame' do
       frame.log_roll(6)
       frame.log_roll(3)
       expect(frame.sum_frame).to eq 9
+    end
+  end
+
+  describe '#open_frame' do
+    it 'is an open frame' do
+      frame.log_roll(6)
+      frame.log_roll(3)
+      expect(frame.open_frame?).to be true
     end
   end
 
@@ -121,7 +129,7 @@ describe Frame do
       it 'logs the second roll' do
         frame.log_roll(6)
         frame.log_roll(3)
-        expect(frame.all_rolls).to eq [6,3]
+        expect(frame.all_rolls).to eq [6, 3]
       end
     end
 
@@ -129,7 +137,7 @@ describe Frame do
       it 'scores a spare on the second roll if first roll zero' do
         frame.log_roll(0)
         frame.log_roll(10)
-        expect(frame.all_rolls).to eq [0,10]
+        expect(frame.all_rolls).to eq [0, 10]
       end
     end
   end

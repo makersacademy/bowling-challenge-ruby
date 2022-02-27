@@ -39,6 +39,10 @@ class Frame
     @frame_type == :spare
   end
 
+  def open_frame?
+    @frame_type == :open
+  end
+
   private
 
   def invalid_roll?(roll)
@@ -82,7 +86,7 @@ class Frame
 
     @frame_type = :strike if pins_downed == TEN_PINS && first_roll?
     @frame_type = :spare if second_roll? && pins_downed + @rolls[FIRST_ROLL] == TEN_PINS
-    @frame_type = :open_frame if second_roll? && pins_downed + @rolls[FIRST_ROLL] != TEN_PINS
+    @frame_type = :open if second_roll? && pins_downed + @rolls[FIRST_ROLL] != TEN_PINS
   end
 
   def second_roll?

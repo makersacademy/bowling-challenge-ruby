@@ -26,7 +26,7 @@ class ScoreCard
   end
 
   def score
-    @frames.map { |frame_no, frame| current_frame_score(frame_no, frame)}.sum
+    @frames.map { |frame_no, frame| current_frame_score(frame_no, frame) }.sum
   end
 
   private
@@ -35,16 +35,15 @@ class ScoreCard
     @frames.count == LAST_FRAME && @frames[LAST_FRAME].frame_complete?
   end
 
+  def last_frame_next?
+    @frames.count + 1 == LAST_FRAME
+  end
+
   def current_frame_score(frame_no, frame)
     return 0 unless frame.frame_complete?
+    return frame.sum_frame if frame.open_frame?
 
-    if frame.strike_frame?
-      strike_points(frame_no)
-    elsif frame.spare_frame?
-      spare_points(frame_no)
-    else
-      frame.sum_frame
-    end
+    process_bonus_frame(frame, frame_no)
   end
 
   def current_frame
@@ -62,25 +61,21 @@ class ScoreCard
     false
   end
 
-  def last_frame_next?
-    @frames.count + 1 == LAST_FRAME
+  def process_bonus_frame(frame, frame_no)
+    bonus_type = strike_or_spare(frame)
+    bonus_points(frame_no, bonus_type).positive? ? TEN_PINS + bonus_points(frame_no, bonus_type) : ZERO_SCORE
   end
 
-  def strike_points(frame_no)
-    bonus_points(frame_no, STRIKE).positive? ? TEN_PINS + bonus_points(frame_no, STRIKE) : ZERO_SCORE
-  end
-
-  def spare_points(frame_no)
-    bonus_points(frame_no, SPARE).positive? ? bonus_points(frame_no, SPARE) + TEN_PINS : ZERO_SCORE
+  def strike_or_spare(frame)
+    frame.strike_frame? ? STRIKE : SPARE
   end
 
   def bonus_points(frame_no, rolls_ahead)
     frames_ahead = @frames.select { |frame_key, _frame| frame_key >= frame_no }
-    frame_scores = frames_ahead.map { |frame_key, frame| frame.all_rolls }.flatten
+    
+    frame_scores = frames_ahead.map { |_frame_key, frame| frame.all_rolls }.flatten
 
     frame_scores = rolls_ahead == SPARE ? frame_scores.drop(2) : frame_scores.drop(1)
-
     frame_scores.first(rolls_ahead).count == rolls_ahead ? frame_scores.first(rolls_ahead).sum : ZERO_SCORE
   end
-
 end
