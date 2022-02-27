@@ -1,6 +1,6 @@
 require 'frame'
 
-class Game
+class Scoreboard
 
   attr_accessor :game_score
 
