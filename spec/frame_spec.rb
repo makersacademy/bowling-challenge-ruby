@@ -23,6 +23,14 @@ describe Frame do
     end
   end
 
+  describe "#sum_frame" do
+    it "sums a frame" do
+      frame.log_roll(6)
+      frame.log_roll(3)
+      expect(frame.sum_frame).to eq 9
+    end
+  end
+
   describe '#strike_frame?' do
     it 'shows a game as a strike frame' do
       frame.log_roll(10)

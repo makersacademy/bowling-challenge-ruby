@@ -3,9 +3,6 @@
 require 'frame'
 
 class ScoreCard
-  FIRST_ROLL = 1
-  SECOND_ROLL = 2
-  FINAL_ROLL = 3
   LAST_FRAME = 10
   TEN_PINS = 10
   ZERO_SCORE = 0
@@ -44,7 +41,7 @@ class ScoreCard
     elsif frame.spare_frame?
       spare_points(frame_no)
     else
-      frame.all_rolls.sum
+      frame.sum_frame
     end
   end
 
@@ -69,7 +66,7 @@ class ScoreCard
 
   def strike_points(frame_no)
     if frame_no == LAST_FRAME
-      return @frames[frame_no].all_rolls.sum
+      return @frames[frame_no].sum_frame
     end
 
     bonus_points(frame_no, 2).positive? ? TEN_PINS + bonus_points(frame_no, 2) : ZERO_SCORE
@@ -77,7 +74,7 @@ class ScoreCard
 
   def spare_points(frame_no)
     if frame_no == LAST_FRAME
-      @frames[frame_no].all_rolls.sum
+      @frames[frame_no].sum_frame
     else
       bonus_points(frame_no, 1).positive? ? bonus_points(frame_no, 1) + TEN_PINS : ZERO_SCORE
     end
@@ -93,4 +90,5 @@ class ScoreCard
 
     frame_scores.flatten.first(rolls_ahead).count == rolls_ahead ? frame_scores.flatten.first(rolls_ahead).sum : 0
   end
+
 end

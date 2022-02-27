@@ -19,6 +19,10 @@ class Frame
     process_roll(pins_downed)
   end
 
+  def sum_frame
+    @rolls.sum
+  end
+
   def all_rolls
     @rolls
   end
