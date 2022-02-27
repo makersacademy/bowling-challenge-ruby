@@ -16,18 +16,36 @@ class Game
     p @rolls
   end
 
-  def score
-    #@rolls.reduce(:+)  
+  def score 
     result = 0
     rollindex = 0
     10.times do
-      if @rolls[rollindex] + @rolls[rollindex + 1] == 10
+      if @rolls[rollindex] == 10
         result += @rolls[rollindex] + @rolls[rollindex + 1] + @rolls[rollindex + 2]
+        rollindex += 1
+      elsif spare? rollindex
+        result += spareScore rollindex
+        rollindex += 2
       else
-        result += @rolls[rollindex] + @rolls[rollindex + 1]
+        result += frameScore rollindex
+        rollindex += 2
       end
-      rollindex += 2
     end
     result
   end
+
+  def spare? rollindex
+    @rolls[rollindex] + @rolls[rollindex + 1] == 10
+  end
+
+  def spareScore rollindex
+    @rolls[rollindex] + @rolls[rollindex + 1] + @rolls[rollindex + 2]
+  end
+
+  def frameScore rollindex
+    @rolls[rollindex] + @rolls[rollindex + 1]
+  end
+
+
+
 end
