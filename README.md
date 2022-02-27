@@ -71,3 +71,7 @@ Before attempting the challenge, I created a table to incorporate the main bits 
 
 <img src='./images/bowling_challenge_table.png'>
 
+### Main things to remember about the game
+
+- every frame will look like one of the following scenarios: 1) 'X' (which is a strike), 2) a number and then a '/' (to show a roll first, then a spare) and 3) a numerical value -ab- (roll 1 (a) and 2 (b) points being added together if player did not score a strike or spare).
+- for 9 frames, the player gets a maximum of 2 rolls, this changes in the 10th frame if player scores a strike or spare.
