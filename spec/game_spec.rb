@@ -11,10 +11,10 @@ describe Game  do
     end
 
     describe 'end game'  do
-        it 'ends the game after 3 rolls, and returns the final score' do
+        it 'ends the game after max rolls, and returns the final score' do
             ((Game::FRAME_MAX * 2) - 1).times{subject.roll(1)}
             
-             expect(subject.roll(1)).to eq "The game is finished - you scored 10 points"
+             expect(subject.roll(1)).to eq "The game is finished - you scored 20 points"
         end
 
         it 'errors if any further rolls are attempted' do
@@ -95,14 +95,22 @@ describe Game  do
             ((Game::FRAME_MAX * 2) - 2).times{subject.roll(1)}
             subject.roll(1)
             subject.roll(9)
-        expect(subject.roll(1)).to eq "The game is finished - you scored 19 points"
+        expect(subject.roll(1)).to eq "The game is finished - you scored 29 points"
         end
 
         it 'give a two bonus roll on final frame if a strike' do
             ((Game::FRAME_MAX * 2) - 2).times{subject.roll(1)}
             subject.roll(10)
             subject.roll(10)
-            expect(subject.roll(10)).to eq "The game is finished - you scored 38 points"
+            expect(subject.roll(10)).to eq "The game is finished - you scored 48 points"
+        end
+    end
+
+    describe 'a perfect game' do
+      it 'returns a finishing message and 300 when a perfect game is bowled' do
+        11.times{subject.roll(10)}
+
+        expect(subject.roll(10)).to eq "The game is finished - you scored 300 points"
         end
     end
 end

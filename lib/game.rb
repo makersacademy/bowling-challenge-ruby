@@ -1,7 +1,7 @@
 class Game
 
     attr_reader :score, :frame_counter
-    FRAME_MAX = 5
+    FRAME_MAX = 10
     BONUS_VALUE = 10
 
     def initialize
@@ -20,16 +20,18 @@ class Game
         bonus_determiner
     end
 
+    private
+
     def bonus_determiner
-        @length = @results.length
+        @length = (@results.length) - 1
         return spare_bonus if @spare_counter == 1
-        return strike_bonus if @results[@length - 3] == 10 && @length >= 3
+        return strike_bonus if @results[@length - 2] == BONUS_VALUE && @length >= 2
         frame_determiner
     end
 
 
     def frame_determiner
-        return strike_frame if @results[@length - 1] == BONUS_VALUE
+        return strike_frame if @results[@length] == BONUS_VALUE
         return nil if @frame.length < 2
         return spare_frame if @frame.sum == BONUS_VALUE
         frame_result
@@ -50,13 +52,13 @@ class Game
     end
 
     def strike_bonus
-        @score += BONUS_VALUE + @results[@length - 1] + @results[@length - 2]
+        @score += BONUS_VALUE + @results[@length] + @results[@length - 1]
         frame_determiner
     end
 
     def bonus_ball_strike
         @frame_counter -= 2
-        @extra_roll = 2
+        @extra_roll = 1
     end
 
     def spare_frame
@@ -68,7 +70,7 @@ class Game
     end
 
     def spare_bonus
-        @score += BONUS_VALUE + @results[@length - 1]
+        @score += BONUS_VALUE + @results[@length]
         @spare_counter = 0
         return frame_determiner if @extra_roll == 0
         @frame_counter += 1
@@ -83,9 +85,9 @@ class Game
 
     def running_score
       return "The game is finished - you scored #{@score} points" if @frame_counter == FRAME_MAX
-      return "Strike! Your score after frame #{@frame_counter} is #{@score}" if @results[@length - 1] == BONUS_VALUE
+      return "Strike! Your score after frame #{@frame_counter} is #{@score}" if @results[@length] == BONUS_VALUE
       return "Spare! Your score after frame #{@frame_counter} is #{@score}" if @spare_counter == 1
-      return"Your score after frame #{@frame_counter} is #{@score}"
+      return "Your score after frame #{@frame_counter} is #{@score}"
     end
 
 end
