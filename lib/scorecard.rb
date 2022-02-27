@@ -15,4 +15,8 @@ class ScoreCard
     @frames.count
   end
 
+  def roll(pin_count)
+    
+  end
+
 end

@@ -12,4 +12,9 @@ describe ScoreCard do
     expect(scorecard.frame_number).to eq 0
   end
 
+  it "knows a gutter ball on the first roll of the first game scores zero" do
+    scorecard.roll(0)
+    expect(scorecard.score).to eql(0)
+  end
+
 end
