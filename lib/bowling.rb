@@ -11,12 +11,17 @@ class Bowling
   def score
     result = 0 
     rollIndex = 0
-    20.times do 
-      result += @rolls[rollIndex]
-      rollIndex += 1
+    10.times do 
+      if @rolls[rollIndex] + @rolls[rollIndex + 1] == 10
+        result += @rolls[rollIndex] + @rolls[rollIndex + 1] + @rolls[rollIndex + 2]
+      else
+        result += @rolls[rollIndex] + @rolls[rollIndex + 1]
+      end
+      rollIndex += 2
     end
     result
   end
+
 
 
 end
