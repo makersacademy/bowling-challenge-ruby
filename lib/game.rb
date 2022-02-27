@@ -20,8 +20,8 @@ class Game
     result = 0
     rollindex = 0
     10.times do
-      if @rolls[rollindex] == 10
-        result += @rolls[rollindex] + @rolls[rollindex + 1] + @rolls[rollindex + 2]
+      if strike? rollindex
+        result += strikeScore rollindex
         rollindex += 1
       elsif spare? rollindex
         result += spareScore rollindex
@@ -38,13 +38,22 @@ class Game
     @rolls[rollindex] + @rolls[rollindex + 1] == 10
   end
 
-  def spareScore rollindex
-    @rolls[rollindex] + @rolls[rollindex + 1] + @rolls[rollindex + 2]
+  def strike? rollindex
+    @rolls[rollindex]  == 10
   end
 
   def frameScore rollindex
     @rolls[rollindex] + @rolls[rollindex + 1]
   end
+
+  def spareScore rollindex
+    @rolls[rollindex] + @rolls[rollindex + 1] + @rolls[rollindex + 2]
+  end
+
+  def strikeScore rollindex
+    @rolls[rollindex] + @rolls[rollindex + 1] + @rolls[rollindex + 2]
+  end
+  
 
 
 
