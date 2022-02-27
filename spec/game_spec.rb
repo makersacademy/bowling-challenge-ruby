@@ -11,21 +11,23 @@ describe Game  do
     end
 
     describe 'end game'  do
-        it 'ends the game after 3 rolls, and retruns the final score' do
+        it 'ends the game after 3 rolls, and returns the final score' do
             ((Game::FRAME_MAX * 2) - 1).times{subject.roll(1)}
             
-        expect(subject.roll(1)).to eq "The game is finished - you scored 6 points"
+             expect(subject.roll(1)).to eq "The game is finished - you scored 8 points"
         end
 
         it 'errors if any further rolls are attempted' do
             (Game::FRAME_MAX * 2).times{subject.roll(1)}
-        expect{ subject.roll(4) }.to raise_error 'This game is over'
+
+            expect{ subject.roll(4) }.to raise_error 'This game is over'
         end
     end
 
     describe 'frame scoring' do
         it 'accepts inputs in pairs and generates scores in frames' do
             subject.roll(1)
+
             expect(subject.roll(2)).to eq 'Your score after frame 1 is 3'
             expect(subject.frame_counter).to eq 1
         end
@@ -66,5 +68,27 @@ describe Game  do
             subject.roll(0)
             expect(subject.score).to eq 22
         end
+    end
+
+    describe 'strike bonus' do
+        it 'adds the correct bonus when a strike is scored' do
+            subject.roll(1)
+            subject.roll(1)
+            subject.roll(10)
+            subject.roll(1)
+            subject.roll(1)
+            expect(subject.score).to eq 16
+        end
+
+        it 'handles consecutive strikes with the correct bonus' do
+            subject.roll(10)
+            subject.roll(10)
+            subject.roll(10)
+            subject.roll(0)
+            subject.roll(9)
+            expect(subject.score).to eq 78
+        end
+
+        
     end
 end
