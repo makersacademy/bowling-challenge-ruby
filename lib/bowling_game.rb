@@ -14,19 +14,31 @@ class Bowlinggame
     rollindex = 0
     # rollIndex - count the number in the array
    10.times do
-      if @rolls[rollindex].to_i + @rolls[rollindex + 1].to_i == 10
-        score_counter += @rolls[rollindex].to_i + @rolls[rollindex + 1].to_i + @rolls[rollindex + 2].to_i
+      if spare?(rollindex)
+        score_counter += spare_score(rollindex)
 
       else
-       score_counter += @rolls[rollindex].to_i + @rolls[rollindex + 1].to_i
+       score_counter += overall_score(rollindex)
       end
       rollindex += 2
     end
     score_counter
   end
 
-  # def spare?(rolli)
-  # def spare
+  def spare?(rollindex)
+  
+    @rolls[rollindex].to_i + @rolls[rollindex + 1].to_i == 10
 
-  # end
+  end
+
+  def spare_score(rollindex)
+    @rolls[rollindex].to_i + @rolls[rollindex + 1].to_i + @rolls[rollindex + 2].to_i
+  end
+
+def overall_score(rollindex)
+  @rolls[rollindex].to_i + @rolls[rollindex + 1].to_i
+end
+
+
+
 end
