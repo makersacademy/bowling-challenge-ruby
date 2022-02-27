@@ -63,3 +63,15 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+My attempt at the bowling challenge.
+=================
+
+Before attempting the challenge, I created a table to incorporate the main bits of information about the bowling game. This consists of the idea of strikes and spares, as well as scenarios which may occur in the game. The ones I have included are rolling a strike/spare in the 10th frame, a gutter game and the perfect game. There are many other scenarios which can occur in this game, however these are the main ones I have included. I have attached the table below. 
+
+<img src='./images/bowling_challenge_table.png'>
+
+### Main things to remember about the game
+
+- for 9 frames, the player gets a maximum of 2 rolls, this changes in the 10th frame if player scores a strike or spare.
+- maximum amount of possible rolls in a game is 21.
