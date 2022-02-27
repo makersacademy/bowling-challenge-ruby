@@ -91,12 +91,18 @@ describe Game  do
     end
 
     describe 'final frame bonus'  do
-        it 'gives a bonus throw on final frame if a spare' do
+        it 'gives a bonus roll on final frame if a spare' do
             ((Game::FRAME_MAX * 2) - 2).times{subject.roll(1)}
             subject.roll(1)
             subject.roll(9)
         expect(subject.roll(1)).to eq "The game is finished - you scored 19 points"
         end
+
+        it 'give a two bonus roll on final frame if a strike' do
+            ((Game::FRAME_MAX * 2) - 2).times{subject.roll(1)}
+            subject.roll(10)
+            subject.roll(10)
+            expect(subject.roll(10)).to eq "The game is finished - you scored 38 points"
+        end
     end
- 
 end

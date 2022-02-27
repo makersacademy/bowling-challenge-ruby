@@ -49,6 +49,7 @@ class Game
     def strike_frame
         @frame_counter += 1
         @frame = []
+        return bonus_ball_strike if @frame_counter == FRAME_MAX && @extra_roll == 0
         running_score
     end
 
@@ -57,11 +58,16 @@ class Game
         frame_determiner
     end
 
+    def bonus_ball_strike
+        @frame_counter -= 2
+        @extra_roll = 2
+    end
+
     def spare_frame
         @spare_counter += 1
         @frame_counter += 1
         @frame = []
-        return bonus_ball unless @frame_counter != FRAME_MAX
+        return bonus_ball_spare unless @frame_counter != FRAME_MAX
         running_score
     end
 
@@ -73,7 +79,7 @@ class Game
         running_score
     end
 
-    def bonus_ball
+    def bonus_ball_spare
         @frame_counter -= 1
         @extra_roll = 1
     end
