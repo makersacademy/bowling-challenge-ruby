@@ -3,6 +3,7 @@ require 'simplecov-console'
 require 'rspec'
 require_relative '../lib/player'
 require_relative '../lib/frame'
+require_relative '../lib/game'
 
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

@@ -3,8 +3,8 @@ describe Frame do
 
   describe '#first_roll' do
     it 'determines if a second roll is required' do
-      frame.first_roll(2)
-      expect(frame.pinfall[:roll1]).to eq 2
+      
+      expect(frame.first_roll(2)).to eq 'Player to roll again'
     end
   end
 

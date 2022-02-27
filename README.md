@@ -3,15 +3,17 @@ Bowling Challenge in Ruby
 ## The Task
 Count and sum the scores of a bowling game for one player.
 
-## The Rules
-* A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. 
-* In every frame the player can roll one or two times. The actual number depends on strikes and spares. 
-* The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. 
-* After every frame the 10 pins are reset.
+## How to use:
+-------
+* Clone this repo.
+* Run the command 'bundle' in the project directory to ensure you have all the gems.
+* Run tests with RSpec.
+* Run tests with Rubocop.
+* Run with irb in terminal, `require './lib/frame'` to test some frames by inputting the scores. For example `frame.first_roll(4)` ...
 
 ## Process
 
-![domain model](images/domain_model_02.png)
+![domain model](images/domain_model_03.png)
 =================
 
 ![class model](images/class_diagram_01.png)
@@ -44,7 +46,8 @@ Spare
 -  => [{:roll1=>4, :roll2=>6, :bonus_points=>4}, {:roll1=>4, :roll2=>6}] 
 - 3.0.0 :008 > 
 
-
+Work in progress
+- I have written a test to start looking at playing a full game of bowling and printing a scoresheet. I have started writing a test, but I need to think more about how I want to display the info. When I have more time I will pick it up from here.
 
 ## The Task
 
