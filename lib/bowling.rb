@@ -21,6 +21,7 @@ class Bowling
     end
     # p frame_scores
     frame_scores.each { |scores| @total_score += scores.sum }
+    total_score
   end
 
   def strike?(frame)
