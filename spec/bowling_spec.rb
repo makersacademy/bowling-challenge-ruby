@@ -47,6 +47,15 @@ describe Bowling do
         expect(game.total_score).to eq 300
       end
     end
+    context 'when a player gets all spares' do
+      before do
+        @frame_scores = [[8,2],[8,2],[8,2],[8,2],[8,2],[8,2],[8,2],[8,2],[8,2],[8,2],[8,0]]
+      end
+      it 'returns the correct score of 180' do
+        game.total_frames(@frame_scores)
+        expect(game.total_score).to eq 180
+      end
+    end
   end
   # describe '#frame_score' do
   #   it 'saves the score from the two rolls in a frame to the total score' do

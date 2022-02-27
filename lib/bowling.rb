@@ -9,7 +9,7 @@ class Bowling
 
   def total_frames(frame_scores)
     raise "Minimum of 10 frames must be entered" if frame_scores.count < 10
-    frame_scores.each.with_index do |frame, index|
+    frame_scores.map.with_index do |frame, index|
       unless index == 9 || index == 10 || index == 11
         if frame[0] == 10 && frame_scores[index+1][0] == 10
           frame_scores[index] = [frame[0],((frame_scores[index+1].sum)+(frame_scores[index+2].sum))]
