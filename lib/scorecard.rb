@@ -2,6 +2,7 @@ class Scorecard
 
     def initialize
       @rolls = []
+      @score = 0
     end
 
     def roll(pins)
@@ -11,5 +12,10 @@ class Scorecard
     def score
       @rolls.reduce(:+)
     end
+
+    def strike?(frame)
+      frame.any? { |n| n == 10 }
+    end
+  
 
 end
