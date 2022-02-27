@@ -15,11 +15,6 @@ describe Scorecard do
         expect(scorecard.score).to eq 0
       end
 
-      it 'can roll a gutter game' do
-        20.times { scorecard.roll(0) }
-        expect(scorecard.score).to eq 0
-      end
-
       it 'can roll all 1s' do
         20.times { scorecard.roll(1) }
         expect(scorecard.score).to eq 20
@@ -28,6 +23,16 @@ describe Scorecard do
       it 'can roll all 2s' do
         20.times { scorecard.roll(2) }
         expect(scorecard.score).to eq 40
+      end
+
+      it 'can roll a gutter game' do
+        20.times { scorecard.roll(0) }
+        expect(scorecard.score).to eq 0
+      end
+
+      it 'can score a perfect game of 300 points' do
+        12.times { scorecard.roll(10) }
+        expect(scorecard.perfect_game).to eq 300
       end
 
     end
@@ -51,17 +56,4 @@ describe Scorecard do
         expect(scorecard.spare?([5, 3])).to eq false
       end
     end
-
-    #   it 'can score a perfect game of 300 points' do
-    #     12.times { scorecard.roll(10) }
-    #     expect(scorecard.score).to eq 300
-    #   end
-
-
 end
- #   it 'can roll a spare, followed by a 2' do
-    #     2.times { scorecard.roll(5) }
-    #     scorecard.roll(2)
-    #     scorecard.roll(0)
-    #     expect(scorecard.score).to eq 14
-    #   end

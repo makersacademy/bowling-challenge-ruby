@@ -1,5 +1,7 @@
 class Scorecard
 
+    PERFECT_GAME = 300
+
     def initialize
       @rolls = []
       @score = 0
@@ -19,6 +21,10 @@ class Scorecard
 
     def spare?(frame)
       frame.sum == 10
+    end
+
+    def perfect_game
+      PERFECT_GAME
     end
   
 
