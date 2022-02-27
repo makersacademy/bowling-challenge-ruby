@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../lib/bowling_game'
 
 describe Bowlinggame do
@@ -13,17 +15,16 @@ describe Bowlinggame do
       20.times { game.roll 1 }
       expect(game.score).to eq 20
     end
-  
 
-  it 'can roll a spare' do
-    game = Bowlinggame.new
-    game.roll 5
-    game.roll 3
-    game.roll 5
-    17.times { game.roll 1}
-    expect(game.score).to eq 16
+    it 'can roll a spare' do
+      game = Bowlinggame.new
+      game.roll 5
+      game.roll 3
+      game.roll 5
+      17.times { game.roll 1 }
+      expect(game.score).to eq 16
+    end
   end
-end
   # now to create a spare method
   # do this by creating a new game
   # then how many rolls

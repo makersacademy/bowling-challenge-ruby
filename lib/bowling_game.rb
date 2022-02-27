@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Bowlinggame
   def initialize
     @rolls = []
@@ -8,26 +10,23 @@ class Bowlinggame
   end
 
   def score
-   
     score_counter = 0
-     rollindex = 0
+    rollindex = 0
     # rollIndex - count the number in the array
-    10.times do
-     score_counter += @rolls[rollindex].to_i + @rolls[rollindex + 1].to_i 
-    
-    rollindex += 2
+   10.times do
+      if @rolls[rollindex].to_i + @rolls[rollindex + 1].to_i == 10
+        score_counter += @rolls[rollindex].to_i + @rolls[rollindex + 1].to_i + @rolls[rollindex + 2].to_i
 
-      # rolls needs to be bought to 10 as the game needs to frame by frame instead of rolls
-      # 10.times and rollIndex needs to be incremented by 2
-      # rolls is the number scored by the player
-      # 
-      # however for a spare the index needs
-      # to add the score from the next roll too
+      else
+       score_counter += @rolls[rollindex].to_i + @rolls[rollindex + 1].to_i
+      end
+      rollindex += 2
     end
-  score_counter
+    score_counter
   end
 
+  # def spare?(rolli)
   # def spare
-  
+
   # end
 end
