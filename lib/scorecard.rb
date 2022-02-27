@@ -22,6 +22,7 @@ class ScoreCard
 
   def log_roll(pins_downed)
     return :game_complete if game_complete?
+
     current_frame.log_roll(pins_downed)
   end
 
@@ -34,6 +35,7 @@ class ScoreCard
   end
 
   private
+
   def game_complete?
     @frames.count == LAST_FRAME && @frames[LAST_FRAME].frame_complete?
   end
@@ -67,28 +69,31 @@ class ScoreCard
     @frames.count + 1 == LAST_FRAME
   end
 
-  # For the sake of readability I have decided not to split this function any further
   def strike_points(frame_no)
     if frame_no == LAST_FRAME
       last_frame = @frames[frame_no]
       return TEN_PINS + last_frame.roll_score(SECOND_ROLL) + last_frame.roll_score(FINAL_ROLL)
     end
 
-    if @frames.key?(frame_no + 1)
-      next_frame = @frames[frame_no + 1]
-      if next_frame.roll_score(SECOND_ROLL)
-        return TEN_PINS + next_frame.roll_score(FIRST_ROLL) + next_frame.roll_score(SECOND_ROLL); end
-      if @frames.key?(frame_no + 2)
-        return TEN_PINS + next_frame.roll_score(FIRST_ROLL) + @frames[frame_no + 2].roll_score(FIRST_ROLL); end
-    end
-    ZERO_SCORE
+    bonus_points(frame_no, 2).positive? ? TEN_PINS + bonus_points(frame_no, 2) : ZERO_SCORE
   end
 
   def spare_points(frame_no)
     if frame_no == LAST_FRAME
       @frames[frame_no].roll_score(FINAL_ROLL) + TEN_PINS
     else
-      @frames.key?(frame_no + 1) ? @frames[frame_no + 1].roll_score(FIRST_ROLL) + TEN_PINS : ZERO_SCORE
+      bonus_points(frame_no, 1).positive? ? bonus_points(frame_no, 1) + TEN_PINS : ZERO_SCORE
     end
+  end
+
+  def bonus_points(frame_no, rolls_ahead)
+    frames_ahead = @frames.select { |frame_key, _frame| frame_key > frame_no }
+
+    arr = []
+    frames_ahead.each_value do |frame|
+      arr << frame.all_rolls
+    end
+
+    arr.flatten.first(rolls_ahead).count == rolls_ahead ? arr.flatten.first(rolls_ahead).sum : 0
   end
 end

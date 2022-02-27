@@ -2,24 +2,29 @@
 
 class Frame
   TEN_PINS = 10
-  FIRST_ROLL = 1
-  SECOND_ROLL = 2
-  LAST_ROLL = 3
+  FIRST_ROLL = 0
+  SECOND_ROLL = 1
+  LAST_ROLL = 2
 
   def initialize
-    @rolls = {}
+    @rolls = []
     @frame_type = nil
   end
 
   def log_roll(pins_downed)
     raise 'Pins downed must be between 0 and 10' if invalid_pins?(pins_downed)
     raise 'Frame complete. Cannot roll again' if frame_complete?
+
     process_frame_type(pins_downed)
     process_roll(pins_downed)
   end
 
+  def all_rolls
+    @rolls
+  end
+
   def roll_score(roll)
-    @rolls[roll]
+    @rolls[roll - 1]
   end
 
   def frame_complete?
@@ -37,7 +42,7 @@ class Frame
   private
 
   def invalid_roll?(roll)
-    roll.negative? || (roll > @rolls.count )
+    roll.negative? || (roll > @rolls.count)
   end
 
   def invalid_pins?(pins_downed)
@@ -55,7 +60,7 @@ class Frame
   end
 
   def process_roll(pins_downed)
-    #process_final_roll(pins_downed)
+    # process_final_roll(pins_downed)
     process_second_roll(pins_downed)
     process_first_roll(pins_downed)
   end
@@ -64,13 +69,13 @@ class Frame
     return unless second_roll?
     raise "Pins downed must be between 0 and #{pins_left}" if to_many_pins?(pins_downed)
 
-    @rolls[SECOND_ROLL] = pins_downed
+    @rolls << pins_downed
   end
 
   def process_first_roll(pins_downed)
     return unless first_roll?
 
-    @rolls[FIRST_ROLL] = pins_downed
+    @rolls << pins_downed
   end
 
   def process_frame_type(pins_downed)

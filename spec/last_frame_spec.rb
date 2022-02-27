@@ -44,7 +44,7 @@ describe LastFrame do
     end
   end
 
-  context "Bonus rolls on last frame" do
+  context 'Bonus rolls on last frame' do
     it 'scores two strikes on 2 rolls' do
       frame.log_roll(10)
       frame.log_roll(10)

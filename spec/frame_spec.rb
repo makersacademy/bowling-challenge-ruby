@@ -97,7 +97,7 @@ describe Frame do
       expect { frame.log_roll(5) }.to raise_error('Frame complete. Cannot roll again')
     end
   end
-  describe "#log_roll" do
+  describe '#log_roll' do
     context 'no rolls' do
       it 'there is no roll' do
         expect(frame.roll_score(1)).to be_nil
@@ -126,8 +126,5 @@ describe Frame do
         expect(frame.spare_frame?).to be true
       end
     end
-    
   end
-
-
 end
