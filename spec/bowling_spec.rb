@@ -60,25 +60,4 @@ describe Bowling do
       end
     end
   end
-  # describe '#frame_score' do
-  #   it 'saves the score from the two rolls in a frame to the total score' do
-  #     game.frame_score(3, 2)
-  #     expect(game.total_score).to eq 5
-  #   end
-  #   it 'current frame increases by 1 after each score is entered' do
-  #     expect(game.frame).to eq 1
-  #     game.frame_score(2, 4)
-  #     expect(game.frame).to eq 2
-  #   end
-  #   it 'if a player gets a strike or a spare, the total score is not immediately updated' do
-  #     game.frame_score(10, 0)
-  #     expect(game.total_score).to eq 0
-  #   end
-  #   it 'if a player gets a strike, the following frame_score will be doubled' do
-  #     game.frame_score(10, 0)
-  #     expect(game.frame).to eq 2
-  #     expect(game.total_score).to eq 0
-  #     game.frame_score(2, 3)
-  #     expect(game.total_score).to eq 20
-  #   end
 end

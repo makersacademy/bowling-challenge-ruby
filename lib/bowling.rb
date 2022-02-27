@@ -3,7 +3,6 @@ class Bowling
 
   def initialize
     @total_score = 0
-    @frame = []
   end
 
   def total_frames(frame_scores)
@@ -35,5 +34,5 @@ class Bowling
   def spare?(frame)
     frame[0] != 10 && frame.sum == 10
   end
-  
+
 end
