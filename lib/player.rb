@@ -25,6 +25,7 @@ class Player
   # end
 
   def bowl(current_frame, skittles_down)
+    current_frame.roll_id += 1
     current_frame.num_of_rolls += 1
     current_frame.total_score += skittles_down
     current_frame

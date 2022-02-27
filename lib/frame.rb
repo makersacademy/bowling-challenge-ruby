@@ -10,5 +10,4 @@ class Frame
     @total_score = total_score
     @bonus_num = bonus_num
   end
-  
 end
