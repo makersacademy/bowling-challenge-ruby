@@ -27,11 +27,7 @@ class ScoreCard
   end
 
   def score
-    score = 0
-    @frames.each do |frame_no, frame|
-      score += process_frame(frame_no, frame) if frame.frame_complete?
-    end
-    score
+    @frames.map { |frame_no, frame| frame.frame_complete? ? process_frame(frame_no, frame) : 0 }.sum
   end
 
   private
@@ -46,7 +42,7 @@ class ScoreCard
     elsif frame.spare_frame?
       spare_points(frame_no)
     else
-      frame.roll_score(FIRST_ROLL) + frame.roll_score(SECOND_ROLL)
+      frame.all_rolls.sum
     end
   end
 
