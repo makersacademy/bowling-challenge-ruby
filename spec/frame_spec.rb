@@ -12,4 +12,19 @@ describe Frame do
       expect(frame.first_roll(10)).to eq 'STRIKE! End of frame'
     end
   end
+
+  describe '#second_roll' do
+    it 'records a spare' do
+      frame.first_roll(4)
+      expect(frame.second_roll(6)).to eq 'SPARE!'
+    end
+  end
+
+  describe '#second_roll' do
+    it 'counts pinfall for frame' do
+      frame.first_roll(4)
+      expect(frame.second_roll(4)).to eq 'You knocked over 8 pins'
+    end
+  end
+
 end

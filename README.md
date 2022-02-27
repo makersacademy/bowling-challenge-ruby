@@ -11,13 +11,13 @@ Count and sum the scores of a bowling game for one player.
 
 ## Process
 
-![domain model](images/domain_model_01.png)
+![domain model](images/domain_model_02.png)
 =================
 
 ![class model](images/class_diagram_01.png)
 =================
 
-* Frame class - IRB tests:
+Frame class - IRB tests:
 
 - 001 > require './lib/frame'
 - => true 
