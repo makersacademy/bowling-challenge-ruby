@@ -1,41 +1,72 @@
 class Game
 
-    def initialize
-      @total = 0
-    end
+  FRAMES = 10
 
+  def initialize
+    @total = 0
+    @rolls = []
+  end
 
-  def score(game_result)
-    game_result.each_with_index do |frame, idx|
-      if strike?(frame)
-        add_strike_bonus(game_result,idx)
-      elsif spare?(frame)
-        add_spare_bonus(game_result, idx)
+  def roll(pins_knocked_down)
+    @rolls << pins_knocked_down
+  end
+
+  def score
+    idx = 0
+    fr_idx = 0
+    FRAMES.times do
+      fr_idx += 1
+      last_frame_bonus(fr_idx, idx)
+      
+      if strike?(idx)
+        add_strike_bonus(idx)
+        idx += 1
+      elsif spare?(idx)
+        add_spare_bonus(idx)
+        idx += 2
       else
-        @total += frame[0] + frame[1]
+        frame_score(idx)
+        idx += 2
       end
+
     end
+    
     @total
   end
 
   private
 
-  def add_spare_bonus(game_result, idx)
-    next_frame = game_result[idx + 1]
-    @total += 10 + next_frame[0]
+  def frame_score(idx)
+    @total += @rolls[idx] + @rolls[idx + 1]
   end
 
-  def add_strike_bonus(game_result, idx)
-    next_frame = game_result[idx + 1]
-    @total += 10 + next_frame[0] + next_frame[1]
+  def add_spare_bonus(idx)
+    @total += 10 + @rolls[idx + 2]
   end
 
-  def strike?(pins)
-    pins[0] == 10
+  def add_strike_bonus(idx) 
+    @total += 10 + @rolls[idx + 1] + @rolls[idx + 2]
   end
 
-  def spare?(pins)
-    pins[0] + pins[1] == 10
+  def strike?(idx)
+    @rolls[idx] == 10
+  end
+
+  def spare?(idx)
+    @rolls[idx] + @rolls[idx + 1] == 10
+  end
+
+  def last_frame_bonus(fr_idx, idx)
+    if fr_idx == 10
+      if @rolls[idx+2] == 10
+        extra = 0
+      elsif !@rolls[idx+2].nil?
+        extra = @rolls[idx+2]
+      else
+        extra = 0
+      end
+      @total += extra
+    end
   end
 
 end
