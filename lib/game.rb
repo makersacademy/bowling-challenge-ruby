@@ -15,9 +15,8 @@ class Game
     idx = 0
     fr_idx = 0
     FRAMES.times do
-      fr_idx += 1
-      last_frame_bonus(fr_idx, idx)
-      
+      last_frame_bonus(fr_idx += 1, idx)
+
       if strike?(idx)
         add_strike_bonus(idx)
         idx += 1
@@ -30,7 +29,6 @@ class Game
       end
 
     end
-    
     @total
   end
 
@@ -57,16 +55,16 @@ class Game
   end
 
   def last_frame_bonus(fr_idx, idx)
-    if fr_idx == 10
-      if @rolls[idx+2] == 10
-        extra = 0
-      elsif !@rolls[idx+2].nil?
-        extra = @rolls[idx+2]
-      else
-        extra = 0
-      end
-      @total += extra
+    return unless fr_idx == 10
+    if @rolls[idx + 2] == 10
+      extra = 0
+    elsif !@rolls[idx + 2].nil?
+      extra = @rolls[idx + 2]
+    else
+      extra = 0
     end
+    @total += extra
+
   end
 
 end
