@@ -8,12 +8,7 @@ class Frame
 
   def first_roll(pinfall)
     @pinfall << pinfall
-    if @pinfall.sum == 10 
-      save_to_scorecard
-      return 'STRIKE! End of frame' 
-    else
-      return 'Player to roll again'
-    end
+    @pinfall.sum == 10 ? strike : (return 'Player to roll again')
   end
 
   def second_roll(pinfall)
@@ -27,6 +22,11 @@ class Frame
   def save_to_scorecard
     @scorecard << @pinfall.sum 
     @pinfall.clear
+  end
+
+  def strike
+    save_to_scorecard
+    return 'STRIKE! End of frame' 
   end
 
 end
