@@ -27,7 +27,7 @@ class ScoreCard
   end
 
   def score
-    @frames.map { |frame_no, frame| frame.frame_complete? ? process_frame(frame_no, frame) : 0 }.sum
+    @frames.map { |frame_no, frame| process_frame_score(frame_no, frame)}.sum
   end
 
   private
@@ -36,7 +36,9 @@ class ScoreCard
     @frames.count == LAST_FRAME && @frames[LAST_FRAME].frame_complete?
   end
 
-  def process_frame(frame_no, frame)
+  def process_frame_score(frame_no, frame)
+    return 0 unless frame.frame_complete?
+
     if frame.strike_frame?
       strike_points(frame_no)
     elsif frame.spare_frame?
