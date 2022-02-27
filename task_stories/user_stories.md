@@ -34,7 +34,7 @@ I want to have a new scorecard
 
 #### Object Model
 
-Object | Scorecards
+Object | Scorecard
 --------------- | --------------------
 Player (user) | 
 Scorecard | .create
@@ -53,7 +53,7 @@ I want to update the scorecard with number of pins knocked down
 
 #### Object model
 
-Object | Scorecards
+Object | Scorecard
 --------------- | --------------------
 Player (user) | 
 Scorecard | .create
@@ -75,8 +75,14 @@ I want to know which frame I am on
 Object | Frame
 --------------- | --------------------
 Player (user) | 
-Frame | number
+Frame | .number
 
+#### Object model
+
+Object | Scorecard
+--------------- | --------------------
+Player (user) | 
+Scorecard| .frame_number
 
 ------
 
@@ -90,7 +96,7 @@ I want to post zero score if no pins knocked down
 
 #### Object model
 
-Object | Scorecards
+Object | Scorecard
 --------------- | --------------------
 Player (user) | 
 Scorecard | .update
@@ -107,7 +113,7 @@ I want to end a frame if I knock down ten pins on my first roll
 
 #### Object model
 
-Object | Scorecards
+Object | Scorecard
 --------------- | --------------------
 Player (user) | 
 Frame | .finished?
@@ -124,7 +130,7 @@ I want to double up on my next frame points if I had a previous strike
 
 #### Object model
 
-Object | Scorecards
+Object | Scorecard
 --------------- | --------------------
 Player (user) | 
 Frame | .calculate_bonus
@@ -142,7 +148,7 @@ I want to double up on my next roll points if I had a previous spare
 
 #### Object model
 
-Object | Scorecards
+Object | Scorecard
 --------------- | --------------------
 Player (user) | 
 Frame | .calculate_bonus
@@ -160,7 +166,7 @@ I want to roll one extra ball
 
 #### Object model
 
-Object | Scorecards
+Object | Scorecard
 --------------- | --------------------
 Player (user) | 
 Frame | .additional.roll
