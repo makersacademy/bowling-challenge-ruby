@@ -19,6 +19,16 @@ Count and sum the scores of a bowling game for one player.
 
 =================
 
+* Frame class - IRB tests:
+
+001 > require './lib/frame'
+ => true 
+ :002 > frame = Frame.new
+ => #<Frame:0x00007f874d0bf820> 
+ :003 > frame.first_roll(4)
+ => "Player to roll again" 
+  :004 > frame.first_roll(10)
+ => "STRIKE! End of frame" 
 
 
 
