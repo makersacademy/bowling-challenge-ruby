@@ -89,11 +89,11 @@ class ScoreCard
   def bonus_points(frame_no, rolls_ahead)
     frames_ahead = @frames.select { |frame_key, _frame| frame_key > frame_no }
 
-    arr = []
+    frame_scores = []
     frames_ahead.each_value do |frame|
-      arr << frame.all_rolls
+      frame_scores << frame.all_rolls
     end
 
-    arr.flatten.first(rolls_ahead).count == rolls_ahead ? arr.flatten.first(rolls_ahead).sum : 0
+    frame_scores.flatten.first(rolls_ahead).count == rolls_ahead ? frame_scores.flatten.first(rolls_ahead).sum : 0
   end
 end
