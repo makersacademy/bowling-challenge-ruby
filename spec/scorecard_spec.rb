@@ -4,7 +4,7 @@ describe ScoreCard do
   subject(:scorecard) { described_class.new }
 
   describe '#log_roll' do
-    it 'returns game complete if trying to add a roll after 10 frams are done' do
+    it 'returns game complete if trying to add a roll after 10 frames are done' do
       12.times do
         scorecard.log_roll(10)
       end
@@ -33,21 +33,16 @@ describe ScoreCard do
   end
 
   describe '#score' do
-    it 'gives score at the start of the game' do
+    it 'start of the game no rolls' do
       expect(scorecard.score).to eq 0
     end
 
-    it 'gives score after first frame, first roll, no strike' do
+    it 'first frame, first roll, no strike' do
       scorecard.log_roll(7)
       expect(scorecard.score).to eq 0
     end
 
-    it 'gives score after first frame, first roll, no strike' do
-      scorecard.log_roll(8)
-      expect(scorecard.score).to eq 0
-    end
-
-    it 'gives score after first frame, second roll, no spare' do
+    it 'first frame, second roll, no spare' do
       scorecard.log_roll(7)
       scorecard.log_roll(2)
       expect(scorecard.score).to eq 9
@@ -75,7 +70,7 @@ describe ScoreCard do
       expect(scorecard.score).to eq 15
     end
 
-    it 'second frame first roll, spare previous' do
+    it 'second frame first roll, spare on previous frame' do
       scorecard.log_roll(7)
       scorecard.log_roll(3)
       scorecard.log_roll(4)
