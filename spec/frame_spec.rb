@@ -27,7 +27,7 @@ describe Frame do
   describe '#second_roll' do
     it 'counts pinfall for frame' do
       frame.first_roll(4)
-      expect(frame.second_roll(4)).to eq 'You knocked over 8 pins'
+      frame.second_roll(4)
       expect(frame.scorecard.last[:roll1] + frame.scorecard.last[:roll2]).to eq 8
     end
   end

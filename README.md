@@ -17,8 +17,9 @@ Count and sum the scores of a bowling game for one player.
 ![class model](images/class_diagram_01.png)
 =================
 
-Frame class - IRB tests:
+### Frame class - IRB tests:
 
+Strike
 - 001 > require './lib/frame'
 - => true 
 - :002 > frame = Frame.new
@@ -27,6 +28,21 @@ Frame class - IRB tests:
 - => "Player to roll again" 
 - :004 > frame.first_roll(10)
 - => "STRIKE! End of frame" 
+
+Spare
+- 3.0.0 :002 > frame = Frame.new
+-  => #<Frame:0x00007fd6dfa121c0 @pinfall={:roll1=>nil, :roll2=>nil}, @scorecard=[], @bonus=nil> 
+- 3.0.0 :003 > frame.first_roll(4)
+-  => "Player to roll again" 
+- 3.0.0 :004 > frame.second_roll(6)
+-  => "SPARE!" 
+- 3.0.0 :005 > frame.first_roll(4)
+-  => "Player to roll again" 
+- 3.0.0 :006 > frame.second_roll(6)
+-  => "SPARE!" 
+- 3.0.0 :007 > frame.scorecard
+-  => [{:roll1=>4, :roll2=>6, :bonus_points=>4}, {:roll1=>4, :roll2=>6}] 
+- 3.0.0 :008 > 
 
 
 

@@ -1,9 +1,10 @@
 class Frame
-  attr_reader :pinfall, :scorecard
+  attr_reader :scorecard
 
   def initialize
     @pinfall = { roll1: nil, roll2: nil }
     @scorecard = []
+    @bonus = nil
   end
 
   def first_roll(pins)
@@ -13,21 +14,47 @@ class Frame
 
   def second_roll(pins)
     @pinfall[:roll2] = pins
-    save_to_scorecard 
-    total = pins + @scorecard.last[:roll1]
-    total == 10 ? (return "SPARE!") : (return "You knocked over #{total} pins")
+    total = @pinfall[:roll1] + @pinfall[:roll2]
+    total == 10 ? spare : save_to_scorecard 
   end
 
   private
   
   def save_to_scorecard
-    @scorecard << @pinfall
+    if @bonus.nil?
+      @scorecard << @pinfall
+    elsif @bonus == "strike bonus" 
+      strike_bonus 
+    elsif @bonus == "spare bonus" 
+      spare_bonus
+    end
     @pinfall = { roll1: nil, roll2: nil }
   end
 
   def strike
     save_to_scorecard
+    @bonus = "strike bonus"  
     return 'STRIKE! End of frame' 
+  end
+
+  def strike_bonus
+    @bonus = nil
+    bonus_points = @pinfall[:roll1] + @pinfall[:roll2]
+    @scorecard[-1][:bonus_points] = bonus_points
+    @scorecard << @pinfall
+  end
+
+  def spare
+    save_to_scorecard
+    @bonus = "spare bonus" 
+    return "SPARE!"
+  end
+
+  def spare_bonus
+    @bonus = nil
+    bonus_points = @pinfall[:roll1]
+    @scorecard[-1][:bonus_points] = bonus_points
+    @scorecard << @pinfall
   end
 
 end
