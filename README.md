@@ -1,43 +1,44 @@
-Bowling Challenge in Ruby
-=================
+# Bowling Challenge in Ruby
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+A bowling scorecard program in Ruby, using Rspec for testing. The user inputs their rolls and it calculates the total score. This was a weekend challenge completed as part of Makers Academy week 5.
 
-## The Task
+It is a predecessor to the [JavaScript version](https://github.com/ConorButler/bowling-challenge) which has a command line interface and shows a scorecard after each frame with the cumulative score like a scorecard at a bowling alley.
 
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
+# Using the app
 
-Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
+```
+git clone https://github.com/ConorButler/bowling-challenge-ruby.git
+cd bowling-challenge-ruby
+rspec
+```
 
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
+Starting a game:
 
-As usual please start by
+```
+irb
+require './lib/bowling'
+game = Bowling.new
+```
 
-* Forking this repo
+Enter each roll like this:
 
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
+```
+game.roll(3)
+```
 
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
+When you have used all your rolls, it will raise "Game Over!.
 
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
+# Tests
 
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
+![Tests](https://i.gyazo.com/c9b97dae7ef65eb6a79e8ff8aee7b204.png)
 
 ## Bowling — how does it work?
 
+A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
+
 ### Strikes
 
-The player has a strike if he knocks down all 10 pins with the first roll in a frame. The frame ends immediately (since there are no pins left for a second roll). The bonus for that frame is the number of pins knocked down by the next two rolls. That would be the next frame, unless the player rolls another strike.
+The player has a strike if they knock down all 10 pins with the first roll in a frame. The frame ends immediately (since there are no pins left for a second roll). The bonus for that frame is the number of pins knocked down by the next two rolls. That would be the next frame, unless the player rolls another strike.
 
 ### Spares
 
