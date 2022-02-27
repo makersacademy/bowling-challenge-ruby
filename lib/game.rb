@@ -1,6 +1,6 @@
 class Game
 
-    attr_reader :score, :frame_counter, :frame, :results
+    attr_reader :score, :frame_counter
     FRAME_MAX = 5
     BONUS_VALUE = 10
 
@@ -14,7 +14,7 @@ class Game
     end
 
     def roll(pins)
-        fail 'This game is over' unless @frame_counter != FRAME_MAX
+        fail 'This game is over' if @frame_counter == FRAME_MAX
         @results << pins
         @frame  << pins
         bonus_determiner
@@ -22,20 +22,16 @@ class Game
 
     def bonus_determiner
         @length = @results.length
-        if @spare_counter == 1
-            spare_bonus
-        elsif @results[@length - 3] == 10 && @length >= 3
-            strike_bonus
-        else
-           frame_determiner
-        end
+        return spare_bonus if @spare_counter == 1
+        return strike_bonus if @results[@length - 3] == 10 && @length >= 3
+        frame_determiner
     end
 
 
     def frame_determiner
-        return strike_frame unless @results[@length - 1] != BONUS_VALUE
-        return nil unless @frame.length == 2
-        return spare_frame unless @frame.sum != 10
+        return strike_frame if @results[@length - 1] == BONUS_VALUE
+        return nil if @frame.length < 2
+        return spare_frame if @frame.sum == BONUS_VALUE
         frame_result
     end
 
@@ -67,14 +63,14 @@ class Game
         @spare_counter += 1
         @frame_counter += 1
         @frame = []
-        return bonus_ball_spare unless @frame_counter != FRAME_MAX
+        return bonus_ball_spare if @frame_counter == FRAME_MAX
         running_score
     end
 
     def spare_bonus
         @score += BONUS_VALUE + @results[@length - 1]
         @spare_counter = 0
-        return frame_determiner unless @extra_roll == 1
+        return frame_determiner if @extra_roll == 0
         @frame_counter += 1
         running_score
     end
@@ -86,9 +82,9 @@ class Game
     
 
     def running_score
-      return "The game is finished - you scored #{@score} points" unless @frame_counter != FRAME_MAX
-      return "Strike! Your score after frame #{@frame_counter} is #{@score}" unless @results[@length - 1] != BONUS_VALUE
-      return "Spare! Your score after frame #{@frame_counter} is #{@score}" unless @spare_counter == 0
+      return "The game is finished - you scored #{@score} points" if @frame_counter == FRAME_MAX
+      return "Strike! Your score after frame #{@frame_counter} is #{@score}" if @results[@length - 1] == BONUS_VALUE
+      return "Spare! Your score after frame #{@frame_counter} is #{@score}" if @spare_counter == 1
       return"Your score after frame #{@frame_counter} is #{@score}"
     end
 
