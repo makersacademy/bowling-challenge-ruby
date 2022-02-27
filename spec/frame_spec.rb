@@ -56,7 +56,7 @@ describe Frame do
       expect(frame.strike_frame?).to be false
     end
 
-    it 'shows a game is not a strike frame after an open frame ' do
+    it 'shows a frame is not a strike frame after an open frame ' do
       frame.log_roll(7)
       frame.log_roll(2)
       expect(frame.strike_frame?).to be false
@@ -80,7 +80,7 @@ describe Frame do
       expect(frame.spare_frame?).to be false
     end
 
-    it 'shows a game is not a spare frame after an open frame' do
+    it 'shows a frame is not a spare frame after an open frame' do
       frame.log_roll(7)
       frame.log_roll(1)
       expect(frame.spare_frame?).to be false
@@ -96,15 +96,9 @@ describe Frame do
       expect { frame.log_roll(-1) }.to raise_error('Pins downed must be between 0 and 10')
     end
 
-    it 'does not allow rolls greater than what pins are left' do
+    it 'does not allow rolls greater than what pins are left, 2nd ball' do
       frame.log_roll(5)
       expect { frame.log_roll(6) }.to raise_error('Pins downed must be between 0 and 5')
-    end
-
-    it 'does not allow rolls greater than what pins are left, 3rd ball' do
-      frame.log_roll(5)
-      frame.log_roll(5)
-      expect { frame.log_roll(11) }.to raise_error('Pins downed must be between 0 and 10')
     end
 
     it 'raises an error if the frame is completed and a roll is logged against the frame' do

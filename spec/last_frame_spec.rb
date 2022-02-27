@@ -75,7 +75,7 @@ describe LastFrame do
       expect { frame.log_roll(5) }.to raise_error('Frame complete. Cannot roll again')
     end
 
-    it 'raises an error if the frame is completed with a strikeand a roll is logged against the frame' do
+    it 'raises an error if the frame is completed with a strike and a roll is logged against the frame' do
       frame.log_roll(10)
       frame.log_roll(5)
       frame.log_roll(5)
@@ -87,5 +87,12 @@ describe LastFrame do
       frame.log_roll(5)
       expect { frame.log_roll(5) }.to raise_error('Frame complete. Cannot roll again')
     end
+
+    it 'does not allow rolls greater than what pins are left, 3rd ball' do
+      frame.log_roll(5)
+      frame.log_roll(5)
+      expect { frame.log_roll(11) }.to raise_error('Pins downed must be between 0 and 10')
+    end
+
   end
 end
