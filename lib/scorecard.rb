@@ -43,7 +43,7 @@ class ScoreCard
     return 0 unless frame.frame_complete?
     return frame.sum_frame if frame.open_frame?
 
-    process_bonus_frame(frame, frame_no)
+    bonus_frame_score(frame, frame_no)
   end
 
   def current_frame
@@ -61,7 +61,7 @@ class ScoreCard
     false
   end
 
-  def process_bonus_frame(frame, frame_no)
+  def bonus_frame_score(frame, frame_no)
     bonus_type = strike_or_spare(frame)
     bonus_points(frame_no, bonus_type).positive? ? TEN_PINS + bonus_points(frame_no, bonus_type) : ZERO_SCORE
   end
