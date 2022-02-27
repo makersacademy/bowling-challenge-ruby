@@ -60,7 +60,6 @@ class Frame
   end
 
   def process_roll(pins_downed)
-    # process_final_roll(pins_downed)
     process_second_roll(pins_downed)
     process_first_roll(pins_downed)
   end

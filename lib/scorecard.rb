@@ -6,6 +6,8 @@ class ScoreCard
   LAST_FRAME = 10
   TEN_PINS = 10
   ZERO_SCORE = 0
+  SPARE = 1
+  STRIKE = 2
 
   def initialize(frame_class = Frame, last_frame_class = LastFrame)
     @frame_class = frame_class
@@ -24,7 +26,7 @@ class ScoreCard
   end
 
   def score
-    @frames.map { |frame_no, frame| process_frame_score(frame_no, frame)}.sum
+    @frames.map { |frame_no, frame| current_frame_score(frame_no, frame)}.sum
   end
 
   private
@@ -33,7 +35,7 @@ class ScoreCard
     @frames.count == LAST_FRAME && @frames[LAST_FRAME].frame_complete?
   end
 
-  def process_frame_score(frame_no, frame)
+  def current_frame_score(frame_no, frame)
     return 0 unless frame.frame_complete?
 
     if frame.strike_frame?
@@ -65,30 +67,20 @@ class ScoreCard
   end
 
   def strike_points(frame_no)
-    if frame_no == LAST_FRAME
-      return @frames[frame_no].sum_frame
-    end
-
-    bonus_points(frame_no, 2).positive? ? TEN_PINS + bonus_points(frame_no, 2) : ZERO_SCORE
+    bonus_points(frame_no, STRIKE).positive? ? TEN_PINS + bonus_points(frame_no, STRIKE) : ZERO_SCORE
   end
 
   def spare_points(frame_no)
-    if frame_no == LAST_FRAME
-      @frames[frame_no].sum_frame
-    else
-      bonus_points(frame_no, 1).positive? ? bonus_points(frame_no, 1) + TEN_PINS : ZERO_SCORE
-    end
+    bonus_points(frame_no, SPARE).positive? ? bonus_points(frame_no, SPARE) + TEN_PINS : ZERO_SCORE
   end
 
   def bonus_points(frame_no, rolls_ahead)
-    frames_ahead = @frames.select { |frame_key, _frame| frame_key > frame_no }
+    frames_ahead = @frames.select { |frame_key, _frame| frame_key >= frame_no }
+    frame_scores = frames_ahead.map { |frame_key, frame| frame.all_rolls }.flatten
 
-    frame_scores = []
-    frames_ahead.each_value do |frame|
-      frame_scores << frame.all_rolls
-    end
+    frame_scores = rolls_ahead == SPARE ? frame_scores.drop(2) : frame_scores.drop(1)
 
-    frame_scores.flatten.first(rolls_ahead).count == rolls_ahead ? frame_scores.flatten.first(rolls_ahead).sum : 0
+    frame_scores.first(rolls_ahead).count == rolls_ahead ? frame_scores.first(rolls_ahead).sum : ZERO_SCORE
   end
 
 end
