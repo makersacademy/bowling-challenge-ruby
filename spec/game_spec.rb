@@ -31,7 +31,7 @@ describe Game  do
         end
     end
 
-    describe 'strike identifying' do
+    describe 'strike identifier' do
         it 'changes the frame number as soon as a 10 is rolled' do
             subject.roll(1)
             subject.roll(1)
@@ -53,6 +53,18 @@ describe Game  do
             subject.roll(1)
             subject.roll(5)
             expect(subject.roll(5)).to eq  'Spare! Your score after frame 2 is 2'
+        end
+    end
+
+    describe 'spare bonus' do
+        it 'adds the correct bonus when a spare is scored' do
+            subject.roll(1)
+            subject.roll(1)
+            subject.roll(5)
+            subject.roll(5)
+            subject.roll(5)
+            subject.roll(0)
+            expect(subject.score).to eq 22
         end
     end
 end

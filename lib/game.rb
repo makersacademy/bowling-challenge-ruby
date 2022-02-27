@@ -2,6 +2,7 @@ class Game
 
     attr_reader :score, :frame_counter
     FRAME_MAX = 3
+    BONUS_VALUE = 10
 
     def initialize
         @score = 0
@@ -13,7 +14,8 @@ class Game
 
     def roll(value)
         fail 'This game is over' unless @frame_counter < FRAME_MAX
-        return strike_frame unless value != 10
+        return spare_bonus(value) unless @spare_counter != 1
+        return strike_frame unless value != BONUS_VALUE
         @frame_array << value
         frame_determiner
     end
@@ -31,7 +33,7 @@ class Game
     end
 
     def frame_result
-        return spare_frame unless @frame_array.sum != 10
+        return spare_frame unless @frame_array.sum != BONUS_VALUE
         @score += @frame_array.sum
         @frame_array = []
         running_score
@@ -41,6 +43,14 @@ class Game
         @spare_counter += 1
         @frame_array = []
         running_score
+    end
+
+    def spare_bonus(value)
+        @score += BONUS_VALUE + value
+        @frame_array << value
+        @spare_counter = 0
+        return nil unless value == BONUS_VALUE
+        strike_frame
     end
 
     def running_score
