@@ -16,6 +16,10 @@ class Scorecard
     def strike?(frame)
       frame.any? { |n| n == 10 }
     end
+
+    def spare?(frame)
+      frame.sum == 10
+    end
   
 
 end

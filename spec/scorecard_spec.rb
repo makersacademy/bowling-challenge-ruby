@@ -42,6 +42,16 @@ describe Scorecard do
       end
     end
 
+    describe '#spare' do
+      it 'returns true when spare' do
+        expect(scorecard.spare?([5, 5])).to eq true
+      end
+
+      it 'returns false when not spare' do
+        expect(scorecard.spare?([5, 3])).to eq false
+      end
+    end
+
     #   it 'can score a perfect game of 300 points' do
     #     12.times { scorecard.roll(10) }
     #     expect(scorecard.score).to eq 300
