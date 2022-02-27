@@ -1,21 +1,34 @@
 # frozen_string_literal: true
 
 # If I score 10 I do not get a second roll
-
+require 'rspec'
 require 'game'
 
 describe Game do
-  describe '#pin' do
-    it 'pins returns the number of pins knocked down' do
-      game = Game.new
-      expect(game.pins(4)).to eq 4
-    end
+  it 'can create game' do
+    game = Game.new
   end
-  describe 'with no strikes or spares' do
-    it 'sums over all the hits' do
-      game = Game.new
-      20.times { game.pins(3) }
-      expect(game.score).to eq 60
-    end
+
+  it 'can score a gutter game' do
+    game = Game.new
+
+    20.times{game.roll(0)}
+    expect(game.score).to eq 0
+  end
+
+  it 'can roll all ones' do
+    game = Game.new
+    
+    20.times{game.roll(1)} 
+    expect(game.score).to eq 20
+  end
+
+  it 'Can roll a spare' do
+    game = Game.new
+    game.roll(5)
+    game.roll(5)
+    game.roll(3)
+    17.times{game.roll(0)}
+    expect(game.score).to eq 16
   end
 end

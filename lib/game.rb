@@ -7,13 +7,27 @@
 # Base the decisions on if we have a roll 2 based on if roll 1< 10
 
 class Game
-  attr_reader :score
-
   def initialize
-    @score = 0
+    @rolls = []
   end
 
-  def pins(n)
-    @score += n
+  def roll pins
+    @rolls << pins
+    p @rolls
+  end
+
+  def score
+    #@rolls.reduce(:+)  
+    result = 0
+    rollindex = 0
+    10.times do
+      if @rolls[rollindex] + @rolls[rollindex + 1] == 10
+        result += @rolls[rollindex] + @rolls[rollindex + 1] + @rolls[rollindex + 2]
+      else
+        result += @rolls[rollindex] + @rolls[rollindex + 1]
+      end
+      rollindex += 2
+    end
+    result
   end
 end
