@@ -11,17 +11,17 @@ Count and sum the scores of a bowling game for one player.
 
 ## Process
 
-![Started domain model](images/domain_model_01.png)
+![domain model](images/domain_model_01.png)
 
 =================
 
-![Started domain model](images/class_diagram_01.png)
+![class model](images/class_diagram_01.png)
 
 =================
 
 
 
-rs
+
 ## The Task
 
 **THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
