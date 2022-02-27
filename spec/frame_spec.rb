@@ -9,7 +9,7 @@ describe Frame do
   end
 
   it 'creates a gutter game' do
-    20.times do 
+    10.times do 
       while @frame.frame_end == false do 
         @frame.roll(0)
         @scorecard.score(@frame.frame,@frame.frame_end, @frame.standard_roll, @frame.is_strike)
@@ -25,6 +25,17 @@ describe Frame do
        @frame = Frame.new(0,0)
     end
     expect(@scorecard.game_total).to eq 300
+  end
+
+  it 'creates a standard game - no spares or striles' do
+    10.times do 
+      while @frame.frame_end == false do 
+        @frame.roll(5)
+        @scorecard.score(@frame.frame,@frame.frame_end, @frame.standard_roll, @frame.is_strike)
+      end
+      @frame = Frame.new(0,0)
+    end
+    expect(@scorecard.game_total).to eq 100
   end
 
 end
