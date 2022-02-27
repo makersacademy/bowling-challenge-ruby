@@ -1,3 +1,9 @@
+````
+Completed:
+1. gutter game
+2. perfect game
+3. standard game
+````
 Bowling Challenge in Ruby
 =================
 
