@@ -1,37 +1,21 @@
 Bowling Challenge in Ruby
 =================
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+For this challenge I followed a TDD approach to write a program that calculates the total score for a game of bowling, of a single player from a given array of pins knocked down by each roll.
 
-## The Task
+With more time, I would like to ammend my program to be able to take the points from each roll to calculate the score as the game is played; by working out and saving each score to the total score array as it is entered.
 
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
+Instructions
+------------
 
-Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
+Run `irb -r './lib/bowling.rb'` in the terminal, then input the scores for each frame as an array of sub-arrays, each value in each sub-array representing the number of pins knocked over by each ball roll. 
 
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
-
-As usual please start by
-
-* Forking this repo
-
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
-
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
-
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
-
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
+```sh
+3.0.0 :001 > game = Bowling.new
+ => #<Bowling:0x000000012c3c5208 @total_score=0>
+3.0.0 :002 > game.total_frames([[10, 0], [1, 3], [0, 0], [3, 5], [2, 6], [10, 0], [9, 1], [7, 2], [1, 6], [1, 9],[6, 0]])
+ => 103
+```
 
 ## Bowling — how does it work?
 
