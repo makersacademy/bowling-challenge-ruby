@@ -41,6 +41,21 @@ Bowling Challenge
 
 5. Repeat until basic user story functionality is covered
 
+## My thoughts on what the strong hint are!
+
+There is a warning in the Makers README.md: ___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
+
+I believe this refers to setting up all ten frames in adance so you can keep track of strikes/spares etc which I have setup in the Frame class.
+
+[#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>, 
+#<Frame:0x00000001239eb050 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>, 
+#<Frame:0x00000001239eb000 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>,
+#<Frame:0x00000001239eafb0 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>, 
+#<Frame:0x00000001239eaf60 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>, 
+#<Frame:0x00000001239eaf10 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>, 
+#<Frame:0x00000001239eaec0 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>, 
+#<Frame:0x00000001239eae70 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>, 
+#<Frame:0x00000001239eae20 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>]
 
 
 #### Structure
