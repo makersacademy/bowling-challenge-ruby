@@ -1,19 +1,20 @@
 class Game
 
     attr_reader :score, :frame_counter, :frame, :results
-    FRAME_MAX = 4
+    FRAME_MAX = 5
     BONUS_VALUE = 10
 
     def initialize
         @score = 0
         @frame_counter = 0
         @spare_counter = 0
+        @extra_roll = 0
         @results = []
         @frame = []
     end
 
     def roll(pins)
-        fail 'This game is over' unless @frame_counter < FRAME_MAX
+        fail 'This game is over' unless @frame_counter != FRAME_MAX
         @results << pins
         @frame  << pins
         bonus_determiner
@@ -60,14 +61,23 @@ class Game
         @spare_counter += 1
         @frame_counter += 1
         @frame = []
+        return bonus_ball unless @frame_counter != FRAME_MAX
         running_score
     end
 
     def spare_bonus
         @score += BONUS_VALUE + @results[@length - 1]
         @spare_counter = 0
-        frame_determiner
+        return frame_determiner unless @extra_roll == 1
+        @frame_counter += 1
+        running_score
     end
+
+    def bonus_ball
+        @frame_counter -= 1
+        @extra_roll = 1
+    end
+    
 
     def running_score
       return "The game is finished - you scored #{@score} points" unless @frame_counter != FRAME_MAX

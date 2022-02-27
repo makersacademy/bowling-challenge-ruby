@@ -14,7 +14,7 @@ describe Game  do
         it 'ends the game after 3 rolls, and returns the final score' do
             ((Game::FRAME_MAX * 2) - 1).times{subject.roll(1)}
             
-             expect(subject.roll(1)).to eq "The game is finished - you scored 8 points"
+             expect(subject.roll(1)).to eq "The game is finished - you scored 10 points"
         end
 
         it 'errors if any further rolls are attempted' do
@@ -88,7 +88,15 @@ describe Game  do
             subject.roll(9)
             expect(subject.score).to eq 78
         end
-
-        
     end
+
+    describe 'final frame bonus'  do
+        it 'gives a bonus throw on final frame if a spare' do
+            ((Game::FRAME_MAX * 2) - 2).times{subject.roll(1)}
+            subject.roll(1)
+            subject.roll(9)
+        expect(subject.roll(1)).to eq "The game is finished - you scored 19 points"
+        end
+    end
+ 
 end
