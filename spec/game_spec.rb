@@ -38,6 +38,21 @@ describe Game  do
             subject.roll(10)
             expect(subject.frame_counter).to eq 2
         end
+
+        it 'it identifies a strike' do
+            subject.roll(1)
+            subject.roll(1)
+            expect(subject.roll(10)).to eq 'Strike! Your score after frame 2 is 2'
+        end
+
     end
 
+    describe 'spare identifying' do
+        it 'identifies a spare' do
+            subject.roll(1)
+            subject.roll(1)
+            subject.roll(5)
+            expect(subject.roll(5)).to eq  'Spare! Your score after frame 2 is 2'
+        end
+    end
 end
