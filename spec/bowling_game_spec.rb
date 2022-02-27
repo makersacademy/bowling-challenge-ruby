@@ -19,9 +19,9 @@ describe Bowlinggame do
     it 'can roll a spare' do
       game = Bowlinggame.new
       game.roll 5
-      game.roll 3
       game.roll 5
-      17.times { game.roll 1 }
+      game.roll 3
+      17.times { game.roll 0 }
       expect(game.score).to eq 16
     end
   end

@@ -32,7 +32,7 @@ class Bowlinggame
   end
 
   def spare_score(rollindex)
-    @rolls[rollindex].to_i + @rolls[rollindex + 1].to_i + @rolls[rollindex + 2].to_i
+   10 + @rolls[rollindex + 2].to_i
   end
 
 def overall_score(rollindex)
