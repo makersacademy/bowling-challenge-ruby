@@ -23,10 +23,6 @@ class Frame
     @rolls
   end
 
-  def roll_score(roll)
-    @rolls[roll - 1]
-  end
-
   def frame_complete?
     @rolls.count > 1 || @frame_type == :strike
   end

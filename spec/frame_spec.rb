@@ -100,21 +100,20 @@ describe Frame do
   describe '#log_roll' do
     context 'no rolls' do
       it 'there is no roll' do
-        expect(frame.roll_score(1)).to be_nil
+        expect(frame.all_rolls).to be_empty
       end
     end
 
     context 'No bonuses' do
       it 'logs the first roll' do
         frame.log_roll(6)
-        expect(frame.roll_score(1)).to eq 6
+        expect(frame.all_rolls).to eq [6]
       end
 
       it 'logs the second roll' do
         frame.log_roll(6)
         frame.log_roll(3)
-        expect(frame.roll_score(2)).to eq 3
-        expect(frame.roll_score(1)).to eq 6
+        expect(frame.all_rolls).to eq [6,3]
       end
     end
 
@@ -122,8 +121,7 @@ describe Frame do
       it 'scores a spare on the second roll if first roll zero' do
         frame.log_roll(0)
         frame.log_roll(10)
-        expect(frame.roll_score(2)).to eq 10
-        expect(frame.spare_frame?).to be true
+        expect(frame.all_rolls).to eq [0,10]
       end
     end
   end
