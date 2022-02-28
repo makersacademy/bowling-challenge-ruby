@@ -14,4 +14,9 @@ it 'can do' do
   expect(game.score).to eq 0
 end
 
+it 'can do' do
+  game = Game.new
+  20.times{game.roll(4)}
+  expect(game.score).to eq 80
+end
 end
