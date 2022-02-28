@@ -115,4 +115,29 @@ describe 'test_scorecards' do
     scoreboard.single_roll(10)
     expect { scoreboard.single_roll(10) }.to raise_error("you have attempted to add too many throws")
   end
+
+  it 'should return 0 for a gutter game' do
+  scoreboard = Scoreboard.new
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    scoreboard.single_roll(0)
+    expect(scoreboard.score).to eq 0
+  end
 end
