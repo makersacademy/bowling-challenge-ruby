@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class GameOne
+
+  STRIKE = 10
   attr_reader :scorecard, :frames_total, :roll_counter,
               :frame_counter, :bonus, :total
 
@@ -57,7 +59,7 @@ class GameOne
   end
 
   def strike(score)
-    score == 10
+    score == STRIKE
   end
 
   def next_roll
@@ -114,11 +116,11 @@ class GameOne
   end
 
   def previous_frame_strike
-    @scorecard[@roll_counter - 3] == 10
+    @scorecard[@roll_counter - 3] == STRIKE
   end
 
   def last_but_one_frame_was_a_strike
-    @scorecard[@roll_counter - 5] == 10
+    @scorecard[@roll_counter - 5] == STRIKE
   end
 
   def add_score_to_previous_bonus(score)
@@ -126,7 +128,7 @@ class GameOne
   end
 
   def last_frame_was_a_strike
-    @scorecard[@roll_counter - 4] == 10
+    @scorecard[@roll_counter - 4] == STRIKE
   end
 
   def add_score_to_bonus(score)
@@ -146,7 +148,7 @@ class GameOne
 
   # last frame is a strike
   def tenth_frame_is_strike_first_go
-    @scorecard[18] == 10 && @roll_counter == 20
+    @scorecard[18] == STRIKE && @roll_counter == 20
   end
 
   def tenth_frame_first_roll(score)
@@ -157,7 +159,7 @@ class GameOne
   end
 
   def tenth_frame_is_strike_second_go
-    @scorecard[18] == 10 && @roll_counter == 21
+    @scorecard[18] == STRIKE && @roll_counter == 21
   end
 
   def tenth_frame_second_roll(score)
@@ -168,7 +170,7 @@ class GameOne
   end
 
   def tenth_frame_is_strike_third_go
-    @scorecard[18] == 10 && @roll_counter == 22
+    @scorecard[18] == STRIKE && @roll_counter == 22
   end
 
   def tenth_frame_third_roll(score)

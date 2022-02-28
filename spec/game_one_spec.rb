@@ -33,14 +33,14 @@ describe GameOne do
       expect { game.roll(5) }.to change { game.roll_counter }.by 1
     end
     it 'adds 1 count extra to the roll_counter if first role of frame is 10' do
-      expect { game.roll(10) }.to change { game.roll_counter }.by 2
+      expect {  game.roll(GameOne::STRIKE)}.to change { game.roll_counter }.by 2
     end
     it 'adds the score of the frame to the frames_total if you hit a strike' do
-      game.roll(10)
+      game.roll(GameOne::STRIKE)
       expect(game.frames_total).to eq [10, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     end
     it 'adds one to the frame count if you get a strike' do
-      game.roll(10)
+      game.roll(GameOne::STRIKE)
       expect(game.frame_counter).to eq 2
     end
     it 'adds one to the frame counter every second go of frame' do
@@ -53,9 +53,9 @@ describe GameOne do
       expect { game.roll(5) }.to change { game.scorecard.sum }.by 5
     end
     it 'adds bonus points if two strikes in a row happen' do
-      game.roll(10)
-      game.roll(10)
-      game.roll(10)
+      game.roll(GameOne::STRIKE)
+      game.roll(GameOne::STRIKE)
+      game.roll(GameOne::STRIKE)
       expect(game.bonus).to eq [20, 10, 0, 0, 0, 0, 0, 0, 0, 0]
     end
     it 'adds the score to the previous frames bonus index if spare equals true' do
@@ -64,20 +64,20 @@ describe GameOne do
       expect { game.roll(7) }.to change { game.bonus[0] }.by 7
     end
     it 'ends the game at the 20th go if 10th frame is normal' do
-      9.times { game.roll(10) }
+      9.times {   game.roll(GameOne::STRIKE) }
       game.roll(2)
       game.roll(3)
       expect(game.total).to eq 252
     end
     it 'returns the correct final score if last frame is a spare' do
-      9.times { game.roll(10) }
+      9.times {   game.roll(GameOne::STRIKE) }
       game.roll(2)
       game.roll(8)
       game.roll(5)
       expect(game.total).to eq 267
     end
     it 'returns the correct final score if last frame is a strike' do
-      12.times { game.roll(10) }
+      12.times {   game.roll(GameOne::STRIKE) }
       expect(game.total).to eq 300
     end
   end
