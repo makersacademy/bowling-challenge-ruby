@@ -1,9 +1,10 @@
-describe Game do
-  subject(:game) { described_class.new }
+# describe Game do
+#   subject(:game) { described_class.new }
 
-  describe '#scorecard' do
-    it 'prints the current scorecard' do
-      expect(game.scorecard).to eq "Frame 1, roll 1, pins knocked down 4"
-    end
-  end
-end
+#   describe '#total' do
+#     it 'prints the current score total' do
+#       # method moved to private - remove test?
+#       expect(game.total(frame)).to eq 26
+#     end
+#   end
+# end
