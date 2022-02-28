@@ -4,7 +4,6 @@ class Frame
   TEN_PINS = 10
   FIRST_ROLL = 0
   SECOND_ROLL = 1
-  LAST_ROLL = 2
 
   def initialize
     @rolls = []

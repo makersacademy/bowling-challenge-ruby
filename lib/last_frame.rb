@@ -3,6 +3,8 @@
 require './lib/frame'
 
 class LastFrame < Frame
+  LAST_ROLL = 2
+  
   def frame_complete?
     return @rolls.count == 3 if bonus_frame?
 
