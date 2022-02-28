@@ -45,7 +45,7 @@ Bowling Challenge
 
 There is a warning in the Makers README.md: ___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
 
-I believe this refers to setting up all ten frames in adance so you can keep track of strikes/spares etc which I have setup in the Frame class.
+I believe this refers to setting up all ten frames in advance so you can keep track of strikes/spares etc which I have setup in the Frame class.
 
 [#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>, 
 #<Frame:0x00000001239eb050 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>, 
@@ -60,13 +60,12 @@ I believe this refers to setting up all ten frames in adance so you can keep tra
 
 #### Structure
 - Specs: `spec/<name>.rb`
-- Features: `spec/features/<name>.rb`
 - Models: `lib/<name>.rb`
 
 #### What I know I need to work on
-- 
-
-
+- Go back through CRCs to rectify errors
+- Improvement of the structure
+- Error messages
 
 
 Bowling Challenge in Ruby
