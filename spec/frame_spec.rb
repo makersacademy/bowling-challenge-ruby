@@ -3,39 +3,29 @@ require_relative '../lib/scorecard'
 require 'spec_helper'
 
 describe Frame do
-  before do
-    @frame = Frame.new(0,0)
-    @scorecard = Scorecard.new
+  before do 
+    @frame = Frame.new
   end
 
-  it 'creates a gutter game' do
-    10.times do 
-      while @frame.frame_end == false do 
-        @frame.roll(0)
-        @scorecard.score(@frame.frame,@frame.frame_end, @frame.standard_roll, @frame.is_strike)
-      end
-      @frame = Frame.new(0,0)
-    end
-    expect(@scorecard.game_total).to eq 0
-  end
-  it 'creates a perfect game' do
-    10.times do 
-        @frame.roll(10)
-        @scorecard.score(@frame.frame,@frame.frame_end, @frame.standard_roll, @frame.is_strike)
-       @frame = Frame.new(0,0)
-    end
-    expect(@scorecard.game_total).to eq 300
-  end
+  it 'can roll pins' do 
+    @frame.roll(1)
+    expect(@frame.standard?).to eq true
+  end 
 
-  it 'creates a standard game - no spares or striles' do
-    10.times do 
-      while @frame.frame_end == false do 
-        @frame.roll(5)
-        @scorecard.score(@frame.frame,@frame.frame_end, @frame.standard_roll, @frame.is_strike)
-      end
-      @frame = Frame.new(0,0)
-    end
-    expect(@scorecard.game_total).to eq 100
-  end
+  it 'completes a frame' do 
+    @frame.roll(1)
+    @frame.roll(1)
+    expect(@frame.complete?).to eq true
+  end 
 
+  it 'rolls a strike' do 
+    @frame.roll(10)
+    expect(@frame.strike?).to eq true
+  end 
+
+  it 'rolls a spare' do 
+    @frame.roll(1)
+    @frame.roll(9)
+    expect(@frame.spare?).to eq true
+  end 
 end

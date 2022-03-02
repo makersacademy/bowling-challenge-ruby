@@ -1,44 +1,50 @@
-class Frame 
-attr_accessor :frame, :frame_end,  :standard_roll, :is_strike
-  def initialize(pin_count1 = 0, pin_count2 = 0)
+ class Frame
 
-    @standard_roll = true
-    @is_strike = "No"
-
-    @roll_count = 0 
-    @frame = [] 
-    @frame_end = false
-    @frame = [pin_count1, pin_count2]
+  def initialize
+    @frame =[] 
+    @roll_count = 0
   end
 
-  def roll(pin)
-    if pin == 10
-        strike
+  def roll(pins)
+    @pins = pins
+    @frame << @pins
+    # if strike? 
+    #   @roll_count = 0 
+    #   return @frame
+    # end
+    # if spare? 
+    #   @roll_count = 0 
+    #   return @frame
+    # end
+    if strike? || spare?
+      @roll_count = 0 
     else
-    @standard_roll = true
-    @frame[@roll_count] = pin 
-    @roll_count += 1 
-    end?
-    
-   end
-   @frame
-  end
-
-  def strike
-    @is_strike = "Yes"
-    @roll_count = 2
-    @frame = [10,"-"]
-    @frame_end = true
-    @standard_roll = false
-  end
-
-  def end? 
-    if @roll_count == 2 
-      @frame_end = true
-      @roll_count = 0
-    else 
-      @frame_end = false
+      @roll_count += 1
     end
-    @frame_end 
+   # p "END"
+  #  p @roll_count
+    @frame
   end
+ 
+ #
+
+  def standard?
+    @frame.sum < 10
+  end
+
+  def complete?
+   # p "COMPLETE rolls count '#{@roll_count}'"
+    @roll_count >= 1
+  end
+
+  def strike?
+   # p "STRIKE? rolls count '#{@roll_count}'" 
+    @pins == 10
+  end
+
+  def spare?
+  #  p "SPARE? rolls count '#{@roll_count}'" 
+    @frame.sum == 10 && @frame[0] !=10
+  end
+
 end
