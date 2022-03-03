@@ -36,7 +36,23 @@ describe Scorecard do
     @scorecard.roll(7)
     @scorecard.roll(1)
     expect(@scorecard.final_score).to eq 51
+  end
+  it 'creates a 2 spares' do
+    @scorecard.roll(3)
+    @scorecard.roll(7)
+    @scorecard.roll(3)
+    @scorecard.roll(7)
+    @scorecard.roll(3)
+    @scorecard.roll(7)
+    @scorecard.roll(7)
+    @scorecard.roll(1)
+    @scorecard.roll(3)
+    @scorecard.roll(7)
+    @scorecard.roll(7)
+    @scorecard.roll(1)
+    expect(@scorecard.final_score).to eq 76
   end 
+ 
 end
 
 #   it 'creates a perfect game' do
