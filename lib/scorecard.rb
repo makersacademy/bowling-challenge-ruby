@@ -13,11 +13,9 @@ class Scorecard
     end
     @frame_count = 0 
     @running_total = 0
-    @strike_count = 0
-   # @spare_count = 0 
+    @strike_count = 0 
     @scores = []
-    @score_count = 0
-   # @ball_rolls = 0
+    @score_count = 0 
     @end_of_game = false
     @bonus_count = 0 
   end
@@ -40,8 +38,8 @@ class Scorecard
         @end_of_game = true
       elsif @scores[@score_count-1] == "X"
         p "SCORE BONUS FRAME  '#{@scores[@score_count-1]}'"
-        "@scorecard[9][2] '#{@scorecard[9][2]}'"
-        "running tot  '#{@running_total}'"
+      p "@scorecard[9][2] '#{@scorecard[9][2]}'"
+       p "running tot  '#{@running_total}'"
         @running_total += pins
         @scorecard[9][2] = @running_total 
         @bonus_count += 1
@@ -76,7 +74,8 @@ class Scorecard
 
       if @frame.strike? 
         @scores[@score_count] = "X"
-        @score_count +=1   
+        @score_count +=1  
+        @strike_count += 1 
       end 
       @frame = Frame.new
       @frame_count += 1 
@@ -89,7 +88,7 @@ class Scorecard
           score_count =  @scorecard[@frame_count][0].to_i
           @scorecard[@frame_count - 1][2] = @running_total + score_count
           @running_total += score_count
-      end
+      end 
     end 
     end 
   end

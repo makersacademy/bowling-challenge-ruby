@@ -21,7 +21,7 @@
   end
 
   def complete?
-    @roll_count >= 1
+    @roll_count >= 1 || @frame[0] == 10
   end
 
   def strike?
