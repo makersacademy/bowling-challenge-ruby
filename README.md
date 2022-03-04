@@ -46,6 +46,43 @@ Spare
 -  => [{:roll1=>4, :roll2=>6, :bonus_points=>4}, {:roll1=>4, :roll2=>6}] 
 - 3.0.0 :008 > 
 
+Game
+- 3.0.0 :001 > require './lib/game'
+-  => true 
+- 3.0.0 :002 > require './lib/frame'
+-  => false 
+- 3.0.0 :003 > game = Game.new
+-  => #<Game:0x00007f9320a5cb60 @test_game=#<Frame:0x00007f9320a5cb10 @pinfall={:roll1=>nil, :roll2=>nil}, @scorecard=[], @bonus=nil>, ... 
+- 3.0.0 :004 > game.play_bowling
+- "Round 1, roll 1:"
+- 10
+- "strike!"
+- 10
+- "Round 2, roll 1:"
+- 10
+- "strike!"
+- 30
+- "Round 3, roll 1:"
+- 10
+- "strike!"
+- 50
+- "Round 4, roll 1:"
+- 
+- ...
+- 
+- "Round 10, roll 1:"
+- 5
+- "Round 10, roll 2:"
+- 5
+- 170
+- "spare bonus round!"
+- "Round 10, Bonus roll:"
+- 10
+- 180
+- "Final score: 180"
+-  =>  #<Frame:0x00007f932094ffb0 @pinfall={:roll1=>nil, :roll2=>nil}, @scorecard=[], @bonus=nil> 
+
+
 Work in progress
 - I have written a test to start looking at playing a full game of bowling and printing a scoresheet. I have started writing a test, but I need to think more about how I want to display the info. When I have more time I will pick it up from here.
 

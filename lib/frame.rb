@@ -1,5 +1,5 @@
 class Frame
-  attr_reader :scorecard
+  attr_reader :scorecard, :bonus
 
   def initialize
     @pinfall = { roll1: nil, roll2: nil }
@@ -16,6 +16,14 @@ class Frame
     @pinfall[:roll2] = pins
     total = @pinfall[:roll1] + @pinfall[:roll2]
     total == 10 ? spare : save_to_scorecard 
+  end
+
+  def bonus_roll(pins)
+    if @scorecard[-1][:bonus_points].nil?
+      @scorecard[-1][:bonus_points] = pins 
+    else
+      @scorecard[-1][:bonus_points] += pins 
+    end
   end
 
   private
@@ -39,7 +47,11 @@ class Frame
 
   def strike_bonus
     @bonus = nil
-    bonus_points = @pinfall[:roll1] + @pinfall[:roll2]
+    if @pinfall[:roll2].nil?
+      bonus_points = @pinfall[:roll1]
+    else
+      bonus_points = @pinfall[:roll1] + @pinfall[:roll2]
+    end
     @scorecard[-1][:bonus_points] = bonus_points
     @scorecard << @pinfall
   end
@@ -56,5 +68,4 @@ class Frame
     @scorecard[-1][:bonus_points] = bonus_points
     @scorecard << @pinfall
   end
-
 end
