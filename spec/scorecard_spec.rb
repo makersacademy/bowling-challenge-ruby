@@ -96,10 +96,18 @@ describe Scorecard do
   end 
 
   it 'creates a standard game' do
+    10.times do 
+      @scorecard.roll(1)
+      @scorecard.roll(9)
+    end
+    expect(@scorecard.final_score).to eq 109
+  end
+
+  it 'creates a standard game' do
     21.times do 
-        @scorecard.roll(2)
+      @scorecard.roll(2)
     end
     expect(@scorecard.end_of_game).to eq "THE GAME HAS ENDED! START A NEW ONE"
-  end 
+  end
  
 end 

@@ -161,6 +161,7 @@ class Scorecard
   end
 
   def end_of_game
+    p "THE GAME HAS ENDED! START A NEW ONE"
     return "THE GAME HAS ENDED! START A NEW ONE"
   end
 
