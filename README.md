@@ -82,9 +82,36 @@ Game
 - "Final score: 180"
 -  =>  #<Frame:0x00007f932094ffb0 @pinfall={:roll1=>nil, :roll2=>nil}, @scorecard=[], @bonus=nil> 
 
+Scorecard Formatting
+-  "Frame: 1, roll: 1, pins knocked: 10"
+-  "Frame: 1, roll: 2, pins knocked: , total: 10 (bonus: 10)"
+-  "Frame: 2, roll: 1, pins knocked: 10"
+-  "Frame: 2, roll: 2, pins knocked: , total: 30 (bonus: 10)"
+-  "Frame: 3, roll: 1, pins knocked: 10"
+-  "Frame: 3, roll: 2, pins knocked: , total: 50 (bonus: 10)"
+-  "Frame: 4, roll: 1, pins knocked: 10"
+-  "Frame: 4, roll: 2, pins knocked: , total: 70 (bonus: 10)"
+-  "Frame: 5, roll: 1, pins knocked: 10"
+-  "Frame: 5, roll: 2, pins knocked: , total: 90 (bonus: 10)"
+-  "Frame: 6, roll: 1, pins knocked: 10"
+-  "Frame: 6, roll: 2, pins knocked: , total: 110 (bonus: 10)"
+-  "Frame: 7, roll: 1, pins knocked: 10"
+-  "Frame: 7, roll: 2, pins knocked: , total: 130 (bonus: 10)"
+-  "Frame: 8, roll: 1, pins knocked: 10"
+-  "Frame: 8, roll: 2, pins knocked: , total: 150 (bonus: 10)"
+-  "Frame: 9, roll: 1, pins knocked: 10"
+-  "Frame: 9, roll: 2, pins knocked: , total: 170 (bonus: 10)"
+-  "Frame: 10, roll: 1, pins knocked: 10"
+-  "Frame: 10, roll: 2, pins knocked: , total: 190 (bonus: 20)"
+ => [] 
 
-Work in progress
-- I have written a test to start looking at playing a full game of bowling and printing a scoresheet. I have started writing a test, but I need to think more about how I want to display the info. When I have more time I will pick it up from here.
+Work-in-progress
+* Check that strike bonus points are working as per correct rules.
+* Add tests for game class.
+* Improve scorecard info - adding a "0" or "/" where are second roll is not required on the scorecard.
+* Would be nice to add bonus roll 1 & roll 2 for end of game bonuses.
+
+
 
 ## The Task
 

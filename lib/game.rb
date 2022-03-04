@@ -1,14 +1,15 @@
 require_relative './frame'
 
 class Game
-  attr_reader :test_game, :result, :counter
+  attr_reader :game, :result, :counter, :frame_totals
 
   START_COUNTER = 1
 
   def initialize
-    @test_game = Frame.new
+    @game = Frame.new
     @result = 0
     @counter = START_COUNTER
+    @frame_totals = []
   end
 
   def play_bowling
@@ -27,21 +28,21 @@ class Game
     p "Round #{@counter}, roll 1:"
     @result = gets.chomp
     @result = @result.to_i
-    @test_game.first_roll(@result)
+    @game.first_roll(@result)
   end
 
   def roll_two
     p "Round #{@counter}, roll 2:"
     @result = gets.chomp
     @result = @result.to_i
-    @test_game.second_roll(@result)
+    @game.second_roll(@result)
   end
 
   def roll_bonus
     p "Round 10, Bonus roll:"
     @result = gets.chomp
     @result = @result.to_i
-    @test_game.bonus_roll(@result)
+    @game.bonus_roll(@result)
   end
 
   def end_of_frame
@@ -51,28 +52,40 @@ class Game
   end
 
   def end_of_game
-    p "Final score: #{total}"
-    # print full detailed scorecard
+    print_scorecard
     @counter = START_COUNTER
-    @test_game = Frame.new
+    @game = Frame.new
+    @frame_totals = []
   end
 
   def tenth_frame
     roll_one
     @result == 10 ? (p "strike!") : roll_two 
     end_of_frame
-    if @test_game.bonus == "strike bonus"
+    if @game.bonus == "strike bonus"
       p "strike bonus rounds!"
       2.times { roll_bonus }
-    elsif @test_game.bonus == "spare bonus"
+    elsif @game.bonus == "spare bonus"
       p "spare bonus round!"
       roll_bonus
     end 
   end
 
   def total
-    score_total = @test_game.scorecard.map(&:values).flatten.compact.sum
-    p score_total
+    current_total = @game.scorecard.map(&:values).flatten.compact.sum
+    p current_total
+    @frame_totals << current_total
+  end
+
+  def print_scorecard
+    counter = 0
+    @game.scorecard.each { |print|
+      p "Frame: #{counter + 1}, roll: 1, pins knocked: #{@game.scorecard[counter][:roll1]}"
+      p "Frame: #{counter + 1}, roll: 2, pins knocked: #{@game.scorecard[counter][:roll2]}, total: #{@frame_totals[counter]} (bonus: #{@game.scorecard[counter][:bonus_points]})"
+      # if counter == 9
+      # p "Frame: 10, bonus roll: 1, pins knocked: #{@game.scorecard[counter][:roll2]}, total: #{@frame_totals[counter]} (bonus: #{@game.scorecard[counter][:bonus_points]})"
+      counter += 1
+    }
   end
 
 end
