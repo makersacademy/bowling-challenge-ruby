@@ -1,4 +1,5 @@
-require 'last_frame'
+# require 'last_frame'
+require './lib/last_frame'
 
 class Frame
   MAX_PINS = 10
