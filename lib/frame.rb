@@ -29,7 +29,7 @@
   end
 
   def spare?
-    @frame.sum == 10 && @frame[0] !=10
+    @frame.sum == 10 && @frame[0] != 10
   end
 
 end
