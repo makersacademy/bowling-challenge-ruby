@@ -1,3 +1,73 @@
+Bowling Challenge
+=================
+
+## Approach by Claire Nelson
+
+#### Break down the requirements using tables that follow techniques learnt in Intro to TDD workshop and in Domain Modelling workshop
+
+- Capture the nouns in the user stories as objects and verbs in user stories as messages. Use the techniques learnt in the first week of Makers to create [object model tables and CRCs](https://github.com/nelsonclaire/bowling-challenge-ruby/blob/master/task_stories/user_stories.md) which should assist with how to create the tests, classes and methods. 
+
+
+## Technologies used
+
+- Ruby
+- Rspec (test framework)
+
+
+
+## Steps to download
+
+1. Fork this [repo](https://github.com/nelsonclaire/chitter-challenge)
+
+2. `git clone git@github.com:<userName>/bowling-challenge-ruby.git` onto your local machine
+
+
+## To run tests
+
+1. After cloning run rspec --init 
+
+2. Run `rspec` directly in root of your local project
+
+
+## My approach
+
+1. Break down into simple steps - consider the options for each frame as you move through the game, there appear to be three sections, what happens at the start, what can happen in the frames 2-9 with regards stirkes and spares and finally what can happen on the last frame
+
+2. Write first unit test - at the start of a game the score is zero
+
+3. Follow red, green, refactor cycle for each test with commits before a refactor
+
+4. Continue with simple tests for the first frame and when complete move to the next section of frames and options
+
+5. Repeat until basic user story functionality is covered
+
+## My thoughts on what the strong hint are!
+
+There is a warning in the Makers README.md: ___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
+
+I believe this refers to setting up all ten frames in advance so you can keep track of strikes/spares etc which I have setup in the Frame class.
+
+[#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>, 
+#<Frame:0x00000001239eb050 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>, 
+#<Frame:0x00000001239eb000 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>,
+#<Frame:0x00000001239eafb0 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>, 
+#<Frame:0x00000001239eaf60 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>, 
+#<Frame:0x00000001239eaf10 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>, 
+#<Frame:0x00000001239eaec0 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>, 
+#<Frame:0x00000001239eae70 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>, 
+#<Frame:0x00000001239eae20 @rolls=[], @next_frame=#<Frame:0x00000001239eb0a0 @rolls=[], @next_frame=nil>>]
+
+
+#### Structure
+- Specs: `spec/<name>.rb`
+- Models: `lib/<name>.rb`
+
+#### What I know I need to work on
+- Go back through CRCs to rectify errors
+- Improvement of the structure
+- Error messages
+
+
 Bowling Challenge in Ruby
 =================
 
