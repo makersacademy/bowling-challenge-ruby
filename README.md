@@ -1,7 +1,7 @@
 Bowling Scorecard Challenge in Ruby
 =================
 
-My bowling scorecard program calculates the scores of a bowling game for one player. For this challenge, I was instructed to just focus on the logic for bowling, following the scoring rules below. Take a look at my Bowling Challenge Game so see a built user interface in Javascript for this Bowling scorecard game. 
+My bowling scorecard program calculates the scores of a bowling game for one player. For this challenge, I was instructed to just focus on the logic for bowling, following the scoring rules below. 
 
 ## Instructions and Functionality
 1. The Scorecard is initialised with a @frames array containing 10 arrays, with each inner array comprising of 2 values, or 3 if it is the 10th frame e.g. Scorecard.new([[4, 5], [3, 2], [3, 1], [2, 8], [4, 4], [10, 0], [2, 0], [10, 0], [10, 0], [10, 10, 3]]
