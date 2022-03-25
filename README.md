@@ -1,10 +1,117 @@
 Bowling Challenge in Ruby
 =================
+## The Task
+Count and sum the scores of a bowling game for one player.
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+## How to use:
+-------
+* Clone this repo.
+* Run the command 'bundle' in the project directory to ensure you have all the gems.
+* Run tests with RSpec.
+* Run tests with Rubocop.
+* Run with irb in terminal, `require './lib/frame'` to test some frames by inputting the scores. For example `frame.first_roll(4)` ...
+
+## Process
+
+![domain model](images/domain_model_03.png)
+=================
+
+![class model](images/class_diagram_01.png)
+=================
+
+### Frame class - IRB tests:
+
+Strike
+- 001 > require './lib/frame'
+- => true 
+- :002 > frame = Frame.new
+- => #<Frame:0x00007f874d0bf820> 
+- :003 > frame.first_roll(4)
+- => "Player to roll again" 
+- :004 > frame.first_roll(10)
+- => "STRIKE! End of frame" 
+
+Spare
+- 3.0.0 :002 > frame = Frame.new
+-  => #<Frame:0x00007fd6dfa121c0 @pinfall={:roll1=>nil, :roll2=>nil}, @scorecard=[], @bonus=nil> 
+- 3.0.0 :003 > frame.first_roll(4)
+-  => "Player to roll again" 
+- 3.0.0 :004 > frame.second_roll(6)
+-  => "SPARE!" 
+- 3.0.0 :005 > frame.first_roll(4)
+-  => "Player to roll again" 
+- 3.0.0 :006 > frame.second_roll(6)
+-  => "SPARE!" 
+- 3.0.0 :007 > frame.scorecard
+-  => [{:roll1=>4, :roll2=>6, :bonus_points=>4}, {:roll1=>4, :roll2=>6}] 
+- 3.0.0 :008 > 
+
+Game
+- 3.0.0 :001 > require './lib/game'
+-  => true 
+- 3.0.0 :002 > require './lib/frame'
+-  => false 
+- 3.0.0 :003 > game = Game.new
+-  => #<Game:0x00007f9320a5cb60 @test_game=#<Frame:0x00007f9320a5cb10 @pinfall={:roll1=>nil, :roll2=>nil}, @scorecard=[], @bonus=nil>, ... 
+- 3.0.0 :004 > game.play_bowling
+- "Round 1, roll 1:"
+- 10
+- "strike!"
+- 10
+- "Round 2, roll 1:"
+- 10
+- "strike!"
+- 30
+- "Round 3, roll 1:"
+- 10
+- "strike!"
+- 50
+- "Round 4, roll 1:"
+- 
+- ...
+- 
+- "Round 10, roll 1:"
+- 5
+- "Round 10, roll 2:"
+- 5
+- 170
+- "spare bonus round!"
+- "Round 10, Bonus roll:"
+- 10
+- 180
+- "Final score: 180"
+-  =>  #<Frame:0x00007f932094ffb0 @pinfall={:roll1=>nil, :roll2=>nil}, @scorecard=[], @bonus=nil> 
+
+Scorecard Formatting
+-  "Frame: 1, roll: 1, pins knocked: 10"
+-  "Frame: 1, roll: 2, pins knocked: , total: 10 (bonus: 10)"
+-  "Frame: 2, roll: 1, pins knocked: 10"
+-  "Frame: 2, roll: 2, pins knocked: , total: 30 (bonus: 10)"
+-  "Frame: 3, roll: 1, pins knocked: 10"
+-  "Frame: 3, roll: 2, pins knocked: , total: 50 (bonus: 10)"
+-  "Frame: 4, roll: 1, pins knocked: 10"
+-  "Frame: 4, roll: 2, pins knocked: , total: 70 (bonus: 10)"
+-  "Frame: 5, roll: 1, pins knocked: 10"
+-  "Frame: 5, roll: 2, pins knocked: , total: 90 (bonus: 10)"
+-  "Frame: 6, roll: 1, pins knocked: 10"
+-  "Frame: 6, roll: 2, pins knocked: , total: 110 (bonus: 10)"
+-  "Frame: 7, roll: 1, pins knocked: 10"
+-  "Frame: 7, roll: 2, pins knocked: , total: 130 (bonus: 10)"
+-  "Frame: 8, roll: 1, pins knocked: 10"
+-  "Frame: 8, roll: 2, pins knocked: , total: 150 (bonus: 10)"
+-  "Frame: 9, roll: 1, pins knocked: 10"
+-  "Frame: 9, roll: 2, pins knocked: , total: 170 (bonus: 10)"
+-  "Frame: 10, roll: 1, pins knocked: 10"
+-  "Frame: 10, roll: 2, pins knocked: , total: 190 (bonus: 20)"
+ => [] 
+
+Work-in-progress
+* Check that strike bonus points are working as per correct rules.
+* Add tests for game class.
+* Improve scorecard info - adding a "0" or "/" where are second roll is not required on the scorecard.
+* Would be nice to add bonus roll 1 & roll 2 for end of game bonuses.
+
+
 
 ## The Task
 
