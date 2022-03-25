@@ -1,0 +1,8 @@
+# SimpleCov Output Folder
+/coverage
+
+# Locally cached copy of Makers Rubocop Guide
+.rubocop-https*
+
+# My notes file
+PK-Notes-README.md
