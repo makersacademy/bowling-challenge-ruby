@@ -1,6 +1,6 @@
 # :nocov:
 class GoodVibes
-  if File.exist?('./good_vibes_pk.rb') 
+  if File.exist?(File.expand_path('good_vibes_pk.rb', File.dirname(__FILE__)))
     require_relative './good_vibes_pk'
     VIBES = GoodVibesPK::POSITIVE_AFFIRMATIONS
   else 
