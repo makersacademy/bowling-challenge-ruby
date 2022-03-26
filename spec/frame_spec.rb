@@ -4,9 +4,15 @@ describe Frame do
 
   subject(:frame) { described_class.new }
 
-  describe '#add_first_roll'
-  it 'adds 2 pins to first roll in first frame' do
-    expect(frame.add_first_roll(2)).to eq [2]
+  describe '#add_first_roll' do
+    it 'adds 2 pins to first roll in first frame' do
+      expect(frame.add_first_roll(2)).to eq [2]
+    end
+
+    it 'scores strike at first roll' do
+      frame.add_first_roll(10)
+      expect(frame.strike?).to eq true
+    end
   end
 
   describe '#add_second_roll' do
@@ -19,6 +25,12 @@ describe Frame do
     it 'adds 10 pins (strike) and completes the second roll with zero bu default' do
       frame.add_first_roll(10)
       expect(frame.frames[1]).to eq [10, 0]
+    end
+
+    it 'scores spare at second roll' do
+      frame.add_first_roll(2)
+      frame.add_second_roll(8)
+      expect(frame.spare?).to eq true
     end
   end
 

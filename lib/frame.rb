@@ -26,6 +26,14 @@ class Frame
     @frames[current_frame].count == 2 ? true : false
   end
 
+  def strike?
+    @frames[@current_frame - 1][0] == 10 ? true : false
+  end
+
+  def spare?
+    @frames[@current_frame - 1].sum == 10 ? true : false
+  end
+
   private
 
   def next_frame
