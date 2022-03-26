@@ -9,7 +9,7 @@ class Frame
   end
 
   def add_first_roll(first_pin)
-    if  first_pin == 10
+    if first_pin == 10
       @frames[@current_frame] = [first_pin, 0]
       next_frame
     else
@@ -23,15 +23,15 @@ class Frame
   end
 
   def complete?(current_frame)
-    @frames[current_frame].count == 2 ? true : false
+    @frames[current_frame].count == 2
   end
 
   def strike?
-    @frames[@current_frame - 1][0] == 10 ? true : false
+    @frames[@current_frame - 1][0] == 10
   end
 
   def spare?
-    @frames[@current_frame - 1].sum == 10 ? true : false
+    @frames[@current_frame - 1].sum == 10
   end
 
   private
