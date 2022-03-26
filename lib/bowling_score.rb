@@ -12,6 +12,8 @@ class BowlingScore
   end
 
   def add(increase)
+    apply_bonus(increase)
+    add_new_frame if current_frame.complete?
     current_frame.add(increase)
   end
   
@@ -30,8 +32,20 @@ class BowlingScore
 
   def current_frame
     add_new_frame if @frames.empty?
-    add_new_frame if @frames.last.complete?
-    @frames.last
+    return @frames.last
+  end
+
+  def previous_frame
+    return nil if @frames.empty? || @frames.length == 1
+    previous_index = current_frame.number - 2
+    p "Previous Index: #{previous_index}"
+    @frames[previous_index]
+  end
+
+  def apply_bonus(increase)
+    return nil if previous_frame.nil?
+    return nil unless current_frame.complete?
+    previous_frame.increase_bonus(increase) unless previous_frame.bonus_complete?
   end
 
   def add_new_frame
