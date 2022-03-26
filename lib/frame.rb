@@ -1,25 +1,32 @@
 class Frame
   FIRST_FRAME = 1
+  SECOND_FRAME = 2
 
-  attr_reader :frames, :current_frame
+  attr_reader :frames, :current_frame, :next_frame
 
-  def initialize(current_frame = FIRST_FRAME)
+  def initialize(current_frame = FIRST_FRAME, next_frame = SECOND_FRAME)
     @frames = (1..10).map { |x| [x, []] }.to_h
     @current_frame = current_frame
+    @next_frame = next_frame
   end
 
   def add_first_roll(first_pin)
     if first_pin == 10
       @frames[@current_frame] = [first_pin, 0]
-      next_frame
+      new_current_frame
     else
       @frames[@current_frame] = [first_pin]
     end
   end
 
   def add_second_roll(second_pin)
-    @frames[@current_frame] << second_pin
-    next_frame
+    if @current_frame == @next_frame
+      new_next_frame
+    else
+      @frames[@current_frame] << second_pin
+      new_current_frame
+      new_next_frame
+    end
   end
 
   def complete?(current_frame)
@@ -36,7 +43,11 @@ class Frame
 
   private
 
-  def next_frame
+  def new_current_frame
     @current_frame += 1
+  end
+
+  def new_next_frame
+    @next_frame += 1
   end
 end

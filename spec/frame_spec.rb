@@ -22,7 +22,7 @@ describe Frame do
       expect(frame.frames[1]).to eq [2, 7]
     end
 
-    it 'adds 10 pins (strike) and completes the second roll with zero bu default' do
+    it 'adds 10 pins (strike) and completes the second roll with zero by default' do
       frame.add_first_roll(10)
       expect(frame.frames[1]).to eq [10, 0]
     end
@@ -32,9 +32,14 @@ describe Frame do
       frame.add_second_roll(8)
       expect(frame.spare?).to eq true
     end
+
+    it 'returns next frame if score strike in previous roll' do
+      frame.add_first_roll(10)
+      expect(frame.add_second_roll(2)).to eq 3
+    end
   end
 
-  describe '#next_frame' do
+  describe '#new_current_frame' do
     it 'it changes the frame (turn) to the next one' do
       frame.add_first_roll(2)
       frame.add_second_roll(7)
