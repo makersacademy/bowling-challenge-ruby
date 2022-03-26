@@ -20,13 +20,11 @@ class Frame
   end
 
   def add_second_roll(second_pin)
-    if @current_frame == @next_frame
-      new_next_frame
-    else
+    if @current_frame != @next_frame
       @frames[@current_frame] << second_pin
       new_current_frame
-      new_next_frame
     end
+    new_next_frame
   end
 
   def complete?(current_frame)
