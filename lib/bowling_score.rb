@@ -1,37 +1,45 @@
-class BowlingScore
-  attr_reader :name, :current_score, :frame
+require 'frame'
 
-  def initialize(name)
+class BowlingScore
+  MAX_FRAMES = 10
+
+  attr_reader :name
+
+  def initialize(name, frame_class = Frame)
     @name = name
-    @current_score = 0
-    @frame = 0
+    @frame_class = frame_class
+    @frames = []
+  end
+
+  def add(increase)
+    current_frame.add(increase)
   end
   
-  def add(increase)
-    @current_score += increase
+  def total_score
+    score = 0
+    for frame_number in 1..MAX_FRAMES do
+      score += frame_score(frame_number)
+    end
+    return score
+  end
+
+  def frame_score(number)
+    index = number - 1
+    @frames[index].nil? ? 0 : @frames[index].score
+  end
+
+  def current_frame
+    add_new_frame if @frames.empty?
+    add_new_frame if @frames.last.complete?
+    @frames.last
+  end
+
+  def add_new_frame
+    @frames << @frame_class.new(next_frame_number)
+  end
+
+  def next_frame_number
+    return 1 if @frames.empty?
+    return @frames.length + 1
   end
 end
-
-=begin
-1  1
-1  4
-2  4
-2  5
-3  6
-3  4
-4  5
-4  5
-5  10
-5  nil
-6  0
-6  1
-7  7
-7  3
-8  6
-8  4
-9  10
-9  nil
-10  2
-10  8
-10  6
-=end
