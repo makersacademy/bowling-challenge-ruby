@@ -69,16 +69,15 @@ I want to see my final total score
      
 * I started with the Frame class following a TDD approach:
     * the class has the following methods:
-        add_first_roll adds pins number for first roll and current_frame
-        add_second_roll adds pins number for second roll (if applicable) and current_frame
-        next_frame (private) changes current frame to next one
-        complete?(current_frame) returns true if current frame is complete
-        strike? Returns true if scored strike at first roll
-        spare? Returns true if scored total of 10 with second roll
+        * add_first_roll adds pins number for first roll and current_frame
+        * add_second_roll adds pins number for second roll (if applicable) and current_frame
+        * complete?(current_frame) returns true if current frame is complete
+        * strike? Returns true if scored strike at first roll
+        * spare? Returns true if scored total of 10 with second roll
     * and properties:
-        @frames = hash with 10 keys as frames and arrays to store rolls for each frame
-        @current_frame = current turn, starts at 1
-        @next_frame = following turn, starts at 2
+        * @frames = hash with 10 keys as frames and arrays to store rolls for each frame
+        * @current_frame = current turn, starts at 1
+        * @next_frame = following turn, starts at 2
 
 * I then moved to the Scorecard class with the same approach, but I think I overcomplicated things as I wanted to print the actual score after each frame as it's supposed to happen when going to play bowling. I didn't manage to complete what I was aiming to do and I ran out of time.
 
@@ -111,7 +110,7 @@ Call the same methods until you get to the 10th turn, then to see the frames sco
 frame.frames
 ```
 
-## Technologies use
+## Technologies used
 
 * Ruby
 * Rspec
