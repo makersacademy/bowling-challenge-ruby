@@ -1,7 +1,7 @@
 # Bowling Challenge in Ruby
 [![Tests](https://github.com/ruiined/bowling-challenge-ruby/actions/workflows/main.yml/badge.svg)](https://github.com/ruiined/bowling-challenge-ruby/actions/workflows/main.yml)
 ## Overview
-_Ruby challenge provided by [Makers](https://github.com/makersacademy/bowling-challenge-ruby)._
+_Ruby challenge provided by [Makers](https://github.com/makersacademy/bowling-challenge-ruby)_
 
 100% test coverage
 
