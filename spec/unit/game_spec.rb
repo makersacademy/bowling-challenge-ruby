@@ -15,4 +15,11 @@ describe Game do
     expect(subject.score).to eq 20
   end
 
+  it 'can roll a spare' do
+    subject.roll(4)
+    subject.roll(6)
+    18.times{ subject.roll(1) }
+    expect(subject.score).to eq 29
+  end
+
 end
