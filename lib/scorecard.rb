@@ -33,17 +33,7 @@ class ScoreCard
   end
 
   def frame_score
-    if frame_unfinished?
-      @pins.last
-    elsif prev_frame_strike?
-      store_frame_score
-      strike
-    elsif prev_frame_spare?
-      store_frame_score
-      spare
-    else
-      store_frame_score
-    end
+    frame_unfinished? ? @pins.last : calculate_frame_score
   end
 
   def roll(pins)
@@ -69,6 +59,18 @@ class ScoreCard
   end
 
   private
+
+  def calculate_frame_score
+    if prev_frame_strike?
+      store_frame_score
+      strike
+    elsif prev_frame_spare?
+      store_frame_score
+      spare
+    else
+      store_frame_score
+    end
+  end
 
   def store_frame_score
     @frames << @pins.last(2).sum
