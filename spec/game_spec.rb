@@ -168,4 +168,70 @@ describe Game do
       {pins: [], total: 0 }
     ]
   end
+
+  it 'allows a 3rd turn in frame 10 if stike scored and provides score' do
+    game = Game.new
+    bowl1 = game.bowl(2)
+    bowl2 = game.bowl(7)
+    bowl3 = game.bowl(10)
+    bowl4 = game.bowl(10)
+    bowl5 = game.bowl(7) 
+    bowl6 = game.bowl(2)  
+    bowl7 = game.bowl(9)  
+    bowl8 = game.bowl(1)  
+    bowl9 = game.bowl(4)  
+    bowl10 = game.bowl(4)  
+    bowl11 = game.bowl(0)  
+    bowl12 = game.bowl(0)   
+    bowl13 = game.bowl(10)  
+    bowl14 = game.bowl(10)  
+    bowl15 = game.bowl(10)
+    bowl16 = game.bowl(10)
+    expect(game.bowl(0)).to eq [
+      {pins: [2, 7], total: 9 },
+      {pins: [10], total: 27 },
+      {pins: [10], total: 19 },
+      {pins: [7, 2], total: 9 },
+      {pins: [9, 1], total: 14 },
+      {pins: [4, 4], total: 8 },
+      {pins: [0, 0], total: 0 },
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10, 10, 0], total: 20 }
+    ]
+  end
+
+  it 'allows a 3rd turn in frame 10 if spare scored and provides score' do
+    game = Game.new
+    bowl1 = game.bowl(2)
+    bowl2 = game.bowl(7)
+    bowl3 = game.bowl(10)
+    bowl4 = game.bowl(10)
+    bowl5 = game.bowl(7) 
+    bowl6 = game.bowl(2)  
+    bowl7 = game.bowl(9)  
+    bowl8 = game.bowl(1)  
+    bowl9 = game.bowl(4)  
+    bowl10 = game.bowl(4)  
+    bowl11 = game.bowl(0)  
+    bowl12 = game.bowl(0)   
+    bowl13 = game.bowl(10)  
+    bowl14 = game.bowl(5)  
+    bowl15 = game.bowl(4)
+    bowl16 = game.bowl(4)
+    bowl17 = game.bowl(6)
+    expect(game.bowl(5)).to eq [
+      {pins: [2, 7], total: 9 },
+      {pins: [10], total: 27 },
+      {pins: [10], total: 19 },
+      {pins: [7, 2], total: 9 },
+      {pins: [9, 1], total: 14 },
+      {pins: [4, 4], total: 8 },
+      {pins: [0, 0], total: 0 },
+      {pins: [10], total: 19 },
+      {pins: [5, 4], total: 9 },
+      {pins: [4, 6, 5], total: 15 }
+    ]
+  end
+  
 end
