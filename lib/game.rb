@@ -9,7 +9,7 @@ class Game
   end
 
   def roll(pins)
-    frame_complete?
+    frame_complete_check unless scorecard.length == 10
     scorecard.last.roll(pins)
   end
 
@@ -21,7 +21,7 @@ class Game
     running_total
   end
 
-  def frame_complete?
+  def frame_complete_check
     if scorecard.last.complete?
       new_frame
     end
@@ -42,7 +42,10 @@ class Game
   end
 
   def score_strike(index: )
-
+    frame_subset = scorecard[index..index+2]
+    rolls_subset = frame_subset.map { |frame| frame.rolls }
+    rolls_subset.flatten!
+    rolls_subset[0..2].sum
   end
 
   def score_spare(index: )

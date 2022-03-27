@@ -22,4 +22,31 @@ describe Game do
     expect(subject.score).to eq 29
   end
 
+  it 'can roll a strike' do
+    subject.roll(10)
+    18.times{ subject.roll(1) }
+    expect(subject.score).to eq 30
+  end
+
+  it 'can roll 2 strikes' do
+    subject.roll(10)
+    subject.roll(10)
+    16.times{ subject.roll(1) }
+    expect(subject.score).to eq 49
+  end
+
+  it 'can roll a strike in the final frame' do
+    18.times{ subject.roll(1) }
+    3.times{ subject.roll(10) }
+    expect(subject.score).to eq 48
+  end
+
+  it 'can roll a spare in the final frame' do
+    18.times{ subject.roll(1) }
+    subject.roll(4)
+    subject.roll(6)
+    subject.roll(5)
+    expect(subject.score).to eq 33
+  end
+
 end

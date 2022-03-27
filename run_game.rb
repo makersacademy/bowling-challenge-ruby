@@ -4,23 +4,10 @@
 require_relative './lib/game'
 
 game = Game.new
-game.roll(6)
-game.roll(4)
+18.times{ game.roll(1) }
+3.times{ game.roll(10) }
 
-game.roll(1)
-game.roll(1)
-game.roll(1)
-game.roll(1)
-game.roll(1)
-game.roll(1)
-game.roll(1)
-game.roll(1)
-game.roll(1)
-game.roll(1)
-game.roll(1)
-game.roll(1)
-game.roll(1)
-game.roll(1)
+p game.scorecard
 
-game.score
+p game.score
 
