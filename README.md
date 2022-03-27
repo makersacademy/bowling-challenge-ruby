@@ -85,5 +85,23 @@ To begin, I will start with some basic rspec tests that will describe the user c
 - [x] the user should have a name and a scorecard
 For simplicity I decided for a one to one approach with the relationship between user and scorecard, i.e. a single user will have one scorecard.
 
-- [ ] the add_score method should pass the correct argument to a Scorecard object
+- [x] the add_score method should pass the correct argument to a Scorecard object
+
+Now lets start tackling the scoring section, since its very complicated, im going to begin by making a bunch of tests which describe a series of scenarios such as:
+
+I am also tackling the bonus score tests after the first series of tests:
+
+first series of tests:
+Strike tests:
+- [ ] Scoring a strike should add a score of 10 for that frame and skip to the next frame
+spare tests:
+- [ ] scoring less than 10 should not skip to the next frame
+- [ ] after two inputs or two rolls the frame should skip to next one
+- [ ] if user knocks down the remaining pins on his second roll he gets a spare for that frame
+Less than 10 pins:
+- [ ] if user still has remaining pin on the second roll he will not get spare for that frame
+
+Second series of tests: 
+After we have successfully completed the tasks above we can begin writing tests for bonus scores
+
 
