@@ -1,7 +1,6 @@
 class Game
 
   def initialize
-    @running_score = 0
     @array_of_each_throw = []
     @array_of_each_rack = []
     @racks_completed = 0
@@ -13,9 +12,13 @@ class Game
     @final_rack = false
     @final_rack_first_roll_strike = false
     @final_rack_second_roll_spare = false
+    @current_roll_multiplier = 1
+    @next_roll_multiplier = 1
+    @two_rolls_time_multiplier = 1
   end
 
   def roll(n)
+    transfer
     if @third_roll == true
       final_rack_third_roll(n)
     elsif @final_rack == true && @second_roll == false
@@ -73,7 +76,6 @@ class Game
       add_rack
       rack_score_message
       @racks_completed += 1
-      @running_score += @current_rack_score
       @second_roll = false
       score_and_rack_message
       check_for_final_rack
@@ -87,7 +89,8 @@ class Game
     add_rack
     rack_score_message
     @racks_completed += 1
-    @running_score += @current_rack_score
+    @next_roll_multiplier += 1
+    @two_rolls_time_multiplier += 1
     score_and_rack_message
     check_for_final_rack
   end
@@ -99,16 +102,15 @@ class Game
     add_rack
     rack_score_message
     @racks_completed += 1
-    @running_score += @current_rack_score
     @second_roll = false
+    @next_roll_multiplier += 1
     score_and_rack_message
     check_for_final_rack
   end
 
   def add_throw(n)
-    @array_of_each_throw << n
+    @array_of_each_throw << n*@current_roll_multiplier
   end
-
   def add_rack
     @array_of_each_rack << @current_rack_score
   end
@@ -118,7 +120,7 @@ class Game
   end
 
   def score_and_rack_message
-    puts "After #{@racks_completed} racks your score is #{@running_score}!"
+    puts "After #{@racks_completed} racks your score is #{@array_of_each_throw.sum}!"
   end
 
   def check_for_final_rack
@@ -173,7 +175,6 @@ class Game
       add_throw(n)
       add_rack
       @racks_completed += 1
-      @running_score += @current_rack_score
       game_over_message
     end
   end
@@ -186,20 +187,17 @@ class Game
     @third_roll_score = n
     if n == 10
       final_rack_strike(n)
-      @running_score += @current_rack_score
       game_over_message
     elsif @second_roll_score + n == 10
       final_rack_spare(n)
       add_rack
       @racks_completed += 1
-      @running_score += @current_rack_score
       game_over_message
     else
       @current_rack_score += @second_roll_score
       add_throw(n)
       add_rack
       @racks_completed += 1
-      @running_score += @current_rack_score
       game_over_message
     end
   end
@@ -221,6 +219,12 @@ class Game
   end
 
   def game_over_message
-    puts "The game is over... you scored #{@running_score}"
+    puts "The game is over... you scored #{@array_of_each_throw.sum}"
+  end
+
+  def transfer
+    @current_roll_multiplier = @next_roll_multiplier
+    @next_roll_multiplier = @two_rolls_time_multiplier
+    @two_rolls_time_multiplier = 1
   end
 end
