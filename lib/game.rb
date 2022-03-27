@@ -74,7 +74,6 @@ class Game
       @current_rack_score += n
       add_throw(n)
       add_rack
-      rack_score_message
       @racks_completed += 1
       @second_roll = false
       score_and_rack_message
@@ -87,7 +86,6 @@ class Game
     @current_rack_score += n
     add_throw(n)
     add_rack
-    rack_score_message
     @racks_completed += 1
     @next_roll_multiplier += 1
     @two_rolls_time_multiplier += 1
@@ -100,7 +98,6 @@ class Game
     @current_rack_score += n
     add_throw(n)
     add_rack
-    rack_score_message
     @racks_completed += 1
     @second_roll = false
     @next_roll_multiplier += 1
@@ -110,13 +107,11 @@ class Game
 
   def add_throw(n)
     @array_of_each_throw << n*@current_roll_multiplier
-  end
-  def add_rack
-    @array_of_each_rack << @current_rack_score
+    puts "Your score is currently #{@array_of_each_throw.sum}"
   end
 
-  def rack_score_message
-    puts "You scored #{@current_rack_score} in the most recent rack!"
+  def add_rack
+    @array_of_each_rack << @current_rack_score
   end
 
   def score_and_rack_message
