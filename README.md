@@ -6,7 +6,15 @@ tested effect on score by rolling 1 and then 2 for every turn, which drove creat
 
 tempting to use array.sum method to total score but wanted to increment the turn with an eye on implementing spare and strike bonuses, which depend on ensuing games, so would be helpful to have a turn number to work with
 
-so did a 20.times block adding the value stored in the @rolls array at the index position of turn (starting at 0 at top of method to avoid adjustment for zero-indexing) to the total, and incrementing the turn by 1
+so did a 20.times block adding the value stored in the @rolls array at the index position of turn (starting at 0 at top of method to avoid adjustment for zero-indexing) to the total, and incrementing the turn by 1 - then return total after block
+
+then test for spare, inputting the first three rolls (the first two making a spare) and then 17 zeros for the remainder as our score method returns the total for the whole game and we just want to focus on three rolls - this fails as expected because there's no functionality for bonuses yet
+
+this drives incrementing score-keeping by frames instead of just rolls (ie. by increments of 2) - so change the 20.times to 10.times, and turn incrementing by 2, to set up the conditionality for two rolls in a frame totalling 10 and thus getting the bonus of the score from the first roll of the next frame - so now the initialize method treats it as 20 separate rolls, but the score-keeping does it in increments of two - maybe not the ideal presentation but it makes the implementation easier
+
+this has the limitation of not being a 'live' game - ie you can't check your score on the go, user has to manually input each score before checking the total
+
+refactor this spare logic into a private method
 
 
 

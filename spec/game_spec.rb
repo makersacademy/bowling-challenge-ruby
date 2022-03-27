@@ -17,4 +17,12 @@ describe Game do
     20.times { game.roll(2) }
     expect(game.score).to eq 40
   end
+
+  it 'can roll a spare' do
+    game.roll(5)
+    game.roll(5)
+    game.roll(7)
+    17.times { game.roll(0) }
+    expect(game.score).to eq 24
+  end
 end
