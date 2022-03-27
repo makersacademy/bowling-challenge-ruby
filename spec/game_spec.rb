@@ -25,4 +25,12 @@ describe Game do
     17.times { game.roll(0) }
     expect(game.score).to eq 24
   end
+
+  it 'can roll a strike' do
+    game.roll(10)
+    game.roll(5)
+    game.roll(6)
+    16.times { game.roll(0) }
+    expect(game.score).to eq 32
+  end
 end

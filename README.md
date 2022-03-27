@@ -14,8 +14,11 @@ this drives incrementing score-keeping by frames instead of just rolls (ie. by i
 
 this has the limitation of not being a 'live' game - ie you can't check your score on the go, user has to manually input each score before checking the total
 
-refactor this spare logic into a private method
+refactor this spare logic into a private method, as well as the logic for frame and spare scores
 
+test for strike by doing 10, 5, 6 then 16 zeros (1 less as strike means frame is only 1 roll), gets error 'nil can't be coerced into Integer' as array isn't full, so have to implement functionality for strike skipping a go
+
+logic for strike score will be same as spare score (current plus next two in index) so change it to bonus_score and have the difference just being how they iterate in the method
 
 
 
