@@ -63,3 +63,27 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+### My Approach
+
+#### How to setup and use the program
+
+#### My steps
+Below is an account of how I went about solving this challenge
+
+##### First steps
+
+I began by creating user stories that described most of the logic for calculating scores for a typical game of bowling.
+
+I attempted Domain Modelling, however, I began to get confused about what I needed to include in the domain model. Below is my first attempt.
+(images/Bowling Challenge DM.drawio.png)
+
+I will attempt to improve it as I progress.
+
+To begin, I will start with some basic rspec tests that will describe the user class such as, 
+
+- [ ] the user should have a name and a scorecard
+For simplicity I decided for a one to one approach with the relationship between user and scorecard, i.e. a single user will have one scorecard.
+
+- [ ] the add_score method should pass the correct argument to a Scorecard object
+
