@@ -1,8 +1,14 @@
-* test a gutter game and an all 1's game to test-drive roll and score methods as well as class-level @rolls array to be summed in score method
+first attempt dividing into frames but this added an extra layer of complication
 
-make the turns be added to the score two at a time to make it work like frames, setting stage for implementation of spare and strike functionality
+start by testing gutter game as simplest application of it, drives creation of roll and score methods - passed it with hard-coded 0 in score
 
-refactored the logic of frame, spare and strike scores into private methods, testing all the while
+tested effect on score by rolling 1 and then 2 for every turn, which drove creation of class-level array for holding scores 
+
+tempting to use array.sum method to total score but wanted to increment the turn with an eye on implementing spare and strike bonuses, which depend on ensuing games, so would be helpful to have a turn number to work with
+
+so did a 20.times block adding the value stored in the @rolls array at the index position of turn (starting at 0 at top of method to avoid adjustment for zero-indexing) to the total, and incrementing the turn by 1
+
+
 
 
 

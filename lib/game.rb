@@ -1,12 +1,19 @@
 class Game
-  attr_reader :frames
-
   def initialize
-    @frames = []
+    @rolls = []
   end
 
-  def frame(roll_1, roll_2)
-    @frames << [roll_1, roll_2]
+  def roll(pins)
+    @rolls << pins
   end
 
+  def score
+    total = 0
+    turn = 0
+    20.times do
+      total += @rolls[turn]
+      turn += 1
+    end
+    total
+  end
 end
