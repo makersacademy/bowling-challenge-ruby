@@ -1,37 +1,11 @@
 Bowling Challenge in Ruby
 =================
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
-
-## The Task
-
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
+## Challenge description
 
 Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
 
 A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
-
-As usual please start by
-
-* Forking this repo
-
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
-
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
-
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
-
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
 
 ## Bowling — how does it work?
 
@@ -62,4 +36,82 @@ In the image below you can find some score examples.
 
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
-![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+## My approach to the challenge
+
+* I've started diagramming the following stories:
+
+```shell
+As a bowling player
+So that I can practice my skills
+I want to play a full bowling game 
+
+As a bowling player
+So that I know how well I’m doing
+I want to see how many pins I knock down in each roll
+
+As a bowling player
+So that I have a record for next time
+I want to keep track of my total score for each frame
+
+As a bowling player
+So that I have some more information about my rolls
+I want to have some notes on my strikes, spares and bonuses
+
+As a bowling player
+So that I know how the game went
+I want to see my final total score
+```
+
+* I decided to create 3 classes: 
+    * Frame: in charge of keeping track of the number of frames, rolls and pins that are knocked down
+    * Scorecard: in charge of keeping track of the total score for each frame and final score
+    * BowlingGame: in charge of letting the player play a bowling game and returning the scores for each frame and final score
+     
+* I started with the Frame class following a TDD approach:
+    * the class has the following methods:
+        add_first_roll adds pins number for first roll and current_frame
+        add_second_roll adds pins number for second roll (if applicable) and current_frame
+        next_frame (private) changes current frame to next one
+        complete?(current_frame) returns true if current frame is complete
+        strike? Returns true if scored strike at first roll
+        spare? Returns true if scored total of 10 with second roll
+    * and properties:
+        @frames = hash with 10 keys as frames and arrays to store rolls for each frame
+        @current_frame = current turn, starts at 1
+        @next_frame = following turn, starts at 2
+
+* I then moved to the Scorecard class with the same approach, but I think I overcomplicated things as I wanted to print the actual score after each frame as it's supposed to happen when going to play bowling. I didn't manage to complete what I was aiming to do and I ran out of time.
+
+## Notes
+
+As I run out of time I didn't manage to complete the challenge. I think I should have followed a different and more simple approach. 
+I will try to complete it as soon as I can. Also there are some methods that need to be refactored as they are pretty long and complex to understand.
+
+At the moment the only way to run the program in irb is by following the commands below, but again this is not what I was aiming to implement as final product:
+
+```shell
+irb
+require './lib/frame.rb'
+frame = Frame.new
+```
+
+Then call the method .adds_first_roll(pin) with number of pins as argument. Call this again if the previous time it was a strike.
+```shell
+frame.add_first_roll(10)
+```
+
+Call .adds_first_roll(pin) and .adds_second_roll(pin) if there is no strike in the first roll
+```shell
+frame.add_first_roll(3)
+frame.add_second_roll(4)
+```
+
+Call the same methods until you get to the 10th turn, then to see the frames scores run the following command:
+```shell
+frame.frames
+```
+
+## Technologies use
+
+* Ruby
+* Rspec
