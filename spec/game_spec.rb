@@ -233,5 +233,93 @@ describe Game do
       {pins: [4, 6, 5], total: 15 }
     ]
   end
-  
+
+  it '10th frame starts with strike returns appropriate bonus' do
+    game = Game.new
+    bowl1 = game.bowl(10)
+    bowl2 = game.bowl(10)
+    bowl3 = game.bowl(10)
+    bowl4 = game.bowl(10)
+    bowl5 = game.bowl(10) 
+    bowl6 = game.bowl(10)  
+    bowl7 = game.bowl(10)  
+    bowl8 = game.bowl(10)  
+    bowl9 = game.bowl(10)  
+    bowl10 = game.bowl(10)  
+    bowl11 = game.bowl(2)  
+    expect(game.bowl(2)).to eq [
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10], total: 22 },
+      {pins: [10, 2, 2], total: 14 },
+    ]
+  end
+
+  it 'perfect game' do
+    game = Game.new
+    bowl1 = game.bowl(10)
+    bowl2 = game.bowl(10)
+    bowl3 = game.bowl(10)
+    bowl4 = game.bowl(10)
+    bowl5 = game.bowl(10) 
+    bowl6 = game.bowl(10)  
+    bowl7 = game.bowl(10)  
+    bowl8 = game.bowl(10)  
+    bowl9 = game.bowl(10)  
+    bowl10 = game.bowl(10)  
+    bowl11 = game.bowl(10)  
+    expect(game.bowl(10)).to eq [
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10], total: 30 },
+      {pins: [10, 10, 10], total: 30 },
+    ]
+  end
+
+  it 'gutter game' do
+    game = Game.new
+    bowl1 = game.bowl(0)
+    bowl2 = game.bowl(0)
+    bowl3 = game.bowl(0)
+    bowl4 = game.bowl(0)
+    bowl5 = game.bowl(0) 
+    bowl6 = game.bowl(0)  
+    bowl7 = game.bowl(0)  
+    bowl8 = game.bowl(0)  
+    bowl9 = game.bowl(0)  
+    bowl10 = game.bowl(0) 
+    bowl11 = game.bowl(0) 
+    bowl12 = game.bowl(0) 
+    bowl13 = game.bowl(0) 
+    bowl14 = game.bowl(0) 
+    bowl15 = game.bowl(0) 
+    bowl16 = game.bowl(0) 
+    bowl17 = game.bowl(0) 
+    bowl18 = game.bowl(0) 
+    bowl19 = game.bowl(0) 
+    expect(game.bowl(0)).to eq [
+      {pins: [0, 0], total: 0 },
+      {pins: [0, 0], total: 0 },
+      {pins: [0, 0], total: 0 },
+      {pins: [0, 0], total: 0 },
+      {pins: [0, 0], total: 0 },
+      {pins: [0, 0], total: 0 },
+      {pins: [0, 0], total: 0 },
+      {pins: [0, 0], total: 0 },
+      {pins: [0, 0], total: 0 },
+      {pins: [0, 0], total: 0 }
+    ]
+  end
 end
