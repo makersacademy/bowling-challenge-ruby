@@ -147,25 +147,25 @@ describe Game do
     ]
   end
 
-  it 'adds correct bonus if strike follows a strike' do
-    game = Game.new
-    bowl1 = game.bowl(2)
-    bowl2 = game.bowl(7)
-    bowl3 = game.bowl(10)
-    bowl4 = game.bowl(10)
-    bowl5 = game.bowl(7) 
-    bowl6 = game.bowl(5)  
-    expect(game.bowl(0)).to eq [
-      {pins: [2, 7], total: 9 },
-      {pins: [10], total: 25 },
-      {pins: [10], total: 15 },
-      {pins: [5, 0], total: 5 },
-      {pins: [], total: 0 },
-      {pins: [], total: 0 },
-      {pins: [], total: 0 },
-      {pins: [], total: 0 },
-      {pins: [], total: 0 },
-      {pins: [], total: 0 }
-    ]
-  end
+  # it 'adds correct bonus if strike follows a strike' do
+  #   game = Game.new
+  #   bowl1 = game.bowl(2)
+  #   bowl2 = game.bowl(7)
+  #   bowl3 = game.bowl(10)
+  #   bowl4 = game.bowl(10)
+  #   bowl5 = game.bowl(7) 
+  #   bowl6 = game.bowl(5)  
+  #   expect(game.bowl(0)).to eq [
+  #     {pins: [2, 7], total: 9 },
+  #     {pins: [10], total: 25 },
+  #     {pins: [10], total: 15 },
+  #     {pins: [5, 0], total: 5 },
+  #     {pins: [], total: 0 },
+  #     {pins: [], total: 0 },
+  #     {pins: [], total: 0 },
+  #     {pins: [], total: 0 },
+  #     {pins: [], total: 0 },
+  #     {pins: [], total: 0 }
+  #   ]
+  # end
 end
