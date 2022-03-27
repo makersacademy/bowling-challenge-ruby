@@ -1,4 +1,6 @@
 class Game
+  attr_reader :rolls
+
   def initialize
     @rolls = []
   end
