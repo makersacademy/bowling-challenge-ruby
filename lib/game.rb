@@ -7,11 +7,11 @@ class Game
   end
 
   def roll(pins)
-    # @scorecard << pins
+    @scorecard << pins
   end
 
   def score
-    0
+    @scorecard.sum
   end
 
 end
