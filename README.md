@@ -82,7 +82,7 @@ I will attempt to improve it as I progress.
 
 To begin, I will start with some basic rspec tests that will describe the user class such as, 
 
-- [ ] the user should have a name and a scorecard
+- [x] the user should have a name and a scorecard
 For simplicity I decided for a one to one approach with the relationship between user and scorecard, i.e. a single user will have one scorecard.
 
 - [ ] the add_score method should pass the correct argument to a Scorecard object
