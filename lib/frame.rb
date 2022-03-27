@@ -1,9 +1,9 @@
 class Frame
   
-  attr_reader :roll_array
+  attr_reader :rolls
 
   def initialize
-    @roll_array = []
+    @rolls = []
   end
   
   def flatten_frame
@@ -11,18 +11,30 @@ class Frame
   end
 
   def total
-    @roll_array.sum
+    @rolls.sum
   end
 
   def roll(pins)
-    @roll_array << pins
+    @rolls << pins
   end
 
   def complete?
-    if roll_array.sum == 10 || roll_array.length == 2
+    if total == 10 || rolls.length == 2
       true
     else
       false
+    end
+  end
+  
+  def strike?
+    if total == 10 && rolls.length == 1
+      true
+    end
+  end
+
+  def spare?
+    if total == 10 && rolls.length == 2
+      true
     end
   end
 

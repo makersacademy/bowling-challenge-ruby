@@ -4,11 +4,23 @@
 require_relative './lib/game'
 
 game = Game.new
-p game.scorecard.last.complete?
-game.roll(10)
-p game.scorecard.last.complete?
-game.roll(1)
-game.roll(1)
-p game.scorecard.last.complete?
+game.roll(6)
+game.roll(4)
 
+game.roll(1)
+game.roll(1)
+game.roll(1)
+game.roll(1)
+game.roll(1)
+game.roll(1)
+game.roll(1)
+game.roll(1)
+game.roll(1)
+game.roll(1)
+game.roll(1)
+game.roll(1)
+game.roll(1)
+game.roll(1)
+
+game.score
 
