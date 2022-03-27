@@ -10,22 +10,22 @@ describe Frame do
 
   describe '.roll' do
     it 'starts off empty' do
-      expect(frame_class.frame).to be_empty
+      expect(frame_class.score).to be_empty
     end
 
     it 'stores the first roll' do
       frame_class.roll(pins)
-      expect(frame_class.frame).to include roll_double
+      expect(frame_class.score).to include pins
     end
 
     it 'stores the second roll' do
       2.times { frame_class.roll(pins) }
-      expect(frame_class.frame.length).to be 2
+      expect(frame_class.score.length).to be 2
     end
 
     it 'finishes the frame when there is a strike' do
       frame_class.roll(10)
-      expect(frame_class.frame.length).to be 2
+      expect(frame_class.score.length).to be 2
     end
   end
 

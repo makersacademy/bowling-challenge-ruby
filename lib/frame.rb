@@ -2,40 +2,38 @@
 
 require_relative 'roll'
 
+MAX_PINS = 10
+
 # Frame class
 class Frame
-  attr_reader :frame
+  attr_reader :score, :max_pins
 
   def initialize(roll_class = Roll)
     @roll_class = roll_class
-    @frame = []
+    @score = []
   end
 
   def roll(pins)
     raise IncorrectRollError, frame_over if frame_finished?
     raise IncorrectRollError, no_pins_left if too_many?(pins)
 
-    @frame << @roll_class.new(pins)
-    @frame << 0 if frame_ongoing? && pins == max_pins
+    @score << @roll_class.new(pins).pins
+    @score << 0 if frame_ongoing? && pins == MAX_PINS
     # pins
   end
 
   private
 
-  def max_pins
-    Roll::MAX_PINS
-  end
-
   def frame_ongoing?
-    @frame.length == 1
+    @score.length == 1
   end
 
   def frame_finished?
-    @frame.length == 2
+    @score.length == 2
   end
 
   def too_many?(pins)
-    !@frame.empty? && pins > (max_pins - @frame.last.pins)
+    !@score.empty? && pins > (MAX_PINS - @score.last)
   end
 
   def frame_over
