@@ -7,21 +7,21 @@ describe ScoreCard do
   let(:max_pins) { ScoreCard::MAX_PINS }
   let(:max_frames) { ScoreCard::MAX_FRAMES }
 
-  describe "roll" do
+  describe 'roll' do
     it 'takes the first roll score' do
       expect(scorecard.roll(4)).to eq 4
     end
-  
+
     it 'starts a new frame after 2 rolls' do
       3.times { scorecard.roll(4) }
       expect(scorecard.frame_count).to eq 2
     end
-  
+
     it "counts whether it's the first or second roll" do
       3.times { scorecard.roll(4) }
       expect(scorecard.roll_count).to eq 1
     end
-  
+
     it 'adds the knocked pins to an array' do
       scorecard.roll(4)
       scorecard.roll(2)
@@ -29,7 +29,7 @@ describe ScoreCard do
     end
   end
 
-  describe ".frame_score" do
+  describe '.frame_score' do
     it 'calculates the frame score after 1 roll' do
       scorecard.roll(4)
       expect(scorecard.frame_score).to eq 4
@@ -51,43 +51,46 @@ describe ScoreCard do
     end
   end
 
-  describe ".strike" do
-    it "skips the frame after the strike" do
+  describe '.strike' do
+    it 'skips the frame after the strike' do
       scorecard.roll(max_pins)
       expect(scorecard.frames).to include max_pins
       2.times { scorecard.roll(4) }
       expect(scorecard.frames).to include 8
     end
 
-    it "calculates strike score correctly" do
+    it 'calculates strike score correctly' do
       scorecard.roll(max_pins)
       2.times { scorecard.roll(4) }
       expect(scorecard.total_score).to eq max_pins + 16
     end
   end
 
-  describe ".spare" do
-    it "calculates spare correctly" do
+  describe '.spare' do
+    it 'calculates spare correctly' do
       scorecard.roll(max_pins - 4)
       3.times { scorecard.roll(4) }
       expect(scorecard.total_score).to eq max_pins + 12
     end
   end
 
-  describe "edge cases" do
+  describe 'edge cases' do
     it 'raises an error when rolling incorrect amount of pins' do
-      expect { scorecard.roll(-1) }.to raise_error(IncorrectRollError, "Incorrect number of pins entered")
-      expect { scorecard.roll(max_pins + 1) }.to raise_error(IncorrectRollError, "Incorrect number of pins entered")
+      expect { scorecard.roll(-1) }.to raise_error(IncorrectRollError, 'Incorrect number of pins entered')
+      expect { scorecard.roll(max_pins + 1) }.to raise_error(IncorrectRollError, 'Incorrect number of pins entered')
     end
 
     it 'raises an error when the second roll exceeds the remaining amount of pins' do
       scorecard.roll(4)
-      expect { scorecard.roll(max_pins - 3) }.to raise_error(IncorrectRollError, "Number of pins entered exceeds the amount of pins left")
+      expect do
+        scorecard.roll(max_pins - 3)
+      end.to raise_error(IncorrectRollError,
+                         'Number of pins entered exceeds the amount of pins left')
     end
 
     it 'raises an error when trying to roll after the last frame' do
       (max_frames * 2).times { scorecard.roll(4) }
-      expect { scorecard.roll(4) }.to raise_error(IncorrectRollError, "The game is over")
+      expect { scorecard.roll(4) }.to raise_error(IncorrectRollError, 'The game is over')
     end
   end
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'incorrect_roll_error'
 
 # ScoreCard class
@@ -31,17 +32,20 @@ class ScoreCard
   end
 
   def roll(pins)
-    raise IncorrectRollError if pins < 0 || pins > MAX_PINS
-    raise IncorrectRollError.new("Number of pins entered exceeds the amount of pins left") if !@pins.empty? && roll_count == 1 && pins > (MAX_PINS - @pins.last)
-    raise IncorrectRollError.new("The game is over") if frames.length >= MAX_FRAMES
-      if frame_unfinished? && pins == MAX_PINS
-        @rolls += 2
-        @pins << pins
-        @pins << 0
-      else 
-        @pins << pins
-        @rolls += 1
-      end
+    raise IncorrectRollError if pins.negative? || pins > MAX_PINS
+    if !@pins.empty? && roll_count == 1 && pins > (MAX_PINS - @pins.last)
+      raise IncorrectRollError, 'Number of pins entered exceeds the amount of pins left'
+    end
+    raise IncorrectRollError, 'The game is over' if frames.length >= MAX_FRAMES
+
+    if frame_unfinished? && pins == MAX_PINS
+      @rolls += 2
+      @pins << pins
+      @pins << 0
+    else
+      @pins << pins
+      @rolls += 1
+    end
     frame_score
     pins
   end
@@ -51,20 +55,17 @@ class ScoreCard
   end
 
   def roll_count
-    frame_count == 0 ? 1 : @rolls / frame_count 
+    frame_count.zero? ? 1 : @rolls / frame_count
   end
 
   private
 
   def calculate_frame_score
+    store_frame_score
     if prev_frame_strike?
-      store_frame_score
       strike
     elsif prev_frame_spare?
-      store_frame_score
       spare
-    else
-      store_frame_score
     end
   end
 
@@ -73,7 +74,7 @@ class ScoreCard
   end
 
   def prev_frame_strike?
-    @pins[-4] == MAX_PINS && @pins[-3] == 0
+    @pins[-4] == MAX_PINS && (@pins[-3]).zero?
   end
 
   def prev_frame_spare?
@@ -81,7 +82,7 @@ class ScoreCard
   end
 
   def frame_unfinished?
-    @pins.length.odd? || @pins.length == 0
+    @pins.length.odd? || @pins.length.zero?
   end
 
   def strike
