@@ -4,7 +4,8 @@ require 'scorecard'
 
 describe ScoreCard do
   subject(:scorecard) { ScoreCard.new }
-  subject(:max_pins) { ScoreCard::MAX_PINS }
+  let(:max_pins) { ScoreCard::MAX_PINS }
+  let(:max_frames) { ScoreCard::MAX_FRAMES }
 
   describe "roll" do
     it 'takes the first roll score' do
@@ -79,9 +80,14 @@ describe ScoreCard do
       expect { scorecard.roll(max_pins + 1) }.to raise_error(IncorrectRollError, "Incorrect number of pins entered")
     end
 
-    it "raises an error when the second roll exceeds the remaining amount of pins" do
+    it 'raises an error when the second roll exceeds the remaining amount of pins' do
       scorecard.roll(4)
       expect { scorecard.roll(max_pins - 3) }.to raise_error(IncorrectRollError, "Number of pins entered exceeds the amount of pins left")
+    end
+
+    it 'raises an error when trying to roll after the last frame' do
+      (max_frames * 2).times { scorecard.roll(4) }
+      expect { scorecard.roll(4) }.to raise_error(IncorrectRollError, "The game is over")
     end
   end
 end

@@ -6,6 +6,7 @@ class ScoreCard
   attr_reader :pins, :frames
 
   MAX_PINS = 10
+  MAX_FRAMES = 10
 
   def initialize
     @pins = []
@@ -32,6 +33,7 @@ class ScoreCard
   def roll(pins)
     raise IncorrectRollError if pins < 0 || pins > MAX_PINS
     raise IncorrectRollError.new("Number of pins entered exceeds the amount of pins left") if !@pins.empty? && roll_count == 1 && pins > (MAX_PINS - @pins.last)
+    raise IncorrectRollError.new("The game is over") if frames.length >= MAX_FRAMES
       if frame_unfinished? && pins == MAX_PINS
         @rolls += 2
         @pins << pins
