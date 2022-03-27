@@ -12,9 +12,9 @@ class Game
     turn = 0
     10.times do
       if spare?(turn)
-        total += @rolls[turn] + @rolls[turn + 1] + @rolls[turn + 2]
+        total += spare_score(turn)
       else
-        total += @rolls[turn] + @rolls[turn + 1]
+        total += frame_score(turn)
       end
       turn += 2
     end
@@ -25,5 +25,13 @@ class Game
 
   def spare?(turn)
     @rolls[turn] + @rolls[turn + 1] == 10
+  end
+
+  def frame_score(turn)
+    @rolls[turn] + @rolls[turn + 1]
+  end
+
+  def spare_score(turn)
+    @rolls[turn] + @rolls[turn + 1] + @rolls[turn + 2]
   end
 end
