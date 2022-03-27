@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require_relative 'incorrect_roll_error'
 
 # ScoreCard class
 class ScoreCard
@@ -20,14 +21,6 @@ class ScoreCard
     ]
   end
 
-  def strike
-    @frames[-2] = MAX_PINS + @pins.last(2).sum
-  end
-
-  def spare
-    @frames[-2] = MAX_PINS + @pins[-2]
-  end
-  
   def total_score
     @frames.sum
   end
@@ -37,8 +30,9 @@ class ScoreCard
   end
 
   def roll(pins)
-    raise "incorrect number of pins" if pins < 0 || pins > MAX_PINS
-      if pins == MAX_PINS
+    raise IncorrectRollError if pins < 0 || pins > MAX_PINS
+    raise IncorrectRollError.new("Number of pins entered exceeds the amount of pins left") if !@pins.empty? && roll_count == 1 && pins > (MAX_PINS - @pins.last)
+      if frame_unfinished? && pins == MAX_PINS
         @rolls += 2
         @pins << pins
         @pins << 0
@@ -55,7 +49,7 @@ class ScoreCard
   end
 
   def roll_count
-    @rolls / frame_count
+    frame_count == 0 ? 1 : @rolls / frame_count 
   end
 
   private
@@ -85,6 +79,14 @@ class ScoreCard
   end
 
   def frame_unfinished?
-    @pins.length.odd?
+    @pins.length.odd? || @pins.length == 0
+  end
+
+  def strike
+    @frames[-2] = MAX_PINS + @pins.last(2).sum
+  end
+
+  def spare
+    @frames[-2] = MAX_PINS + @pins[-2]
   end
 end
