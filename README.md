@@ -3,7 +3,7 @@
 ## Overview
 _Ruby challenge provided by [Makers](https://github.com/makersacademy/bowling-challenge-ruby)_
 
-100% ruby code for bowling score calculations.
+Bowling score calculations
 
 100% test coverage
 
