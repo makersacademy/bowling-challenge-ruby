@@ -1,8 +1,9 @@
 require 'game'
 
 describe Game do
-  it 'can add the number of pins down to a frame' do
+  it 'can add the number of pins_down to a frame' do
     expect(subject.bowl(4)).to eq [
+      {game_total: 4},
       {pins: [4], total: 4 },
       {pins: [], total: 0 },
       {pins: [], total: 0 },
@@ -12,8 +13,9 @@ describe Game do
       {pins: [], total: 0 },
       {pins: [], total: 0 },
       {pins: [], total: 0 },
-      {pins: [], total: 0 }
+      {pins: [], total: 0 },
     ]
+
   end
 
   it 'starts a new frame every 2 bowls' do
@@ -23,6 +25,7 @@ describe Game do
     bowl3 = game.bowl(8)
     bowl4 = game.bowl(1)
     expect(game.bowl(9)).to eq [
+      {game_total: 25},
       {pins: [4, 3], total: 7 },
       {pins: [8, 1], total: 9 },
       {pins: [9], total: 9 },
@@ -46,6 +49,7 @@ describe Game do
     bowl6 = game.bowl(1) 
     bowl7 = game.bowl(5)  
     expect(game.bowl(0)).to eq [
+      {game_total: 41},
       {pins: [2, 8], total: 12 },
       {pins: [2, 7], total: 9 },
       {pins: [9, 1], total: 15 },
@@ -68,6 +72,7 @@ describe Game do
     bowl5 = game.bowl(4) 
     bowl6 = game.bowl(5)  
     expect(game.bowl(0)).to eq [
+      {game_total: 40},
       {pins: [2, 8], total: 17 },
       {pins: [7, 3], total: 14 },
       {pins: [4, 5], total: 9 },
@@ -90,6 +95,7 @@ describe Game do
     bowl5 = game.bowl(4) 
     bowl6 = game.bowl(5)  
     expect(game.bowl(0)).to eq [
+      {game_total: 38},
       {pins: [2, 7], total: 9 },
       {pins: [10], total: 17 },
       {pins: [3, 4], total: 7 },
@@ -112,6 +118,7 @@ describe Game do
     bowl5 = game.bowl(4) 
     bowl6 = game.bowl(5)  
     expect(game.bowl(0)).to eq [
+      {game_total: 49},
       {pins: [2, 8], total: 20 },
       {pins: [10], total: 17 },
       {pins: [3, 4], total: 7 },
@@ -134,6 +141,7 @@ describe Game do
     bowl5 = game.bowl(7) 
     bowl6 = game.bowl(5)  
     expect(game.bowl(0)).to eq [
+      {game_total: 49},
       {pins: [2, 7], total: 9 },
       {pins: [10], total: 20 },
       {pins: [3, 7], total: 15 },
@@ -156,6 +164,7 @@ describe Game do
     bowl5 = game.bowl(7) 
     bowl6 = game.bowl(2)  
     expect(game.bowl(5)).to eq [
+      {game_total: 69},
       {pins: [2, 7], total: 9 },
       {pins: [10], total: 27 },
       {pins: [10], total: 19 },
@@ -188,6 +197,7 @@ describe Game do
     bowl15 = game.bowl(10)
     bowl16 = game.bowl(10)
     expect(game.bowl(0)).to eq [
+      {game_total: 166},
       {pins: [2, 7], total: 9 },
       {pins: [10], total: 27 },
       {pins: [10], total: 19 },
@@ -221,6 +231,7 @@ describe Game do
     bowl16 = game.bowl(4)
     bowl17 = game.bowl(6)
     expect(game.bowl(5)).to eq [
+      {game_total: 129},
       {pins: [2, 7], total: 9 },
       {pins: [10], total: 27 },
       {pins: [10], total: 19 },
@@ -248,6 +259,7 @@ describe Game do
     bowl10 = game.bowl(10)  
     bowl11 = game.bowl(2)  
     expect(game.bowl(2)).to eq [
+      {game_total: 276},
       {pins: [10], total: 30 },
       {pins: [10], total: 30 },
       {pins: [10], total: 30 },
@@ -275,6 +287,7 @@ describe Game do
     bowl10 = game.bowl(10)  
     bowl11 = game.bowl(10)  
     expect(game.bowl(10)).to eq [
+      {game_total: 300},
       {pins: [10], total: 30 },
       {pins: [10], total: 30 },
       {pins: [10], total: 30 },
@@ -310,6 +323,7 @@ describe Game do
     bowl18 = game.bowl(0) 
     bowl19 = game.bowl(0) 
     expect(game.bowl(0)).to eq [
+      {game_total: 0},
       {pins: [0, 0], total: 0 },
       {pins: [0, 0], total: 0 },
       {pins: [0, 0], total: 0 },
