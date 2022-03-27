@@ -4,7 +4,7 @@ require_relative 'frame'
 
 # Game class
 class Game
-  attr_reader :frames, :current_frame
+  attr_reader :frames
 
   MAX_FRAMES = 10
   MAX_PINS = 10
