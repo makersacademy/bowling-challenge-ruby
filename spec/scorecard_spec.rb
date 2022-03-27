@@ -7,4 +7,8 @@ describe Scorecard do
       subject.current_frame
     end.not_to raise_error
   end
+
+  it "should respond to a method called add_score" do
+    expect{subject.add_score}.not_to raise_error
+  end
 end 

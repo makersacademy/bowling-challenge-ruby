@@ -6,4 +6,7 @@ class Scorecard
     @current_frame
     @score_hash = {}
   end
+
+  def add_score
+  end
 end
