@@ -1,55 +1,21 @@
-first attempt dividing into frames but this added an extra layer of complication
+# Bowling Challenge - Ruby
 
-start by testing gutter game as simplest application of it, drives creation of roll and score methods - passed it with hard-coded 0 in score
+Our weekend challenge for the fifth week of the Makers Academy boot camp was to write a program that calculates the score of a bowling game, with a view to trying the same again in JavaScript. We were not tasked with fleshing it out into a playable game with a user interface, so I kept it very streamlined.
 
-tested effect on score by rolling 1 and then 2 for every turn, which drove creation of class-level array for holding scores 
+## My Approach
 
-tempting to use array.sum method to total score but wanted to increment the turn with an eye on implementing spare and strike bonuses, which depend on ensuing games, so would be helpful to have a turn number to work with
+* I initially attempted to store the scores as a multidimensional array of ten frames with two scores each, but this added an extra layer of complication to I started again with my array holding 20 individual scores
 
-so did a 20.times block adding the value stored in the @rolls array at the index position of turn (starting at 0 at top of method to avoid adjustment for zero-indexing) to the total, and incrementing the turn by 1 - then return total after block
+* My first test was for a gutter game (0 on every roll) as this was the simplest application of what was to come - this drove the creation of game.roll and game.score methods, the latter of which placated RSpec with a hard-coded 0 in the method
 
-then test for spare, inputting the first three rolls (the first two making a spare) and then 17 zeros for the remainder as our score method returns the total for the whole game and we just want to focus on three rolls - this fails as expected because there's no functionality for bonuses yet
+* Testing the effects on the score by rolling 1 for every turn drove the creation of my class-level array for storing the scores
 
-this drives incrementing score-keeping by frames instead of just rolls (ie. by increments of 2) - so change the 20.times to 10.times, and turn incrementing by 2, to set up the conditionality for two rolls in a frame totalling 10 and thus getting the bonus of the score from the first roll of the next frame - so now the initialize method treats it as 20 separate rolls, but the score-keeping does it in increments of two - maybe not the ideal presentation but it makes the implementation easier
+* Although it was tempting to use the .sum method on this array to total the scores, I decided against this approach with an eye on incrementing the turn value in order to implement bonuses for spares and strikes
 
-this has the limitation of not being a 'live' game - ie you can't check your score on the go, user has to manually input each score before checking the total
+* At first I gave my score method a `20.times` block adding each value stored in the @rolls array to the total, incrementing the turn by one , and returning the total after this block, but by the time I implemented functionality for strikes I had to use an if/elsif/else construction to account for incrementations of one for a strike (as a strike means the frame is only one roll) and two otherwise
 
-refactor this spare logic into a private method, as well as the logic for frame and spare scores
+## Possible Improvements
 
-test for strike by doing 10, 5, 6 then 16 zeros (1 less as strike means frame is only 1 roll), gets error 'nil can't be coerced into Integer' as array isn't full, so have to implement functionality for strike skipping a go
+This program doesn't provide a running total, so it's only able to calculate the score for an entire game in retrospect with each roll inputted manually (although it does this accurately, and accounting for bonuses). Developing this into a user-friendly game would necessitate 'live' score updates, so this would be the first improvement I'd make. I'd also prefer to have the scores stored by frame, rather than individually.
 
-logic for strike score will be same as spare score (current plus next two in index) so change it to bonus_score and have the difference just being how they iterate in the method
-
-
-
-
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
-
-### Strikes
-
-The player has a strike if he knocks down all 10 pins with the first roll in a frame. The frame ends immediately (since there are no pins left for a second roll). The bonus for that frame is the number of pins knocked down by the next two rolls. That would be the next frame, unless the player rolls another strike.
-
-### Spares
-
-The player has a spare if the knocks down all 10 pins with the two rolls of a frame. The bonus for that frame is the number of pins knocked down by the next roll (first roll of next frame).
-
-### 10th frame
-
-If the player rolls a strike or spare in the 10th frame they can roll the additional balls for the bonus. But they can never roll more than 3 balls in the 10th frame. The additional rolls only count for the bonus not for the regular frame count.
-
-    10, 10, 10 in the 10th frame gives 30 points (10 points for the regular first strike and 20 points for the bonus).
-    1, 9, 10 in the 10th frame gives 20 points (10 points for the regular spare and 10 points for the bonus).
-
-### Gutter Game
-
-A Gutter Game is when the player never hits a pin (20 zero scores).
-
-### Perfect Game
-
-A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 strikes for the bonus in the 10th frame). The Perfect Game scores 300 points.
-
-In the image below you can find some score examples.
-
-More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
-
-![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+[Jonny Abrams](https://github.com/jonnyabrams)
