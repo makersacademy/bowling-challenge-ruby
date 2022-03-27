@@ -50,7 +50,7 @@ describe ScoreCard do
   describe ".strike" do
     it "skips the frame after the strike" do
       scorecard.roll(ScoreCard::MAX_PINS)
-      expect(scorecard.frame_score).to include ScoreCard::MAX_PINS
+      expect(scorecard.frames).to include ScoreCard::MAX_PINS
       2.times { scorecard.roll(4) }
       expect(scorecard.frames).to include 8
     end
@@ -62,10 +62,13 @@ describe ScoreCard do
     end
   end
 
-  
-
-  it "calculates spare correctly" do
-    
+  describe ".spare" do
+    it "calculates spare correctly" do
+      scorecard.roll(ScoreCard::MAX_PINS - 4)
+      3.times { scorecard.roll(4) }
+      expect(scorecard.total_score).to eq ScoreCard::MAX_PINS + 12
+      
+    end
   end
 
   describe "edge cases" do

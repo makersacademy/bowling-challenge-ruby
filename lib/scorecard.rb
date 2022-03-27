@@ -25,7 +25,7 @@ class ScoreCard
   end
 
   def spare
-    
+    @frames[-2] = MAX_PINS + @pins[-2]
   end
   
   def total_score
@@ -33,13 +33,16 @@ class ScoreCard
   end
 
   def frame_score
-    if @pins[-4] == MAX_PINS && @pins[-3] == 0
-      @frames << @pins.last(2).sum
-      strike
-    elsif @pins.length.odd?
+    if frame_unfinished?
       @pins.last
+    elsif prev_frame_strike?
+      store_frame_score
+      strike
+    elsif prev_frame_spare?
+      store_frame_score
+      spare
     else
-      @frames << @pins.last(2).sum
+      store_frame_score
     end
   end
 
@@ -63,5 +66,23 @@ class ScoreCard
 
   def roll_count
     @rolls / frame_count
+  end
+
+  private
+
+  def store_frame_score
+    @frames << @pins.last(2).sum
+  end
+
+  def prev_frame_strike?
+    @pins[-4] == MAX_PINS && @pins[-3] == 0
+  end
+
+  def prev_frame_spare?
+    @frames.last == MAX_PINS && !prev_frame_strike?
+  end
+
+  def frame_unfinished?
+    @pins.length.odd?
   end
 end
