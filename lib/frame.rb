@@ -2,12 +2,12 @@
 
 require_relative 'roll'
 
-MAX_PINS = 10
-
 # Frame class
 class Frame
   attr_reader :score, :max_pins
-
+  
+  MAX_PINS = 10
+  
   def initialize(roll_class = Roll)
     @roll_class = roll_class
     @score = []
@@ -19,7 +19,6 @@ class Frame
 
     @score << @roll_class.new(pins).pins
     @score << 0 if frame_ongoing? && pins == MAX_PINS
-    # pins
   end
 
   private
