@@ -1,21 +1,16 @@
 require 'scorecard'
 
-describe Scorecard do
-  context 'when name given' do
-    subject(:scorecard) { Scorecard.new('Rob') }
-    describe '#start' do
-      it 'outputs the player name' do
-        expect { scorecard.start }.to output(a_string_including('Player: Rob')).to_stdout
-      end
-    end
+describe Scorecard
+  describe '#get_score' do
   end
 
-  context 'when no name given' do
-    subject(:scorecard) { Scorecard.new }
-    describe '#start' do
-      it 'outputs no name' do
-        expect { scorecard.start }.to output(a_string_including('Scorecard')).to_stdout
-      end
-    end
+  describe '#title' do
   end
+
+  describe '#finish' do
+  end
+
+  describe '#update' do
+  end
+  
 end

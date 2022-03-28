@@ -27,9 +27,7 @@ class Frame
     if complete?
       @bonus -= 1
     else
-      print 'hi'
       @bonus = SPARE if @score + score == NUMBER_OF_PINS
-      print @bonus if @bonus
       @bonus = STRIKE if score == NUMBER_OF_PINS
     end
   end
