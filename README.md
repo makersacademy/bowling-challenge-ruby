@@ -114,3 +114,4 @@ frame.frames
 
 * Ruby
 * Rspec
+* Rubocop
