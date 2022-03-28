@@ -93,9 +93,9 @@ I am also tackling the bonus score tests after the first series of tests:
 
 first series of tests:
 Strike tests:
-- [ ] Scoring a strike should add a score of 10 for that frame and skip to the next frame
+- [x] Scoring a strike should add a score of 10 for that frame and skip to the next frame
 spare tests:
-- [ ] scoring less than 10 should not skip to the next frame
+- [x] scoring less than 10 should not skip to the next frame
 - [ ] after two inputs or two rolls the frame should skip to next one
 - [ ] if user knocks down the remaining pins on his second roll he gets a spare for that frame
 Less than 10 pins:
