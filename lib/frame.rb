@@ -22,6 +22,8 @@ class Frame
     @score += score
     self.class.apply_oustanding_bonuses(score)
   end
+  
+  private
 
   def determine_bonus(score)
     if complete?
@@ -31,6 +33,8 @@ class Frame
       @bonus = STRIKE if score == NUMBER_OF_PINS
     end
   end
+
+  public
 
   class << self
     @@all = []
