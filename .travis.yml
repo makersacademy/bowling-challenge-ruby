@@ -1,5 +1,4 @@
 language: ruby
 
 script:
-  - bundle install --without development test
   - bundle exec rspec
