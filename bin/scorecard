@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
+require './lib/game'
 require './lib/scorecard'
 
-name = ARGV[0]
-Scorecard.new(name).start
+Game.new(Scorecard.new).game
