@@ -1,3 +1,5 @@
+Navigate to GEORGES_NOTES.md to see instructions on how to run the bowling scorecard
+
 Bowling Challenge in Ruby
 =================
 
