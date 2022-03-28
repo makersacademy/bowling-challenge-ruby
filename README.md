@@ -1,65 +1,79 @@
-Bowling Challenge in Ruby
-=================
+# Planning  
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+- Work out paths for scoring
+- score method
+  - should be able to accept up to 2 rolls or 3 (if frame = 10 & r1+r2 = spare or strike)
 
-## The Task
+[][][][][][][][][][]
 
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
+Frames 1 - 9 can accept 2 rolls.
+Frame 10 can accept up to 3.
 
-Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
+* - user enters roll
+* - roll added to the array in scorecard equivalent to (frame number - 1) - frame 1 would access array at index 0
+* - when 2 entries (or 1 strike) are in the array, the frame is complete
+* - if the sum of the two entries in a frame array = 10 (strike or spare) score calculation waits until the next roll to calculate bonuses
 
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
+* initialize with array of 10 arrays to represent frames
+* initialize with frame_number of zero
+* initialize with score of 0
 
-As usual please start by
+* user enters first roll (r1)
+*   frame number updated to 1
+*   roll pushed into scorecard array with index of 0 (frame_number - 1)
+*   if r1 = 10, end of turn, completed frame with strike
+*   else loop for turn 2
+*   - if r1 + r2 = 10, completed frame with spare
 
-* Forking this repo
 
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
+Order of play
+  1) input pins
+  2) increment frame number +1 (start first frame)
+standard
+  3) add knocked down pins to scorecardarray[0]
+  4) add second roll
+  5) add knocked down pins to scorecardarray[0]
+  6) end turn
+  7) calculate score
+if strike
+  3) add strike to scorecardarray[0]
+  4) end turn
+  5) don't calculate score until r2 of the next frame
+if spare
+  3) add spare to scorecardarray[0]
+  4) end turn
+  5) don't calculate score until r1 of the next frame
 
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
+# Scoring
 
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
+## Traditional Scoring
 
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
+In traditional scoring, one point is scored for each pin that is knocked over, and when less than all ten pins are knocked down in two rolls in a frame (an open frame), the frame is scored with the total number of pins knocked down. However, when all ten pins are knocked down with either the first or second rolls of a frame (a mark), bonus pins are awarded as follows.
 
-## Bowling — how does it work?
+Strike: When all ten pins are knocked down on the first roll (marked "X" on the scorescreen), the frame receives ten pins plus a bonus of pinfall on the next two rolls (not necessarily the next two frames). A strike in the tenth (final) frame receives two extra rolls for bonus pins.
+Spare: When a second roll of a frame is needed to knock down all ten pins (marked "/" on the scorescreen), the frame receives ten pins plus a bonus of pinfall in the next roll (not necessarily the next frame). A spare in the first two rolls in the tenth (final) frame receives a third roll for bonus pins.
+The maximum score is 300, achieved by getting twelve strikes in a row within the same game.
 
-### Strikes
-
-The player has a strike if he knocks down all 10 pins with the first roll in a frame. The frame ends immediately (since there are no pins left for a second roll). The bonus for that frame is the number of pins knocked down by the next two rolls. That would be the next frame, unless the player rolls another strike.
-
-### Spares
-
-The player has a spare if the knocks down all 10 pins with the two rolls of a frame. The bonus for that frame is the number of pins knocked down by the next roll (first roll of next frame).
-
-### 10th frame
-
-If the player rolls a strike or spare in the 10th frame they can roll the additional balls for the bonus. But they can never roll more than 3 balls in the 10th frame. The additional rolls only count for the bonus not for the regular frame count.
-
-    10, 10, 10 in the 10th frame gives 30 points (10 points for the regular first strike and 20 points for the bonus).
-    1, 9, 10 in the 10th frame gives 20 points (10 points for the regular spare and 10 points for the bonus).
-
-### Gutter Game
-
-A Gutter Game is when the player never hits a pin (20 zero scores).
-
-### Perfect Game
-
-A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 strikes for the bonus in the 10th frame). The Perfect Game scores 300 points.
-
-In the image below you can find some score examples.
-
-More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
-
-![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+ Frame | Roll | Pins Knocked Down | Score Calculation|
+|-----|-----|-----|-----|
+| 1 | 1 | 1 | 1 |
+| 1 | 2 | 4 | 1+5 = 5 |
+| 2 | 1 | 4 |  |
+| 2 | 2 | 5 | 5+4+5 = 14 |
+| 3 | 1 | 6 |  |
+| 3 | 2 | 4 | 14+6+4+5(f4r1) = 29 |
+| 4 | 1 | 5 |  |
+| 4 | 2 | 5 | 29+5+5+10(f5r1) = 49 |
+| 5 | 1 | 10 |  |
+| 5 | 2 | x | 49+10+1(f6r1+2) = 60 |
+| 6 | 1 | 0 |  |
+| 6 | 2 | 1 | 61 |
+| 7 | 1 | 7 |  |
+| 7 | 2 | 3 | 61+7+3+6(f8r1) = 77 |
+| 8 | 1 | 6 |  |
+| 8 | 2 | 4 | 77+6+4+10(f9r1) = 97 |
+| 9 | 1 | 10 |  |
+| 9 | 2 | x | 97+10 = 117 |
+| 10 | 1 | 2 |  |
+| 10 | 2 | 8 |  |
+| 10 | 3 | 6 | 117+2+8+6 = 133 |
