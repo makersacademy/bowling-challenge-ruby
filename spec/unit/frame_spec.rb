@@ -71,10 +71,28 @@ describe Frame do
         end
       end
     end
-    context 'if there are less than 2 scores and no strike' do
-      it 'returns false' do
-        frame.add(Frame::TOTAL_PINS - 1)
-        expect(frame.complete?).to be false
+    context 'if a strike has been scored' do
+      before do
+        frame1.add(Frame::TOTAL_PINS)
+      end
+      context 'and no bonus rolls have been added' do
+        it 'returns false' do
+          frame1.increase_bonus(5)
+          expect(frame1.bonus_complete?).to be false
+        end
+      end
+      context 'and one bonus roll has been added' do
+        it 'returns false' do
+          frame1.increase_bonus(5)
+          expect(frame1.bonus_complete?).to be false
+        end
+      end
+      context 'and both bonus rolls have been added' do
+        it 'returns true' do
+          frame1.increase_bonus(5)
+          frame1.increase_bonus(3)
+          expect(frame1.bonus_complete?).to be true
+        end
       end
     end
   end
