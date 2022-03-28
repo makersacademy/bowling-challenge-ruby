@@ -1,3 +1,7 @@
+## How to Use
+
+Clone this repository, bundle install, open irb, create a new game object (e.g. game = Game.new), then record your rolls using the roll method on your game object, with the number of pins knocked down being the parameter accepted by the roll method (e.g. game.roll(10))
+
 ## My Thoughts
 
 The only good thing I can say is that it works (as far as I have tested in IRB), and I did it all myself. I mentally planned during the weekend how to do this, but left it too late to actually put pen to paper on a diagram, or some coding. The end result is a mess that violates all sorts of coding principles.
