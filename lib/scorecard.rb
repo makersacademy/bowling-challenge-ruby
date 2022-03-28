@@ -12,11 +12,12 @@ class Scorecard
 
   def roll(pins)
     if @frames[turn].next_turn?
-      @total_score += @frames[turn].score
       create_new_frame
       @frames[turn].rolled(pins)
+      calculate_total
     else
       @frames[turn].rolled(pins)
+      calculate_total
     end
   end
 
@@ -24,17 +25,19 @@ class Scorecard
     @current_turn
   end
 
-  private
-
   def calculate_total
     @total_score = 0
     calcualate_bonus
-    @frames.sum { |frame| @total_score += frame}
+    @frames.each { |frame| @total_score += (frame.score + frame.bonus_score) }
   end
 
+  private
+
   def calcualate_bonus
-    if @frames[last_turn].previous_was_strike?
-      @frames[last_turn].score += @frames[turn].score
+    if @frames[last_turn].strike? && @frames.length > 1
+      @frames[last_turn].bonus_score = @frames[turn].score
+    elsif @frames[last_turn].spare? && @frames.length > 1
+      @frames[last_turn].bonus_score = @frames[turn].rolls[0]
     end
   end
 
@@ -48,15 +51,3 @@ class Scorecard
   end
 
 end
-
-# def calculate_status
-#   if pins == 10
-#     frame.strike = true
-#     frame.complete = true
-#   elsif frame.roll_1 + frame.roll_2 == 10
-#     frame.spare == true
-#     frame.complete = true
-#   elseif frame.roll_1 != nil && frame.roll_2 != nil
-#     frame.complete = true
-#   end
-# end

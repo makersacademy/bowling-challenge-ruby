@@ -58,7 +58,22 @@ end
 
       it 'strike should return true' do
         @frame.rolled(10)
-        expect(@frame.previous_was_strike?).to eq true
+        expect(@frame.strike?).to eq true
+      end
+
+    end
+
+    context 'with spare' do
+
+      it 'should return false if a frams is not a spare' do
+        @frame.rolled(3)
+        expect(@frame.spare?).to eq false
+      end
+
+      it 'should return true if a frame is a spare' do
+        @frame.rolled(7)
+        @frame.rolled(3)
+        expect(@frame.spare?).to eq true
       end
 
     end
