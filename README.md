@@ -1,10 +1,36 @@
 Bowling Challenge in Ruby
 =================
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+## Notes
+
+### User instructions
+
+- git clone repository
+- irb -r game.rb
+    - game = Game.new
+    - game.roll(number of pins) e.g. game.roll(6)
+
+### Condensed user stories
+
+As a player
+
+So that I can...
+
+- I want to play 10 frames
+- I want the pins to reset to 10 for each new frame
+
+For frames 1-9
+- I want to roll a ball
+- I want to roll a second ball if I do not knock down 10 pins with my first roll
+- I want to be able to knock down no more than 10 pins per frame
+
+For frame 10
+- I want a third roll if I roll a strikes
+- I want a third roll if I roll a spare
+
+### Outstanding tasks
+- error handling where the user tries to roll an invalid number of pins (e.g. more than 10; 4 pins, then 8 pins)
+- isolating unit tests
 
 ## The Task
 
