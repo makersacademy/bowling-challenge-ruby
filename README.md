@@ -1,5 +1,98 @@
 Bowling Challenge in Ruby
 =================
+The task for the Makers Academy Week 5 weekend challenge is to write the backend logic for a program that calculates a scorecard for a single player bowling game. The program doesn't simulate a game itself, it operates as a calculator and requires the user to enter in manually the number of pins knocked down each roll.
+
+[ Gif of function in terminal ]
+
+## Approach
+
+<details>
+    <summary> Planning </summary>
+    <br>
+
+
+
+### Diagramming Game Logic
+<img src="/public/images/bowling_rules.png">
+
+### Domain Model
+[attach image]
+</details>
+
+<details>
+    <summary> Implementation </summary>
+    <br>
+
+ ### Inclusions: 
+- [x] Need to allow for a frame to consist of 2 rolls, and to calculate the game score based on 10 frames 
+- [ ] Need to allow for a total of 10 frames per game (raise an error if further rolls entered, or set scorecard to 0?)
+- [x] Need to allow game score to be 0 == gutter game
+- [x] Need to allow for a spare == all ten pins knocked down over 2 rolls of a frame
+- [x] Need to allow for a strike == all ten pins knocked down with first roll of frame, no second roll (i.e. score of 10 ends the turn)
+- [x] Need to allow for a perfect score == 300 (in tests) 
+- [x] Need to allow for bonus rolls if strike or spare scored in the 10th frame (2 and 1 respectively)
+
+<details>
+        <summary> Pseudocode </summary>
+        <br>
+
+**Scorecard class methods:**
+ 
+	Initialize 
+		Rolls = [ ]
+ 
+    Roll(no. of pins) (i.e. - play)
+        Raise error if ‘pins’ value > 10
+        Push no of pins to rolls array
+    
+        Total_score (i.e. - points as result of play)
+            using the roll index from the rolls array - sum the rolls per frame to return frame score, and use this to return total score for whole game by iterasting through whole array (using counter). 
+
+
+**Private methods:**
+
+    Frame score
+        Need to establish that a frame consists of 10 pins and 2 possible rolls
+        
+    Strike? (roll)
+        First roll in frame == all ten pins knocked down, no second roll.
+
+    Strike score
+        Frame 1 == 10 + (frame 2a Score + frame 2b score)
+
+    Spare? (roll)
+        First roll + second roll == 10
+        
+    Spare score 
+        Frame 1 == 10 + (frame 2a score)
+    
+    Bonus rolls (end of game)
+        10th frame has max of 3 rolls if strike or spare rolled. 
+    
+    Game over?
+        If frame(10) score == strike?
+            Allow 2 more rolls
+        Elsif frame(10) score == spare?
+            Allow 1 more roll
+        Else
+        Frames == 10
+        End game/ error: max no. rolls played. 
+
+Notes: <br>
+Currently automated iteration through array - would like to try and convert logic to manually input two roll scores per frame so that I can attempt to implement a 'game over' method which resets the scorecard to 0 once the 10th frame has been played. 
+
+
+</details>
+
+</details>
+
+## To Test in IRB
+
+
+## Task Overview
+<details>
+    <summary> Instructions </summary>
+    <br>
 
 * Feel free to use google, your notes, books, etc. but work on your own
 * If you refer to the solution of another coach or student, please put a link to that in your README
@@ -33,6 +126,12 @@ In order to do this, you may pay particular attention to the following:
 * Single Responsibility Principle and encapsulation
 * Clear and readable code
 
+</details>
+
+<details>
+    <summary> Bowling rules </summary>
+    <br>
+
 ## Bowling — how does it work?
 
 ### Strikes
@@ -63,3 +162,5 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+</details>
