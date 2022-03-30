@@ -1,3 +1,57 @@
+## Steps
+### Stage 1 - Prep
+1. Created CRC cards and flow chart (accesible in docs - previews attached later in Readme) 
+2. Created Gemfile. Minimal gem usage - gems targeted for improving code/test quality. RSpec framework installed.
+### Stage 2 - Score class
+3. Created score spec. Expected that it can receive a numberic roll
+4. Created score.rb that accepts numeric roll. Currently just returns it (commit 1).
+5. Create distinct tests and score for second roll. Changed name of original roll method to reflect second roll (commit 2). 
+6. Created test for score object to init with two roll totals (init to nil) and spare/strike (init to false) (commit 3).
+7. Created test for scoring 10 pins in one roll to set strike to true. Added if statement to set strike to true when first_roll ==10.
+8. Created test for scoring 10 pins in two rolls to set spare to true. Added if statement to set spare to true when first roll + second roll == 10 (commit 4).
+9. REFACTOR. To satisfy SRP within the score class, I created distinct methods for spare/strike logic. Test 1 refactored to check instance var first_roll as opposed to pins being returned by method (commit 5).
+### Stage 3 - Frame class
+11. Created frame spec. Expect it to have a score and frame number as default.
+12. Created frame.rb. Inits taking a round as an init arg, and inits with a score.
+13. Created tests that pass rolls to frame, and expect it to change score accordingly
+14. Created frame methods that pass rolls to score (commit 6).
+### Stage 4 - Game class
+15. Created game class spec with empty test.
+16. Created game class to satisft empty test.
+17. Added test that checks game class initis with current frame (nil expectation) and all frames (empty array expectation).
+18. Added instance variables to game class, enabling it to pass step 17. tests (commit 7).
+19. Realised that class couldn't meet all responsbilities laid out in CRC cards. Added round num var tests, and tests that against changed name of current round to better reflect what that var returns.
+20.  Updated game class to past new tests (with new var names) (commit 8).
+21. Created test that checks frame num starts at 1. Created a start_game method that creates a Frame object with round = 1, and sets it to current_frame.
+22. REFACTOR: Game spec growing quickly, so split out init tests to nested describe block. 
+23. Created test that checks end_frame creates a new frame obj that is distinct from old one, pushes old one into array of old frames, and changes frame num. Created relevant method (commit 9).
+24. Created test that checks user input. Created test that rolls a non-strike, then stores the old frame with a completed score in array.
+25. Created methods for above. Created stub that mocks a roll of a non strike across two rolls to pass tests (commit 10).
+26. Created a test that expects game end message after 10 frames. Created end game method, which is called during end frame if frame num == 10 (commit 11). 
+27. Notice edge case where start_game could be called multiple times, changing frame obj and scores but keeping prior num. Corrected.
+28. Created a test that made two rolls (non-strike) and expected game to know the score. Created game method that looks at array of past frames, and uses the inbuilt frame method to calculate total score and plot on a game instance var (commit 12).
+29. Added additional messaging output to signpost end of frame to user (commit 13).
+30. REFACTOR: Created 3 new methods to create smalller methods in game class (due to SRP) (commit 14).
+### Stage 5 - Sparing and Striking out - returning to Frame & Score
+31. Changed the name of calculate_score in Score to calculate_normal_score in anticipation of alternative ways of calculating scores. Created calculate_strike_score and calculate_spare_score (empty methods).
+32. Created a helper method for rolling a spare, and a helper method for rolling a strike.
+33. Created a game test where it expects game to pass to Frame whether the last round was a strike.
+34. Changed scoring to know whether previous round was a strike using index.
+35. Changed scoring to know whether previous round was a spare.
+36. Changed scoring to add bonus for spare.
+37. Changed scoring to add bonus for strike.
+### Stage 6 - PANIC at the bowling alley! Big refactor
+38. Realised that strike and spare bonuses should be added to PRIOR rounds, meaning my current method of adding bonus to round score was incorrect. Would have to add it to prior score - though would need an overhaul of scoring to allow for this, as frame scores weren't exposed. 
+39. Fixed tests for scoring in game spec, by changing numbers to expect right amounts - and changed their expect subject to track the previous roll scores in the old scores array (commit 15)
+40. Changed logic to target new scoring mechanism - added a conditional to scoring total, where if the prior round was a spare, the current round would go back into the array of past scores and edit using first roll (commit 16).
+41. Copied strike to logic to spares with a few tweaks. Strike works with full functionality (commit 17).
+### Stage 7 - Being really good at Bowling - last round strikes and spares
+42. Created a test that played out 10 rounds - scoring a spare on the 10th round. Test expects game to be ongoing if 10th round is spare.
+43. Created a separate final frame method for distinct scoring methods to live in ('final frame'). Everything working!
+44. Uploaded miro and CRC cards to images. 
+
+
+
 Bowling Challenge in Ruby
 =================
 
@@ -62,4 +116,5 @@ In the image below you can find some score examples.
 
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
+![CRC cards](images/crc_cards.png)
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
