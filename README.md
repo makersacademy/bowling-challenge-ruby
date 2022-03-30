@@ -63,3 +63,13 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+
+### Design Thoughts
+
+Classes
+
+- Player
+- BowlingGame : sum = frame + 10thframe, perfect_game?, gutter_game?
+- Frame : [count the frames up to 9], [count rolls in a frame], count, strike?, spare?
+- 10thFrame (separate class??)
