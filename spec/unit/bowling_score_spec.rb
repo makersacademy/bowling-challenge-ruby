@@ -39,12 +39,12 @@ describe BowlingScore do
     end
     context 'when only one frame has been scored' do
       it 'returns nil' do
-        score.add_new_frame
         expect(score.previous_frame).to eq nil
       end
     end
     context 'when one complete frame has been fully scored' do
       it 'returns that frame' do
+        
         frame = score.current_frame
         score.add(1)
         score.add(1)
