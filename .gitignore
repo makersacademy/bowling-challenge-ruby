@@ -1,0 +1,14 @@
+# SimpleCov Output Folder
+/coverage
+
+# Locally cached copy of Makers Rubocop Guide
+.rubocop-https*
+
+# My notes file
+PK-Notes-README.md
+
+# Local GoodVibes array
+good_vibes_pk.rb
+
+# Diagram.io files
+diagrams/
