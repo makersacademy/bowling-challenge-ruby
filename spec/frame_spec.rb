@@ -30,40 +30,103 @@ describe Frame do
     end
   end
 
-  describe '.complete?' do
-    it 'returns true when both roll_1 and roll_2 has a value' do
-      subject.add_roll(4)
-      subject.add_roll(3)
-      expect(subject.complete?).to be true
-    end
-
-    it 'returns true when roll_1 is a strike' do
-      subject.add_roll(10)
-      expect(subject.complete?).to be true
-    end
-
-    it 'returns false when only roll_1 is passed and not a strike' do
+  describe '.spare?' do
+    it 'return true if roll_1 and roll_2 equal 10' do
       subject.add_roll(5)
-      expect(subject.complete?).to be false
-    end
-
-    it 'returns false when both roll_1 and roll_2 are nil' do
-      expect(subject.complete?).to be false
+      subject.add_roll(5)
+      expect(subject.spare?).to be true
     end
   end
 
-    describe '.spare?' do
-      it 'return true if roll_1 and roll_2 equal 10' do
-        subject.add_roll(5)
-        subject.add_roll(5)
-        expect(subject.spare?).to be true
-      end
+  describe '.strike?' do
+    it 'return true if roll_1 equal 10' do
+      subject.add_roll(10)
+      expect(subject.strike?).to be true
+    end
+  end
+
+  describe '.regular_frame_complete?' do
+    it 'knows it is not the tenth frame' do
+      subject.tenth_frame = true
+      expect(subject.regular_frame_complete?).to be false
     end
 
-    describe '.strike?' do
-      it 'return true if roll_1 equal 10' do
-        subject.add_roll(10)
-        expect(subject.strike?).to be true
-      end
+    it 'knows it is complete if the roll_1 is a strike' do
+      subject.add_roll(10)
+      expect(subject.regular_frame_complete?).to be true
     end
+
+    it 'knows it is complete if the roll_1 and roll_2 are played' do
+      subject.add_roll(3)
+      subject.add_roll(5)
+      expect(subject.regular_frame_complete?).to be true
+    end
+
+    it 'knows it is not complete if only roll_1 is played and not a strike' do
+      subject.add_roll(3)
+      expect(subject.regular_frame_complete?).to be false
+    end
+  end
+
+  describe '.tenth_frame_complete?' do
+    it 'knows that it is not complete if it is not the tenth frame' do
+      expect(subject.tenth_frame_complete?).to be false
+    end
+
+    it 'knows it is complete if 3 rolls have been played' do
+      subject.tenth_frame = true
+      subject.add_roll(5)
+      subject.add_roll(5)
+      subject.add_roll(5)
+      expect(subject.tenth_frame_complete?).to be true
+    end
+
+    it 'knows it is not complete if roll_3 has not been played and roll_1 is a strike' do
+      subject.tenth_frame = true
+      subject.add_roll(10)
+      subject.add_roll(5)
+      expect(subject.tenth_frame_complete?).to be false
+    end
+
+    it 'knows it is not complete if roll_3 has not been played and roll_2 is a spare' do
+      subject.tenth_frame = true
+      subject.add_roll(6)
+      subject.add_roll(4)
+      expect(subject.tenth_frame_complete?).to be false
+    end
+
+    it 'knows it is not complete if roll_2 has not been played and is not a strike' do
+      subject.tenth_frame = true
+      subject.add_roll(6)
+      expect(subject.tenth_frame_complete?).to be false
+    end
+
+    it 'knows it is complete if roll_1 and roll_2 did not make a spare' do
+      subject.tenth_frame = true
+      subject.add_roll(3)
+      subject.add_roll(3)
+      expect(subject.tenth_frame_complete?).to be true
+    end
+  end
+
+  describe '.frame_score' do
+    it 'returns score of a frame if roll_1 is a strike' do
+      subject.add_roll(10)
+      expect(subject.frame_score).to eq 10
+    end
+
+    it 'returns score of a frame if roll_1 is not a strike' do
+      subject.add_roll(6)
+      subject.add_roll(3)
+      expect(subject.frame_score).to eq 9
+    end
+
+    it 'returns score of a frame if roll_3 is played' do
+      subject.tenth_frame = true
+      subject.add_roll(5)
+      subject.add_roll(5)
+      subject.add_roll(8)
+      expect(subject.frame_score).to eq 18
+    end
+  end
 end

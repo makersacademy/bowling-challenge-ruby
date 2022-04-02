@@ -25,20 +25,8 @@ class Frame
   end
 
   def complete?
-    return true if @tenth_frame == true && spare? == true && @roll_3 != nil
-    return true if @tenth_frame == true && strike? == true && @roll_2 != nil && @roll_3 != nil
-    return true if @roll_1 != nil && @roll_2 != nil && @tenth_frame == false
-   
-    if @roll_1 == MAXIMUM_SCORE
-      if @tenth_frame == false
-        return true
-      else
-        if @roll_3 != nil && @roll_2 != nil
-          return true
-        end
-      end
-    end
-   return false
+    return true if regular_frame_complete? || tenth_frame_complete?
+    return false
   end
 
   def spare?
@@ -49,5 +37,34 @@ class Frame
   def strike?
     return true if @roll_1 == MAXIMUM_SCORE
     return false
+  end
+
+  def regular_frame_complete?
+    return false if @tenth_frame 
+    return true if strike?
+    return true if @roll_1 != nil && @roll_2 != nil 
+    return false
+  end
+
+  def tenth_frame_complete?
+    if @tenth_frame 
+      if @roll_3 != nil
+        return true
+      elsif spare? || strike?
+        return false
+      elsif @roll_2 != nil
+        return true
+      else 
+        return false
+      end
+    end
+    return false
+  end
+
+  def frame_score
+    score = @roll_1
+    score += @roll_2 if @roll_2 != nil
+    score += @roll_3 if @roll_3 != nil
+    return score
   end
 end
