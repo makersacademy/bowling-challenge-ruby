@@ -31,6 +31,20 @@ describe BowlingScore do
     end
   end
 
+  describe '#game_complete?' do
+    context 'if all ten frames are not finished' do
+      it 'returns false' do
+        expect(score.game_complete?).to be false
+      end
+    end
+    context 'if all ten frames are finished' do
+      it 'returns true' do
+        12.times { score.add(10) }
+        expect(score.game_complete?).to be true
+      end
+    end
+  end
+
   describe '#previous_frame' do
     context 'when no frames have been scored' do
       it 'returns nil' do
@@ -44,7 +58,6 @@ describe BowlingScore do
     end
     context 'when one complete frame has been fully scored' do
       it 'returns that frame' do
-        
         frame = score.current_frame
         score.add(1)
         score.add(1)

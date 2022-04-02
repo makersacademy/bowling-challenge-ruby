@@ -17,13 +17,10 @@ class Frame
   end
 
   def add(score_to_add)
+    return nil if @number == 10 && complete?
     raise 'This frame is complete' if complete?
 
     @scores << score_to_add
-  end
-
-  def rolls
-    @scores.length
   end
 
   def bonus
@@ -44,7 +41,7 @@ class Frame
   def complete?
     return true if strike?
 
-    rolls == FRAME_LENGTH
+    @scores.length == FRAME_LENGTH
   end
 
   def strike?

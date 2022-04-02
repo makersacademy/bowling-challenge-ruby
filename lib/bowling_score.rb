@@ -11,12 +11,6 @@ class BowlingScore
     @frames = []
   end
 
-  def add(increase)
-    add_new_frame if current_frame.complete?
-    apply_bonus(increase)
-    current_frame.add(increase)
-  end
-  
   def total_score
     score = 0
     for frame_number in 1..MAX_FRAMES do
@@ -25,9 +19,24 @@ class BowlingScore
     return score
   end
 
+  def add(increase)
+    raise 'The game is over' if game_complete?
+
+    apply_bonus(increase)
+    if @frames.length < MAX_FRAMES
+      add_new_frame if current_frame.complete?
+    end
+    current_frame.add(increase)
+  end
+
+  def apply_bonus(increase)
+    incomplete_bonuses = @frames.select { |frame| frame.bonus_complete? == false }
+    incomplete_bonuses.each { |frame| frame.increase_bonus(increase) }
+  end
+
   def frame_score(number)
-    index = number - 1
-    @frames[index].nil? ? 0 : @frames[index].score
+    search_frame = @frames.find { |frame| frame.number == number }
+    search_frame.nil? ? 0 : search_frame.score
   end
 
   def current_frame
@@ -41,13 +50,6 @@ class BowlingScore
     @frames.find { |frame| frame.number == previous_number }
   end
 
-  def apply_bonus(increase)
-    if previous_frame.nil?
-      return nil
-    end
-    previous_frame.increase_bonus(increase) unless previous_frame.bonus_complete?
-  end
-
   def add_new_frame
     @frames << @frame_class.new(next_frame_number)
   end
@@ -55,5 +57,12 @@ class BowlingScore
   def next_frame_number
     return 1 if @frames.empty?
     return @frames.length + 1
+  end
+
+  def game_complete?
+    return false if @frames.length < MAX_FRAMES
+    @frames.all? do |frame|
+      frame.complete? && frame.bonus_complete?
+    end
   end
 end
