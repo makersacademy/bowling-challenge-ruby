@@ -1,3 +1,4 @@
+
 class Scorecard
 
   def initialize (scores)
