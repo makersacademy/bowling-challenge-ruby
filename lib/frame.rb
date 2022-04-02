@@ -1,36 +1,32 @@
-class Frame
+# frozen_string_literal: true
 
-  attr_reader :roll_1, :roll_2, :roll_3
+# A class to store rolls of a bowling game within a frame object
+class Frame
+  attr_reader :roll1, :roll2, :roll3
   attr_accessor :score
 
   def initialize(turn)
-    @roll_1 = nil
-    @roll_2 = nil
-    @roll_3 = nil
+    @roll1 = nil
+    @roll2 = nil
+    @roll3 = nil
     @score = 0
     @turn = turn
     @complete = 'incomplete'
   end
 
   def roll(score)
-    if @roll_1 == nil
-      @roll_1 = score 
-      calculate_total
-      @complete = 'complete' if score == 10 && @turn < 10
-    elsif @turn < 10 && @roll_2 == nil && !complete?
-      @roll_2 = score
-      calculate_total
-      @complete = 'complete'
-    elsif @turn == 10 && @roll_2 == nil && !complete?
-      @roll_2 = score
-      calculate_total
-      @complete = 'complete' if @roll_1 + @roll_2 < 10
-    elsif !complete? && @roll_1 + @roll_2 >= 10
-      @roll_3 = score
-      calculate_total
-      @complete = 'complete'
+    raise 'You cannot roll more than 10' if score > 10
+    raise 'You cannot roll less than 0' if score.negative?
+    raise 'This frame is complete' if @complete == 'complete'
+
+    if @roll1.nil?
+      first_roll(score)
+    elsif @turn < 10 && @roll2.nil?
+      second_roll(score)
+    elsif @roll2.nil?
+      second_roll_turn10(score)
     else
-      raise "This frame is complete"
+      bonus_roll(score)
     end
   end
 
@@ -39,19 +35,44 @@ class Frame
   end
 
   def strike?
-    @roll_1 == 10
+    @roll1 == 10
   end
 
   def spare?
-    @roll_1 != 10 && @roll_1.to_i + @roll_2.to_i == 10
+    @roll1 != 10 && @roll1.to_i + @roll2.to_i == 10
   end
 
   def total
-    @roll_1.to_i + @roll_2.to_i + @roll_3.to_i
+    @roll1.to_i + @roll2.to_i + @roll3.to_i
   end
 
   def calculate_total
-    @score = @roll_1.to_i + @roll_2.to_i + @roll_3.to_i
+    @score = @roll1.to_i + @roll2.to_i + @roll3.to_i
   end
 
+  private
+
+  def first_roll(score)
+    @roll1 = score
+    calculate_total
+    @complete = 'complete' if score == 10 && @turn < 10
+  end
+
+  def second_roll(score)
+    @roll2 = score
+    calculate_total
+    @complete = 'complete'
+  end
+
+  def second_roll_turn10(score)
+    @roll2 = score
+    calculate_total
+    @complete = 'complete' if @roll1 + @roll2 < 10
+  end
+
+  def bonus_roll(score)
+    @roll3 = score
+    calculate_total
+    @complete = 'complete'
+  end
 end
