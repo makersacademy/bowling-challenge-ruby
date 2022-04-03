@@ -25,7 +25,7 @@ describe Scorecard do
       expect(subject.calculate_score).to eq 13
     end
 
-    it 'calculates score for a five frames' do
+    it 'calculates score for five frames' do
       frame1 = double('frame', :frame_score => 3, :spare? => false, :strike? => false)
       frame2 = double('frame', :frame_score => 8, :spare? => false, :strike? => false)
       frame3 = double('frame', :frame_score => 0, :spare? => false, :strike? => false)
