@@ -3,57 +3,56 @@ require 'frame'
 
 describe Scorecard do
   describe '#add_frame' do
-
     it 'allow a frame to be added' do
       frame = double('frame')
       subject.add_frame(frame)
-
       expect(subject.frames).to include(frame)
     end
   end
 
-  describe '#calculate_current_score' do
-  
-    it 'should know score is 0 at start of the game' do
-      expect(subject.calculate_current_score).to eq 0
-    end
-
-    it 'should calculate score for one frame' do
-      frame1 = double('frame', :roll_1 => 4, :roll_2 => 5, :roll_3 => nil, :tenth_frame => false)
+  describe '#calculate score' do
+    it 'calculates score for a single frame' do
+      frame1 = double('frame', :frame_score => 9)
       subject.add_frame(frame1)
-      expect(subject.calculate_current_score).to eq 9
+      expect(subject.calculate_score).to eq 9
     end
 
-    it 'should calculate score for multiple frames' do
-      frame1 = double('frame', :roll_1 => 4, :roll_2 => 5, :roll_3 => nil, :spare? => false, :strike? => false, :tenth_frame => false)
-      frame2 = double('frame', :roll_1 => 1, :roll_2 => 1, :roll_3 => nil, :spare? => false, :strike? => false, :tenth_frame => false)
-      frame3 = double('frame', :roll_1 => 8, :roll_2 => 0, :roll_3 => nil, :spare? => false, :strike? => false, :tenth_frame => false)
+    it 'calculates score for a two frames' do
+      frame1 = double('frame', :frame_score => 7, :spare? => false, :strike? => false)
+      frame2 = double('frame', :frame_score => 6, :spare? => false, :strike? => false)
+      subject.add_frame(frame1)
+      subject.add_frame(frame2)
+      expect(subject.calculate_score).to eq 13
+    end
+
+    it 'calculates score for a five frames' do
+      frame1 = double('frame', :frame_score => 3, :spare? => false, :strike? => false)
+      frame2 = double('frame', :frame_score => 8, :spare? => false, :strike? => false)
+      frame3 = double('frame', :frame_score => 0, :spare? => false, :strike? => false)
+      frame4 = double('frame', :frame_score => 5, :spare? => false, :strike? => false)
+      frame5 = double('frame', :frame_score => 9, :spare? => false, :strike? => false)
       subject.add_frame(frame1)
       subject.add_frame(frame2)
       subject.add_frame(frame3)
-      
-      expect(subject.calculate_current_score).to eq 19
+      subject.add_frame(frame4)
+      subject.add_frame(frame5)
+      expect(subject.calculate_score).to eq 25
     end
 
-    it 'should calculate score when there was a spare' do
-      frame1 = double('frame', :roll_1 => 4, :roll_2 => 6, :roll_3 => nil, :spare? => true, :strike? => false, :tenth_frame => false)
-      frame2 = double('frame', :roll_1 => 3, :roll_2 => 6, :roll_3 => nil, :spare? => false, :strike? => false, :tenth_frame => false)
+    it 'calculates score for multiple frames including strikes and spares' do
+      frame1 = double('frame', :frame_score => 14)
+      frame2 = double('frame', :frame_score => 8)
+      frame3 = double('frame', :frame_score => 9)
+      frame4 = double('frame', :frame_score => 16)
+      frame5 = double('frame', :frame_score => 6)
       subject.add_frame(frame1)
       subject.add_frame(frame2)
-      
-      expect(subject.calculate_current_score).to eq 22
-    end
-
-    it 'should calculate score when there was a strike' do
-      frame1 = double('frame', :roll_1 => 10, :roll_2 => nil, :roll_3 => nil, :spare? => false, :strike? => true, :tenth_frame => false)
-      frame2 = double('frame', :roll_1 => 3, :roll_2 => 6, :roll_3 => nil, :spare? => false, :strike? => false, :tenth_frame => false)
-      subject.add_frame(frame1)
-      subject.add_frame(frame2)
-      
-      expect(subject.calculate_current_score).to eq 28
+      subject.add_frame(frame3)
+      subject.add_frame(frame4)
+      subject.add_frame(frame5)
+      expect(subject.calculate_score).to eq 53
     end
   end
-
 end
 
   

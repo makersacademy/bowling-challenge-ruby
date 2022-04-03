@@ -9,23 +9,36 @@ class Scorecard
 
   def add_frame(frame)
     @frames << frame
+    calculate_bonus_points
   end
 
-  def calculate_current_score
-    
-    rolling_score = 0
-    second_last_frame = nil
-    last_frame = nil
-    @frames.each { |frame| 
-      rolling_score += frame.roll_1
-      rolling_score += frame.roll_2 if frame.roll_2 != nil 
-      rolling_score += frame.roll_1 if (last_frame != nil && last_frame.spare?)
-      rolling_score += frame.roll_1 + frame.roll_2 if (last_frame != nil && last_frame.strike? && frame.roll_2 != nil)
-      rolling_score += frame.roll_1 + last_frame.roll_1 if (last_frame != nil && second_last_frame != nil && last_frame.strike? && second_last_frame.strike?)
-      rolling_score += frame.roll_3 if frame.tenth_frame && frame.roll_3 != nil
-      second_last_frame = last_frame
-      last_frame = frame
-    }
-    return rolling_score
+  def calculate_bonus_points
+    num_frames = @frames.count
+    return if num_frames == 1 
+
+    previous_frame = @frames[num_frames - 2]
+    current_frame = @frames[num_frames - 1]
+    second_last_frame = @frames[num_frames - 3] if num_frames > 2
+ 
+    if previous_frame.spare?
+      previous_frame.add_bonus_points(current_frame.roll_1)
+    end
+
+    if previous_frame.strike?
+      previous_frame.add_bonus_points(current_frame.roll_1)
+      if (current_frame.roll_2 != nil)
+        previous_frame.add_bonus_points(current_frame.roll_2)
+      end
+    end
+ 
+    if previous_frame != nil && second_last_frame != nil && previous_frame.strike? && second_last_frame.strike?
+      previous_frame.add_bonus_points(current_frame.roll_1)
+    end
+  end
+
+  def calculate_score
+    score = 0
+    @frames.each { |frame| score += frame.frame_score }
+  return score
   end
 end

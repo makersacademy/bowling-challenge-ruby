@@ -9,6 +9,7 @@ class Frame
     @roll_2 = nil
     @tenth_frame = false
     @roll_3 = nil
+    @bonus_points = 0
   end
 
   def add_roll(roll)
@@ -65,6 +66,11 @@ class Frame
     score = @roll_1
     score += @roll_2 if @roll_2 != nil
     score += @roll_3 if @roll_3 != nil
-    return score
+    score += @bonus_points
+    return score 
+  end
+
+  def add_bonus_points(points)
+    @bonus_points += points
   end
 end

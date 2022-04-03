@@ -21,7 +21,7 @@ while number_of_frames < 10 do
   rescue 
     p "Invalid score!"
   else  
-    total = scorecard.calculate_current_score
+    total = scorecard.calculate_score
     p "your score = #{total}"
   end
 end

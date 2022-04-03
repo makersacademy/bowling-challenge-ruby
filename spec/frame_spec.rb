@@ -2,7 +2,7 @@ require 'frame'
 
 describe Frame do
   describe '.add_roll' do
-    it 'has a no score when created' do
+    it 'has no score when created' do
       expect(subject.roll_1).to eq nil
       expect(subject.roll_2).to eq nil
     end
@@ -51,12 +51,12 @@ describe Frame do
       expect(subject.regular_frame_complete?).to be false
     end
 
-    it 'knows it is complete if the roll_1 is a strike' do
+    it 'knows it is complete if roll_1 is a strike' do
       subject.add_roll(10)
       expect(subject.regular_frame_complete?).to be true
     end
 
-    it 'knows it is complete if the roll_1 and roll_2 are played' do
+    it 'knows it is complete if roll_1 and roll_2 are played' do
       subject.add_roll(3)
       subject.add_roll(5)
       expect(subject.regular_frame_complete?).to be true
@@ -127,6 +127,14 @@ describe Frame do
       subject.add_roll(5)
       subject.add_roll(8)
       expect(subject.frame_score).to eq 18
+    end
+
+    it'returns score including bonus points' do
+      subject.tenth_frame = true
+      subject.add_roll(5)
+      subject.add_roll(5)
+      subject.add_bonus_points(3)
+      expect(subject.frame_score).to eq 13
     end
   end
 end
