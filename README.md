@@ -10,6 +10,9 @@
      '._/\     /_.'
           '---'
 
+[![Build Status](https://app.travis-ci.com/NicolaCortese/bowling-challenge-ruby.svg?branch=main)](https://app.travis-ci.com/github/NicolaCortese/bowling-challenge-ruby)
+
+
 ## The Task
 
 **THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. I DID NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
