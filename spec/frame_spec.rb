@@ -48,5 +48,19 @@ describe Frame do
     subject.add_roll(5)
     expect(subject.spare).to eq true
   end
+  
+  it "adds one bonus roll when spare" do
+    subject.add_roll(5)
+    subject.add_roll(5)
+    subject.add_bonus(4)
+    expect(subject.frame_score).to eq 14
+  end
+
+  it "adds two bonus rolls when strike" do
+    subject.add_roll(10)
+    subject.add_bonus(4)
+    subject.add_bonus(4)
+    expect(subject.frame_score).to eq 18
+  end
 
 end

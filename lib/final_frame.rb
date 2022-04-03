@@ -1,5 +1,4 @@
-class Frame
-
+class FinalFrame
   attr_reader :strike, :spare, :rolls
 
   def initialize()
@@ -10,12 +9,16 @@ class Frame
   end
 
   def add_roll(pins)
-    @rolls << pins
-
-    if @rolls[0] == 10
-      @strike = true
-    elsif @rolls.sum == 10
-      @spare = true
+    
+    if @rolls.count < 2 && !@strike
+      @rolls << pins
+      if @rolls[0] == 10
+        @strike = true
+      elsif @rolls.sum == 10
+        @spare = true
+      end
+    else
+      add_bonus(pins)
     end
 
   end
@@ -60,7 +63,4 @@ class Frame
       false
     end
   end
-
-
-
 end
