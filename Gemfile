@@ -9,7 +9,7 @@ group :test do
   gem 'simplecov-console', require: false
 end
 
-group :development do
+group :development, :test do
   gem 'rubocop', '~> 1.26', require: false
 end
 
