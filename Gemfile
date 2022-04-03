@@ -2,8 +2,14 @@
 
 source 'https://rubygems.org'
 
-gem 'rspec'
 
-gem 'rubocop', '~> 1.26', require: false
-gem 'simplecov', require: false
-gem 'simplecov-console', require: false
+group :test do
+  gem 'rspec'
+  gem 'simplecov', require: false
+  gem 'simplecov-console', require: false
+end
+
+group :development do
+  gem 'rubocop', '~> 1.26', require: false
+end
+
