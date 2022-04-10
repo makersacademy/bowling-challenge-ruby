@@ -11,21 +11,17 @@ class Game
   def initialize(frame = Frame.new)
     @current_frame = frame
     @frame_count = 1
-    @scorecard = {}
+    @scorecard = []
   end
 
   def roll(pins)
-    # adds the frame to the scorecard
-    @scorecard[@frame_count] = @current_frame
+    # adds the frame to the scorecard if it's the first roll
+    @scorecard << @current_frame if @current_frame.rolls.empty?
 
     # add pins to the current playing frame
     @current_frame.add_roll(pins)
 
-    # check if the previous frame needs bonus
-    @scorecard[@frame_count - 1]&.add_bonus(pins)
-
-    # check if the two prior frame needs bonus
-    @scorecard[@frame_count - 2]&.add_bonus(pins)
+    distribute_bonus_rolls(pins)
 
     # after adding a roll we check if the frame
     # is complete and we start a new one
@@ -35,31 +31,32 @@ class Game
 
   def check_frame
     return unless @current_frame.complete? && @frame_count != 10
-
     @frame_count += 1
-    @current_frame = if @frame_count == 10
-                       FinalFrame.new
-                     else
-                       Frame.new
-                     end
+    @current_frame = @frame_count == 10 ? FinalFrame.new : Frame.new
+
   end
 
   def print_score
     # if game is complete
     if @frame_count == 10 && @current_frame.score_complete?
-      p "Game finished! Your total score is #{score}"
+      puts "Game finished! Your total score is #{score}"
     else # otherwise print the score for the complete frames
-      p "Your current score is #{score}"
+      puts "Your current score is #{score}"
     end
   end
 
   def score
-    total_score = 0
+    @scorecard.map { |frame| frame.score }.sum
+  end
 
-    @scorecard.each do |_frame_count, frame|
-      total_score += frame.frame_score
-    end
+  def distribute_bonus_rolls(pins)
+    # check if the previous frame needs bonus
+    previous_frame = @scorecard.find_index(@current_frame) - 1
+    previous_frame.add_bonus(pins)
 
-    total_score
+    # check if the two prior frame needs bonus
+    second_to_last_frame = @scorecard.find_index(@current_frame) - 2
+    second_to_last_frame.add_bonus(pins)
+
   end
 end
