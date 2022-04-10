@@ -22,7 +22,7 @@ class Frame
     @bonus << pins if strike? && @bonus.count < 2
   end
 
-  def frame
+  def score
     if score_complete?
       total_score = @rolls + @bonus
       total_score.sum
@@ -48,7 +48,7 @@ class Frame
       false
     end
   end
-  
+
   def strike?
     @rolls[0] == 10
   end
@@ -56,5 +56,4 @@ class Frame
   def spare?
     @rolls.sum == 10 && @rolls.length == 2
   end
-
 end

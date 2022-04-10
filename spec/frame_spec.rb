@@ -3,7 +3,6 @@
 require 'frame'
 
 describe Frame do
-
   it 'holds a roll' do
     subject.add_roll(2)
     expect(subject.rolls).to eq [2]
@@ -65,5 +64,4 @@ describe Frame do
     subject.add_bonus(4)
     expect(subject.score).to eq 18
   end
-
 end

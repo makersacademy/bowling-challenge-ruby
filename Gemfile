@@ -2,7 +2,6 @@
 
 source 'https://rubygems.org'
 
-
 group :test do
   gem 'rspec'
   gem 'simplecov', require: false
@@ -12,4 +11,3 @@ end
 group :development, :test do
   gem 'rubocop', '~> 1.26', require: false
 end
-

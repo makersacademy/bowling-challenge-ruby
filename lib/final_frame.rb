@@ -3,7 +3,7 @@
 require_relative './frame'
 
 # this class is instatiated by the Game class
-# whenever it reaches the 10th frame, it 
+# whenever it reaches the 10th frame, it
 # inherits from the frame class
 class FinalFrame < Frame
   attr_reader :rolls
@@ -20,5 +20,4 @@ class FinalFrame < Frame
       add_bonus(pins)
     end
   end
-
 end
