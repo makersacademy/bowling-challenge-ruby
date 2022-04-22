@@ -1,0 +1,61 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/michaelsu/week9/bowling_challenge_ruby/spec/frame_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          6,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/michaelsu/week9/bowling_challenge_ruby/lib/frame.rb": {
+        "lines": [
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/michaelsu/week9/bowling_challenge_ruby/spec/scoresheet_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/michaelsu/week9/bowling_challenge_ruby/lib/scoresheet.rb": {
+        "lines": [
+          1,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1650644768
+  }
+}

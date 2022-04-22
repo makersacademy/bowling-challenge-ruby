@@ -19,7 +19,7 @@ I have been tasked to create a Bowling Sheet program that can calculate the scor
 To do this, I will be planning my program with Domain Modelling and by using TDD, I will use tests to test the behaviour of the program and ensure that my code can pass them.
 
 ## Instructions
-Clone this repository to your desired location using `git clone https://github.com/mcsuGH/bowling-challenge-ruby.git` then run `gem install bundler` (if you don't already have bundler), and then use the command `bundle install`.\
+Clone this repository to your desired location using `git clone https://github.com/mcsuGH/bowling-challenge-ruby.git` then run `gem install bundler` (if you don't already have bundler), and then use the command `bundle install`.
 
 ## Specification 
 Strikes\
@@ -39,6 +39,18 @@ A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 str
 
 ## User Stories created from Specification
 ```
+As a Player,
+So that the game can be completed,
+I would like frames to end after a maximum of two rolls
+
+As a Player,
+So that the game can be completed,
+I would like frames to end after all ten pins are down
+
+As a Player,
+So that the game can be completed,
+I would like the game to end after ten frames
+
 As a Player,
 So that I know how well I am playing,
 I would like to keep track of my total score in each frame
@@ -62,13 +74,14 @@ I would like the final frame to add only the bonus of the extra roll/s rather th
 ```
 
 ## Domain Modelling
+![Screenshot](https://i.imgur.com/Ji5v48C.png)
 
 ## References
 ```
 https://www.asciiart.eu/sports-and-outdoors/bowling
 
 ```
-used the above for ASCII art of the bowling sheet\
+used the above for ASCII art of the bowling sheet
 
 
 ## Functionality yet to be added
