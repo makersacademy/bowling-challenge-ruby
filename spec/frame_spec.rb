@@ -4,8 +4,15 @@ describe Frame do
 
   let(:frame) { described_class.new }
 
-  it 'Should know how many rolls have been rolled' do
-    expect(frame.rolls.length).to eq(0)
+  describe "#rolls" do
+    it 'Should start with no rolls' do
+      expect(frame.rolls).to eq(0)
+    end
+
+    it 'Should know how many rolls have been rolled' do
+      frame.add_roll(2)
+      expect(frame.rolls).to eq(1)
+    end
   end
 
   it 'Should know how many pins are remaining for this frame' do
@@ -47,7 +54,7 @@ describe Frame do
     it 'Should know if the frame was a spare' do
       frame.add_roll(5)
       frame.add_roll(5)
-      expect(frame.spare).to eq(true)
+      expect(frame.spare?).to eq(true)
     end
 
     it 'Should know if the frame was not a spare' do
