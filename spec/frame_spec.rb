@@ -13,7 +13,10 @@ describe Frame do
       expect(frame.create_roll).to eq roll
     end
 
-    # it 'add the roll to the list of rolls that make up its score'
+    it 'add the roll to the list of rolls that make up its score' do
+      roll = frame.create_roll
+      expect(frame.scoring_rolls).to include roll
+    end
   end
 
   describe '#get_roll_score' do
