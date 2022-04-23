@@ -11,7 +11,7 @@ class Scoresheet
   def new_frame(frame = Frame.new)
     @current_frame = frame
   end
-  
+ 
   def current_frame
     if @frames.length == 9
       tenth_frame
@@ -46,7 +46,7 @@ class Scoresheet
   end
 
   def strike_bonus(num)
-    if num == 9 
+    if num == 9
       @frames[9].second_roll + @frames[9].bonus_roll
     elsif num == 8 && @frames[9].strike?
       @frames[9].first_roll + @frames[9].second_roll

@@ -42,10 +42,10 @@ describe Scoresheet do
       expect(scoresheet.frame_score(1)).to eq(18)
     end
 
-    it 'Should add the value of the next two rolls even if they are different frames as a bonus after rolling a strike' do
+    it 'Should add the value of the next two rolls even if from different frames as a bonus after rolling a strike' do
       scoresheet.current_frame.add_roll(10)
       scoresheet.current_frame.add_roll(10)
-      scoresheet.current_frame.add_roll(10) 
+      scoresheet.current_frame.add_roll(10)
       scoresheet.current_frame.add_roll(2) # extra roll to create a new frame
       expect(scoresheet.frame_score(1)).to eq(30)
     end
@@ -63,7 +63,7 @@ describe Scoresheet do
   end
 
   context 'Tenth Frame' do
-    it 'Should let the last frame to have upto 3 rolls if a spare is landed' do
+    it 'Should let the last frame have upto 3 rolls if a spare is landed' do
       18.times do
         scoresheet.current_frame.add_roll(0)
       end
@@ -107,7 +107,7 @@ describe Scoresheet do
   end
 
   context 'Edge Case' do
-    it 'where 9th frame is a strike and 10th frame is a strike, then 9th will take also the second roll of 10th frame as bonus' do
+    it 'if 9th and 10th frames are strikes, then 9th will take also the second roll of 10th frame as bonus' do
       16.times do
         scoresheet.current_frame.add_roll(0)
       end
@@ -115,7 +115,7 @@ describe Scoresheet do
       scoresheet.current_frame.add_roll(10) # 10th frame
       scoresheet.current_frame.add_roll(10) # 10th frame
       scoresheet.current_frame.add_roll(7) # 10th frame
-      expect(scoresheet.total_score).to eq(57)
+      expect(scoresheet.frame_score(9)).to eq(30)
     end
   end
 end
