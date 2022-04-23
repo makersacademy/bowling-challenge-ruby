@@ -1,51 +1,51 @@
-class Game
-  def self.play
-    game = Game.new 
-    until game.next_frame == 10
-      game.play_frame
-      next_frame += 1
-    end
-    game.play_frame(:last)
-  end
+# class Game
+#   def self.play
+#     game = Game.new 
+#     until game.next_frame == 10
+#       game.play_frame
+#       next_frame += 1
+#     end
+#     game.play_frame(:last)
+#   end
 
-  attr_reader :next_frame, :scoresheet 
+#   attr_reader :next_frame, :scoresheet 
 
-  def initialize(scoresheet = Scoresheet.new, frame = Frame)
-    @starting_frame = 1
-    @next_frame = @starting_frame + 1
-    @scoresheet = scoresheet
-    @frame = frame
+#   def initialize(scoresheet = Scoresheet.new, frame = Frame)
+#     @starting_frame = 1
+#     @next_frame = @starting_frame + 1
+#     @scoresheet = scoresheet
+#     @frame = frame
 
-  end
+#   end
 
-  private
+#   private
 
-  def play_frame(type = :standard)
-    unless type == :last
-      result = frame.standard_play
-    else
-      result = frame.play_last
-    end
-    game.scoresheet.update(frame_result)
-    game.scoresheet.display
-  end
-end
+#   def play_frame(type = :standard)
+#     unless type == :last
+#       result = frame.standard_play
+#     else
+#       result = frame.play_last
+#     end
+#     game.scoresheet.update(frame_result)
+#     game.scoresheet.display
+#   end
+# end
 
-class Scoresheet
-  def update(result)
+# class Scoresheet
+#   def update(result)
 
-  end
+#   end
 
-  def final_score
+#   def final_score
 
-  end
+#   end
 
-end
+# end
 
-class Frame
-  def self.standard_play
+# class Frame
+#   def self.standard_play
 
-  end
+#   end
 
-  def self.play_last
-end
+#   def self.play_last
+# end
