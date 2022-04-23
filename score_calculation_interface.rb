@@ -1,3 +1,4 @@
+## Inputting the scores for the first nine rounds
 frame_count = 0
 scores = []
 
@@ -18,6 +19,7 @@ scores = []
   puts "\n\n"
 end
 
+## Inputting the scores for the final round
 puts "FRAME 10 - THE FINAL FRAME"
 print "Enter the score for the first roll: "
 final_1 = gets.chomp.to_i
@@ -32,6 +34,7 @@ if (final_1 == 10) || ((final_1 + final_2) == 10)
   scores[9].push(final_3)
 end
 
+## Calulating the bonus score for strikes and spares, before calculating the total
 bonus_count = 0
 bonus = 0
 
@@ -51,6 +54,7 @@ end
 
 total = scores.flatten.sum + bonus
 
+## Reporting the final score
 print "\n\nYour total score for this game was #{total}!"
 puts ' A perfect game! Wow!' if total == 300
 puts "\n"
