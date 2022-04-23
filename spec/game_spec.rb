@@ -11,10 +11,10 @@ describe Game do
   end  
 
   describe '#run_game-error' do
-     let(:user_input) { 15 }  
+    let(:user_input) { 15 }  
     it 'raise an error is user enters' do 
       game = Game.new
-      expect{game.user_input_scores(user_input)}.to raise_error 'Score need to between 0 and 10'
+      expect { game.user_input_scores(user_input) }.to raise_error 'Score need to between 0 and 10'
     end
   end
 end
