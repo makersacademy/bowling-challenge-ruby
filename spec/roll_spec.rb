@@ -5,17 +5,13 @@ require './lib/roll'
 describe Roll do
   let(:frame) { double(:frame) }
 
-  let(:roll) { described_class.new(frame) }
-  let(:another_roll) { described_class.new(frame, 4) }
+  let(:roll) { described_class.new }
+  let(:another_roll) { described_class.new(4) }
 
   describe '::new' do
     it 'initializes with a given number of standing pins before the roll' do
       expect(roll.standing_pins).to eq 10
       expect(another_roll.standing_pins).to eq 4
-    end
-
-    it 'initializes within a given frame' do
-      expect(roll.frame).to eq frame
     end
   end
 

@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-# Roll class:
-# represents a single roll of the bowling ball
-# into pins within a frame
+# Roll class: represents a single roll
+# of the bowling ball into pins
 class Roll
   attr_reader :standing_pins, :frame, :roll_score
 
-  def initialize(frame, standing_pins = 10)
-    @frame = frame
+  def initialize(standing_pins = 10)
     @standing_pins = standing_pins
   end
 
