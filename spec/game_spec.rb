@@ -3,6 +3,7 @@ require_relative '../lib/game'
 describe Game do
   let(:game1) { Game.new([[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]) }
   let(:game2) { Game.new([[3,6],[0,3],[0,8],[1,4],[0,0],[0,3],[0,0],[0,4],[7,0],[0,0]]) }
+  let(:game3) { Game.new([[3,7],[3,0],[0,8],[1,4],[0,0],[0,3],[0,0],[0,4],[7,0],[0,0]]) }
 
   context "#initialize" do
     it "has a set of rolls as an argument when created" do
@@ -18,6 +19,10 @@ describe Game do
 
     it "calculates the score of a game with no strikes or spares" do
       expect(game2.score).to eq 39
+    end
+
+    it "calculates the score of a game with one spare that is not in the bonus" do
+      expect(game3.score).to eq 43
     end
   end
 end

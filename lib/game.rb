@@ -5,8 +5,9 @@ class Game
 
   def score
     score = 0
-    @rolls.each do |frame|
+    @rolls.each_with_index do |frame, i|
       score += frame.inject(0,:+)
+      score += @rolls[i + 1][0] if score == 10
     end
     score
   end
