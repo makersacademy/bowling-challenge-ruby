@@ -71,6 +71,7 @@ describe Scoresheet do
       scoresheet.current_frame.add_roll(2)
       expect(scoresheet.complete?).to_not eq(true)
       scoresheet.current_frame.add_roll(7)
+      scoresheet.current_frame
       expect(scoresheet.complete?).to eq(true)
     end
 
@@ -82,6 +83,7 @@ describe Scoresheet do
       scoresheet.current_frame.add_roll(10)
       expect(scoresheet.complete?).to_not eq(true)
       scoresheet.current_frame.add_roll(7)
+      scoresheet.current_frame
       expect(scoresheet.complete?).to eq(true)
     end
        
@@ -106,7 +108,7 @@ describe Scoresheet do
     end
   end
 
-  context 'Edge Case' do
+  context 'Edge Cases' do
     it 'if 9th and 10th frames are strikes, then 9th will take also the second roll of 10th frame as bonus' do
       16.times do
         scoresheet.current_frame.add_roll(0)
@@ -115,7 +117,22 @@ describe Scoresheet do
       scoresheet.current_frame.add_roll(10) # 10th frame
       scoresheet.current_frame.add_roll(10) # 10th frame
       scoresheet.current_frame.add_roll(7) # 10th frame
+      scoresheet.current_frame
       expect(scoresheet.frame_score(9)).to eq(30)
+    end
+
+    it 'perfect game of 12 strikes' do
+      12.times do
+        scoresheet.current_frame.add_roll(10)
+      end
+      expect(scoresheet.total_score).to eq(300)
+    end
+
+    it 'gutter game of 20 gutters' do
+      20.times do
+        scoresheet.current_frame.add_roll(0)
+      end
+      expect(scoresheet.total_score).to eq(0)
     end
   end
 end
