@@ -7,6 +7,7 @@ class Scorecard
     def initialize
         @scorecard = []
         @current_frame = 0
+        @store_frame = []
     end
 
     def add_score(score1,score2,*score3)
@@ -14,7 +15,11 @@ class Scorecard
     end
 
     def running_total
-        @scorecard.sum
+        @scorecard.flatten.sum
+    end
+
+    def running_total_strikes
+        score_with_strikes
     end
 
 
@@ -23,33 +28,31 @@ private
     def add_frame(score1,score2,*score3)
         if round_10? == true
             @current_frame = Frame.new(score1,*score2,*score3)
-            @scorecard.push(@current_frame.bowl1)
-            @scorecard.push(@current_frame.bowl2)
-            @scorecard.push(@current_frame.bowl3)
+            @store_frame.push(@current_frame.bowl1)
+            @store_frame.push(@current_frame.bowl2)
+            @store_frame.push(@current_frame.bowl3)
+            store_frame = @store_frame
+            @store_frame = []
+            @scorecard.push(store_frame)
         elsif round_10? == false
             @current_frame = Frame.new(score1,*score2)
-            @scorecard.push(@current_frame.bowl1)
-            @scorecard.push(@current_frame.bowl2)
+            @store_frame.push(@current_frame.bowl1)
+            @store_frame.push(@current_frame.bowl2)
+            store_frame = @store_frame
+            @store_frame = []
+            @scorecard.push(store_frame)
         end
     end
 
     def current_frame?
-        if @scorecard.count/2 <= 18
-            @current_frame = @scorecard.count/2 + 1
-        elsif @scorecard.count/2 == 21
-            @current_frame = @scorecard.count/2 - 0.5
-        elsif @scorecard.count/2 == 20
-            @current_frame = @scorecard.count/2
-        end
+        @scorecard.count + 1
     end
 
     def round_10?
         if current_frame? < 10
             false
-        elsif current_frame?  == 10
+        elsif current_frame? == 10
             true
-        elsif current_frame? == 11
-            "Game is over! You score #{running_total}"
         end
     end
 
@@ -65,7 +68,9 @@ private
         "Game is over! You score #{running_total}"
     end
 
-    def score_with_strikes
+    def break_into_pairs
+
     end
+
 
 end

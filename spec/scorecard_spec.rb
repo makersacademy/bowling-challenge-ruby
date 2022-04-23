@@ -10,11 +10,6 @@ describe Scorecard do
         expect(scorecard.scorecard).to eq []
     end
     
-    it '#add_score should create a new frame and push total_score to scorecard' do
-       scorecard.add_score(2,2)
-       expect(scorecard.scorecard.sum).to eq 4
-    end
-    
     scorecard1 = Scorecard.new
     it '#add_score return "Game is over! message when 10 rounds is complete' do
         9.times do scorecard1.add_score(2,3) end
@@ -27,6 +22,13 @@ describe Scorecard do
         scorecard2.add_score(2,2)
         scorecard2.add_score(1,7)
         expect(scorecard2.running_total).to eq 12
+    end
+
+    scorecard3 = Scorecard.new
+    it '#running_total_strikes should account for strikes' do
+        scorecard3.add_score(10,0)
+        scorecard3.add_score(4,3)
+        expect(scorecard3.running_total_strikes).to eq 24
     end
 
 end
