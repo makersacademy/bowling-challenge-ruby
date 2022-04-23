@@ -2,12 +2,13 @@ require_relative 'frame'
 
 class Scorecard
 
-    attr_reader :scorecard
+    attr_reader :scorecard, :strike_points
 
     def initialize
         @scorecard = []
         @current_frame = 0
         @store_frame = []
+        @strike_points = 0
     end
 
     def add_score(score1,score2,*score3)
@@ -15,11 +16,8 @@ class Scorecard
     end
 
     def running_total
-        @scorecard.flatten.sum
-    end
-
-    def running_total_strikes
-        score_with_strikes
+        count_strikes
+        @scorecard.flatten.sum + @strike_points
     end
 
 
@@ -68,8 +66,10 @@ private
         "Game is over! You score #{running_total}"
     end
 
-    def break_into_pairs
-
+    def count_strikes
+        if @scorecard[0..9][0] == 10
+            @strike_points += @scorecard[1].sum
+        end
     end
 
 
