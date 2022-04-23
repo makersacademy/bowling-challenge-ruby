@@ -28,7 +28,8 @@ describe Scoresheet do
     it 'Should calculate the score of a frame' do
       scoresheet.current_frame.add_roll(6)
       scoresheet.current_frame.add_roll(2)
-      expect(scoresheet.frame_score(frame)).to eq(8)
+      scoresheet.current_frame.add_roll(2) #extra roll to create a new frame
+      expect(scoresheet.frame_score(1)).to eq(8)
     end
   end
 
@@ -37,16 +38,27 @@ describe Scoresheet do
       scoresheet.current_frame.add_roll(10)
       scoresheet.current_frame.add_roll(6)
       scoresheet.current_frame.add_roll(2)
-      expect(scoresheet.frame_score(frame)).to eq(18)
+      scoresheet.current_frame.add_roll(2) #extra roll to create a new frame
+      expect(scoresheet.frame_score(1)).to eq(18)
+    end
+
+    it 'Should add the value of the next two rolls even if they are different frames as a bonus after rolling a strike' do
+      scoresheet.current_frame.add_roll(10)
+      scoresheet.current_frame.add_roll(10)
+      scoresheet.current_frame.add_roll(10) 
+      scoresheet.current_frame.add_roll(2) #extra rolls to create a new frame
+      expect(scoresheet.frame_score(1)).to eq(30)
     end
   end
 
   describe '#spare_bonus' do
     it 'Should add the value of the next roll as a bonus after rolling a spare' do
-      scoresheet.current_frame.add_roll(10)
-      scoresheet.current_frame.add_roll(6)
+      scoresheet.current_frame.add_roll(8)
       scoresheet.current_frame.add_roll(2)
-      expect(scoresheet.frame_score(frame)).to eq(16)
+      scoresheet.current_frame.add_roll(2)
+      scoresheet.current_frame.add_roll(2) #extra rolls to create a new frame
+      scoresheet.current_frame.add_roll(2) #extra rolls to create a new frame
+      expect(scoresheet.frame_score(1)).to eq(12)
     end
   end
 end
