@@ -21,7 +21,9 @@ To do this, I will be planning my program with Domain Modelling and by using TDD
 ## Instructions
 Clone this repository to your desired location using `git clone https://github.com/mcsuGH/bowling-challenge-ruby.git` then run `gem install bundler` (if you don't already have bundler), and then use the command `bundle install`.\
 \
-You can then use `rspec` whilst in the main directory to run the tests or alternatively, run the program in `irb` and require the program by using `require './lib/scoresheet`. From there, you can create a new scoresheet using the command `Scoresheet.new` (it is recommended to use a variable name when creating this, such as `scoresheet = Scoresheet.new`). You can then use `scoresheet.current_frame.add_roll(num)` to input your scores 1 by 1, with num being the number of pins taken down in the roll. After you have inputted all your rolls, use `scoresheet.total_score` to calculate your final score. If you wish to see your results in a scoresheet format, please uncomment the entire `scoresheet` method (line 81) located inside `scoresheet.rb` and by using it, you will be able to see the following:
+You can then use `rspec` whilst in the main directory to run the tests or alternatively, run the program in `irb` and require the program by using `require './lib/scoresheet`.\
+\
+From there, you can create a new scoresheet using the command `Scoresheet.new` (it is recommended to use a variable name when creating this, such as `scoresheet = Scoresheet.new`). You can then use `scoresheet.current_frame.add_roll(num)` to input your scores 1 by 1, with num being the number of pins taken down in the roll. After you have inputted all your rolls, use `scoresheet.total_score` to calculate your final score. If you wish to see your results in a scoresheet format, please uncomment the entire `scoresheet` method (line 81) located inside `scoresheet.rb` and by using it, you will be able to see the following by using `puts scoresheet.scoresheet`:
 
 ![Screenshot](https://i.imgur.com/X73VGWf.png)
 
@@ -89,4 +91,6 @@ used the above for ASCII art of the bowling sheet
 
 
 ## Functionality yet to be added
-A lot of refactoring needs to be done to improve readability - or some better methods to reduce the amount of logic required (many conditionals currently being used).
+A lot of refactoring needs to be done to improve readability - or some better methods to reduce the amount of logic required (many conditionals currently being used).\
+Need to replace the instances of Frame class inside the test spec for Scoresheet with doubles\
+Add some guard conditions to reduce frequency users can run into errors (such as using total_score before finishing the game)
