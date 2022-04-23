@@ -38,4 +38,11 @@ describe Scorecard do
         scorecard4.add_score(4,3)
         expect(scorecard4.running_total).to eq 24
     end
+
+    scorecard5 = Scorecard.new
+    it '#running_total should take into account spare bonuses' do
+        scorecard5.add_score(1,9)
+        scorecard5.add_score(5,0)
+        expect(scorecard5.running_total).to eq 20
+    end
 end
