@@ -9,8 +9,8 @@ class Frame
   end
 
   def add_roll(num)
-    @pins_remaining -= num
-    @rolls << num
+    @pins_remaining -= num unless rolls > 2
+    @rolls << num unless rolls > 2
   end
 
   def rolls

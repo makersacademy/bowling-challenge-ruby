@@ -1,6 +1,7 @@
 require_relative './frame'
 
 class Scoresheet
+  attr_reader :frames
 
   def initialize(frame = Frame.new)
     @frames = []
@@ -12,9 +13,24 @@ class Scoresheet
   end
   
   def current_frame
-    if @current_frame.rolls == 2 || @current_frame.strike?
+    if @frames.length == 9
+      tenth_frame
+    elsif @current_frame.rolls == 2 || @current_frame.strike?
       @frames << @current_frame
-      new_frame
+      new_frame unless complete?
+    else
+      @current_frame
+    end
+    @current_frame
+  end
+
+  def tenth_frame
+    if (@current_frame.strike? || @current_frame.spare?) && @current_frame.rolls == 3
+      @frames << @current_frame
+    elsif @current_frame.rolls == 2
+      @frames << @current_frame
+    else
+      @current_frame
     end
     @current_frame
   end
@@ -24,27 +40,41 @@ class Scoresheet
     score += strike_bonus(num - 1) if @frames[num - 1].strike?
     score += spare_bonus(num - 1) if @frames[num - 1].spare?
     score += @frames[num - 1].first_roll
-    score += @frames[num - 1].second_roll unless @frames[num - 1].strike?
+    score += @frames[num - 1].second_roll if @frames[num - 1].strike? == false || num == 10
+    score += @frames[num - 1].bonus_roll if @frames[num - 1].bonus_roll
     score
   end
 
   def strike_bonus(num)
-    if @frames[num+1].strike?
-      @frames[num+1].first_roll + @frames[num+2].first_roll
+    if num == 9 
+      @frames[9].second_roll + @frames[9].bonus_roll
+    elsif num == 8 && @frames[9].strike?
+      @frames[9].first_roll + @frames[9].second_roll
+    elsif @frames[num + 1].strike?
+      @frames[num + 1].first_roll + @frames[num + 2].first_roll
     else
-      @frames[num+1].first_roll + @frames[num+1].second_roll
+      @frames[num + 1].first_roll + @frames[num + 1].second_roll
     end
   end
 
   def spare_bonus(num)
-    @frames[num+1].first_roll
+    if num == 9
+      @frames[9].bonus_roll
+    else
+      @frames[num + 1].first_roll
+    end
   end
 
   def complete?
-    
+    @frames.length == 10
   end
 
   def total_score
-    0
+    current_frame
+    score = 0
+    for i in 1..10 do
+      score += frame_score(i)
+    end
+    score
   end
 end
