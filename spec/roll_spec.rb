@@ -23,6 +23,7 @@ describe Roll do
     let(:valid_user_input) { '3' }
     let(:invalid_user_input_for_another_roll) { '7' }
 
+    # Consider approach in this using 'stringio https://stackoverflow.com/questions/17258630/how-do-i-write-an-rspec-test-for-a-ruby-method-that-contains-gets-chomp
     # it 'receives user input of number of pins knocked down' do
     #   expect(another_roll.get_roll(valid_user_input))
 
