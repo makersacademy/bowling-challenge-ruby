@@ -4,9 +4,8 @@ class Game
   def user_input_scores
     puts "Please enter your scores for frame no.#{ @counter_frame } (need to between 0 and 10)"
     @user_input = gets.chomp
-    @user_input = @user_input.to_i
     raise "Score need to between 0 and 10" if @user_input.to_i > 10
-    return @user_input
+    return @user_input.to_i
   end
 
   def controller
@@ -24,11 +23,15 @@ class Game
 
   def roll_manager
     @roll_one = user_input_scores
-    @roll_two = user_input_scores
+    strike? ? @roll_two = 0 : @roll_two = user_input_scores
     @frame_score = { one: @roll_one, two: @roll_two }
     @total_score_array << @frame_score
   end
   
+  def strike?
+    @roll_one == 10 ? true : false
+  end
+
   def display_scorecard
     counter = 1
     @total_score_array.each do | scores|
