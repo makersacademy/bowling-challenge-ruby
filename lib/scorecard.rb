@@ -8,7 +8,6 @@ class Scorecard
         @scorecard = []
         @current_frame = 0
         @store_frame = []
-        @strike_points = 0
     end
 
     def add_score(score1,score2,*score3)
@@ -67,8 +66,11 @@ private
     end
 
     def count_strikes
-        if @scorecard[0..9][0] == 10
-            @strike_points += @scorecard[1].sum
+        @strike_points = 0
+        @scorecard.each_cons(2) do |frame1, frame2|
+            if frame1[0] == 10
+                @strike_points += frame2.sum
+            end
         end
     end
 
