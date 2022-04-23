@@ -1,8 +1,8 @@
 class Game 
-  attr_reader :counter_frame, :user_input
+  attr_reader :counter_frame, :user_input, :total_score_array, :frame_score
   
   def user_input_scores
-    puts 'Please enter your scores - need to between 0 and 10:'
+    puts "Please enter your scores for frame no.#{ @counter_frame } (need to between 0 and 10)"
     @user_input = gets.chomp
     @user_input = @user_input.to_i
     raise "Score need to between 0 and 10" if @user_input.to_i > 10
@@ -10,16 +10,35 @@ class Game
   end
 
   def controller
-    user_input_scores
+    frame_manager
+    display_scorecard
   end
 
   def frame_manager
+    @total_score_array = []
     for i in 1..10 do
-      roll_counter = 1
-      while roll_counter < 3
-        @counter_frame = i
-        roll_counter += 1
-      end
+      @counter_frame = i
+      roll_manager
     end
   end
+
+  def roll_manager
+    @roll_one = user_input_scores
+    @roll_two = user_input_scores
+    @frame_score = { one: @roll_one, two: @roll_two }
+    @total_score_array << @frame_score
+  end
+  
+  def display_scorecard
+    counter = 1
+    @total_score_array.each do | scores|
+      print " Frame number #{counter}  =>"
+      scores.each do |key, score|
+        print " roll #{key} is #{score} "
+      end
+      puts
+      counter += 1
+    end
+  end
+
 end

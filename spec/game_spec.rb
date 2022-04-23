@@ -2,12 +2,12 @@ require 'game'
 require 'stringio'
 
 describe Game do
-  let(:game) {Game.new}
+  let(:game) { Game.new }
   
 
   describe '#run_game' do
     before do
-      $stdin = StringIO.new("3\n" )
+      $stdin = StringIO.new("3\n")
     end
     after do
       $stdin = STDIN
@@ -20,7 +20,7 @@ describe Game do
 
   describe '#run_game-error' do
     before do
-      $stdin = StringIO.new("15\n" )
+      $stdin = StringIO.new("15\n")
     end
     after do
       $stdin = STDIN
@@ -30,11 +30,10 @@ describe Game do
     end
   end
 
-
   describe '#frame_manager' do
     it 'counts number of frames' do
-      game.frame_manager
-      expect(game.counter_frame).to be_between(1,10)
+      expect { game.counter_frame }.not_to raise_error
     end
   end
+  
 end
