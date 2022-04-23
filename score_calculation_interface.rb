@@ -1,33 +1,33 @@
-round_count = 0
+frame_count = 0
 scores = []
 
 9.times do
-  puts "ROUND #{round_count + 1}"
-  print "Enter the score for the first bowl: "
+  puts "FRAME #{frame_count + 1}"
+  print "Enter the score for the first roll: "
   first = gets.chomp.to_i
   if first == 10
     scores.push([10])
   else
     scores.push([first])
-    print "\nEnter the score for the second bowl: "
+    print "\nEnter the score for the second roll: "
     second = gets.chomp.to_i
-    scores[round_count].push(second)
+    scores[frame_count].push(second)
   end
 
-  round_count += 1
+  frame_count += 1
   puts "\n\n"
 end
 
-puts "ROUND 10 - THE FINAL ROUND"
-print "Enter the score for the first bowl: "
+puts "FRAME 10 - THE FINAL FRAME"
+print "Enter the score for the first roll: "
 final_1 = gets.chomp.to_i
-print "\nEnter the score for the second bowl: "
+print "\nEnter the score for the second roll: "
 final_2 = gets.chomp.to_i
 scores.push([final_1, final_2])
 
 
 if (final_1 == 10) || ((final_1 + final_2) == 10)
-  print "\nEnter the score for the bonus bowl: "
+  print "\nEnter the score for the bonus roll: "
   final_3 = gets.chomp.to_i
   scores[9].push(final_3)
 end
@@ -53,3 +53,4 @@ total = scores.flatten.sum + bonus
 
 print "\n\nYour total score for this game was #{total}!"
 puts ' A perfect game! Wow!' if total == 300
+puts "\n"
