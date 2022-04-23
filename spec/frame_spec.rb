@@ -1,10 +1,9 @@
 require 'frame'
 
 describe Frame do
-
   let(:frame) { described_class.new }
 
-  describe "#rolls" do
+  describe '#rolls' do
     it 'Should start with no rolls' do
       expect(frame.rolls).to eq(0)
     end
@@ -37,7 +36,7 @@ describe Frame do
     expect(frame.third_roll).to eq(0)
   end
 
-  describe "#strike?" do
+  describe '#strike?' do
     it 'Should know if the frame was a strike' do
       frame.add_roll(10)
       expect(frame.strike?).to eq(true)
@@ -50,7 +49,7 @@ describe Frame do
     end
   end
 
-  describe "#spare?" do
+  describe '#spare?' do
     it 'Should know if the frame was a spare' do
       frame.add_roll(5)
       frame.add_roll(5)
@@ -63,5 +62,4 @@ describe Frame do
       expect(frame.spare?).to eq(false)
     end
   end
-
 end

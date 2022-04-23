@@ -1,5 +1,4 @@
 class Frame
-
   attr_reader :pins_remaining
 
   PINS = 10
@@ -9,9 +8,9 @@ class Frame
     @pins_remaining = PINS
   end
 
-  def add_roll(n)
-    @pins_remaining -= n
-    @rolls << n
+  def add_roll(num)
+    @pins_remaining -= num
+    @rolls << num
   end
 
   def rolls
@@ -31,11 +30,10 @@ class Frame
   end
 
   def strike?
-    @rolls.length == 1 && @pins_remaining == 0
+    @rolls.length == 1 && @pins_remaining.zero?
   end
 
   def spare?
-    @rolls.length == 2 && @pins_remaining == 0
+    @rolls.length == 2 && @pins_remaining.zero?
   end
-
 end
