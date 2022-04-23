@@ -11,7 +11,7 @@ class Scoresheet
   def new_frame(frame = Frame.new)
     @current_frame = frame
   end
- 
+
   def current_frame
     if @frames.length == 9
       tenth_frame
@@ -40,8 +40,7 @@ class Scoresheet
     score += strike_bonus(num - 1) if @frames[num - 1].strike?
     score += spare_bonus(num - 1) if @frames[num - 1].spare?
     score += @frames[num - 1].first_roll
-    score += @frames[num - 1].second_roll if @frames[num - 1].strike? == false || num == 10
-    score += @frames[num - 1].bonus_roll if @frames[num - 1].bonus_roll
+    score += @frames[num - 1].second_roll if @frames[num - 1].strike? == false
     score
   end
 
@@ -72,8 +71,9 @@ class Scoresheet
   def total_score
     current_frame
     score = 0
-    for i in 1..10 do
-      score += frame_score(i)
+    frames = (1..10).to_a
+    frames.each do |frame|
+      score += frame_score(frame)
     end
     score
   end

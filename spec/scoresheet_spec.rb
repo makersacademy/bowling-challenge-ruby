@@ -84,7 +84,7 @@ describe Scoresheet do
       scoresheet.current_frame.add_roll(7)
       expect(scoresheet.complete?).to eq(true)
     end
-        
+       
     it 'Should only add the bonus of the extra roll to score' do
       18.times do
         scoresheet.current_frame.add_roll(0)

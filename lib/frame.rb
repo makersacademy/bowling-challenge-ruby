@@ -6,6 +6,8 @@ class Frame
   def initialize
     @rolls = []
     @pins_remaining = PINS
+    @strike = false
+    @spare = false
   end
 
   def add_roll(num)
@@ -30,10 +32,12 @@ class Frame
   end
 
   def strike?
-    @rolls.length == 1 && @pins_remaining.zero?
+    @strike = true if @rolls.length == 1 && @pins_remaining.zero?
+    @strike
   end
 
   def spare?
-    @rolls.length == 2 && @pins_remaining.zero?
+    @spare = true if @rolls.length == 2 && @pins_remaining.zero?
+    @spare
   end
 end
