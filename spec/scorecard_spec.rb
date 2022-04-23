@@ -28,13 +28,14 @@ describe Scorecard do
     it '#strike_points should account for strikes' do
         scorecard3.add_score(10,0)
         scorecard3.add_score(4,3)
-        scorecard3.running_total
+        scorecard3.add_score(4,3)
         expect(scorecard3.strike_points).to eq 7
     end
 
     scorecard4 = Scorecard.new
     it '#running_total should take into account strike bonuses' do
         scorecard4.add_score(10,0)
+        scorecard4.add_score(4,3)
         scorecard4.add_score(4,3)
         expect(scorecard4.running_total).to eq 24
     end

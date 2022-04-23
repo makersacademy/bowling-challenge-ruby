@@ -10,6 +10,7 @@ class Scorecard
         @store_frame = []
         @strike_points = 0
         @spare_points = 0
+        @running_total = 0
     end
 
     def add_score(score1,score2,*score3)
@@ -19,15 +20,15 @@ class Scorecard
     def running_total
         count_strikes
         count_spares
-        @scorecard.flatten.sum + @strike_points + @spare_points
+        @running_total = @scorecard.flatten.sum + @strike_points + @spare_points
     end
-
-
-private
 
     def current_frame?
         @scorecard.count
     end
+
+
+private
 
     def add_frame(score1,score2,*score3)
         if round_10? == true
@@ -59,8 +60,10 @@ private
     def add_score_based_on_round(score1,score2,*score3)
         if round_10? == true
             add_frame(score1,score2,score3.pop)
+            running_total
         elsif round_10? == false
             add_frame(score1,score2)
+            running_total
         end
     end
 
@@ -73,14 +76,26 @@ private
     end
 
     def count_strikes
-        if round_10? == false
-            @strike_points = 0
-            @scorecard.each_cons(2) do |frame1, frame2|
-                if frame1[0] == 10
+        if @scorecard.count < 10
+            @scorecard.each_cons(3) do |frame1, frame2, frame3|
+                if frame1[0] == 10 && frame2[0] == 10 && frame3[0] == 10
+                    @strike_points += frame2[0] + frame3[0]
+                elsif frame1[0] == 10 && frame2[0] == 10 && frame3[0] != 10
+                    @strike_points += frame2[0] + frame3[0]
+                elsif frame1[0] == 10 && frame2[0] != 10
                     @strike_points += frame2.sum
                 end
-            end 
-        end
+            end
+
+        elsif @scorecard.count == 10
+            if @scorecard[9][0] == 10
+                @strike_points += @scorecard[9][1] + @scorecard[9][2]
+            end
+        end 
+    end
+
+    def strikes_maximum_30
+        
     end
 
     def count_spares
@@ -89,6 +104,17 @@ private
             if frame1.sum == 10 && frame1[0] != 10
                 @spare_points += frame2[0]
             end
+        end
+    end
+
+    def game_outcome
+        if running_total == 300
+            "You scored a perfect 300!"
+        elsif
+            running_total == 0
+            "Gutter game! You scored 0!"
+        else 
+            "Game is over! You score #{running_total}"
         end
     end
 
