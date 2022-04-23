@@ -6,8 +6,16 @@ class Game
   def score
     score = 0
     @rolls.each_with_index do |frame, i|
-      score += frame.inject(0,:+)
-      score += @rolls[i + 1][0] if score == 10
+      next if i > 9
+      frame_score = frame.inject(0,:+)
+      score += frame_score
+      if frame_score == 10
+        if frame.length == 1
+          score += @rolls[i + 1].inject(0,:+)
+        else
+          score += @rolls[i + 1][0]
+        end
+      end
     end
     score
   end
