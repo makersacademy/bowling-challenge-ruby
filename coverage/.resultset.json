@@ -1,7 +1,59 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/almorcrette/coding/projects/bowling-challenge-ruby/spec/roll_spec.rb": {
+        "lines": [
+          1,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
     },
-    "timestamp": 1650713876
+    "timestamp": 1650716451
   }
 }
