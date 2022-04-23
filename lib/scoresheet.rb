@@ -40,6 +40,10 @@ class Scoresheet
     @frames[num+1].first_roll
   end
 
+  def complete?
+    
+  end
+
   def total_score
     0
   end

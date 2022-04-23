@@ -46,7 +46,7 @@ describe Scoresheet do
       scoresheet.current_frame.add_roll(10)
       scoresheet.current_frame.add_roll(10)
       scoresheet.current_frame.add_roll(10) 
-      scoresheet.current_frame.add_roll(2) #extra rolls to create a new frame
+      scoresheet.current_frame.add_roll(2) #extra roll to create a new frame
       expect(scoresheet.frame_score(1)).to eq(30)
     end
   end
@@ -59,6 +59,40 @@ describe Scoresheet do
       scoresheet.current_frame.add_roll(2) #extra rolls to create a new frame
       scoresheet.current_frame.add_roll(2) #extra rolls to create a new frame
       expect(scoresheet.frame_score(1)).to eq(12)
+    end
+  end
+
+  context 'Tenth Frame' do
+    it 'Should let the last frame to have upto 3 rolls if a spare is landed' do
+      18.times do 
+        scoresheet.current_frame.add_roll(0)
+      end
+      scoresheet.current_frame.add_roll(8)
+      scoresheet.current_frame.add_roll(2)
+      expect(scoresheet.complete?).to_not eq(true)
+      scoresheet.current_frame.add_roll(7)
+      expect(scoresheet.complete?).to eq(true)
+    end
+
+    it 'Should let the last frame to have upto 3 rolls if a strike is landed' do
+      18.times do 
+        scoresheet.current_frame.add_roll(0)
+      end
+      scoresheet.current_frame.add_roll(10)
+      scoresheet.current_frame.add_roll(10)
+      expect(scoresheet.complete?).to_not eq(true)
+      scoresheet.current_frame.add_roll(7)
+      expect(scoresheet.complete?).to eq(true)
+    end
+        
+    it 'Should only add the bonus of the extra roll to score rather than both the bonus and the value of the bonus roll' do
+      18.times do 
+        scoresheet.current_frame.add_roll(0)
+      end
+      scoresheet.current_frame.add_roll(8)
+      scoresheet.current_frame.add_roll(2)
+      scoresheet.current_frame.add_roll(7)
+      expect(scoresheet.total_score).to eq(17)
     end
   end
 end

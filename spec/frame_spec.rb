@@ -29,11 +29,11 @@ describe Frame do
     expect(frame.second_roll).to eq(2)
   end
 
-  it 'Should know how many pins were taken down in third roll' do
+  it 'Should know how many pins were taken down in bonus roll' do
     frame.add_roll(5)
     frame.add_roll(2)
     frame.add_roll(0)
-    expect(frame.third_roll).to eq(0)
+    expect(frame.bonus_roll).to eq(0)
   end
 
   describe '#strike?' do

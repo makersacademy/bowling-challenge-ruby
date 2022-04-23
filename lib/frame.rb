@@ -25,7 +25,7 @@ class Frame
     @rolls[1]
   end
 
-  def third_roll
+  def bonus_roll
     @rolls[2]
   end
 
