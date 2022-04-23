@@ -14,12 +14,19 @@ describe Scorecard do
        scorecard.add_score(2,2)
        expect(scorecard.scorecard.sum).to eq 4
     end
-
+    
     scorecard1 = Scorecard.new
+    it '#add_score return "Game is over! message when 10 rounds is complete' do
+        9.times do scorecard1.add_score(2,3) end
+        scorecard1.add_score(3,3,3)
+        expect(scorecard1.add_score(1,2)).to eq("Game is over! You score #{scorecard1.running_total}")
+    end
+
+    scorecard2 = Scorecard.new
     it '#running_total should calculate the current total score' do
-        scorecard1.add_score(2,2)
-        scorecard1.add_score(1,7)
-        expect(scorecard1.running_total).to eq 12
+        scorecard2.add_score(2,2)
+        scorecard2.add_score(1,7)
+        expect(scorecard2.running_total).to eq 12
     end
 
 end
