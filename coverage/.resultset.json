@@ -1,12 +1,68 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/almorcrette/coding/projects/bowling-challenge-ruby/spec/roll_spec.rb": {
+      "/Users/almorcrette/coding/projects/bowling-challenge-ruby/spec/frame_spec.rb": {
         "lines": [
           1,
           null,
           1,
+          1,
           null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/almorcrette/coding/projects/bowling-challenge-ruby/lib/frame.rb": {
+        "lines": [
+          null,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/almorcrette/coding/projects/bowling-challenge-ruby/spec/roll_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
           6,
           null,
           6,
@@ -24,7 +80,6 @@
           null,
           null,
           1,
-          null,
           3,
           2,
           null,
@@ -46,8 +101,6 @@
           1,
           4,
           1,
-          null,
-          null,
           null,
           null,
           null
@@ -55,8 +108,12 @@
       },
       "/Users/almorcrette/coding/projects/bowling-challenge-ruby/lib/roll.rb": {
         "lines": [
-          1,
           null,
+          null,
+          null,
+          null,
+          null,
+          1,
           1,
           null,
           1,
@@ -67,14 +124,14 @@
           1,
           4,
           4,
-          2,
-          2,
           null,
+          2,
+          2,
           null,
           null
         ]
       }
     },
-    "timestamp": 1650717653
+    "timestamp": 1650718536
   }
 }
