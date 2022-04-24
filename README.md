@@ -8,7 +8,7 @@ To set up and run Bowling Scorecard...
 # 4. Instantiate the Scorecard class with; card = Scorecard.new (for example)
 # 5. To 'bowl' and record your score do card.bowl(0) - passing your score as a parameter
 # 6. Keep adding scores, a strike of 10 will also pass 0 for the next round
-# 7. I started adding functionality to create bonus
+# 7. I added functionality to create spares, bonuses and gutter games
 # 8. You have to do 'play' 10 rounds before you can return your score with; card.score
 (trying before will raise an error)
 
@@ -23,7 +23,7 @@ To make the project I did all initial setting up.
 and specified ruby version - updated ruby -v with rvm install-3.1.1
 - did gem bundle install
 
-- I would have liked to have separated the scoring and other concerns but ran out of time.
+# What I didn't manage yet - to improve on, I would have liked to have separated the scoring and other concerns but ran out of time and other functionalities like calculating a perfect score etc.
 
 - Started planning the basic game score structure and look at 10th frame bonuses/perfect games later
   # 10 frames are allowed in total 
