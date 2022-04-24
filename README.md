@@ -1,6 +1,53 @@
 Bowling Challenge in Ruby
 =================
 
+#### Makers Week 5 Weekend Challenge - bowling scorecard.
+jackmcc08 answer to the challenge.
+
+On Submission:
+- RSPEC tests all passed
+- Rubocop - only one violation (BowlingScorecard class too long)
+
+## To use
+1. git clone to your local machine
+2. run `bundle install`
+3. enter into terminal `ruby bowling_scorecard_run.rb` (This will run the command line interface for the scorecard - should be simple to follow).
+4. enter your bowling scores - it should give you errors if incorrect scores are used.
+
+## technologies
+Program is built entirely with Ruby and used the following gems for testing development - Rspec, Rubocop, SimpleCov, Preek (thanks Stu for introducing me to this new pain!).
+
+Cool features include:
+- Using Sprintf method to format the display strings simply and easily.
+- mocking user input with $stdin and stubbing gets.
+
+The program is split into two classes:
+- RunScorecard which includes the display logic and the game loop
+- BowlingScorecard which includes all the logic for the game and storing the information.
+- If I have time I will look to extract a Frame class, but unlikely at this point.
+
+## Development History
+
+Please see the development notes for my in progress write up during dev.
+
+I started off this project through building out the specification into user stories and domain model, and I also did a flow chart to identify all possible routes the bowling game could take. This helped me map out the program.
+
+I followed as much as possible strict TDD, incrementing the program with only what was necessary to meet the tests. This helped hugely in developing the logic and avoided getting lost in the complexity.
+
+There was a point where I tried to make a big leap in the logic, but it was getting confusing so I broke it down into much smaller increments by writing more incremental tests.
+
+For the 10th frame logic I wrote it out long hand before refactoring into the other methods I wrote for frames 1 to 9.
+
+Areas to improve/concern:
+- Program does not allow you to revise scores.
+- I think I tackled all input edge cases but could have done with more testing.
+- Needs more extraction to get it to be more object orientated/srp.
+- Cool next steps would be to build a web app and database for the program.
+
+
+
+# Original Instructions
+
 * Feel free to use google, your notes, books, etc. but work on your own
 * If you refer to the solution of another coach or student, please put a link to that in your README
 * If you have a partial solution, **still check in a partial solution**
@@ -18,7 +65,7 @@ As usual please start by
 
 * Forking this repo
 
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
+* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am.
 
 ___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
 
