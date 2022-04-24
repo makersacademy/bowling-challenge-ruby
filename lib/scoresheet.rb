@@ -18,40 +18,12 @@ class Scoresheet
     @current_frame
   end
 
-  def final_frame
-    if @current_frame.strike? || @current_frame.spare?
-      @frames << @current_frame if @current_frame.rolls == 3
-    elsif @current_frame.rolls == 2
-      @frames << @current_frame
-    end
-  end
-
   def frame_score(num)
     score = 0
     score += bonus(num - 1)
     score += @frames[num - 1].first_roll
     score += @frames[num - 1].second_roll if @frames[num - 1].strike? == false
     score
-  end
-
-  def strike_bonus(num)
-    if num == LAST_FRAME - 1
-      @frames[-1].second_roll + @frames[-1].bonus_roll
-    elsif num == LAST_FRAME - 2 && @frames[-1].strike?
-      @frames[-1].first_roll + @frames[-1].second_roll
-    elsif @frames[num + 1].strike?
-      @frames[num + 1].first_roll + @frames[num + 2].first_roll
-    else
-      @frames[num + 1].first_roll + @frames[num + 1].second_roll
-    end
-  end
-
-  def spare_bonus(num)
-    if num == LAST_FRAME - 1
-      @frames[-1].bonus_roll
-    else
-      @frames[num + 1].first_roll
-    end
   end
 
   def complete?
@@ -90,6 +62,34 @@ class Scoresheet
     bonus += strike_bonus(num) if @frames[num].strike?
     bonus += spare_bonus(num) if @frames[num].spare?
     bonus
+  end
+
+  def strike_bonus(num)
+    if num == LAST_FRAME - 1
+      @frames[-1].second_roll + @frames[-1].bonus_roll
+    elsif num == LAST_FRAME - 2 && @frames[-1].strike?
+      @frames[-1].first_roll + @frames[-1].second_roll
+    elsif @frames[num + 1].strike?
+      @frames[num + 1].first_roll + @frames[num + 2].first_roll
+    else
+      @frames[num + 1].first_roll + @frames[num + 1].second_roll
+    end
+  end
+
+  def spare_bonus(num)
+    if num == LAST_FRAME - 1
+      @frames[-1].bonus_roll
+    else
+      @frames[num + 1].first_roll
+    end
+  end
+
+  def final_frame
+    if @current_frame.strike? || @current_frame.spare?
+      @frames << @current_frame if @current_frame.rolls == 3
+    elsif @current_frame.rolls == 2
+      @frames << @current_frame
+    end
   end
 
   # def scoresheet
