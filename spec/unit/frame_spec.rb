@@ -66,4 +66,22 @@ describe Frame do
       expect(frame.length).to eq current_frame.length
     end
   end
+
+  describe 'bonus_frame?' do
+      it 'knows whether a frame contains bonus score' do
+      frame.add_to_frame(3)
+      frame.add_to_frame(7)
+      frame.add_to_frame(2)
+      expect(frame).to be_bonus_frame
+    end
+  end
+
+  describe '#first_two' do
+    it 'sums only the first two rolls of a frame' do
+    frame.add_to_frame(3)
+    frame.add_to_frame(7)
+    frame.add_to_frame(2)
+    end
+  end
+
 end  

@@ -9,7 +9,6 @@ class Game
   end
 
   def regular_strike(pins)
-    # If the first roll was a strike and pre-final-frame
     @roll_number.even? && pins == 10 && @roll_number < 18
   end
 
@@ -45,14 +44,23 @@ class Game
   def score
     @rolls.each_with_index do |frame, index|
       if frame.strike?
-        @score += frame.total + @rolls[index + 1].total
-      elsif frame.spare?
-        @score += frame.total + @rolls[index + 1].first_roll 
+        if frame.bonus_frame?
+          score_bonus_frame(frame)
       else
-        # spare bonuses now calculated below as they no longer equal 10 (bonus score has been added to frame)
-        @score += frame.total
+          @score += frame.total + @rolls[index + 1].total
+        end
+      elsif frame.spare?
+          @score += frame.total + @rolls[index + 1].first_roll
+      else 
+         @score += frame.total
       end
     end
-   @score
+    @score
   end
+  
+  def score_bonus_frame(frame)
+    @score += frame.total
+  end
+
+  
 end
