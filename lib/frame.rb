@@ -32,12 +32,12 @@ class Frame
   end
 
   def strike?
-    @strike = true if @rolls.length == 1 && @pins_remaining.zero?
+    @strike = true if rolls == 1 && @pins_remaining.zero?
     @strike
   end
 
   def spare?
-    @spare = true if @rolls.length == 2 && @pins_remaining.zero?
+    @spare = true if rolls == 2 && @pins_remaining.zero?
     @spare
   end
 end

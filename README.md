@@ -23,9 +23,11 @@ Clone this repository to your desired location using `git clone https://github.c
 \
 You can then use `rspec` whilst in the main directory to run the tests or alternatively, run the program in `irb` and require the program by using `require './lib/scoresheet`.\
 \
-From there, you can create a new scoresheet using the command `Scoresheet.new` (it is recommended to use a variable name when creating this, such as `scoresheet = Scoresheet.new`). You can then use `scoresheet.current_frame.add_roll(num)` to input your scores 1 by 1, with num being the number of pins taken down in the roll. After you have inputted all your rolls, use `scoresheet.total_score` to calculate your final score. If you wish to see your results in a scoresheet format, please uncomment the entire `scoresheet` method (line 81) located inside `scoresheet.rb` and by using it, you will be able to see the following by using `puts scoresheet.scoresheet`:
+From there, you can create a new scoresheet using the command `Scoresheet.new` (it is recommended to use a variable name when creating this, such as `scoresheet = Scoresheet.new`). You can then use `scoresheet.current_frame.add_roll(num)` to input your scores 1 by 1, with num being the number of pins taken down in the roll. After you have inputted all your rolls, use `scoresheet.total_score` to calculate your final score.\
+\
+If you wish to see your results in a scoresheet format, please uncomment the entire `scoresheet` method (line 100-205) aswell as the line `scoresheet` (line 75) used inside the `total_score` method inside the `scoresheet.rb` file and by using it, you will be able to see the following by using `scoresheet.total_score`:
 
-![Screenshot](https://i.imgur.com/X73VGWf.png)
+![Screenshot](https://i.imgur.com/4Y0bXUh.png)
 
 ## Specification 
 Strikes\

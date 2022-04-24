@@ -17,11 +17,18 @@ describe Scoresheet do
     scoresheet.current_frame.add_roll(2)
   end
 
-  it 'Should be able to get a total score after the tenth frame has ended' do
-    20.times do
-      scoresheet.current_frame.add_roll(0)
+  describe '#total_score' do
+    it 'Should be able to get a total score after the tenth frame has ended' do
+      20.times do
+        scoresheet.current_frame.add_roll(0)
+      end
+      expect(scoresheet.total_score).to eq(0)
     end
-    expect(scoresheet.total_score).to eq(0)
+
+    it 'Does not give a total score until the game is complete' do
+      scoresheet.current_frame.add_roll(10)
+      expect { scoresheet.total_score }.to raise_error('Your game has not finished yet!')
+    end
   end
 
   describe '#frame_score' do
@@ -86,7 +93,7 @@ describe Scoresheet do
       scoresheet.current_frame
       expect(scoresheet.complete?).to eq(true)
     end
-       
+      
     it 'Should only add the bonus of the extra roll to score' do
       18.times do
         scoresheet.current_frame.add_roll(0)

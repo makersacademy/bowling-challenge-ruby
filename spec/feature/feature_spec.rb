@@ -1,9 +1,9 @@
-require 'scoresheet' 
+require 'scoresheet'
 
-describe "User can input their scores and get their score" do
-  it "will return final score" do
+describe 'User can input their scores and get their score' do
+  it 'will return final score' do
     scoresheet = Scoresheet.new
-    
+   
     scoresheet.current_frame.add_roll(1)
     scoresheet.current_frame.add_roll(4)
     scoresheet.current_frame.add_roll(4)
@@ -23,7 +23,7 @@ describe "User can input their scores and get their score" do
     scoresheet.current_frame.add_roll(2)
     scoresheet.current_frame.add_roll(8)
     scoresheet.current_frame.add_roll(6)
-    
+   
     expect(scoresheet.total_score).to eq(133)
   end
 end
