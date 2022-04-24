@@ -6,7 +6,8 @@ describe Frame do
 
   describe '#roll' do
     it 'reduces the number of standing pins by pins knocked down' do
-      expect(frame.roll(10, 6)[:remaining_pins]).to eq 4
+      frame.roll(10, 6)
+      expect(frame.pins_standing).to eq 4
     end
 
     it 'outputs the score from the roll' do
