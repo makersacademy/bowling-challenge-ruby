@@ -10,9 +10,8 @@ class Frame
   def roll
     knocked_down = $stdin.gets.chomp.to_i
     raise "Cannot knock down more pins than are standing" if knocked_down > @pins_standing
-    score = knocked_down
-    @pins_standing = @pins_standing - score
-    { remaining_pins: @pins_standing, score: score }
+    @pins_standing = @pins_standing - knocked_down
+    knocked_down
   end
 
   def cleared?

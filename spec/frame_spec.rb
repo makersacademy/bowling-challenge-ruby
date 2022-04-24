@@ -20,7 +20,7 @@ describe Frame do
     end
 
     it 'outputs the score from the roll' do
-      expect(frame.roll[:score]).to eq 6
+      expect(frame.roll).to eq 6
     end
 
     describe 'when attempting to knock down more pins than are standing' do
