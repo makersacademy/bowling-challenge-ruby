@@ -15,11 +15,7 @@ class Frame
   end
 
   def cleared?
-    if @pins_standing == 0
-      true
-    else
-      false
-    end
+    @pins_standing == 0
   end
 
 end
