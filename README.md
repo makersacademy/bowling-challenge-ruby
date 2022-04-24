@@ -19,7 +19,8 @@ and specified ruby version - updated ruby -v with rvm install-3.1.1
   # There is a second frame if any pins standing with 2 more rolls
   # A 'spare' is when player has knocked down 10 with the 2nd roll
    - bonus is pins knocked down by next roll
-  # 'Gutter' games are missing all ten pins
+  # 'Gutter' games are when player misses all ten pins - scores 0
+   - score method to return 0
   
 - Tried to focus on TDD and testing behaviour rather than state
 - Use SRP and encapsulation
