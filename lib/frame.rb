@@ -4,6 +4,7 @@ class Frame
 
   def initialize
     @pins_standing = 10
+    @frame_score  = { first_roll: nil, second_roll: nil}
   end
 
 
@@ -14,8 +15,16 @@ class Frame
     knocked_down
   end
 
+  def update_score(index, result)
+    @frame_score[index] = result
+  end
+
   def cleared?
     @pins_standing == 0
+  end
+
+  def strike?
+    @frame_score[:first_roll] == 10
   end
 
 end
