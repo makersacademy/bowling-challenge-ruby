@@ -25,15 +25,15 @@ describe Game do
       expect(game2.score).to eq 39
     end
 
-    it "gives the score of a game with one spare that is not in the bonus" do
+    it "gives the score of a game with one spare that is not in frame 10" do
       expect(game3.score).to eq 43
     end
 
-    it "gives the score of a game with a strike that is not in the bonus" do
+    it "gives the score of a game with a strike that is not in frame 10" do
       expect(game4.score).to eq 51
     end
 
-    it "correctly adds the bonus score when the player scores a spare in frame 10" do
+    it "correctly adds the bonus score when the player scores a spare or a strike in frame 10" do
       expect(game5.score).to eq 66
     end
 
