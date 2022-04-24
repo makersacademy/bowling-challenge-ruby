@@ -1,0 +1,31 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/davidmakers2022/Projects/Main_Course_Projects/week_5/week_5_weekend_challenge/bowling_scorecard/bowling-challenge-ruby/spec/bowling_scorecard_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/davidmakers2022/Projects/Main_Course_Projects/week_5/week_5_weekend_challenge/bowling_scorecard/bowling-challenge-ruby/lib/bowling_scorecard.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1650819767
+  }
+}
