@@ -14,15 +14,9 @@ describe Scorecard do
     it '#add_score return "Game is over! message when 10 rounds is complete' do
         9.times do scorecard1.add_score(2,3) end
         scorecard1.add_score(3,3,3)
-        expect(scorecard1.add_score(1,2)).to eq("Game is over! You score #{scorecard1.running_total}")
+        expect(scorecard1.add_score(1,2)).to include("Game is over!")
     end
 
-    scorecard2 = Scorecard.new
-    it '#running_total should calculate the current total score' do
-        scorecard2.add_score(2,2)
-        scorecard2.add_score(1,7)
-        expect(scorecard2.running_total).to eq 12
-    end
 
     scorecard3 = Scorecard.new
     it '#strike_points should account for strikes' do
@@ -32,18 +26,39 @@ describe Scorecard do
         expect(scorecard3.strike_points).to eq 7
     end
 
-    scorecard4 = Scorecard.new
-    it '#running_total should take into account strike bonuses' do
-        scorecard4.add_score(10,0)
-        scorecard4.add_score(4,3)
-        scorecard4.add_score(4,3)
-        expect(scorecard4.running_total).to eq 24
+    scorecard6 = Scorecard.new
+    it 'should return a perfect game' do
+        9.times do scorecard6.add_score(10,0) end
+        expect(scorecard6.add_score(10,10,10)).to eq "Game is over! You scored a perfect 300!"
     end
 
-    scorecard5 = Scorecard.new
-    it '#running_total should take into account spare bonuses' do
-        scorecard5.add_score(1,9)
-        scorecard5.add_score(5,0)
-        expect(scorecard5.running_total).to eq 20
+    scorecard7 = Scorecard.new
+    it 'should return 150 from all spare game' do
+        9.times do scorecard7.add_score(5,5) end
+        expect(scorecard7.add_score(5,5,5)).to eq "Game is over! You scored 150!"
+    end
+
+    scorecard8 = Scorecard.new
+    it 'should return gutter game' do
+        9.times do scorecard8.add_score(0,0) end
+        expect(scorecard8.add_score(0,0)).to eq "Game is over! You scored 0! Gutter game!"
+    end
+
+    scorecard9 = Scorecard.new
+    it 'should return a game with a mixture of spares, strikes and other bowls' do
+        scorecard9.add_score(0,0)
+        scorecard9.add_score(3,4)
+        scorecard9.add_score(7,2)
+        scorecard9.add_score(10,0)
+        scorecard9.add_score(0,0)
+        scorecard9.add_score(0,1)
+        scorecard9.add_score(10,0)
+        scorecard9.add_score(0,8)
+        scorecard9.add_score(9,0)
+        expect(scorecard9.add_score(5,5,5)).to eq "Game is over! You scored 77!"
     end
 end
+
+
+
+
