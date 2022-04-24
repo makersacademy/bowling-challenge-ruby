@@ -1,9 +1,12 @@
+require_relative './score'
+
 class Frame
 
- attr_reader :knocked_down_pins_log
+ attr_reader :knocked_down_pins_log, :frame
 
-  def initialize
+  def initialize(score = Score.new)
     @knocked_down_pins_log = []
+    @frame = 0
   end
 
   def knocked_down_pins(num)
@@ -12,19 +15,10 @@ class Frame
 
   def reset_knocked_down_pins_log
     @knocked_down_pin_log = []
+    change_frame
   end
 
-  def spare?
-    if @knocked_down_pins_log.sum == 10 && @knocked_down_pins_log.length == 2
-      true
-    else false
-    end
-  end
-
-  def strike?
-    if @knocked_down_pins_log.sum == 10 && @knocked_down_pins_log.length == 1
-      true
-    else false
-    end
+  def change_frame
+    @frame += 1
   end
 end
