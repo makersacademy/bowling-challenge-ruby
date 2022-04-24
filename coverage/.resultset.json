@@ -48,15 +48,16 @@
           1,
           null,
           1,
-          5,
+          6,
           null,
           null,
           null,
           1,
+          7,
+          7,
           6,
-          5,
-          5,
-          5,
+          6,
+          6,
           null,
           null,
           1,
@@ -73,18 +74,51 @@
       "/Users/almorcrette/coding/projects/bowling-challenge-ruby/spec/game_spec.rb": {
         "lines": [
           1,
+          1,
           null,
           1,
+          null,
+          2,
+          null,
+          2,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
           null,
           null
         ]
       },
       "/Users/almorcrette/coding/projects/bowling-challenge-ruby/lib/game.rb": {
         "lines": [
-
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
         ]
       }
     },
-    "timestamp": 1650795653
+    "timestamp": 1650797626
   }
 }

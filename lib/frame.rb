@@ -8,8 +8,9 @@ class Frame
 
 
   def roll(knocked_down)
-    raise "Cannot knock down more pins than are standing" if knocked_down > @pins_standing
-    score = knocked_down.to_i
+    knocked_down_parsed = knocked_down.to_i
+    raise "Cannot knock down more pins than are standing" if knocked_down_parsed > @pins_standing
+    score = knocked_down_parsed
     @pins_standing = @pins_standing - score
     { remaining_pins: @pins_standing, score: score }
   end

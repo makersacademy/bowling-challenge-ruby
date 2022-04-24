@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 
 ruby '3.1.0'
 
+gem 'stringio'
+
 group :development, :test do
   gem 'rspec'
   gem 'rubocop'
