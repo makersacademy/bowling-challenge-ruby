@@ -21,11 +21,11 @@ To do this, I will be planning my program with Domain Modelling and by using TDD
 ## Instructions
 Clone this repository to your desired location using `git clone https://github.com/mcsuGH/bowling-challenge-ruby.git` then run `gem install bundler` (if you don't already have bundler), and then use the command `bundle install`.\
 \
-You can then use `rspec` whilst in the main directory to run the tests or alternatively, run the program in `irb` and require the program by using `require './lib/scoresheet`.\
+You can then use `rspec` whilst in the main directory to run the tests or alternatively, run the program in `irb` and require the program by using `require './lib/scoresheet'`.\
 \
 From there, you can create a new scoresheet using the command `Scoresheet.new` (it is recommended to use a variable name when creating this, such as `scoresheet = Scoresheet.new`). You can then use `scoresheet.current_frame.add_roll(num)` to input your scores 1 by 1, with num being the number of pins taken down in the roll. After you have inputted all your rolls, use `scoresheet.total_score` to calculate your final score.\
 \
-If you wish to see your results in a scoresheet format, please uncomment the entire `scoresheet` method (line 95-200) aswell as the line `scoresheet` (line 42) used inside the `total_score` method inside the `scoresheet.rb` file and by using it, you will be able to see the following by using `scoresheet.total_score`:
+If you wish to see your results in a scoresheet format, inside the `scoresheet.rb` file, uncomment the entire `scoresheet` method (line 95-200) aswell as the line `scoresheet` (line 42) used inside the `total_score` method and then you will be able to see the following by using `scoresheet.total_score`:
 
 ![Screenshot](https://i.imgur.com/4Y0bXUh.png)
 
@@ -87,7 +87,6 @@ I would like the final frame to add only the bonus of the extra roll/s rather th
 ## References
 ```
 https://www.asciiart.eu/sports-and-outdoors/bowling
-
 ```
 used the above for ASCII art of the bowling sheet
 
