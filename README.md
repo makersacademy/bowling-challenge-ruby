@@ -19,8 +19,8 @@ and specified ruby version - updated ruby -v with rvm install-3.1.1
   # There is a second frame if any pins standing with 2 more rolls
   # A 'spare' is when player has knocked down 10 with the 2nd roll
    - bonus is pins knocked down by next roll
-  # 'Gutter' games are when player misses all ten pins - scores 0
-   - score method to return 0
+  # Keep game score - 2 rolls = 20 / Gutter' games are when player misses all ten pins - scores 0
+   - Have Score not as a definition - keep score with @score instance
   
 - Tried to focus on TDD and testing behaviour rather than state
 - Use SRP and encapsulation

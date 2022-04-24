@@ -1,10 +1,13 @@
 class Scorecard
+  
+  attr_reader :score
+
+  def initialize
+    @score = 0
+  end
 
   def roll(pins)
+    @score += pins
   end
-  
-  def score
-    0
-  end
-  
+
 end
