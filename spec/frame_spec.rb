@@ -1,12 +1,15 @@
 require './lib/frame'
 
 describe '#roll' do
-  let(:user_input) { "6" }
-  it 'reduces the number of standing pins by the user input of pins knocked down' do
-    expect(roll(10, user_input)[:remaining_pins]).to eq 4
+  it 'reduces the number of standing pins by pins knocked down' do
+    expect(roll(10, 6)[:remaining_pins]).to eq 4
   end
 
   it 'outputs the score from the roll' do
-    expect(roll(10, user_input)[:score]).to eq 6
+    expect(roll(10, 6)[:score]).to eq 6
+  end
+
+  it 'raises an error if attempt to knock down more pins than are standing' do
+    expect { roll(5, 7) }.to raise_error("Cannot knock down more pins than were standing")
   end
 end
