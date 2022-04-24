@@ -21,7 +21,9 @@ and specified ruby version - updated ruby -v with rvm install-3.1.1
    - bonus is pins knocked down by next roll
   # Keep game score - 2 rolls = 20 / Gutter' games are when player misses all ten pins - scores 0
    - Have Score not as a definition - keep score with @score instance
-  
+
+# Scorecard designing process
+- Focus on creating each test methodically for each step of plan
 - Tried to focus on TDD and testing behaviour rather than state
 - Use SRP and encapsulation
 - Commit often with clear commit messages
