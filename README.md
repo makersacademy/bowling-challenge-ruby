@@ -1,37 +1,39 @@
 Bowling Challenge in Ruby
 =================
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+This is a program that calculates the final score of a bowling game. Initially, the score of a game with no strikes or spares was calculated to start simple. Then, functionality for spares were implemented along with having one strike in the game. Then the bonus round was taken into account when the player scores a strike or a spare in frame 10. Finally, the functionality for scoring two strikes in a row was implemented which then meant that correctly scoring a perfect game was covered with all these steps. In order to make the code more readable, once all the tests were passing, the score method was refactored using three private methods.
 
-## The Task
+This program was written using the TDD (Test Driven Development) process using RSpec while also being Object Oriented by creating a Game class that would take the rolls of a game as input from the user when creating an instance of this class. This program also assumes that a valid set of rolls will be inputted from the user.
 
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
+## Getting Started
 
-Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
+Start by cloning this repository and installing bundler if you haven't already. Then install the necessary gems present in the [Gemfile](https://github.com/jmcnally17/bowling-challenge-ruby/blob/main/Gemfile)
+```
+git clone https://github.com/jmcnally17/bowling-challenge-ruby.git
+gem install bundler
+bundle
+```
+Now, you will be setup to start using the Game class in the [lib](https://github.com/jmcnally17/bowling-challenge-ruby/tree/main/lib) folder in order to calculate bowling scores.
 
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
+## How To Use
 
-As usual please start by
+Start in irb:
+```
+irb
+require_relative './lib/game'
+```
+Then create an instance of a game with the rolls as an argument:
+```
+game = Game.new([[10],[10],[1,8],[1,4],[0,0],[0,3],[0,0],[0,4],[7,0],[0,10],[5]])
+```
+The only thing left for the user to do is to use the score method to find the final score for this particular game:
+```
+game.score
+```
 
-* Forking this repo
+## Tests
 
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
-
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
-
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
-
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
+Run `rspec` in the terminal in the [main](https://github.com/jmcnally17/bowling-challenge-ruby) directory in order to run the tests present in the [spec](https://github.com/jmcnally17/bowling-challenge-ruby/tree/main/spec) folder. These tests have provided a 100% test coverage from SimpleCov while this program also commits 0 offenses when running RuboCop with help from the [Makers rubocop scaffolint](https://github.com/jmcnally17/bowling-challenge-ruby/blob/main/.rubocop.yml).
 
 ## Bowling — how does it work?
 
