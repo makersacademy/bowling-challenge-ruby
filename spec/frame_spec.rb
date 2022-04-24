@@ -10,6 +10,6 @@ describe '#roll' do
   end
 
   it 'raises an error if attempt to knock down more pins than are standing' do
-    expect { roll(5, 7) }.to raise_error("Cannot knock down more pins than were standing")
+    expect { roll(5, 7) }.to raise_error("Cannot knock down more pins than are standing")
   end
 end
