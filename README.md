@@ -1,6 +1,49 @@
 Bowling Challenge in Ruby
 =================
 
+# To set up and run the Bowling Scorecard...
+
+# 1. Clone repo https://github.com/Ramble-Tamble-70/bowling-challenge-ruby.git
+# 2. Run bundle install
+# 3. Open irb and enter - require './lib/bowling_scorecard.rb'
+# 4. Instantiate the Scorecard class with; card = Scorecard.new (for example)
+# 5. To 'bowl' and record your score do card.bowl(0) - passing your score as a parameter
+# 6. Keep adding scores, a strike of 10 will also pass 0 for the next round
+# 7. I added functionality to create spares, bonuses and gutter games
+# 8. You have to do 'play' 10 rounds before you can return your score with; card.score
+(trying before will raise an error)
+
+
+To make the project I did all initial setting up.
+
+- fork and pull challenge repo
+- git init and git cloned repo
+- rspec init to create spec_helper file
+- required & added simplecov dependency in spec_helper
+- created gemfile and added testing dependencies incl. simplecov, rspec & rubocop
+and specified ruby version - updated ruby -v with rvm install-3.1.1
+- did gem bundle install
+
+# What I didn't manage yet - to improve on, I would have liked to have separated the scoring and other concerns but ran out of time and other functionalities like calculating a perfect score etc.
+
+- Started planning the basic game score structure and look at 10th frame bonuses/perfect games later
+  # 10 frames are allowed in total 
+  # Each 'bowl' is the number of pins that were knocked down
+  # There are 10 points for a 'strike' (all ten pins) and the frame ends immediately
+    - bonuses are added after a strike, the number of pins knocked down by next 2 'rolls'
+  # There is a second frame if any pins standing with 2 more rolls
+  # A 'spare' is when player has knocked down 10 with the 2nd roll
+   - bonuses are pins knocked down by next roll
+  # Keep game score - 2 rolls = 20 / Gutter' games are when player misses all ten pins - scores 0
+   - Have Score not as a definition - keep score with @score instance
+
+
+# Scorecard designing process
+- Focus on creating each test methodically for each step of plan
+- Tried to focus on TDD and testing behaviour rather than state
+- Use SRP and encapsulation
+- Commit often with clear commit messages
+
 * Feel free to use google, your notes, books, etc. but work on your own
 * If you refer to the solution of another coach or student, please put a link to that in your README
 * If you have a partial solution, **still check in a partial solution**
