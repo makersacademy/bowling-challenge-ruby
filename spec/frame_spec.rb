@@ -8,12 +8,24 @@ describe Frame do
 
   let(:frame) { described_class.new(roll_class) }
 
+  describe '::standard_play' do
+    
+    Frame.standard_play
+
+
+  end
+
+
+
+
+
+
   describe '#create_roll' do
     it 'creates a new roll object whose frame is the object on which it is called' do
       expect(frame.create_roll).to eq roll
     end
 
-    it 'add the roll to the list of rolls that make up its score' do
+    it 'adds the roll to the list of rolls that make up its score' do
       roll = frame.create_roll
       expect(frame.scoring_rolls).to include roll
     end
