@@ -20,3 +20,13 @@ This scorecard allows you to pass in your bowling scorecard as an array eg ```[[
 - Happy Bowling! 
 
 ![Screenshot](https://imgur.com/Blw0tac.png)
+
+## Testing
+
+I used https://www.bowlinggenius.com/ to calculate my tests and ensure they were correct.
+
+![Screenshot](https://imgur.com/1XinoDn.png)
+
+## Domain Model
+
+![Screenshot](https://imgur.com/IupQmSd.png)
