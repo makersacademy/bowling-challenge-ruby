@@ -5,7 +5,6 @@ This scorecard allows you to pass in your bowling scorecard as an array eg ```[[
 
 ## Features
 
-* Features
   * [X] Strikes
   * [X] Spares
   * [X] 10th Frame
@@ -16,6 +15,8 @@ This scorecard allows you to pass in your bowling scorecard as an array eg ```[[
 
 - Clone this repo to your local machine
 - Run IRB in your terminal and 'require './lib/scorecard' to require the program in irb
-- To insert a scorecard and have your game calculated you can use the command 'Scorecard.new('insert your scorecard here').
+- To insert a scorecard and have your game calculated, you can use the command 'Scorecard.new('insert your scorecard here').
+- This will import your scorecard into the program, to have the program calculate your final score you can use the method '.final_score'
+- Happy Bowling! 
 
 ![Screenshot](https://imgur.com/Blw0tac.png)
