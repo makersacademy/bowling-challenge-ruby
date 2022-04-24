@@ -46,17 +46,32 @@ describe Scorecard do
 
     scorecard9 = Scorecard.new
     it 'should return a game with a mixture of spares, strikes and other bowls' do
-        scorecard9.add_score(0,0)
-        scorecard9.add_score(3,4)
-        scorecard9.add_score(7,2)
+        scorecard9.add_score(2,0)
         scorecard9.add_score(10,0)
-        scorecard9.add_score(0,0)
-        scorecard9.add_score(0,1)
+        scorecard9.add_score(7,0)
+        scorecard9.add_score(10,0)
+        scorecard9.add_score(5,5)
+        scorecard9.add_score(2,0)
         scorecard9.add_score(10,0)
         scorecard9.add_score(0,8)
         scorecard9.add_score(9,0)
-        expect(scorecard9.add_score(5,5,5)).to eq "Game is over! You scored 77!"
+        expect(scorecard9.add_score(5,5,5)).to eq "Game is over! You scored 110!"
     end
+
+    scorecard10 = Scorecard.new
+    it 'should return a game with a mixture of spares, strikes and other bowls' do
+        scorecard10.add_score(2,0)
+        scorecard10.add_score(10,0)
+        scorecard10.add_score(7,0)
+        scorecard10.add_score(10,0)
+        scorecard10.add_score(5,5)
+        scorecard10.add_score(2,0)
+        scorecard10.add_score(10,0)
+        scorecard10.add_score(0,8)
+        scorecard10.add_score(5,5)
+        expect(scorecard10.add_score(5,5,5)).to eq "Game is over! You scored 116!"
+    end
+
 end
 
 

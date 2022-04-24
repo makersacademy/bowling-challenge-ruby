@@ -39,7 +39,7 @@ private
     def add_score_based_on_round(score1,score2,*score3)
         if round_10? == true
             add_frame(score1,score2,score3.pop)
-            running_total
+            final_score
             "Game is over! You scored #{game_outcome}"
         elsif round_10? == false
             add_frame(score1,score2)
@@ -67,6 +67,7 @@ private
         end
     end
 
+
     def count_strikes
         if @scorecard.count < 10
             @store_strike_points = 0
@@ -74,15 +75,12 @@ private
                 if frame1[0] == 10 && frame2[0] != 10 
                     @store_strike_points += frame2[0] + frame2[1]
                     store_strike_points
-                    break
                 elsif frame1[0] == 10 && frame2[0] == 10 && frame3[0] == 10
                     @store_strike_points += frame2[0] + frame3[0]
                     store_strike_points
-                    break
                 elsif frame1[0] == 10 && frame2[0] == 10 && frame3[0] != 10
                     @store_strike_points += frame2[0] + frame3[0]
                     store_strike_points
-                    break
                 end
             end
         elsif @scorecard.count == 10
@@ -102,29 +100,42 @@ private
 
     def count_spares
         @store_spare_points = 0
-        if @scorecard.count < 10
+        if @scorecard.count <= 9
             @scorecard.each_cons(2) do |frame1, frame2|
+            if @scorecard.count <= 9
                 if frame1.sum == 10 && frame1[0] != 10
                     @store_spare_points += frame2[0]
                     store_spare_points
-                    break
+                    end
                 end
             end
-        end
-        if @scorecard.count == 10 && @scorecard[8][0] + @scorecard[8][1] == 10 && @scorecard[8][0] != 10
-            @store_spare_points += @scorecard[9][0]
-            store_spare_points
+        elsif @scorecard.count == 10
+            if @scorecard[8].sum == 10 && @scorecard[8][0] != 10
+                @store_spare_points += @scorecard[9][0]
+                store_spare_points
+            end
+            if @scorecard[9][0] + @scorecard[9][1] == 1 && @scorecard[9][0] != 10
+                @store_spare_points += @scorecard[9][2]
+                store_spare_points
+            end
         end
     end
 
     def running_total
+        @strike_points = 0
+        count_strikes
+        @spare_points = 0
+        count_spares
+        @running_total = @scorecard.flatten.sum + @strike_points + @spare_points
+    end
+
+    def final_score
         count_strikes
         count_spares
         @running_total = @scorecard.flatten.sum + @strike_points + @spare_points
     end
 
     def game_outcome
-        @running_total = @scorecard.flatten.sum + @strike_points + @spare_points
         if @running_total == 300
             "a perfect 300!"
         elsif
