@@ -4,6 +4,7 @@ class ScoreCard
   def initialize
     @game = Game.new
     @total_score_array = []
+    @total_of_frame = 0
   end
   
   def score_controller
@@ -18,10 +19,16 @@ class ScoreCard
       print " Frame number #{@counter}  =>"
       scores.each do |key, score|
         print " roll #{key} is #{score} "
+        total_score(score)
       end
-      puts
+      puts "total score of this frame: #{@total_of_frame}"
+      @total_of_frame = 0
       @counter += 1
     end
+  end
+
+  def total_score(score)
+      @total_of_frame += score 
   end
 
 end  
