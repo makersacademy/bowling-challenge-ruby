@@ -1,7 +1,8 @@
 Bowling Challenge in Ruby
 =================
 
-To set up and run Bowling Scorecard...
+# To set up and run the Bowling Scorecard...
+
 # 1. Clone repo https://github.com/Ramble-Tamble-70/bowling-challenge-ruby.git
 # 2. Run bundle install
 # 3. Open irb and enter - require './lib/bowling_scorecard.rb'
