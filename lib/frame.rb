@@ -25,5 +25,12 @@ class Frame
     self.current_frame.include?(10)
   end
 
+  def add_bonus(pins)
+    self.current_frame.push(pins)
+  end
+
+  def length 
+    self.current_frame.length
+  end
   
 end

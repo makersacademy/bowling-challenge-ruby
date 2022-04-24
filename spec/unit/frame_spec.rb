@@ -52,4 +52,18 @@ describe Frame do
       expect(frame).not_to be_strike
     end
   end
+
+  describe 'add_bonus(pins)' do
+    it 'adds bonus pins to frame' do
+      frame.add_bonus(5)
+      expect(frame.current_frame.pop).to eq(5) 
+    end
+  end
+
+  describe 'length' do 
+    it 'returns the length of the current frame' do
+      current_frame = frame.current_frame
+      expect(frame.length).to eq current_frame.length
+    end
+  end
 end  

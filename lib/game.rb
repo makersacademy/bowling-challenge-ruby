@@ -35,7 +35,6 @@ class Game
     end
   end
     
-
   def complete_frame(pins)
     @frame.add_to_frame(pins)
     @frame.add_to_frame(0)

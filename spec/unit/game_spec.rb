@@ -35,5 +35,11 @@ describe Game do
     expect(game.score).to eq 18
   end
   
+  it 'awards spare bonuses in final frame' do
+    18.times { game.bowl(0) }
+    2.times { game.bowl(5) }
+    game.bowl(2)
+    expect(game.score).to eq 12
+  end
   
 end
