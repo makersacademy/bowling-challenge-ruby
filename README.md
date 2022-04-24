@@ -1,7 +1,19 @@
 Bowling Challenge in Ruby
 =================
 
-Did all initial setting up.
+To set up and run Bowling Scorecard...
+# 1. Clone repo https://github.com/Ramble-Tamble-70/bowling-challenge-ruby.git
+# 2. Run bundle install
+# 3. Open irb and enter - require './lib/bowling_scorecard.rb'
+# 4. Instantiate the Scorecard class with; card = Scorecard.new (for example)
+# 5. To 'bowl' and record your score do card.bowl(0) - passing your score as a parameter
+# 6. Keep adding scores, a strike of 10 will also pass 0 for the next round
+# 7. I started adding functionality to create bonus
+# 8. You have to do 'play' 10 rounds before you can return your score with; card.score
+(trying before will raise an error)
+
+
+To make the project I did all initial setting up.
 
 - fork and pull challenge repo
 - git init and git cloned repo
@@ -11,16 +23,19 @@ Did all initial setting up.
 and specified ruby version - updated ruby -v with rvm install-3.1.1
 - did gem bundle install
 
+- I would have liked to have separated the scoring and other concerns but ran out of time.
+
 - Started planning the basic game score structure and look at 10th frame bonuses/perfect games later
-  # 10 frames are allowed in total
-  # Each 'roll' is the number of pins that were knocked down
+  # 10 frames are allowed in total 
+  # Each 'bowl' is the number of pins that were knocked down
   # There are 10 points for a 'strike' (all ten pins) and the frame ends immediately
-    - bonus after a strike is number of pins knocked down by next 2 'rolls'
+    - bonuses are added after a strike, the number of pins knocked down by next 2 'rolls'
   # There is a second frame if any pins standing with 2 more rolls
   # A 'spare' is when player has knocked down 10 with the 2nd roll
-   - bonus is pins knocked down by next roll
+   - bonuses are pins knocked down by next roll
   # Keep game score - 2 rolls = 20 / Gutter' games are when player misses all ten pins - scores 0
    - Have Score not as a definition - keep score with @score instance
+
 
 # Scorecard designing process
 - Focus on creating each test methodically for each step of plan

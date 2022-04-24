@@ -9,29 +9,41 @@ describe Scorecard do
     end
   end
 
+context 'score' do
   describe 'score' do
-    it 'can calculate score for finished game' do
+    it 'calculates score for finished game' do
       expect(scorecard).to respond_to(:bowls)
     end
   
     it 'returns the score' do
-      10.times{ scorecard.bowl(2) }
-      expect(scorecard.score).to eq(20)
+      20.times{ scorecard.bowl(2) }
+      expect(scorecard.score).to eq(40)
     end
     
     it 'returns 0 for a gutter game' do
-      10.times{ scorecard.bowl(0) }
+      20.times{ scorecard.bowl(0) }
       expect(scorecard.score).to eq(0)
     end
 
-  context 'when there is a spare' do
-    it 'has a spare' do
+   context 'when there is a spare' do
+     it 'has a spare' do
       scorecard.bowl(5)
       scorecard.bowl(5)
       scorecard.bowl(2)
-      7.times{ scorecard.bowl(0) }
+      17.times{ scorecard.bowl(0) }
       expect(scorecard.score).to eq(14)
       end
     end
+
+  context 'when there is a strike' do
+    it 'has a strike' do
+      scorecard.bowl(10)
+      scorecard.bowl(2)
+      scorecard.bowl(2)
+      16.times{ scorecard.bowl(0) }
+      expect(scorecard.score).to eq(18)
+    end
+   end
   end
+ end
 end

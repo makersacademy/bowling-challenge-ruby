@@ -1,4 +1,0 @@
-# .rubocop.yml
-
-Style/Documentation"
-  Enabled: false
