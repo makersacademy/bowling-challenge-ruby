@@ -32,16 +32,6 @@ class Game
     @roll_one == 10 ? true : false
   end
 
-  def display_scorecard
-    counter = 1
-    @total_score_array.each do | scores|
-      print " Frame number #{counter}  =>"
-      scores.each do |key, score|
-        print " roll #{key} is #{score} "
-      end
-      puts
-      counter += 1
-    end
-  end
+  
 
 end
