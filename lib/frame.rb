@@ -7,10 +7,10 @@ class Frame
   end
 
 
-  def roll(knocked_down)
-    knocked_down_parsed = knocked_down.to_i
-    raise "Cannot knock down more pins than are standing" if knocked_down_parsed > @pins_standing
-    score = knocked_down_parsed
+  def roll
+    knocked_down = $stdin.gets.chomp.to_i
+    raise "Cannot knock down more pins than are standing" if knocked_down > @pins_standing
+    score = knocked_down
     @pins_standing = @pins_standing - score
     { remaining_pins: @pins_standing, score: score }
   end
