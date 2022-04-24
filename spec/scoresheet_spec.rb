@@ -1,8 +1,7 @@
 require 'scoresheet'
 
 describe Scoresheet do
-  let(:frame) { Frame.new }
-  let(:scoresheet) { described_class.new(frame) }
+  let(:scoresheet) { described_class.new }
 
   it 'Should create a new frame once there are 2 rolls in a frame' do
     scoresheet.current_frame.add_roll(5)

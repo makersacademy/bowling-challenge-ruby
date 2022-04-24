@@ -49,11 +49,11 @@ A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 str
 ```
 As a Player,
 So that the game can be completed,
-I would like frames to end after a maximum of two rolls
+I would like normal frames to end after a maximum of two rolls
 
 As a Player,
 So that the game can be completed,
-I would like frames to end after all ten pins are down
+I would like normal frames to end after all ten pins are down
 
 As a Player,
 So that the game can be completed,
@@ -93,6 +93,7 @@ used the above for ASCII art of the bowling sheet
 
 
 ## Functionality yet to be added
-A lot of refactoring needs to be done to improve readability - or some better methods to reduce the amount of logic required (many conditionals currently being used).\
-Need to replace the instances of Frame class inside the test spec for Scoresheet with doubles\
-Add some guard conditions to reduce frequency users can run into errors (such as using total_score before finishing the game)
+More refactoring needs to be done to improve readability - or add more methods to reduce the amount of logic required (many conditionals currently being used)\
+Need to replace the instances of Frame class inside the test spec for Scoresheet with doubles - problem: not sure how to stub when my method is creating new instances of Frame by itself\
+Add some conditions to prevent users from inputting invalid rolls (currently can roll higher than a 10, or can knock down more than 10 pins in a single frame)\
+Improve user experience via a User interface or perhaps finding a way to let users know which frame they are currently on when inputting rolls
