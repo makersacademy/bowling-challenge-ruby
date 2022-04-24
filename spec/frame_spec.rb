@@ -79,4 +79,30 @@ describe Frame do
 
   end
 
+  describe '#update_score' do 
+    it "adds to the relevant key a roll result to the frame's score" do
+      frame.update_score(:first_roll, 5)
+      frame.update_score(:second_roll, 3)
+      expect(frame.frame_score).to eq( { first_roll: 5, second_roll: 3 })
+    end
+  end
+
+  describe '#strike?' do
+
+    describe 'when first roll does not knock ten pins down' do
+      it 'returns false' do
+        frame.update_score(:first_roll, 5)
+        frame.update_score(:second_roll, 3)
+        expect(frame.strike?).to be false
+      end
+    end
+
+    describe 'when first roll knocks ten pins down' do
+      it 'returns true' do
+        frame.update_score(:first_roll, 10)
+        expect(frame.strike?).to be true
+      end
+    end
+
+  end
 end

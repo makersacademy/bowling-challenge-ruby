@@ -1,6 +1,6 @@
 class Frame
 
-  attr_reader :pins_standing
+  attr_reader :pins_standing, :frame_score
 
   def initialize
     @pins_standing = 10
@@ -15,8 +15,8 @@ class Frame
     knocked_down
   end
 
-  def update_score(index, result)
-    @frame_score[index] = result
+  def update_score(key, result)
+    @frame_score[key] = result
   end
 
   def cleared?
