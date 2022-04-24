@@ -1,6 +1,30 @@
 Bowling Challenge in Ruby
 =================
 
+Did all initial setting up.
+
+- fork and pull challenge repo
+- git init and git cloned repo
+- rspec init to create spec_helper file
+- required & added simplecov dependency in spec_helper
+- created gemfile and added testing dependencies incl. simplecov, rspec & rubocop
+and specified ruby version - updated ruby -v with rvm install-3.1.1
+- did gem bundle install
+
+- Started planning the basic game score structure and look at 10th frame bonuses/perfect games later
+  # 10 frames are allowed in total
+  # Each 'roll' is the number of pins that were knocked down
+  # There are 10 points for a 'strike' (all ten pins) and the frame ends immediately
+    - bonus after a strike is number of pins knocked down by next 2 'rolls'
+  # There is a second frame if any pins standing with 2 more rolls
+  # A 'spare' is when player has knocked down 10 with the 2nd roll
+   - bonus is pins knocked down by next roll
+  # 'Gutter' games are missing all ten pins
+  
+- Tried to focus on TDD and testing behaviour rather than state
+- Use SRP and encapsulation
+- Commit often with clear commit messages
+
 * Feel free to use google, your notes, books, etc. but work on your own
 * If you refer to the solution of another coach or student, please put a link to that in your README
 * If you have a partial solution, **still check in a partial solution**
