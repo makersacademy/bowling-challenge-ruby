@@ -9,18 +9,9 @@ describe Game do
 
   describe '#play_frame' do
 
-    before do
-      $stdin = StringIO.new("6")
-    end
-
-    after do
-      $stdin = STDIN
-    end
-
     it 'plays a frame and returns the frames basic score' do
-
-      allow(frame).to receive(:roll).with("6")
-      expect(game.play_frame).to eq( { first_roll: 6} )
+      allow(frame).to receive(:roll).and_return( { remaining_pins: 4 , score: 6 } )
+      expect(game.play_frame(frame)).to eq( { first_roll: 6} )
     end
 
   end
