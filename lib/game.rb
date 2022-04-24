@@ -10,12 +10,12 @@ class Game
 
   def controller
     frame_manager
-    display_scorecard
+    # display_scorecard
   end
 
   def frame_manager
     @total_score_array = []
-    for i in 1..10 do
+    for i in 1..3 do
       @counter_frame = i
       roll_manager
     end
