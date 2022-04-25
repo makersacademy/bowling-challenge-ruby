@@ -14,7 +14,14 @@ This project demonstrates the following skills:
 
 ## Note on what has not been implemented
 
+Currently, I have a basic 10-frame basic game with no bonus scoring for strikes and spares.
+
+Not implemented yet:
 * Bonus scoring for strikes and spares
+* Score updates based on bonus scoring after every roll.
+
+Other implementation notes:
+* Playing a frame is currently implemented in Game class. This leads to some limitations in the testing of edge case for playing a full game. Playing a frame would sit better in the Frame class, and permit better testing of this functionality. 
 
 ## The Task (given by Makers Academy)
 
