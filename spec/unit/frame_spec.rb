@@ -81,6 +81,7 @@ describe Frame do
     frame.add_to_frame(3)
     frame.add_to_frame(7)
     frame.add_to_frame(2)
+    expect(frame.first_two).to eq(10)
     end
   end
 

@@ -2,50 +2,47 @@ require 'game'
 
 describe Game do
   let(:game) { described_class.new }
-  it 'can score a single frame of 0s' do
-    2.times { game.bowl(0) }
-    expect(game.score).to eq 0
+  let(:frame) { double :frame }
+
+  describe '#bowl' do
+    it 'can begin a new frame' do
+      allow(frame).to receive(:new).and_return(frame)
+      expect(frame).to receive(:add_to_frame).with(5)
+      game.bowl(5, frame)
+    end
+
+    it 'closes a frame when a strike is scored on first roll' do
+      allow(frame).to receive(:new).and_return(frame)
+      expect(frame).to receive(:add_to_frame).with(10)
+      expect(frame).to receive(:add_to_frame).with(0)
+      game.bowl(10, frame)
+    end
+
+    it 'closes a frame on the second roll' do
+      allow(frame).to receive(:new).and_return(frame)
+      expect(frame).to receive(:add_to_frame).with(2)
+      expect(frame).to receive(:add_to_frame).with(3)
+      game.bowl(2, frame)
+      game.bowl(3, frame)
+    end
   end
 
-  it 'can score a single frame of 2s' do
-    2.times { game.bowl(2) }
-    expect(game.score).to eq 4
+  it 'will raise an error if the user tries to bowl after perfect game' do
+    12.times { game.bowl(10) }
+    expect { game.bowl(10) }.to raise_error("The game is over.")
   end
 
-  it 'can score a gutter game' do
-    20.times { game.bowl(0) }
-    expect(game.score).to eq 0
-  end
 
-  it 'can score a game of all 2s' do
-    20.times { game.bowl(2) }
-    expect(game.score).to eq 40
+  describe '#score' do
+    it 'can check for strikes and spares' do
+      allow(frame).to receive(:new).and_return(frame)
+      allow(frame).to receive(:total).and_return(10)
+      expect(frame).to receive(:add_to_frame).with(10)
+      expect(frame).to receive(:add_to_frame).with(0)
+      game.bowl(10, frame)
+      expect(frame).to receive(:strike?)
+      expect(frame).to receive(:spare?)
+      game.score
+    end
   end
-
-  it 'can score a spare, followed by a 2' do
-    2.times { game.bowl(5) }
-    game.bowl(2)
-    game.bowl(0)
-    expect(game.score).to eq 14
-  end
-
-  it 'can score a strike, followed by a double 2' do
-    game.bowl(10)
-    2.times { game.bowl(2) }
-    expect(game.score).to eq 18
-  end
-  
-  it 'awards spare bonuses in final frame' do
-    18.times { game.bowl(0) }
-    2.times { game.bowl(5) }
-    game.bowl(2)
-    expect(game.score).to eq 12
-  end
-
-  it 'correctly scores three strikes in final frame' do
-    18.times { game.bowl(0) }
-    3.times { game.bowl(10) }
-    expect(game.score).to eq 30
-  end 
-  
 end
