@@ -10,10 +10,29 @@ class Game
   
   def frame_manager
     @total_score_array = []
-    for i in 1..3 do
+    for i in 1..9 do
       @counter_frame = i
       roll_manager
     end
+    tenth_frame
+  end
+
+  def tenth_frame
+    @counter_frame = 10
+    user_input_third_roll = 0
+    user_input_first_roll = user_input_scores
+    if user_input_first_roll == 10
+      user_input_third_roll = user_input_scores
+    else  
+      user_input_second_roll = user_input_scores
+      if user_input_second_roll + user_input_first_roll == 10
+        user_input_third_roll = user_input_scores
+      end
+    end
+    @frame_score = { one: user_input_first_roll, two: user_input_second_roll, strike: false }
+    @total_score_array << @frame_score
+    @frame_score = { one: user_input_third_roll, two: 0, strike: false }
+    @total_score_array << @frame_score
   end
 
   def roll_manager
