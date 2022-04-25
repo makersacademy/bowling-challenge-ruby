@@ -9,7 +9,7 @@ describe Game do
 
   let(:game) { described_class.new }
 
-  describe '#play_frame' do
+  describe '::play_frame' do
 
     describe 'when the first roll is not a strike' do
       it "records first and second rolls and add them to the frame's basic score" do
@@ -39,7 +39,7 @@ describe Game do
       allow(frame).to receive(:strike?).and_return(false)
       allow(frame).to receive(:update_score).with(:second_roll, 3).and_return({ first_roll: 6, second_roll: 3 })
       allow(frame).to receive(:frame_score).and_return( { first_roll: 6, second_roll: 3 } )
-      expect { game.play_frame(frame) }.to output({ first_roll: 6, second_roll: 3 }).to_stdout
+      expect { game.play_frame(frame) }.to output("{:first_roll=>6, :second_roll=>3}\n").to_stdout
     end
 
   end
@@ -53,7 +53,7 @@ describe Game do
       allow(frame).to receive(:frame_score).and_return(:frame_score)
       gamesheet = []
       10.times { gamesheet << game.play_frame(frame) }
-      expect(game.play(frame_class)).to eq gamesheet
+      expect(Game.play(frame_class)).to eq gamesheet
     end
   end
 
