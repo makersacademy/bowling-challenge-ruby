@@ -20,10 +20,6 @@ class Frame
     @frame_score[key] = result
   end
 
-  def cleared?
-    @pins_standing == 0
-  end
-
   def strike?
     @frame_score[:first_roll] == 10
   end

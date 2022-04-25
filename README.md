@@ -1,6 +1,6 @@
 # Bowling Challenge in Ruby
 
-This is Alexis Morcrette's solution to the Bowling Challenge in Ruby, Makers Academy's Week 5 Weekend Challenge.
+This is Alexis Morcrette's partial solution to the Bowling Challenge in Ruby, Makers Academy's Week 5 Weekend Challenge.
 
 The focus for this challenge is to write high-quality code, to deliver a bowling score program.
 
@@ -12,6 +12,10 @@ This project demonstrates the following skills:
 * Single Responsibility Principle and encapsulation
 * Clear and readable code
 
+## Note on what has not been implemented
+
+* Bonus scoring for strikes and spares
+
 ## The Task (given by Makers Academy)
 
 Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
@@ -20,32 +24,41 @@ A bowling game consists of 10 frames in which the player tries to knock down the
 
 ## Getting started
 
-__to follow__
+`git clone almorcrette/bowling-challenge-ruby`
 
-`git clone path-to-your-repo`
-`command_to_install_dependencies` (e.g. `bundle`)
+Then run: `bundle`
 
 ## Usage
 
-__to follow__
+`irb -r './lib/game.rb`
 
-`command_to_start` (e.g. `rackup` or `rails s`)
-Navigate to `http://localhost:4567/`
+Then:
+`Game.play`
 
 
 ## Running tests
 
-__to follow__
-
-`test_command` (e.g. `rspec`)
+`rspec`
 
 ## File manifest
 
-__to follow__
+See Github repo page.
 
 ## Project approach
 
-__to follow__
+### Analysis of game logic
+
+![](bowling-game-logic.png)
+
+### Functional presentation
+
+| Class      | Variables               | Methods                    |
+| -----------| ------------------------| ---------------------------|
+| Game       | @scoresheet: Array      | ::play(frame_class)        |
+|            |                         | #play_frame(frame)         |
+| Frame      | @pins_standing: Integer | #roll                      |
+|            | @frame_score: Hash      | #update_score(key, result) |
+|            |                         | #strike?                   |
 
 ## Bowling — how does it work?
 
@@ -77,17 +90,3 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
-
-----------------------------------------------
-
-At the barest minimum, it should contain a description of what the code does, how to install it, how to use it and how to run its tests. In addition, READMEs often include other information such as:
-
-- Configuration instructions
-- A file manifest (list of files included)
-- Copyright and licensing information
-- Contact information for the distributor or programmer
-- Known bugs
-- Troubleshooting
-- Credits and acknowledgments
-- A changelog (usually for programmers)
-- A news section (usually for users)
