@@ -10,7 +10,7 @@ class Game
       second_roll = frame.roll
       frame.update_score(:second_roll, second_roll)
     end
-    frame.frame_score
+    p frame.frame_score
   end
 
   def play(frame_class = Frame)

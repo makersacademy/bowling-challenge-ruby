@@ -9,6 +9,7 @@ class Frame
 
 
   def roll
+    puts "Roll... how many did you knock down?"
     knocked_down = $stdin.gets.chomp.to_i
     raise "Cannot knock down more pins than are standing" if knocked_down > @pins_standing
     @pins_standing = @pins_standing - knocked_down

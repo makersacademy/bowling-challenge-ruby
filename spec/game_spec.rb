@@ -32,6 +32,16 @@ describe Game do
         expect(game.play_frame(frame)).to eq( { first_roll: 10, second_roll: nil } )
       end
     end
+
+    it "prints the frame's basic score at the end of the frame" do
+      allow(frame).to receive(:roll).and_return(6, 3)
+      allow(frame).to receive(:update_score).with(:first_roll, 6).and_return({ first_roll: 6, second_roll: nil })
+      allow(frame).to receive(:strike?).and_return(false)
+      allow(frame).to receive(:update_score).with(:second_roll, 3).and_return({ first_roll: 6, second_roll: 3 })
+      allow(frame).to receive(:frame_score).and_return( { first_roll: 6, second_roll: 3 } )
+      expect { game.play_frame(frame) }.to output({ first_roll: 6, second_roll: 3 }).to_stdout
+    end
+
   end
 
   describe '#play' do
@@ -46,4 +56,5 @@ describe Game do
       expect(game.play(frame_class)).to eq gamesheet
     end
   end
+
 end
