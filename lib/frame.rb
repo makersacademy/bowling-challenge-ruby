@@ -1,14 +1,30 @@
-# frozen_string_literal: true
-
-require_relative 'roll'
-
-# Frame class
 class Frame
-  def initialize(roll_class = Roll)
-    @roll_class = roll_class
+
+  attr_reader :pins_standing, :frame_score
+
+  def initialize
+    @pins_standing = 10
+    @frame_score  = { first_roll: nil, second_roll: nil}
   end
 
-  def create_roll
-    @roll_class.new(self)
+
+  def roll
+    knocked_down = $stdin.gets.chomp.to_i
+    raise "Cannot knock down more pins than are standing" if knocked_down > @pins_standing
+    @pins_standing = @pins_standing - knocked_down
+    knocked_down
   end
+
+  def update_score(key, result)
+    @frame_score[key] = result
+  end
+
+  def cleared?
+    @pins_standing == 0
+  end
+
+  def strike?
+    @frame_score[:first_roll] == 10
+  end
+
 end

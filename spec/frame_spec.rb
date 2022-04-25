@@ -1,48 +1,108 @@
-# frozen_string_literal: true
-
 require './lib/frame'
 
 describe Frame do
-  let(:roll) { double(:roll) }
-  let(:roll_class) { double(:roll_class, new: roll) }
 
-  let(:frame) { described_class.new(roll_class) }
+  let(:frame) { described_class.new }
 
-  describe '#create_roll' do
-    it 'creates a new roll object whose frame is the object on which it is called' do
-      expect(frame.create_roll).to eq roll
+  describe '#roll' do
+
+    before do
+      $stdin = StringIO.new("6")
+    end
+    
+    after do
+      $stdin = STDIN
     end
 
-    it 'add the roll to the list of rolls that make up its score' do
-      roll = frame.create_roll
-      expect(frame.scoring_rolls).to include roll
+    it 'reduces the number of standing pins by pins knocked down' do
+      frame.roll
+      expect(frame.pins_standing).to eq 4
     end
+
+    it 'outputs the score from the roll' do
+      expect(frame.roll).to eq 6
+    end
+
+    describe 'when attempting to knock down more pins than are standing' do
+
+      before do
+        $stdin = StringIO.new("5")
+      end
+  
+      after do
+        $stdin = STDIN
+      end
+
+      it 'raises an error' do
+        frame.roll
+        $stdin = StringIO.new("7")
+        expect { frame.roll }.to raise_error("Cannot knock down more pins than are standing")
+      end
+
+    end
+
   end
 
-  describe '#get_roll_score' do
+  describe '#cleared?' do 
+
+    describe 'when there are no pins standing' do
+      before do
+        $stdin = StringIO.new("10")
+      end
+  
+      after do
+        $stdin = STDIN
+      end
+      
+      it 'returns true ' do
+        frame.roll
+        expect(frame.cleared?).to be true
+      end
+    end
+
+    describe 'when there are still pins standing' do
+
+      before do
+        $stdin = StringIO.new("5")
+      end
+  
+      after do
+        $stdin = STDIN
+      end
+
+      it 'returns false' do
+        frame.roll
+        expect(frame.cleared?).to be false
+      end
+
+    end
+
   end
 
-  describe '#calculate_running_total' do
-  end
-
-  describe '#two_rolls_complete?' do
+  describe '#update_score' do 
+    it "adds to the relevant key a roll result to the frame's score" do
+      frame.update_score(:first_roll, 5)
+      frame.update_score(:second_roll, 3)
+      expect(frame.frame_score).to eq( { first_roll: 5, second_roll: 3 })
+    end
   end
 
   describe '#strike?' do
-  end
 
-  describe '#spare?' do
-  end
+    describe 'when first roll does not knock ten pins down' do
+      it 'returns false' do
+        frame.update_score(:first_roll, 5)
+        frame.update_score(:second_roll, 3)
+        expect(frame.strike?).to be false
+      end
+    end
 
-  describe '#update_num_scoring_rolls' do
-  end
+    describe 'when first roll knocks ten pins down' do
+      it 'returns true' do
+        frame.update_score(:first_roll, 10)
+        expect(frame.strike?).to be true
+      end
+    end
 
-  describe '#finish_frame' do
-  end
-
-  describe '#update_scoring_rolls' do
-  end
-
-  describe '#calc_frame_score' do
   end
 end
