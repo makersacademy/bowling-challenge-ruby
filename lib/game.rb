@@ -17,9 +17,11 @@ class Game
   end
 
   def roll_manager
+    strike_confirmation = false
     @roll_one = user_input_scores
     strike? ? @roll_two = 0 : @roll_two = user_input_scores
-    @frame_score = { one: @roll_one, two: @roll_two }
+    strike_confirmation = true if @roll_two == 0 && @roll_one == 10
+    @frame_score = { one: @roll_one, two: @roll_two, strike: strike_confirmation }
     @total_score_array << @frame_score
   end
   
