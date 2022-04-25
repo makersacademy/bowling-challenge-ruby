@@ -31,7 +31,11 @@ class ScoreCard
     @final_total = 0
     for i in 0..8 do
       if @total_score_array[i][:strike] == true
-        @total = @total_score_array[i][:one].to_i + @total_score_array[i+1][:one].to_i + @total_score_array[i+1][:two].to_i
+        if @total_score_array[i+1][:strike] == true
+          @total = @total_score_array[i][:one].to_i + @total_score_array[i+1][:one].to_i + @total_score_array[i+2][:one].to_i
+        else
+          @total = @total_score_array[i][:one].to_i + @total_score_array[i+1][:one].to_i + @total_score_array[i+1][:two].to_i
+        end 
         @final_total += @total
         puts "Score until frame number #{i+1} is #{@final_total}"
       elsif @total_score_array[i][:one] + @total_score_array[i][:two] == 10

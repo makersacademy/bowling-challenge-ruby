@@ -22,7 +22,10 @@ class Game
     user_input_third_roll = 0
     user_input_first_roll = user_input_scores
     if user_input_first_roll == 10
-      user_input_third_roll = user_input_scores
+      user_input_second_roll = user_input_scores
+      if user_input_second_roll == 10
+        user_input_third_roll = user_input_scores
+      end
     else  
       user_input_second_roll = user_input_scores
       if user_input_second_roll + user_input_first_roll == 10
