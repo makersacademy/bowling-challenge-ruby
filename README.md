@@ -34,6 +34,7 @@ bundle
 ```
 
 
+![Stickies Packs](https://user-images.githubusercontent.com/99490100/165034393-1bb548a0-4298-43e7-8e30-9bb571969216.jpg)
 
 
 ## Bowling — how does it work?
