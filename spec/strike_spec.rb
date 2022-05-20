@@ -51,4 +51,24 @@ describe Strike do
 
     end
   end
+
+  describe '#complete?' do
+    
+    it 'it is complete when #add has been called twice (even if it has been added 0 points)' do
+      
+      subject.add(0)
+      subject.add(5)
+
+      expect(subject).to be_complete
+
+    end
+
+    it 'it is not complete when #add has not been called twice' do
+      
+      subject.add(7)
+      
+      expect(subject).not_to be_complete
+
+    end
+  end
 end

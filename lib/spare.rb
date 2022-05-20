@@ -16,4 +16,8 @@ class Spare
     @roll_count += 1
   end
 
+  def complete?
+    @roll_count == 1
+  end
+
 end

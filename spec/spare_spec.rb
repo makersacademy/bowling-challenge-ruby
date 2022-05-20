@@ -41,4 +41,21 @@ describe Spare do
 
     end
   end
+
+  describe '#complete?' do
+    
+    it 'it is complete when #add has been called once (even if has been added 0 points)' do
+      
+      subject.add(0)
+
+      expect(subject).to be_complete
+
+    end
+
+    it 'it is not complete when #add has not been called' do
+      
+      expect(subject).not_to be_complete
+
+    end
+  end
 end

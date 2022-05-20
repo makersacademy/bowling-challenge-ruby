@@ -16,4 +16,8 @@ class Strike
     @roll_count += 1
   end
 
+  def complete?
+    @roll_count == 2
+  end
+
 end
