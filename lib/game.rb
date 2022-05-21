@@ -18,5 +18,9 @@ class Game
     def frame_score
         @frame_score = @rolls.sum if @rolls.length == 2 && @rolls.sum <= 9
     end
+
+    def clear_rolls
+        @rolls.clear if @rolls.length == 2
+    end
     
 end
