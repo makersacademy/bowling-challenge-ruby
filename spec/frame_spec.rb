@@ -1,4 +1,4 @@
-require_relative '../lib/game'
+require_relative '../lib/frame'
 
 describe Frame do
     it 'allows a player to input each of their rolls' do

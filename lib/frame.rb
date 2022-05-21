@@ -5,9 +5,11 @@ class Frame
     def initialize
         @roll
         @rolls = []
+        @frame_score = []
     end
 
     def input_roll(roll)
+        fail 'max rolls reached' if @rolls.length == 2
         @roll = roll
         @rolls << @roll 
     end 
@@ -21,9 +23,7 @@ class Frame
     end
 
     def frame_score
-        @frame_score = []
-        @frame_score += @rolls if @rolls.sum <= 9
-        @frame_score.sum
+        @frame_score = @rolls.sum if @rolls.length == 2 && @rolls.sum <= 9
     end
 
 
