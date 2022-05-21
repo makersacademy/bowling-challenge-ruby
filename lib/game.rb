@@ -9,25 +9,25 @@ class Game
   end
 
   def score
-    result = 0
-    rollIndex = 0
+    score = 0
+    index = 0
 
     10.times do
 
-      if @rolls[rollIndex] == 10
-        result += @rolls[rollIndex] + @rolls[rollIndex + 1] + @rolls[rollIndex + 2]
-        rollIndex += 1
-      elsif @rolls[rollIndex] + @rolls[rollIndex + 1] == 10
-        result += @rolls[rollIndex] + @rolls[rollIndex + 1] + @rolls[rollIndex + 2]
-        rollIndex += 2
+      if @rolls[index] == 10
+        score += @rolls[index] + @rolls[index + 1] + @rolls[index + 2]
+        index += 1
+      elsif @rolls[index] + @rolls[index + 1] == 10
+        score += @rolls[index] + @rolls[index + 1] + @rolls[index + 2]
+        index += 2
       else
-        result += @rolls[rollIndex] + @rolls[rollIndex +1]
-        rollIndex += 2
+        score += @rolls[index] + @rolls[index +1]
+        index += 2
       end
       
     end
-    
-    result
+
+    score
   end
 
 end
