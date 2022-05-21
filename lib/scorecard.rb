@@ -1,3 +1,6 @@
+require 'spare'
+require 'strike'
+
 class Scorecard
 
   attr_reader :frame, :roll, :spares, :strikes, :score
@@ -20,6 +23,22 @@ class Scorecard
     else
       @roll += 1 unless roll >= 2
     end
+  end
+
+  def add_spare(spare = Spare.new)
+    @spares << spare
+  end
+
+  def add_strike(strike = Strike.new)
+    @strikes << strike
+  end
+
+  def add_spare_score
+    @score += spares.shift.score
+  end
+
+  def add_strike_score
+    @score += strikes.shift.score
   end
 
 end

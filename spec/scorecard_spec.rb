@@ -57,4 +57,56 @@ describe Scorecard do
       
     end
   end
+
+  describe '#add_spare' do
+    
+    it 'adds a Spare instance in @spares' do
+      
+      subject.add_spare
+
+      expect(subject.spares.first).to be_a(Spare)
+
+    end
+  end
+
+  describe '#add_strike' do
+    
+    it 'adds a Strike instance in @strikes' do
+      
+      subject.add_strike
+
+      expect(subject.strikes.first).to be_a(Strike)
+      
+    end
+  end
+
+  describe '#add_spare_score' do
+
+    it 'adds the total score from a spare into the scorecard score and takes it out of array' do
+    
+      spare_dbl = double("Spare double")
+      allow(spare_dbl).to receive_messages(:score => 15)
+      subject.add_spare(spare_dbl)
+
+      expect(subject.spares).not_to be_empty
+      expect { subject.add_spare_score }.to change { subject.score }.by(15)
+      expect(subject.spares).to be_empty
+
+    end
+  end
+
+  describe '#add_strike_score' do
+
+    it 'adds the total score from a strike into the scorecard score and takes it out of array' do
+    
+      strike_dbl = double("Strike double")
+      allow(strike_dbl).to receive_messages(:score => 15)
+      subject.add_strike(strike_dbl)
+
+      expect(subject.strikes).not_to be_empty
+      expect { subject.add_strike_score }.to change { subject.score }.by(15)
+      expect(subject.strikes).to be_empty
+
+    end
+  end
 end
