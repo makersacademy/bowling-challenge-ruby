@@ -22,9 +22,4 @@ class Frame
         @rolls.sum <= 9 ? true : false
     end
 
-    def frame_score
-        @frame_score = @rolls.sum if @rolls.length == 2 && @rolls.sum <= 9
-    end
-
-
 end

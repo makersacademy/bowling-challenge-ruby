@@ -8,15 +8,15 @@ class Game
         @frame = frame
         @roll = frame.roll
         @rolls = frame.rolls
-        @frame_score = frame.frame_score
+        @frame_score = frame_score
     end
 
     def input_roll(roll)
         @frame.input_roll(roll)
     end
 
-    # def add_to_frame_score
-    #     @frame.frame_score
-    # end
+    def frame_score
+        @frame_score = @rolls.sum if @rolls.length == 2 && @rolls.sum <= 9
+    end
     
 end
