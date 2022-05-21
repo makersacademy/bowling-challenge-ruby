@@ -9,17 +9,24 @@ class Game
   end
 
   def score
-    # @rolls.reduce(:+)
     result = 0
     rollIndex = 0
+
     10.times do
-      if @rolls[rollIndex] + @rolls[rollIndex + 1] == 10
+
+      if @rolls[rollIndex] == 10
         result += @rolls[rollIndex] + @rolls[rollIndex + 1] + @rolls[rollIndex + 2]
+        rollIndex += 1
+      elsif @rolls[rollIndex] + @rolls[rollIndex + 1] == 10
+        result += @rolls[rollIndex] + @rolls[rollIndex + 1] + @rolls[rollIndex + 2]
+        rollIndex += 2
       else
         result += @rolls[rollIndex] + @rolls[rollIndex +1]
-      end
         rollIndex += 2
+      end
+      
     end
+    
     result
   end
 
