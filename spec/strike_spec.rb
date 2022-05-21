@@ -38,7 +38,7 @@ describe Strike do
 
     it 'raise an error if tries to add more than 10 at once' do
 
-      expect {subject.add(11) }.to raise_error 'Strike can only add 10 more points per roll'
+      expect { subject.add(11) }.to raise_error 'Strike can only add 10 more points per roll'
 
     end
 

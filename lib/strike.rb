@@ -1,12 +1,10 @@
 class Strike
 
+  attr_reader :score
+
   def initialize
     @score = 10
     @roll_count = 0
-  end
-
-  def score
-    @score
   end
 
   def add(points)

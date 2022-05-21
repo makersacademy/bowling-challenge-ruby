@@ -29,7 +29,7 @@ describe Spare do
 
     it 'raise an error if tries to add more than 10' do
 
-      expect {subject.add(11) }.to raise_error 'Spare can only add 10 more points'
+      expect { subject.add(11) }.to raise_error 'Spare can only add 10 more points'
 
     end
 
