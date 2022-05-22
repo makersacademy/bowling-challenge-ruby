@@ -20,11 +20,11 @@ describe Game do
         expect(subject.frame_score).to eq 9
     end
 
-    it 'empties rolls once two balls have been rolled' do
-        subject.input_roll(1)
-        subject.input_roll(1)
-        subject.input_roll(1)
-        expect(subject.rolls).to eq [1]
-    end
+    # it 'empties rolls once two balls have been rolled' do
+    #     subject.input_roll(1)
+    #     subject.input_roll(1)
+    #     subject.input_roll(1)
+    #     expect(subject.rolls).to eq [1]
+    # end
 end
 
