@@ -10,42 +10,47 @@ Planning
 
 ```mermaid
 
-flowchart TD
+flowchart LR
     A(START HERE Frame Number n)
-    B(Ask how many pins knocked down)
     C{Is it a strike?}
-    D(next frame log 'strike' in carry_1)
-    E(Does this frame have a carry?)
-    F(Is the carry_1 a strike or spare?)
-    G(next frame log 'strike' in carry_2)
+    D(Log 'strike' in previous_round for next frame)
+    E(Did previous rounds have a strike or spare?)
+    F(Is the previous_round a strike or spare?)
+    G(next frame log 'strike' in two_rounds_ago)
     H(Calculate score for spare in previous round)
     I((Is it a Spare?))
-    J(log the score in pins_down)
-    K(Next frame log 'spare' in carry_1)
-    L(Does this frame have a carry_2?)
+    J(Log the score in pins_down)
+    K(Log 'spare' in previous_round for next frame)
+    L(Does this frame have a strike in previous_round_roll_2?)
     M(Roll 1)
     N(Roll 2)
-    O(Get number of pins knocked down)
     P(Not a spare)
     Q(Next Frame)
     R(Yes a spare)
     S(Yes a strike)
     T(Not a strike)
     U(Calculate score for strike two rounds ago)
-    V(Does this frame have a carry?)
-    W(This frame log 'strike' in carry_2)
+    V(Did previous rounds have a strike or spare?)
+    W(This frame log 'strike' in previous_round_roll_2)
+    X(Calculate score for strike in previous round)
+    Y(Is it round 10?)
+    Z(Round 10 Strike Roll 2)
+    AA(Round 10 Roll 3)
+    BA(Calculate Final Score)
+    CA(How many pins?)
     A --> M
-    B --> O
-    M --> B
-    N --> B
     N --> I
     M --> C
     C -->|Yes| S
-    S --> Q
+    S --> Y
+    Y -->|Yes_Roll_3| AA
+    Y -->|Yes_Roll_2| Z
+    Z --> C
+    Y -->|No| Q
     S --> D
     S --> E
-    E -->|Carry 1| F
-    E -->|Carry 2| U
+    E -->|previous_round| F
+    E -->|two_rounds_ago| U
     F -->|Strike| G
     F -->|Spare| H
     C -->|No| T
@@ -56,21 +61,16 @@ flowchart TD
     I -->|Yes|R
     R --> K
     K --> L
-    L -->|Yes|U
+    L -->|Yes|X
     R --> Q
     T --> N
     J --> V
     V -->|Spare|H
     V -->|Strike|W
+    AA --> CA
+    CA --> BA
+    I --> Y
+    P --> L
     
 
 ```
-
-Still need to think about Does this frame have a carry --> no
-Next frame
-Next roll
-Frame 10
-
-But it is getting there I think 
-
-I'm a bit confused as to the carry 1's and carry 2's - are they fit for purpose? Or do we need 'internal' 1 and 2 and 'external' 1 and 2 - so one is about carrying a strike from roll 1 to roll 2 and the other is about carrying a striker from frame x to frame y to frame z?
