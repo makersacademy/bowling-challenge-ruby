@@ -27,12 +27,12 @@ describe Game do
         expect(subject.frame).not_to eq frame_one
     end
 
-    xit 'switches to FinalFrame after the 9th frame' do
-        9.times {subject.roll(10)}
-        subject.roll(5)
-        subject.roll(3)
-        expect.subject.
-    end
+    # xit 'switches to FinalFrame after the 9th frame' do
+    #     9.times {subject.roll(10)}
+    #     subject.roll(5)
+    #     subject.roll(3)
+    #     expect.subject.
+    # end
 
 
 
