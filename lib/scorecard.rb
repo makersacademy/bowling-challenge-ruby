@@ -97,6 +97,7 @@ class Scorecard
     elsif roll == 2
       last_frame_second(pins)
     else
+      fail if (first_roll + pins) > 10
       check_spares(pins) if strikes.empty?
       check_strikes(pins)
       puts show_score
@@ -123,6 +124,7 @@ class Scorecard
       @third_roll = true
     else
       @score += (first_roll + pins)
+      @first_roll = pins
     end
     if third_roll
       next_roll

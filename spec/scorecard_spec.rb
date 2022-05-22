@@ -1,4 +1,5 @@
 require 'scorecard'
+require_relative './test_games'
 
 describe Scorecard do
   
@@ -139,6 +140,22 @@ describe Scorecard do
       21.times { subject.insert_play(5) }
 
       expect(subject.show_score).to eq 'Frame: 10    Score: 150'
+
+    end
+
+    it 'shows right score (110) and frame 10 when test game 1' do
+      
+      test_game_one
+
+      expect(subject.show_score).to eq 'Frame: 10    Score: 110'
+
+    end
+
+    it 'shows right score (126) and frame 10 when test game 2' do
+      
+      test_game_two
+
+      expect(subject.show_score).to eq 'Frame: 10    Score: 126'
 
     end
   end
