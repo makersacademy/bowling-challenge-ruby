@@ -14,7 +14,14 @@ class Game
   end
 
   def run
-    
+    request_user_input_first_10_frames
+    calculate_all_frame_totals
+    calculate_total
+  end
+
+  private
+
+  def request_user_input_first_10_frames
     loop do
       frame = Frame.new(@frame_number)
       frame.run
@@ -22,34 +29,24 @@ class Game
       record_frame(frame)
       break if @frame_number == 11
     end
-    p self
-    @frame_number = 0
-    loop do
-      calculate_total_by_frame
-      p @score_by_frame
-      @frame_number += 1
-      break if @frame_number == 10
-    end
-    calculate_total
-    
-    
   end
 
   def record_frame(frame)
     rolls = []
-    rolls << frame.roll_1
-    rolls << frame.roll_2 if frame.roll_2 != nil
+    rolls << frame.roll_one
+    rolls << frame.roll_two if frame.roll_two != nil
     @all_rolls << rolls
     @strikes << frame.strike?
     @spares << frame.spare?
   end
 
-  def calculate_total
-    total = 0
-    @score_by_frame.each do |score|     
-      total += score
+  def calculate_all_frame_totals
+    @frame_number = 0
+    loop do
+      calculate_total_by_frame
+      @frame_number += 1
+      break if @frame_number == 10
     end
-    @total_score = total
   end
 
   def calculate_total_by_frame
@@ -67,11 +64,18 @@ class Game
       frame_score += 10
       frame_score += @all_rolls[@frame_number+1][0]
     else
-      p "Trying to calculate"
       frame_score += @all_rolls[@frame_number][0] + @all_rolls[@frame_number][1]
     end
     @score_by_frame[@frame_number] = frame_score
   end
 
-  private
+  def calculate_total
+    total = 0
+    @score_by_frame.each do |score|     
+      total += score
+    end
+    @total_score = total
+  end
+
+
 end
