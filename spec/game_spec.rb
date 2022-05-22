@@ -9,4 +9,11 @@ describe Game do
 
   end
 
+  it 'can enter a frame of 2 zeros' do
+
+    2.times { game.bowl(0) }
+
+    expect(game.score).to eq 0
+
+  end
 end
