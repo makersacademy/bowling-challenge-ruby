@@ -16,7 +16,9 @@ class Round
 
   def calculate_bonus_score(frames)
     for i in 0..9 do
-      if frames[i].sum == 10
+      if frames[i][0] == 10
+        @bonus_score += (@frames[i+1][0] + @frames[i+1][1])
+      elsif frames[i].sum == 10
         @bonus_score += @frames[i+1][0]
       end
       @bonus_score
