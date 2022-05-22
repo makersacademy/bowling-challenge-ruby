@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'input_helper'
 require 'game'
 
 describe Game do
-  describe "#run" do
+  describe '#run' do
     let(:game) { Game.new }
 
     it 'correctly calculates the score for a no strike game' do

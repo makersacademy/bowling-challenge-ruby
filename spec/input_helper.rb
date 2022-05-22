@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'stringio'
 
 class UserInput
-
   def self.input(array)
     io = StringIO.new
     array.each { |user_input| io.puts user_input }

@@ -1,6 +1,8 @@
-require 'frame.rb'
-require 'stringio'
+# frozen_string_literal: true
 
+require 'frame'
+require 'stringio'
+require 'input_helper'
 
 describe Frame do
   let(:frame) { Frame.new(1) }
@@ -9,9 +11,7 @@ describe Frame do
     let(:input) { StringIO.new }
 
     it 'correctly records a strike' do
-      input.puts '10'
-      input.rewind
-      $stdin = input
+      $stdin = UserInput.input([10])
       frame.run
       expect(frame.strike?).to eq(true)
       expect(frame.spare?).to eq(false)
@@ -19,10 +19,7 @@ describe Frame do
     end
 
     it 'correctly records a spare' do
-      input.puts '5'
-      input.puts '5'
-      input.rewind
-      $stdin = input
+      $stdin = UserInput.input([5, 5])
       frame.run
       expect(frame.strike?).to eq(false)
       expect(frame.spare?).to eq(true)
@@ -30,10 +27,7 @@ describe Frame do
     end
 
     it 'correctly a not spare not strike score' do
-      input.puts '4'
-      input.puts '3'
-      input.rewind
-      $stdin = input
+      $stdin = UserInput.input([4, 3])
       frame.run
       expect(frame.strike?).to eq(false)
       expect(frame.spare?).to eq(false)
