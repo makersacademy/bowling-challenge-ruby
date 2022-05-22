@@ -10,7 +10,7 @@ Planning
 
 ```mermaid
 
-flowchart LR
+flowchart TD
     A(START HERE Frame Number n)
     C{Is it a strike?}
     D(Log 'strike' in previous_round for next frame)
@@ -69,7 +69,7 @@ flowchart LR
     V -->|Strike|W
     AA --> CA
     CA --> BA
-    I --> Y
+    R --> Y
     P --> L
     
 
