@@ -1,10 +1,11 @@
 class Frame
 
-    attr_reader :roll, :rolls, :frame_score
+    attr_reader :roll, :rolls, :frame_score, :bonus
 
     def initialize
         @rolls = []
-        @frame_score = [] 
+        @frame_score = [] #still necessary?
+        @bonus = []
     end
 
     def input_roll(roll)
@@ -28,7 +29,7 @@ class Frame
     end
 
     def complete?
-        @rolls.length == 2 || strike?
+        @rolls.length == 2 || strike? || spare?
     end
 
 

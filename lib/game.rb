@@ -2,11 +2,12 @@ require_relative 'frame.rb'
 
 class Game
 
-    attr_reader :roll, :rolls, :frame, :frame_score, :tally
+    attr_reader :roll, :rolls, :frame, :frame_score, :tally, :bonus
 
     def initialize(frame = Frame.new)
         # @roll = @frame.roll
         @frame = frame
+        @bonus = @frame.bonus
         @rolls = @frame.rolls
         # @frame_score = 0
         @tally = []
@@ -14,13 +15,29 @@ class Game
 
     def roll(roll)
         @frame.input_roll(roll)
-        # add_to_frame_score if @rolls.length == 2
-        # add_to_tally
-        if @frame.complete? 
-            @tally << @frame.rolls
-            @frame = Frame.new
-            @rolls = @frame.rolls
+        if @frame.complete? && !@frame.strike? && !@frame.spare? && @tally.length < 9
+            add_to_tally_and_generate_new_frame
+        elsif @frame.complete? && @frame.strike? && @tally.length < 9
+            @tally << "strike"
+            add_to_bonus_and_generate_new_frame
+        elsif @frame.complete? && @frame.spare? && @tally.length < 9
+            @tally << "spare"
+            add_to_bonus_and_generate_new_frame
+        # elsif @frame.complete? && tally.length == 9
+            # @final_frame = FinalFrame.new
         end
+    end
+
+    def add_to_tally_and_generate_new_frame
+        @tally << @frame.rolls
+        @frame = Frame.new
+        @rolls = @frame.rolls
+    end
+
+    def add_to_bonus_and_generate_new_frame
+        @bonus << @frame.rolls
+        @frame = Frame.new
+        @rolls = @frame.rolls
     end
 
     def add_to_frame_score
