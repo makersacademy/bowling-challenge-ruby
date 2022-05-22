@@ -6,4 +6,10 @@ describe Round do
     round = Round.new(frames)
     expect(round.score).to eq 0
   end
+
+  it 'returns 20 when one pin is knocked over each bowl' do
+    frames = [ [1,1] ,[1,1] ,[1,1] ,[1,1] ,[1,1] ,[1,1] ,[1,1] ,[1,1] ,[1,1] ,[1,1] ]
+    round = Round.new(frames)
+    expect(round.score).to eq 20
+  end
 end
