@@ -3,9 +3,8 @@ class Frame
     attr_reader :roll, :rolls, :frame_score
 
     def initialize
-        @roll
         @rolls = []
-        @frame_score = 0
+        # @frame_score = 0 
     end
 
     def input_roll(roll)
@@ -21,5 +20,16 @@ class Frame
     def frame_less_than_ten?
         @rolls.sum <= 9 ? true : false
     end
+
+    #let's change the above methods to represent strikes and spares
+
+    def spare?  
+        @rolls.sum == 10 && @rolls.length == 2 
+    end
+
+    def strike?
+        @rolls.sum == 10 && @rolls.length == 1
+    end
+
 
 end

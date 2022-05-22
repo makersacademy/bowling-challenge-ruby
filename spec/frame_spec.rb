@@ -6,21 +6,26 @@ describe Frame do
         expect(subject.rolls).to eq [9]
     end
     
-    it 'checks if roll equals less than 10' do
-        subject.input_roll(9)
-        expect(subject.roll_less_than_ten?).to eq true
+    it 'registers strike if first roll equals 10' do
+        subject.input_roll(10)
+        expect(subject.strike?).to eq true
     end
 
-    it 'checks if first roll + second roll are less than 10' do
+    it 'does not register strike if first roll equals 10' do
+        subject.input_roll(9)
+        expect(subject.strike?).to eq false
+    end
+
+    it 'does not register spare if first roll + second roll are less than 10' do
         subject.input_roll(7)
         subject.input_roll(1)
-        expect(subject.frame_less_than_ten?).to eq true
+        expect(subject.spare?).to eq false
     end
 
-    it 'checks if first roll + second roll equal 10' do
+    it 'registers spare if first roll + second roll equal 10' do
         subject.input_roll(9)
         subject.input_roll(1)
-        expect(subject.frame_less_than_ten?).to eq false
+        expect(subject.spare?).to eq true
     end
     
 
