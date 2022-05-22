@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'stringio'
-
 class UserInput
   def self.input(array)
     io = StringIO.new

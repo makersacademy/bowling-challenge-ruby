@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'input_helper'
-require 'game'
-
 describe Game do
   describe '#run' do
     let(:game) { Game.new }
@@ -17,6 +14,18 @@ describe Game do
       $stdin = UserInput.input([1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 7])
       game.run
       expect(game.total_score).to eq(125)
+    end
+
+    it 'correctly calculates the score for a game with a spare on the end' do
+      $stdin = UserInput.input([1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6])
+      game.run
+      expect(game.total_score).to eq(133)
+    end
+
+    it 'correctly calculates the score for a game with a strike on the end followed by two normal rolls' do
+      $stdin = UserInput.input([1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 10, 5, 3])
+      game.run
+      expect(game.total_score).to eq(140)
     end
   end
 end

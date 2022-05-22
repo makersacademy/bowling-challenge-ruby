@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'frame'
+require 'eleventhframe'
 
 class Game
   attr_reader :total_score
@@ -16,6 +17,12 @@ class Game
 
   def run
     request_user_input_first_10_frames
+    if @strikes[9] == true || @spares[9] == true
+      frame = EleventhFrame.new(@spares[9])
+      frame.run
+      record_frame(frame)
+      p self
+    end
     calculate_all_frame_totals
     calculate_total
   end

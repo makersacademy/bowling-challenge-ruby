@@ -10,6 +10,11 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
 ])
 SimpleCov.start
 
+require 'input_helper'
+require 'game'
+require 'frame'
+require 'eleventhframe'
+require 'stringio'
 
 RSpec.configure do |config|
   
