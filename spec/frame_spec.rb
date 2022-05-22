@@ -22,22 +22,8 @@ describe Frame do
         subject.input_roll(1)
         expect(subject.frame_less_than_ten?).to eq false
     end
+    
 
-    it 'adds frame to frame_score if it equals less than 10' do #change description
-        expect { subject.input_roll(8) }.to change { subject.frame_score }.by 8
-    end
-
-    it 'adds frame to frame_score if it equals less than 10' do
-        subject.input_roll(8)
-        subject.input_roll(1)
-        expect(subject.frame_score).to eq 9
-    end
-
-    it 'does not add frame to frame_score if it equals 10' do
-        subject.input_roll(8)
-        subject.input_roll(2)
-        expect(subject.frame_score).to eq 0
-    end
 
     # xit 'does not let the player take a second roll if roll_1 = 10 and frame < 9' do
     # end

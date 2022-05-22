@@ -5,13 +5,13 @@ class Frame
     def initialize
         @roll
         @rolls = []
-        @frame_score = []
+        @frame_score = 0
     end
 
     def input_roll(roll)
-        fail 'max rolls reached' if @rolls.length == 2
+        @rolls.clear if @rolls.length == 2
         @roll = roll
-        @rolls << @roll 
+        @rolls << @roll
     end 
 
     def roll_less_than_ten?
