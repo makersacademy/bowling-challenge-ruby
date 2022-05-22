@@ -16,10 +16,6 @@ class Frame
         @frame_score << @rolls if @rolls.length == 2
     end
 
-    # def roll_less_than_ten?
-    #     true if @roll <= 9
-    # end
-
     def spare?  
         @rolls.sum == 10 && @rolls.length == 2 
     end
@@ -30,6 +26,10 @@ class Frame
 
     def complete?
         @rolls.length == 2 || strike? || spare?
+    end
+
+    def bonus?
+         strike? || spare?
     end
 
 

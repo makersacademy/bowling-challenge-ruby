@@ -15,14 +15,15 @@ class Game
 
     def roll(roll)
         @frame.input_roll(roll)
-        if @frame.complete? && !@frame.strike? && !@frame.spare? && @tally.length < 9
+        if @frame.complete? && !frame.bonus? && @tally.length < 9
             add_to_tally_and_generate_new_frame
+            add_bonus_and_points_to_tally
         elsif @frame.complete? && @frame.strike? && @tally.length < 9
-            @tally << []
             add_to_bonus_and_generate_new_frame
+            add_bonus_and_points_to_tally
         elsif @frame.complete? && @frame.spare? && @tally.length < 9
-            @tally << []
             add_to_bonus_and_generate_new_frame
+            add_bonus_and_points_to_tally
         # elsif @frame.complete? && tally.length == 9
             # @final_frame = FinalFrame.new
         end
@@ -37,6 +38,7 @@ class Game
 
     def add_to_bonus_and_generate_new_frame
         @bonus << @frame.rolls
+        @tally << []
         @frame = Frame.new
         @rolls = @frame.rolls
     end
@@ -48,37 +50,39 @@ class Game
 
     #now implement the below automatically
 
-    def add_spare_bonus_and_points_to_tally
-        #this example is for a spare
-        # stored_points_index = @tally.length - 2
-        #i.e. the second to last element in the bonus array
-        index = @tally.length - 1
-        #i.e. the last element in the tally array
+    def add_bonus_and_points_to_tally
+        if @bonus[-2] != nil && @bonus[-2].sum == 10 && @bonus[-2].length == 2
+            add_spare_bonus_and_points_to_tally
+        elsif @bonus[-2] != nil && @bonus[-2].sum == 10 && @bonus[-2].length == 1
+            add_strike_bonus_and_points_to_tally
+        end
+    end
+
+    def add_spare_bonus_and_points_to_tally        
+        final_index = @tally.length - 1
+        penultimate_index = @tally.length - 2
         if @tally.last.empty?
-            @tally[index-1] << @bonus[@tally.length-2][0]
-            @tally[index-1] << @bonus[@tally.length-2][1] 
-            @tally[index-1] << @bonus[index][0]
+            @tally[penultimate_index] << @bonus[penultimate_index][0]
+            @tally[penultimate_index] << @bonus[penultimate_index][1] 
+            @tally[penultimate_index] << @bonus[final_index][0]
         elsif !@tally.last.empty?
-            @tally[index-1] << @bonus[@tally.length-2][0]
-            @tally[index-1] << @bonus[@tally.length-2][1] 
-            @tally[index-1] << @tally[index][0]
+            @tally[penultimate_index] << @bonus[penultimate_index][0]
+            @tally[penultimate_index] << @bonus[penultimate_index][1] 
+            @tally[penultimate_index] << @tally[final_index][0]
         end
     end
 
     def add_strike_bonus_and_points_to_tally
-        #this example is for a strike
-        # stored_points_index = @tally.length - 2
-        #i.e. the second to last element in the bonus array
-        index = @tally.length - 1
-        #i.e. the last element in the tally array
+        final_index = @tally.length - 1
+        penultimate_index = @tally.length - 2
         if @tally.last.empty?
-            @tally[index-1] << @bonus[@tally.length-2][0]
-            @tally[index-1] << @bonus[index][0]
-            @tally[index-1] << @bonus[index][1]
+            @tally[penultimate_index] << @bonus[penultimate_index][0]
+            @tally[penultimate_index] << @bonus[final_index][0]
+            @tally[penultimate_index] << @tally[final_index][1]
         elsif !@tally.last.empty?
-            @tally[index-1] << @bonus[@tally.length-2][0] 
-            @tally[index-1] << @tally[index][0]
-            @tally[index-1] << @tally[index][1]
+            @tally[penultimate_index] << @bonus[penultimate_index][0] 
+            @tally[penultimate_index] << @tally[final_index][0]
+            @tally[penultimate_index] << @tally[final_index][1]
         end
     end
 
@@ -90,3 +94,10 @@ end
 
 #do I need to pass an argument to add_to_frame_scores?
 #need to clear frame score after passing it to tally
+
+#the below needs not to be called if
+            # if @tally.length > 1 && !@tally[penultimate_index].empty? && @tally[penultimate_index].length == 1 
+            #     add_strike_bonus_and_points_to_tally
+            # elsif tally.length > 1 && !@tally[penultimate_index].empty? && @tally[penultimate_index].length == 2
+            #     add_spare_bonus_and_points_to_tally
+            # end
