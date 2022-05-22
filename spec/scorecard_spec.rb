@@ -109,4 +109,37 @@ describe Scorecard do
 
     end
   end
+
+  describe '#show_score' do
+    
+    it 'shows a score of 0 and frame 1 when call on a new instance' do
+      
+      expect(subject.show_score).to eq 'Frame: 1    Score: 0'
+
+    end
+
+    it 'shows a score of 300 and frame 10 when a perfect game (12 strikes in a row)' do
+      
+      12.times { subject.insert_play(10) }
+
+      expect(subject.show_score).to eq 'Frame: 10    Score: 300'
+
+    end
+
+    it 'shows a score of 0 points and frame 10 when a gutter game (0 pins in 20 plays)' do
+      
+      20.times { subject.insert_play(0) }
+
+      expect(subject.show_score).to eq 'Frame: 10    Score: 0'
+
+    end
+
+    it 'shows a score of 150 points and frame 10 when 21 plays throwing 5 pins' do
+
+      21.times { subject.insert_play(5) }
+
+      expect(subject.show_score).to eq 'Frame: 10    Score: 150'
+
+    end
+  end
 end
