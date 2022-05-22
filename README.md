@@ -7,6 +7,11 @@ The user inputs the rolls (amount of pins that went down) and the program shows 
 
 Maximum of pins that can be knocked down on a same frame is 10 (expect from last frame), so the program will raise an error in that case.
 
+CRC cards:
+-----
+
+![CRC Cards](images/CRC_cards.png)
+
 
 Getting started:
 -----
