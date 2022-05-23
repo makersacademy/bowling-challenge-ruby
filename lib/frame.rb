@@ -4,7 +4,7 @@ class Frame
 
     def initialize
         @rolls = []
-        @frame_score = [] #still necessary?
+        @frame_score = []
         @bonus = []
     end
 

@@ -26,20 +26,7 @@ describe Frame do
         subject.input_roll(9)
         subject.input_roll(1)
         expect(subject.spare?).to eq true
-    end
-
-    it 'adds the rolls array to frame_score once it contains two rolls or has a strike' do
-        subject.input_roll(9)
-        subject.input_roll(0)
-        expect(subject.frame_score).to eq [9, 0]
-    end
-
-    it 'empties the rolls array once it contains two rolls or has a strike' do
-        subject.input_roll(9)
-        subject.input_roll(0)
-        expect(subject.frame_score).to eq [9, 0]
-    end
-    
+    end    
 
 
     # xit 'does not let the player take a second roll if roll_1 = 10 and frame < 9' do
