@@ -42,22 +42,24 @@ class Game
     end
 
     def add_bonus_and_points_to_tally
-        if @bonus[-2] != nil && @bonus[-2].sum == 10 && @bonus[-2].length == 2
+        if not_first_frame && second_to_last_frame_spare
             add_spare_bonus_and_points_to_tally
-        elsif @bonus[-2] != nil && @bonus[-2].sum == 10 && @bonus[-2].length == 1
+        elsif not_first_frame && second_to_last_frame_strike
             add_strike_bonus_and_points_to_tally
         end
     end
 
-    # def not_first_frame
-    #     @bonus[-2] != nil 
-    # end
+    def not_first_frame
+        @bonus[-2] != nil 
+    end
 
-    # def second_to_last_frame_strike
-    # end
+    def second_to_last_frame_strike
+        @bonus[-2].sum == 10 && @bonus[-2].length == 1
+    end
 
-    # def second_to_last_frame_spare
-    # end
+    def second_to_last_frame_spare
+        @bonus[-2].sum == 10 && @bonus[-2].length == 2
+    end
 
     def add_spare_bonus_and_points_to_tally        
         final_index = @tally.length - 1
