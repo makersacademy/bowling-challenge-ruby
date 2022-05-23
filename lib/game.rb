@@ -4,8 +4,8 @@ class Game
     @rolls = []
   end
  
-  def roll(pins)
-    @rolls << pins
+  def roll(bottles)
+    @rolls << bottles
   end
 
   def score
