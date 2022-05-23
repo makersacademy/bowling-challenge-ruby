@@ -30,4 +30,12 @@ describe Round do
     round = Round.new(frames)
     expect(round.score).to eq 85
   end
+
+  it 'returns 30 when [[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[10,1,1]]' do
+    frames = [ [1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[10,1,1] ]
+    round = Round.new(frames)
+    expect(round.score).to eq 30
+    expect(round.basic_score).to eq 28
+    expect(round.bonus_score).to eq 2
+  end
 end
