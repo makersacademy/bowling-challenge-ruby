@@ -49,17 +49,23 @@ class Game
         end
     end
 
+    # def not_first_frame
+    #     @bonus[-2] != nil 
+    # end
+
+    # def second_to_last_frame_strike
+    # end
+
+    # def second_to_last_frame_spare
+    # end
+
     def add_spare_bonus_and_points_to_tally        
         final_index = @tally.length - 1
         penultimate_index = @tally.length - 2
         if @tally.last.empty?
-            @tally[penultimate_index] << @bonus[penultimate_index][0]
-            @tally[penultimate_index] << @bonus[penultimate_index][1] 
-            @tally[penultimate_index] << @bonus[final_index][0]
+            @tally[penultimate_index] << @bonus[penultimate_index][0] << @bonus[penultimate_index][1] << @bonus[final_index][0]
         elsif !@tally.last.empty?
-            @tally[penultimate_index] << @bonus[penultimate_index][0]
-            @tally[penultimate_index] << @bonus[penultimate_index][1] 
-            @tally[penultimate_index] << @tally[final_index][0]
+            @tally[penultimate_index] << @bonus[penultimate_index][0] << @bonus[penultimate_index][1] << @tally[final_index][0]
         end
     end
 
@@ -67,13 +73,9 @@ class Game
         final_index = @tally.length - 1
         penultimate_index = @tally.length - 2
         if @tally.last.empty?
-            @tally[penultimate_index] << @bonus[penultimate_index][0]
-            @tally[penultimate_index] << @bonus[final_index][0]
-            @tally[penultimate_index] << @tally[final_index][1]
+            @tally[penultimate_index] << @bonus[penultimate_index][0] << @bonus[final_index][0] << @tally[final_index][1]
         elsif !@tally.last.empty?
-            @tally[penultimate_index] << @bonus[penultimate_index][0] 
-            @tally[penultimate_index] << @tally[final_index][0]
-            @tally[penultimate_index] << @tally[final_index][1]
+            @tally[penultimate_index] << @bonus[penultimate_index][0] << @tally[final_index][0] << @tally[final_index][1]
         end
     end
 end
