@@ -22,7 +22,8 @@ I was struggling to understand what I should be defining in the Frame classand w
 Given time, I would like to:
 - prevent a player from entering a score higher than 10 per roll.
 - implement logic for the final frame, via a FinalFrame class.
-- refactor further
+- refactor further - aside from anything else, there are definitely some redundancies in the code and in the tests, but I don't fancy breaking it at 2am. 
+- tighten up the testing
 
 =================
 

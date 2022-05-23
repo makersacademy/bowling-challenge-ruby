@@ -1,6 +1,6 @@
 class Frame
 
-    attr_reader :roll, :rolls, :frame_score, :bonus
+    attr_reader :roll, :rolls, :bonus
 
     def initialize
         @rolls = []
@@ -11,10 +11,6 @@ class Frame
     def input_roll(roll)
         @rolls << roll
     end 
-
-    def add_to_frame_score
-        @frame_score << @rolls if @rolls.length == 2
-    end
 
     def spare?  
         @rolls.sum == 10 && @rolls.length == 2 

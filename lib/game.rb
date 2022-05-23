@@ -2,7 +2,7 @@ require_relative 'frame.rb'
 
 class Game
 
-    attr_reader :rolls, :frame, :frame_score, :tally, :bonus
+    attr_reader :rolls, :frame, :tally, :bonus
 
     def initialize(frame = Frame.new)
         @frame = frame
@@ -39,11 +39,6 @@ class Game
         @tally << []
         @frame = Frame.new
         @rolls = @frame.rolls
-    end
-
-    def add_to_frame_score
-        @frame_score = 0
-        @frame_score += @rolls.sum if @rolls.length == 2 && @rolls.sum <= 9
     end
 
     def add_bonus_and_points_to_tally
