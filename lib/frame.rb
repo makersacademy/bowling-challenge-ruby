@@ -18,7 +18,7 @@ class Frame
   end
 
   def spare?
-    self.total == 10
+    total == 10
   end
 
   def strike?

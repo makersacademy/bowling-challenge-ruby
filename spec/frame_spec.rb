@@ -1,7 +1,7 @@
 require 'frame'
 
 describe Frame do
-  let(:frame) {Frame.new }
+  let(:frame) { Frame.new }
 
   describe '#add_to_frame' do
     it 'adds to the current frame' do
@@ -21,7 +21,7 @@ describe Frame do
     it 'returns the first roll from current_frame' do
       frame.add_to_frame(5)
       frame.add_to_frame(3)
-      expect(frame.first_roll).to eq (5)
+      expect(frame.first_roll).to eq(5)
     end
   end
 
@@ -38,7 +38,7 @@ describe Frame do
       expect(frame).not_to be_spare
     end
   end
-  
+
   describe '#strike?' do
     it 'return true if the frame is a strike' do
       frame.add_to_frame(10)
@@ -51,11 +51,10 @@ describe Frame do
     end
   end
 
-  describe 'add_bonus(pins)' do
+  describe '#add_bonus(pins)' do
     it 'adds bonus pins to frame' do
       frame.add_bonus(5)
-      expect(frame.current_frame.pop).to eq(5) 
+      expect(frame.current_frame.pop).to eq(5)
     end
   end
-
 end

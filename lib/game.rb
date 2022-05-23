@@ -1,5 +1,4 @@
 class Game
-
   def initialize
     @score = 0
     @roll_number = 0
@@ -17,7 +16,7 @@ class Game
   def bowl(pins, frame = Frame)
     if regular_strike(pins)
       @frame = frame.new
-     complete_frame(pins)
+      complete_frame(pins)
       @roll_number += 2
     elsif @roll_number == 20
       @rolls.last.add_bonus(pins)
@@ -40,15 +39,14 @@ class Game
 
   def score
     @rolls.each_with_index do |frame, index|
-      if frame.strike?
-        @score += frame.total + @rolls[index + 1].total
-      elsif frame.spare?
-        @score += frame.total + @rolls[index + 1].first_roll
-      else
-        @score += frame.total
-      end
+      @score += if frame.strike?
+                  frame.total + @rolls[index + 1].total
+                elsif frame.spare?
+                  frame.total + @rolls[index + 1].first_roll
+                else
+                  frame.total
+                end
     end
     @score
   end
-
 end
