@@ -27,5 +27,17 @@ describe Game do
       game.run
       expect(game.total_score).to eq(140)
     end
+
+    it 'correctly calculates the score for a game with a strike on the end followed by a spare' do
+      $stdin = UserInput.input([1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 10, 5, 5])
+      game.run
+      expect(game.total_score).to eq(142)
+    end
+
+    it 'correctly calculates the score for a game with a twelfth frame' do
+      $stdin = UserInput.input([1, 4, 4, 5, 6, 4, 5, 5, 10,  0, 1, 7, 3, 6, 4, 10,  10,  10,  9])
+      game.run
+      expect(game.total_score).to eq(156)
+    end
   end
 end

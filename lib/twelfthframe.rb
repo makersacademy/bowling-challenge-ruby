@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-# similar to frame, but for the eleventh frame
+# one roll in final frame
 
-class EleventhFrame
+class TwelfthFrame
   attr_reader :frame_number, :roll_one, :roll_two
 
-  def initialize(frame_10_spare)
-    @frame_10_spare = frame_10_spare
+  def initialize
     @roll_one = nil
     @roll_two = nil
     @strike = false
@@ -14,16 +13,11 @@ class EleventhFrame
   end
 
   def run
-    puts 'Frame number 11'
+    puts 'Frame number 12'
     puts 'Roll 1?'
     @roll_one = gets.chomp.to_i
     p @roll_one
     calculate_strike
-    return if strike?
-    return if @frame_10_spare == true
-    puts 'Roll 2?'
-    @roll_two = gets.chomp.to_i
-    p @roll_two
   end
 
   def strike?

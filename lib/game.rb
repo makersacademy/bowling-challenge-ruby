@@ -17,14 +17,10 @@ class Game
 
   def run
     request_user_input_first_10_frames
-    if @strikes[9] == true || @spares[9] == true
-      frame = EleventhFrame.new(@spares[9])
-      frame.run
-      record_frame(frame)
-      p self
-    end
+    bonus_frames
     calculate_all_frame_totals
     calculate_total
+    display_total
   end
 
   private
@@ -48,6 +44,25 @@ class Game
     @spares << frame.spare?
   end
 
+  def bonus_frames
+    return unless @strikes[9] == true || @spares[9] == true
+
+    frame = EleventhFrame.new(@spares[9])
+    frame.run
+    record_frame(frame)
+    twelfthframe
+  end
+
+  def twelfthframe
+    return unless @strikes[10] == true && @strikes[9] == true
+
+    @frame_number += 1
+    final_frame = TwelfthFrame.new
+    final_frame.run
+    record_frame(final_frame)
+  end
+
+
   def calculate_all_frame_totals
     @frame_number = 0
     loop do
@@ -70,7 +85,12 @@ class Game
   end
 
   def calculate_strike_frame_total
-    10 + @all_rolls[@frame_number + 1][0] + @all_rolls[@frame_number + 1][1] || @all_rolls[@frame_number + 2][0]
+    score = 10 + @all_rolls[@frame_number + 1][0]
+    if @all_rolls[@frame_number + 1][1]
+      score += @all_rolls[@frame_number + 1][1]
+    else
+      score += @all_rolls[@frame_number + 2][0]
+    end
   end
 
   def calculate_spare_frame_total
@@ -83,5 +103,9 @@ class Game
       total += score
     end
     @total_score = total
+  end
+
+  def display_total
+    puts "Your total score is #{@total_score}"
   end
 end
