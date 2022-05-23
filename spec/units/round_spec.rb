@@ -38,4 +38,13 @@ describe Round do
     expect(round.basic_score).to eq 28
     expect(round.bonus_score).to eq 2
   end
+
+  # this doesnt work
+  it 'returns 300 when [[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,10,10]]' do
+    frames = [ [10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,0],[10,10,10] ]
+    round = Round.new(frames)
+    expect(round.score).to eq 300
+    # expect(round.basic_score).to eq 28
+    # expect(round.bonus_score).to eq 2
+  end
 end
