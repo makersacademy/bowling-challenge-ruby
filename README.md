@@ -1,5 +1,30 @@
 Bowling Challenge in Ruby
+
 =================
+
+# User Guide
+
+This is a program that will run in the terminal, it will take user inputs for the roll results of a bowling game and will return the score of the game at the end. 
+
+Additional functionality still to implement:
+
+    - A scoresheet that will display the scores by frame, this data is stored currently but not displayed
+    - Rerequesting user input if input is not valid, ie an incorrect number of pins or a string etc.
+    - Further refactoring of the code, potential split of Game class into Game and Scoresheet
+    - Multiplayer input available
+
+Installation and running instructions
+
+    ```
+    git clone https://github.com/tomoneill32/tom-bowling-challenge-ruby.git
+    cd tom-bowling-challenge-ruby
+    bundle
+    irb -r ./lib/game.rb
+    game = Game.new
+    game.run
+    ```
+
+# Challenge Instructions
 
 * Feel free to use google, your notes, books, etc. but work on your own
 * If you refer to the solution of another coach or student, please put a link to that in your README
