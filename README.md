@@ -15,14 +15,14 @@ Installation instructions:
 
 Notes to coach/reviewer:
 
-I was under the weather this weekend so wasn't able to finish the challenge. As things stand, a user can calculate the scores for bowling but the final frame is not accounted for.
+I was under the weather this weekend so wasn't able to finish the challenge. As things stand, a user can calculate the scores for bowling but the final frame logic has not been completed. 
 
 I was struggling to understand what I should be defining in the Frame classand what I should be defining in the Game class, and so at some point between the sixth and seventh commit I looked at the work of another student on the pull history of the challenge (Nico Cortese, pull #252). This gave me the idea for a FinalFrame class, as well as leading me to define spares and strikes and completed frames as their own classes (prior to that, I had defined whether a frame was less than ten, which is along the same lines but less efficient as it doesn't distinguish between strikes and spares). I did, however, try not to look at this piece of work too much, and the basic logic of this exercise is my own and builds on what I had been working on up until this point (for which I apologise - I'm aware it's not the easiest to read).
 
 Given time, I would like to:
 - prevent a player from entering a score higher than 10 per roll.
-- implement logic for the final frame, via a FinalFrame class.
-- refactor further - aside from anything else, there are definitely some redundancies in the code and in the tests, but I don't fancy breaking it at 2am. 
+- make it possible to complete a game by finishing the FinalFrame class.
+- refactor further
 - tighten up the testing
 
 =================
