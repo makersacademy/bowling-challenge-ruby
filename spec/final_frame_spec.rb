@@ -15,7 +15,7 @@ describe FinalFrame do
         expect(subject.complete?).not_to eq true
     end
 
-    it 'only gives the player two rolls if they do not get a spare or a strike' do
+    it 'gives the player only two rolls if they do not get a spare or a strike' do
     subject.input_roll(2)
     subject.input_roll(2)
     expect(subject.complete?).to eq true
