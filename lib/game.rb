@@ -72,10 +72,10 @@ class Game
     end
 
     def add_spare_bonus_and_points_to_tally        
-        if @tally.last.empty?
-            @tally[-2] << @bonus[-2][0] << @bonus[-2][1] << @bonus[-1][0]
-        elsif !@tally.last.empty?
-            @tally[-2] << @bonus[-2][0] << @bonus[-2][1] << @tally[-1][0]
+        if @all_rolls[-3].sum == 10 && @all_rolls[-3].length == 2
+            #if two rolls back was a spare 
+            @tally[-3] << @all_rolls[-3] << @all_rolls[-2][0]
+            #push the spare from that roll and the first roll of the previous frame to the frame three rolls back
         end
     end
 
@@ -100,12 +100,16 @@ class Game
     end
 end
 
-    #create an array of all the rolls 
-    #index the tally and find the index of the strike
-    #add the values from the subsequent two indices on the rolls 
-    # i.e. if all_rolls [-3] == strike and all_rolls[-2].length == 2
-    # then tally[-3] << all_rolls[-2][0] << all_rolls[-2][1]
-    #elsif all_rolls [-3] == strike and all_rolls[-2].length == 1
-    # then tally[-3] << all_rolls[-2] << all_rolls[-1]
+# currently the bonus isn't added to the tally until two rolls after the roll in which
+#the bonus was incurred, regardless of whether they continue to get spares or strikes
+#this should only happen if the player scores a strike in the second roll
+#if they score anything else, the bonus should be calculated at the end of that frame.
+#so for [5,5] [6, 2] the 6 should be added to the spare at the end of the [6, 2] frame
+#for [10] [10] [3, 1] the 10 and the 3 should be added at the end of the third frame
+#for [10] [4, 3] the 4 and the 3 should be added at the end of that go
+#for [10] [5, 5] [4, 2] the 5 and the 5 should be added at the end of that the [5,5] frame, and 
+#the 4 should be added to the 5, 5 at the end of the 4, 2 frame
+
+#so that spare method needs to change from [-3] to [-2] for starters...
 
 
