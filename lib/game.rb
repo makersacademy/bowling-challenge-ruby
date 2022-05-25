@@ -15,18 +15,18 @@ class Game
 
     def roll(roll)
         @frame.input_roll(roll)
-        if @frame.complete? && !frame.bonus? && @tally.length < 9
+        if @frame.complete? && !frame.bonus? && @tally.length < 10
             add_to_tally_and_generate_new_frame
             add_bonus_and_points_to_tally
-        elsif @frame.complete? && @frame.strike? && @tally.length < 9
+        elsif @frame.complete? && @frame.strike? && @tally.length < 10
             add_to_bonus_and_generate_new_frame
             add_bonus_and_points_to_tally
-        elsif @frame.complete? && @frame.spare? && @tally.length < 9
+        elsif @frame.complete? && @frame.spare? && @tally.length < 10
             add_to_bonus_and_generate_new_frame
             add_bonus_and_points_to_tally
-        elsif @frame.complete? && tally.length == 9
-            load_final_frame
-            "final frame"
+        # elsif @frame.complete? && tally.length == 9
+        #     load_final_frame
+        #     "final frame"
         end
     end
 
@@ -52,15 +52,27 @@ class Game
     end
 
     def add_bonus_and_points_to_tally
-        if not_first_or_second_frame && previous_frame_was_a_spare
+        if not_first_frame && previous_frame_was_a_spare
             add_spare_bonus_and_points_to_tally
         elsif not_first_or_second_frame && previous_frame_but_one_was_a_strike
             add_strike_bonus_and_points_to_tally
         end
     end
 
+    #think the above needs more scenarios, including but not limited to the below
+
+    #something like:
+    # if not_first_or_second_frame && previous_frame_was_a_strike && this_frame_not_a_strike
+    #elsif not_first_or_second_frame && previous_frame_was_a_strike && this_frame_is_a_strike
+    #elsif not_first_frame && previous_frame_was_a_spare
+    
+
     def not_first_or_second_frame
         @bonus[-3] != nil && @all_rolls.length >= 3
+    end
+
+    def not_first_frame
+        @bonus[-2] != nil && @all_rolls.length >= 2
     end
 
     def previous_frame_but_one_was_a_strike
@@ -72,9 +84,9 @@ class Game
     end
 
     def add_spare_bonus_and_points_to_tally        
-        if @all_rolls[-3].sum == 10 && @all_rolls[-3].length == 2
+        if @all_rolls[-2].sum == 10 && @all_rolls[-2].length == 2
             #if two rolls back was a spare 
-            @tally[-3] << @all_rolls[-3] << @all_rolls[-2][0]
+            @tally[-2] << @all_rolls[-2] << @all_rolls[-1][0]
             #push the spare from that roll and the first roll of the previous frame to the frame three rolls back
         end
     end
@@ -100,6 +112,20 @@ class Game
     end
 end
 
+#do we need an elsif statement for the 9th frame. Does the calculator
+#act differently? Research how points are calculated prior to the final frame. Does anything
+#get carried over or is it a standalone frame?
+
+#I think we need to pretty much replicate the #add_strike_bonus_and_points_to_tally 
+#but for the 10th frame with certain differences
+#also for the add_spare_bonus_and_points_to_tally
+#also for a normal score... then can think about extracting it to another class later...
+
+# so:
+# add_strike_bonus_and_points_to_tally_tenth_frame
+# add_spare_bonus_and_points_to_tally_tenth_frame
+# add_non_bonus_points_to_tally_tenth_frame
+
 # currently the bonus isn't added to the tally until two rolls after the roll in which
 #the bonus was incurred, regardless of whether they continue to get spares or strikes
 #this should only happen if the player scores a strike in the second roll
@@ -111,5 +137,7 @@ end
 #the 4 should be added to the 5, 5 at the end of the 4, 2 frame
 
 #so that spare method needs to change from [-3] to [-2] for starters...
+
+#also think about telling the score at some point...
 
 
