@@ -35,6 +35,14 @@ describe Game do
         expect(subject.tally).to eq ([[[10], 5, 5], []])
     end
 
+    it 'if player rolls a strike in frame 1, and a spare in frame 2, and neither in frame 3, the strike will be added at the end of frame 2 and the spare at the end of frame 3' do
+        subject.roll(10)
+        2.times {subject.roll(5)}
+        2.times {subject.roll(4)}
+        expect(subject.tally).to eq ([[[10], 5, 5], [[5, 5], 4], [4, 4]])
+    end
+
+
 
     # xit 'switches to FinalFrame after the 9th frame' do
     #     9.times {subject.roll(10)}
