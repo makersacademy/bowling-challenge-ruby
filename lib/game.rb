@@ -54,7 +54,7 @@ class Game
     def add_bonus_and_points_to_tally
         if not_first_frame && previous_frame_was_a_spare
             add_spare_bonus_and_points_to_tally
-        elsif not_first_or_second_frame && previous_frame_but_one_was_a_strike
+        elsif not_first_frame && previous_frame_was_a_strike
             add_strike_bonus_and_points_to_tally
         end
     end
@@ -83,6 +83,10 @@ class Game
         @bonus[-2].sum == 10 && @bonus[-2].length == 2
     end
 
+    def previous_frame_was_a_strike
+        @bonus[-2].sum == 10 && @bonus[-2].length == 1
+    end
+
     def add_spare_bonus_and_points_to_tally        
         if @all_rolls[-2].sum == 10 && @all_rolls[-2].length == 2
             #if two rolls back was a spare 
@@ -100,7 +104,10 @@ class Game
     # end
 
     def add_strike_bonus_and_points_to_tally
-        if @all_rolls[-3].sum == 10 && @all_rolls[-3].length == 1 && @all_rolls[-2].length == 2
+        if @all_rolls[-2].sum == 10 && @all_rolls[-2].length == 1 && @tally[-2].empty? && @all_rolls[-1].length == 2
+            #if two rolls back was a strike and the second to last roll wasn't a strike and no points are in the tally for two rolls back
+            @tally[-2] << @all_rolls[-2] << @all_rolls[-1][0] << @all_rolls[-1][1]
+        elsif @all_rolls[-3].sum == 10 && @all_rolls[-3].length == 1 && @all_rolls[-2].length == 2
             #if three rolls back was a strike and the second to last roll wasn't a strike
             @tally[-3] << @all_rolls[-3] << @all_rolls[-2][0] << @all_rolls[-2][1]
             #push the strike from that roll and both rolls from the second to last roll to the score for that roll three back 
