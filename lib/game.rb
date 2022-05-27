@@ -87,7 +87,7 @@ class Game
         if @all_rolls[-2].sum == 10 && @all_rolls[-2].length == 2
             #if two rolls back was a spare 
             @tally[-2] << @all_rolls[-2] << @all_rolls[-1][0]
-            #push the spare from that roll and the first roll of the previous frame to the frame three rolls back
+            #push the spare from that roll and the first roll of the previous frame to the frame two rolls back
         end
     end
 
@@ -139,5 +139,35 @@ end
 #so that spare method needs to change from [-3] to [-2] for starters...
 
 #also think about telling the score at some point...
+
+#also a maximum input limit
+
+#did this frame consist of two rolls?
+#if yes, was the previous frame a strike?
+#if yes, that strike has now had its two extra rolls and needs its points
+#and its bonus points.
+
+#I think the above one is the one that's missing. In any case, it should come at the
+#end of the frame after the strike if it isn't a strike itself... at the 
+#moment it comes a frame too late...
+
+#did this frame consist of one roll? 
+#was the previous frame a strike? 
+#no points owing yet... (no condition needed here, more for my own understanding)
+
+#was the previous frame but one a strike and is its index empty in the tally?
+#that is, has it not yet had its bonus put there by an earlier operation.
+#I think this would be the same as asking was the previous frame but one a strike and
+#was the previous frame a strike...
+#if so, it has had its extra rolls and needs its bonus
+#push the points from its corresponding index in all_rolls, as well as 
+#the points from the previous frame (since it's a strike) and the points from
+# the first roll of this frame
+
+#change where it's reading from bonus to read from all_rolls. Do this 
+#before anything else
+
+
+
 
 
