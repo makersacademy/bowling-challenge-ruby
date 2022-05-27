@@ -142,6 +142,8 @@ end
 
 #also a maximum input limit
 
+# possible scenarios for adding points:
+
 #did this frame consist of two rolls?
 #if yes, was the previous frame a strike?
 #if yes, that strike has now had its two extra rolls and needs its points
@@ -154,6 +156,12 @@ end
 #did this frame consist of one roll? 
 #was the previous frame a strike? 
 #no points owing yet... (no condition needed here, more for my own understanding)
+
+#did this frame consist of one roll?
+#if so, was the previous frame a spare? 
+#if so, points points are owed. Push the points for the previous
+#frame from all_rolls to the corresponding index in tally and the strike 
+#from this roll from all_rolls to the previous frame in tally
 
 #was the previous frame but one a strike and is its index empty in the tally?
 #that is, has it not yet had its bonus put there by an earlier operation.
