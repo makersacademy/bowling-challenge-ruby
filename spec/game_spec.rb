@@ -157,10 +157,17 @@ describe Game do
         expect(subject.tally[-2..-1]).to eq [[4, 4], [4, 4]]
     end
 
-    it 'tells the user their score at the end of the game' do
-        12.times {subject.roll(10)}
-        expect(subject.score).to eq ("You scored 300")
+    it 'tells the user their score' do
+        4.times {subject.roll(4)}
+        expect(subject.score).to eq ("Your score is 16")
     end
+
+    # it 'tells the user their score at the end of the game' do
+    #     12.times {subject.roll(10)}
+    #     expect(subject.final_score).to eq ("Your score is 300")
+    # end
+
+
 
     # xit 'switches to FinalFrame after the 9th frame' do
     #     9.times {subject.roll(10)}

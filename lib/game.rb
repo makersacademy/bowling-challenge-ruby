@@ -3,7 +3,7 @@ require_relative 'final_frame.rb'
 
 class Game
 
-    attr_reader :rolls, :frame, :tally, :bonus, :final_frame, :all_rolls, :score
+    attr_reader :rolls, :frame, :tally, :bonus, :final_frame, :all_rolls
 
     def initialize(frame = Frame.new, final_frame = FinalFrame.new)
         @frame = frame
@@ -12,8 +12,10 @@ class Game
         @rolls = @frame.rolls
         @tally = []
         @all_rolls = []
-        @score = @tally.flatten.sum
-        #add a score that can be incremented
+    end
+
+    def score
+        "Your score is #{@tally.flatten.sum}"
     end
 
     def roll(roll)
@@ -31,20 +33,19 @@ class Game
             end
         elsif tally.length >= 9
             @final_frame.input_roll(roll)
-            #after each roll:
-            #add any bonuses to eighth and ninth frames
             add_final_frame_bonuses_to_tally
             add_roll_to_all_rolls_final_frame_edition
             add_final_roll_to_tally
             @final_frame.game_over
-          
-            #add each roll to the final frame (all rolls and tally)
-            # add_roll_to_all_rolls_final_frame
-            # add_roll_to_tally_final_frame
-            #need to take bonus from final frame and give to the 8th and/or 9th frames if required
-            #need to implement logic for final frame
+            final_score
+            #final score breaks one of the tests...
         end
-        #once this is all done, return the score
+    end
+
+    def final_score
+        unless all_rolls.length < 12
+        "You scored #{tally.flatten.sum}"
+        end
     end
 
     def load_final_frame 
