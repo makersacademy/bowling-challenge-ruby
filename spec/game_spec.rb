@@ -42,6 +42,40 @@ describe Game do
         expect(subject.tally).to eq ([[[10], 5, 5], [[5, 5], 4], [4, 4]])
     end
 
+    it 'if player rolls a spare in the first frame followed by a strike in the second, they receive their spare at the end of the second frame plus the points from the strike' do
+        subject.roll(7)
+        subject.roll(3)
+        subject.roll(10)
+        expect(subject.tally).to eq ([[[7, 3], 10], []])
+    end
+
+    it 'if a player rolls a spare, then two strikes, their tally will show the first spare (with the strike added) but nothing else' do
+        subject.roll(7)
+        subject.roll(3)
+        2.times {subject.roll(10)}
+        expect(subject.tally).to eq ([[[7, 3], 10], [], []])
+    end
+
+    it 'if a player rolls a spare, a strike, an open frame, then two strikes, their tally will show the first spare (with the strike added, the strike (with the points from the open frame added), and two empty indices' do
+        subject.roll(7)
+        subject.roll(3)
+        subject.roll(10)
+        2.times {subject.roll(4)}
+        2.times {subject.roll(10)}
+        expect(subject.tally).to eq ([[[7, 3], 10], [[10], 4, 4], [4, 4], [], []])
+    end
+
+    it 'player can roll three strikes from the first frame' do
+        3.times {subject.roll(10)}
+        expect(subject.tally).to eq([[[10], [10], [10]], [], []])
+    end
+
+    it 'player rolls 3 x strikes followed by a spare followed by an open frame followed by a strike' do
+        3.times {subject.roll(10)}
+        2.times {subject.roll(5)}
+        2.times {subject.roll(3)}
+        expect(subject.tally).to eq ([[[10], [10], [10]], [[10], [10], 5], [[10], [5, 5]], [[5, 5], 3], [3, 3]])
+   end
 
 
     # xit 'switches to FinalFrame after the 9th frame' do

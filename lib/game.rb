@@ -53,9 +53,12 @@ class Game
 
     def add_bonus_and_points_to_tally
         if not_first_frame && previous_frame_was_a_spare
+            add_strike_bonus_and_points_to_tally
             add_spare_bonus_and_points_to_tally
         elsif not_first_frame && previous_frame_was_a_strike
             add_strike_bonus_and_points_to_tally
+        elsif not_first_frame && previous_frame_but_one_was_a_strike
+            add_strike_bonus_and_points_to_tally           
         end
     end
 
@@ -76,7 +79,7 @@ class Game
     end
 
     def previous_frame_but_one_was_a_strike
-        @bonus[-3].sum == 10 && @bonus[-2].length == 1
+        not_first_or_second_frame && @all_rolls[-3].sum == 10 && @bonus[-3].length == 1
     end
 
     def previous_frame_was_a_spare
@@ -88,7 +91,7 @@ class Game
     end
 
     def add_spare_bonus_and_points_to_tally        
-        if @all_rolls[-2].sum == 10 && @all_rolls[-2].length == 2
+        if @all_rolls[-2].sum == 10 && @all_rolls[-2].length == 2 && @tally[-2].empty?
             #if two rolls back was a spare 
             @tally[-2] << @all_rolls[-2] << @all_rolls[-1][0]
             #push the spare from that roll and the first roll of the previous frame to the frame two rolls back
@@ -104,17 +107,42 @@ class Game
     # end
 
     def add_strike_bonus_and_points_to_tally
-        if @all_rolls[-2].sum == 10 && @all_rolls[-2].length == 1 && @tally[-2].empty? && @all_rolls[-1].length == 2
-            #if two rolls back was a strike and the second to last roll wasn't a strike and no points are in the tally for two rolls back
+        if @all_rolls[-2].sum == 10 && @all_rolls[-2].length == 1 && @tally[-2].empty? && @all_rolls[-1].length == 2 && @all_rolls[-3] != nil && @all_rolls[-3].length != 1
+            #if last frame was a strike two rolls back wasn't a strike and this frame wasn't a strike 
             @tally[-2] << @all_rolls[-2] << @all_rolls[-1][0] << @all_rolls[-1][1]
-        elsif @all_rolls[-3].sum == 10 && @all_rolls[-3].length == 1 && @all_rolls[-2].length == 2
-            #if three rolls back was a strike and the second to last roll wasn't a strike
-            @tally[-3] << @all_rolls[-3] << @all_rolls[-2][0] << @all_rolls[-2][1]
-            #push the strike from that roll and both rolls from the second to last roll to the score for that roll three back 
-        elsif @all_rolls[-3].sum == 10 && @all_rolls[-3].length == 1 && all_rolls[-2].length == 1
-            #if three rolls back was a strike and two rolls back was a strike
-            @tally[-3] << @all_rolls[-3] << @all_rolls[-2][0] << @all_rolls[-1][0]
-            #push the strike from that roll and from the previous roll to the score for that roll three back
+            'method 1'
+        elsif @all_rolls[-2].sum == 10 && @all_rolls[-2].length == 1 && @tally[-2].empty? && @all_rolls[-1].length == 2 && @all_rolls[-3] == nil 
+            #if last frame was a strike and two rolls back wasn't a strike and this frame wasn't a strike and it's the second frame 
+            @tally[-2] << @all_rolls[-2] << @all_rolls[-1][0] << @all_rolls[-1][1]
+            'method 2'
+        elsif @all_rolls[-3] != nil && @all_rolls[-2].sum == 10 && @all_rolls[-2].length == 2 && @all_rolls[-3].length == 1 && @all_rolls[-3].sum == 10 && @tally[-2].empty? && @tally[-3].empty?
+        #     #if last frame was a spare and this frame wasn't a strike and two frames back was a strike 
+            @tally[-3] << @all_rolls[-3] << @all_rolls[-2] && @tally[-2] << @all_rolls[-2] << @all_rolls[-1][0]
+        #     #give two frames back its points from the spare and the spare its points from the last roll
+        elsif @all_rolls[-3] != nil && @all_rolls[-3].length != 1 && @all_rolls[-2].sum == 10 && @all_rolls[-2].length == 1 && @tally[-2].empty? && @all_rolls[-1].length == 1 
+            #if last roll was a strike and this roll is a strike and two rolls back was not a strike
+            "method 3"
+        elsif @all_rolls[-3] != nil && @all_rolls[-3].sum == 10 && @all_rolls[-3].length == 1 && @all_rolls[-2].sum == 10 && @all_rolls[-2].length == 1 && @tally[-3].empty? && @all_rolls[-1].length == 1
+            #if two frames back was a strike and one frame back was a strike and this frame was a strike 
+            @tally[-3] << @all_rolls[-3] << @all_rolls[-2] << @all_rolls[-1]
+            'method 4'
+        elsif @all_rolls[-3] != nil && @all_rolls[-3].sum == 10 && @all_rolls[-3].length == 1 && @all_rolls[-2].sum == 10 && @all_rolls[-2].length == 1 && @tally[-3].empty? && @all_rolls[-1].length != 1
+            #if two frames back was a strike and one frame back was a strike and this frame was not a strike 
+            @tally[-3] << @all_rolls[-3] << @all_rolls[-2] << @all_rolls[-1][0]
+            'method 5'
+        # elsif @all_rolls[-3] != nil && @all_rolls[-3].sum == 10 && @all_rolls[-3].length == 1 && @all_rolls[-2].length == 2 && @tally[-3].empty? && @all_rolls[-1].length == 2
+        #     #if two frames back was a strike and one frame back was not a strike and this frame was not a strike 
+        #     @tally[-3] << @all_rolls[-3] << @all_rolls[-2] << @all_rolls[-1][0]
+        #     'method 6'
+            #last frame not a strike, two frames back a strike, this one not a strike
+        # elsif @all_rolls[-3] != nil && @all_rolls[-3].sum == 10 && @all_rolls[-3].length == 1 && @all_rolls[-2].length == 2
+        #     #if three rolls back was a strike and the second to last roll wasn't a strike
+        #     @tally[-3] << @all_rolls[-3] << @all_rolls[-2][0] << @all_rolls[-2][1]
+        #     #push the strike from that roll and both rolls from the second to last roll to the score for that roll three back 
+        # elsif @all_rolls[-3] != nil && @all_rolls[-3].sum == 10 && @all_rolls[-3].length == 1 && all_rolls[-2].length == 1
+        #     #if three rolls back was a strike and two rolls back was a strike
+        #     @tally[-3] << @all_rolls[-3] << @all_rolls[-2][0] << @all_rolls[-1][0]
+        #     #push the strike from that roll and from the previous roll to the score for that roll three back
         end
     end
 end
