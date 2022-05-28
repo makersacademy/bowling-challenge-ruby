@@ -7,7 +7,9 @@ class FinalFrame
     end
 
     def input_roll(roll)
+        unless (@rolls.length == 2 && (!strike? && !spare?)) || (@rolls.length == 3)# && (strike? || spare?))
         @rolls << roll
+        end
     end 
 
     def spare?  
