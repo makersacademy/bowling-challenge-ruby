@@ -77,6 +77,23 @@ describe Game do
         expect(subject.tally).to eq ([[[10], [10], [10]], [[10], [10], 5], [[10], [5, 5]], [[5, 5], 3], [3, 3]])
    end
 
+   xit 'instantiates a final frame after nine frames have been completed' do
+   end
+
+   xit 'if a player scores a strike in the tenth frame, first roll, they are allowed two more shots' do
+
+   end
+
+   xit 'if a player does not score a strike or a spare in the first two rolls of the final frame, they only get two shots' do
+   end
+
+   xit 'there are no bonus points. The points scored in this frame are added up to form the final score for the frame' do
+   end
+
+   xit 'the ninth frame can take its bonus points from the final frame' do
+   end
+   #maybe push to the array after each roll rather than at the end of the frame???
+
 
     # xit 'switches to FinalFrame after the 9th frame' do
     #     9.times {subject.roll(10)}

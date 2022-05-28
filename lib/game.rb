@@ -5,8 +5,9 @@ class Game
 
     attr_reader :rolls, :frame, :tally, :bonus, :final_frame, :all_rolls
 
-    def initialize(frame = Frame.new)
+    def initialize(frame = Frame.new, final_frame = FinalFrame.new)
         @frame = frame
+        @final_frame = final_frame
         @bonus = @frame.bonus
         @rolls = @frame.rolls
         @tally = []
@@ -14,24 +15,30 @@ class Game
     end
 
     def roll(roll)
+        if @tally.length < 9
         @frame.input_roll(roll)
-        if @frame.complete? && !frame.bonus? && @tally.length < 10
-            add_to_tally_and_generate_new_frame
-            add_bonus_and_points_to_tally
-        elsif @frame.complete? && @frame.strike? && @tally.length < 10
-            add_to_bonus_and_generate_new_frame
-            add_bonus_and_points_to_tally
-        elsif @frame.complete? && @frame.spare? && @tally.length < 10
-            add_to_bonus_and_generate_new_frame
-            add_bonus_and_points_to_tally
-        # elsif @frame.complete? && tally.length == 9
-        #     load_final_frame
-        #     "final frame"
+            if @frame.complete? && !frame.bonus? && @tally.length < 9
+                add_to_tally_and_generate_new_frame
+                add_bonus_and_points_to_tally
+            elsif @frame.complete? && @frame.strike? && @tally.length < 9
+                add_to_bonus_and_generate_new_frame
+                add_bonus_and_points_to_tally
+            elsif @frame.complete? && @frame.spare? && @tally.length < 9
+                add_to_bonus_and_generate_new_frame
+                add_bonus_and_points_to_tally
+            end
+        elsif tally.length == 9
+            @final_frame.input_roll(roll)
+            #need to take bonus from final frame and give to the 8th and/or 9th frames if required
+            #need to implement logic for final frame
         end
     end
 
     def load_final_frame 
         @final_frame = FinalFrame.new
+    end
+
+    def add_final_frame_to_tally
     end
 
     def add_to_tally_and_generate_new_frame

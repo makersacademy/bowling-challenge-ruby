@@ -8,8 +8,12 @@ class Frame
     end
 
     def input_roll(roll)
+        unless @rolls.length == 2
         @rolls << roll
+        end
     end 
+
+    #frame now takes a maximum of two rolls. 
 
     def spare?  
         @rolls.sum == 10 && @rolls.length == 2 

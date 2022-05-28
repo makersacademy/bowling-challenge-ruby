@@ -28,6 +28,12 @@ describe Frame do
         expect(subject.spare?).to eq true
     end    
 
+    xit 'does not allow a player to enter a roll higher than ten' do
+    end
+
+    xit 'does not allow a player to enter a second roll higher than the ten minus their first roll' do
+    end
+
 
     # xit 'does not let the player take a second roll if roll_1 = 10 and frame < 9' do
     # end
