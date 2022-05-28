@@ -7,7 +7,7 @@ class FinalFrame
     end
 
     def input_roll(roll)
-        unless (@rolls.length == 2 && (!strike? && !spare?)) || (@rolls.length == 3)# && (strike? || spare?))
+        unless (@rolls.length == 2 && (!strike? && !spare?)) || (@rolls.length == 3) #&& (strike? || spare?)
         @rolls << roll
         end
     end 
@@ -30,7 +30,8 @@ class FinalFrame
 
     def game_over
         if complete? 
-            "game over" 
+            true 
+            "Game over!"
         end
     end
 

@@ -6,7 +6,7 @@ describe FinalFrame do
         subject.input_roll(8)
         subject.input_roll(2)
         subject.input_roll(8)
-        expect(subject.game_over).to include ('game over')
+        expect(subject.game_over).to include ("Game over!")
     end
 
     it 'gives the player an extra roll if they score a strike or a spare' do

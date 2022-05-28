@@ -3,7 +3,7 @@ require_relative 'final_frame.rb'
 
 class Game
 
-    attr_reader :rolls, :frame, :tally, :bonus, :final_frame, :all_rolls
+    attr_reader :rolls, :frame, :tally, :bonus, :final_frame, :all_rolls, :score
 
     def initialize(frame = Frame.new, final_frame = FinalFrame.new)
         @frame = frame
@@ -12,6 +12,7 @@ class Game
         @rolls = @frame.rolls
         @tally = []
         @all_rolls = []
+        @score = @tally.flatten.sum
         #add a score that can be incremented
     end
 
@@ -28,12 +29,15 @@ class Game
                 add_to_bonus_and_generate_new_frame
                 add_bonus_and_points_to_tally
             end
-        elsif tally.length == 9
+        elsif tally.length >= 9
             @final_frame.input_roll(roll)
             #after each roll:
             #add any bonuses to eighth and ninth frames
             add_final_frame_bonuses_to_tally
             add_roll_to_all_rolls_final_frame_edition
+            add_final_roll_to_tally
+            @final_frame.game_over
+          
             #add each roll to the final frame (all rolls and tally)
             # add_roll_to_all_rolls_final_frame
             # add_roll_to_tally_final_frame
@@ -47,12 +51,32 @@ class Game
         @final_frame = FinalFrame.new
     end
 
-    def add_final_frame_bonuses_to_tally
-        if eighth_frame_was_a_strike || ninth_frame_was_a_strike
-            add_strike_bonus_and_points_to_tally_final_frame_edition
-        elsif ninth_frame_was_a_spare
-            add_spare_bonus_and_points_to_tally_final_frame_edition
+    def add_final_roll_to_tally
+        @tally << [] unless tally.length == 10
+        if @tally[9] != nil && @tally[9].length == 0 #&& @final_frame != nil 
+            #if tenth frame exists and there's nothing in it
+            @tally[9] << @final_frame.rolls[0]
+            #send the first roll of the final frame there
+        elsif @tally[9] != nil && @tally[9].length == 1 #&& @final_frame != nil 
+            #if tenth frame has one entry
+            @tally[9] << @final_frame.rolls[1]
+            #send the second entry there
+        elsif @tally[9] != nil && @tally[9].length == 2 #&& @final_frame != nil 
+            #if tenth frame has two entries
+            @tally[9] << @final_frame.rolls[2]
+            #send the third entry there
         end
+    end
+
+    def add_final_frame_bonuses_to_tally
+        # if eighth_frame_was_a_strike || ninth_frame_was_a_strike
+        #     add_strike_bonus_and_points_to_tally_final_frame_edition
+        # elsif ninth_frame_was_a_spare
+        #     add_spare_bonus_and_points_to_tally_final_frame_edition
+        # end
+        add_strike_bonus_and_points_to_tally_final_frame_edition
+        add_spare_bonus_and_points_to_tally_final_frame_edition
+
     end
 
     def add_roll_to_all_rolls_final_frame_edition
@@ -63,24 +87,33 @@ class Game
     end
 
     def add_spare_bonus_and_points_to_tally_final_frame_edition
+        #rolls a spare in ninth frame then an open
+        if @all_rolls[8].length == 2 && @all_rolls[8].sum == 10 && @tally[8] != nil && @tally[8].empty?
+            @tally[8] << @all_rolls[8] << @final_frame.rolls[0]  
+        end
+            #if ninth frame is a spare and 
+        #rolls a spare then a spare
+        #rolls a spare then an open
     end
 
     def add_strike_bonus_and_points_to_tally_final_frame_edition
         if @all_rolls[7].length == 1 && @all_rolls[8].length == 1 && @tally[7].empty?
-            #if eighth frame a strike and ninth frame a strike
+            #if eighth frame a strike and ninth frame a strike and the eighth frame hasn't received its points yet
             @tally[7] << @all_rolls[7] << @all_rolls[8] << @final_frame.rolls[0] 
             #give eighth frame its points and the bonus from the ninth frame and first roll of tenth
             "moved points from final frame to tally"
         elsif @all_rolls[8].length == 1 && @final_frame.rolls[0] == 10 && @final_frame.rolls[1] == 10 && @tally[8].empty?
-            #if ninth frame a strike and first roll of tenth frame a strike and second roll of tenth frame a strike
+            #if ninth frame a strike and first roll of tenth frame a strike and second roll of tenth frame a strike and the ninth frame hasn't received its points yet
             @tally[8] << @all_rolls[8] << @final_frame.rolls[0] << @final_frame.rolls[1]
             #give ninth frame its points and the bonus from the first two rolls of the tenth frame
         elsif @all_rolls[8].length == 1 && @final_frame.rolls[0] == 10 && @final_frame.rolls[1] != 10 && @tally[8].empty?
             #if ninth frame a strike and first roll of tenth a strike and second roll not a strike
             @tally[8] << @all_rolls[8] << @final_frame.rolls[0] << @final_frame.rolls[1]
-            @tally[9] << @final_frame.rolls[0] << @final_frame.rolls[1]
+        elsif @all_rolls[8].length == 1 && @final_frame.rolls[0] != 10 && @tally[8].empty?
+            #if ninth frame a strike and first roll of tenth not a strike 
+            @tally[8] << @all_rolls[8] << @final_frame.rolls[0] << @final_frame.rolls[1]
+            # @tally[9] << @final_frame.rolls[0] << @final_frame.rolls[1] #comment this back in soon 
             #give ninth frame its points from 10.1 and 10.2 and give 10.1 its points and 10.2 its points
-
         end 
     end
 
@@ -170,7 +203,7 @@ class Game
 
     def add_strike_bonus_and_points_to_tally
         if @all_rolls[-2].sum == 10 && @all_rolls[-2].length == 1 && @tally[-2].empty? && @all_rolls[-1].length == 2 && @all_rolls[-3] != nil && @all_rolls[-3].length != 1
-            #if last frame was a strike two rolls back wasn't a strike and this frame wasn't a strike 
+            #if last frame was a strike, two rolls back wasn't a strike and this frame wasn't a strike 
             @tally[-2] << @all_rolls[-2] << @all_rolls[-1][0] << @all_rolls[-1][1]
             'method 1'
         elsif @all_rolls[-2].sum == 10 && @all_rolls[-2].length == 1 && @tally[-2].empty? && @all_rolls[-1].length == 2 && @all_rolls[-3] == nil 
@@ -192,6 +225,12 @@ class Game
             #if two frames back was a strike and one frame back was a strike and this frame was not a strike 
             @tally[-3] << @all_rolls[-3] << @all_rolls[-2] << @all_rolls[-1][0]
             'method 5'
+            if @all_rolls[-2] != nil && @all_rolls[-2].length == 1 && @tally[-2].empty? && @all_rolls[-1].length != 1
+            @tally[-2] << @all_rolls [-2] << @all_rolls[-1]
+            end
+
+        #need one for if last frame was a strike and this frame wasn't a strike
+
         # elsif @all_rolls[-3] != nil && @all_rolls[-3].sum == 10 && @all_rolls[-3].length == 1 && @all_rolls[-2].length == 2 && @tally[-3].empty? && @all_rolls[-1].length == 2
         #     #if two frames back was a strike and one frame back was not a strike and this frame was not a strike 
         #     @tally[-3] << @all_rolls[-3] << @all_rolls[-2] << @all_rolls[-1][0]

@@ -105,26 +105,62 @@ describe Game do
         9.times {subject.roll(10)}
         subject.roll(10)
         subject.roll(10)
-        expect(subject.tally[-2..-1]).to eq [[[10], [10], 10], [[10], 10, 10]]
+        expect(subject.tally[-3..-2]).to eq [[[10], [10], 10], [[10], 10, 10]]
    end
 
    it 'the ninth frame can take its bonus points from the final frame - spare edition' do
         9.times {subject.roll(10)}
         2.times {subject.roll(5)}
-        expect(subject.tally[-2..-1]).to eq [[[10], [10], 5], []]
+        expect(subject.tally[-2..-1]).to eq [[[10], 5, 5], [5, 5]]
     end
 
     it 'the ninth frame can take its bonus points from the final frame - spare edition 2' do
         10.times {subject.roll(10)}
         subject.roll(5)
-        expect(subject.tally[-2..-1]).to eq [[[10], [10], 10], [[10], 5]]
+        expect(subject.tally[-2..-1]).to eq [[[10], 10, 5], [10, 5]]
     end
 
-   xit 'ends the game after two rolls of the final frame if no bonuses' do
-   end
+    it 'the tally displays all the rolls of the final frame' do 
+        10.times {subject.roll(10)}
+        2.times {subject.roll(5)}
+        expect(subject.tally[-2..-1]).to eq [[[10], 10, 5], [10, 5, 5]]
+    end
 
-   xit 'ends the game after three rolls of the final frame if bonuses' do
-   end
+    it 'tally is 10 long after 10 rolls' do
+        10.times {subject.roll(10)}
+        expect(subject.tally.length).to eq 10
+    end
+
+    it 'player rolls spare in ninth frame, should get their bonus points after one roll of final frame' do 
+        8.times {subject.roll(10)}
+        2.times {subject.roll(5)}
+        subject.roll(8)
+        expect(subject.tally[-2..-1]).to eq [[[5, 5], 8], [8]]
+    end
+
+    it 'player rolls spare in ninth frame and then a strike. Should still get their bonus after one roll' do
+        8.times {subject.roll(10)}
+        2.times {subject.roll(5)}
+        subject.roll(10)
+        expect(subject.tally[-2..-1]).to eq [[[5, 5], 10], [10]]
+    end
+
+    it 'player rolls spare in ninth frame and then a spare. Should still get their bonus after one roll' do
+        8.times {subject.roll(10)}
+        4.times {subject.roll(5)}
+        expect(subject.tally[-2..-1]).to eq [[[5, 5], 5], [5, 5]]
+    end
+
+    it 'just another test just to be sure' do
+        8.times {subject.roll(10)}
+        4.times {subject.roll(4)}
+        expect(subject.tally[-2..-1]).to eq [[4, 4], [4, 4]]
+    end
+
+    it 'tells the user their score at the end of the game' do
+        12.times {subject.roll(10)}
+        expect(subject.score).to eq ("You scored 300")
+    end
 
     # xit 'switches to FinalFrame after the 9th frame' do
     #     9.times {subject.roll(10)}
