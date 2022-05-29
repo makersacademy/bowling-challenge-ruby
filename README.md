@@ -34,7 +34,7 @@ rspec
 ## Planning
 1. Started by drawing the diagram of the game to be able to understand the rules better.
 
-![game-diagram](https://dl.dropboxusercontent.com/s/iqwmrc8jr60tv5r/diagram%20-%20game.png?dl=0)
+![game-diagram](https://dl.dropboxusercontent.com/s/xhilft3sednr1x0/diagram%20-%20game.png?dl=0)
 
 2. Took a step back and re-read the requirements. Realised that having a working game is not necessary for the completion of the task.
 3. Started thinking about how the scoring system could be tested. Decided to input the array of user scores for the whole game, as opposed to for each frame individually.
