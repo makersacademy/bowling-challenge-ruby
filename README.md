@@ -41,9 +41,9 @@ rspec
 4. Knowing how to test the scoring method allowed me to quickly progress through the tests and increase complexity. 
 5. Made a new diagram detailing the scoring system. This helped with understanding the logic of the 10th frame scoring.
 
-![scoring-diagram]()
+![scoring-diagram](https://dl.dropboxusercontent.com/s/q5hrx6phjuuay7w/diagram%20-%20scoring1.png?dl=0)
 
-![scoring-diagram]()
+![scoring-diagram](https://dl.dropboxusercontent.com/s/47zwq5yyv08xbzn/diagram%20-%20scoring2.png?dl=0)
 
 ## Testing
 First, tested a simple array of scores excluding the 10th frame.
