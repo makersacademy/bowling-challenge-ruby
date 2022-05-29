@@ -34,7 +34,7 @@ rspec
 ## Planning
 
 
-![Screenshot](https://www.dropbox.com/s/prb5q86h1iapaq4/diagram%20-%20game.png)
+![Screenshot](https://www.dropbox.com/s/prb5q86h1iapaq4/diagram%20-%20game.png?dl=0)
 
 
 
