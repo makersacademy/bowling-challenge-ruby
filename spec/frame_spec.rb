@@ -11,7 +11,7 @@ describe Frame do
         expect(subject.strike?).to eq true
     end
 
-    it 'does not register strike if first roll equals 10' do
+    it 'does not register strike if first roll does not equal 10' do
         subject.input_roll(9)
         expect(subject.strike?).to eq false
     end

@@ -162,10 +162,7 @@ describe Game do
         expect(subject.score).to eq ("Your score is 16")
     end
 
-    # it 'tells the user their score at the end of the game' do
-    #     12.times {subject.roll(10)}
-    #     expect(subject.final_score).to eq ("Your score is 300")
-    # end
+    
 
 
 
