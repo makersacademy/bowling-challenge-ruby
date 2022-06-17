@@ -4,7 +4,14 @@ class UserInterface
   end
   
   def run
-    @io.puts "Welcome to the 🎳 Bowling Game"
-    @io.puts "I am here to keep your score!"
+    show "Welcome to the 🎳 Bowling Game"
+    show "I am here to keep your score!"
   end
+
+  private
+
+  def show(message)
+    @io.puts(message)
+  end
+
 end
