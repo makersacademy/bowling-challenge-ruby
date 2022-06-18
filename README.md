@@ -1,4 +1,13 @@
 Bowling Challenge in Ruby
+
+Game class calculates the total score
+Frame/Round class knows if they got a strike, spare, or had 2 normal bowls
+
+
+INPUT | OUTPUT
+1, 3, 4, 6 | 14 #total score
+3, 7, 5, 1 | 21 (5 bonus from spare)
+10, 5, 3 | 23 (+5 bonus from strike in round 1)
 =================
 
 * Feel free to use google, your notes, books, etc. but work on your own
