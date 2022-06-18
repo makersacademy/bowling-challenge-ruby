@@ -15,18 +15,24 @@ describe Game do
 
   context "should calculate the total score" do
     it "should return the total sum of 14" do
-      game.increase_score(1)
-      game.increase_score(3)
-      game.increase_score(4)
-      game.increase_score(6)
+      game.enter_score(1)
+      game.enter_score(3)
+      game.enter_score(4)
+      game.enter_score(6)
       expect(game.total_score).to eq 14
     end
   end
 
   context "frame management" do
     it "should increase the frame by 1" do
-      game.increase_score(10)
+      game.enter_score(10)
       expect(game.current_round).to eq 2
+    end
+
+    it "should return the total score when current round is greater than 10" do
+      10.times { game.enter_score(10) }
+      expect(game.current_round).to eq 10
+      expect(game.total_score).to eq 100
     end
   end
 end
