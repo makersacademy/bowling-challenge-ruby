@@ -35,4 +35,16 @@ describe Game do
       expect(game.total_score).to eq 100
     end
   end
+
+  context "score management" do
+    it "should return true if last roll was a strike" do
+      game.enter_score(10)
+      expect(game.is_strike).to eq true
+    end
+
+    it "should return false if last roll was not a strike" do
+      game.enter_score(8)
+      expect(game.is_strike).to eq false
+    end
+  end
 end
