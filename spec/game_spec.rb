@@ -1,0 +1,32 @@
+require './lib/game'
+
+RSpec.describe Game do
+  describe 'initialisation' do
+    it 'initialises with Frame 1 Roll 1, and total score: 0' do
+      game = Game.new
+      expect(game.frame).to eq 1
+      expect(game.roll).to eq 1
+      expect(game.pins_rolled).to eq [[], [], [], [], [], [], [], [], [], []] 
+      expect(game.total_score).to eq 0
+    end
+  end
+
+  describe 'taking new input' do
+    it 'takes input and changes frame and roll number accordingly (1-1 -> 1-2)' do
+      game = Game.new
+      game.roll_pin(5)
+      expect(game.frame).to eq 1
+      expect(game.roll).to eq 2
+      expect(game.pins_rolled).to eq [[5], [], [], [], [], [], [], [], [], []] 
+    end
+
+    it 'takes input and changes frame and roll number accordingly (1-2 -> 2-1)' do
+      game = Game.new
+      game.roll_pin(5)
+      game.roll_pin(3)
+      expect(game.frame).to eq 2
+      expect(game.roll).to eq 1
+      expect(game.pins_rolled).to eq [[5, 3], [], [], [], [], [], [], [], [], []]
+    end
+  end
+end

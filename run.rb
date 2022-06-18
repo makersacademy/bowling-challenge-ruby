@@ -2,6 +2,6 @@ require './lib/user_interface'
 
 io = Kernel
 
-
-user_interface = UserInterface.new(io)
+game = Game.new
+user_interface = UserInterface.new(io, game)
 user_interface.run

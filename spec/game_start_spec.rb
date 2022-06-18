@@ -1,10 +1,13 @@
 require 'user_interface'
-  
+
 RSpec.describe UserInterface do
   describe 'app starts' do
     it 'greets users and asks users to input the first input when app starts' do
       io = double(:io)
-      interface = UserInterface.new(io)
+      game = double(:game)
+      expect(game).to receive(:frame).and_return(1)
+      expect(game).to receive(:roll).and_return(1)
+      interface = UserInterface.new(io, game)
       expect(io).to receive(:puts).with("Welcome to the 🎳 Bowling Game")
       expect(io).to receive(:puts).with("I am here to keep your score!")
       expect(io).to receive(:puts).with("Frame No. 1, Roll No. 1")
@@ -16,7 +19,10 @@ RSpec.describe UserInterface do
 
     it 'keeps asking user if the input is wrong' do
       io = double(:io)
-      interface = UserInterface.new(io)
+      game = double(:game)
+      expect(game).to receive(:frame).and_return(1)
+      expect(game).to receive(:roll).and_return(1)
+      interface = UserInterface.new(io, game)
       expect(io).to receive(:puts).with("Welcome to the 🎳 Bowling Game")
       expect(io).to receive(:puts).with("I am here to keep your score!")
       expect(io).to receive(:puts).with("Frame No. 1, Roll No. 1")

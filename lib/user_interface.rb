@@ -1,12 +1,13 @@
 class UserInterface
-  def initialize(io)
+  def initialize(io, game)
     @io = io
+    @game = game
   end
   
   def run
     show 'Welcome to the 🎳 Bowling Game'
     show 'I am here to keep your score!'
-    show 'Frame No. 1, Roll No. 1'
+    show "Frame No. #{@game.frame}, Roll No. #{@game.roll}"
     pin_num = prompt 'Please enter the number of knocked down pins:'
     show pin_num 
   end
