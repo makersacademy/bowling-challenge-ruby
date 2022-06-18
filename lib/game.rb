@@ -15,13 +15,15 @@ class Game
 
   def roll_pin(pin)
     @pins_rolled[@frame-1].push(pin)
-    if pin == 10 && @roll == 1
-      @frame += 1
-    else
+    if @frame == 10 && @roll == 2 && @pins_rolled[9].sum <10
+      @continue = false
+    end
+    if pin < 10
       @frame += 1 if @roll == 2
       @roll == 1 ? @roll += 1 : @roll = 1
+    elsif pin == 10 && @roll == 1
+      @frame += 1
     end
-    p @pins_rolled
   end
 
 end

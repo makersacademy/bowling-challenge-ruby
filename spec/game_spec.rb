@@ -55,4 +55,17 @@ RSpec.describe Game do
       expect(game.pins_rolled).to eq [[10], [10], [6, 3], [], [], [], [], [], [], []] 
     end
   end
+
+  describe '10th frame' do
+    it 'ends the game if it is not a strike' do
+      game = Game.new
+      9.times {game.roll_pin(10) }
+      expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], []] 
+      game.roll_pin(1)
+      game.roll_pin(2)
+      expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], [1,2]] 
+      expect(game.continue).to eq false
+    end
+  end
+
 end
