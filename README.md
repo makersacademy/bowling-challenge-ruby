@@ -63,3 +63,19 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+
+## Design Diagrams
+
+
+### State Diagram 1
+
+
+### Class Diagram 1
+
+
+## Tests iteration 1
+
+* Test ten frames each scoring zero with total score of zero.
+* BowlingScoreManager( [...20 zeros...] ) => 0
+
