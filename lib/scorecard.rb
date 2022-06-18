@@ -1,6 +1,6 @@
 class Scorecard
-  attr_reader :current_roll
+  attr_reader :frame_total
   def input_score(score)
-    @current_roll = score.score
+    @frame_total = score.first_roll + score.second_roll
   end
 end
