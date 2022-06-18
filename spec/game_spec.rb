@@ -28,5 +28,13 @@ RSpec.describe Game do
       expect(game.roll).to eq 1
       expect(game.pins_rolled).to eq [[5, 3], [], [], [], [], [], [], [], [], []]
     end
+
+    it 'takes input and changes frame if roll 1 is a strike' do
+      game = Game.new
+      game.roll_pin(10)
+      expect(game.frame).to eq 2
+      expect(game.roll).to eq 1
+      expect(game.pins_rolled).to eq [[10], [], [], [], [], [], [], [], [], []] 
+    end
   end
 end
