@@ -1,0 +1,1 @@
+CREATE TABLE player1(id SERIAL PRIMARY KEY, roll smallint, knocked_pins smallint, total_frame smallint, notes VARCHAR(200));
