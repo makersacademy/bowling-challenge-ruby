@@ -7,8 +7,10 @@ describe Game do
     expect(game.current_round).to eq 1
   end
 
-  context "should return the sum of given numbers" do
-    xit "should return the total sum" do
+  context "should calculate the total score" do
+    it "should return the total sum of 8" do
+      expect(game).to receive(:total_score).and_return(8)
+      expect(game.total_score).to eq 8
     end
   end
 end
