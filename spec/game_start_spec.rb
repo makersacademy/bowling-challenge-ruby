@@ -19,6 +19,7 @@ RSpec.describe UserInterface do
       expect(game).to receive(:pins_rolled).and_return([[1], [], [], [], [], [], [], [], [], []])
       expect(io).to receive(:puts).with([[1], [], [], [], [], [], [], [], [], []])
       expect(game).to receive(:continue).and_return(false).ordered
+      expect(io).to receive(:puts).with("Game 🎳 ends!")
       interface.run
     end
 
@@ -44,6 +45,7 @@ RSpec.describe UserInterface do
       expect(game).to receive(:pins_rolled).and_return([[10],[],[],[],[],[],[],[],[],[]])
       expect(io).to receive(:puts).with([[10],[],[],[],[],[],[],[],[],[]])
       expect(game).to receive(:continue).and_return(false).ordered
+      expect(io).to receive(:puts).with("Game 🎳 ends!")
       interface.run
     end
   end
@@ -72,6 +74,7 @@ RSpec.describe UserInterface do
       expect(game).to receive(:pins_rolled).and_return([[1,8],[],[],[],[],[],[],[],[],[]])
       expect(io).to receive(:puts).with([[1,8],[],[],[],[],[],[],[],[],[]])
       expect(game).to receive(:continue).and_return(false).ordered
+      expect(io).to receive(:puts).with("Game 🎳 ends!")
       interface.run
     end
   end

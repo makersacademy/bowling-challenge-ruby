@@ -10,6 +10,7 @@ class UserInterface
       pin_num = get_pin_num(@game.frame, @game.roll)
       @game.roll_pin(pin_num)
     end
+    show "Game 🎳 ends!"
     show @game.pins_rolled
   end
 
