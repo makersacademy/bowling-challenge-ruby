@@ -5,14 +5,22 @@ class UserInterface
   end
   
   def run
-    show 'Welcome to the 🎳 Bowling Game'
-    show 'I am here to keep your score!'
-    show "Frame No. #{@game.frame}, Roll No. #{@game.roll}"
-    pin_num = prompt 'Please enter the number of knocked down pins:'
-    show pin_num 
+    greetings
+    # show 'Welcome to the 🎳 Bowling Game'
+    # show 'I am here to keep your score!'
+    pin_num = get_pin_num(@game.frame, @game.roll)
+    @game.roll_pin(pin_num)
+    pin_num = get_pin_num(@game.frame, @game.roll)
+    @game.roll_pin(pin_num)
+    show @game.pins_rolled
   end
 
   private
+
+  def greetings
+    show 'Welcome to the 🎳 Bowling Game'
+    show 'I am here to keep your score!'
+  end
 
   def show(message)
     @io.puts(message)
@@ -32,6 +40,11 @@ class UserInterface
       user_input = @io.gets.chomp
     end
     user_input.to_i
+  end
+
+  def get_pin_num(frame, roll)
+    show "Frame No. #{frame}, Roll No. #{roll}"
+    pin_num = prompt 'Please enter the number of knocked down pins:'
   end
 
 end

@@ -20,6 +20,7 @@ class Game
       @frame += 1 if @roll == 2
       @roll == 1 ? @roll += 1 : @roll = 1
     end
+    p @pins_rolled
   end
 
 end

@@ -1,4 +1,5 @@
 require './lib/user_interface'
+require './lib/game'
 
 io = Kernel
 

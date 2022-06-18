@@ -36,5 +36,22 @@ RSpec.describe Game do
       expect(game.roll).to eq 1
       expect(game.pins_rolled).to eq [[10], [], [], [], [], [], [], [], [], []] 
     end
+
+    it 'takes inputs correctly for multiple rounds' do
+      game = Game.new
+      game.roll_pin(10)
+      expect(game.frame).to eq 2
+      expect(game.roll).to eq 1
+      game.roll_pin(10)
+      expect(game.frame).to eq 3
+      expect(game.roll).to eq 1
+      game.roll_pin(6)
+      expect(game.frame).to eq 3
+      expect(game.roll).to eq 2
+      game.roll_pin(3)
+      expect(game.frame).to eq 4
+      expect(game.roll).to eq 1
+      expect(game.pins_rolled).to eq [[10], [10], [6,3], [], [], [], [], [], [], []] 
+    end
   end
 end
