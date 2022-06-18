@@ -77,5 +77,5 @@ More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 ## Tests iteration 1
 
 * Test ten frames each scoring zero with total score of zero.
-* BowlingScoreManager( [...20 zeros...] ) => 0
+* BowlingScoreManager.score( [...20 zeros...] ) => 0
 
