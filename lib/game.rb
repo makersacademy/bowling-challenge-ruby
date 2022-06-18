@@ -1,10 +1,11 @@
 class Game 
 
-  attr_reader :frame, :roll, :pins_rolled
+  attr_reader :frame, :roll, :pins_rolled, :continue
 
   def initialize
     @frame = 1
     @roll = 1
+    @continue = true
     @pins_rolled = Array.new(10) {Array.new}
   end
 

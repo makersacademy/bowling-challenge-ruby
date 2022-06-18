@@ -8,6 +8,7 @@ RSpec.describe Game do
       expect(game.roll).to eq 1
       expect(game.pins_rolled).to eq [[], [], [], [], [], [], [], [], [], []] 
       expect(game.total_score).to eq 0
+      expect(game.continue).to eq true
     end
   end
 
@@ -51,7 +52,7 @@ RSpec.describe Game do
       game.roll_pin(3)
       expect(game.frame).to eq 4
       expect(game.roll).to eq 1
-      expect(game.pins_rolled).to eq [[10], [10], [6,3], [], [], [], [], [], [], []] 
+      expect(game.pins_rolled).to eq [[10], [10], [6, 3], [], [], [], [], [], [], []] 
     end
   end
 end

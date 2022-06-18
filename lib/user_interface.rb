@@ -6,12 +6,10 @@ class UserInterface
   
   def run
     greetings
-    # show 'Welcome to the 🎳 Bowling Game'
-    # show 'I am here to keep your score!'
-    pin_num = get_pin_num(@game.frame, @game.roll)
-    @game.roll_pin(pin_num)
-    pin_num = get_pin_num(@game.frame, @game.roll)
-    @game.roll_pin(pin_num)
+    while @game.continue
+      pin_num = get_pin_num(@game.frame, @game.roll)
+      @game.roll_pin(pin_num)
+    end
     show @game.pins_rolled
   end
 
