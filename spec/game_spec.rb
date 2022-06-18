@@ -30,13 +30,13 @@ describe Game do
     end
 
     it "should return the total score when current round is greater than 10" do
-      10.times { game.enter_score(10) }
+      10.times { game.enter_score(8) }
       expect(game.current_round).to eq 10
-      expect(game.total_score).to eq 100
+      expect(game.total_score).to eq 80
     end
   end
 
-  context "score management" do
+  context "strike management" do
     it "should return true if last roll was a strike" do
       game.enter_score(10)
       expect(game.is_strike).to eq true
@@ -45,6 +45,13 @@ describe Game do
     it "should return false if last roll was not a strike" do
       game.enter_score(8)
       expect(game.is_strike).to eq false
+    end
+
+    it "adds 10 to the next roll following a strike" do
+      game.enter_score(10)
+      game.enter_score(5)
+      game.enter_score(5)
+      expect(game.total_score).to eq 30
     end
   end
 end

@@ -9,6 +9,7 @@ class Game
 
   def enter_score(score)
     strike?(score)
+    bonus_points(score)
     next_round?
     @total_score += score
   end
@@ -19,5 +20,11 @@ class Game
 
   def strike?(score)
     score == 10 ? @is_strike = true : @is_strike = false
+  end
+
+  def bonus_points(score)
+    if @is_strike
+      @total_score += 10
+    end
   end
 end
