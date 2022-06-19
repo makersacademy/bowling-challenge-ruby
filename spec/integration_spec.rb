@@ -26,4 +26,14 @@ RSpec.describe "integration of Game and Frame classes" do
     end
   end
 
+  it "knows the current frame number" do
+    game = Game.new
+    frame_1 = Frame.new
+    frame_2 = Frame.new
+    game.add(frame_1)
+    game.add(frame_2)
+    expect(game.current_frame).to eq 3
+  end
+  
+
 end
