@@ -8,4 +8,9 @@ describe ".score calculator" do
     game = score_calc([[1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1]])
     expect(game).to eq 20
   end
+
+  it "returns correct score for game with one spare" do
+    game = score_calc([[1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [5,5], [1,1]])
+    expect(game).to eq 29
+  end
 end
