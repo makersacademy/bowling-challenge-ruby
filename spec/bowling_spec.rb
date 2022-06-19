@@ -76,13 +76,6 @@ describe BowlingScore do
      expect(game.result).to eq 166
   end
 
-  it "returns correct result for a realistic game with a strike on the first roll of the 10th frame" do
-    game = BowlingScore.new(
-      [[4,3], [5,5], [6,4], [10], [5,2], [10], [3,7], [4,6], [10], [10,6,3]]
-    )
-    expect(game.result).to eq 166
-  end
-
   it "returns correct result for a realistic game with two strikes in the 10th frame" do
     game = BowlingScore.new(
       [[4,3], [5,5], [6,4], [10], [5,2], [10], [3,7], [4,6], [10], [10,10,3]]
