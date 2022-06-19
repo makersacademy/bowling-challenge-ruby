@@ -57,7 +57,7 @@ RSpec.describe Game do
   end
 
   describe '10th frame' do
-    it 'ends the game if it is not a strike' do
+    it 'ends the game when in Frame 10, no strike or spare' do
       game = Game.new
       9.times {game.roll_pin(10) }
       expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], []] 
@@ -66,6 +66,72 @@ RSpec.describe Game do
       expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], [1,2]] 
       expect(game.continue).to eq false
     end
+
+    it 'allows the third roll if the 10th frame is a spare' do
+      game = Game.new
+      9.times {game.roll_pin(10) }
+      expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], []] 
+      game.roll_pin(1)
+      game.roll_pin(9)
+      expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], [1,9]] 
+      expect(game.continue).to eq true
+    end
+
+    it 'allows the third roll when the 10th frame has two strikes' do
+      game = Game.new
+      9.times {game.roll_pin(10) }
+      expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], []] 
+      game.roll_pin(10)
+      game.roll_pin(10)
+      expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], [10, 10]] 
+      expect(game.continue).to eq true
+    end
+
+    it 'ends the game after three rolls at Frame 10 (case 1)' do
+      game = Game.new
+      9.times {game.roll_pin(10) }
+      expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], []] 
+      game.roll_pin(10)
+      game.roll_pin(10)
+      game.roll_pin(10)
+      expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], [10, 10, 10]] 
+      expect(game.continue).to eq false
+    end
+
+    it 'ends the game after three rolls at Frame 10 (case 2)' do
+      game = Game.new
+      9.times {game.roll_pin(10) }
+      expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], []] 
+      game.roll_pin(10)
+      game.roll_pin(10)
+      game.roll_pin(7)
+      expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], [10, 10, 7]] 
+      expect(game.continue).to eq false
+    end
+
+    it 'ends the game after three rolls at Frame 10 (case 3)' do
+      game = Game.new
+      9.times {game.roll_pin(10) }
+      expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], []] 
+      game.roll_pin(2)
+      game.roll_pin(8)
+      game.roll_pin(7)
+      expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], [2, 8, 7]] 
+      expect(game.continue).to eq false
+    end
+
+    it 'ends the game after three rolls at Frame 10 (case 4)' do
+      game = Game.new
+      9.times {game.roll_pin(10) }
+      expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], []] 
+      game.roll_pin(2)
+      game.roll_pin(8)
+      game.roll_pin(10)
+      expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], [2, 8, 10]] 
+      expect(game.continue).to eq false
+    end
+
+
   end
 
 end
