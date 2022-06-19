@@ -1,3 +1,21 @@
+| input | output |
+|-------|--------|
+| Gutter game - all 0 | 0 |
+| complete game - no X or / [[1,1] * 10]| 20 |
+| complete game - one spare [[1,1] * 8, [5,5], [1,1]] | 29 |
+| complete game - two spares [[1,1] * 4, [5,5], [1,1] * 3, [3,7], [1,1]] | 38 |
+| complete game - one strike [[1,1] * 8, [10], [1,1]] | 30 |
+| complete game - two strikes [[1,1] * 4, [10], [1,1] * 3, 10, [1,1]] | 40 |
+| complete game - two spares in a row [[5,5], [5,5], [1,1] * 8] | 42 |
+| complete game - two strikes in a row [[10], [10], [1,1] * 8] | 49 |
+| complete game - mixed [[4,3], [5,5], [6,4], [10], [5,2], [10], [3,7], [4,6], [10], [4,2]] | 143 |
+| complete game - spare in 10th frame | [[4,3], [5,5], [6,4], [10], [5,2], [10], [3,7], [4,6], [10], [4,6,3]] | 154 |
+| complete game - strike on first roll of 10th frame [[4,3], [5,5], [6,4], [10], [5,2], [10], [3,7], [4,6], [10], [10,6,3]] | 166 |
+| complete game - strike on second roll of 10th frame [[4,3], [5,5], [6,4], [10], [5,2], [10], [3,7], [4,6], [10], [6,10,3]] | 166 |
+| complete game - two strikes in 10th frame [[4,3], [5,5], [6,4], [10], [5,2], [10], [3,7], [4,6], [10], [10,10,3]] | 170 |
+| perfect game [[10] * 10] | 300 |
+
+
 Bowling Challenge in Ruby
 =================
 
