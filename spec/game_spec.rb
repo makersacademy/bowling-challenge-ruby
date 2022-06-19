@@ -236,5 +236,15 @@ RSpec.describe Game do
       expect(game.pins_rolled[9]).to eq [2, 8, 10]
       expect(game.total_score).to eq 122
     end
+
+    it 'calculates scores for a perfect game' do
+      game = Game.new
+      9.times {game.roll_pin(10)}
+      game.roll_pin(10)
+      game.roll_pin(10)
+      game.roll_pin(10)
+      expect(game.pins_rolled[9]).to eq [10, 10, 10]
+      expect(game.total_score).to eq 300
+    end
   end
 end
