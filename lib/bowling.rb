@@ -15,7 +15,8 @@ class Bowling
 
   def rolls(roll, pins)
     @roll = roll
-    @pins = pins # not too sure what tp use the variable for 
+    @pins = pins # not too sure what to use the variable for 
+    # p pins
     @pins_array << pins.to_i
     @current_frame = @pins_array.last(2)
   end 
@@ -32,11 +33,12 @@ class Bowling
       frame_score = @current_frame.sum
     end 
     @score_array << frame_score 
+    # p @current_frame
   end 
 
   def total_score
     @total_score = @score_array.sum
-    p @total_score
+    # p @total_score
     return "Your current score is #{@total_score} points"
   end 
 
