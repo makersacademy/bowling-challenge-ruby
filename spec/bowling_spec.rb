@@ -103,4 +103,18 @@ describe BowlingScore do
     )
     expect(game.result).to eq 300
   end
+
+  it "returns a score for an incomplete game without a bonus scoring roll at the end" do
+    game = BowlingScore.new(
+      [[4,3], [5,5], [6,0], [10], [5,2]]
+    )
+    expect(game.result).to eq 53
+  end
+
+  it "returns a score for an incomplete game with a strike at the end" do
+    game = BowlingScore.new(
+      [[4,3], [5,5], [6,0], [10], [5,2], [10]]
+    )
+    expect(game.result).to eq 63
+  end
 end
