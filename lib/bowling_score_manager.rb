@@ -24,7 +24,13 @@ class BowlingScoreManager
         # into appropriate frame
 #binding.irb
           (@frames[frame_num]).roll1 = rollsArray[roll_from_start]
-          # Check for strike
+          # Check for spare from previous frame
+          if ((frame_num > 1) && @frames[frame_num-1].status == :spare)
+            # Add this roll to previous frame and mark it completed
+            @frames[frame_num-1].total += (@frames[frame_num]).roll1
+            @frames[frame_num-1].completed = true
+          end
+          # Check for strike in this frame
           if (@frames[frame_num]).roll1 == 10
             @frames[frame_num].status = :strike
             @frames[frame_num].roll2 = 0
@@ -38,7 +44,7 @@ class BowlingScoreManager
         # into appropriate frame
 #binding.irb
           (@frames[frame_num]).roll2 = rollsArray[roll_from_start]
-          # Check for spare
+          # Check for spare in this frame
           if ((@frames[frame_num].roll1) + (@frames[frame_num].roll2) == 10)
             @frames[frame_num].status = :spare
             @frames[frame_num].total = 10
