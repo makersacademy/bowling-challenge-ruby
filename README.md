@@ -69,9 +69,10 @@ More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 
 ### State Diagram 1
+![Class Diagram 1](images/StateDiagram1.png)
 
 
-### Class Diagram 1
+### Class Diagrams 1
 ![Class Diagram 1](images/ClassDiagram1.png)
 ![Class Diagram 2](images/ClassDiagram2.png)
 
@@ -79,8 +80,19 @@ More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 * Test ten frames each scoring zero with total score of zero.
 * BowlingScoreManager.score( [...20 zeros...] ) => 0
+* Test ten frames each scoring less than ten in total.
+* [0,0, 1,1, 2,2, 3,3, 4,4, 4,5, 4,3, 3,2, 2,1, 0,0] => sum of these values
 
 ## Refactor
 
 * Internally process the rolls / hits into frames
 * Test drove the above
+
+### State Diagram 2
+
+
+## Refactor
+
+* Internally process the rolls / hits into frames which account for spare roll
+* TODO: Test drive the above
+

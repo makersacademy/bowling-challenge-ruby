@@ -15,20 +15,21 @@ class BowlingScoreManager
     # Populate @frames in simple case and score
     # by simply adding the rolls
     frame_num = 1
-    for i in 0..19
+    for roll_from_start in 0..19
+#      previously used i for the loop index         
 #      p "in for loop i is #{i}"
-      if i%2 == 0
+      if roll_from_start%2 == 0
         # Even number index
         # Enter value from rollsArray as roll1
         # into appropriate frame
 #binding.irb
-          (@frames[frame_num]).roll1 = rollsArray[i]
+          (@frames[frame_num]).roll1 = rollsArray[roll_from_start]
       else
         # Odd number index
         # Enter value from rollsArray as roll2
         # into appropriate frame
 #binding.irb
-          (@frames[frame_num]).roll2 = rollsArray[i]
+          (@frames[frame_num]).roll2 = rollsArray[roll_from_start]
           # frame_num is only incremented after every second
           # entry because two rolls per frame
           frame_num += 1
