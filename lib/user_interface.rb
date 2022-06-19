@@ -12,6 +12,7 @@ class UserInterface
     end
     show "Game 🎳 ends!"
     show_whole_game_pins
+    show_game_score
   end
 
   private
@@ -58,5 +59,19 @@ class UserInterface
       }
       frame_num += 1
     }
+  end
+
+  def show_game_score
+    show "Scoreboard:"
+
+    frame_num = 0
+    scores = @game.scores
+    total = 0
+    scores.each { |frame|
+      total += frame
+      show "Frame #{frame_num + 1}: #{total}"
+      frame_num += 1
+    }
+    show "Total score: #{@game.total_score}"
   end
 end

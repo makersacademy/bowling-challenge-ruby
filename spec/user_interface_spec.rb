@@ -21,6 +21,12 @@ RSpec.describe UserInterface do
       expect(io).to receive(:puts).with("Game 🎳 ends!")
       expect(game).to receive(:pins_rolled).and_return([[1], [], [], [], [], [], [], [], [], []])
       expect(io).to receive(:puts).with("Frame No. 1, Roll No. 1: 1")
+      expect(io).to receive(:puts).with("Scoreboard:")
+      expect(game).to receive(:scores).and_return([1])
+      expect(io).to receive(:puts).with("Frame 1: 1")
+
+      expect(game).to receive(:total_score).and_return(1)
+      expect(io).to receive(:puts).with("Total score: 1")
       interface.run
     end
 
@@ -49,6 +55,13 @@ RSpec.describe UserInterface do
       expect(io).to receive(:puts).with("Game 🎳 ends!")
       expect(game).to receive(:pins_rolled).and_return([[10], [], [], [], [], [], [], [], [], []])
       expect(io).to receive(:puts).with("Frame No. 1, Roll No. 1: 10")
+
+      expect(io).to receive(:puts).with("Scoreboard:")
+      expect(game).to receive(:scores).and_return([10])
+      expect(io).to receive(:puts).with("Frame 1: 10")
+
+      expect(game).to receive(:total_score).and_return(10)
+      expect(io).to receive(:puts).with("Total score: 10")
       interface.run
     end
   end
@@ -81,6 +94,13 @@ RSpec.describe UserInterface do
       expect(game).to receive(:pins_rolled).and_return([[1, 8], [], [], [], [], [], [], [], [], []])
       expect(io).to receive(:puts).with("Frame No. 1, Roll No. 1: 1")
       expect(io).to receive(:puts).with("Frame No. 1, Roll No. 2: 8")
+
+      expect(io).to receive(:puts).with("Scoreboard:")
+      expect(game).to receive(:scores).and_return([10])
+      expect(io).to receive(:puts).with("Frame 1: 10")
+
+      expect(game).to receive(:total_score).and_return(10)
+      expect(io).to receive(:puts).with("Total score: 10")
       interface.run
     end
   end
