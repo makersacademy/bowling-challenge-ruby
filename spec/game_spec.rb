@@ -212,7 +212,7 @@ RSpec.describe Game do
       expect(game.total_score).to eq 102
     end
 
-    it 'calculates scores of a sample (up to 10th frame)' do
+    it 'calculates scores of a sample (up to 10th frame) - case 1' do
       game = Game.new
       game.roll_pin(8)
       game.roll_pin(1)
@@ -235,6 +235,109 @@ RSpec.describe Game do
       game.roll_pin(10)
       expect(game.pins_rolled[9]).to eq [2, 8, 10]
       expect(game.total_score).to eq 122
+    end
+
+    it 'calculates scores of a sample (up to 10th frame) - case 2' do
+      game = Game.new
+      game.roll_pin(5)
+      game.roll_pin(5)
+
+      game.roll_pin(4)
+      game.roll_pin(0)
+
+      game.roll_pin(8)
+      game.roll_pin(1)
+
+      game.roll_pin(10)
+
+      game.roll_pin(0)
+      game.roll_pin(10)
+
+      game.roll_pin(10)
+
+      game.roll_pin(10)
+
+      game.roll_pin(10)
+
+      game.roll_pin(4)
+      game.roll_pin(6)
+
+      game.roll_pin(10)
+      game.roll_pin(10)
+      game.roll_pin(5)
+
+      expect(game.pins_rolled[9]).to eq [10, 10, 5]
+      expect(game.total_score).to eq 186
+    end
+
+    it 'calculates scores of a sample (up to 10th frame) - case 3' do
+      game = Game.new
+      game.roll_pin(8)
+      game.roll_pin(1)
+
+      game.roll_pin(0)
+      game.roll_pin(9)
+
+      game.roll_pin(2)
+      game.roll_pin(8)
+
+      game.roll_pin(10)
+
+      game.roll_pin(6)
+      game.roll_pin(3)
+
+      game.roll_pin(7)
+      game.roll_pin(0)
+
+      game.roll_pin(5)
+      game.roll_pin(2)
+
+      game.roll_pin(10)
+
+      game.roll_pin(0)
+      game.roll_pin(6)
+
+      game.roll_pin(2)
+      game.roll_pin(8)
+      game.roll_pin(10)
+
+      expect(game.pins_rolled[9]).to eq [2, 8, 10]
+      expect(game.total_score).to eq 122
+    end
+
+    it 'calculates scores of a sample (up to 10th frame) - case 4' do
+      game = Game.new
+      game.roll_pin(8)
+      game.roll_pin(2)
+
+      game.roll_pin(9)
+      game.roll_pin(0)
+
+      game.roll_pin(4)
+      game.roll_pin(4)
+
+      game.roll_pin(7)
+      game.roll_pin(2)
+
+      game.roll_pin(9)
+      game.roll_pin(0)
+
+      game.roll_pin(10)
+
+      game.roll_pin(10)
+
+      game.roll_pin(8)
+      game.roll_pin(0)
+
+      game.roll_pin(3)
+      game.roll_pin(5)
+
+      game.roll_pin(9)
+      game.roll_pin(1)
+      game.roll_pin(7)
+
+      expect(game.pins_rolled[9]).to eq [9, 1, 7]
+      expect(game.total_score).to eq 133
     end
 
     it 'calculates scores of gutter game' do
