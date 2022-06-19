@@ -237,6 +237,12 @@ RSpec.describe Game do
       expect(game.total_score).to eq 122
     end
 
+    it 'calculates scores of gutter game' do
+      game = Game.new
+      20.times {game.roll_pin(0)}
+      expect(game.total_score).to eq 0
+    end
+
     it 'calculates scores for a perfect game' do
       game = Game.new
       9.times {game.roll_pin(10)}
