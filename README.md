@@ -72,10 +72,15 @@ More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 
 ### Class Diagram 1
-
+![Class Diagram 1](images/ClassDiagram1.png)
+![Class Diagram 2](images/ClassDiagram2.png)
 
 ## Tests iteration 1
 
 * Test ten frames each scoring zero with total score of zero.
 * BowlingScoreManager.score( [...20 zeros...] ) => 0
 
+## Refactor
+
+* Internally process the rolls / hits into frames
+* Test drove the above

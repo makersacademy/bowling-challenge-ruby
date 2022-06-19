@@ -1,5 +1,43 @@
+require 'frame'
+
 class BowlingScoreManager
   def self.score( rollsArray )
-    return rollsArray.sum
+    # In the simplest case rollsArray is array of twenty roll hits
+    # such that none of them cause a spare or a strike
+    # and so can basically be added together grouped into
+    # frames of two rolls each
+      
+    # Setup array of Frames
+    # @frames[0] = nil and use @frames[1] through @frames[10] inclusive
+    @frames = [nil]
+    (1..10).each { @frames << Frame.new }
+#binding.irb    
+    # Populate @frames in simple case and score
+    # by simply adding the rolls
+    frame_num = 1
+    for i in 0..19
+#      p "in for loop i is #{i}"
+      if i%2 == 0
+        # Even number index
+        # Enter value from rollsArray as roll1
+        # into appropriate frame
+#binding.irb
+          (@frames[frame_num]).roll1 = rollsArray[i]
+      else
+        # Odd number index
+        # Enter value from rollsArray as roll2
+        # into appropriate frame
+#binding.irb
+          (@frames[frame_num]).roll2 = rollsArray[i]
+          # frame_num is only incremented after every second
+          # entry because two rolls per frame
+          frame_num += 1
+      end
+    end
+    grand_total = 0
+    for i in 1..10
+      grand_total += (@frames[i].roll1 + @frames[i].roll2)
+    end
+    return grand_total
   end
 end
