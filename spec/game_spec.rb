@@ -7,7 +7,7 @@ RSpec.describe Game do
       expect(game.frame).to eq 1
       expect(game.roll).to eq 1
       expect(game.pins_rolled).to eq [[], [], [], [], [], [], [], [], [], []] 
-      expect(game.score).to eq 0
+      expect(game.total_score).to eq 0
       expect(game.continue).to eq true
     end
   end
@@ -135,7 +135,7 @@ RSpec.describe Game do
   describe 'calculating scores' do
     it 'starts the game with 0 score' do
       game = Game.new
-      expect(game.score).to eq 0
+      expect(game.total_score).to eq 0
     end
 
     it 'calculates score with no strike and spare' do
@@ -144,7 +144,24 @@ RSpec.describe Game do
       game.roll_pin(2)
       game.roll_pin(5)
       game.roll_pin(4)
-      expect(game.score).to eq 18
+      expect(game.total_score).to eq 18
+    end
+
+    it 'calculates score one spare then open' do
+      game = Game.new
+      game.roll_pin(7)
+      game.roll_pin(3)
+      game.roll_pin(5)
+      game.roll_pin(4)
+      expect(game.total_score).to eq 24
+    end
+
+    it 'calculates score one strike then open' do
+      game = Game.new
+      game.roll_pin(10)
+      game.roll_pin(5)
+      game.roll_pin(4)
+      expect(game.total_score).to eq 28
     end
   end
 end

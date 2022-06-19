@@ -10,13 +10,22 @@ class Game
     @scores = Array.new(10){0}
   end
 
-  def score
+  def total_score
     @scores.sum
   end
 
   def roll_pin(pin)
-    @pins_rolled[@frame-1].push(pin)
+    @pins_rolled[@frame - 1].push(pin)
+    
     @scores[@frame-1] += pin # adding pin number as scores.... definitely need more calculations
+    if (@frame > 1) && spare(@pins_rolled[@frame - 2])
+      @scores[@frame - 2] = @pins_rolled[@frame - 2].sum + @pins_rolled[@frame - 1][0]
+    end
+
+    if (@frame > 1) && strike(@pins_rolled[@frame - 2])
+      @scores[@frame - 2] = @pins_rolled[@frame - 2].sum + @pins_rolled[@frame - 1].sum
+    end
+    
     @continue = false if (@frame == 10) && (@roll == 2) && (@pins_rolled[9].sum <10)
     @continue = false if (@frame == 10) && (@roll == 3)
     if @continue == true
@@ -30,4 +39,15 @@ class Game
       end
     end
   end
+
+  def spare(frame)
+    return (!frame.include? 10) && (frame.sum == 10) ? true : false
+  end
+
+  def strike(frame)
+    return (frame.include? 10) ? true : false
+  end
+
+
+
 end
