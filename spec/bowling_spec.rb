@@ -137,4 +137,47 @@ describe Bowling do
       expect(game.total_score).to eq "Your current score is 23 points" # (4+3)+(10+6)
     end 
   end 
+
+  context "The bowler has played 3 frames and scored 2 strikes" do 
+    let(:frame_1) { '1' }
+    let(:roll_f1_1) { '1' }
+    let(:pins_f1_1) { '10' }
+
+    let(:frame_2) { '1' }
+    let(:roll_f2_1) { '1' }
+    let(:pins_f2_1) { '10' }
+    
+    let(:frame_3) { '2' }
+    let(:roll_f3_1) { '1' }
+    let(:pins_f3_1) { '3' }
+    let(:roll_f3_2) { '2' }
+    let(:pins_f3_2) { '6' }
+
+    it "it returns a well done message and the bowler's current score" do 
+      game.frames(frame_1)
+      game.rolls(roll_f1_1, pins_f1_1)
+      game.strike
+      expect(game.strike).to eq "Well Done, you scored a strike! Your total score will now be calculated after your next frame"
+  
+   
+
+      game.frames(frame_2)
+      game.rolls(roll_f2_1, pins_f2_1)
+      game.strike
+      expect(game.strike).to eq "Well Done, you scored a strike! Your total score will now be calculated after your next frame"
+    
+   
+
+      game.frames(frame_3)
+      game.rolls(roll_f3_1, pins_f3_1)
+      game.rolls(roll_f3_2, pins_f3_2)
+      game.frame_score
+      game.total_score
+      expect(game.total_score).to eq "Your current score is 48 points" # (10+10)+(10+6+3)+(6+3)
+    end 
+  end
+  
+  # need to add two spares test
+  # need to do test for tenth frame
+  # need to do error tests
 end 
