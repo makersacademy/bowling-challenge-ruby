@@ -6,6 +6,33 @@ Bowling Challenge in Ruby
 * If you have a partial solution, **still check in a partial solution**
 * You must submit a pull request to this repo with your code by 9am Monday week
 
+## Issues to Address
+
+[X] Able to greet user
+[X] Allows user to input the number of pins rolled
+[X] Rejects non-integer input or integer outside 0 - 10 and prompts user to input again
+[X] Able to advance the game by changing frame numbers and roll numbers correctly
+[X] Knows when to end the game
+[X] Able to display the number of pins rolled at each frame and roll correctly
+[X] Able to show the scores of each frame
+[X] Able to calculate the total score
+[ ] Only allows user to input remaining pin number at second roll
+
+## TDD
+
+Bowling game has complex rules concerning its progress and scores. A bowling game can have a minimum of 11 rolls to a maximum of 21 rolls. Scoring is complex there are special bonus for strikes and spares. TDD was used to break down the whole challenge into smaller problems.
+
+Frequent commits were made to ensure reversal to the latest working code is always possible.
+
+### Reqired test cases for calculating scores
+
+* Perfect game
+* Gutter game
+* Random confirmed game scores from internet (with strikes and spares)
+
+
+## The below are provided description of the task
+
 ## The Task
 
 **THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
