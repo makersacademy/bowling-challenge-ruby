@@ -26,7 +26,8 @@ class UserInterface
   end
 
   def check_valid_number(num_string)
-    return true if (num_string.match? /^\d{1,2}$/) && (num_string.to_i >= 0) && (num_string.to_i <= 10)
+    @max_allowed = 10
+    return true if (num_string.match? /^\d{1,2}$/) && (num_string.to_i >= 0) && (num_string.to_i <= @max_allowed)
     return false
   end
 
@@ -34,7 +35,7 @@ class UserInterface
     @io.puts(message)
     user_input = @io.gets.chomp
     while !check_valid_number(user_input)
-      show "Invalid input. You can only input an integer between 0 and 10."
+      show "Invalid input. You can only input an integer between 0 and #{@max_allowed}."
       show message
       user_input = @io.gets.chomp
     end
