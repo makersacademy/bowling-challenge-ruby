@@ -1,10 +1,36 @@
-Bowling Challenge in Ruby
+# Bowling Challenge in Ruby
+
+Installation instructions:
+
+- clone the repo
+- run bundler
+- open IRB
+- require './lib/game.rb'
+- create a new game (e.g. game = Game.new)
+- enter your rolls (e.g. game.roll(9))
+- the programme changes frames automatically (e.g. if you score a strike in a frame, the next roll you input will automatically be added to the subsequent frame)
+
+===================
+
+Notes to coach/reviewer:
+
+I was under the weather this weekend so wasn't able to finish the challenge. As things stand, a user can calculate the scores for bowling but the final frame logic has not been completed.
+
+I was struggling to understand what I should be defining in the Frame classand what I should be defining in the Game class, and so at some point between the sixth and seventh commit I looked at the work of another student on the pull history of the challenge (Nico Cortese, pull #252). This gave me the idea for a FinalFrame class, as well as leading me to define spares and strikes and completed frames as their own classes (prior to that, I had defined whether a frame was less than ten, which is along the same lines but less efficient as it doesn't distinguish between strikes and spares). I did, however, try not to look at this piece of work too much, and the basic logic of this exercise is my own and builds on what I had been working on up until this point (for which I apologise - I'm aware it's not the easiest to read).
+
+Given time, I would like to:
+
+- prevent a player from entering a score higher than 10 per roll.
+- make it possible to complete a game by finishing the FinalFrame class.
+- refactor further
+- tighten up the testing
+
 =================
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+- Feel free to use google, your notes, books, etc. but work on your own
+- If you refer to the solution of another coach or student, please put a link to that in your README
+- If you have a partial solution, **still check in a partial solution**
+- You must submit a pull request to this repo with your code by 9am Monday week
 
 ## The Task
 
@@ -16,22 +42,24 @@ A bowling game consists of 10 frames in which the player tries to knock down the
 
 As usual please start by
 
-* Forking this repo
+- Forking this repo
 
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
+- Finally submit a pull request before Monday week at 9am with your solution or partial solution. However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am.
 
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
+**_STRONG HINT, IGNORE AT YOUR PERIL:_** Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
 
 ## Focus for this challenge
+
 The focus for this challenge is to write high-quality code.
 
 In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
+
+- Using diagramming to plan your approach to the challenge
+- TDD your code
+- Focus on testing behaviour rather than state
+- Commit often, with good commit messages
+- Single Responsibility Principle and encapsulation
+- Clear and readable code
 
 ## Bowling — how does it work?
 
