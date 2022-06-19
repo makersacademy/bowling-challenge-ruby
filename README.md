@@ -63,3 +63,50 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+### Planning
+
+#### I/O Notes
+
+Input: An array of ten frames, each of which is an array of two rolls
+Output: The sum total of points during that game
+
+Input: A score of ten, i.e. a ‘strike’ has occured during a roll
+Output: The points from the next two rolls are added to the total score
+
+Input: A score of ten has occured during a frame, i.e. a spare
+Output: The points from the next roll is added to the total score
+
+#### Thoughts
+
+Input is the bowling scorecard contains 10/11 frames where each frame contains two rolls
+i.e. Techinically, this is a multi-dimensional array containing of 10/11 sub-arrays each with two elements
+
+Need to focus on iterating over a frame not all the frames or induvidual rolls
+Why? If we focus on rolls or flatten the whole array then we cannot determine the bonus accurate for strike or spares
+
+#### Methods
+
+attr_accessor
+This allows us to 'get and set' the instance variable, frames from outside the class. 
+
+def initialize(scorecard)
+This method will receive the scorecard, the multi-dimensional array described above as the only input. 
+Please see bowling_spec.rb for examples of the scorecard. 
+We will use the .self method to gain direct access to the elements within the scorecard object.
+
+def sum_frame(frame)
+This method will summate all the elements within a frame using the 'inject' method
+
+def first_roll(frame)
+This method identifies the first roll within a frame. This helps the total method score a spare, where the first roll
+of the subsequent frame is added as a points bonus. 
+
+def strike?(frame)
+This method identifies if the frame contains a strike. 
+
+def spare?(frame)
+This method identifies if the frame contains a spare.
+
+def total
+This method returns the total score achieved.
