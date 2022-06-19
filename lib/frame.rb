@@ -1,4 +1,7 @@
 class Frame
+
+  attr_reader :pins_left
+
   def initialize 
   @rolls = []
   @closed = false
@@ -8,22 +11,21 @@ class Frame
   end
 
   def roll(pins)
-    # pins is number of pins knocked down in a roll
-    add pins to @rolls
+    @rolls << pins
     @roll_counter += 1
     @pins_left = @pins_left - pins
   end
 
   def frame_score
-    # list of scores
+    @rolls
   end
 
-  def frame_total
-    # add together frame scores
+   def frame_total
+    frame_score.inject(:+)
   end
 
   def strike
-    # rolls 10 on first go
+    @rolls[0] == 10
   end
 
   def spare
@@ -31,8 +33,13 @@ class Frame
   end
 
   def closed?
-    # changes closed to true if strike or spare or 2 rolls
-
+    if @roll_counter == 2
+      @closed = true
+    elsif @pins_left == 0
+      @closed = true
+    else
+      false
+    end
   end
 
   def bonus
