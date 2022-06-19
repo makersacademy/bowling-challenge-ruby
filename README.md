@@ -11,8 +11,7 @@
 | complete game - mixed [[4,3], [5,5], [6,4], [10], [5,2], [10], [3,7], [4,6], [10], [4,2]] | 143 |
 | complete game - spare in 10th frame | [[4,3], [5,5], [6,4], [10], [5,2], [10], [3,7], [4,6], [10], [4,6,3]] | 154 |
 | complete game - strike on first roll of 10th frame [[4,3], [5,5], [6,4], [10], [5,2], [10], [3,7], [4,6], [10], [10,6,3]] | 166 |
-| complete game - strike on second roll of 10th frame [[4,3], [5,5], [6,4], [10], [5,2], [10], [3,7], [4,6], [10], [6,10,3]] | 166 |
-| complete game - two strikes in 10th frame [[4,3], [5,5], [6,4], [10], [5,2], [10], [3,7], [4,6], [10], [10,10,3]] | 170 |
+| complete game - two strikes in 10th frame [[4,3], [5,5], [6,4], [10], [5,2], [10], [3,7], [4,6], [10], [10,10,3]] | 174 |
 | perfect game [[10] * 10] | 300 |
 
 
