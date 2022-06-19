@@ -1,0 +1,76 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/saif-ulhussain/Projects/bowling-challenge-ruby/spec/game_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/saif-ulhussain/Projects/bowling-challenge-ruby/lib/game.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          4,
+          4,
+          null,
+          null,
+          1,
+          4,
+          4,
+          4,
+          null,
+          null,
+          1,
+          4,
+          67,
+          13,
+          12,
+          null,
+          null,
+          null,
+          null,
+          1,
+          4,
+          4,
+          4,
+          null,
+          35,
+          2,
+          2,
+          null,
+          null,
+          35,
+          34,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1655667160
+  }
+}
