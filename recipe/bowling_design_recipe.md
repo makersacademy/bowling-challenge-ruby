@@ -67,7 +67,7 @@ class Bowling
   def report
   # return current frame 
   # return current roll
-  # return current frame score
+  # return current score
   end 
 end
 ```
@@ -80,11 +80,11 @@ _Make a list of examples of how the class will behave in different situations._
 # EXAMPLE
 
 # 1 - test user input is turned into frame variable and added to frame array
-let(:frame) {'1'}
-game = Bowling.new
-game.frames(frame)
-game.report
-expect(game.report).to eq "You just played frame: 1"
+# let(:frame) {'1'}
+# game = Bowling.new
+# game.frames(frame)
+# game.report
+# expect(game.report).to eq "You just played frame: 1"
 
 # 2 - test frames, roll, report method 
 let(:frame) {'1'}
