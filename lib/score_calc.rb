@@ -12,7 +12,9 @@ class BowlingScore
       score << frame.sum
       # apply logic for spare
       if spare?(frame)
-        score << handle_spare(index)
+        score << spare_bonus(index)
+      elsif strike?(frame)
+        score << strike_bonus(index)
       end
     end
     score.sum
@@ -24,7 +26,15 @@ class BowlingScore
     frame.length == 2 && frame.sum == 10
   end
 
-  def handle_spare(index)
+  def spare_bonus(index)
     all_frames[index + 1][0]
+  end
+
+  def strike?(frame)
+    frame.length == 1 && frame.sum == 10
+  end
+
+  def strike_bonus(index)
+    (spare_bonus(index)) + all_frames[index + 1][1] ||= all_frames[index + 2][0]
   end
 end
