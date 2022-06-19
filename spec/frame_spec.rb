@@ -31,6 +31,14 @@ RSpec.describe Frame do
     frame.roll(10)
     expect(frame.closed?).to eq true
   end
+
+  it "records a spare and closes frame" do
+    frame = Frame.new
+    frame.roll(6)
+    frame.roll(4)
+    expect(frame.closed?).to eq true
+    expect(frame.roll_counter).to eq 2
+  end
 end
 
 

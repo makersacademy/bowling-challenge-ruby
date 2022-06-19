@@ -1,6 +1,6 @@
 class Frame
 
-  attr_reader :pins_left
+  attr_reader :pins_left, :roll_counter
 
   def initialize 
   @rolls = []
@@ -29,7 +29,7 @@ class Frame
   end
 
   def spare
-    # total 10 in 2 rolls
+    @rolls[0] + @rolls[1] == 10
   end
 
   def closed?
