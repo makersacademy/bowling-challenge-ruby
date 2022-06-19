@@ -54,4 +54,11 @@ describe BowlingScore do
     )
     expect(game.result).to eq 49
   end
+
+  it "returns correct result for a realistic game with a mixture of strikes, spares and neither" do
+    game = BowlingScore.new(
+      [[4,3], [5,5], [6,4], [10], [5,2], [10], [3,7], [4,6], [10], [4,2]]
+    )
+    expect(game.result).to eq 143
+  end
 end
