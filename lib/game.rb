@@ -12,7 +12,6 @@ class Game
   end
   
   def sum_total 
-    # sums the total of @scores
-    # Returns total
+    score_card.inject(:+)
   end
 end

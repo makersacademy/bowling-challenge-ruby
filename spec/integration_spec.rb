@@ -13,4 +13,17 @@ RSpec.describe "integration of Game and Frame classes" do
     end
   end
 
+  context "given a set of frame scores" do
+    it "returns the total" do
+    game = Game.new
+    frame_1 = Frame.new
+    frame_2 = Frame.new
+    frame_1 = 7
+    frame_2 = 8
+    game.add(frame_1)
+    game.add(frame_2)
+    expect(game.sum_total).to eq 15
+    end
+  end
+
 end
