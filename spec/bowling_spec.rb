@@ -89,4 +89,18 @@ describe BowlingScore do
     )
     expect(game.result).to eq 174
   end
+
+  it "returns a correct result for a realistic game with 0s and 3rd roll in 10th frame" do
+    game = BowlingScore.new(
+      [[4,3], [5,5], [6,0], [10], [5,2], [10], [3,0], [4,6], [10], [9,1,3]]
+    )
+    expect(game.result).to eq 122
+  end
+
+  it "returns a perfect score for a perfect game" do
+    game = BowlingScore.new(
+      [[10], [10], [10], [10], [10], [10], [10], [10], [10], [10, 10, 10]]
+    )
+    expect(game.result).to eq 300
+  end
 end
