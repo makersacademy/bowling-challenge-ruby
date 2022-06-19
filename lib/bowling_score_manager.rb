@@ -38,14 +38,28 @@ class BowlingScoreManager
         # into appropriate frame
 #binding.irb
           (@frames[frame_num]).roll2 = rollsArray[roll_from_start]
-          # frame_num is only incremented after every second
-          # entry because two rolls per frame
+          # Check for spare
+          if ((@frames[frame_num].roll1) + (@frames[frame_num].roll2) == 10)
+            @frames[frame_num].status = :spare
+            @frames[frame_num].total = 10
+            @frames[frame_num].completed = false
+            frame_num += 1
+            # Go to next roll as below is for normal frames
+            next
+          end
+          # For normal status do below but will need to amend for spare and strike
+          @frames[frame_num].total = @frames[frame_num].roll1 + @frames[frame_num].roll2
+          @frames[frame_num].completed = true
+          # frame_num is usually incremented after every second
+          # roll because two rolls per frame
           frame_num += 1
       end
     end
     grand_total = 0
     for i in 1..10
-      grand_total += (@frames[i].roll1 + @frames[i].roll2)
+#      Previous code when sub-totals were not kept in frame                                                                       
+#      grand_total += (@frames[i].roll1 + @frames[i].roll2)
+      grand_total += @frames[i].total
     end
     return grand_total
   end
