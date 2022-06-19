@@ -24,6 +24,14 @@ class BowlingScoreManager
         # into appropriate frame
 #binding.irb
           (@frames[frame_num]).roll1 = rollsArray[roll_from_start]
+          # Check for strike
+          if (@frames[frame_num]).roll1 == 10
+            @frames[frame_num].status = :strike
+            @frames[frame_num].roll2 = 0
+            @frames[frame_num].total = 10
+            @frames[frame_num].completed = false
+            frame_num += 1
+          end
       else
         # Odd number index
         # Enter value from rollsArray as roll2
