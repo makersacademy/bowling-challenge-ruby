@@ -1,0 +1,21 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/aishayusuff/Makers-2022/weekend-challenge/week5/bowling-challenge-ruby/spec/bowling_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/aishayusuff/Makers-2022/weekend-challenge/week5/bowling-challenge-ruby/lib/bowling.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      }
+    },
+    "timestamp": 1655646508
+  }
+}
