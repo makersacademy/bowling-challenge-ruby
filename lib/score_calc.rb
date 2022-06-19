@@ -8,6 +8,7 @@ class BowlingScore
   def result
     score = []
     all_frames.each_with_index do |frame, index| 
+      p "frame = #{frame}"
       # add calculate score without bonuses
       score << frame.sum
       # apply logic for spare
@@ -16,6 +17,7 @@ class BowlingScore
       elsif strike?(frame)
         score << strike_bonus(index)
       end
+      p "score = #{score.sum}"
     end
     score.sum
   end
@@ -35,6 +37,10 @@ class BowlingScore
   end
 
   def strike_bonus(index)
-    (spare_bonus(index)) + all_frames[index + 1][1] ||= all_frames[index + 2][0]
+    if all_frames[index + 1][1] 
+      spare_bonus(index) + all_frames[index + 1][1] 
+    else
+      spare_bonus(index) + all_frames[index + 2][0]
+    end
   end
 end

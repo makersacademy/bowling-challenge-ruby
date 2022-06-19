@@ -33,4 +33,25 @@ describe BowlingScore do
     )
     expect(game.result).to eq 30
   end
+
+  it "returns correct score for game with two strikes, no spares" do
+    game = BowlingScore.new(
+      [[1,1], [1,1], [1,1], [1,1], [10], [1,1], [1,1], [1,1], [10], [1,1]]
+    )
+    expect(game.result).to eq 40
+  end
+
+  it "returns correct score for game with two spares in a row, no strikes" do
+    game = BowlingScore.new(
+      [[5,5], [5,5], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1]]
+    )
+    expect(game.result).to eq 42
+  end
+
+  it "returns correct score for game with two strikes in a row, no spares" do
+    game = BowlingScore.new(
+      [[10], [10], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1], [1,1]]
+    )
+    expect(game.result).to eq 49
+  end
 end
