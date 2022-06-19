@@ -7,6 +7,8 @@ The calculator will handle bonuses from strikes and spares, plus the rules aroun
 
 To complete this challenge, I followed TDD principles to guide me to my final result. I started with a single method as this was adequate to handle my initial test cases (i.e a gutter game), but as the cases became more complex, I felt it was necessary to move to a single class to take advantage of initialization and private methods. 
 
+I could have refactored my tests to have fewer in the final version, but decided to leave all tests in place to clearly show the TDD process that I followed.
+
 I have assumed that the input will always be an array of arrays containing integers, as this would typically be handled at the point of user input (which was not required for this challenge)
 
 
