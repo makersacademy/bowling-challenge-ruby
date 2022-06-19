@@ -163,5 +163,78 @@ RSpec.describe Game do
       game.roll_pin(4)
       expect(game.total_score).to eq 28
     end
+
+    it 'calculates score two strikes followed by an open' do
+      game = Game.new
+      game.roll_pin(10)
+      game.roll_pin(10)
+      game.roll_pin(7)
+      game.roll_pin(2)
+      expect(game.total_score).to eq 55
+    end
+
+    it 'calculates score a strike followed by a spare, then an open' do
+      game = Game.new
+      game.roll_pin(10)
+      game.roll_pin(7)
+      game.roll_pin(3)
+      game.roll_pin(5)
+      expect(game.total_score).to eq 40
+    end
+
+    it 'calculates score a strike followed by a spare, then an open' do
+      game = Game.new
+      game.roll_pin(10)
+      game.roll_pin(7)
+      game.roll_pin(3)
+      game.roll_pin(5)
+      expect(game.total_score).to eq 40
+    end
+
+    it 'calculates scores of a sample (up to 9th frame)' do
+      game = Game.new
+      game.roll_pin(8)
+      game.roll_pin(1)
+      game.roll_pin(0)
+      game.roll_pin(9)
+      game.roll_pin(2)
+      game.roll_pin(8)
+      game.roll_pin(10)
+      game.roll_pin(6)
+      game.roll_pin(3)
+      game.roll_pin(7)
+      game.roll_pin(0)
+      game.roll_pin(5)
+      game.roll_pin(2)
+      game.roll_pin(10)
+      game.roll_pin(0)
+      game.roll_pin(6)
+      expect(game.total_score).to eq 102
+    end
+
+    it 'calculates scores of a sample (up to 10th frame)' do
+      game = Game.new
+      game.roll_pin(8)
+      game.roll_pin(1)
+      game.roll_pin(0)
+      game.roll_pin(9)
+      game.roll_pin(2)
+      game.roll_pin(8)
+      game.roll_pin(10)
+      game.roll_pin(6)
+      game.roll_pin(3)
+      game.roll_pin(7)
+      game.roll_pin(0)
+      game.roll_pin(5)
+      game.roll_pin(2)
+      game.roll_pin(10)
+      game.roll_pin(0)
+      game.roll_pin(6)
+      game.roll_pin(2)
+      game.roll_pin(8)
+      game.roll_pin(10)
+      expect(game.pins_rolled[9]).to eq [2, 8, 10]
+      expect(game.total_score).to eq 122
+    end
   end
 end
