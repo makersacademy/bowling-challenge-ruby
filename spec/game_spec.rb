@@ -130,8 +130,5 @@ RSpec.describe Game do
       expect(game.pins_rolled).to eq [[10], [10], [10], [10], [10], [10], [10], [10], [10], [2, 8, 10]] 
       expect(game.continue).to eq false
     end
-
-
   end
-
 end

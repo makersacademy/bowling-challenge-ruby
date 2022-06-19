@@ -16,10 +16,11 @@ RSpec.describe UserInterface do
       expect(io).to receive(:puts).with("Please enter the number of knocked down pins:")
       expect(io).to receive(:gets).and_return("1")
       expect(game).to receive(:roll_pin).and_return(1)
-      expect(game).to receive(:pins_rolled).and_return([[1], [], [], [], [], [], [], [], [], []])
-      expect(io).to receive(:puts).with([[1], [], [], [], [], [], [], [], [], []])
       expect(game).to receive(:continue).and_return(false).ordered
+
       expect(io).to receive(:puts).with("Game 🎳 ends!")
+      expect(game).to receive(:pins_rolled).and_return([[1], [], [], [], [], [], [], [], [], []])
+      expect(io).to receive(:puts).with("Frame No. 1, Roll No. 1: 1")
       interface.run
     end
 
@@ -32,6 +33,7 @@ RSpec.describe UserInterface do
       expect(io).to receive(:puts).with("Welcome to the 🎳 Bowling Game")
       expect(io).to receive(:puts).with("I am here to keep your score!")
       expect(game).to receive(:continue).and_return(true).ordered
+
       expect(io).to receive(:puts).with("Frame No. 1, Roll No. 1")
       expect(io).to receive(:puts).with("Please enter the number of knocked down pins:")
       expect(io).to receive(:gets).and_return("11")
@@ -42,10 +44,11 @@ RSpec.describe UserInterface do
       expect(io).to receive(:puts).with("Please enter the number of knocked down pins:")
       expect(io).to receive(:gets).and_return("10")
       expect(game).to receive(:roll_pin).and_return(10)
-      expect(game).to receive(:pins_rolled).and_return([[10],[],[],[],[],[],[],[],[],[]])
-      expect(io).to receive(:puts).with([[10],[],[],[],[],[],[],[],[],[]])
+
       expect(game).to receive(:continue).and_return(false).ordered
       expect(io).to receive(:puts).with("Game 🎳 ends!")
+      expect(game).to receive(:pins_rolled).and_return([[10], [], [], [], [], [], [], [], [], []])
+      expect(io).to receive(:puts).with("Frame No. 1, Roll No. 1: 10")
       interface.run
     end
   end
@@ -59,6 +62,7 @@ RSpec.describe UserInterface do
       interface = UserInterface.new(io, game)
       expect(io).to receive(:puts).with("Welcome to the 🎳 Bowling Game")
       expect(io).to receive(:puts).with("I am here to keep your score!")
+      
       expect(game).to receive(:continue).and_return(true).ordered
       expect(io).to receive(:puts).with("Frame No. 1, Roll No. 1")
       expect(io).to receive(:puts).with("Please enter the number of knocked down pins:")
@@ -71,10 +75,12 @@ RSpec.describe UserInterface do
       expect(io).to receive(:puts).with("Please enter the number of knocked down pins:")
       expect(io).to receive(:gets).and_return("8")
       expect(game).to receive(:roll_pin).and_return(8)
-      expect(game).to receive(:pins_rolled).and_return([[1,8],[],[],[],[],[],[],[],[],[]])
-      expect(io).to receive(:puts).with([[1,8],[],[],[],[],[],[],[],[],[]])
+
       expect(game).to receive(:continue).and_return(false).ordered
       expect(io).to receive(:puts).with("Game 🎳 ends!")
+      expect(game).to receive(:pins_rolled).and_return([[1, 8], [], [], [], [], [], [], [], [], []])
+      expect(io).to receive(:puts).with("Frame No. 1, Roll No. 1: 1")
+      expect(io).to receive(:puts).with("Frame No. 1, Roll No. 2: 8")
       interface.run
     end
   end

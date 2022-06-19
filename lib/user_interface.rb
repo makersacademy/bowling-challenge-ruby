@@ -11,7 +11,7 @@ class UserInterface
       @game.roll_pin(pin_num)
     end
     show "Game 🎳 ends!"
-    show @game.pins_rolled
+    show_whole_game_pins
   end
 
   private
@@ -46,4 +46,16 @@ class UserInterface
     pin_num = prompt 'Please enter the number of knocked down pins:'
   end
 
+  def show_whole_game_pins
+    frame_num = 1
+    pins_rolled = @game.pins_rolled
+    pins_rolled.each { |frame|
+      roll_num = 1
+      frame.each {|ball|
+        show "Frame No. #{frame_num}, Roll No. #{roll_num}: #{ball}"
+        roll_num += 1
+      }
+      frame_num += 1
+    }
+  end
 end
