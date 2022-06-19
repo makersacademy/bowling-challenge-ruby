@@ -7,14 +7,16 @@ class Game
     @roll = 1
     @continue = true
     @pins_rolled = Array.new(10) {Array.new}
+    @scores = Array.new(10){0}
   end
 
-  def total_score
-    0
+  def score
+    @scores.sum
   end
 
   def roll_pin(pin)
     @pins_rolled[@frame-1].push(pin)
+    @scores[@frame-1] += pin # adding pin number as scores.... definitely need more calculations
     @continue = false if (@frame == 10) && (@roll == 2) && (@pins_rolled[9].sum <10)
     @continue = false if (@frame == 10) && (@roll == 3)
     if @continue == true
