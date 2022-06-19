@@ -35,6 +35,14 @@ class BowlingScoreManager
             # Add this roll to previous frame but don't yet mark completed
             # because two rolls need to be added to a strike
             @frames[frame_num-1].total += (@frames[frame_num]).roll1
+            # Deal with possible strike from two frames ago
+            if ((frame_num > 2) && @frames[frame_num-2].status == :strike)
+              # Add this roll to strike from two frames ago
+              # and mark it complete as both of its following rolls
+              # have now been added
+              @frames[frame_num-2].total += (@frames[frame_num]).roll1
+              @frames[frame_num-1].completed = true
+            end
           end
           # Mark possible strike in this frame
           if (@frames[frame_num]).roll1 == 10
