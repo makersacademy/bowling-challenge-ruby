@@ -69,7 +69,7 @@ More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 
 ### State Diagram 1
-![Class Diagram 1](images/StateDiagram1.png)
+![State Diagram 1](images/StateDiagram1.png)
 
 
 ### Class Diagrams 1
@@ -89,10 +89,11 @@ More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 * Test drove the above
 
 ### State Diagram 2
+![State Diagram 2](images/StateDiagram2.png)
 
 
 ## Refactor
 
 * Internally process the rolls / hits into frames which account for spare roll
-* TODO: Test drive the above
+* Test-drove above
 
