@@ -11,13 +11,21 @@ class Bowling
     @strike = []
   end 
 
+  # method with users input 
+  # def frames
+  #   puts "What frame are you currently playing?"
+  #   frame = gets.chomp.to_s
+  #   @frame = frame
+  #   binding.irb
+  # end
+
   def frames(frame)
     @frame = frame
   end
 
   def rolls(roll, pins)
     @roll = roll
-    @pins = pins # not too sure what to use the variable for 
+    @pins = pins 
     @pins_array << pins.to_i
     @current_frame = @pins_array.last(2)
   end 
@@ -69,5 +77,6 @@ class Bowling
 
   def report
     return "You just played frame: #{@frame} and roll: #{@roll}."
+    # return "You scored x spares and x strikes."
   end
 end 

@@ -158,15 +158,11 @@ describe Bowling do
       game.rolls(roll_f1_1, pins_f1_1)
       game.strike
       expect(game.strike).to eq "Well Done, you scored a strike! Your total score will now be calculated after your next frame"
-  
-   
 
       game.frames(frame_2)
       game.rolls(roll_f2_1, pins_f2_1)
       game.strike
       expect(game.strike).to eq "Well Done, you scored a strike! Your total score will now be calculated after your next frame"
-    
-   
 
       game.frames(frame_3)
       game.rolls(roll_f3_1, pins_f3_1)
@@ -179,5 +175,5 @@ describe Bowling do
   
   # need to add two spares test
   # need to do test for tenth frame
-  # need to do error tests
+  # need to do error tests 
 end 
