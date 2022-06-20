@@ -48,5 +48,4 @@ RSpec.describe BowlingScoreManager do
   it "Successfully scores final frame when no third roll needed but preceded by a strike" do
     expect(BowlingScoreManager.score( [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 10, 1,2] )).to eq ( [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 10, 1,2].sum + 1 + 2) 
   end
-
 end
