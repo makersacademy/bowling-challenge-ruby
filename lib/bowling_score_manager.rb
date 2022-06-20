@@ -177,6 +177,8 @@ class BowlingScoreManager
       else # on_roll == 3
         # Add last roll value to current total
         @frames[frame_num].total += last_rolls[rolls_at_end]
+        # No need to loop further
+        break
       end
       # For normal status do below but will need to amend for spare and strike
       @frames[frame_num].total = @frames[frame_num].roll1 + @frames[frame_num].roll2

@@ -32,8 +32,11 @@ RSpec.describe BowlingScoreManager do
     it "Successfully scores a game including a strike followed immediately by another two strikes" do
       expect(BowlingScoreManager.score( [0,0, 1,1, 5,3, 10, 10, 10, 4,3, 3,2, 2,1, 0,0] )).to eq ([0,0, 1,1, 5,3, 10, 10, 10, 4,3, 3,2, 2,1, 0,0].sum + 10 + 10 + 10 + 4 + 4 + 3)
     end
-    it "Successfully scores a maximum" do
-      expect(BowlingScoreManager.score( [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10] )).to eq 300
+    it "Successfully scores final frame in case of maximum possible score" do
+      expect(BowlingScoreManager.score( [10, 10, 10, 10, 10, 10, 10, 10, 10, 10,10,10] )).to eq 300
+    end
+    it "Successfully scores final frame in case of spare in final frame" do
+      expect(BowlingScoreManager.score( [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 3,7,2] )).to eq ( [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 3,7,2].sum) 
     end
   end
 end
