@@ -1,0 +1,49 @@
+  # def roll(pins)
+  #   # If player gets a strike
+  #   if pins == 10 && @current_round == 1
+  #     @strike += 1
+  #     @current_frame += 1
+  #     return @strike
+  #   end
+
+  #   if @current_round == 1
+  #     @round1_score = pins
+  #     @remaining_pins -= pins
+  #     return @current_round += 1
+  #   else
+  #     @round2_score = pins
+  #     @remaining_pins -= pins
+  #   end
+
+  #   # Only calculate the score for the second round if there
+  #   # are pins remaining
+  #   if @remaining_pins == 0
+  #     p "spare!!!"
+  #     @spare = true
+     
+  #   else
+  #     @total_score += @round1_score + @round2_score
+  #   end
+    
+  #   bonus
+  #   reset if @current_round == 2
+  # end
+
+  # def bonus
+  #   if @strike > 0
+  #     @total_score += @round1_score + @round2_score + (10
+  #     @strike = false
+  #   end
+  #   if @spare
+  #     @total_score += @round1_score + 10
+  #     @spare = false
+  #   end
+  # end
+
+  # def reset
+  #   @current_frame += 1
+  #   @current_round = 1
+  # end
+
+
+

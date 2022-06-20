@@ -1,0 +1,123 @@
+require 'game'
+
+RSpec.describe Game do
+  it "Returns Total Score as 8 after two rounds in a single frame" do
+    game = Game.new
+    # Frame 1
+    game.roll(5)
+    game.roll(3)
+    game.resolve_scores
+    game.current_score
+    expect(game.total_score).to eq(8)
+  end
+  it "Calculates the strike bonus points for previous round" do
+    game = Game.new
+    # Frame 1
+    game.roll(10)
+    # Frame 2
+    game.roll(4)
+    game.roll(4)
+    game.resolve_scores
+    game.current_score
+    expect(game.total_score).to eq(26)
+  end
+  it "Calculates the strike bonus points for five consecutive rounds" do
+    game = Game.new
+    # Frame 1
+    game.roll(10)
+    # Frame 2
+    game.roll(10)
+    # Frame 3
+    game.roll(1)
+    game.roll(2)
+    game.resolve_scores
+    game.current_score
+    expect(game.total_score).to eq(37)
+  end
+  it "Calculates the strike bonus points for first round only out of 3 frames" do
+    game = Game.new
+    # Frame 1
+    game.roll(10)
+    # Frame 2
+    game.roll(3)
+    game.roll(2)
+    # Frame 3
+    game.roll(3)
+    game.roll(6)
+    game.resolve_scores
+    game.current_score
+    expect(game.total_score).to eq(29)
+  end
+  it "Calculates the spare bonus" do
+    game = Game.new
+    # Frame 1
+    game.roll(5)
+    game.roll(5)
+    # Frame 2
+    game.roll(3)
+    game.roll(2)
+    game.resolve_scores
+    game.current_score
+    expect(game.total_score).to eq(18)
+  end
+  it "Calculates the two spare bonus for two rounds out of four" do
+    game = Game.new
+    # Frame 1
+    game.roll(5)
+    game.roll(5)
+    # Frame 2
+    game.roll(3)
+    game.roll(2)
+    # Frame 3
+    game.roll(6)
+    game.roll(4)
+    # Frame 4
+    game.roll(4)
+    game.roll(5)
+    game.resolve_scores
+    game.current_score
+    expect(game.total_score).to eq(41)
+  end
+  it "Calculates strike and spare bonus" do
+    game = Game.new
+    # Frame 1
+    game.roll(10)
+    # Frame 2
+    game.roll(5)
+    game.roll(5)
+    # Frame 3
+    game.roll(6)
+    game.roll(4)
+    # Frame 4
+    game.roll(4)
+    game.roll(5)
+    game.resolve_scores
+    game.current_score
+    expect(game.total_score).to eq(59)
+  end
+  it "calculates score for perfect game" do
+    game = Game.new
+    # Frame 1
+    game.roll(10)
+    # Frame 2
+    game.roll(10)
+    # Frame 3
+    game.roll(10)
+    # Frame 4
+    game.roll(10)
+    # Frame 5
+    game.roll(10)
+    # Frame 6
+    game.roll(10)
+
+
+    game.resolve_scores
+    game.current_score
+    expect(game.total_score).to eq(150)
+  end
+end
+
+# Create test if a player scores 5 in first round
+# and then provides a number greater than 5 in the next
+# as in the second round only the remaining number can be the
+# highest number send
