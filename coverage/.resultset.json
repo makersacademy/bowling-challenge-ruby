@@ -1,0 +1,144 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/raphaella/Desktop/~\\Projects/week5/bowling-challenge-ruby/spec/frame_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/raphaella/Desktop/~\\Projects/week5/bowling-challenge-ruby/lib/frame.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/raphaella/Desktop/~\\Projects/week5/bowling-challenge-ruby/spec/scorecard_integration_spec.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/raphaella/Desktop/~\\Projects/week5/bowling-challenge-ruby/lib/scorecard.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          12,
+          null,
+          12,
+          12,
+          null,
+          null,
+          12,
+          12,
+          null,
+          null
+        ]
+      },
+      "/Users/raphaella/Desktop/~\\Projects/week5/bowling-challenge-ruby/spec/test_helpers.rb": {
+        "lines": [
+          null,
+          1,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null
+        ]
+      },
+      "/Users/raphaella/Desktop/~\\Projects/week5/bowling-challenge-ruby/spec/scorecard_spec.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1655715677
+  }
+}
