@@ -8,15 +8,15 @@ Bowling Challenge in Ruby
 
 ## Issues to Address
 
-[X] Able to greet user
-[X] Allows user to input the number of pins rolled
-[X] Rejects non-integer input or integer outside 0 - 10 and prompts user to input again
-[X] Able to advance the game by changing frame numbers and roll numbers correctly
-[X] Knows when to end the game
-[X] Able to display the number of pins rolled at each frame and roll correctly
-[X] Able to show the scores of each frame
-[X] Able to calculate the total score
-[ ] Only allows user to input remaining pin number at second roll
+[X] Able to greet user  
+[X] Allows user to input the number of pins rolled  
+[X] Rejects non-integer input or integer outside 0 - 10 and prompts user to input again  
+[X] Able to advance the game by changing frame numbers and roll numbers correctly  
+[X] Knows when to end the game  
+[X] Able to display the number of pins rolled at each frame and roll correctly  
+[X] Able to show the scores of each frame  
+[X] Able to calculate the total score  
+[ ] Only allows user to input remaining pin number at second roll  
 
 ## TDD
 
@@ -31,7 +31,7 @@ Frequent commits were made to ensure reversal to the latest working code is alwa
 * Random confirmed game scores from internet (with strikes and spares)
 
 
-## The below are provided description of the task
+### The below are provided description of the task
 
 ## The Task
 
