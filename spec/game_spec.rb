@@ -182,15 +182,6 @@ RSpec.describe Game do
       expect(game.total_score).to eq 40
     end
 
-    it 'calculates score a strike followed by a spare, then an open' do
-      game = Game.new
-      game.roll_pin(10)
-      game.roll_pin(7)
-      game.roll_pin(3)
-      game.roll_pin(5)
-      expect(game.total_score).to eq 40
-    end
-
     it 'calculates scores of a sample (up to 9th frame)' do
       game = Game.new
       game.roll_pin(8)
