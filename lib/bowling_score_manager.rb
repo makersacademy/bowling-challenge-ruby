@@ -98,6 +98,8 @@ class BowlingScoreManager
     end
 =end
     # Mark possible strike in this frame
+    manage_poss_strike_this_frame( frames, frame_num )
+=begin    
     if (frames[frame_num]).roll1 == 10
       frames[frame_num].status = :strike
       frames[frame_num].roll2 = 0
@@ -107,6 +109,7 @@ class BowlingScoreManager
       # frame_num += 1
       # Go to next roll, still considering on_roll to be 1
     end
+=end
   end
 
   
@@ -171,6 +174,20 @@ class BowlingScoreManager
     end
   end
 
+
+  def self.manage_poss_strike_this_frame( frames, frame_num )
+    if (frames[frame_num]).roll1 == 10
+      frames[frame_num].status = :strike
+      frames[frame_num].roll2 = 0
+      frames[frame_num].total = 10
+      frames[frame_num].completed = false
+      # Maybe remove comments below later?
+      # Need to check for this condition on return and update frame number there
+      # frame_num += 1
+      # Go to next roll, still considering on_roll to be 1
+    end
+  end
+  
   
   def self.handle_frame_10( last_rolls, frames )
     frame_num = 10
