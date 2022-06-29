@@ -8,7 +8,7 @@ class BowlingScoreManager
 
   @@roll3_frame_10 = 0  # Manage the one-off final frame optional roll
 
-  def self.score_game( rollsArray )
+  def self.score_game( rolls )
     # In the simplest case rollsArray is array of twenty roll hits
     # such that none of them cause a spare or a strike
     # and so can basically be added together grouped into
@@ -18,7 +18,7 @@ class BowlingScoreManager
     @frames = self.setup_frames();
     # Populate @frames in simple case and score
     # by simply adding the rolls
-    self.score_frames( rollsArray );
+    self.score_frames( rolls );
   end
     
     
