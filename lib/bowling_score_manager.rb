@@ -22,13 +22,13 @@ class BowlingScoreManager
   end
     
     
-  def self.score_frames( rollsArray )
+  def self.score_frames( rolls )
     frame_num = 1
     on_roll = 1
-    for roll_from_start in 0...rollsArray.size
+    for roll_from_start in 0...rolls.size
       if frame_num == 10
         # Handle remaining sub-array separately
-        handle_frame_10( rollsArray.drop(roll_from_start) )
+        handle_frame_10( rolls.drop(roll_from_start) )
         # Exit the loop completely as work now done
         break
       end
@@ -36,7 +36,7 @@ class BowlingScoreManager
       if on_roll == 1
         # Enter value from rollsArray as roll1
         # into appropriate frame
-        self.manage_frame_roll1( rollsArray[roll_from_start], @frames, frame_num );
+        self.manage_frame_roll1( rolls[roll_from_start], @frames, frame_num );
         if @frames[frame_num].status == :strike
           # Strike recorded in current frame
           # Move to roll one in next frame
@@ -49,7 +49,7 @@ class BowlingScoreManager
         # Enter value from rollsArray as roll2
         # into appropriate frame
 #binding.irb
-          (@frames[frame_num]).roll2 = rollsArray[roll_from_start]
+          (@frames[frame_num]).roll2 = rolls[roll_from_start]
           # Deal with possible strike from previous frame
           if ((frame_num > 1) && @frames[frame_num-1].status == :strike)
             # Add this roll to previous frame and then mark completed
