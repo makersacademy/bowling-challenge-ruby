@@ -19,6 +19,7 @@ class BowlingScoreManager
     # Populate @frames in simple case and score
     # by simply adding the rolls
     self.score_frames( rolls );
+    return self.get_grand_total( @frames )
   end
     
     
@@ -76,8 +77,6 @@ class BowlingScoreManager
           on_roll = 1
       end
     end
-    return self.get_grand_total( @frames )
-    
   end
    
         
