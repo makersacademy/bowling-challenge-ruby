@@ -226,6 +226,14 @@ class BowlingScoreManager
         end
 =end
         # Mark possible strike in this frame
+        manage_poss_strike_this_frame( frames, frame_num )
+        if (frames[frame_num]).roll1 == 10
+          # We don't increase frame number in frame 10
+          # Go to next roll
+          on_roll = 2
+          next
+        end
+=begin        
         if (frames[frame_num]).roll1 == 10
           frames[frame_num].status = :strike
           frames[frame_num].roll2 = 0
@@ -237,6 +245,7 @@ class BowlingScoreManager
           on_roll = 2
           next
         end
+=end
         # Switch to roll2 for next iteration
         on_roll = 2
         next
