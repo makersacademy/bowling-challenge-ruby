@@ -76,7 +76,7 @@ class BowlingScoreManager
           on_roll = 1
       end
     end
-    return self.get_grand_total()
+    return self.get_grand_total( @frames )
     
   end
    
@@ -91,7 +91,7 @@ class BowlingScoreManager
   
 
   def self.manage_frame_roll1( rollValue, frames_array, frame_num );
-#    (frames_array[frame_num]).roll1 = rollsArray[roll_from_start]
+    # Record most recent roll in current frame
     (frames_array[frame_num]).roll1 = rollValue
     # Deal with possible spare from previous frame
     if ((frame_num > 1) && frames_array[frame_num-1].status == :spare)
@@ -210,10 +210,10 @@ class BowlingScoreManager
   end
   
   
-  def self.get_grand_total
+  def self.get_grand_total( frames )
     grand_total = 0
     for i in 1..10
-      grand_total += @frames[i].total
+      grand_total += frames[i].total
     end
     return grand_total
   end
