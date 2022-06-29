@@ -9,7 +9,7 @@ class BowlingScoreManager
   @@roll3_frame_10 = 0  # Manage the one-off final frame optional roll
 
   def self.score_game( rolls )
-    # In the simplest case rollsArray is array of twenty roll hits
+    # In the simplest case rolls is array of twenty roll hits
     # such that none of them cause a spare or a strike
     # and so can basically be added together grouped into
     # frames of two rolls each
@@ -35,7 +35,7 @@ class BowlingScoreManager
       end
       # Remainder to be put in else after frame_num == 10 handled?
       if on_roll == 1
-        # Enter value from rollsArray as roll1
+        # Enter value from rolls as roll1
         # into appropriate frame
         self.manage_frame_roll1( rolls[roll_from_start], @frames, frame_num );
         if @frames[frame_num].status == :strike
@@ -47,6 +47,22 @@ class BowlingScoreManager
         on_roll = 2
         next
       else
+        # Enter value from rolls as roll2
+        # into appropriate frame
+        self.manage_frame_roll2( rolls[roll_from_start], @frames, frame_num );        
+        if @frames[frame_num].status == :spare
+          # Go on to next roll as what follows is for normal frames
+          frame_num += 1
+          on_roll = 1
+          next
+        end
+        # frame_num is usually incremented after every second
+        # roll because two rolls per frame
+        frame_num += 1
+        on_roll = 1
+      end
+      
+=begin
         # Enter value from rollsArray as roll2
         # into appropriate frame
 #binding.irb
@@ -76,6 +92,7 @@ class BowlingScoreManager
           frame_num += 1
           on_roll = 1
       end
+=end
     end
   end
    
@@ -123,7 +140,44 @@ class BowlingScoreManager
       # Go to next roll, still considering on_roll to be 1
     end
   end
+
   
+  def self.manage_frame_roll2( rollValue, frames, frame_num );        
+
+    # Enter value from rolls as roll2
+    # into appropriate frame
+
+    (frames[frame_num]).roll2 = rollValue
+    # Deal with possible strike from previous frame
+    if ((frame_num > 1) && frames[frame_num-1].status == :strike)
+      # Add this roll to previous frame and then mark completed
+      # because this is second of two rolls need to be added to a strike
+      frames[frame_num-1].total += (frames[frame_num]).roll2
+      frames[frame_num-1].completed = true
+    end          
+    # Mark possible spare in this frame
+    if ((frames[frame_num].roll1) + (frames[frame_num].roll2) == 10)
+      frames[frame_num].status = :spare
+      frames[frame_num].total = 10
+      frames[frame_num].completed = false
+      # Need to check this condition and manage below upon return
+      # frame_num += 1
+      # Go to next roll as below is for normal frames
+      # on_roll = 1
+      # next
+      return
+    end
+    # For normal status do below but will need to amend for spare and strike
+    frames[frame_num].total = frames[frame_num].roll1 + frames[frame_num].roll2
+    frames[frame_num].completed = true
+    # frame_num is usually incremented after every second
+    # roll because two rolls per frame
+    # Will have to deal with below on return
+    # frame_num += 1
+    # on_roll = 1
+    return
+  end
+
   
   def self.handle_frame_10( last_rolls )
     frame_num = 10
