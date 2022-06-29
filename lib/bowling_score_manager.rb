@@ -163,11 +163,14 @@ class BowlingScoreManager
 #binding.irb
         (frames[frame_num]).roll1 = last_rolls[rolls_at_end]
         # Deal with possible spare from previous frame
+        self.manage_poss_prev_spare( frames[frame_num].roll1, frames, frame_num )
+=begin
         if ((frame_num > 1) && frames[frame_num-1].status == :spare)
           # Add this roll to previous frame and mark it completed
           frames[frame_num-1].total += (frames[frame_num]).roll1
           frames[frame_num-1].completed = true
         end
+=end
         # Deal with possible strike from previous frame
         if ((frame_num > 1) && frames[frame_num-1].status == :strike)
           # Add this roll to previous frame but don't yet mark completed
