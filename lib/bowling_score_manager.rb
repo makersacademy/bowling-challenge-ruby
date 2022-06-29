@@ -45,7 +45,7 @@ class BowlingScoreManager
           next
         end
         on_roll = 2
-        next
+#        next
       else # on_roll == 2
         # Enter value from rolls as roll2
         # into appropriate frame
