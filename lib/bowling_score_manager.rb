@@ -192,6 +192,8 @@ class BowlingScoreManager
         end
 =end
         # Deal with possible strike from previous frame
+        manage_poss_prev_strike( frames, frame_num )
+=begin
         if ((frame_num > 1) && frames[frame_num-1].status == :strike)
           # Add this roll to previous frame but don't yet mark completed
           # because two rolls need to be added to a strike
@@ -205,6 +207,7 @@ class BowlingScoreManager
             frames[frame_num-1].completed = true
           end
         end
+=end
         # Mark possible strike in this frame
         if (frames[frame_num]).roll1 == 10
           frames[frame_num].status = :strike
