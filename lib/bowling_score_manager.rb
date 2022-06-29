@@ -2,22 +2,20 @@ require 'frame'    # The frame is a smaller unit of scoring the game
                    # Made up of one two, or possibly in the tenth and final
                    # frame, ten rolls.
 
+
 # BowlingScoreManager uses Singleton design pattern
 class BowlingScoreManager
-  @@roll3_frame_10 = 0
-  def self.score( rollsArray )
+
+  @@roll3_frame_10 = 0  # Manage the one-off final frame optional roll
+
+  def self.score_game( rollsArray )
     # In the simplest case rollsArray is array of twenty roll hits
     # such that none of them cause a spare or a strike
     # and so can basically be added together grouped into
     # frames of two rolls each
       
     # Setup array of Frames
-    # @frames[0] = nil and use @frames[1] through @frames[10] inclusive
-    # as this models the domain more closely
     @frames = self.setup_frames();
-#    @frames = [nil]
-#    (1..10).each { @frames << Frame.new }
-#binding.irb    
     # Populate @frames in simple case and score
     # by simply adding the rolls
     frame_num = 1
@@ -196,6 +194,8 @@ class BowlingScoreManager
   
   
   def self.setup_frames
+    # @frames[0] = nil and use @frames[1] through @frames[10] inclusive
+    # as this models the domain more closely
     frames_array = [nil];
     (1..10).each { frames_array << Frame.new }
     return frames_array;
