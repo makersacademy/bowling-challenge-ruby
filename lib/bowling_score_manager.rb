@@ -72,11 +72,14 @@ class BowlingScoreManager
     # Record most recent roll in current frame
     (frames[frame_num]).roll1 = rollValue
     # Deal with possible spare from previous frame
+    manage_poss_prev_spare( rollValue, frames, frame_num );
+=begin
     if ((frame_num > 1) && frames[frame_num-1].status == :spare)
       # Add this roll to previous frame and mark it completed
       frames[frame_num-1].total += (frames[frame_num]).roll1
       frames[frame_num-1].completed = true
     end
+=end
     # Deal with possible strike from previous frame
     if ((frame_num > 1) && frames[frame_num-1].status == :strike)
       # Add this roll to previous frame but don't yet mark completed
@@ -139,6 +142,15 @@ class BowlingScoreManager
     # on_roll = 1
   end
 
+
+  def self.manage_poss_prev_spare( roll, frames, frame_num )
+    if ((frame_num > 1) && frames[frame_num-1].status == :spare)
+      # Add this roll to previous frame and mark it completed
+      frames[frame_num-1].total += roll
+      frames[frame_num-1].completed = true
+    end    
+  end
+  
   
   def self.handle_frame_10( last_rolls, frames )
     frame_num = 10
