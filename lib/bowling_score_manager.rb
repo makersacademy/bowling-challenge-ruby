@@ -36,7 +36,7 @@ class BowlingScoreManager
       if on_roll == 1
         # Enter value from rollsArray as roll1
         # into appropriate frame
-        self.manage_frame_roll1( rollsArray, roll_from_start, @frames, frame_num );
+        self.manage_frame_roll1( rollsArray[roll_from_start], @frames, frame_num );
         if @frames[frame_num].status == :strike
           # Strike recorded in current frame
           # Move to roll one in next frame
@@ -90,8 +90,9 @@ class BowlingScoreManager
   end
   
 
-  def self.manage_frame_roll1( rollsArray, roll_from_start, frames_array, frame_num );
-    (frames_array[frame_num]).roll1 = rollsArray[roll_from_start]
+  def self.manage_frame_roll1( rollValue, frames_array, frame_num );
+#    (frames_array[frame_num]).roll1 = rollsArray[roll_from_start]
+    (frames_array[frame_num]).roll1 = rollValue
     # Deal with possible spare from previous frame
     if ((frame_num > 1) && frames_array[frame_num-1].status == :spare)
       # Add this roll to previous frame and mark it completed
