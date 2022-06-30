@@ -91,6 +91,35 @@ More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 ### State Diagram 2
 ![State Diagram 2](images/StateDiagram2.png)
 
+## Tests iteration 2
+
+* Successfully scores a game including a spare
+* [5,5, 3,1, 2,2, 3,3, 4,4, 4,5, 4,3, 3,2, 2,1, 0,0]
+* Successfully scores a game including two spares
+* [5,5, 3,1, 2,2, 3,3, 6,4, 4,5, 4,3, 3,2, 2,1, 0,0]
+* Successfully scores a game including multiple successive spares
+* [5,2, 3,7, 2,8, 5,5, 6,4, 4,5, 4,3, 3,2, 2,1, 0,0]
+* Successfully scores a game including a strike do
+* [0,0, 1,1, 10, 3,5, 4,4, 4,5, 4,3, 3,2, 2,1, 0,0]
+* Successfully scores a game including a strike followed immediately by a spare
+* [0,0, 1,1, 10, 7,3, 4,4, 4,5, 4,3, 3,2, 2,1, 0,0] 
+* Successfully scores a game including a spare followed immediately by a strike
+* [0,0, 1,1, 4,6, 10, 4,4, 4,5, 4,3, 3,2, 2,1, 0,0]
+* Successfully scores a game including a strike followed immediately by another strike
+* [0,0, 1,1, 5,3, 10, 10, 4,5, 4,3, 3,2, 2,1, 0,0]
+* Successfully scores a game including a strike followed immediately by another two strikes
+* [0,0, 1,1, 5,3, 10, 10, 10, 4,3, 3,2, 2,1, 0,0]
+* Successfully scores final frame in case of maximum possible score
+* [10, 10, 10, 10, 10, 10, 10, 10, 10, 10,10,10] as 300
+* Successfully scores final frame in case of spare in final frame
+* [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 3,7,2]
+* Successfully scores final frame when no third roll needed
+* [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,2]
+* Successfully scores final frame when no third roll needed but preceded by a spare
+* [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 5,5, 1,2]
+* Successfully scores final frame when no third roll needed but preceded by a strike 
+* [1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 10, 1,2]
+
 
 ## Refactor
 
