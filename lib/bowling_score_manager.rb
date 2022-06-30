@@ -6,7 +6,6 @@ require 'frame'    # The frame is a smaller unit of scoring the game
 # BowlingScoreManager uses Singleton design pattern
 class BowlingScoreManager
 
-#  @@roll3_frame_10 = 0  # Manage the one-off final frame optional roll
 
   def self.score_game( rolls )
     @frames = self.setup_frames();
@@ -56,7 +55,7 @@ class BowlingScoreManager
   end
 
   
-  def self.manage_frame_roll2( rollValue, frames, frame_num );        
+  def self.manage_frame_roll2( rollValue, frames, frame_num )        
     (frames[frame_num]).roll2 = rollValue
     manage_roll2_poss_prev_strike( frames, frame_num )
     manage_poss_spare_this_frame( frames, frame_num )
@@ -64,9 +63,12 @@ class BowlingScoreManager
       return
     end
     # For normal status do below but will need to amend for spare and strike
+    sum_normal_frame( frames, frame_num )
+=begin
     frames[frame_num].total = frames[frame_num].roll1 + frames[frame_num].roll2
     frames[frame_num].completed = true
-  end
+=end
+    end
 
 
   def self.manage_poss_prev_spare( roll, frames, frame_num )
@@ -159,7 +161,12 @@ class BowlingScoreManager
       frames[frame_num].completed = true
     end
   end
+
   
+  def self.sum_normal_frame( frames, frame_num )
+    frames[frame_num].total = frames[frame_num].roll1 + frames[frame_num].roll2
+    frames[frame_num].completed = true    
+  end
   
   def self.get_grand_total( frames )
     grand_total = 0
