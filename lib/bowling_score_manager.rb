@@ -158,12 +158,15 @@ class BowlingScoreManager
       elsif on_roll == 2
         (frames[frame_num]).roll2 = last_rolls[rolls_at_end]
         # Deal with possible strike from previous frame
+        manage_roll2_poss_prev_strike( frames, frame_num )
+=begin
         if ((frame_num > 1) && frames[frame_num-1].status == :strike)
           # Add this roll to previous frame and then mark completed
           # because this is second of two rolls need to be added to a strike
           frames[frame_num-1].total += (frames[frame_num]).roll2
           frames[frame_num-1].completed = true
         end          
+=end
         # Mark possible spare in this frame
         if ((frames[frame_num].roll1) + (frames[frame_num].roll2) == 10)
           frames[frame_num].status = :spare
