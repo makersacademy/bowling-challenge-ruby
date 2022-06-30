@@ -40,13 +40,13 @@ class BowlingScoreManager
    
         
   def self.setup_frames
-    # @frames[0] = nil and use @frames[1] through @frames[10] inclusive
-    # as this models the domain more closely
+    # Do not use index 0 as this models the domain more closely
     frames_array = [nil];
     (1..10).each { frames_array << Frame.new }
     return frames_array;
   end
 
+  
   def self.manage_frame_roll1( rollValue, frames, frame_num );
     (frames[frame_num]).roll1 = rollValue
     manage_poss_prev_spare( rollValue, frames, frame_num );
@@ -64,11 +64,7 @@ class BowlingScoreManager
     end
     # For normal status do below but will need to amend for spare and strike
     sum_normal_frame( frames, frame_num )
-=begin
-    frames[frame_num].total = frames[frame_num].roll1 + frames[frame_num].roll2
-    frames[frame_num].completed = true
-=end
-    end
+  end
 
 
   def self.manage_poss_prev_spare( roll, frames, frame_num )
@@ -156,9 +152,7 @@ class BowlingScoreManager
         # No need to loop further
         break
       end
-      # For normal status do below but will need to amend for spare and strike
-      frames[frame_num].total = frames[frame_num].roll1 + frames[frame_num].roll2
-      frames[frame_num].completed = true
+      sum_normal_frame( frames, frame_num )
     end
   end
 
