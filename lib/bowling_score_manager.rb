@@ -6,7 +6,7 @@ require 'frame'    # The frame is a smaller unit of scoring the game
 # BowlingScoreManager uses Singleton design pattern
 class BowlingScoreManager
 
-  @@roll3_frame_10 = 0  # Manage the one-off final frame optional roll
+#  @@roll3_frame_10 = 0  # Manage the one-off final frame optional roll
 
   def self.score_game( rolls )
     @frames = self.setup_frames();
