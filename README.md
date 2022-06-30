@@ -123,6 +123,9 @@ More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ## Refactor
 
-* Internally process the rolls / hits into frames which account for spare roll
+* Internally process the rolls / hits into frames which account for spares
+* Internally process the rolls / hits into frames which account for strikes
+* Internally process the rolls / hits into frames which account for combinations and sequences of above
+* Internally process all of the above including frame 10 and possible third roll therein
 * Test-drove above
 
