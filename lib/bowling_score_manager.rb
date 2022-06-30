@@ -84,7 +84,7 @@ class BowlingScoreManager
         # and mark it complete as both of its following rolls
         # have now been added
         frames[frame_num-2].total += (frames[frame_num]).roll1
-        frames[frame_num-1].completed = true
+        frames[frame_num-2].completed = true
       end
     end
   end
