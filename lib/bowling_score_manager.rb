@@ -59,26 +59,18 @@ class BowlingScoreManager
   
   def self.manage_frame_roll2( rollValue, frames, frame_num );        
     (frames[frame_num]).roll2 = rollValue
-    # Deal with possible strike from previous frame
     manage_roll2_poss_prev_strike( frames, frame_num )
-=begin    
-    if ((frame_num > 1) && frames[frame_num-1].status == :strike)
-      # Add this roll to previous frame and then mark completed
-      # because this is second of two rolls need to be added to a strike
-      frames[frame_num-1].total += (frames[frame_num]).roll2
-      frames[frame_num-1].completed = true
-    end
-=end
     # Mark possible spare in this frame
+    manage_poss_spare_this_frame( frames, frame_num )
+=begin    
     if ((frames[frame_num].roll1) + (frames[frame_num].roll2) == 10)
       frames[frame_num].status = :spare
       frames[frame_num].total = 10
       frames[frame_num].completed = false
-      # Need to check this condition and manage below upon return
-      # frame_num += 1
-      # Go to next roll as below is for normal frames
-      # on_roll = 1
-      # next
+      return
+    end
+=end
+    if ( frames[frame_num].status == :spare )
       return
     end
     # For normal status do below but will need to amend for spare and strike
@@ -126,6 +118,14 @@ class BowlingScoreManager
     end          
   end
 
+  def self.manage_poss_spare_this_frame( frames, frame_num )
+    if ((frames[frame_num].roll1) + (frames[frame_num].roll2) == 10)
+      frames[frame_num].status = :spare
+      frames[frame_num].total = 10
+      frames[frame_num].completed = false
+    end    
+  end
+
 
   def self.manage_poss_strike_this_frame( frames, frame_num )
     if (frames[frame_num]).roll1 == 10
@@ -135,7 +135,7 @@ class BowlingScoreManager
       frames[frame_num].completed = false
     end
   end
-  
+
   
   def self.handle_frame_10( last_rolls, frames )
     frame_num = 10
@@ -157,16 +157,7 @@ class BowlingScoreManager
         next
       elsif on_roll == 2
         (frames[frame_num]).roll2 = last_rolls[rolls_at_end]
-        # Deal with possible strike from previous frame
         manage_roll2_poss_prev_strike( frames, frame_num )
-=begin
-        if ((frame_num > 1) && frames[frame_num-1].status == :strike)
-          # Add this roll to previous frame and then mark completed
-          # because this is second of two rolls need to be added to a strike
-          frames[frame_num-1].total += (frames[frame_num]).roll2
-          frames[frame_num-1].completed = true
-        end          
-=end
         # Mark possible spare in this frame
         if ((frames[frame_num].roll1) + (frames[frame_num].roll2) == 10)
           frames[frame_num].status = :spare
