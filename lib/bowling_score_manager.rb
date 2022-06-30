@@ -59,11 +59,9 @@ class BowlingScoreManager
     (frames[frame_num]).roll2 = rollValue
     manage_roll2_poss_prev_strike( frames, frame_num )
     manage_poss_spare_this_frame( frames, frame_num )
-    if ( frames[frame_num].status == :spare )
-      return
+    if !( frames[frame_num].status == :spare )
+      sum_normal_frame( frames, frame_num )
     end
-    # For normal status do below but will need to amend for spare and strike
-    sum_normal_frame( frames, frame_num )
   end
 
 
