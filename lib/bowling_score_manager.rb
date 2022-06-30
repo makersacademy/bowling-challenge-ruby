@@ -47,7 +47,6 @@ class BowlingScoreManager
     (1..10).each { frames_array << Frame.new }
     return frames_array;
   end
-  
 
   def self.manage_frame_roll1( rollValue, frames, frame_num );
     (frames[frame_num]).roll1 = rollValue
@@ -60,27 +59,13 @@ class BowlingScoreManager
   def self.manage_frame_roll2( rollValue, frames, frame_num );        
     (frames[frame_num]).roll2 = rollValue
     manage_roll2_poss_prev_strike( frames, frame_num )
-    # Mark possible spare in this frame
     manage_poss_spare_this_frame( frames, frame_num )
-=begin    
-    if ((frames[frame_num].roll1) + (frames[frame_num].roll2) == 10)
-      frames[frame_num].status = :spare
-      frames[frame_num].total = 10
-      frames[frame_num].completed = false
-      return
-    end
-=end
     if ( frames[frame_num].status == :spare )
       return
     end
     # For normal status do below but will need to amend for spare and strike
     frames[frame_num].total = frames[frame_num].roll1 + frames[frame_num].roll2
     frames[frame_num].completed = true
-    # frame_num is usually incremented after every second
-    # roll because two rolls per frame
-    # Will have to deal with below on return
-    # frame_num += 1
-    # on_roll = 1
   end
 
 
@@ -158,15 +143,9 @@ class BowlingScoreManager
       elsif on_roll == 2
         (frames[frame_num]).roll2 = last_rolls[rolls_at_end]
         manage_roll2_poss_prev_strike( frames, frame_num )
-        # Mark possible spare in this frame
-        if ((frames[frame_num].roll1) + (frames[frame_num].roll2) == 10)
-          frames[frame_num].status = :spare
-          frames[frame_num].total = 10
-          frames[frame_num].completed = false
-          # Do not increment frame number in frame 10
-          # frame_num += 1
-          # Go to third roll as below is for normal frames
-          on_roll = 3
+        manage_poss_spare_this_frame( frames, frame_num )
+        if ( frames[frame_num].status == :spare )
+          on_roll =3
           next
         end
       else # on_roll == 3
