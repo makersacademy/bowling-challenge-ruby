@@ -130,12 +130,6 @@ class BowlingScoreManager
         self.manage_poss_prev_spare( frames[frame_num].roll1, frames, frame_num )
         manage_roll1_poss_prev_strike( frames, frame_num )
         manage_poss_strike_this_frame( frames, frame_num )
-        if (frames[frame_num]).roll1 == 10
-          # We don't increase frame number in frame 10
-          # Go to next roll
-          on_roll = 2
-          next
-        end
         on_roll = 2
         next
       elsif on_roll == 2
