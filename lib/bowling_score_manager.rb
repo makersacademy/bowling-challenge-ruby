@@ -1,6 +1,6 @@
 require 'frame'    # The frame is a smaller unit of scoring the game
                    # Made up of one two, or possibly in the tenth and final
-                   # frame, ten rolls.
+                   # frame, three rolls.
 
 
 # BowlingScoreManager uses Singleton design pattern
@@ -135,7 +135,7 @@ class BowlingScoreManager
         manage_roll2_poss_prev_strike( frames, frame_num )
         manage_poss_spare_this_frame( frames, frame_num )
         if ( frames[frame_num].status == :spare )
-          on_roll =3
+          on_roll = 3
           next
         end
       else # on_roll == 3
