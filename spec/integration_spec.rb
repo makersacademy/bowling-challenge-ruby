@@ -119,4 +119,50 @@ RSpec.describe "integration of Game and Frame classes" do
         expect(game.sum_total).to eq 24
       end
     end
+  
+    context "if a spare is bowled" do
+      it "adds the next two roll scores as a bonus" do
+        game = Game.new
+      frame_1 = Frame.new
+      frame_2 = Frame.new
+      frame_3 = Frame.new
+      frame_1.roll(4)
+      frame_1.roll(6)
+      game.add(frame_1)
+      frame_2.roll(4)
+      frame_2.roll(1)
+      game.add(frame_2)
+      game.get_frame_score
+      expect(game.next_roll_score).to eq 4
+      expect(game.sum_total).to eq 19
+      end
+    end
+
+    context "if a spare and strike are bowled" do
+      it "adds the scores with bonuses" do
+      game = Game.new
+      frame_1 = Frame.new
+      frame_2 = Frame.new
+      frame_3 = Frame.new
+      frame_4 = Frame.new
+      frame_5 = Frame.new
+      frame_1.roll(3)
+      frame_1.roll(6)
+      game.add(frame_1)
+      frame_2.roll(4)
+      frame_2.roll(6)
+      game.add(frame_2)
+      frame_3.roll(2)
+      frame_3.roll(0)
+      game.add(frame_3)
+      frame_4.roll(10)
+      game.add(frame_4)
+      frame_5.roll(4)
+      frame_5.roll(3)
+      game.add(frame_5)
+      game.get_frame_score
+      expect(game.sum_total).to eq 45
+      end
+    end
+
 end
