@@ -4,26 +4,35 @@ class Game
 
   def initialize
     @scores = []
+    @frames = []
     @current_frame = 1
   end
 
   def add(frame) # frame is an instance of Frame
-    @scores << frame
+    @frames << frame
     @current_frame += 1
   end
 
-  def score_card
-    @scores
+  def get_frame_score
+    @scores = @frames.map do |object|
+      object.frame_score
+    end
+    
+    end
 
+  def score_card
+    @frames
+  end
+
+  def frame_scores
+    @scores
   end
   
   def sum_total 
-    @scores.inject(:+)
-  #   result_1 = @scores.flatten.map do |score|
-  #     score.frame_score
-  #   end
-  #   result_2 = result_1.inject(:+)
-  #   result_3 = result_2.inject(:+)
-  #   p result_3
+    @scores.flatten.inject(:+)
   end
+
+  def next_frame_score
+    @scores[@current_frame - 2].inject(:+)
+  end 
 end

@@ -4,10 +4,9 @@ class Frame
 
   def initialize 
   @rolls = []
-  @closed = false
+  #@closed = false
   @pins_left = 10
   @roll_counter = 0
-  @roll_score = 0
   end
 
   def roll(pins)
