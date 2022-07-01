@@ -17,19 +17,22 @@ class Game
     @scores = @frames.map do |object|
       object.frame_score
     end
-    
-    end
+  end
 
   def score_card
     @frames
   end
 
   def frame_scores
-    @scores
+    if @scores[@current_frame - 3][0] == 10
+      @scores << next_frame_score
+    else
+      @scores
+    end
   end
-  
+
   def sum_total 
-    @scores.flatten.inject(:+)
+    frame_scores.flatten.inject(:+)
   end
 
   def next_frame_score

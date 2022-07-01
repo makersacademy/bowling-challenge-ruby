@@ -3,10 +3,10 @@ class Frame
   attr_reader :pins_left, :roll_counter
 
   def initialize 
-  @rolls = []
-  #@closed = false
-  @pins_left = 10
-  @roll_counter = 0
+    @rolls = []
+    #@closed = false
+    @pins_left = 10
+    @roll_counter = 0
   end
 
   def roll(pins)
@@ -41,7 +41,4 @@ class Frame
     end
   end
 
-  def bonus
-  end
-    
 end

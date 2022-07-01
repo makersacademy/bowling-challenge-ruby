@@ -40,14 +40,6 @@ RSpec.describe Frame do
     expect(frame.roll_counter).to eq 2
   end
 
-  xcontext "if a strike is bowled" do
-    it "adds the next two roll scores as a bonus" do
-      frame = Frame.new
-      frame.roll(10)
-      frame.bonus
-      expect(frame.frame_score).to eq 
-    end
-  end
 end
 
 
