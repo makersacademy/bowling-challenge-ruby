@@ -74,14 +74,14 @@ describe Scorecard do
   it "returns correct running total for first 8 frames of a game including normal rolls, spares and strikes" do
     frames = [[2, 8], [2, 7], [3, 2], [2, 0], [6, 4], [3, 1], [10], [10], [10], [8, 2, 2]]
     scorecard = Scorecard.new(frames)
-    expect(scorecard.normal_running_total(1)).to eq 12
-    expect(scorecard.normal_running_total(2)).to eq 21
-    expect(scorecard.normal_running_total(3)).to eq 26
-    expect(scorecard.normal_running_total(4)).to eq 28
-    expect(scorecard.normal_running_total(5)).to eq 41
-    expect(scorecard.normal_running_total(6)).to eq 45
-    expect(scorecard.normal_running_total(7)).to eq 75
-    expect(scorecard.normal_running_total(8)).to eq 103
+    expect(scorecard.running_total(1)).to eq 12
+    expect(scorecard.running_total(2)).to eq 21
+    expect(scorecard.running_total(3)).to eq 26
+    expect(scorecard.running_total(4)).to eq 28
+    expect(scorecard.running_total(5)).to eq 41
+    expect(scorecard.running_total(6)).to eq 45
+    expect(scorecard.running_total(7)).to eq 75
+    expect(scorecard.running_total(8)).to eq 103
   end
 
   it "returns correct ninth frame score" do
@@ -93,13 +93,13 @@ describe Scorecard do
   it "returns correct running total at 9th frame for game including normal rolls, spares and strikes" do
     frames = [[2, 8], [2, 7], [3, 2], [2, 0], [6, 4], [3, 1], [10], [10], [10], [8, 2, 2]]
     scorecard = Scorecard.new(frames)
-    expect(scorecard.normal_running_total(9)).to eq 123
+    expect(scorecard.running_total(9)).to eq 123
   end
 
   it "returns correct running total at 10th frame for 3 strike final game" do
     frames = [[2, 8], [2, 7], [3, 2], [2, 0], [6, 4], [3, 1], [10], [10], [10], [10, 10, 10]]
     scorecard = Scorecard.new(frames)
-    expect(scorecard.normal_running_total(10)).to eq 165
+    expect(scorecard.running_total(10)).to eq 165
   end
 
   it "returns true for valid input" do
@@ -132,7 +132,7 @@ describe Scorecard do
     expect(scorecard.valid_input?).to eq false
   end
 
-  it "returns nicely formatted scoreboard" do
+  xit "returns nicely formatted scoreboard" do
     frames = [[10], [10], [9, 1], [9, 1], [10], [8, 1], [9, 0], [10], [10], [9, 1, 0]]
     scorecard = Scorecard.new(frames)
     expect(scorecard.final).to include("Frame 1 Roll(s): 10.\n TOTAL SCORE: 29")

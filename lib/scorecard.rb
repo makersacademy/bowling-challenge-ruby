@@ -14,7 +14,7 @@ class Scorecard
   def totals_script
     frame = 1
     while frame <= 10
-      puts "Frame #{frame} - Pins Knocked: #{@frames[frame - 1]}.\n TOTAL SCORE: #{normal_running_total(frame)}"
+      puts "Frame #{frame} - Pins Knocked: #{@frames[frame - 1]}.\n TOTAL SCORE: #{running_total(frame)}"
       frame += 1
     end
   end
@@ -37,8 +37,7 @@ class Scorecard
     end
   end
 
-  def normal_running_total(frame_number)
-    # provides running total from frames 1 to "frame_number" for up to first 8 frames.
+  def running_total(frame_number)
     frame = 1
     total = 0
     while frame <= frame_number
