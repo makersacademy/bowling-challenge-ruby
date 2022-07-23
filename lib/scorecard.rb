@@ -131,6 +131,6 @@ class Scorecard
   end
 end
 
-frames = [[10], [3, 4], [5, 5], [5, 5], [10], [8, 1], [10], [10], [3, 7], [10, 2, 8]]
-scorecard = Scorecard.new(frames)
-scorecard.run
+# frames = [[10], [3, 4], [5, 5], [5, 5], [10], [8, 1], [10], [10], [3, 7], [10, 2, 8]]
+# scorecard = Scorecard.new(frames)
+# scorecard.run
