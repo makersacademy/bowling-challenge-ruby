@@ -135,8 +135,8 @@ describe Scorecard do
   xit "returns nicely formatted scoreboard" do
     frames = [[10], [10], [9, 1], [9, 1], [10], [8, 1], [9, 0], [10], [10], [9, 1, 0]]
     scorecard = Scorecard.new(frames)
-    expect(scorecard.final).to include("Frame 1 Roll(s): 10.\n TOTAL SCORE: 29")
-    expect(scorecard.final).to include("Frame 9 Roll(s): 10.\n TOTAL SCORE: 174")
-    expect(scorecard.final).to include("Frame 10 Roll(s): 9, 1, 0.\n TOTAL SCORE: 184")
+    expect(scorecard.run).to include("Frame 1 Roll(s): 10.\n TOTAL SCORE: 29")
+    expect(scorecard.run).to include("Frame 9 Roll(s): 10.\n TOTAL SCORE: 174")
+    expect(scorecard.run).to include("Frame 10 Roll(s): 9, 1, 0.\n TOTAL SCORE: 184")
   end
 end

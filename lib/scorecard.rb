@@ -3,7 +3,7 @@ class Scorecard
     @frames = frames
   end
 
-  def final
+  def run
     if valid_input? == false
       puts "Check the rolls you entered. Rules are:\n  Exactly 10 frames\n  Each roll between 0 - 10\n  Each frame must add up to less than 10 (except for 10th frame where max sum is 30)\n  2 rolls per frame (unless it's a strike or it's the tenth frame bonus roll)"
     else
@@ -20,23 +20,37 @@ class Scorecard
   end
 
   def current_frame_score(frame_number)
-    # "normal frame" refers to frames 1 to 8, whose scores cannot be impacted by the 10th frame's 2nd and 3rd roll (10th frame has its own unique ruleset)
+    current_frame = @frames[frame_number - 1]
+    next_frame = @frames[frame_number]
+    subsequent_frame = @frames[frame_number + 1]
+
+    # call on separate function if it's the ninth frame (because of its unique scoring interactions with the tenth frame)
     if frame_number == 9
       return ninth_frame_score
+
+      # if it's the tenth frame, score is the sum of all rolls in the frame
     elsif frame_number == 10
-      return @frames[9].sum
-    elsif @frames[frame_number - 1][0] == 10 && @frames[frame_number].length == 2
-      return 10 + @frames[frame_number].sum
-    elsif @frames[frame_number - 1][0] == 10 && @frames[frame_number].length == 1
-      #   p @frames[frame_number + 1]
-      return 20 + @frames[frame_number + 1][0]
-    elsif @frames[frame_number - 1].sum == 10
-      return 10 + @frames[frame_number][0]
+      return current_frame.sum
+
+      # if curent frame is a strike and the next frame isn't a strike, score is 10 + sum of next frame
+    elsif current_frame[0] == 10 && next_frame.length == 2
+      return 10 + next_frame.sum
+
+      # if current frame and next frame are strikes, score is 20 + first roll of the subsequent frame
+    elsif current_frame[0] == 10 && next_frame.length == 1
+      return 20 + subsequent_frame[0]
+
+      # if current frame is a spare, score is 10 + first roll of next frame
+    elsif current_frame.sum == 10
+      return 10 + next_frame[0]
+
+      # if frame isn't a spare or a strike, score is the sum of each roll in the frame
     else
-      return @frames[frame_number - 1].sum
+      return current_frame.sum
     end
   end
 
+  # add up all the single frame scores up to the specified frame number
   def running_total(frame_number)
     frame = 1
     total = 0
@@ -48,12 +62,15 @@ class Scorecard
   end
 
   def ninth_frame_score
-    if @frames[8][0] == 10
-      return 10 + @frames[9][0] + @frames[9][1]
-    elsif @frames[8].sum == 10
-      return 10 + @frames[9][0]
+    ninth_frame = @frames[8]
+    tenth_frame = @frames[9]
+
+    if ninth_frame[0] == 10
+      return 10 + tenth_frame[0] + tenth_frame[1]
+    elsif ninth_frame.sum == 10
+      return 10 + tenth_frame[0]
     else
-      return @frames[8].sum
+      return ninth_frame.sum
     end
   end
 
@@ -69,8 +86,8 @@ class Scorecard
     else
       true
     end
-    # check that array length is 10, no negative numbers, the sum of each subarray less than ten (except tenth frame which is max 20) / each element of each subarray has to be
-    # between 0 and 10 as well as the sum being less than 10. Relevant for last frame as you could have 11 , 5, 2 which is less than 20 but can't have 11.
+    # check that array length is 10, no negative numbers, the sum of each subarray less than ten (except tenth frame which is max 30) / each element of each subarray has to be
+    # between 0 and 10 as well as the sum being less than 10. Max 2 rolls per frame (apart from the 10th). If frame has one roll the score has to be 10.
   end
 
   private
@@ -116,4 +133,4 @@ end
 
 frames = [[10], [3, 4], [5, 5], [5, 5], [10], [8, 1], [10], [10], [3, 7], [10, 2, 8]]
 scorecard = Scorecard.new(frames)
-scorecard.final
+scorecard.run
