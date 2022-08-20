@@ -73,5 +73,13 @@ RSpec.describe "bowl_score" do
       result = score(rolls.flatten)
       expect(result).to eq(70)       
     end
+
+    it "scores the correct bonus for any spares" do
+      rolls = []
+      10.times { rolls << [3, 4] }
+      rolls[1] = [4, 6]
+      result = score(rolls.flatten)
+      expect(result).to eq(76)  
+    end
   end
 end

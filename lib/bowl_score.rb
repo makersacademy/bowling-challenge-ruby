@@ -1,8 +1,15 @@
 
 def score(rolls)
   fail "Invalid rolls" unless rolls_valid?(rolls)
+  score = rolls.sum
   game = to_frames(rolls)
-  game.flatten.sum
+  
+  # spare bonus
+  spares = game.map.each_with_index do |frame, ind|
+    frame.sum == 10 ? game[ind + 1][0] : 0
+  end.sum
+
+  score += spares
 end
 
 
