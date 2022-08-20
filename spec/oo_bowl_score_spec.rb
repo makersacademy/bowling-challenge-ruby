@@ -25,47 +25,42 @@ RSpec.describe "bowl_score" do
     end
   end
 
-  xcontext "score different rolls" do
+  context "score different rolls" do
     it "scores a 10 frame game with no strikes or spares" do
-      rolls = []
-      10.times { rolls << [3, 4] }
-      result = score(rolls.flatten)
-      expect(result).to eq(70)       
+      rolls = 10.times.map { [3, 4] }
+      result = BowlScore.new(rolls.flatten)
+      expect(result.score).to eq(70)       
     end
 
     it "scores the correct bonus for a spare" do
-      rolls = []
-      10.times { rolls << [3, 4] }
+      rolls = 10.times.map { [3, 4] }
       rolls[1] = [4, 6]
-      result = score(rolls.flatten)
-      expect(result).to eq(76)  
+      result = BowlScore.new(rolls.flatten)
+      expect(result.score).to eq(76)       
     end
 
     it "scores the correct bonus for a spare in the last frame" do
-      rolls = []
-      9.times { rolls << [3, 4] }
+      rolls = 9.times.map { [3, 4] }
       rolls << [4, 6, 8]
-      result = score(rolls.flatten)
-      expect(result).to eq(81)  
+      result = BowlScore.new(rolls.flatten)
+      expect(result.score).to eq(81)  
     end
 
     it "scores the correct bonus for a spare in the last frame" do
-      rolls = []
-      9.times { rolls << [3, 4] }
+      rolls = 9.times.map { [3, 4] }
       rolls << [4, 6, 0]
-      result = score(rolls.flatten)
-      expect(result).to eq(73)  
+      result = BowlScore.new(rolls.flatten)
+      expect(result.score).to eq(73)    
     end
 
     it "scores a strike in a middle frame" do
-      rolls = []
-      10.times { rolls << [3, 4] }
+      rolls = 10.times.map { [3, 4] }
       rolls[1] = [10]
-      result = score(rolls.flatten)
-      expect(result).to eq(80)  
+      result = BowlScore.new(rolls.flatten)
+      expect(result.score).to eq(80)   
     end
 
-    it "scores a strike in the end frame" do
+    xit "scores a strike in the end frame" do
       rolls = []
       9.times { rolls << [3, 4] }
       rolls << [10, 0, 0]
@@ -73,7 +68,7 @@ RSpec.describe "bowl_score" do
       expect(result).to eq(73)  
     end
 
-    it "scores a strike in the end frame" do
+    xit "scores a strike in the end frame" do
       rolls = []
       9.times { rolls << [3, 4] }
       rolls << [10, 10, 10]
@@ -82,7 +77,7 @@ RSpec.describe "bowl_score" do
     end
   end
 
-  context "edge cases" do
+  xcontext "edge cases" do
     it "perfect game" do
       rolls = []
       9.times { rolls << [10] }
