@@ -42,15 +42,13 @@ RSpec.describe "bowl_score" do
 
   context "rolls into frames" do
     it "puts a simple game of 20 rolls into 10 frames" do
-      frames = []
-      10.times { frames << [3, 4] }
+      frames = 10.times.map { [3, 4] }
       result = to_frames(frames.flatten)
       expect(result).to eq(frames)
     end
 
     it "a frame with a strike must have 1 roll" do
-      frames = []
-      10.times { frames << [3, 4] }
+      frames = 10.times.map { [3, 4] }
       frames[1] = [10]
       frames[2] = [10]
       result = to_frames(frames.flatten)
