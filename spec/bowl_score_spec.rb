@@ -74,12 +74,52 @@ RSpec.describe "bowl_score" do
       expect(result).to eq(70)       
     end
 
-    it "scores the correct bonus for any spares" do
+    it "scores the correct bonus for a spare" do
       rolls = []
       10.times { rolls << [3, 4] }
       rolls[1] = [4, 6]
       result = score(rolls.flatten)
       expect(result).to eq(76)  
+    end
+
+    it "scores the correct bonus for a spare in the last frame" do
+      rolls = []
+      9.times { rolls << [3, 4] }
+      rolls << [4, 6, 8]
+      result = score(rolls.flatten)
+      expect(result).to eq(81)  
+    end
+
+    it "scores the correct bonus for a spare in the last frame" do
+      rolls = []
+      9.times { rolls << [3, 4] }
+      rolls << [4, 6, 0]
+      result = score(rolls.flatten)
+      expect(result).to eq(73)  
+    end
+
+    it "scores a strike in a middle frame" do
+      rolls = []
+      10.times { rolls << [3, 4] }
+      rolls[1] = [10]
+      result = score(rolls.flatten)
+      expect(result).to eq(80)  
+    end
+
+    it "scores a strike in the end frame" do
+      rolls = []
+      9.times { rolls << [3, 4] }
+      rolls << [10, 0, 0]
+      result = score(rolls.flatten)
+      expect(result).to eq(73)  
+    end
+
+    it "scores a strike in the end frame" do
+      rolls = []
+      9.times { rolls << [3, 4] }
+      rolls << [10, 10, 10]
+      result = score(rolls.flatten)
+      expect(result).to eq(93)  
     end
   end
 end

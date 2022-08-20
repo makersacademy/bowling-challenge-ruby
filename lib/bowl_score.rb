@@ -1,17 +1,17 @@
 
 def score(rolls)
   fail "Invalid rolls" unless rolls_valid?(rolls)
-  score = rolls.sum
   game = to_frames(rolls)
-  
-  # spare bonus
-  spares = game.map.each_with_index do |frame, ind|
-    frame.sum == 10 ? game[ind + 1][0] : 0
+
+  bonus = game.map.each_with_index do |frame, ind|
+    # add in first from next frame
+    (frame.sum == 10 && ind < 9 ? game[ind + 1][0] : 0) +
+    # add in second from next frame if strike
+    (frame.sum == 10 && ind < 9 && frame.length == 1 ? game[ind + 1][1] : 0)
   end.sum
 
-  score += spares
+  game.flatten.sum + bonus
 end
-
 
 # convert rolls into frames
 def to_frames(rolls)
