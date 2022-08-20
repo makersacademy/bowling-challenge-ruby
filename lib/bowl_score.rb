@@ -1,5 +1,5 @@
 
-# convert rolls into frames. 
+# convert rolls into frames
 def to_frames(rolls)
   game = []
   frame_num = 0
@@ -7,10 +7,11 @@ def to_frames(rolls)
   rolls.each do |roll|
     game[frame_num] == nil ? game << [roll] : game[frame_num] << roll
     frame_num += 1 if game[frame_num].length == 2 || game[frame_num].sum == 10
+    frame_num = 9 if frame_num > 9
   end
 
   game
-  
+
 end
 
 # rolls must have between 11 and 21 balls and all numbers must be between 0 and 10

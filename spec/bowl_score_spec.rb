@@ -48,5 +48,21 @@ RSpec.describe "bowl_score" do
       result = to_frames(frames.flatten)
       expect(result).to eq(frames)
     end
+
+    it "10th frame with a spare and extra ball" do
+      frames = []
+      9.times { frames << [3, 4] }
+      frames << [4, 6, 5]
+      result = to_frames(frames.flatten)
+      expect(result).to eq(frames)
+    end
+
+    it "10th frame with a strike and 2 extra balls" do
+      frames = []
+      9.times { frames << [3, 4] }
+      frames << [10, 9, 10]
+      result = to_frames(frames.flatten)
+      expect(result).to eq(frames)      
+    end
   end
 end
