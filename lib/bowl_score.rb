@@ -1,4 +1,4 @@
-# calculate score of bowls
+# calculate score of rolls
 def score(rolls)
   fail "Invalid rolls" unless rolls_valid?(rolls)
   game = to_frames(rolls)
