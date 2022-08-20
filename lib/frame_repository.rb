@@ -5,7 +5,7 @@ class FrameRepository
     @frames = []
   end
 
-  def score_calculator
+  def calculate_score
       # frame = Frame.new(@roll_1, @roll_2)
       # @scorecard << frame.score
       # total_score = @scorecard.map { |frame| frame.sum }.sum
