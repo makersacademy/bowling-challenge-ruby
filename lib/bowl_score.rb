@@ -1,19 +1,20 @@
-
+# calculate score of bowls
 def score(rolls)
   fail "Invalid rolls" unless rolls_valid?(rolls)
   game = to_frames(rolls)
 
   bonus = game.map.each_with_index do |frame, ind|
-    # add in first from next frame
+    # add in the next roll if this frame adds up to 10 and is not last frame
     (frame.sum == 10 && ind < 9 ? game[ind + 1][0] : 0) +
-    # add in second from next frame if strike
-    (frame.sum == 10 && ind < 9 && frame.length == 1 ? game[ind + 1][1] : 0)
+
+    # add second roll if strike and not last frame
+    (frame[0] == 10 && ind < 9 ? game[(ind + 1)..-1].flatten[1] : 0)
   end.sum
 
-  game.flatten.sum + bonus
+  rolls.sum + bonus
 end
 
-# convert rolls into frames
+# convert rolls into frames - up to 3 rolls allowed in 10th frame
 def to_frames(rolls)
   game = []
   frame_num = 0

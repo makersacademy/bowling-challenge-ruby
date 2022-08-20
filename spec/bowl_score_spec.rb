@@ -3,7 +3,9 @@ require 'bowl_score'
 RSpec.describe "bowl_score" do
   context "checks rolls has between 11 and 21 balls" do
     it "returns false for 6 balls" do
-      result = rolls_valid?([3, 5, 6, 4, 4, 8])
+      rolls = []
+      6.times { rolls << 4 }
+      result = rolls_valid?(rolls)
       expect(result).to eq(false)
     end
 
@@ -15,19 +17,25 @@ RSpec.describe "bowl_score" do
     end
   end
 
-  context "checks numbers are between 0 and 10"do
-    it "returns true with [3, 5, 6, 4, 4, 8, 4, 5, 6, 3, 6]" do
-      result = rolls_valid?([3, 5, 6, 4, 4, 8, 4, 5, 6, 3, 6])
+  context "checks numbers are between 0 and 10" do
+    it "returns true with numbers between 0 and 10" do
+      rolls = []
+      11.times { rolls << 5 }
+      result = rolls_valid?(rolls)
       expect(result).to eq(true)
     end
 
-    it "returns false with [11, 5, 6, 4, 4, 8, 4, 5, 6, 3, 6]" do
-      result = rolls_valid?([11, 5, 6, 4, 4, 8, 4, 5, 6, 3, 6])
+    it "returns false with numbers greater than 10" do
+      rolls = []
+      11.times { rolls << 11 }
+      result = rolls_valid?(rolls)
       expect(result).to eq(false)
     end
 
-    it "returns false with [3, -4, 6, 4, 4, 8, 4, 5, 6, 3, 6]" do
-      result = rolls_valid?([3, -4, 6, 4, 4, 8, 4, 5, 6, 3, 6])
+    it "returns false with numbers less than 0" do
+      rolls = []
+      11.times { rolls << -4 }
+      result = rolls_valid?(rolls)
       expect(result).to eq(false)
     end
   end
@@ -120,6 +128,31 @@ RSpec.describe "bowl_score" do
       rolls << [10, 10, 10]
       result = score(rolls.flatten)
       expect(result).to eq(93)  
+    end
+  end
+
+  context "edge cases" do
+    it "perfect game" do
+      rolls = []
+      9.times { rolls << [10] }
+      rolls << [10, 10, 10]
+      result = score(rolls.flatten)
+      expect(result).to eq(300)  
+    end
+
+    it "gutter game" do
+      rolls = []
+      10.times { rolls << [0, 0] }
+      result = score(rolls.flatten)
+      expect(result).to eq(0)  
+    end
+  end
+
+  context "mix it up a bit" do
+    it "mixed game scores" do
+      rolls = [10, 5, 0, 4, 6, 10, 10, 2, 3, 1, 9, 10, 0, 0, 10, 5, 5]
+      result = score(rolls)
+      expect(result).to eq(132)
     end
   end
 end
