@@ -6,14 +6,16 @@
 
 2. Designing the classes
   class Frames
+    attr_reader :first_roll, :second_roll, :strike, :spare
 
     def initialize(first_roll, second_roll)
       @first_roll = first_roll
       @second_roll = second_roll
-      @strike = false
-      @spare = false
+      @strike = is_strike
+      @spare = is_spare
     end
 
+    priv 
     def is_strike
       if @first_roll == 10
       @strike = true
@@ -35,7 +37,7 @@
     end
 
     def add_frame(first_roll, second_roll)
-    if @frames.length < 10
+      if @frames.length < 10
       Frames.new(,)
     end
   end
