@@ -1,3 +1,4 @@
+require_relative 'lib/frame'
 require_relative 'lib/frame_repository'
 
 class App
