@@ -65,4 +65,13 @@ RSpec.describe "bowl_score" do
       expect(result).to eq(frames)      
     end
   end
+
+  context "score different rolls" do
+    it "scores a 10 frame game with no strikes or spares" do
+      rolls = []
+      10.times { rolls << [3, 4] }
+      result = score(rolls.flatten)
+      expect(result).to eq(70)       
+    end
+  end
 end
