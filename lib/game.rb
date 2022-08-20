@@ -8,6 +8,11 @@ class Game
   end
 
   def calculate_current_score
+    score = 0
+    @frames.each { |frame|
+      score += (frame.first_roll + frame.second_roll)
+    }
+    return score
   end
 
   def add_frame(first_roll, second_roll)
