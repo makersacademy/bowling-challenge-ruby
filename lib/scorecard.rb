@@ -8,4 +8,8 @@ class Scorecard
   def add(frame)
     @frames << frame
   end
+
+  def calculate_score
+    return 0
+  end
 end
