@@ -1,13 +1,20 @@
 require_relative 'frame'
 
 class BowlingScorecard
-  def initialize(io = Kernel)
+
+  def initialize(io = Kernel, frames = [])
     @io = io
-    @frames = []
+    @frames = frames
   end
 
+  # def run 
+  #   @io.puts "Frame 1"
+  #   frame_loop
+
+  # end
+
   def roll(frame)
-    pinfall = pinfall_check
+    pinfall = pinfall_check(frame)
     frame.rolls << pinfall
     if pinfall == 10
       frame.bonus_rolls += 2
@@ -29,12 +36,13 @@ class BowlingScorecard
 
   private
 
-  def pinfall_check
+  def pinfall_check(frame)
     loop do
       value = @io.gets.to_i
-      return value unless value > 10
+      max_value = 10 - frame.rolls.sum
+      return value unless value > max_value
 
-      @io.puts 'Please enter a value of 10 or less'
+      @io.puts "Please enter a value of #{max_value} or less"
     end
   end
 end
