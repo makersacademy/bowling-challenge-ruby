@@ -3,14 +3,14 @@ def score(rolls)
   fail "Invalid rolls" unless rolls_valid?(rolls)
   game = to_frames(rolls)
 
-  bonus = (0..8).map do |ind|
+  bonus = (0..8).sum do |ind|
     # add in next roll if frame adds up to 10
     (game[ind].sum == 10 ? game[ind + 1][0] : 0 ) +
     # add second roll if strike
     (game[ind][0] == 10 ? game[(ind + 1)..-1].flatten[1] : 0 )
   end
 
-  game.flatten.sum + bonus.sum
+  game.flatten.sum + bonus
 end
 
 # convert rolls into 10 frames - up to 3 rolls allowed in 10th frame

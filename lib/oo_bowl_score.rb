@@ -6,11 +6,11 @@ class BowlScore
   end
 
   def score
-    bonus = 9.times.map do |ind| 
+    bonus = 9.times.sum do |ind| 
       (@game.frames[ind].spare_or_strike ? @game.next_roll(ind + 1) : 0) +
       (@game.frames[ind].strike ? @game.next_two(ind + 1) : 0)
     end
-    @game.frames.map.sum { |frame| frame.score } + bonus.sum    
+    @game.frames.sum { |frame| frame.score } + bonus    
   end
 
   private
