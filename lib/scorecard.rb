@@ -1,6 +1,6 @@
 require_relative 'frame'
 
-class FrameRepository
+class Scorecard
   def initialize
     @frames = []
     @bonus_points = []
@@ -38,7 +38,7 @@ class FrameRepository
     elsif @last_frame.strike? && !end_of_game?
       @bonus_points << frame.roll_1 << frame.roll_2
     # elsif @second_last_frame.strike? && @last_frame.strike? && !end_of_game?
-
+    #   @bonus_points << frame.roll_1 << frame.roll_2
     end
   end
 end

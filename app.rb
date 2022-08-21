@@ -1,5 +1,5 @@
 require_relative 'lib/frame'
-require_relative 'lib/frame_repository'
+require_relative 'lib/scorecard'
 
 class App
   def initialize(io)
@@ -12,11 +12,14 @@ class App
 
     while @frame_number <= 10
       @io.puts "Please enter the first number of knocked down pins:"
-      @roll_1 = @io.gets.chomp.to_i
+      roll_1 = @io.gets.chomp.to_i
       @io.puts "Please enter the second number of knocked down pins:"
-      @roll_2 = @io.gets.chomp.to_i
+      roll_2 = @io.gets.chomp.to_i
 
-      @io.puts "Your score: #{@frame_score}"
+      frame_repo = FrameRepository.new
+      frame = Frame.new(roll_1, roll_2)
+      frame_repo.add(frame)
+
       @frame_number += 1
     end
   end
