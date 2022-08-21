@@ -15,7 +15,7 @@ end
 
 # convert rolls into 10 frames - up to 3 rolls allowed in 10th frame
 def to_frames(rolls)
-  result = 9.times.map { rolls[0] == 10 ? rolls.shift(1) : rolls.shift(2) }
+  result = (0..8).map { rolls[0] == 10 ? rolls.shift(1) : rolls.shift(2) }
   result << rolls.shift(rolls.length) 
 end
 
