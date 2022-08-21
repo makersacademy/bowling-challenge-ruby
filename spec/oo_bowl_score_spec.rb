@@ -60,45 +60,41 @@ RSpec.describe "bowl_score" do
       expect(result.score).to eq(80)   
     end
 
-    xit "scores a strike in the end frame" do
-      rolls = []
-      9.times { rolls << [3, 4] }
+    it "scores a strike in the end frame" do
+      rolls = 9.times.map { [3, 4] }
       rolls << [10, 0, 0]
-      result = score(rolls.flatten)
-      expect(result).to eq(73)  
+      result = BowlScore.new(rolls.flatten)
+      expect(result.score).to eq(73) 
     end
 
-    xit "scores a strike in the end frame" do
-      rolls = []
-      9.times { rolls << [3, 4] }
+    it "scores a strike in the end frame" do
+      rolls = 9.times.map { [3, 4] }
       rolls << [10, 10, 10]
-      result = score(rolls.flatten)
-      expect(result).to eq(93)  
+      result = BowlScore.new(rolls.flatten)
+      expect(result.score).to eq(93) 
     end
   end
 
-  xcontext "edge cases" do
+  context "edge cases" do
     it "perfect game" do
-      rolls = []
-      9.times { rolls << [10] }
+      rolls = 9.times.map { [10] }
       rolls << [10, 10, 10]
-      result = score(rolls.flatten)
-      expect(result).to eq(300)  
+      result = BowlScore.new(rolls.flatten)
+      expect(result.score).to eq(300) 
     end
 
     it "gutter game" do
-      rolls = []
-      10.times { rolls << [0, 0] }
-      result = score(rolls.flatten)
-      expect(result).to eq(0)  
+      rolls = 10.times.map { [0, 0] }
+      result = BowlScore.new(rolls.flatten)
+      expect(result.score).to eq(0) 
     end
   end
 
   context "mix it up a bit" do
     it "mixed game scores" do
       rolls = [10, 5, 0, 4, 6, 10, 10, 2, 3, 1, 9, 10, 0, 0, 10, 5, 5]
-      result = score(rolls)
-      expect(result).to eq(132)
+      result = BowlScore.new(rolls)
+      expect(result.score).to eq(132) 
     end
   end
 end

@@ -14,6 +14,10 @@ class Frame
     @frame
   end
 
+  def nrolls
+    @frame.length
+  end
+
   def spare_or_strike
     return true if @frame.sum == 10
     return true if @frame.length == 3 && @frame[0..1].sum == 10

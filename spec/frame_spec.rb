@@ -7,6 +7,7 @@ RSpec.describe Frame do
       expect(frame.score).to eq(9)
       expect(frame.spare_or_strike).to eq(false) 
       expect(frame.strike).to eq(false)
+      expect(frame.nrolls).to eq(2)
     end
 
     it "with spare" do
@@ -20,6 +21,7 @@ RSpec.describe Frame do
       expect(frame.score).to eq(10)
       expect(frame.spare_or_strike).to eq(true) 
       expect(frame.strike).to eq(true)
+      expect(frame.nrolls).to eq(1)
     end
 
     it "no bonus" do
