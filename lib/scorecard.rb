@@ -5,10 +5,13 @@ class Scorecard
     @frames = []
     @bonus_points = []
     @last_frame = Frame.new(0,0)
+    @second_last_frame = Frame.new(0,0)
   end
 
   def add(frame)
-    bonus_points(frame)
+    calc_bonus_points(frame)
+
+    p @bonus_points
 
     @frames << frame
     @last_frame = @frames[-1]
@@ -32,13 +35,13 @@ class Scorecard
     return @frames.length == 10
   end
 
-  def bonus_points(frame)
+  def calc_bonus_points(frame)
     if @last_frame.spare? && !end_of_game?
-      @bonus_points << frame.roll_1
+      @bonus_points.push(frame.roll_1)
     elsif @last_frame.strike? && !end_of_game?
-      @bonus_points << frame.roll_1 << frame.roll_2
+      @bonus_points.push(frame.roll_1, frame.roll_2)
     # elsif @second_last_frame.strike? && @last_frame.strike? && !end_of_game?
-    #   @bonus_points << frame.roll_1 << frame.roll_2
+    #   @bonus_points.push(@last_frame.roll_1, @last_frame.roll_2, frame.roll_1, frame.roll_2)
     end
   end
 end
