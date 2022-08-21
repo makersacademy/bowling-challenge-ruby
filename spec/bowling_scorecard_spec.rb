@@ -87,6 +87,16 @@ RSpec.describe BowlingScorecard do
       expect(@io).not_to receive(:puts).with('Enter roll 2 pinfall:')
       @bowling_scorecard.frame_loop
     end
+
+    xit "rolls three balls if a strike or spare is scored and it's the tenth frame" do
+      expect(@io).to receive(:puts).with('Enter roll 1 pinfall:')
+      expect(@io).to receive(:gets).and_return('10')
+      expect(@io).to receive(:puts).with('Enter roll 2 pinfall:')
+      expect(@io).to receive(:gets).and_return('10')
+      expect(@io).to receive(:puts).with('Enter roll 3 pinfall:')
+      expect(@io).to receive(:gets).and_return('10')
+      @bowling_scorecard.frame_loop(true)
+    end
   end
 
   context 'print_scorecard method' do
@@ -129,7 +139,17 @@ RSpec.describe BowlingScorecard do
       expect(@io).to receive(:puts).with("Frame 2")
       expect(@io).to receive(:puts).with("3 6")
       expect(@io).to receive(:puts).with("Score: 28\n")
+      bowling_scorecard.print_scorecard
+    end
 
+    it 'prints X for a strike' do
+      frame1 = Frame.new
+      frame1.rolls = [10]
+      frame1.bonus_rolls = 2
+      bowling_scorecard = BowlingScorecard.new(@io, [frame1])
+      expect(@io).to receive(:puts).with("Frame 1")
+      expect(@io).to receive(:puts).with("X")
+      expect(@io).to receive(:puts).with("\n")
       bowling_scorecard.print_scorecard
     end
   end
@@ -175,7 +195,7 @@ RSpec.describe BowlingScorecard do
       expect(@io).to receive(:puts).with('Enter roll 1 pinfall:').ordered
       expect(@io).to receive(:gets).and_return('10')
       expect(@io).to receive(:puts).with('Frame 1')
-      expect(@io).to receive(:puts).with('5 /')
+      expect(@io).to receive(:puts).with('X')
       expect(@io).to receive(:puts).with("\n")
       expect(@io).to receive(:puts).with('Frame 2').ordered
       expect(@io).to receive(:puts).with('Enter roll 1 pinfall:').ordered
@@ -183,11 +203,11 @@ RSpec.describe BowlingScorecard do
       expect(@io).to receive(:puts).with('Enter roll 2 pinfall:')
       expect(@io).to receive(:gets).and_return('4')
       expect(@io).to receive(:puts).with('Frame 1')
-      expect(@io).to receive(:puts).with('5 /')
-      expect(@io).to receive(:puts).with("Score: 15\n")
+      expect(@io).to receive(:puts).with('X')
+      expect(@io).to receive(:puts).with("Score: 19\n")
       expect(@io).to receive(:puts).with('Frame 2')
       expect(@io).to receive(:puts).with('5 4')
-      expect(@io).to receive(:puts).with("Score: 24\n")
+      expect(@io).to receive(:puts).with("Score: 28\n")
       @bowling_scorecard.run(2)
     end
   end

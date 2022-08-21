@@ -8,7 +8,7 @@ class BowlingScorecard
 
   def run(num_of_frames = 10)
     frame_count = 0
-    num_of_frames.times do
+    until frame_count == num_of_frames do
       frame_count += 1
       @io.puts "Frame #{frame_count}"
       frame_loop
@@ -27,19 +27,14 @@ class BowlingScorecard
     @frames << current_frame
   end
 
-  def roll(frame)
-    pinfall = pinfall_check(frame)
-    @frames.each do |frame|
-      if frame.bonus_rolls > 0
-        frame.bonus_rolls -= 1
-        frame.bonus_points += pinfall
-      end
-    end
-    frame.rolls << pinfall
+  def roll(current_frame)
+    pinfall = pinfall_check(current_frame)
+    add_bonus_points(pinfall)
+    current_frame.rolls << pinfall
     if pinfall == 10
-      frame.bonus_rolls += 2
-    elsif frame.rolls.sum == 10
-      frame.bonus_rolls += 1
+      current_frame.bonus_rolls += 2
+    elsif current_frame.rolls.sum == 10
+      current_frame.bonus_rolls += 1
     end
   end
 
@@ -54,12 +49,23 @@ class BowlingScorecard
 
   private
 
+  def add_bonus_points(pinfall)
+    @frames.each do |frame|
+      if frame.bonus_rolls.positive?
+        frame.bonus_rolls -= 1
+        frame.bonus_points += pinfall
+      end
+    end
+  end
+
   def score_string(frame)
     frame_total = @scorecard_total += frame.rolls.sum + frame.bonus_points
     frame.bonus_rolls.zero? ? "Score: #{frame_total}" : ''
   end
 
   def format_roll(frame)
+    return 'X' if frame.rolls[0] == 10
+
     frame.rolls.map.with_index do |roll, idx|
       roll = '/' if idx == 1 && frame.rolls.sum == 10
       roll.to_s
