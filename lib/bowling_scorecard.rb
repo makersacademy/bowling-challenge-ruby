@@ -52,15 +52,20 @@ class BowlingScorecard
   def pinfall_check(frame)
     loop do
       value = @io.gets.to_i
-      if @frames.length == 9 && frame.rolls[0] == 10
-        max_value = frame.rolls.sum == 20 ? 10 : 10 - frame.rolls[1, 2].sum
-      else
-        max_value = 10 - frame.rolls.sum
-      end
+      max_value = max_value_check(frame)
       return value unless value > max_value
 
       @io.puts "Please enter a value of #{max_value} or less"
     end
+  end
+
+  def max_value_check(frame)
+    if @frames.length == 9 && frame.rolls[0] == 10
+      return 10 if frame.rolls.sum == 20
+
+      return 10 - frame.rolls[1, 2].sum
+    end
+    10 - frame.rolls.sum
   end
 
   def add_bonus_points(pinfall)
