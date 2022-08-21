@@ -34,6 +34,18 @@ RSpec.describe BowlingScorecard do
       @bowling_scorecard.roll(@frame)
       expect(@frame.bonus_rolls).to eq 1
     end
+
+    it 'uses different logic if tenth frame' do
+      frame = Frame.new
+      frame.rolls = [5, 5]
+      BowlingScorecard.new(@io, [*1..9].map{frame})
+      expect(@io).to receive(:gets).and_return('10')
+      @bowling_scorecard.roll(@frame)
+      expect(@io).to receive(:gets).and_return('10')
+      @bowling_scorecard.roll(@frame)
+      expect(@io).to receive(:gets).and_return('10')
+      @bowling_scorecard.roll(@frame)
+    end
   end
 
   context 'frame_loop method' do

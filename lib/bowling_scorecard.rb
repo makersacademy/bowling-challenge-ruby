@@ -28,7 +28,21 @@ class BowlingScorecard
   end
 
   def roll(current_frame)
+    # if not tenth frame
     pinfall = pinfall_check(current_frame)
+    # if tenth frame
+      # if no strike
+        # normal for first two rolls
+        # if no spare
+          # end game
+        # if spare
+          # extra roll
+      # if strike
+        # extra two rolls up to ten
+        # if second roll is a strike
+          # extra roll can also be a strike
+
+
     add_bonus_points(pinfall)
     current_frame.rolls << pinfall
     if pinfall == 10
