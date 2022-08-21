@@ -8,7 +8,7 @@ class BowlingScorecard
 
   def run(num_of_frames = 10)
     frame_count = 0
-    until frame_count == num_of_frames do
+    until frame_count == num_of_frames
       frame_count += 1
       @io.puts "Frame #{frame_count}"
       frame_loop
@@ -28,21 +28,7 @@ class BowlingScorecard
   end
 
   def roll(current_frame)
-    # if not tenth frame
     pinfall = pinfall_check(current_frame)
-    # if tenth frame
-      # if no strike
-        # normal for first two rolls
-        # if no spare
-          # end game
-        # if spare
-          # extra roll
-      # if strike
-        # extra two rolls up to ten
-        # if second roll is a strike
-          # extra roll can also be a strike
-
-
     add_bonus_points(pinfall)
     current_frame.rolls << pinfall
     if pinfall == 10
@@ -62,6 +48,20 @@ class BowlingScorecard
   end
 
   private
+
+  def pinfall_check(frame)
+    loop do
+      value = @io.gets.to_i
+      if @frames.length == 9 && frame.rolls[0] == 10
+        max_value = frame.rolls.sum == 20 ? 10 : 10 - frame.rolls[1, 2].sum
+      else
+        max_value = 10 - frame.rolls.sum
+      end
+      return value unless value > max_value
+
+      @io.puts "Please enter a value of #{max_value} or less"
+    end
+  end
 
   def add_bonus_points(pinfall)
     @frames.each do |frame|
@@ -84,15 +84,5 @@ class BowlingScorecard
       roll = '/' if idx == 1 && frame.rolls.sum == 10
       roll.to_s
     end.join(' ')
-  end
-
-  def pinfall_check(frame)
-    loop do
-      value = @io.gets.to_i
-      max_value = 10 - frame.rolls.sum
-      return value unless value > max_value
-
-      @io.puts "Please enter a value of #{max_value} or less"
-    end
   end
 end

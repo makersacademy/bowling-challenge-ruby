@@ -35,16 +35,29 @@ RSpec.describe BowlingScorecard do
       expect(@frame.bonus_rolls).to eq 1
     end
 
-    it 'uses different logic if tenth frame' do
-      frame = Frame.new
-      frame.rolls = [5, 5]
-      BowlingScorecard.new(@io, [*1..9].map{frame})
+    it 'allows an extra two rolls if roll 1 on frame 10 is a strike' do
+      frame_for_array = Frame.new
+      frame_for_array.rolls = [5, 4]
+      bowling_scorecard = BowlingScorecard.new(@io, [*1..9].map{frame_for_array})
       expect(@io).to receive(:gets).and_return('10')
-      @bowling_scorecard.roll(@frame)
+      bowling_scorecard.roll(@frame)
+      expect(@io).to receive(:gets).and_return('5')
+      bowling_scorecard.roll(@frame)
+      expect(@io).to receive(:gets).and_return('4')
+      bowling_scorecard.roll(@frame)
+      expect(@frame.rolls).to eq [10, 5, 4]
+    end
+    
+    it 'allows three strikes to be thrown if roll 1 on frame 10 is a strike' do
+      frame_for_array = Frame.new
+      frame_for_array.rolls = [5, 4]
+      bowling_scorecard = BowlingScorecard.new(@io, [*1..9].map{frame_for_array})
       expect(@io).to receive(:gets).and_return('10')
-      @bowling_scorecard.roll(@frame)
+      bowling_scorecard.roll(@frame)
       expect(@io).to receive(:gets).and_return('10')
-      @bowling_scorecard.roll(@frame)
+      bowling_scorecard.roll(@frame)
+      expect(@io).to receive(:gets).and_return('10')
+      bowling_scorecard.roll(@frame)
     end
   end
 
