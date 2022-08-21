@@ -16,10 +16,6 @@ class App
       @io.puts "Please enter the second number of knocked down pins:"
       roll_2 = @io.gets.chomp.to_i
 
-      frame_repo = FrameRepository.new
-      frame = Frame.new(roll_1, roll_2)
-      frame_repo.add(frame)
-
       @frame_number += 1
     end
   end
