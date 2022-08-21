@@ -63,6 +63,55 @@ RSpec.describe Game do
         game.add_frame(1,1)
         expect(game.calculate_current_score).to eq 33
       end
+      it "three frames with only third frame being a strike" do
+        game = Game.new
+        game.add_frame(1,1)
+        game.add_frame(1,1)
+        game.add_frame(10,0)
+        expect(game.calculate_current_score).to eq 14
+      end
+      it "three frames with only third frame being a spare" do
+        game = Game.new
+        game.add_frame(1,1)
+        game.add_frame(1,1)
+        game.add_frame(9,1)
+        expect(game.calculate_current_score).to eq 14
+      end
+      it "completes a game with no strikes or spares" do
+        game = Game.new
+        10.times { game.add_frame(1,1) }
+        expect(game.frames.length).to eq 10
+        expect(game.calculate_current_score).to eq 20
+      end
+      it "completes the game with the 10th frame being a strike" do
+        game = Game.new
+        9.times { game.add_frame(1,1) }
+        expect(game.frames.length).to eq 9
+        game.add_frame(10,1,1)
+        expect(game.frames.length).to eq 10
+        expect(game.calculate_current_score).to eq 30
+      end
+      it "completes the game with the 10th frame being a spare" do
+        game = Game.new
+        9.times { game.add_frame(1,1) }
+        expect(game.frames.length).to eq 9
+        game.add_frame(9,1,1)
+        expect(game.frames.length).to eq 10
+        expect(game.calculate_current_score).to eq 29
+      end
+      it "completes a perfect game" do
+        game = Game.new
+        9.times { game.add_frame(10,0) }
+        game.add_frame(10,10,10)
+        expect(game.frames.length).to eq 10
+        expect(game.calculate_current_score).to eq 300
+      end
+      it "completes a gutter game" do
+        game = Game.new
+        10.times { game.add_frame(0,0) }
+        expect(game.frames.length).to eq 10
+        expect(game.calculate_current_score).to eq 0
+      end
     end
   end
 end
