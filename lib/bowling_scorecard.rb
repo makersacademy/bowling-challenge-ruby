@@ -7,12 +7,6 @@ class BowlingScorecard
     @frames = frames
   end
 
-  # def run 
-  #   @io.puts "Frame 1"
-  #   frame_loop
-
-  # end
-
   def roll(frame)
     pinfall = pinfall_check(frame)
     frame.rolls << pinfall
@@ -32,6 +26,15 @@ class BowlingScorecard
       roll_count += 1
     end
     @frames << current_frame
+  end
+
+  def print_scorecard
+    total = 0
+    @frames.each_with_index do |frame, idx|
+      @io.puts "Frame #{idx + 1}"
+      @io.puts frame.rolls.map(&:to_s).join(" ")
+      @io.puts "Score: #{total += frame.rolls.sum}\n"
+    end
   end
 
   private
