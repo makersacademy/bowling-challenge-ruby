@@ -68,6 +68,25 @@ RSpec.describe BowlingScorecard do
       expect(@io).to receive(:gets).and_return('5')
       @bowling_scorecard.frame_loop
     end
+
+    it 'adds bonus points to the frames before it' do
+      frame = Frame.new
+      frame.rolls = [5, 5]
+      frame.bonus_rolls = 1
+      bowling_scorecard = BowlingScorecard.new(@io, [frame])
+      expect(@io).to receive(:puts).with('Enter roll 1 pinfall:')
+      expect(@io).to receive(:gets).and_return('5')
+      expect(@io).to receive(:puts).with('Enter roll 2 pinfall:')
+      expect(@io).to receive(:gets).and_return('4')
+      expect(bowling_scorecard.frame_loop.first.bonus_points).to eq 5
+    end
+
+    it 'only rolls once in a frame if a strike is rolled' do
+      expect(@io).to receive(:puts).with('Enter roll 1 pinfall:')
+      expect(@io).to receive(:gets).and_return('10')
+      expect(@io).not_to receive(:puts).with('Enter roll 2 pinfall:')
+      @bowling_scorecard.frame_loop
+    end
   end
 
   context 'print_scorecard method' do
@@ -85,20 +104,91 @@ RSpec.describe BowlingScorecard do
       expect(@io).to receive(:puts).with("Score: 14\n")
       bowling_scorecard.print_scorecard
     end
+
+    it 'prints a blank score if a spare has been scored but the bonus roll has not happened yet' do
+      frame1 = Frame.new
+      frame1.rolls = [5, 5]
+      frame1.bonus_rolls = 1
+      bowling_scorecard = BowlingScorecard.new(@io, [frame1])
+      expect(@io).to receive(:puts).with("Frame 1")
+      expect(@io).to receive(:puts).with("5 /")
+      expect(@io).to receive(:puts).with("\n")
+      bowling_scorecard.print_scorecard
+    end
+
+    it 'adds bonus points as well as regular points' do
+      frame1 = Frame.new
+      frame1.rolls = [5, 5]
+      frame1.bonus_points = 9
+      frame2 = Frame.new
+      frame2.rolls = [3, 6]
+      bowling_scorecard = BowlingScorecard.new(@io, [frame1, frame2])
+      expect(@io).to receive(:puts).with("Frame 1")
+      expect(@io).to receive(:puts).with("5 /")
+      expect(@io).to receive(:puts).with("Score: 19\n")
+      expect(@io).to receive(:puts).with("Frame 2")
+      expect(@io).to receive(:puts).with("3 6")
+      expect(@io).to receive(:puts).with("Score: 28\n")
+
+      bowling_scorecard.print_scorecard
+    end
   end
 
+  context 'run method' do
+    it 'prints a scorecard after the frame' do
+      expect(@io).to receive(:puts).with('Frame 1').ordered
+      expect(@io).to receive(:puts).with('Enter roll 1 pinfall:').ordered
+      expect(@io).to receive(:gets).and_return('5')
+      expect(@io).to receive(:puts).with('Enter roll 2 pinfall:')
+      expect(@io).to receive(:gets).and_return('4')
+      expect(@io).to receive(:puts).with('Frame 1')
+      expect(@io).to receive(:puts).with('5 4')
+      expect(@io).to receive(:puts).with("Score: 9\n")
+      @bowling_scorecard.run(1)
+    end
 
+    it 'adds bonus points to previous frames' do
+      expect(@io).to receive(:puts).with('Frame 1').ordered
+      expect(@io).to receive(:puts).with('Enter roll 1 pinfall:').ordered
+      expect(@io).to receive(:gets).and_return('5')
+      expect(@io).to receive(:puts).with('Enter roll 2 pinfall:')
+      expect(@io).to receive(:gets).and_return('5')
+      expect(@io).to receive(:puts).with('Frame 1')
+      expect(@io).to receive(:puts).with('5 /')
+      expect(@io).to receive(:puts).with("\n")
+      expect(@io).to receive(:puts).with('Frame 2').ordered
+      expect(@io).to receive(:puts).with('Enter roll 1 pinfall:').ordered
+      expect(@io).to receive(:gets).and_return('5')
+      expect(@io).to receive(:puts).with('Enter roll 2 pinfall:')
+      expect(@io).to receive(:gets).and_return('4')
+      expect(@io).to receive(:puts).with('Frame 1')
+      expect(@io).to receive(:puts).with('5 /')
+      expect(@io).to receive(:puts).with("Score: 15\n")
+      expect(@io).to receive(:puts).with('Frame 2')
+      expect(@io).to receive(:puts).with('5 4')
+      expect(@io).to receive(:puts).with("Score: 24\n")
+      @bowling_scorecard.run(2)
+    end
 
-  # context 'run method' do
-  #   it 'prints a scorecard after the frame' do
-  #     expect(@io).to receive(:puts).with('Frame 1').ordered
-  #     expect(@io).to receive(:puts).with('Enter roll 1 pinfall:').ordered
-  #     expect(@io).to receive(:gets).and_return('5')
-  #     expect(@io).to receive(:puts).with('Enter roll 2 pinfall:')
-  #     expect(@io).to receive(:gets).and_return('4')
-  #     expect(@io).to receive(:puts).with('Frame 1')
-  #     expect(@io).to receive(:puts).with('5 4')
-  #     expect(@io).to receive(:puts).with('Score: 9')
-  #   end
-  # end
+    it 'adds bonus points to previous frames with a strike' do
+      expect(@io).to receive(:puts).with('Frame 1').ordered
+      expect(@io).to receive(:puts).with('Enter roll 1 pinfall:').ordered
+      expect(@io).to receive(:gets).and_return('10')
+      expect(@io).to receive(:puts).with('Frame 1')
+      expect(@io).to receive(:puts).with('5 /')
+      expect(@io).to receive(:puts).with("\n")
+      expect(@io).to receive(:puts).with('Frame 2').ordered
+      expect(@io).to receive(:puts).with('Enter roll 1 pinfall:').ordered
+      expect(@io).to receive(:gets).and_return('5')
+      expect(@io).to receive(:puts).with('Enter roll 2 pinfall:')
+      expect(@io).to receive(:gets).and_return('4')
+      expect(@io).to receive(:puts).with('Frame 1')
+      expect(@io).to receive(:puts).with('5 /')
+      expect(@io).to receive(:puts).with("Score: 15\n")
+      expect(@io).to receive(:puts).with('Frame 2')
+      expect(@io).to receive(:puts).with('5 4')
+      expect(@io).to receive(:puts).with("Score: 24\n")
+      @bowling_scorecard.run(2)
+    end
+  end
 end
