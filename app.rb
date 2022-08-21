@@ -16,7 +16,7 @@ class App
       @io.puts "Please enter the second number of knocked down pins:"
       @roll_2 = @io.gets.chomp.to_i
 
-      @io.puts "Your score: #{@frame_score} points"
+      @io.puts "Your score: #{@frame_score}"
       @frame_number += 1
     end
   end

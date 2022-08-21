@@ -3,13 +3,42 @@ require_relative 'frame'
 class FrameRepository
   def initialize
     @frames = []
+    @bonus_points = []
+    @last_frame = Frame.new(0,0)
   end
 
   def add(frame)
-    return @frames << frame.rolls
+    bonus_points(frame)
+
+    @frames << frame
+    @last_frame = @frames[-1]
+    @second_last_frame = @frames[-2]
+    return @frames
   end
 
   def calculate_score
-    return @frames.map { |frame| frame.sum }.sum
+    score = @frames.map { |frame| frame.sum }.sum + @bonus_points.sum
+
+    if @frames.last.spare?
+      "Spare! Your score: #{score} + next roll"
+    elsif @frames.last.strike?
+      "Strike! Your score: #{score} + next two rolls"
+    else
+      return "Your score: #{score}"
+    end
+  end
+
+  def end_of_game?
+    return @frames.length == 10
+  end
+
+  def bonus_points(frame)
+    if @last_frame.spare? && !end_of_game?
+      @bonus_points << frame.roll_1
+    elsif @last_frame.strike? && !end_of_game?
+      @bonus_points << frame.roll_1 << frame.roll_2
+    # elsif @second_last_frame.strike? && @last_frame.strike? && !end_of_game?
+
+    end
   end
 end
