@@ -82,4 +82,4 @@ class UserInterface
 end
 
 
-UserInterface.new(Kernel).start_game
+# UserInterface.new(Kernel).start_game
