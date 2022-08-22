@@ -9,6 +9,7 @@ class Frame
   end
 
   def format_roll
+    # formats the roll to be written as a score, eg. 5 5 => "5 /"
     rolls.map.with_index do |roll, idx|
       roll = '/' if idx == 1 && rolls.sum == 10
       roll = 'X' if roll == 10
@@ -17,6 +18,8 @@ class Frame
   end
 
   def pinfall_check(frames_length)
+    # frames_length is an integer of how many frames have been played already
+    # checks whether input is more than the reminaing number of pins at play
     loop do
       value = @io.gets.to_i
       max_value = max_value_check(frames_length)
@@ -29,8 +32,8 @@ class Frame
   end
 
   def add_bonus_points(pinfall)
-    return unless bonus_rolls.positive?
-
+    # pinfall is an integer
+    # adds bonus points to rolls that have spares or strikes
     @bonus_rolls -= 1
     @bonus_points += pinfall
   end
@@ -38,6 +41,8 @@ class Frame
   private
 
   def max_value_check(frames_length)
+    # frames_length is an integer of how many frames have been played already
+    # calculates the max value pinfall for the current roll can be
     if frames_length == 9 && rolls[0] == 10
       return 10 if rolls.sum == 20
 
