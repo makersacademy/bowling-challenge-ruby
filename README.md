@@ -23,6 +23,9 @@ Frame 1
 Score: 9
 ```
 Example scorecard:
+
+Spares are recorded as /, eg. 5, 5 => " 5 /"
+Strikes are recorded as X, eg. 10 => "X"
 ```
 Frame 1
 5 4
