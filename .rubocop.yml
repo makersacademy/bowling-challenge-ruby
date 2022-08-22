@@ -1,0 +1,9 @@
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - 'spec/bowling_scorecard_spec.rb'
