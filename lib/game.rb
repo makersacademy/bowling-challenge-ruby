@@ -1,5 +1,5 @@
-require 'frame'
-require 'tenth_frame'
+require_relative './frame'
+require_relative './tenth_frame'
 
 class Game
   attr_reader :frames
@@ -25,7 +25,8 @@ class Game
   end
 
 
-  def add_frame(first_roll, second_roll, third_roll = 0)
+  def add_frame(first_roll, second_roll = 0, third_roll = 0)
+    return "The game has finished" if @frames.length == 10
     return @frames << Frame.new(first_roll, second_roll) if @frames.length < 9
     return @frames << TenthFrame.new(first_roll, second_roll, third_roll) if @frames.length == 9
   end
