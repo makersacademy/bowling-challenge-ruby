@@ -1,10 +1,10 @@
 10 Frames
-
 2 rolls
+
 
 10 pins
 
-score = 0
+score
 
 previous frame = 'Strike'
 previous frame = 'Spare
