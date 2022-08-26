@@ -1,11 +1,7 @@
-class Frame {
-constructor(r1,r2){
-this.rollOne = r1
-this.rollTwo = r2
-}
+roll = 0
+roll = 0
+frame = [0,0]
+score = 0
 
-}
-
-class Bowling {
-
-}
+game = [[0,0][0,0]...]
+total = 0
