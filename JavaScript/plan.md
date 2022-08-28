@@ -25,6 +25,10 @@ if frame 10 score = 10
 +roll
 []
 
+https://www.bowlinggenius.com/
+
+First attempt
+
 ```JavaScript
   // frameScore(frame) {
   //   this.isSpare(frame);
