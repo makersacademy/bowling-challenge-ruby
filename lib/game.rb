@@ -1,16 +1,14 @@
 require_relative './frame.rb'
 
 class Game
+  attr_accessor :all_frames
+
   def initialize 
     @all_frames = []
   end
   
   def add_frame(frame)
     @all_frames << frame
-  end
-
-  def all_frames
-    @all_frames
   end
 
   def sum
