@@ -54,14 +54,43 @@ RSpec.describe do
     it "takes strikes into account by adding the next 2 rolls to the total sum" do
       frame1 = double :frame, roll_1: 10, roll_2: 0, spare?: false, strike?: true, total: 10
       frame2 = double :frame, roll_1: 2, roll_2: 7, spare?: false, strike?: false, total: 9
+      frame3 = double :frame, roll_1: 3, roll_2: 4, spare?: false, strike?: false, total: 7
       game = Game.new
       game.add_frame(frame1)
       game.add_frame(frame2)
-      expect(game.sum).to eq 28
+      game.add_frame(frame3)
+      expect(game.sum).to eq 35
     end
 
     it "returns 300 if there were 12 strikes" do
+      frame1 = double :frame, roll_1: 10, roll_2: 0, spare?: false, strike?: true, total: 10
+      frame2 = double :frame, roll_1: 10, roll_2: 0, spare?: false, strike?: true, total: 10
+      frame3 = double :frame, roll_1: 10, roll_2: 0, spare?: false, strike?: true, total: 10
+      frame4 = double :frame, roll_1: 10, roll_2: 0, spare?: false, strike?: true, total: 10
+      frame5 = double :frame, roll_1: 10, roll_2: 0, spare?: false, strike?: true, total: 10
+      frame6 = double :frame, roll_1: 10, roll_2: 0, spare?: false, strike?: true, total: 10
+      frame7 = double :frame, roll_1: 10, roll_2: 0, spare?: false, strike?: true, total: 10
+      frame8 = double :frame, roll_1: 10, roll_2: 0, spare?: false, strike?: true, total: 10
+      frame9 = double :frame, roll_1: 10, roll_2: 0, spare?: false, strike?: true, total: 10
+      frame10 = double :frame, roll_1: 10, roll_2: 0, spare?: false, strike?: true, total: 10
+      frame11 = double :frame, roll_1: 10, roll_2: 0, spare?: false, strike?: true, total: 10
+      frame12 = double :frame, roll_1: 10, roll_2: 0, spare?: false, strike?: true, total: 10
 
+      game = Game.new
+      game.add_frame(frame1)
+      game.add_frame(frame2)
+      game.add_frame(frame3)
+      game.add_frame(frame4)
+      game.add_frame(frame5)
+      game.add_frame(frame6)
+      game.add_frame(frame7)
+      game.add_frame(frame8)
+      game.add_frame(frame9)
+      game.add_frame(frame10)
+      game.add_frame(frame11)
+      game.add_frame(frame12)
+
+      expect(game.sum).to eq 300
     end
   end
 end

@@ -1,5 +1,5 @@
 class Frame
-  attr_accessor :roll_1, :roll_2, :roll_3
+  attr_accessor :roll_1, :roll_2
   
   def spare?
     roll_1 == 10 || roll_1 + roll_2 < 10 ? false : true
@@ -10,6 +10,6 @@ class Frame
   end
 
   def total
-    return roll_1 + roll_2
+    return roll_2 == nil ? roll_1 : roll_1 + roll_2
   end
 end

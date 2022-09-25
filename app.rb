@@ -9,58 +9,63 @@ class Application
   def run
     n = 0
     @game = Game.new
+
     # For the first 9 frames the palyer can roll the ball and if it doesn't hit all the pins it can roll again
-    while n < 10 do
-      p @game
-      @io.puts "Enter the first roll:"
-      frame = Frame.new
-      frame.roll_1 = @io.gets.chomp.to_i
-      if frame.roll_1 < 10
-        @io.puts "Enter the second roll:"
-        frame.roll_2 = @io.gets.chomp.to_i
+    while n < 9 do
+      first_roll
+      if @frame.roll_1 < 10
+        second_roll
       end
-      @game.add_frame(frame)
+      @game.add_frame(@frame)
       n += 1
     end
-    p @game
+
     # The 10th frame is a special one where the player can get a bonus roll
-    @io.puts "Enter the first roll:"
-    frame = Frame.new
-    frame.roll_1 = @io.gets.chomp.to_i
-    if frame.roll_1 < 10
-      @io.puts "Enter the second roll:"
-      frame.roll_2 = @io.gets.chomp.to_i
-      @game.add_frame(frame)
+    first_roll
+    if @frame.roll_1 < 10
+      second_roll
+      @game.add_frame(@frame)
 
       # If a player hits a spare they get an extra roll
-      if frame.spare? == true
-        @io.puts "Enter the bonus roll:"
-        frame = Frame.new
-        frame.roll_1 = @io.gets.chomp.to_i
-        @game.add_frame(frame)
+      if @frame.spare?
+        bonus_roll
+        @game.add_frame(@frame)
       end
 
     # If a player hits a strike they get extra rolls
-    elsif frame.strike? == true
-      @io.puts "Enter the bonus roll:"
-      frame = Frame.new
-      frame.roll_1 = @io.gets.chomp.to_i
-      if frame.roll_1 < 10
-        @io.puts "Enter the second roll:"
-        frame.roll_2 = @io.gets.chomp.to_i
-      end
-      @game.add_frame(frame)
-
-      if frame.strike? == true
-        @io.puts "Enter the bonus roll:"
-        frame = Frame.new
-        frame.roll_1 = @io.gets.chomp.to_i
-        @game.add_frame(frame)
-        binding.irb
+    elsif @frame.strike?
+      bonus_roll
+      if @frame.roll_1 < 10
+        second_roll
+        @game.add_frame(@frame)
+      elsif @frame.strike?
+        @game.add_frame(@frame)
+        bonus_roll
+        @game.add_frame(@frame)
       end
     end 
     return @game
   end
+
+  private
+
+  def first_roll
+    @io.puts "Enter the first roll:"
+    @frame = Frame.new
+    @frame.roll_1 = @io.gets.chomp.to_i
+  end
+
+  def second_roll
+    @io.puts "Enter the second roll:"
+    @frame.roll_2 = @io.gets.chomp.to_i
+  end
+
+  def bonus_roll
+    @io.puts "Enter the bonus roll:"
+    @frame = Frame.new
+    @frame.roll_1 = @io.gets.chomp.to_i
+  end
+
 end
 
 # app = Application.new(Kernel)
