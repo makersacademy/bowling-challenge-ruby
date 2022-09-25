@@ -59,9 +59,8 @@ class Application
     previous_round_spare = false
     second_bonus_roll_required = false
 
-    # the index + 1 is the round number!
     @rounds.each_with_index do |round, index|
-      display_roll_and_round(1, index + 1)
+      display_roll_and_round(1, round.id)
       round.roll1 = get_roll
 
       # Adding the bonus for previous round if they were strike or spare
@@ -91,8 +90,8 @@ class Application
       end
 
       # If first roll wasn't a strike (or it's the 10th round), user gets second roll
-      if round.roll1 < 10 || index + 1 == 10
-        display_roll_and_round(2, index + 1)
+      if round.roll1 < 10 || round.id == 10
+        display_roll_and_round(2, round.id)
         round.roll2 = get_roll
         
         # in the rare event that user gets a strike and then a 0 in the 10th round, it is NOT a spare!
@@ -116,13 +115,13 @@ class Application
       end
 
       # if we are in 10th round and there has been a strike or spare in this round (recorded as previous_round_...) we get a 3rd roll
-      if (index + 1) == 10 && (previous_round_strike || previous_round_spare)
-        display_roll_and_round(3, index + 1)
+      if (round.id) == 10 && (previous_round_strike || previous_round_spare)
+        display_roll_and_round(3, round.id)
         round.roll3 = get_roll
       end
 
       round.calculate_score
-      display_scorecard(index + 1)
+      display_scorecard(round.id)
     end
   end
 end
