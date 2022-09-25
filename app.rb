@@ -1,4 +1,9 @@
+require './lib/game'
+require './lib/frame'
+
 class Application
+
+  current_game = Game.new
 
   def score(rolls, total, i)
     if rolls[i] == 10
@@ -12,5 +17,10 @@ class Application
       i+2 >= (rolls.length - 1) ? total : score(rolls, total, i+2)
     end
   end
+
+  def run_game(game = current_game)
+    score(game, 0, 0)
+  end
+
 
 end

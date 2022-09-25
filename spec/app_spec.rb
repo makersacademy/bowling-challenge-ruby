@@ -17,8 +17,8 @@ describe "App" do
 
   it "should return 120 for a game of all spares" do
     rolls = [2,8] * 10
-    rolls << 2
-    expect(app.score(rolls, 0, 0)).to eq(120)
+    rolls << 10
+    expect(app.score(rolls, 0, 0)).to eq(128)
   end
 
 end
