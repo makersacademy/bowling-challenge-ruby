@@ -1,3 +1,25 @@
+## Initial class design
+
+              ┌───────────────────────┐
+              │ Scorecard             │
+              │ ---------             │
+              │ @player_name          │
+              │ @frames = []          │
+              │ #get_current_total    │
+              └───────▲───────▲───────┘
+                      │       │
+                      │       │
+┌─────────────────────┴─┐   ┌─┴─────────────────────┐
+│ Frame                 ├───► LastFrame < Frame     │
+│ -----                 │   │ ---------             │
+│ @first_roll  (int)    │   │ @third_roll (int)     │
+│ @second_roll (int)    │   │ #second_strike (bool) │
+│ #strike?     (bool)   │   └───────────────────────┘
+│ #spare?      (bool)   │
+└───────────────────────┘
+
+  
+
 Bowling Challenge in Ruby
 =================
 
