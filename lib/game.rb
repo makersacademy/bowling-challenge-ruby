@@ -19,7 +19,8 @@ class Game
 
     @all_frames.each do |frame|
 
-      # For the non-bonus frames the sum calculation is the same and it is different then for the bonus frame
+      # The calculations are done for the first 10 frames + the bonus rolls 
+      # (that are saved as separate frames, but we only calculate them as a part of the 10th roll)
       if n < 10
 
         # First we need to check if the roll is a strike
@@ -40,13 +41,6 @@ class Game
         else
           sum += frame.total
         end
-      
-      # The calculations are different for the last frame
-      elsif n == 10
-        if frame.strike?
-        end
-
-
       end
 
       n += 1
