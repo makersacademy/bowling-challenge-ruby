@@ -31,20 +31,28 @@ class Application
         bonus_roll
         @game.add_frame(@frame)
       end
+      
 
     # If a player hits a strike they get extra rolls
     elsif @frame.strike?
+      @game.add_frame(@frame)
       bonus_roll
+
       if @frame.roll_1 < 10
         second_roll
         @game.add_frame(@frame)
+
       elsif @frame.strike?
         @game.add_frame(@frame)
         bonus_roll
         @game.add_frame(@frame)
       end
     end 
-    return @game
+    @game
+  end
+
+  def score
+    @io.puts "Your final score is #{@game.sum}"
   end
 
   private
@@ -70,3 +78,4 @@ end
 
 # app = Application.new(Kernel)
 # app.run
+# app.score

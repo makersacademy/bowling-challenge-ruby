@@ -26,7 +26,7 @@ class Game
 
           # If yes, we need to check if the following roll is also a strike
           if @all_frames[n+1].strike?
-            sum += frame.total + @all_frames[n+1].total + @all_frames[n+2].roll_1
+            sum += frame.total + @all_frames[n+1].total + @all_frames[n+2].total
           else
             sum += frame.total + @all_frames[n+1].total
           end
