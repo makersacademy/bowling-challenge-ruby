@@ -1,5 +1,5 @@
 class Frame
-  attr_accessor :roll_1, :roll_2
+  attr_accessor :roll_1, :roll_2, :roll_3
   
   def spare?
     roll_1 == 10 || roll_1 + roll_2 < 10 ? false : true

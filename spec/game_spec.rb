@@ -51,6 +51,15 @@ RSpec.describe do
       expect(game.sum).to eq 21
     end
 
+    it "takes strikes into account by adding the next 2 rolls to the total sum" do
+      frame1 = double :frame, roll_1: 10, roll_2: 0, spare?: false, strike?: true, total: 10
+      frame2 = double :frame, roll_1: 2, roll_2: 7, spare?: false, strike?: false, total: 9
+      game = Game.new
+      game.add_frame(frame1)
+      game.add_frame(frame2)
+      expect(game.sum).to eq 28
+    end
+
     it "returns 300 if there were 12 strikes" do
 
     end
