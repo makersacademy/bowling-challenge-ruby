@@ -2,7 +2,7 @@ class Scorecard
   def initialize(io)
     @io = io
     @score = []
-    @card = [0]
+    @card = []
     @total = 0
     @frame_count = 1
   end
@@ -19,11 +19,13 @@ class Scorecard
                 puts "strike!"
                 @frame == [10, 0]
                 @score << @frame
+                @card << 2
             else
                 puts "how many pins?"
                 answer = gets.chomp.to_i
                 @frame << answer if answer + @frame[0] <= 10
                 puts "spare!" if @frame.sum == 10 && @frame[1] >= 1
+                @card << 1 if @frame.sum == 10 && @frame[1] >= 1
             end
             @score << @frame
         else
@@ -31,12 +33,15 @@ class Scorecard
             puts "how many pins?"
             answer = gets.chomp.to_i
             @frame << answer if answer >= 0 && answer <= 10
-            puts "strike!" if @frame.sum == 10
+            #if @frame.sum == 10
+             # @card << 2
+              #puts "strike!" 
             puts "how many pins?"
             answer = gets.chomp.to_i
             @frame << answer if answer >= 0 && answer <= 10
             puts "strike!" if @frame.sum == 20
             puts "spare!" if @frame.sum == 10
+            if 
             puts "how many pins?"
             answer = gets.chomp.to_i
             @frame << answer if answer >= 0 && answer <= 10
@@ -52,17 +57,13 @@ class Scorecard
     @total
   end
 
-  def scoring_card
-    @frame |score|
-      if score.sum == 10 && score[1] == 0
-        @bonus == 2
-      elsif score.sum == 10 && score[1] >= 1
-        @bonus = 1
-      else
-        @bonus = 0
-      end
-      @card << @bonus
+  def bonuses
+    @score.each do |frame|
     end
+  end
+
+
+
 end
 
 bowl = Scorecard.new(@io)
