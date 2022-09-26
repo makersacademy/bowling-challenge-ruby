@@ -7,16 +7,15 @@ class Frame
   end
 
   def strike?
-    raise 'First roll not complete.' if @first_roll.nil?
     @first_roll == 10
   end
 
   def spare?
     if strike?
       return false
-    elsif @second_roll.nil?
-      raise 'Second roll not complete.'
-    else
+    elsif @first_roll.nil? || @second_roll.nil?
+      return false
+    else !@first_roll.nil? && !@second_roll.nil?
       (@first_roll + @second_roll) == 10
     end
   end

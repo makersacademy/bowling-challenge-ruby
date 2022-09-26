@@ -1,5 +1,5 @@
-## Initial class design
-
+## Initial class design (it has been modified in development)
+```
               ┌───────────────────────┐
               │ Scorecard             │
               │ ---------             │
@@ -17,6 +17,57 @@
 │ #strike?     (bool)   │   └───────────────────────┘
 │ #spare?      (bool)   │
 └───────────────────────┘
+```
+## Use
+The user enters sequentially results for all rolls and receives display of the
+current state of the full scorecard after each frame.
+
+## Output
+```
+Frame 1, roll 1: 7
+Frame 1, roll 2: 3
+Volo
+Frame  1 - | |7|/|   10
+Frame  2 - | | | |
+Frame  3 - | | | |
+Frame  4 - | | | |
+Frame  5 - | | | |
+Frame  6 - | | | |
+Frame  7 - | | | |
+Frame  8 - | | | |
+Frame  9 - | | | |
+Frame 10 - | | | |
+Frame 2, roll 1: 
+```
+
+
+```
+Loki
+Frame  1 - | |1|4|    5
+Frame  2 - | |4|5|   14
+Frame  3 - | |6|/|   29
+Frame  4 - | |5|/|   49
+Frame  5 - | |X| |   60
+Frame  6 - | |0|1|   61
+Frame  7 - | |7|/|   77
+Frame  8 - | |6|/|   97
+Frame  9 - | |X| |  117
+Frame 10 - |2|/|6|  133
+```
+
+```
+Loki
+Frame  1 - | |X| |   30
+Frame  2 - | |X| |   60
+Frame  3 - | |X| |   90
+Frame  4 - | |X| |  120
+Frame  5 - | |X| |  150
+Frame  6 - | |X| |  180
+Frame  7 - | |X| |  210
+Frame  8 - | |X| |  240
+Frame  9 - | |X| |  270
+Frame 10 - |X|X|X|  300
+```
 
   
 

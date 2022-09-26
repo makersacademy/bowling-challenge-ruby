@@ -15,8 +15,8 @@ RSpec.describe Frame do
       expect(frame.strike?).to eq false
     end
 
-    it 'raises error if called before first roll' do
-      expect { frame.strike? }.to raise_error 'First roll not complete.'
+    it 'returns false if called before first roll' do
+      expect(frame.strike?).to eq false
     end
   end
 
@@ -38,9 +38,9 @@ RSpec.describe Frame do
       expect(frame.spare?).to eq false
     end
 
-    it 'raises error if called before second roll' do
+    it 'returns false if called before second roll' do
       frame.first_roll = 3
-      expect { frame.spare? }.to raise_error 'Second roll not complete.'
+      expect(frame.spare?).to eq false
     end  
   end
 end
