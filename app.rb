@@ -35,9 +35,9 @@ class Application
     end
   end
 
+  # checks if roll is a numeral and a number from 0-10
+  # user has to repeat input if not
   def get_roll
-    # checks if roll is a numeral and a number from 0-10
-    # user has to repeat input if not
     roll = ""
     while !(roll.is_integer? && roll.to_i < 11 && roll.to_i >= 0)
       roll = @io.gets.strip
@@ -63,7 +63,6 @@ class Application
   end
 
   def run
-    second_bonus_roll_required = false
     tenth_round_strike = false
 
     @rounds.each_with_index do |round, index|
@@ -80,17 +79,11 @@ class Application
       if second_bonus_roll_required?(index)
         @rounds[index - 2].bonus += round.roll1
         @rounds[index - 2].calculate_score
-        second_bonus_roll_required = false
       end
 
       # Strike!
       if round.roll1 == 10
         @io.puts "STRIKE!"
-        # if we had a strike in the last round too we will need another bonus roll in the next round (because roll 2 doesn't get executed)
-        if @rounds[index - 1].roll1 == 10
-          second_bonus_roll_required = true
-        end
-
         if round.id == 10
           tenth_round_strike = true
         else
@@ -119,8 +112,8 @@ class Application
         end
       end
 
-      # if we are in 10th round and there has been a strike or spare in this round (recorded as previous_round_...) we get a 3rd roll
-      if (round.id) == 10 && (tenth_round_strike || is_spare?(index -1))
+      # if we are in 10th round and there has been a strike or spare in this round we get a 3rd roll
+      if (round.id) == 10 && (tenth_round_strike || is_spare?(index))
         display_roll(3, round.id)
         round.roll3 = get_roll
       end
