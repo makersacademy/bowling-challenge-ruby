@@ -54,25 +54,30 @@ class Application
     end
   end
 
+  def is_spare?(round_index)
+    @rounds[round_index].roll1 + @rounds[round_index].roll2.to_i == 10
+  end
+
+  def second_bonus_roll_required?(round_index)
+    @rounds[round_index - 2].roll1 == 10 && @rounds[round_index - 1].roll1 == 10
+  end
+
   def run
-    previous_round_strike = false
-    previous_round_spare = false
     second_bonus_roll_required = false
-    tenth_round_striken = false
+    tenth_round_strike = false
 
     @rounds.each_with_index do |round, index|
       display_roll(1, round.id)
       round.roll1 = get_roll
 
-      # Adding the bonus for previous round if they were strike or spare
-      if previous_round_spare || previous_round_strike
+      # Adding the bonus for previous round if they were spare or strike
+      if is_spare?(index -1) || @rounds[index - 1].roll1 == 10
         @rounds[index - 1].bonus = round.roll1
         @rounds[index - 1].calculate_score
-        previous_round_spare = false
       end
 
       # If last two rounds were strikes we still need to add a bonus to the score two rounds ago
-      if second_bonus_roll_required
+      if second_bonus_roll_required?(index)
         @rounds[index - 2].bonus += round.roll1
         @rounds[index - 2].calculate_score
         second_bonus_roll_required = false
@@ -82,14 +87,13 @@ class Application
       if round.roll1 == 10
         @io.puts "STRIKE!"
         # if we had a strike in the last round too we will need another bonus roll in the next round (because roll 2 doesn't get executed)
-        if previous_round_strike == true
+        if @rounds[index - 1].roll1 == 10
           second_bonus_roll_required = true
         end
 
         if round.id == 10
           tenth_round_strike = true
         else
-          previous_round_strike = true
           # second roll is not executed
           round.roll2 = ""
         end
@@ -104,24 +108,19 @@ class Application
         if round.roll1 == 10 || round.roll1 + round.roll2 < 10
           previous_round_spare = false
         # Checking for spare
-        elsif round.roll1 + round.roll2 == 10
+        elsif is_spare?(index)
           @io.puts "SPARE!"
-          previous_round_spare = true
         end
 
         # Adding bonus for previous round if it was a strike (2nd bonus roll)
-        if previous_round_strike
+        if @rounds[index - 1].roll1 == 10
           @rounds[index - 1].bonus += round.roll2
           @rounds[index - 1].calculate_score
-          # need to check again if there's not been a strike this round in roll1 (only possible in round 10)
-          if round.roll1 != 10
-            previous_round_strike = false
-          end
         end
       end
 
       # if we are in 10th round and there has been a strike or spare in this round (recorded as previous_round_...) we get a 3rd roll
-      if (round.id) == 10 && (tenth_round_strike || previous_round_spare)
+      if (round.id) == 10 && (tenth_round_strike || is_spare?(index -1))
         display_roll(3, round.id)
         round.roll3 = get_roll
       end

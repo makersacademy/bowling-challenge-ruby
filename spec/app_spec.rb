@@ -387,9 +387,12 @@ describe Application do
     expect(io).to receive(:puts).with("  9   -    4   -    6   -    /   -   10")
     expect(io).to receive(:puts).with("Round 10")
     expect(io).to receive(:puts).with("First Roll:")
-    expect(io).to receive(:gets).and_return("3")
+    expect(io).to receive(:gets).and_return("5")
     expect(io).to receive(:puts).with("Second Roll:")
     expect(io).to receive(:gets).and_return("5")
+    expect(io).to receive(:puts).with("SPARE!")
+    expect(io).to receive(:puts).with("Third Roll:")
+    expect(io).to receive(:gets).and_return("7")
     expect(io).to receive(:puts).with("Round - Roll 1 - Roll 2 - Roll 3 - Score")
     expect(io).to receive(:puts).with("  1   -    10   -       -    /   -   30")
     expect(io).to receive(:puts).with("  2   -    10   -       -    /   -   24")
@@ -399,8 +402,8 @@ describe Application do
     expect(io).to receive(:puts).with("  6   -    2   -    8   -    /   -   20")
     expect(io).to receive(:puts).with("  7   -    10   -       -    /   -   10")
     expect(io).to receive(:puts).with("  8   -    0   -    0   -    /   -   0")
-    expect(io).to receive(:puts).with("  9   -    4   -    6   -    /   -   13")
-    expect(io).to receive(:puts).with("  10   -    3   -    5   -    /   -   8")
+    expect(io).to receive(:puts).with("  9   -    4   -    6   -    /   -   15")
+    expect(io).to receive(:puts).with("  10   -    5   -    5   -    7   -   17")
     app.run
   end
 end
