@@ -23,7 +23,7 @@ class Application
     @rounds = [round1, round2, round3, round4, round5, round6, round7, round8, round9, round10]
   end
 
-  def display_roll_and_round(roll_number, round_number)
+  def display_roll(roll_number, round_number)
     if roll_number == 1
       @io.puts "Round #{round_number}"
       @io.puts "First Roll:"
@@ -58,9 +58,10 @@ class Application
     previous_round_strike = false
     previous_round_spare = false
     second_bonus_roll_required = false
+    tenth_round_striken = false
 
     @rounds.each_with_index do |round, index|
-      display_roll_and_round(1, round.id)
+      display_roll(1, round.id)
       round.roll1 = get_roll
 
       # Adding the bonus for previous round if they were strike or spare
@@ -84,14 +85,19 @@ class Application
         if previous_round_strike == true
           second_bonus_roll_required = true
         end
-        previous_round_strike = true
-        # second roll is not executed
-        round.roll2 = ""
+
+        if round.id == 10
+          tenth_round_strike = true
+        else
+          previous_round_strike = true
+          # second roll is not executed
+          round.roll2 = ""
+        end
       end
 
       # If first roll wasn't a strike (or it's the 10th round), user gets second roll
       if round.roll1 < 10 || round.id == 10
-        display_roll_and_round(2, round.id)
+        display_roll(2, round.id)
         round.roll2 = get_roll
         
         # in the rare event that user gets a strike and then a 0 in the 10th round, it is NOT a spare!
@@ -115,8 +121,8 @@ class Application
       end
 
       # if we are in 10th round and there has been a strike or spare in this round (recorded as previous_round_...) we get a 3rd roll
-      if (round.id) == 10 && (previous_round_strike || previous_round_spare)
-        display_roll_and_round(3, round.id)
+      if (round.id) == 10 && (tenth_round_strike || previous_round_spare)
+        display_roll(3, round.id)
         round.roll3 = get_roll
       end
 
@@ -125,6 +131,3 @@ class Application
     end
   end
 end
-
-app = Application.new(Kernel)
-app.run
