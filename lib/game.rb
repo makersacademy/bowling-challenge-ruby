@@ -8,6 +8,6 @@ class Game
   end
 
   def run
-    @io.puts("Welcome")
+    @io.puts('Welcome')
   end
 end
