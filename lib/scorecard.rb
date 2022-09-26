@@ -1,4 +1,4 @@
-require 'frame'
+require_relative './frame'
 
 class Scorecard
   def initialize
