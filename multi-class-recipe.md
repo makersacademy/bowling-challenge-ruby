@@ -22,14 +22,16 @@ uses asciiflow.com but you could also use excalidraw.com, draw.io, or miro.com_
 │ - final_score              │
 └───────────┬────────────────┘
             │
-            │ owns a list of
+            │ owns a collection of frames
             ▼
 ┌─────────────────────────┐
-│ Roll                    │
+│ Frame                   │
 │                         │
-│ - roll                  │
-│ - user interaction      │
-│ - takes input from user │
+│ - roll1                 │
+│ - roll2                 |
+│ - frame = []
+│ - takes input from user |
+│                         | 
 └─────────────────────────┘
 
 
@@ -48,56 +50,60 @@ _Also design the interface of each class in more detail._
 ```ruby
 class Scorecard
   def initialize
-    # ...
+    # scorecard = []
   end
 
-  def add(roll) # roll is an instance of Roll
-    # Roll gets added to the scorecard
+  def add(frame) # frame is an instance of Frame
+    # Frame gets added to the scorecard
     # Returns nothing
   end
 
-  def rolls_arr
-    # Returns an array of all rolls
+  def raw_score_arr
+    # Returns an array of all frames so far
   end
 
-  def spare_multiplier
-    # Takes spare (/) from rolls_arr
-    # Adds next score to spare, returns to score_arr
+  def spare_bonus
+    # Looks for spare (/) from frame in raw_score_arr
+    # Adds roll1 of frame n+1 to spare, returns to score_arr
   end
 
-  def strike_multiplier
+  def strike_bonus
     # Takes strike (X) from rolls_arr
-    # Adds next two scores to spare, returns to score_arr
+    # Adds roll1 & roll2* of frame n+1, returns to scorecard_arr
+    # If roll1 of frame n+1 is also a strike, adds roll1 of frame n+2
   end
   
   def score_arr
-    
-  end
-
-  def frame_score
-    # Sequentially takes 2 scores from score_arr
-    # Returns the total score of each score
+    # 
   end
 
   def final_score
-    # Adds all scores from score arr
+    # Adds all scores from score_arr
     # returns final total
   end
-  
-  # def search_by_title(keyword) # keyword is a string
-  #   # Returns a list of tracks with titles that include the keyword
-  # end
 end
 
-class FormatScorecard
-  def initialize(xx,xx) # title and artist are both strings
+class Frame
+  def initialize(roll1, roll2)
+  @roll1 = roll1
+  @roll2 = roll2
+  @frame = []
   end
 
-  def format_frame
-    # Returns a string of the form "TITLE by ARTIST"
+  def roll1
+    @roll1
   end
 
-  def format_final_score
+  def roll2
+    @roll2
+  end
+
+  def add
+    @frame << roll1, roll2
+  end
+
+  def frame_arr
+    @frame
   end
 end
 ```
@@ -110,13 +116,13 @@ combinations that reflect the ways in which the system will be used._
 ```ruby
 # EXAMPLE
 
-# Gets all tracks
-library = MusicLibrary.new
-track_1 = Track.new("Carte Blanche", "Veracocha")
-track_2 = Track.new("Synaesthesia", "The Thrillseekers")
-library.add(track_1)
-library.add(track_2)
-library.all # => [track_1, track_2]
+# Adds frames to raw_score_array
+scorecard = Scorecard.new
+frame1 = Frame.new('1', '6')
+frame2 = Frame.new('6', '3')
+scorecard.add(frame1)
+scorecard.add(frame2)
+scorecard.raw_score_arr # => [['1','6']['6']['3']]
 ```
 
 ## 4. Create Examples as Unit Tests
