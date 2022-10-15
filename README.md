@@ -1,65 +1,117 @@
-Bowling Challenge in Ruby
-=================
+Introduction
+---------
+This repo contains the code I wrote for the Bowling Challenge, the Makers Academy Week 5 end-of-week challenge. This involved writing code for a bowling scorecard that could count and sum scores for a game of bowling.
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+The main focus of this challenge was writing high-quality code, with an emphasis on planning, test-driven development, behaviour testing, good commit messaging, encapsulation, the Single Responsibility Principle (SRP), and clear, readable code.
 
-## The Task
+My approach
+---------
+### Planning
+I began by planning out the logical steps I felt would be necessary to calculate the final score of a bowling game based on an input array of pins knocked down with individual bowls:
+```
+1. Convert rolls into an array of frames (frame = a pair of bowls, e.g. [2, 3])
+2. Convert values 0 - 9 to their frame scores:
+    a) If the frame values don't add to 10, convert the frame to their sum
+    b) If the frame values do add up to 10 but don't contain a 10, convert to frame sum + first value in next frame
+    c) If the frame values contain a 10 AND the next frame doesn't, convert to 10 + next frame sum
+    d) If the frame values contain a 10 AND so does the next frame, convert to 10 + 10 + first value in nextx2 frame
+3. Convert values 10 and up to 0
+4. Sum all values
+```
+I then added a fifth step that would allow an accumulating score to be recorded at the end of each frame:
+```
+5. Count bowls at the end of every new scored_bowl added
+```
+Once that was done, I wrote some very basic code that replicated the logic of my plan:
+```
+bowls = [1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6]
+# bowls = [10,10,10,10,10,10,10,10,10,10,10,10]
+# bowls = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
-**THIS IS NOT A BOWLING GAME, IT IS A BOWLING SCORECARD PROGRAM. DO NOT GENERATE RANDOM ROLLS. THE USER INPUTS THE ROLLS.**
+# 1. Convert rolls into frames
+framed_bowls = []
+i = 0
+puts bowls.length
+while i < bowls.length
+  frame = []
+  frame << bowls[i]
+  if bowls[i] < 10
+    i += 1
+    frame << bowls[i] unless bowls[i].nil?
+  end
+  framed_bowls << frame
+  i += 1
+end
+puts print framed_bowls
+# 2. Convert values 0 - 9 to their frame scores:
+#    a) If the frame values don't add to 10, convert the frame to their sum
+#    b) If the frame values do add up to 10 but don't contain a 10, convert to frame sum + first value in next frame
+#    c) If the frame values contain a 10 AND the next frame doesn't, convert to 10 + next frame sum
+#    d) If the frame values contain a 10 AND so does the next frame, convert to 10 + 10 + first value in nextx2 frame
+# 3. Convert values 10 and up to 0
+# 4. Sum all values
+# 5. Count bowls at the end of every new scored_bowl added
+scored_bowls = []
+count_bowls = []
+j = 0
+while j <= framed_bowls.length
+  if j > 9
+    scored_bowls << 0
+  else
+    scored_bowls << if framed_bowls[j].sum < 10
+                      framed_bowls[j].sum
+                    elsif framed_bowls[j].include? 10
+                      if framed_bowls[j + 1].include? 10
+                        20 + framed_bowls[j + 2].first
+                      else
+                        10 + framed_bowls[j + 1].sum
+                      end
+                    else
+                      (framed_bowls[j].sum + framed_bowls[j + 1].first)
+                    end
+    count_bowls << scored_bowls.sum
+  end
+  j += 1
+end
+puts print scored_bowls
+puts print count_bowls
+puts scored_bowls.sum
+```
+I used the Code Runner extension for VS Code to run multiple tests with various inputs to check if the logic produced the results I wanted. Once I had confirmed the logic of my plan made sense, I proceeded to producing class-based code.
 
-Count and sum the scores of a bowling game for one player. For this challenge, you do _not_ need to build a web app with a UI, instead, just focus on the logic for bowling (you also don't need a database). Next end-of-unit challenge, you will have the chance to translate the logic to Javascript and build a user interface.
+### Scorecard class
+Initially, I felt a single class would be sufficient to hold all the necessary information. I decided to create a Scorecard class using a test-driven development approach. Throughout the process, I refactored to ensure adherence to the SRP. I named methods in ways I felt would make the code easy to understand, and added comments to explain more complicated sections.
 
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can roll one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After every frame the 10 pins are reset.
+By the end of this process, I had created a single Scorecard class with all the capabilities necessary to pass the week's challenge.
 
-As usual please start by
+### Frame class
+On reviewing my code, I decided it would make sense to extract a Frame class that could store information about individual frames. Recognising this could be a complicated process, I decided to plan out how I would structure this new class and what changes it would require to my existing one:
 
-* Forking this repo
+![Frame class](images/frame_class.png)
 
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
+I approached the creation of this class in the same way I made the previous one.
 
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
+Once both classes were fully functional, I isolated the tests for the Frame and Scorecard classes. Then, once all rspec tests were passing, I tested in irb and found a bug which I then fixed. Finally, I refactored both classes and their rspec tests, and I re-wrote some tests to ensure behaviour was being tested rather than state.
 
-## Focus for this challenge
-The focus for this challenge is to write high-quality code.
+Total rspec testing coverage: 100%; tests isolated; rubocop passed with no offences.
 
-In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
+Technologies used
+---------
+The following technologies were used in this repo
+1) VS Code was used for all coding requirements
+2) Planning diagrams were made in Microsoft Powerpoint
+3) Rubocop was used to improve coding readability
+4) irb used for testing
 
-## Bowling — how does it work?
 
-### Strikes
+Instructions for use
+---------
+### Setup:
+- Clone this repo to a local repository
+- Open irb and enter: 'require "./lib/scorecard.rb"'
 
-The player has a strike if he knocks down all 10 pins with the first roll in a frame. The frame ends immediately (since there are no pins left for a second roll). The bonus for that frame is the number of pins knocked down by the next two rolls. That would be the next frame, unless the player rolls another strike.
-
-### Spares
-
-The player has a spare if the knocks down all 10 pins with the two rolls of a frame. The bonus for that frame is the number of pins knocked down by the next roll (first roll of next frame).
-
-### 10th frame
-
-If the player rolls a strike or spare in the 10th frame they can roll the additional balls for the bonus. But they can never roll more than 3 balls in the 10th frame. The additional rolls only count for the bonus not for the regular frame count.
-
-    10, 10, 10 in the 10th frame gives 30 points (10 points for the regular first strike and 20 points for the bonus).
-    1, 9, 10 in the 10th frame gives 20 points (10 points for the regular spare and 10 points for the bonus).
-
-### Gutter Game
-
-A Gutter Game is when the player never hits a pin (20 zero scores).
-
-### Perfect Game
-
-A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 strikes for the bonus in the 10th frame). The Perfect Game scores 300 points.
-
-In the image below you can find some score examples.
-
-More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
-
-![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+### Interaction:
+- In irb, create a new iteration of the scorecard class, e.g. 'my_card = Scorecard.new'. This will initiate with a default list of individual bowl scores
+- Use the .score method to view the final score
+- Use the .accumulative_scores method to view how the individual bowl scores accumulated over the course of the game to reach the final score
+- You can also specify your own individual bowl scores by specifying an array of values as an argument on the .new call. For example, a perfect game involved throwing 12 strikes (strike value = 10). Entering 'perfect_game = Scorecard.new([10]*12)' will create a scorecard for a perfect game. Entering 'perfect_game.score' will then return a final score of 300.
