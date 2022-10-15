@@ -51,18 +51,36 @@ class TenPinScore
         double = false
         spare = false
         @total_score.each_with_index do |zero, index|
+            # 10th frame
             if index == 9 
-                @total_score[index] += @scorecard[index].sum
+                if strike == false && double == false && spare == false
+                    @total_score[index] += @scorecard[index].sum
+                elsif strike == false && double == false && spare == true
+                    @total_score[index] += @scorecard[index].sum
+                    @total_score[index-1] += @scorecard[index][0]
+                elsif strike == true && double == false && spare == false
+                    @total_score[index] += @scorecard[index].sum
+                    @total_score[index-1] += 10
+                elsif strike == false && double == true && spare == false
+                    @total_score[index] += @scorecard[index].sum
+                    @total_score[index-1] += 10
+                    @total_score[index-2] += 10
+                end
              # Strike behaviour    
             elsif @scorecard[index][0] == 10
-                if strike == false && spare == false
+                if strike == false && spare == false && double == false
                     @total_score[index] += 10
                     strike = true 
-                elsif strike == true && spare == false
+                elsif strike == false && spare == true && double == false
+                    @total_score[index] += 10
+                    @total_score[index-1] += 10
+                    strike = true 
+                    spare = false
+                elsif strike == true && spare == false && double == false
                     @total_score[index] += 10
                     @total_score[index-1] += 10
                     strike = false
-                    double == true
+                    double = true
                 elsif double == true && spare == false
                     @total_score[index] += 10
                     @total_score[index-1] += 10
@@ -96,11 +114,11 @@ class TenPinScore
                     @total_score[index] += @scorecard[index].sum
                 elsif strike == true 
                     @total_score[index] += @scorecard[index].sum
-                    @total_score[index-1] += 10
+                    @total_score[index-1] += @scorecard[index].sum
                     strike = false
                 elsif double == true 
                     @total_score[index] += @scorecard[index].sum
-                    @total_score[index-1] += 10
+                    @total_score[index-1] += @scorecard[index].sum
                     @total_score[index-2] += 10
                     strike = false
                     double = false
@@ -116,7 +134,7 @@ class TenPinScore
                     spare = false
                 end
             end  
-            binding.irb
+            #binding.irb
         
         end
         return @total_score.sum
