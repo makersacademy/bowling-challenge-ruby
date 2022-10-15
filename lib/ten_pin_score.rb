@@ -1,0 +1,125 @@
+
+
+class TenPinScore
+    
+    def initialize
+        @scorecard = []
+        @total_score = []
+         # Is how many rolls have been made so far
+        @total_rolls = 0
+        # Either 1 or 2
+        @which_roll = 0
+        # Should total rolls of each frame
+        @roll_total = 0
+        # Should count 0-9
+        @which_frame = 0
+    end
+
+    def format_arrays
+        10.times{ @scorecard << [] }
+        10.times{ @total_score << 0}
+    end
+
+    def add_roll(roll)
+        # roll_total is score for frame
+        @roll_total += roll
+        # Diff behaviour for frame 10 as can be 3 rolls if strike or spare
+        if @total_rolls == 19 || @total_rolls == 20 || @total_rolls == 21
+            @scorecard[@which_frame] << roll
+        # Bahaviour for roll 1    
+        elsif @which_roll == 0
+            @scorecard[@which_frame][@which_roll] = roll
+            @which_roll += 1
+        # Bahaviour for roll 2
+        elsif @which_roll == 1
+            @scorecard[@which_frame][@which_roll] = roll
+            @which_roll = 0
+            @roll_total = 0
+            @which_frame += 1
+        end
+        @total_rolls += 1
+        
+    end
+
+    def scorecard
+        #binding.irb
+        return @scorecard
+    end
+
+    def total_score
+        strike = false
+        double = false
+        spare = false
+        @total_score.each_with_index do |zero, index|
+            if index == 9 
+                @total_score[index] += @scorecard[index].sum
+             # Strike behaviour    
+            elsif @scorecard[index][0] == 10
+                if strike == false && spare == false
+                    @total_score[index] += 10
+                    strike = true 
+                elsif strike == true && spare == false
+                    @total_score[index] += 10
+                    @total_score[index-1] += 10
+                    strike = false
+                    double == true
+                elsif double == true && spare == false
+                    @total_score[index] += 10
+                    @total_score[index-1] += 10
+                    @total_score[index-2] += 10
+                end
+            # score a spare behaviour
+            elsif @scorecard[index][0] != 10 && @scorecard[index].sum == 10
+                if strike == false && spare == false
+                    @total_score[index] += 10
+                    spare = true 
+                elsif strike == false && spare == true
+                    @total_score[index] += @scorecard[index].sum
+                    @total_score[index-1] += @scorecard[index][0]
+                    spare = true 
+                elsif strike == true && spare == false
+                    @total_score[index] += 10
+                    @total_score[index-1] += 10
+                    strike = false
+                    spare == true
+                elsif double == true && spare == false
+                    @total_score[index] += 10
+                    @total_score[index-1] += 10
+                    @total_score[index-2] += 10
+                    strike = false
+                    double = false
+                    spare == true     
+                end      
+            # If you bowl less than 10 and spare false        
+            elsif @scorecard[index].sum < 10 && spare == false
+                if strike == false 
+                    @total_score[index] += @scorecard[index].sum
+                elsif strike == true 
+                    @total_score[index] += @scorecard[index].sum
+                    @total_score[index-1] += 10
+                    strike = false
+                elsif double == true 
+                    @total_score[index] += @scorecard[index].sum
+                    @total_score[index-1] += 10
+                    @total_score[index-2] += 10
+                    strike = false
+                    double = false
+                end
+                # If you bowl less than 10 and spare true         
+            elsif @scorecard[index].sum < 10 && spare == true
+                if spare == false
+                    @total_score[index] += @scorecard[index].sum
+                    spare = false
+                elsif spare == true 
+                    @total_score[index] += @scorecard[index].sum
+                    @total_score[index-1] += @scorecard[index][0]
+                    spare = false
+                end
+            end  
+            binding.irb
+        
+        end
+        return @total_score.sum
+    end
+
+end
