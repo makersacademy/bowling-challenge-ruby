@@ -20,4 +20,8 @@ class Frame
   def frame_arr
     @frame
   end
+
+  def sum_rolls
+    frame_arr.map(&:to_i).reduce(0, :+)
+  end
 end

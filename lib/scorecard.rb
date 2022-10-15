@@ -3,9 +3,10 @@ require 'frame'
 class Scorecard
   def initialize
     @raw_score_arr = []
+    @score_arr = []
   end
 
-  def add(frame)
+  def add_frames(frame)
     @raw_score_arr << frame
   end
 
@@ -24,12 +25,22 @@ class Scorecard
     # If roll1 of frame n+1 is also a strike, adds roll1 of frame n+2
   end
   
+  def sum_score(frame_sum)
+    @score_arr << frame_sum
+  end
+
   def score_arr
-    # 
+    @score_arr
   end
 
   def final_score
-    # Adds all scores from score_arr
-    # returns final total
+    sum = 0
+    @score_arr.each do |frame|
+      frame = frame.to_i
+      sum += frame
+    end
+    sum
   end
 end
+
+# score_arr.map(&:to_i).reduce(0, :+)
