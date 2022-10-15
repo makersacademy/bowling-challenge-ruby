@@ -3,21 +3,20 @@ class Bowling
     @score_card = []
   end
 
+  attr_accessor :score_card
+
   def frame
     @score_card.length + 1 
   end
 
-  attr_accessor :score_card
-  
   def score
-
+    # Squishes the array and sums up the score
+    @score_card.flatten.inject(:+)
   end
 
-  def add_score(first, second)
+  def add_score(first = 0, second = 0)
     @score_card << [first, second]
   end
-
-  private
 
   def check_strike(arr)
     arr[0] == 10
