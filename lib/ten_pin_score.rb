@@ -5,8 +5,6 @@ class TenPinScore
     def initialize
         @scorecard = []
         @total_score = []
-         # Is how many rolls have been made so far
-        @total_rolls = 0
         # Either 1 or 2
         @which_roll = 0
         # Should total rolls of each frame
@@ -24,9 +22,6 @@ class TenPinScore
     def add_roll(roll)
         # roll_total is score for frame
         @roll_total += roll
-        # Diff behaviour for frame 10 as can be 3 rolls if strike or spare
-        # if @total_rolls == 19 || @total_rolls == 20 || @total_rolls == 21
-        #     @scorecard[@which_frame] << roll
         # Bahaviour for roll 1    
         if @which_roll == 0
             @scorecard[@which_frame][@which_roll] = roll
@@ -38,7 +33,6 @@ class TenPinScore
             @roll_total = 0
             @which_frame += 1
         end
-        @total_rolls += 1
     end
 
     def scorecard
@@ -59,7 +53,6 @@ class TenPinScore
                 else
                     @total_score[index] += @scorecard[index].sum
                 end
-            #binding.irb
             # 10th frame
             elsif index == 9 
                 if strike == false && double == false && spare == false
@@ -70,7 +63,6 @@ class TenPinScore
                 elsif strike == true && double == false && spare == false
                         @total_score[index] += @scorecard[index].sum
                         @total_score[index-1] += 10                        
-
                 elsif strike == false && double == true && spare == false
                     # For some reason, that I can't find in the rules, if you bowl all
                     # strikes then a spare in the tenth frame the 8th frame dow not get 
@@ -154,9 +146,7 @@ class TenPinScore
                     spare = false
                 end
             end 
-            #binding.irb
         end
-        #binding.irb
         @total_score.sum
     end
 
