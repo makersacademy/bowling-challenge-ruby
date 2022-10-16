@@ -19,7 +19,7 @@ RSpec.describe Bowling do
       bowling.add_score(7, 2)
       expect(bowling.frame).to eq(10)
       bowling.add_score(1, 5) # The game goes up to 10 frames so there shouldn't be an 11th
-      p bowling.score_card
+      bowling.score_card
       expect(bowling.frame).to eq(10)
     end
   end
@@ -47,7 +47,7 @@ RSpec.describe Bowling do
       bowling = Bowling.new
       bowling.add_score(1, 2)
       bowling.add_score(3, 4)
-      bowling.add_score(5, 5)
+      bowling.add_score(4, 5)
       bowling.add_score(7, 2)
       bowling.add_score(1, 6)
       expect(bowling.score_card).to eq([[1,2], [3,4], [5,5], [7,2], [1,6]])
@@ -87,6 +87,36 @@ RSpec.describe Bowling do
       bowling.add_score(6)
       expect(bowling.score_card.last).to eq [5, 4]
       expect(bowling.score_card.length).to eq 10
+    end
+  end
+
+  describe '#score' do
+    it 'returns the basic score (without bonus points)' do
+      bowling = Bowling.new
+      bowling.add_score(0, 10)
+      bowling.add_score(10, 0)
+      expect(bowling.score).to eq(20)
+      bowling.add_score(4, 5)
+      expect(bowling.score).to eq (29)
+    end
+  end
+
+  describe '#bonus_score' do
+    xit 'returns the bonus score on strikes' do
+      bowling = Bowling.new
+      bowling.add_score(10, 0)
+      bowling.add_score(0, 8)
+      bowling.add_score(3, 0)
+      expect(bowling.bonus_score).to eq(11)
+    end
+
+    it 'returns the bonus score on spares' do
+      bowling = Bowling.new
+      bowling.add_score(5, 5)
+      bowling.add_score(3, 3)
+      bowling.add_score(2, 2)
+      expect(bowling.bonus_score).to eq(6)
+    
     end
   end
 end
