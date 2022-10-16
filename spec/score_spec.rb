@@ -93,7 +93,29 @@ describe PlayerGameScore do
       fake_round1 = double(fake_round1, :round_pins => [3, 4], strike: false, spare: false)
       @game_score.add_round(fake_round1)
 
-      expect(@game_score.calculate_total_score).to eq 7
+      fake_round2 = double(fake_round2, :round_pins => [10], strike: true, spare: false)
+      @game_score.add_round(fake_round2)
+
+      fake_round3 = double(fake_round3, :round_pins => [4, 6], strike: false, spare: true)
+      @game_score.add_round(fake_round3)
+
+      fake_round4 = double(fake_round4, :round_pins => [1, 5], strike: false, spare: false)
+      @game_score.add_round(fake_round4)
+
+      expect(@game_score.calculate_total_score).to eq 44
+    end
+
+    it "calculates the right total points when several rounds" do      
+        fake_round1 = double(fake_round1, :round_pins => [3, 4], strike: false, spare: false)
+        @game_score.add_round(fake_round1)
+  
+        expect(@game_score.calculate_total_score).to eq 7
+      end
+
+    xit "total points should equal 300 if player introdues perfect game" do
+      strikes_counter = 12
+
+      expect(@game_score.calculate_total_score).to eq 300
     end
   end
 end
