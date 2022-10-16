@@ -140,4 +140,49 @@ describe TenPinScore do
         expect(ten_pin.scorecard[-1].sum).to eq 10
         expect(ten_pin.total_score).to eq 275
     end
+
+    it 'checks a run of non strike/spare with a spare on last roll' do
+        ten_pin = TenPinScore.new
+        ten_pin.format_arrays
+        9.times {|i| 
+            ten_pin.add_roll(3)
+            ten_pin.add_roll(3)
+        }
+        ten_pin.add_roll(5)
+        ten_pin.add_roll(5)
+        ten_pin.add_roll(3)
+        expect(ten_pin.scorecard.length).to eq 11
+        expect(ten_pin.scorecard[-1].sum).to eq 3
+        expect(ten_pin.total_score).to eq 67
+    end
+
+    it 'checks a run of non strike/spare with a strike on last roll' do
+        ten_pin = TenPinScore.new
+        ten_pin.format_arrays
+        9.times {|i| 
+            ten_pin.add_roll(3)
+            ten_pin.add_roll(3)
+        }
+        ten_pin.add_roll(10)
+        ten_pin.add_roll(5)
+        ten_pin.add_roll(3)
+        expect(ten_pin.scorecard.length).to eq 11
+        expect(ten_pin.scorecard[-1].sum).to eq 3
+        expect(ten_pin.total_score).to eq 72
+    end
+
+    it 'checks a run of non strike/spare with a strike on last roll' do
+        ten_pin = TenPinScore.new
+        ten_pin.format_arrays
+        9.times {|i| 
+            ten_pin.add_roll(3)
+            ten_pin.add_roll(3)
+        }
+        ten_pin.add_roll(10)
+        ten_pin.add_roll(10)
+        ten_pin.add_roll(3)
+        expect(ten_pin.scorecard.length).to eq 11
+        expect(ten_pin.scorecard[-1].sum).to eq 3
+        expect(ten_pin.total_score).to eq 77
+    end
 end
