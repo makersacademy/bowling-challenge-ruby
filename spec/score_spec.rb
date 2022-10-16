@@ -37,14 +37,14 @@ describe PlayerGameScore do
       expect(@game_score.round_scores).to eq([20, 17, 7])
     end
 
-    xit "adds the next frame's first roll points when spare" do
-      fake_round1 = double(fake_round1, :round_pins => [10], strike: true)
+    it "adds the next frame's first roll points when spare" do
+      fake_round1 = double(fake_round1, :round_pins => [4, 6], strike: false, spare: true)
       @game_score.add_round(fake_round1)
   
-      fake_round2 = double(fake_round2, :round_pins => [2, 5], strike: false)
+      fake_round2 = double(fake_round2, :round_pins => [2, 5], strike: false, spare: false)
       @game_score.add_round(fake_round2)
   
-      expect(@game_score.round_scores).to eq([17, 7])
+      expect(@game_score.round_scores).to eq([12, 7])
     end
   end
 end
