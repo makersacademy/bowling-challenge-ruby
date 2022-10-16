@@ -26,13 +26,15 @@ describe Round do
 
         pins_knocked = 4
         @current_round.add_pins(pins_knocked)
+        @current_round.add_round_pins
 
-        expect(@current_round.add_round_pins).to eq([[2, 6]])
+        expect(@current_round.game_pins).to eq([[2, 4]])
 
         pins_knocked = 10
         @current_round.add_pins(pins_knocked)
+        @current_round.add_round_pins
 
-        expect(@current_round.add_round_pins).to eq([[2, 6], [10]])
+        expect(@current_round.game_pins).to eq([[2, 4], [10]])
       end
   end
 end
