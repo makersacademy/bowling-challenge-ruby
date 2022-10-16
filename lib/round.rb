@@ -12,9 +12,7 @@ class Round
     @round_pins << pins_knocked
     @strike = true if @round_pins[0] == 10
     if @counter == 2
-      if (@round_pins[0] + @round_pins[1]) == 10
-        @spare = true 
-      end
+      @spare = true if (@round_pins[0] + @round_pins[1]) == 10
       @counter = 0
     end
     @counter += 1
