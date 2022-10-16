@@ -21,14 +21,18 @@ describe Round do
 
   describe "#add_round_pins" do
       it "adds the round_pins to the game_pins array" do
-        pins_this_round = @current_round.round_pins = [2, 6]
+        pins_knocked = 2
+        @current_round.add_pins(pins_knocked)
 
-        expect(@current_round.add_round_pins(pins_this_round)).to eq([[2, 6]])
+        pins_knocked = 4
+        @current_round.add_pins(pins_knocked)
 
-        pins_this_round = @current_round.round_pins = [4, 7]
+        expect(@current_round.add_round_pins).to eq([[2, 6]])
 
-        expect(@current_round.add_round_pins(pins_this_round)).to eq([[2, 6], [4, 7]])
-        
+        pins_knocked = 10
+        @current_round.add_pins(pins_knocked)
+
+        expect(@current_round.add_round_pins).to eq([[2, 6], [10]])
       end
   end
 end
