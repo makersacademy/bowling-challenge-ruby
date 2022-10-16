@@ -52,8 +52,6 @@ class App
     frame
   end
 
-  def calculate_bonus_points(frame)
-
 
   def get_user_input
     # validate_input
