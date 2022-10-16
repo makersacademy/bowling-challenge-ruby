@@ -27,4 +27,9 @@ class PlayerGameScore
     @prev_round_strike = true if @round.strike == true
     @prev_round_spare = true if @round.spare == true
   end
+
+  def calculate_total_score
+    result = @round_scores.inject(0, :+)
+    return result
+  end
 end
