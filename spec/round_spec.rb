@@ -24,7 +24,7 @@ describe Round do
       pins_knocked = 10
       @current_round.add_pins(pins_knocked)
   
-      expect(@current_round.strike).to eq(True)
+      expect(@current_round.strike).to eq(true)
     end
   end
 end
