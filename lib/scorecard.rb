@@ -14,21 +14,41 @@ class Scorecard
 
   def score
     score = 0
-    @frame_arr.each_with_index do |frame, n|
-      next_frame = @frame_arr[n+1]
+    frame_no = 0
+    @frame_arr.each_with_index do |frame, frame_no|
+      next_frame = @frame_arr[frame_no + 1]
+      next_frame_2 = @frame_arr[frame_no + 2]
+      if frame_no < 10
         if frame.is_strike?
-          score += next_frame.sum_rolls + 10
-          next
+          if next_frame.is_strike?
+            score += next_frame.sum_rolls + 10 + next_frame_2.roll1
+            next
+          else
+            score += next_frame.sum_rolls + 10
+            next
+          end
         end
         if frame.is_spare?
           score += next_frame.roll1 + 10
           next
         end
       score += frame.sum_rolls
-    end
+      end
+      if frame_no == 10
+        if frame.is_strike? || frame.is_spare?
+          score += next_frame.sum_rolls + 10
+          next
+        end
+        score += frame.sum_rolls
+      end
+      if frame_no == 11
+        score += frame.sum_rolls
+        next
+      end
+      frame_no += 1
+      end
     score
   end
-
   
   def sum_score(frame_sum)
     @score_arr << frame_sum
@@ -37,25 +57,6 @@ class Scorecard
   def score_arr
     @score_arr
   end
-
-  def final_score
-    sum = 0
-    @score_arr.each do |frame|
-      sum += frame
-    end
-    sum
-  end
 end
 
 # # score_arr.map(&:to_i).reduce(0, :+)
-# def spare_bonus
-#   # raw_score_arr.each do |frame|
-#   #   if frame.include?('/')
-
-# end
-
-# def strike_bonus
-#   # Takes strike (X) from rolls_arr
-#   # Adds roll1 & roll2* of frame n+1, returns to scorecard_arr
-#   # If roll1 of frame n+1 is also a strike, adds roll1 of frame n+2
-# end

@@ -38,17 +38,3 @@ class Frame
     roll1 == 10 ? true : false
   end
 end
-
-  # def frame_type
-  #   if (roll1 < 10) && (roll1 + roll2 == 10)
-  #     @frame_type = '[/]'
-  #   elsif roll1 == 10
-  #     @frame_type = '[X]'
-  #   else
-  #     @frame_type = '[ ]'
-  #   end
-  # end
-
-  # def add_frame_type
-  #   frame_arr << frame_type
-  # end
