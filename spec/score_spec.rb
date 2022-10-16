@@ -112,7 +112,7 @@ describe PlayerGameScore do
         expect(@game_score.calculate_total_score).to eq 7
       end
 
-    xit "total points should equal 300 if player introdues perfect game" do
+    it "total points should equal 300 if player introdues perfect game" do
       strikes_counter = 12
 
       expect(@game_score.calculate_total_score).to eq 300
