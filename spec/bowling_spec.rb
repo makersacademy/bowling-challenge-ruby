@@ -47,7 +47,7 @@ RSpec.describe Bowling do
       bowling = Bowling.new
       bowling.add_score(1, 2)
       bowling.add_score(3, 4)
-      bowling.add_score(4, 5)
+      bowling.add_score(5, 5)
       bowling.add_score(7, 2)
       bowling.add_score(1, 6)
       expect(bowling.score_card).to eq([[1,2], [3,4], [5,5], [7,2], [1,6]])
@@ -99,24 +99,70 @@ RSpec.describe Bowling do
       bowling.add_score(4, 5)
       expect(bowling.score).to eq (29)
     end
+
+    it 'returns the basic score (without bonus points)' do
+      bowling = Bowling.new
+      bowling.score_card = bowling.score_card = [[5,5], [4,5], [8,2], [10,0],
+        [6,2], [10, 0], [4, 6], [4, 4], [5,4], [6,2]]
+      expect(bowling.score).to eq (92)
+    end
   end
 
   describe '#bonus_score' do
-    xit 'returns the bonus score on strikes' do
+    it 'returns the bonus score on strikes' do
       bowling = Bowling.new
-      bowling.add_score(10, 0)
-      bowling.add_score(0, 8)
+      bowling.add_score(10, 0) # strike!
+      bowling.add_score(8, 0) # Next two bowls add up to 8
       bowling.add_score(3, 0)
-      expect(bowling.bonus_score).to eq(11)
+      expect(bowling.bonus_score).to eq(8)
+    end
+
+    it 'returns the bonus score on strikes' do
+      bowling = Bowling.new
+      bowling.add_score(10, 0) # strike!
+      bowling.add_score(8, 1)
+      bowling.add_score(7, 2)
+      expect(bowling.bonus_score).to eq(9)
     end
 
     it 'returns the bonus score on spares' do
       bowling = Bowling.new
-      bowling.add_score(5, 5)
+      bowling.add_score(5, 5) # spare
       bowling.add_score(3, 3)
       bowling.add_score(2, 2)
-      expect(bowling.bonus_score).to eq(6)
-    
+      expect(bowling.bonus_score).to eq(3)
+      bowling.add_score(8, 2) # spare
+      bowling.add_score(9, 0)
+      expect(bowling.bonus_score).to eq(12)
+    end
+
+    it 'returns the bonus score on overlapping strikes and spares' do
+      bowling = Bowling.new
+      bowling.add_score(10, 0) # strike
+      bowling.add_score(2, 8) # spare
+      bowling.add_score(4, 3)
+      bowling.add_score(3, 5)
+      expect(bowling.bonus_score).to eq(14)
+    end
+
+    it 'returns multiple bonus scores on strikes/spares' do
+      bowling = Bowling.new
+      bowling.score_card =  bowling.score_card = [[5,5], [4,5], [8,2], [10,0], [6,2],
+        [10, 0], [4, 6], [4, 4], [5,4], [6,2]]
+      expect(bowling.bonus_score).to eq(36)
+    end
+  end
+
+  describe '#total_score' do
+    it 'returns the total score when extra roll is not factored in' do
+      bowling = Bowling.new
+      bowling.score_card = [[5,5], [4,5], [8,2], [10,0], [6,2], [10, 0], [4, 6], [4, 4], [5,4], [6,2]]
+      expect(bowling.total_score).to eq(128)
+    end
+
+    xit 'returns the total score when got a spare on last frame' do
+      bowling = Bowling.new
+      bowling.score_card = []
     end
   end
 end

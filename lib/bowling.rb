@@ -39,16 +39,18 @@ class Bowling
     iterator = 0 
     while iterator < @score_card.length do
       if check_strike(@score_card[iterator])
-        # strikes need to add the score of the next two frames to the current frame
-        # To simulate, the next two frames get doubled score in the form of
-        # bonus score.
+        # strikes need to add the score of the next frame to the current frame
+        # simulated by adding the next frame as bonus score
         bonus_score += @score_card[iterator + 1].sum
-        bonus_score += @score_card[iterator + 2].sum
       elsif check_spare(@score_card[iterator])
-        bonus_score += @score_card[iterator + 1].sum
+        bonus_score += @score_card[iterator + 1][0]
       end
-      iterator == 1
+      iterator += 1
     end
     bonus_score
+  end
+
+  def total_score
+    self.score + self.bonus_score
   end
 end
