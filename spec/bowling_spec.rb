@@ -166,9 +166,11 @@ RSpec.describe Bowling do
       expect(bowling.total_score).to eq(128)
     end
 
-    xit 'returns the total score when got a spare on last frame' do
+    it 'returns the total score when got a spare on last frame' do
       bowling = Bowling.new
-      bowling.score_card = [[10, 0], [9, 1], [5, 5], [7, 2], [10, 0]]
+      bowling.score_card = [[10, 0], [9, 1], [5, 5], [7, 2], [10, 0], [10, 0],
+        [10, 0], [9, 0], [8, 2], [9, 1, 10]]
+      expect(bowling.total_score).to eq(187)
     end
   end
 end
