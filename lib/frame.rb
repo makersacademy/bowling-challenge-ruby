@@ -1,8 +1,9 @@
 class Frame
+  # attr_accessor :roll1, :roll2
   def initialize(roll1, roll2)
-  @roll1 = roll1
-  @roll2 = roll2
-  @frame = []
+    @roll1 = roll1
+    @roll2 = roll2
+    @frame = []
   end
 
   def roll1
@@ -20,8 +21,34 @@ class Frame
   def frame_arr
     @frame
   end
-
+  
   def sum_rolls
-    frame_arr.map(&:to_i).reduce(0, :+)
+    raw_score = 0
+    frame_arr.each do |roll|
+      raw_score += roll
+    end
+    raw_score
+  end
+
+  def is_spare?
+    (roll1 < 10) && (roll1 + roll2 == 10) ? true : false
+  end
+
+  def is_strike?
+    roll1 == 10 ? true : false
   end
 end
+
+  # def frame_type
+  #   if (roll1 < 10) && (roll1 + roll2 == 10)
+  #     @frame_type = '[/]'
+  #   elsif roll1 == 10
+  #     @frame_type = '[X]'
+  #   else
+  #     @frame_type = '[ ]'
+  #   end
+  # end
+
+  # def add_frame_type
+  #   frame_arr << frame_type
+  # end
