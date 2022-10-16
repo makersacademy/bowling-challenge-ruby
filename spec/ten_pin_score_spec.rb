@@ -185,4 +185,19 @@ describe TenPinScore do
         expect(ten_pin.scorecard[-1].sum).to eq 3
         expect(ten_pin.total_score).to eq 77
     end
+
+    it 'checks a run of strikes with a spare on second last roll' do
+        ten_pin = TenPinScore.new
+        ten_pin.format_arrays
+        9.times {|i| 
+            ten_pin.add_roll(10)
+            ten_pin.add_roll(10)
+        }
+        ten_pin.add_roll(10)
+        ten_pin.add_roll(5)
+        ten_pin.add_roll(5)
+        expect(ten_pin.scorecard.length).to eq 11
+        expect(ten_pin.scorecard[-1].sum).to eq 5
+        expect(ten_pin.total_score).to eq 285
+    end
 end
