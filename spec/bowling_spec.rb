@@ -147,9 +147,15 @@ RSpec.describe Bowling do
 
     it 'returns multiple bonus scores on strikes/spares' do
       bowling = Bowling.new
-      bowling.score_card =  bowling.score_card = [[5,5], [4,5], [8,2], [10,0], [6,2],
+      bowling.score_card = [[5,5], [4,5], [8,2], [10,0], [6,2],
         [10, 0], [4, 6], [4, 4], [5,4], [6,2]]
       expect(bowling.bonus_score).to eq(36)
+    end
+
+    it 'can handle consecutive strikes' do
+      bowling = Bowling.new
+      bowling.score_card = [[6, 2], [10, 0], [10, 0], [10, 0], [4, 3], [5, 2]]
+      expect(bowling.bonus_score).to eq(41)
     end
   end
 
@@ -162,7 +168,7 @@ RSpec.describe Bowling do
 
     xit 'returns the total score when got a spare on last frame' do
       bowling = Bowling.new
-      bowling.score_card = []
+      bowling.score_card = [[10, 0], [9, 1], [5, 5], [7, 2], [10, 0]]
     end
   end
 end

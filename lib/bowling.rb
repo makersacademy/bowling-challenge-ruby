@@ -1,9 +1,10 @@
 class Bowling
   def initialize
     @score_card = []
+    @bonus_score = 0
   end
 
-  attr_accessor :score_card
+  attr_accessor :score_card, :bonus_score
 
   def frame
     if @score_card.length >= 9 then return 10 end
@@ -35,19 +36,25 @@ class Bowling
   end
 
   def bonus_score
-    bonus_score = 0
+    @bonus_score = 0
     iterator = 0 
-    while iterator < @score_card.length do
+    while iterator < @score_card.length - 1 do # minus 1 because last frame offers no bonus
       if check_strike(@score_card[iterator])
         # strikes need to add the score of the next frame to the current frame
         # simulated by adding the next frame as bonus score
-        bonus_score += @score_card[iterator + 1].sum
+        if check_strike(@score_card[iterator + 1])
+          @bonus_score += 10 + @score_card[iterator + 2][0]
+        else
+          @bonus_score += @score_card[iterator + 1].sum
+        end
       elsif check_spare(@score_card[iterator])
-        bonus_score += @score_card[iterator + 1][0]
+        @bonus_score += @score_card[iterator + 1][0]
+        # If you get a spare then it basically doubles the score of the next roll
       end
       iterator += 1
     end
-    bonus_score
+
+    @bonus_score
   end
 
   def total_score
