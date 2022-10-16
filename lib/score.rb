@@ -6,11 +6,12 @@ class PlayerGameScore
     @prev_round_strike = false
     @prev_round_spare = false 
     @round_counter = 0
-    # Add a counter for number of strikes, if strikes = 12, total points = 300
+    @strikes_counter = 0 
   end
 
   def add_round(round)
     @round = round
+    @strikes_counter += 1 if @round.strike == true 
     @points = @round.round_pins.inject(0, :+)
     @round_scores << @points
     
@@ -29,6 +30,8 @@ class PlayerGameScore
   end
 
   def calculate_total_score
+    perfect_game_score = 300
+    return perfect_game_score if @strikes_counter == 12
     result = @round_scores.inject(0, :+)
     return result
   end

@@ -112,8 +112,9 @@ describe PlayerGameScore do
         expect(@game_score.calculate_total_score).to eq 7
       end
 
-    it "total points should equal 300 if player introdues perfect game" do
-      strikes_counter = 12
+    it "total points should equal 300 if player introduces perfect game" do
+        fake_round1 = double(fake_round1, :round_pins => [10], strike: true, spare: false)
+        12.times { @game_score.add_round(fake_round1) }
 
       expect(@game_score.calculate_total_score).to eq 300
     end
