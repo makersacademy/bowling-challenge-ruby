@@ -87,4 +87,13 @@ describe PlayerGameScore do
         expect(@game_score.round_scores).to eq([7, 20, 11, 6])
     end
   end
+  
+  describe "#calculate_total_score" do
+    it "calculates the right total points when only one round" do      
+      fake_round1 = double(fake_round1, :round_pins => [3, 4], strike: false, spare: false)
+      @game_score.add_round(fake_round1)
+
+      expect(@game_score.calculate_total_score).to eq 7
+    end
+  end
 end
