@@ -10,16 +10,23 @@ class PlayerGameScore
   end
 
   def add_round(round)
-    points = round.round_pins.inject(0, :+)
-    @round_scores[@round_counter - 1] += points if @prev_round_strike
-    @round_scores[@round_counter - 1] += round.round_pins[0] if @prev_round_spare
-    @prev_round_strike = false
-    @prev_roud_spare = false
-    @round_scores << points
-    @prev_round_strike = true if round.strike == true
-    @prev_round_spare = true if round.spare == true
-
+    @round = round
+    @points = @round.round_pins.inject(0, :+)
+    p @points
+    @round_scores << @points
+    p @round_scores
+    
+    self.calculate_bonus
     @round_counter += 1
   end
 
+  def calculate_bonus
+    @round_scores[@round_counter - 1] += @points if @prev_round_strike
+    @round_scores[@round_counter - 1] += @round.round_pins[0] if @prev_round_spare
+    @prev_round_strike = false
+    @prev_roud_spare = false
+
+    @prev_round_strike = true if @round.strike == true
+    @prev_round_spare = true if @round.spare == true
+  end
 end

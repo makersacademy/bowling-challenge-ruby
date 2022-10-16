@@ -59,5 +59,17 @@ describe PlayerGameScore do
 
       expect(@game_score.round_scores).to eq([13, 11, 4])
     end
+
+    it "adds the right number of points when there are a spare and a strike on a row" do
+        fake_round1 = double(fake_round1, :round_pins => [4, 6], strike: false, spare: true)
+        @game_score.add_round(fake_round1)
+  
+        fake_round2 = double(fake_round2, :round_pins => [10], strike: true, spare: false)
+        @game_score.add_round(fake_round2)
+
+        fake_round3 = double(fake_round3, :round_pins => [1, 5], strike: false, spare: false)
+        @game_score.add_round(fake_round3)
+        expect(@game_score.round_scores).to eq([20, 16, 6])
+    end
   end
 end
