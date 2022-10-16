@@ -20,21 +20,24 @@ describe Round do
     end
 
   describe "#add_round_pins" do
-      it "adds the round_pins to the game_pins array" do
-        pins_knocked = 2
-        @current_round.add_pins(pins_knocked)
+    it "adds the round_pins to the game_pins array" do
+      pins_knocked = 2
+      @current_round.add_pins(pins_knocked)
 
-        pins_knocked = 4
-        @current_round.add_pins(pins_knocked)
-        @current_round.add_round_pins
+      pins_knocked = 4
+      @current_round.add_pins(pins_knocked)
+      @current_round.add_round_pins
 
-        expect(@current_round.game_pins).to eq([[2, 4]])
+      expect(@current_round.game_pins).to eq([[2, 4]])
+    end
+  end
 
-        pins_knocked = 10
-        @current_round.add_pins(pins_knocked)
-        @current_round.add_round_pins
-
-        expect(@current_round.game_pins).to eq([[2, 4], [10]])
-      end
+  describe "#strike" do
+    it "sets strike to true" do
+      pins_knocked = 10
+      @current_round.add_pins(pins_knocked)
+  
+      expect(@current_round.strike).to eq(True)
+    end
   end
 end

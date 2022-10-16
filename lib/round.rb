@@ -1,8 +1,7 @@
 class Round
-    attr_accessor :game_pins, :round_pins
+    attr_accessor :round_pins
 
   def initialize
-    @game_pins = []
     @round_pins = []
   end
 
@@ -10,8 +9,6 @@ class Round
     @round_pins << pins_knocked
   end
 
-  def add_round_pins
-    @game_pins << @round_pins
-    @round_pins = []
-  end
+
+  
 end
