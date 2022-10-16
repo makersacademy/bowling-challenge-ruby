@@ -3,12 +3,17 @@ class PlayerGameScore
 
   def initialize
     @round_scores = []
+    @prev_round_strike = false
+    @prev_round_spare = false 
+    @round_counter = 0
     # Add a counter for number of strikes, if strikes = 12, total points = 300
   end
 
   def add_round(round)
     points = round.round_pins.inject(0, :+)
+    @round_scores[@round_counter - 1] += points if @prev_round_strike
     @round_scores << points
-    
+    @prev_round_strike = true if round.strike == true
+    @round_counter += 1
   end
 end
