@@ -70,4 +70,35 @@ RSpec.describe ScoreCard do
       expect(score_card.total_score).to eq(82)
     end
   end
+
+  context 'with strike' do
+    it 'calculates total score with the bonus point of strike' do
+      frame1 = Frame.new(10, 0)
+      frame2 = Frame.new(2, 4)
+      frame3 = Frame.new(3, 4)
+      score_card = ScoreCard.new
+      score_card.add(frame1)
+      score_card.add(frame2)
+      score_card.add(frame3)
+      expect(score_card.total_score).to eq(29)
+    end
+
+    it 'calculates the perfect game' do
+      frame = Frame.new(10, 0)
+      score_card = ScoreCard.new
+      score_card.add(frame)
+      score_card.add(frame)
+      score_card.add(frame)
+      score_card.add(frame)
+      score_card.add(frame)
+      score_card.add(frame)
+      score_card.add(frame)
+      score_card.add(frame)
+      score_card.add(frame)
+      score_card.add(Frame.new(10, 10))
+      score_card.add(Frame.new(10, 0))
+
+      expect(score_card.total_score).to eq(300)
+    end
+  end
 end
