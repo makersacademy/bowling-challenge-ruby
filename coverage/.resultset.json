@@ -1,0 +1,74 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/naraekim/solo_projects/bowling-challenge-ruby/spec/frame_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/naraekim/solo_projects/bowling-challenge-ruby/lib/frame.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          5,
+          5,
+          null,
+          null,
+          1,
+          4,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          null,
+          3,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1665994566
+  }
+}
