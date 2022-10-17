@@ -191,7 +191,7 @@ describe TenPinScore do
         ten_pin.format_arrays
         9.times {|i| 
             ten_pin.add_roll(10)
-            ten_pin.add_roll(10)
+            ten_pin.add_roll(0)
         }
         ten_pin.add_roll(10)
         ten_pin.add_roll(5)
@@ -199,5 +199,19 @@ describe TenPinScore do
         expect(ten_pin.scorecard.length).to eq 11
         expect(ten_pin.scorecard[-1].sum).to eq 5
         expect(ten_pin.total_score).to eq 285
+    end
+
+    it 'checks a run of strikes with a normal fram eon end' do
+        ten_pin = TenPinScore.new
+        ten_pin.format_arrays
+        9.times {|i| 
+            ten_pin.add_roll(10)
+            ten_pin.add_roll(0)
+        }
+        ten_pin.add_roll(4)
+        ten_pin.add_roll(4)
+        expect(ten_pin.scorecard.length).to eq 11
+        expect(ten_pin.scorecard[-1].sum).to eq 0
+        expect(ten_pin.total_score).to eq 260
     end
 end

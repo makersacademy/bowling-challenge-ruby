@@ -65,12 +65,29 @@ class TenPinScore
             # from first roll of 10th frame.
             if @scorecard[@index][0] == 10 && @scorecard[@index][1] < 10
                 @total_score[@index] += @scorecard[@index].sum
-                @total_score[@index-1] += @scorecard[@index][1]
+                @total_score[@index-1] += (@scorecard[@index][1] + 10)
                 @total_score[@index-2] += 10
-            elsif @scorecard[@index][0] == 10
+
+            elsif @scorecard[@index][0] == 10 && @scorecard[@index][1] == 10
+                @total_score[@index] += @scorecard[@index].sum
+                @total_score[@index-1] += 10 
+                @total_score[@index-2] += 10
+
+            elsif @scorecard[@index][0] == 10 
+                # Think this is covered by first if
                 @total_score[@index] += @scorecard[@index].sum
                 @total_score[@index-1] += 10
                 @total_score[@index-2] += 10
+                # Spare in last frame
+            elsif @scorecard[@index][0] < 10 && @scorecard[@index].sum == 10
+                @total_score[@index] += @scorecard[@index].sum
+                @total_score[@index-1] += 10
+                @total_score[@index-2] += @scorecard[@index][0]
+                # Normal roll in last frame
+            elsif @scorecard[@index][0] < 10
+                @total_score[@index] += @scorecard[@index].sum
+                @total_score[@index-1] += @scorecard[@index].sum
+                @total_score[@index-2] += @scorecard[@index][0]
             else
                 @total_score[@index] += @scorecard[@index].sum
                 @total_score[@index-1] += 10
