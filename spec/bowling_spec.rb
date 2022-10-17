@@ -172,5 +172,12 @@ RSpec.describe Bowling do
         [10, 0], [9, 0], [8, 2], [9, 1, 10]]
       expect(bowling.total_score).to eq(187)
     end
+
+    it 'returns the total score when you get a triple strike at the end' do
+      bowling = Bowling.new
+      bowling.score_card = [[5,5], [5,5], [8,2], [10,0], [6,2],
+        [10, 0], [4, 6], [4, 4], [5,4], [10, 10, 10]]
+      expect(bowling.total_score).to eq(151)
+    end
   end
 end
