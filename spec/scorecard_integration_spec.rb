@@ -28,24 +28,10 @@ RSpec.describe Scorecard do
       scorecard.sum_score(f2)
       expect(scorecard.score_arr).to eq [7, 9]
     end
-
-    # it 'returns array of frame scores inc 1st frame spare' do
-    #   scorecard = Scorecard.new
-    #   frame1 = Frame.new(1, 9)
-    #   frame2 = Frame.new(6, 3)
-    #   frame1.add_rolls
-    #   frame2.add_rolls
-    #   f = frame1.sum_rolls
-    #   f2 = frame2.sum_rolls
-    #   scorecard.add_bonus
-    #   scorecard.sum_score(f)
-    #   scorecard.sum_score(f2)
-    #   expect(scorecard.score_arr).to eq [16,9]
-    # end
   end
 
-  describe '#final_score' do
-    it 'sums all frame scores to return one final score' do
+  describe '#sum_score' do
+    it 'sums all frame scores' do
       scorecard = Scorecard.new
       frame1 = Frame.new(1, 6)
       frame2 = Frame.new(6, 3)
@@ -97,7 +83,7 @@ RSpec.describe Scorecard do
       expect(scorecard.score).to eq 69
     end
 
-    it 'sums frame scores including multiples strikes & spares' do
+    it 'sums frame scores including double strike' do
       scorecard = Scorecard.new
       frame1 = Frame.new(10,0)
       frame2 = Frame.new(10,0)
@@ -122,9 +108,9 @@ RSpec.describe Scorecard do
       frame7 = Frame.new(4,3) # 7
       frame8 = Frame.new(0,0) #0
       frame9 = Frame.new(6,4) #20
-      frame10 = Frame.new(10,0) #21
-      frame11 = Frame.new(10,0) #11
-      frame12 = Frame.new(1,0) #1
+      frame10 = Frame.new(10,0) #30
+      frame11 = Frame.new(10,0) #20
+      frame12 = Frame.new(10,0) #10
       frame1.add_rolls
       frame2.add_rolls
       frame3.add_rolls
@@ -149,23 +135,23 @@ RSpec.describe Scorecard do
       scorecard.frame_add(frame10)
       scorecard.frame_add(frame11)
       scorecard.frame_add(frame12)
-      expect(scorecard.score).to eq 155
+      expect(scorecard.score).to eq 152
     end
 
-    it 'perfect game' do
+    it 'tests perfect game' do
       scorecard = Scorecard.new
-      frame1 = Frame.new(10,0) #27
-      frame2 = Frame.new(10,0) #18
-      frame3 = Frame.new(10,0) #8
-      frame4 = Frame.new(10,0) #17
-      frame5 = Frame.new(10,0) #8
-      frame6 = Frame.new(10,0) #17
-      frame7 = Frame.new(10,0) # 7
-      frame8 = Frame.new(10,0) #0
-      frame9 = Frame.new(10,0) #20
-      frame10 = Frame.new(10,0) #21
-      frame11 = Frame.new(10,0) #11
-      frame12 = Frame.new(10,0) #1
+      frame1 = Frame.new(10,0) #30
+      frame2 = Frame.new(10,0) #30
+      frame3 = Frame.new(10,0) #30
+      frame4 = Frame.new(10,0) #30
+      frame5 = Frame.new(10,0) #30
+      frame6 = Frame.new(10,0) #30
+      frame7 = Frame.new(10,0) #30
+      frame8 = Frame.new(10,0) #30
+      frame9 = Frame.new(10,0) #30
+      frame10 = Frame.new(10,0) #30
+      frame11 = Frame.new(10,0) #20
+      frame12 = Frame.new(10,0) #10
       frame1.add_rolls
       frame2.add_rolls
       frame3.add_rolls
