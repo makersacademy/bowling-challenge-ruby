@@ -19,7 +19,7 @@ class Application
         second_throw
       else
         @scorecard << @roll_1        
-        round += 1 
+        @round += 1 
       end
     end
   end
@@ -41,16 +41,16 @@ class Application
     first_throw
   end
 
-  # def spare
-  #   a = @scorecard.count(10)
-  #   @scorecard.delete(10)
-  #   @scorecard.each_slice(2).to_a
-  #   @scorecard.each { |spare| if spare.sum == 10
-  #           @scorecard.insert(0, spare+1].sum)
-  #           end
-  #         }
-  #   @scorecard.insert(0, a * 10) 
-  # end
+  def spare
+    a = @scorecard.count(10)
+    @scorecard.delete(10)
+    @scorecard.each_slice(2).to_a
+    @scorecard.each { |spare| if spare == 10 || spare.sum == 10
+            @scorecard.insert(0, [spare+1].sum)
+            end
+          }
+    @scorecard.insert(0, a * 10) 
+  end
 end
        
 app = Application.new(@scorecard, @round)
