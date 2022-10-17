@@ -1,4 +1,4 @@
-require './lib/score_card.rb'
+require './lib/game.rb'
 class Frame
 attr_accessor :roll_one, :roll_two
 

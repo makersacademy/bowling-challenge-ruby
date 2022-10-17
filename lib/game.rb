@@ -1,5 +1,5 @@
 require './lib/frame.rb'
-class Scorecard 
+class Game 
     def initialize
         @frames = []
     end
@@ -31,7 +31,7 @@ class Scorecard
         total.sum
     end
 
-end
+
 
 
 

@@ -1,4 +1,4 @@
-require 'score_card.rb'
+require 'game.rb'
 require 'frame.rb'
 
 describe Scorecard do
