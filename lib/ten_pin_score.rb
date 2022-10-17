@@ -60,7 +60,7 @@ class TenPinScore
                 @total_score[@index-1] += 10                        
         elsif @strike == false && @double == true && @spare == false
             # For some reason, that I can't find in the rules, if you bowl all
-            # strikes then a spare in the tenth frame the 8th frame do not get 
+            # strikes then a strike then a spare in the tenth frame the 8th frame do not get 
             # the total points for the 10th frame as bonus it just gets the points
             # from first roll of 10th frame.
             if @scorecard[@index][0] == 10 && @scorecard[@index][1] < 10
