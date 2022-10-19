@@ -1,13 +1,14 @@
-require_relative '../lib/ten_pin_score'
+# require_relative '../lib/ten_pin_score'
+require_relative '../lib/ten_pin_2'
 
 describe TenPinScore do
-    it 'Inserts 10 arrays into @scorecard' do
+    xit 'Inserts 10 arrays into @scorecard' do
         ten_pin = TenPinScore.new
         ten_pin.format_arrays
         expect(ten_pin.scorecard.length).to eq 11
     end
 
-    it 'Adds one score into first array in @scorecard' do
+    xit 'Adds one score into first array in @scorecard' do
         ten_pin = TenPinScore.new
         ten_pin.format_arrays
         ten_pin.add_roll(1)
@@ -15,7 +16,7 @@ describe TenPinScore do
         expect(ten_pin.scorecard[0][0]).to eq 1
     end
 
-    it 'adds scores to the array scorecard' do
+    xit 'adds scores to the array scorecard' do
         ten_pin = TenPinScore.new
         ten_pin.format_arrays
         # 1
@@ -32,7 +33,7 @@ describe TenPinScore do
         ten_pin.add_roll(5)
         # 5 strike
         ten_pin.add_roll(10)
-        ten_pin.add_roll(0)
+        # ten_pin.add_roll(0)
         #  6
         ten_pin.add_roll(0)
         ten_pin.add_roll(1)
@@ -44,18 +45,19 @@ describe TenPinScore do
         ten_pin.add_roll(4)
         # 9 strike
         ten_pin.add_roll(10)
-        ten_pin.add_roll(0)
+        # ten_pin.add_roll(0)
         # 10
         ten_pin.add_roll(2)
         ten_pin.add_roll(8)
         #this makes a split and gets extra go
         ten_pin.add_roll(6)
-        expect(ten_pin.scorecard.length).to eq 11
-        expect(ten_pin.scorecard[-1].length).to eq 1
+        # expect(ten_pin.scorecard.length).to eq 11
+        # expect(ten_pin.scorecard[-1].length).to eq 1
         expect(ten_pin.total_score).to eq 133
     end
 
-   
+ # It is what is happening in the 10th frame you need to think about
+ # The stirke behaviour   
     it 'checks a strike in 10th frame roll 1' do
         ten_pin = TenPinScore.new
         ten_pin.format_arrays
@@ -63,12 +65,12 @@ describe TenPinScore do
         ten_pin.add_roll(10)
         ten_pin.add_roll(10)
         ten_pin.add_roll(10)
-        expect(ten_pin.scorecard.length).to eq 11
-        expect(ten_pin.scorecard[-1].sum).to eq 10
+        # expect(ten_pin.scorecard.length).to eq 11
+        # expect(ten_pin.scorecard[-1].sum).to eq 10
         expect(ten_pin.total_score).to eq 170
     end
 
-    it 'checks a run of all strikes' do
+    xit 'checks a run of all strikes' do
         ten_pin = TenPinScore.new
         ten_pin.format_arrays
         9.times {|i| 
@@ -78,12 +80,12 @@ describe TenPinScore do
         ten_pin.add_roll(10)
         ten_pin.add_roll(10)
         ten_pin.add_roll(10)
-        expect(ten_pin.scorecard.length).to eq 11
-        expect(ten_pin.scorecard[-1].sum).to eq 10
+        # expect(ten_pin.scorecard.length).to eq 11
+        # expect(ten_pin.scorecard[-1].sum).to eq 10
         expect(ten_pin.total_score).to eq 300
     end
 
-    it 'checks a run of all strikes' do
+    xit 'checks a run of all strikes' do
         ten_pin = TenPinScore.new
         ten_pin.format_arrays
         9.times {|i| 
@@ -93,12 +95,12 @@ describe TenPinScore do
         ten_pin.add_roll(10)
         ten_pin.add_roll(10)
         ten_pin.add_roll(10)
-        expect(ten_pin.scorecard.length).to eq 11
-        expect(ten_pin.scorecard[-1].sum).to eq 10
+        # expect(ten_pin.scorecard.length).to eq 11
+        # expect(ten_pin.scorecard[-1].sum).to eq 10
         expect(ten_pin.total_score).to eq 300
     end
 
-    it 'checks a run of all spares' do
+    xit 'checks a run of all spares' do
         ten_pin = TenPinScore.new
         ten_pin.format_arrays
         9.times {|i| 
@@ -108,12 +110,12 @@ describe TenPinScore do
         ten_pin.add_roll(5)
         ten_pin.add_roll(5)
         ten_pin.add_roll(5)
-        expect(ten_pin.scorecard.length).to eq 11
-        expect(ten_pin.scorecard[-1].sum).to eq 5
+        # expect(ten_pin.scorecard.length).to eq 11
+        # expect(ten_pin.scorecard[-1].sum).to eq 5
         expect(ten_pin.total_score).to eq 150
     end
 
-    it 'checks a run of all spares with a strike on last roll' do
+    xit 'checks a run of all spares with a strike on last roll' do
         ten_pin = TenPinScore.new
         ten_pin.format_arrays
         10.times {|i| 
@@ -121,12 +123,12 @@ describe TenPinScore do
             ten_pin.add_roll(5)
         }
         ten_pin.add_roll(10)
-        expect(ten_pin.scorecard.length).to eq 11
-        expect(ten_pin.scorecard[-1].sum).to eq 10
+        # expect(ten_pin.scorecard.length).to eq 11
+        # expect(ten_pin.scorecard[-1].sum).to eq 10
         expect(ten_pin.total_score).to eq 155
     end
 
-    it 'checks a run of all strikes with a spare on last roll' do
+    xit 'checks a run of all strikes with a spare on last roll' do
         ten_pin = TenPinScore.new
         ten_pin.format_arrays
         9.times {|i| 
@@ -136,12 +138,12 @@ describe TenPinScore do
         ten_pin.add_roll(5)
         ten_pin.add_roll(5)
         ten_pin.add_roll(10)
-        expect(ten_pin.scorecard.length).to eq 11
-        expect(ten_pin.scorecard[-1].sum).to eq 10
+        # expect(ten_pin.scorecard.length).to eq 11
+        # expect(ten_pin.scorecard[-1].sum).to eq 10
         expect(ten_pin.total_score).to eq 275
     end
 
-    it 'checks a run of non strike/spare with a spare on last roll' do
+    xit 'checks a run of non strike/spare with a spare on last roll' do
         ten_pin = TenPinScore.new
         ten_pin.format_arrays
         9.times {|i| 
@@ -151,12 +153,12 @@ describe TenPinScore do
         ten_pin.add_roll(5)
         ten_pin.add_roll(5)
         ten_pin.add_roll(3)
-        expect(ten_pin.scorecard.length).to eq 11
-        expect(ten_pin.scorecard[-1].sum).to eq 3
+        # expect(ten_pin.scorecard.length).to eq 11
+        # expect(ten_pin.scorecard[-1].sum).to eq 3
         expect(ten_pin.total_score).to eq 67
     end
 
-    it 'checks a run of non strike/spare with a strike on last roll' do
+    xit 'checks a run of non strike/spare with a strike on last roll' do
         ten_pin = TenPinScore.new
         ten_pin.format_arrays
         9.times {|i| 
@@ -166,12 +168,12 @@ describe TenPinScore do
         ten_pin.add_roll(10)
         ten_pin.add_roll(5)
         ten_pin.add_roll(3)
-        expect(ten_pin.scorecard.length).to eq 11
-        expect(ten_pin.scorecard[-1].sum).to eq 3
+        # expect(ten_pin.scorecard.length).to eq 11
+        # expect(ten_pin.scorecard[-1].sum).to eq 3
         expect(ten_pin.total_score).to eq 72
     end
 
-    it 'checks a run of non strike/spare with a strike on last roll' do
+    xit 'checks a run of non strike/spare with a strike on last roll' do
         ten_pin = TenPinScore.new
         ten_pin.format_arrays
         9.times {|i| 
@@ -181,12 +183,12 @@ describe TenPinScore do
         ten_pin.add_roll(10)
         ten_pin.add_roll(10)
         ten_pin.add_roll(3)
-        expect(ten_pin.scorecard.length).to eq 11
-        expect(ten_pin.scorecard[-1].sum).to eq 3
+        # expect(ten_pin.scorecard.length).to eq 11
+        # expect(ten_pin.scorecard[-1].sum).to eq 3
         expect(ten_pin.total_score).to eq 77
     end
 
-    it 'checks a run of strikes with a spare on second last roll' do
+    xit 'checks a run of strikes with a spare on second last roll' do
         ten_pin = TenPinScore.new
         ten_pin.format_arrays
         9.times {|i| 
@@ -196,12 +198,12 @@ describe TenPinScore do
         ten_pin.add_roll(10)
         ten_pin.add_roll(5)
         ten_pin.add_roll(5)
-        expect(ten_pin.scorecard.length).to eq 11
-        expect(ten_pin.scorecard[-1].sum).to eq 5
+        # expect(ten_pin.scorecard.length).to eq 11
+        # expect(ten_pin.scorecard[-1].sum).to eq 5
         expect(ten_pin.total_score).to eq 285
     end
 
-    it 'checks a run of strikes with a normal fram eon end' do
+    xit 'checks a run of strikes with a normal fram eon end' do
         ten_pin = TenPinScore.new
         ten_pin.format_arrays
         9.times {|i| 
@@ -210,8 +212,8 @@ describe TenPinScore do
         }
         ten_pin.add_roll(4)
         ten_pin.add_roll(4)
-        expect(ten_pin.scorecard.length).to eq 11
-        expect(ten_pin.scorecard[-1].sum).to eq 0
+        # expect(ten_pin.scorecard.length).to eq 11
+        # expect(ten_pin.scorecard[-1].sum).to eq 0
         expect(ten_pin.total_score).to eq 260
     end
 end
