@@ -16,66 +16,66 @@ describe TenPinScore do
         expect(ten_pin.scorecard[0][0]).to eq 1
     end
 
-    xit 'adds scores to the array scorecard' do
-        ten_pin = TenPinScore.new
-        ten_pin.format_arrays
-        # 1
-        ten_pin.add_roll(1)
-        ten_pin.add_roll(4)
-        # 2
-        ten_pin.add_roll(4)
-        ten_pin.add_roll(5)
-        # 3 spare
-        ten_pin.add_roll(6)
-        ten_pin.add_roll(4)
-        # 4 spare
-        ten_pin.add_roll(5)
-        ten_pin.add_roll(5)
-        # 5 strike
-        ten_pin.add_roll(10)
-        # ten_pin.add_roll(0)
-        #  6
-        ten_pin.add_roll(0)
-        ten_pin.add_roll(1)
-        # 7 spare
-        ten_pin.add_roll(7)
-        ten_pin.add_roll(3)
-        # 8 spare
-        ten_pin.add_roll(6)
-        ten_pin.add_roll(4)
-        # 9 strike
-        ten_pin.add_roll(10)
-        # ten_pin.add_roll(0)
-        # 10
-        ten_pin.add_roll(2)
-        ten_pin.add_roll(8)
-        #this makes a split and gets extra go
-        ten_pin.add_roll(6)
-        # expect(ten_pin.scorecard.length).to eq 11
-        # expect(ten_pin.scorecard[-1].length).to eq 1
-        expect(ten_pin.total_score).to eq 133
-    end
+#     it 'adds scores to the array scorecard' do
+#         ten_pin = TenPinScore.new
+#         ten_pin.format_arrays
+#         # 1
+#         ten_pin.add_roll(1)
+#         ten_pin.add_roll(4)
+#         # 2
+#         ten_pin.add_roll(4)
+#         ten_pin.add_roll(5)
+#         # 3 spare
+#         ten_pin.add_roll(6)
+#         ten_pin.add_roll(4)
+#         # 4 spare
+#         ten_pin.add_roll(5)
+#         ten_pin.add_roll(5)
+#         # 5 strike
+#         ten_pin.add_roll(10)
+#         # ten_pin.add_roll(0)
+#         #  6
+#         ten_pin.add_roll(0)
+#         ten_pin.add_roll(1)
+#         # 7 spare
+#         ten_pin.add_roll(7)
+#         ten_pin.add_roll(3)
+#         # 8 spare
+#         ten_pin.add_roll(6)
+#         ten_pin.add_roll(4)
+#         # 9 strike
+#         ten_pin.add_roll(10)
+#         # ten_pin.add_roll(0)
+#         # 10
+#         ten_pin.add_roll(2)
+#         ten_pin.add_roll(8)
+#         #this makes a split and gets extra go
+#         ten_pin.add_roll(6)
+#         # expect(ten_pin.scorecard.length).to eq 11
+#         # expect(ten_pin.scorecard[-1].length).to eq 1
+#         expect(ten_pin.total_score).to eq 133
+#     end
 
- # It is what is happening in the 10th frame you need to think about
- # The stirke behaviour   
-    it 'checks a strike in 10th frame roll 1' do
-        ten_pin = TenPinScore.new
-        ten_pin.format_arrays
-        18.times {|i| ten_pin.add_roll(5)}
-        ten_pin.add_roll(10)
-        ten_pin.add_roll(10)
-        ten_pin.add_roll(10)
-        # expect(ten_pin.scorecard.length).to eq 11
-        # expect(ten_pin.scorecard[-1].sum).to eq 10
-        expect(ten_pin.total_score).to eq 170
-    end
+#  # It is what is happening in the 10th frame you need to think about
+#  # The stirke behaviour   
+#     it 'checks a strike in 10th frame roll 1' do
+#         ten_pin = TenPinScore.new
+#         ten_pin.format_arrays
+#         18.times {|i| ten_pin.add_roll(5)}
+#         ten_pin.add_roll(10)
+#         ten_pin.add_roll(10)
+#         ten_pin.add_roll(10)
+#         # expect(ten_pin.scorecard.length).to eq 11
+#         # expect(ten_pin.scorecard[-1].sum).to eq 10
+#         expect(ten_pin.total_score).to eq 170
+#     end
 
-    xit 'checks a run of all strikes' do
+    it 'checks a run of all strikes' do
         ten_pin = TenPinScore.new
         ten_pin.format_arrays
         9.times {|i| 
             ten_pin.add_roll(10)
-            ten_pin.add_roll(0)
+            # ten_pin.add_roll(0)
         }
         ten_pin.add_roll(10)
         ten_pin.add_roll(10)

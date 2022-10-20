@@ -14,7 +14,6 @@ class TenPinScore
         @spare = false
         @roll_1 = 0
         @roll_2 = 0
-        @tenth = []
     end
 
     def format_arrays
@@ -25,13 +24,10 @@ class TenPinScore
 
 # then do a seperate thing for frame 10
     def add_roll(roll) 
-        if @which_frame > 8
-            @roll = roll
-            frame_10
-        elsif @which_roll == 0
+        if @which_roll == 0
             @roll_1 = roll
             @which_roll += 1
-            if roll == 10
+            if roll == 10 && @which_frame > 9
                 @which_roll = 0
                 add_score
             end
@@ -42,40 +38,19 @@ class TenPinScore
         end
     end
 
-    def frame_10
-        @tenth << @roll 
-    end
-
-    def sum_tenth
-        @total_score[9] += @tenth.sum
-        if @strike == false && @spare == true
-            @total_score[8] += @tenth[0]
-        elsif @strike == true
-            if @tenth[0] < 10
-                @total_score[8] += @tenth[0] + @tenth[1]
-            else
-                @total_score[8] += @tenth[0]
-            end
-        elsif @double == true
-            if @tenth[0] < 10
-                @total_score[8] += @tenth[0] + @tenth[1]
-                @total_score[7] += @tenth[0] + @tenth[1]
-            else
-                @total_score[8] += @tenth[0]
-                @total_score[8] += @tenth[0]
-            end
-        end
-    end
-
     def add_score
         if @roll_1 == 10 #strike behavoiur
             @total_score[@which_frame] += (@roll_1 + @roll_2)
             if @strike == false && @spare == false
-                @strike = true 
+                if @which_frame < 9
+                    @strike = true 
+                end
             elsif @strike == false && @spare == true
                 @total_score[@which_frame-1] += @roll_1 
                 @spare = false
-                @strike = true
+                if @which_frame < 9
+                    @strike = true 
+                end
             elsif @strike == true
                 @total_score[@which_frame-1] += (@roll_1 + @roll_2)
                 @strike = false
@@ -102,15 +77,14 @@ class TenPinScore
             end
             @spare = true if (@roll_1 + @roll_2) == 10
         end
-        binding.irb
-        @roll = 0 
+        #binding.irb
         @roll_1 = 0
         @roll_2 = 0
         @which_frame += 1
     end
 
     def total_score
-        sum_tenth
+        
         return @total_score.sum
     end
 end
