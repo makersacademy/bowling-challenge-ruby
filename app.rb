@@ -20,20 +20,22 @@ class Application
        if first_bowl == 10
         @scorecard << [first_bowl, 0]
        else
-        second_bowl(first_bowl)
+        @terminal.puts "Frame #{@frames + 1}: How many pins did your 2nd bowl knock down?"
+        second_bowl = @terminal.gets.chomp.to_i
+        validate_second_bowl(first_bowl, second_bowl)
       end
       @frames += 1
     end
   end
 
-  def second_bowl(first_bowl)
+  def validate_second_bowl(first_bowl, second_bowl)
     valid_input = false
     while valid_input == false do
-      @terminal.puts "Frame #{@frames + 1}: How many pins did your 2nd bowl knock down?"
-      second_bowl = @terminal.gets.chomp.to_i
       if first_bowl + second_bowl > 10
         @terminal.puts "There were fewer than #{second_bowl} pins after your first bowl." 
         @terminal.puts "Input a number less than #{10 - first_bowl}."
+        @terminal.puts "Frame #{@frames + 1}: How many pins did your 2nd bowl knock down?"
+        second_bowl = @terminal.gets.chomp.to_i
       else
         @scorecard << [first_bowl, second_bowl]
         valid_input = true
@@ -47,13 +49,11 @@ class Application
     first_bowl = @terminal.gets.chomp.to_i
     @terminal.puts "Last frame! How many pins did your 2nd bowl knock down?"
     second_bowl = @terminal.gets.chomp.to_i
+    validate_second_bowl(first_bowl, second_bowl)
     if first_bowl == 10 || first_bowl + second_bowl == 10
       @terminal.puts "Last frame! How many pins did your bonus bowl knock down?"
       bonus_bowl = @terminal.gets.chomp.to_i
-      @scorecard << [first_bowl, second_bowl, bonus_bowl]
-      @frames += 1
-    else
-      @scorecard << [first_bowl, second_bowl]
+      @scorecard.last << bonus_bowl
       @frames += 1
     end
   end
