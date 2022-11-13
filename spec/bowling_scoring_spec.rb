@@ -56,5 +56,17 @@ describe BowlingScoring do
       expect(result).to eq(122)
     end
 
+    it 'returns correct total score with 3 strikes in 10th frame' do
+      scorecard = BowlingScoring.new
+      result = scorecard.calculate([[8, 2], [3, 7], [3, 6], [0, 9], [8, 2], [3, 7], [3, 6], [0, 9], [10, 0], [10, 10, 10]])
+      expect(result).to eq(148)
+    end
+
+    it 'returns correct total score for perfect game' do
+      scorecard = BowlingScoring.new
+      result = scorecard.calculate([[10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 10, 10]])
+      expect(result).to eq(300)
+    end
+
   end
 end

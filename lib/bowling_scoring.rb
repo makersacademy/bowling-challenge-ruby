@@ -10,7 +10,10 @@ class BowlingScoring
 
     while rounds > 0 do
       @score << frames[frame]
-      if frame > 0 && frames[frame - 1].first == 10
+      if frame > 1 && frames[frame - 1].first == 10 && frames[frame - 2].first == 10
+        @score << frames[frame].first(2)
+        @score << frames[frame - 1].first(2)
+      elsif frame > 0 && frames[frame - 1].first == 10
         @score << frames[frame].first(2)
       elsif frame > 0 && frames[frame - 1].sum == 10
         @score << frames[frame].first
@@ -18,7 +21,6 @@ class BowlingScoring
       frame += 1
       rounds -= 1
     end
-
     return @score.flatten.sum
   end
 end
