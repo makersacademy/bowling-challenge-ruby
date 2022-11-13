@@ -21,5 +21,11 @@ describe BowlingScoring do
       result = scorecard.calculate([[2, 8], [2, 5]])
       expect(result).to eq(19)
     end
+
+    it 'returns total score with a strike in 1st frame' do
+      scorecard = BowlingScoring.new
+      result = scorecard.calculate([[10, 0], [1, 5]])
+      expect(result).to eq(22)
+    end
   end
 end
