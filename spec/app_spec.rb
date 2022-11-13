@@ -2,7 +2,7 @@ require_relative '../app'
 
 describe Application do
   context 'when collecting score user input' do
-    it 'collects scores for 10 frames of bowls' do
+    it 'collects scores for 10 frames of bowls with valid inputs' do
       terminal = double(:terminal)
       expect(terminal).to receive(:puts).with("Frame 1: How many pins did your 1st bowl knock down?").ordered
       expect(terminal).to receive(:gets).and_return("2").ordered
@@ -46,4 +46,5 @@ describe Application do
       new_game.collect_scores
     end
   end
+
 end

@@ -1,3 +1,5 @@
+require_relative 'lib/bowling_scoring'
+
 class Application
   def initialize(terminal)
     @terminal = terminal
@@ -6,7 +8,12 @@ class Application
   end
 
   def collect_scores
-  # First 9 frames
+    first_nine_frames
+    final_frame
+    end_game
+  end
+
+  def first_nine_frames
     9.times do
       @terminal.puts "Frame #{@frames + 1}: How many pins did your 1st bowl knock down?"
       first_bowl = @terminal.gets.chomp.to_i
@@ -19,8 +26,10 @@ class Application
        end
       @frames += 1
     end
+  end
 
-  # Final (10th) frame
+  def final_frame
+    # Final (10th) frame
     @terminal.puts "Last frame! How many pins did your 1st bowl knock down?"
     first_bowl = @terminal.gets.chomp.to_i
     @terminal.puts "Last frame! How many pins did your 2nd bowl knock down?"
@@ -34,9 +43,16 @@ class Application
       @scorecard << [first_bowl, second_bowl]
       @frames += 1
     end
+  end
 
+  def end_game
     @terminal.puts "Your scorecard: #{@scorecard}"
     scoring = BowlingScoring.new(@scorecard) 
     @terminal.puts "Your final score: #{scoring.calculate}" 
   end
+end
+
+if __FILE__ == $0
+  app = Application.new(Kernel)
+  app.collect_scores
 end
