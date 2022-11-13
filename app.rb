@@ -20,20 +20,24 @@ class Application
        if first_bowl == 10
         @scorecard << [first_bowl, 0]
        else
-        valid_input = false
-        while valid_input == false do
-          @terminal.puts "Frame #{@frames + 1}: How many pins did your 2nd bowl knock down?"
-          second_bowl = @terminal.gets.chomp.to_i
-          if first_bowl + second_bowl > 10
-            @terminal.puts "There were fewer than #{second_bowl} pins after your first bowl." 
-            @terminal.puts "Input a number less than #{10 - first_bowl}."
-          else
-            @scorecard << [first_bowl, second_bowl]
-            valid_input = true
-          end
-        end
+        second_bowl(first_bowl)
       end
       @frames += 1
+    end
+  end
+
+  def second_bowl(first_bowl)
+    valid_input = false
+    while valid_input == false do
+      @terminal.puts "Frame #{@frames + 1}: How many pins did your 2nd bowl knock down?"
+      second_bowl = @terminal.gets.chomp.to_i
+      if first_bowl + second_bowl > 10
+        @terminal.puts "There were fewer than #{second_bowl} pins after your first bowl." 
+        @terminal.puts "Input a number less than #{10 - first_bowl}."
+      else
+        @scorecard << [first_bowl, second_bowl]
+        valid_input = true
+      end
     end
   end
 
