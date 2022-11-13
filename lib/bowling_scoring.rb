@@ -1,7 +1,6 @@
 class BowlingScoring
 
   def initialize
-    @scorecard = []
     @score = []
   end
 
@@ -10,16 +9,16 @@ class BowlingScoring
     frame = 0
 
     while rounds > 0 do
-      @scorecard << frames[frame]
+      @score << frames[frame]
       if frame > 0 && frames[frame - 1].first == 10
-        @scorecard << frames[frame]
+        @score << frames[frame].first(2)
       elsif frame > 0 && frames[frame - 1].sum == 10
-        @scorecard << frames[frame].first
+        @score << frames[frame].first
       end
       frame += 1
       rounds -= 1
     end
 
-    return @scorecard.flatten.sum
+    return @score.flatten.sum
   end
 end
