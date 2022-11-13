@@ -7,6 +7,11 @@ class Application
     @frames = 0
   end
 
+  def bowls
+    @bowl = 0
+    @second_bowl = 0
+  end
+
   def collect_scores
     first_nine_frames
     final_frame
@@ -16,40 +21,46 @@ class Application
   def first_nine_frames
     9.times do
       @terminal.puts "Frame #{@frames + 1}: How many pins did your 1st bowl knock down?"
-      first_bowl = @terminal.gets.chomp.to_i
-      validate_first_bowl(first_bowl)
+      @bowl = @terminal.gets.chomp.to_i
+      validate_bowl(@first_bowl)
+      if @bowl == 10
+        @scorecard << [@bowl, 0]
+        valid_input = true
+      else
+        @terminal.puts "Frame #{@frames + 1}: How many pins did your 2nd bowl knock down?"
+        @second_bowl = @terminal.gets.chomp.to_i
+        validate_second_bowl(@bowl, @second_bowl)
+        valid_input = true
+      end
       @frames += 1
     end
   end
 
-  def validate_first_bowl(first_bowl)
+  def validate_bowl(bowl)
     valid_input = false
     while valid_input == false do
-      if (0..10).to_a.include?(first_bowl) == false
+      if (0..10).to_a.include?(@bowl) == false
         @terminal.puts "Invalid input. Enter a number between 0 and 10:"
-        first_bowl = @terminal.gets.chomp.to_i
-      elsif first_bowl == 10
-        @scorecard << [first_bowl, 0]
-        valid_input = true
+        @bowl = @terminal.gets.chomp.to_i
       else
-        @terminal.puts "Frame #{@frames + 1}: How many pins did your 2nd bowl knock down?"
-        second_bowl = @terminal.gets.chomp.to_i
-        validate_second_bowl(first_bowl, second_bowl)
         valid_input = true
       end
     end
   end
 
-  def validate_second_bowl(first_bowl, second_bowl)
+  def validate_second_bowl(bowl, second_bowl)
     valid_input = false
     while valid_input == false do
-      if first_bowl + second_bowl > 10
-        @terminal.puts "There were fewer than #{second_bowl} pins after your first bowl." 
-        @terminal.puts "Input a number less than #{10 - first_bowl}."
+      if (0..10).to_a.include?(@second_bowl) == false
+        @terminal.puts "Invalid input. Enter a number between 0 and 10:"
+        @second_bowl = @terminal.gets.chomp.to_i
+      elsif @bowl + @second_bowl > 10
+        @terminal.puts "There were fewer than #{@second_bowl} pins after your first bowl." 
+        @terminal.puts "Input a number less than #{10 - @bowl}."
         @terminal.puts "Frame #{@frames + 1}: How many pins did your 2nd bowl knock down?"
-        second_bowl = @terminal.gets.chomp.to_i
+        @second_bowl = @terminal.gets.chomp.to_i
       else
-        @scorecard << [first_bowl, second_bowl]
+        @scorecard << [@bowl, @second_bowl]
         valid_input = true
       end
     end
@@ -58,24 +69,19 @@ class Application
   def final_frame
     # Final (10th) frame
     @terminal.puts "Last frame! How many pins did your 1st bowl knock down?"
-    first_bowl = @terminal.gets.chomp.to_i
+    @bowl = @terminal.gets.chomp.to_i
+    validate_bowl(@bowl)
     @terminal.puts "Last frame! How many pins did your 2nd bowl knock down?"
-    second_bowl = @terminal.gets.chomp.to_i
-    validate_second_bowl(first_bowl, second_bowl)
-    if first_bowl == 10 || first_bowl + second_bowl == 10
+    @second_bowl = @terminal.gets.chomp.to_i
+    validate_second_bowl(@bowl, @second_bowl)
+    if @bowl == 10 || @bowl + @second_bowl == 10
       @terminal.puts "Last frame! How many pins did your bonus bowl knock down?"
-      bonus_bowl = @terminal.gets.chomp.to_i
-      @scorecard.last << bonus_bowl
+      @bowl = @terminal.gets.chomp.to_i
+      validate_bowl(@bowl)
+      @scorecard.last << @bowl
       @frames += 1
     end
   end
-
-  # def validate_input(bowl)
-  #   if bowl > 10 || bowl < 0 || !bowl.is_a?(Integer)
-  #     @terminal.puts "Invalid input. Enter a number between 0 and 10."
-  #     return false
-  #   end     
-  # end
 
   def end_game
     @terminal.puts "Your scorecard: #{@scorecard}"
