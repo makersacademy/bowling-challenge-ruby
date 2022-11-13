@@ -17,14 +17,26 @@ class Application
     9.times do
       @terminal.puts "Frame #{@frames + 1}: How many pins did your 1st bowl knock down?"
       first_bowl = @terminal.gets.chomp.to_i
-       if first_bowl == 10
+      validate_first_bowl(first_bowl)
+      @frames += 1
+    end
+  end
+
+  def validate_first_bowl(first_bowl)
+    valid_input = false
+    while valid_input == false do
+      if (0..10).to_a.include?(first_bowl) == false
+        @terminal.puts "Invalid input. Enter a number between 0 and 10:"
+        first_bowl = @terminal.gets.chomp.to_i
+      elsif first_bowl == 10
         @scorecard << [first_bowl, 0]
-       else
+        valid_input = true
+      else
         @terminal.puts "Frame #{@frames + 1}: How many pins did your 2nd bowl knock down?"
         second_bowl = @terminal.gets.chomp.to_i
         validate_second_bowl(first_bowl, second_bowl)
+        valid_input = true
       end
-      @frames += 1
     end
   end
 
