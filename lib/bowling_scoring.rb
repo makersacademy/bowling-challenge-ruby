@@ -12,8 +12,7 @@ class BowlingScoring
     while rounds > 0 do
       @score << @scorecard[frame]
       if frame > 1 && @scorecard[frame - 1].first == 10 && @scorecard[frame - 2].first == 10
-        @score << @scorecard[frame].first(2)
-        @score << @scorecard[frame - 1].first(2)
+        @score << @scorecard[frame].first(2) << @scorecard[frame - 1].first(2)
       elsif frame > 0 && @scorecard[frame - 1].first == 10
         @score << @scorecard[frame].first(2)
       elsif frame > 0 && @scorecard[frame - 1].sum == 10
