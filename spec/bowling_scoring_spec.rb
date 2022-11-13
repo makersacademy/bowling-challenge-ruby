@@ -28,4 +28,18 @@ describe BowlingScoring do
       expect(result).to eq(22)
     end
   end
+
+  context 'after multiple frames but fewer than 10 frames' do
+    it 'returns correct total score with no spares or strikes' do
+      scorecard = BowlingScoring.new
+      result = scorecard.calculate([[8, 1], [2, 7], [3, 6], [0, 9], [8, 1], [2, 7], [3, 6], [0, 9], [8, 1]])
+      expect(result).to eq(81)
+    end
+
+    it 'returns correct total score with spares and strikes' do
+      scorecard = BowlingScoring.new
+      result = scorecard.calculate([[8, 2], [3, 7], [3, 6], [0, 9], [8, 2], [3, 7], [3, 6], [0, 9], [10, 0]])
+      expect(result).to eq(98)
+    end
+  end
 end
