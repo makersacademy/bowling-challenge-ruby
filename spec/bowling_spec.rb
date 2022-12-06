@@ -6,6 +6,10 @@ describe BowlingScore do
     score_sheet = []
     score = BowlingScore.new(score_sheet)
     expect { score.final_score }.to raise_error "Score Sheet Provided is Not Readable."
+
+    score_sheet = ["hi", 0, -12, 0, 0, 0, 0, 0, 0, 0, 0]
+    score = BowlingScore.new(score_sheet)
+    expect { score.final_score }.to raise_error "Score Sheet Provided is Not Readable."
   end
 
   it "returns perfect game when score is 300" do
