@@ -8,14 +8,21 @@ describe ScoreCard do
     expect(score_card).to be_instance_of(ScoreCard)
     expect(score_card.frames).to eq([])
   end
-  it "generates a random number between 0 and 10" do
-    score_card = ScoreCard.new
-    
-    expect(score_card.random_num).to be_instance_of(Integer)
-  end
   it "generates a new frame" do
     score_card = ScoreCard.new
 
     expect(score_card.new_frame).to be_instance_of(Frame)
+  end
+  context "total score" do
+    it "returns a total score" do
+      score_card = ScoreCard.new
+  
+      expect(score_card.total_score).to eq 0
+    end
+    it "keeps track of the score by adding a number" do
+      score_card = ScoreCard.new
+      score_card.add_to_total(5)
+      expect(score_card.total_score).to eq 5
+    end
   end
 end

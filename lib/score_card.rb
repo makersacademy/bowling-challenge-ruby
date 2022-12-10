@@ -1,6 +1,5 @@
 require 'frame'
 
-
 class ScoreCard
   def initialize
     @total_score = 0
@@ -15,7 +14,11 @@ class ScoreCard
     Frame.new(1)
   end
 
-  def random_num
-    p rand(11)
+  def total_score
+    @total_score
+  end
+
+  def add_to_total(num)
+    @total_score += num
   end
 end
