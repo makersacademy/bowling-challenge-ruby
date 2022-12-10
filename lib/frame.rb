@@ -9,4 +9,10 @@ class Frame
 
     return @frame_one + @frame_two
   end 
+
+  def is_strike?
+    if @frame_one == 10 then return true 
+    else return false
+    end 
+  end 
 end 

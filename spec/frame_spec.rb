@@ -7,7 +7,7 @@ describe Frame do
     it 'returns the score of a valid entry' do 
       frame = Frame.new(1,5) 
       expect(frame.frame_total).to equal 6
-      # expect(frame.is_strike?).to equal false
+      expect(frame.is_strike?).to equal false
       # expect(frame.is_spare?).to equal false
     end 
 
