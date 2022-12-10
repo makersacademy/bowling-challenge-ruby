@@ -24,6 +24,22 @@ describe ScoreCard do
       score_card.add_to_total(5)
       expect(score_card.total_score).to eq 5
     end
-
+    it "keeps track of the score by adding multiple numbers" do
+      score_card = ScoreCard.new
+      score_card.add_to_total(5)
+      expect(score_card.total_score).to eq 5
+      score_card.add_to_total(3)
+      expect(score_card.total_score).to eq 8
+      score_card.add_to_total(4)
+      expect(score_card.total_score).to eq 12
+    end
+  end
+  it "ends the frame if the player gets 10 on the first roll" do
+    score_card = ScoreCard.new
+    score_card.play_frame(10, 1)
+    
+    expect(score_card.current_frame).to eq 2
   end
 end
+
+

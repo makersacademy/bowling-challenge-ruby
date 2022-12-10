@@ -14,4 +14,10 @@ class Frame
   def frame_score
     @frame_score
   end
+
+  def strike
+    @strike = true
+  end
+
+  
 end
