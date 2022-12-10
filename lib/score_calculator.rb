@@ -6,9 +6,9 @@ class ScoreCalculator
 
   def score_by_frame
     next_index = 1
-    bonus_point = 0
 
     @game.each do |rolls|
+      bonus_point = 0
       if rolls[0] == 10 && next_index < 10
         bonus_point = @game[next_index..next_index+1].flatten[0..1].sum
       elsif rolls.sum == 10 && next_index < 10
@@ -16,7 +16,6 @@ class ScoreCalculator
       end  
       @score << (rolls.sum + bonus_point)
       next_index += 1
-      bonus_point = 0
     end
 
     return @score
