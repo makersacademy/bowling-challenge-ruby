@@ -40,6 +40,29 @@ describe ScoreCard do
 
     expect(score_card.current_frame).to eq 2
   end
+  context "where a previous frame exists" do
+    it "returns the previous frame" do
+      score_card = ScoreCard.new
+      score_card.play_frame(10, 0)
+      score_card.play_frame(10, 0)
+      score_card.play_frame(10, 0)
+      # since it automatically starts a new round/frame once a frame has been played, you only need to call play_frame once.
+
+      expect(score_card.prev_frame).to eq score_card.frames[2]
+    end
+  end
+  it "adds the next two rolls to the previous frame score if the previous frame scored a strike" do
+    score_card = ScoreCard.new
+    score_card.play_frame(10, 1)
+    # score_card.play_frame(2, 2)
+
+    expect(score_card.frames[score_card.current_frame-2].bonus).to eq 4
+    
+    
+  end
+  it "allows a second roll if the player does not get a strike" do
+    score_card = ScoreCard.new
+  end
 end
 
 

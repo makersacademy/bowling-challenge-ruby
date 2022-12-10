@@ -19,5 +19,16 @@ class Frame
     @strike = true
   end
 
+  def spare
+    @spare = true
+  end
+
+  def add_frame_total(num)
+    @frame_score += num
+  end
+
+  def bonus
+    @bonus
+  end
   
 end

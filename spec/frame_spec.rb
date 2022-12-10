@@ -12,11 +12,23 @@ describe Frame do
 
     expect(frame.frame_score).to eq 0
   end
-  it "records a strike" do
+  it "keeps a total for the current frame" do
+    frame = Frame.new(1)
+    frame.add_frame_total(5)
+    frame.add_frame_total(4)
+    expect(frame.frame_score).to eq 9
+  end
+  it "can record a strike" do
     frame = Frame.new(1)
 
     frame.strike
     expect(frame.strike).to eq true
+  end
+  it "can record a spare" do
+    frame = Frame.new(1)
+    
+    frame.spare
+    expect(frame.spare).to eq true
   end
 
 end
