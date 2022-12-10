@@ -13,7 +13,7 @@ RSpec.describe Frame do
     expect(result).to eq true 
   end
 
-  xit "false if roll_2 is a score of 10" do 
+  it "false if roll_2 is a score of 10" do 
     frame = Frame.new(0,10) 
     result = frame.strike
     expect(result).to eq false 
