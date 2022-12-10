@@ -37,7 +37,7 @@ describe ScoreCard do
   it "ends the frame if the player gets 10 on the first roll" do
     score_card = ScoreCard.new
     score_card.play_frame(10, 1)
-    
+
     expect(score_card.current_frame).to eq 2
   end
 end

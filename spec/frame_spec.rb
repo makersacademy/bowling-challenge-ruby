@@ -12,6 +12,11 @@ describe Frame do
 
     expect(frame.frame_score).to eq 0
   end
+  it "records a strike" do
+    frame = Frame.new(1)
 
+    frame.strike
+    expect(frame.strike).to eq true
+  end
 
 end
