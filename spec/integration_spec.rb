@@ -1,15 +1,15 @@
-# require "bowling"
+require "scores"
+require "frame"
 
-# RSpec.describe "bowling integration" do 
-#   xit "gets a gutter game" do 
-#     bowl = Bowling.new
-#     roll_19 = Roll.new 
-#     roll_19.score = 1 
-#     bowl.add(roll_19)
-#     roll_20 = Roll.new
-#     roll_20.score = 2 
-#     bowl.add(roll_20)
-#     expect(bowl.rolls_by_frame)
-#   end 
-# end 
+RSpec.describe "integration" do 
+  it "shows all rolls" do 
+    frame_1 = Frame.new(1,1)
+    frame_2 = Frame.new(2,2)
+    scores = Scores.new 
+    scores.add(frame_1)
+    scores.add(frame_2)
+    expect(scores.all).to eq([frame_1, frame_2])
+  end 
+end 
+
     
