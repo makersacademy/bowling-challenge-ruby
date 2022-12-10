@@ -11,7 +11,7 @@ describe ScoreCard do
   it "generates a new frame" do
     score_card = ScoreCard.new
 
-    expect(score_card.new_frame).to be_instance_of(Frame)
+    expect(score_card.new_frame(1)).to be_instance_of(Frame)
   end
   context "total score" do
     it "returns a total score" do
@@ -24,5 +24,6 @@ describe ScoreCard do
       score_card.add_to_total(5)
       expect(score_card.total_score).to eq 5
     end
+
   end
 end
