@@ -1,4 +1,4 @@
-require 'frame'
+require_relative 'frame'
 
 class ScoreCard
   def initialize
@@ -10,8 +10,8 @@ class ScoreCard
     @frames
   end
   
-  def new_frame
-    Frame.new(1)
+  def new_frame(n)
+    Frame.new(n)
   end
 
   def total_score
