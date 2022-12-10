@@ -17,5 +17,9 @@ class Frame
 
   def strike?
     @scores[0] == 10 ? true : false
-  end  
+  end
+  
+  def spare?
+    @scores.length == 2 && score_sum == 10 ? true : false
+  end
 end

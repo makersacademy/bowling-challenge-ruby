@@ -30,4 +30,15 @@ RSpec.describe Frame do
   
     expect(frame.strike?).to eq true
   end
+
+  it "returns true if spare" do
+    frame = Frame.new
+    score_1 = 3
+    score_2 = 7
+  
+    frame.add(score_1)
+    frame.add(score_2)
+  
+    expect(frame.spare?).to eq true
+  end
 end
