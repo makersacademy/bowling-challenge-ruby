@@ -19,7 +19,7 @@ RSpec.describe Frame do
     expect(result).to eq false 
   end
 
-  xit "true if there is spare" do 
+  it "true if there is spare" do 
     frame = Frame.new(1,9)
     result = frame.spare
     expect(result).to eq true 

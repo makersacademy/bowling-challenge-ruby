@@ -18,11 +18,11 @@ class Frame
     end 
   end 
 
-#   def spare 
-#     if (@roll_1 + @roll_2) == 10
-#       return true
-#     else
-#       return false
-#     end
-#   end 
+  def spare 
+    if (@roll_1 + @roll_2) == 10
+      return true
+    else
+      return false
+    end
+  end 
 end 
