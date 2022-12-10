@@ -6,8 +6,10 @@ class Frame
   end 
 
   def frame_total
-
-    return @roll_one + @roll_two
+    if (@roll_one + @roll_two) > 10 then raise ArgumentError.new("invalid score: more than 10 pins detected")
+    else return @roll_one + @roll_two
+    end 
+    
   end 
 
   def is_strike?
