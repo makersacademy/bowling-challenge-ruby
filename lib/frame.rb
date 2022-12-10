@@ -14,4 +14,8 @@ class Frame
   def score_sum
     @scores.sum
   end
+
+  def strike?
+    @scores[0] == 10 ? true : false
+  end  
 end

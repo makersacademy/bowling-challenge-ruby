@@ -21,4 +21,13 @@ RSpec.describe Frame do
   
     expect(frame.score_sum).to eq 8
   end
+
+  it "returns true if strike" do
+    frame = Frame.new
+    score = 10
+  
+    frame.add(score)
+  
+    expect(frame.strike?).to eq true
+  end
 end
