@@ -83,7 +83,7 @@ When you bowl a strike, the value for that frame will be 10 plus the total pins 
 
 class Frame
 
-  def roll(first,second)
+  def initialize(first,second)
 
   # Score accumalator monitors score
   # First roll happens: 
@@ -103,8 +103,12 @@ class Frame
   # If first = 10 set strike to 10, return X
   # If first + second = 10 set spare to true, return /
   # else return first + second 
+
+
   
   end 
+
+  def frame_total
 
   def is_strike?
 
@@ -149,6 +153,67 @@ class Scorecard
 
 
 end 
+
+```
+
+### Test examples 
+
+```Ruby 
+
+# Score Unit tests:
+
+  
+  # 1 - Score must be between 0 - 10
+
+    frame = Frame.new(1,5) 
+    expect(frame.frame_total).to equal 6
+    expect(frame.is_strike?).to equal false
+    expect(frame.is_spare?).to equal false
+
+  # 2 - Raises error if sum of frame arguments is > 20
+    frame = Frame.New(7,7)
+    expect(frame).to raise_error "invalid score"
+
+  # 3 Frame is a spare
+
+    frame = Frame.new(6,4) 
+    expect(frame.frame_total).to equal 10
+    expect(frame.is_strike?).to equal false
+    expect(frame.is_spare?).to equal true
+
+  # 4 Frame is a Strike 
+
+    frame = Frame.new(10,0) 
+    expect(frame.frame_total).to equal 10
+    expect(frame.is_strike?).to equal true 
+    expect(frame.is_spare?).to equal false
+
+  # 5 Frame does not accept another roll after a strike 
+
+    frame = Frame.new(10,5) 
+    expect(frame).to raise_error "invalid score"
+
+
+# 1 - Strike into open frame
+
+# 1 - Strike into open frame
+
+# 1 - Strike into open frame
+
+# 1 - Strike into open frame
+
+# 1 - Strike into open frame
+
+# 1 - Strike into open frame
+
+# 1 - Strike into open frame
+
+# 1 - Strike into open frame
+
+# 1 - Strike into open frame
+
+# 1 - Strike into open frame
+
 
 
 ```
