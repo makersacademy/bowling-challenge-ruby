@@ -7,7 +7,7 @@ RSpec.describe Frame do
     expect(result).to eq 3
   end
 
-  xit "true when roll_1 is a strike" do 
+  it "true when roll_1 is a strike" do 
     frame = Frame.new(10,0)
     result = frame.strike
     expect(result).to eq true 

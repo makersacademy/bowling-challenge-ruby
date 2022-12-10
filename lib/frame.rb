@@ -10,13 +10,13 @@ class Frame
     return (@roll_1 + @roll_2)
   end
 
-#   def strike 
-#     if @roll_1 == 10 
-#       return true
-#     elsif @roll_2 == 10 
-#       return false 
-#     end 
-#   end 
+  def strike 
+    if @roll_1 == 10 
+      return true
+    elsif @roll_2 == 10 
+      return false 
+    end 
+  end 
 
 #   def spare 
 #     if (@roll_1 + @roll_2) == 10
