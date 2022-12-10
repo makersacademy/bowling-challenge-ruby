@@ -30,19 +30,13 @@ class GameLibrary
     @frame << roll.score
 
     if @frame.sum >= 10
-      if frames.total_number == 9
-        frame_length = 3
-      else
-        frame_length = 1
-      end
+      frames.total_number == 9 ? frame_length = 3 : frame_length = 1
     end
 
     if @frame.length >= frame_length
       @game << @frame
       @frame = []
     end
-    
-    return nil
   end
 
 end

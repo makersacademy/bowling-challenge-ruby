@@ -3,116 +3,84 @@ require 'score_calculator'
 
 RSpec.describe "game_library_integration" do
   context "Separates each game into 10 frames" do 
-    it "Where no strikes or spares are scored" do
+    it "when no strikes or spares are scored" do
       game = GameLibrary.new
-      standard_game_1_to_7(game)
-      standard_game_frame(game)
-      standard_game_frame(game)
-      standard_game_frame(game)
+      10.times {standard_frame(game)}
       expect(game.rolls_by_frame).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2]]
     end
 
     it "Only return 10 frames when extra rolls are added " do
       game = GameLibrary.new
-      standard_game_1_to_7(game)
-      standard_game_frame(game)
-      standard_game_frame(game)
-      standard_game_frame(game)
-      standard_game_frame(game)
+      11.times {standard_frame(game)}
       expect(game.rolls_by_frame).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2]]
     end
 
     it "Add 3 rolls in frame 10 when strike in frame 10" do
       game = GameLibrary.new
-      standard_game_1_to_7(game)
-      standard_game_frame(game)
-      standard_game_frame(game)
-      strike_game_frame(game)
-      standard_game_frame(game)
+      9.times {standard_frame(game)}
+      strike_frame(game)
+      standard_frame(game)
       expect(game.rolls_by_frame).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[10, 1, 2]]
     end
 
     it "Add 3 rolls in frame 10 when spare in frame 10" do
       game = GameLibrary.new
-      standard_game_1_to_7(game)
-      standard_game_frame(game)
-      standard_game_frame(game)
-      roll_1 = Roll.new
-      roll_1.score = 8
-      game.add(roll_1)
-      roll_3 = Roll.new
-      roll_3.score = 2
-      game.add(roll_3)
-      roll_3 = Roll.new
-      roll_3.score = 1
-      game.add(roll_3)
+      9.times {standard_frame(game)}
+      spare_frame(game)
+      extra_roll(game)
       expect(game.rolls_by_frame).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[8, 2, 1]]
     end
 
     it "Add 1 roll in frame 9 when strike in frame 9" do
       game = GameLibrary.new
-      standard_game_1_to_7(game)
-      standard_game_frame(game)
-      strike_game_frame(game)
-      standard_game_frame(game)
+      8.times {standard_frame(game)}
+      strike_frame(game)
+      standard_frame(game)
       expect(game.rolls_by_frame).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[10],[1, 2]]
     end
 
     it "Add 2 rolls in frame 9 when spare in frame 9" do
       game = GameLibrary.new
-      standard_game_1_to_7(game)
-      standard_game_frame(game)
-      roll_1 = Roll.new
-      roll_1.score = 8
-      game.add(roll_1)
-      roll_2 = Roll.new
-      roll_2.score = 2
-      game.add(roll_2)
-      standard_game_frame(game)
+      8.times {standard_frame(game)}
+      spare_frame(game)
+      standard_frame(game)
       expect(game.rolls_by_frame).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[8, 2],[1, 2]]
     end
   end
 
   context "Returns total score" do
-    it "where no strikes or spares are scored" do
+    it "when no strikes or spares are scored" do
       game = GameLibrary.new
-      standard_game_1_to_7(game)
-      standard_game_frame(game)
-      standard_game_frame(game)
-      standard_game_frame(game)
+      10.times {standard_frame(game)}
       score = ScoreCalculator.new(game)
       expect(score.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 3, 3, 3] 
       expect(score.total_score).to eq 30
     end
-    it "where score a strike in frame 9" do
+    it "when score a strike in frame 9" do
       game = GameLibrary.new
-      standard_game_1_to_7(game)
-      standard_game_frame(game)
-      strike_game_frame(game)
-      standard_game_frame(game)
+      8.times {standard_frame(game)}
+      strike_frame(game)
+      standard_frame(game)
       expect(game.rolls_by_frame).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[10],[1, 2]]
       score = ScoreCalculator.new(game)
       expect(score.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 3, 13, 3] 
       expect(score.total_score).to eq 40
     end
-    it "where score a strike in frame 8 and frame 9" do
+    it "when score a strike in frame 8 and frame 9" do
       game = GameLibrary.new
-      standard_game_1_to_7(game)
-      strike_game_frame(game)
-      strike_game_frame(game)
-      standard_game_frame(game)
+      7.times {standard_frame(game)}
+      2.times {strike_frame(game)}
+      standard_frame(game)
       expect(game.rolls_by_frame).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[10],[10],[1, 2]]
       score = ScoreCalculator.new(game)
       expect(score.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 21, 13, 3] 
       expect(score.total_score).to eq 58
     end
-    it "where score a strike in frame 8, frame 9 and frame 10" do
+    it "when score a strike in frame 8, frame 9 and frame 10" do
       game = GameLibrary.new
-      standard_game_1_to_7(game)
-      strike_game_frame(game)
-      strike_game_frame(game)
-      strike_game_frame(game)
-      standard_game_frame(game)
+      7.times {standard_frame(game)}
+      3.times {strike_frame(game)}
+      standard_frame(game)
       expect(game.rolls_by_frame).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[10],[10],[10, 1, 2]]
       score = ScoreCalculator.new(game)
       expect(score.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 30, 21, 13] 
@@ -121,64 +89,52 @@ RSpec.describe "game_library_integration" do
 
     it "total equal 300 when perfect score " do
       game = GameLibrary.new
-      roll = Roll.new
-      roll.score = 10
-      game.add(roll)
-      game.add(roll)
-      game.add(roll)
-      game.add(roll)
-      game.add(roll)
-      game.add(roll)
-      game.add(roll)
-      game.add(roll)
-      game.add(roll)
-      game.add(roll)
-      game.add(roll)
-      game.add(roll)
-
+      12.times {strike_frame(game)}
       expect(game.rolls_by_frame).to eq [[10],[10],[10],[10],[10],[10],[10],[10],[10],[10, 10, 10]]
       score = ScoreCalculator.new(game)
       expect(score.score_by_frame).to eq [30, 30, 30, 30, 30, 30, 30, 30, 30, 30] 
       expect(score.total_score).to eq 300
     end
 
+    it "when score a spare in frame 9" do
+      game = GameLibrary.new
+      8.times {standard_frame(game)}
+      spare_frame(game)
+      standard_frame(game)
+      expect(game.rolls_by_frame).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[8, 2],[1, 2]]
+      score = ScoreCalculator.new(game)
+      expect(score.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 3, 11, 3] 
+      expect(score.total_score).to eq 38
+    end
   end
 
   private
 
-  def standard_game_1_to_7(game)
-    roll_1 = Roll.new
-    roll_1.score = 1
-    game.add(roll_1)
-    roll_2 = Roll.new
-    roll_2.score = 2
-    game.add(roll_2)
-    game.add(roll_1)
-    game.add(roll_2)
-    game.add(roll_1)
-    game.add(roll_2) 
-    game.add(roll_1)
-    game.add(roll_2) 
-    game.add(roll_1)
-    game.add(roll_2) 
-    game.add(roll_1)
-    game.add(roll_2) 
-    game.add(roll_1)
-    game.add(roll_2)
+  def standard_frame(game)
+    roll = Roll.new
+    roll.score = 1
+    game.add(roll)
+    roll.score = 2
+    game.add(roll)
   end
 
-  def standard_game_frame(game)
-    roll_1 = Roll.new
-    roll_1.score = 1
-    game.add(roll_1)
-    roll_2 = Roll.new
-    roll_2.score = 2
-    game.add(roll_2)
-  end
-
-  def strike_game_frame(game)
+  def strike_frame(game)
     roll = Roll.new
     roll.score = 10
+    game.add(roll)
+  end
+
+  def spare_frame(game)
+    roll = Roll.new
+    roll.score = 8
+    game.add(roll)
+    roll.score = 2
+    game.add(roll)
+  end
+
+  def extra_roll(game)
+    roll = Roll.new
+    roll.score = 1
     game.add(roll)
   end
 
