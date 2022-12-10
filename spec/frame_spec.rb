@@ -15,6 +15,15 @@ describe Frame do
       frame = Frame.new(7,7)
       expect { frame.frame_total }.to raise_error(ArgumentError)
     end 
+  end 
 
+  context 'player gets a spare' do 
+
+    it 'marks frame as a spare' do
+      frame = Frame.new(6,4) 
+      expect(frame.frame_total).to equal 10
+      expect(frame.is_strike?).to equal false
+      expect(frame.is_spare?).to equal true
+    end
   end 
 end 
