@@ -12,7 +12,7 @@ describe Frame do
     end 
 
     it 'raises error for invalid frame inputs' do
-      frame = Frame.new(7,7)
+      frame = Frame.new(10,5)
       expect { frame.frame_total }.to raise_error(ArgumentError)
     end 
   end 
@@ -24,6 +24,16 @@ describe Frame do
       expect(frame.frame_total).to equal 10
       expect(frame.is_strike?).to equal false
       expect(frame.is_spare?).to equal true
+    end
+  end 
+
+  context 'player gets a strike' do 
+
+    it 'marks frame as a spare' do
+      frame = Frame.new(10,0) 
+      expect(frame.frame_total).to equal 10
+      expect(frame.is_strike?).to equal true 
+      expect(frame.is_spare?).to equal false
     end
   end 
 end 

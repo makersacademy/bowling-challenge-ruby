@@ -19,7 +19,7 @@ class Frame
   end 
 
   def is_spare?
-    if @roll_one + @roll_two == 10 then return true 
+    if @roll_one + @roll_two == 10 && @roll_one != 10 then return true 
     else return false
     end 
   end 

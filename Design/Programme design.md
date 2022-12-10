@@ -171,7 +171,7 @@ end
     expect(frame.is_spare?).to equal false
 
   # 2 - Raises error if sum of frame arguments is > 20
-    frame = Frame.New(7,7)
+    frame = Frame.New(10,5)
     expect(frame).to raise_error "invalid score"
 
   # 3 Frame is a spare
