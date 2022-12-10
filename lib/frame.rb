@@ -1,17 +1,23 @@
 class Frame 
 
-  def initialize(frame_one, frame_two)
-    @frame_one = frame_one
-    @frame_two = frame_two
+  def initialize(roll_one, roll_two)
+    @roll_one = roll_one
+    @roll_two = roll_two
   end 
 
   def frame_total
 
-    return @frame_one + @frame_two
+    return @roll_one + @roll_two
   end 
 
   def is_strike?
-    if @frame_one == 10 then return true 
+    if @roll_one == 10 then return true 
+    else return false
+    end 
+  end 
+
+  def is_spare?
+    if @roll_one + @roll_two == 10 then return true 
     else return false
     end 
   end 
