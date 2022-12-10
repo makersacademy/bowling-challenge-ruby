@@ -10,4 +10,8 @@ class Frame
   def scores
     @scores
   end
+
+  def score_sum
+    @scores.sum
+  end
 end
