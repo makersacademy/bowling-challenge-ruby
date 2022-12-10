@@ -106,6 +106,31 @@ RSpec.describe "game_library_integration" do
       expect(score.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 3, 11, 3] 
       expect(score.total_score).to eq 38
     end
+
+    it "when score a spare in frame 10" do
+      game = GameLibrary.new
+      9.times {standard_frame(game)}
+      spare_frame(game)
+      extra_roll(game)
+      expect(game.rolls_by_frame).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[8, 2, 1]]
+      score = ScoreCalculator.new(game)
+      expect(score.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 3, 3, 11] 
+      expect(score.total_score).to eq 38
+    end
+
+    it "when score a few spares and strikes" do
+      game = GameLibrary.new
+      3.times {standard_frame(game)}
+      2.times {spare_frame(game)}
+      2.times {strike_frame(game)}
+      2.times {standard_frame(game)}
+      2.times {strike_frame(game)}
+      extra_roll(game)
+      expect(game.rolls_by_frame).to eq [[1, 2],[1, 2],[1, 2],[8, 2],[8, 2],[10],[10],[1, 2],[1, 2],[10, 10, 1]]
+      score = ScoreCalculator.new(game)
+      expect(score.score_by_frame).to eq [3, 3, 3, 18, 20, 21, 13, 3, 3, 21] 
+      expect(score.total_score).to eq 108
+    end
   end
 
   private

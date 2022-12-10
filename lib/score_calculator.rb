@@ -1,25 +1,22 @@
 class ScoreCalculator
   def initialize(game)
-    @game = game
+    @game = game.rolls_by_frame
     @score =[]
   end
 
   def score_by_frame
     next_index = 1
-    game_by_frame = @game.rolls_by_frame
+    bonus_point = 0
 
-    game_by_frame.each do |rolls|
+    @game.each do |rolls|
       if rolls[0] == 10 && next_index < 10
-        next_two_scores = game_by_frame[next_index..next_index+1].flatten[0..1].sum
-        frame_score = rolls[0] + next_two_scores
+        bonus_point = @game[next_index..next_index+1].flatten[0..1].sum
       elsif rolls.sum == 10 && next_index < 10
-        next_score = game_by_frame[next_index][0]
-        frame_score = rolls.sum + next_score 
-      else
-        frame_score = rolls.sum
+        bonus_point = @game[next_index][0]
       end  
-      @score << frame_score
+      @score << (rolls.sum + bonus_point)
       next_index += 1
+      bonus_point = 0
     end
 
     return @score
