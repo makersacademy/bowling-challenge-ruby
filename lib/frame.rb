@@ -3,7 +3,7 @@ class Frame
     @scores = []
   end
 
-  def add(score)
+  def add_ball(score)
     @scores << score
   end
 

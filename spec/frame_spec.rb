@@ -6,7 +6,7 @@ RSpec.describe Frame do
     frame = Frame.new
     score = 0
 
-    frame.add(score)
+    frame.add_ball(score)
 
     expect(frame.scores).to eq [0]
   end
@@ -16,8 +16,8 @@ RSpec.describe Frame do
     score_1 = 3
     score_2 = 5
   
-    frame.add(score_1)
-    frame.add(score_2)
+    frame.add_ball(score_1)
+    frame.add_ball(score_2)
   
     expect(frame.score_sum).to eq 8
   end
@@ -26,7 +26,7 @@ RSpec.describe Frame do
     frame = Frame.new
     score = 10
   
-    frame.add(score)
+    frame.add_ball(score)
   
     expect(frame.strike?).to eq true
   end
@@ -36,8 +36,8 @@ RSpec.describe Frame do
     score_1 = 3
     score_2 = 7
   
-    frame.add(score_1)
-    frame.add(score_2)
+    frame.add_ball(score_1)
+    frame.add_ball(score_2)
   
     expect(frame.spare?).to eq true
   end

@@ -5,44 +5,44 @@ RSpec.describe "it runs the game" do
   
   it "returns the score for a gutter game" do
     frame_1 = Frame.new
-    frame_1.add(0)
-    frame_1.add(0)
+    frame_1.add_ball(0)
+    frame_1.add_ball(0)
 
     frame_2 = Frame.new
-    frame_2.add(0)
-    frame_2.add(0)
+    frame_2.add_ball(0)
+    frame_2.add_ball(0)
 
     frame_3 = Frame.new
-    frame_3.add(0)
-    frame_3.add(0)
+    frame_3.add_ball(0)
+    frame_3.add_ball(0)
 
     frame_4 = Frame.new
-    frame_4.add(0)
-    frame_4.add(0)
+    frame_4.add_ball(0)
+    frame_4.add_ball(0)
 
     frame_5 = Frame.new
-    frame_5.add(0)
-    frame_5.add(0)
+    frame_5.add_ball(0)
+    frame_5.add_ball(0)
 
     frame_6 = Frame.new
-    frame_6.add(0)
-    frame_6.add(0)
+    frame_6.add_ball(0)
+    frame_6.add_ball(0)
 
     frame_7 = Frame.new
-    frame_7.add(0)
-    frame_7.add(0)
+    frame_7.add_ball(0)
+    frame_7.add_ball(0)
 
     frame_8 = Frame.new
-    frame_8.add(0)
-    frame_8.add(0)
+    frame_8.add_ball(0)
+    frame_8.add_ball(0)
 
     frame_9 = Frame.new
-    frame_9.add(0)
-    frame_9.add(0)
+    frame_9.add_ball(0)
+    frame_9.add_ball(0)
 
     frame_10 = Frame.new
-    frame_10.add(0)
-    frame_10.add(0)
+    frame_10.add_ball(0)
+    frame_10.add_ball(0)
 
     game = Game.new
     game.add_frame(frame_1)
@@ -61,44 +61,44 @@ RSpec.describe "it runs the game" do
 
   it "returns the score for a gutter game" do
     frame_1 = Frame.new
-    frame_1.add(2)
-    frame_1.add(1)
+    frame_1.add_ball(2)
+    frame_1.add_ball(1)
 
     frame_2 = Frame.new
-    frame_2.add(3)
-    frame_2.add(2)
+    frame_2.add_ball(3)
+    frame_2.add_ball(2)
 
     frame_3 = Frame.new
-    frame_3.add(4)
-    frame_3.add(1)
+    frame_3.add_ball(4)
+    frame_3.add_ball(1)
 
     frame_4 = Frame.new
-    frame_4.add(2)
-    frame_4.add(4)
+    frame_4.add_ball(2)
+    frame_4.add_ball(4)
 
     frame_5 = Frame.new
-    frame_5.add(6)
-    frame_5.add(1)
+    frame_5.add_ball(6)
+    frame_5.add_ball(1)
 
     frame_6 = Frame.new
-    frame_6.add(4)
-    frame_6.add(3)
+    frame_6.add_ball(4)
+    frame_6.add_ball(3)
 
     frame_7 = Frame.new
-    frame_7.add(1)
-    frame_7.add(1)
+    frame_7.add_ball(1)
+    frame_7.add_ball(1)
 
     frame_8 = Frame.new
-    frame_8.add(0)
-    frame_8.add(3)
+    frame_8.add_ball(0)
+    frame_8.add_ball(3)
 
     frame_9 = Frame.new
-    frame_9.add(1)
-    frame_9.add(0)
+    frame_9.add_ball(1)
+    frame_9.add_ball(0)
 
     frame_10 = Frame.new
-    frame_10.add(5)
-    frame_10.add(3)
+    frame_10.add_ball(5)
+    frame_10.add_ball(3)
 
     game = Game.new
     game.add_frame(frame_1)
