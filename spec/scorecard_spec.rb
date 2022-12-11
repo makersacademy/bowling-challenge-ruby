@@ -15,7 +15,7 @@ describe ScoreCard do
     end 
 
   end 
-  describe "total" do
+  context "programme correctly handles scoring for spares" do
      it "corectly calculate a spare in the first frame" do 
       scorecard = ScoreCard.new
       frame1 = Frame.new(6,4) 
@@ -57,6 +57,78 @@ describe ScoreCard do
       expect(scorecard.total).to include(expected_frame1)
       expect(scorecard.total).to include(expected_frame2)
     end 
+  end  
+  
+  context 'programmes correctly handles strikes' do 
 
-  end    
+    it 'correctly handles a strike into an open frame' do 
+      scorecard = ScoreCard.new
+      frame1 = Frame.new(10,0) 
+      expect(frame1.bonus_status). to eq true
+      frame2 = Frame.new(7,2) 
+      scorecard.add(frame1)
+      scorecard.add(frame2)
+      scorecard.calculate_bonuses
+      expected_frame1 = {roll_one: 10, roll_two: 0, frame_total: 19, is_strike?: true, is_spare?: false, bonus_status: false}        
+      expected_frame2 = {roll_one: 7, roll_two: 2, frame_total: 9, is_strike?: false, is_spare?: false, bonus_status: false} 
+      expect(scorecard.total).to include(expected_frame1)
+      expect(scorecard.total).to include(expected_frame2)
+    end   
+
+    it 'correctly handles a strike into a spare' do 
+      scorecard = ScoreCard.new
+      frame1 = Frame.new(10,0) 
+      frame2 = Frame.new(2,8) 
+      # to not isolate spare score
+      frame3 = Frame.new(0,0) 
+      scorecard.add(frame1)
+      scorecard.add(frame2)
+      scorecard.add(frame3)
+      scorecard.calculate_bonuses
+      expected_frame1 = {roll_one: 10, roll_two: 0, frame_total: 20, is_strike?: true, is_spare?: false, bonus_status: false}        
+      expected_frame2 = {roll_one: 2, roll_two: 8, frame_total: 10, is_strike?: false, is_spare?: true, bonus_status: false} 
+      expect(scorecard.total).to include(expected_frame1)
+      expect(scorecard.total).to include(expected_frame2)
+    end   
+
+    it 'correctly scores a strike into a strike into an open frame' do
+
+      scorecard = ScoreCard.new
+      frame1 = Frame.new(10,0) 
+      frame2 = Frame.new(10,0) 
+      frame3 = Frame.new(3,4) 
+      scorecard.add(frame1)
+      scorecard.add(frame2)
+      scorecard.add(frame3)
+      scorecard.calculate_bonuses
+      expected_frame1 = {roll_one: 10, roll_two: 0, frame_total: 23, is_strike?: true, is_spare?: false, bonus_status: false}        
+      expected_frame2 = {roll_one: 10, roll_two: 0, frame_total: 17, is_strike?: true, is_spare?: false, bonus_status: false} 
+      expected_frame3 = {roll_one: 3, roll_two: 4, frame_total: 7, is_strike?: false, is_spare?: false, bonus_status: false} 
+      expect(scorecard.total).to include(expected_frame1)
+      expect(scorecard.total).to include(expected_frame2)
+      expect(scorecard.total).to include(expected_frame3)
+    end   
+
+    it 'correctly handles 3 strikes in a row' do 
+
+      scorecard = ScoreCard.new
+      frame1 = Frame.new(10,0) 
+      frame2 = Frame.new(10,0) 
+      frame3 = Frame.new(10,0) 
+      frame4 = Frame.new(0,0)
+      scorecard.add(frame1)
+      scorecard.add(frame2)
+      scorecard.add(frame3)
+      scorecard.add(frame4)
+      scorecard.calculate_bonuses
+      expected_frame1 = {roll_one: 10, roll_two: 0, frame_total: 30, is_strike?: true, is_spare?: false, bonus_status: false}        
+      expected_frame2 = {roll_one: 10, roll_two: 0, frame_total: 20, is_strike?: true, is_spare?: false, bonus_status: false} 
+      expected_frame3 = {roll_one: 10, roll_two: 0, frame_total: 10, is_strike?: true, is_spare?: false, bonus_status: false} 
+      expect(scorecard.total).to include(expected_frame1)
+      expect(scorecard.total).to include(expected_frame2)
+      expect(scorecard.total).to include(expected_frame3)
+    end   
+
+  end 
+  
 end 

@@ -63,12 +63,6 @@ When you bowl a strike, the value for that frame will be 10 plus the total pins 
 * Strike into strike into strike 
   * Adds each of the next two ROLLS is 10 so 20 is added to the frame, total modifiers dont apply
 
-* Strike into gutter into strike
-  * Adds 0 + 10 to frame
-
-* Strike into gutter into gitter
-  * strike frame = 10. gutter frame = 0 
-
 #### Final Frame
 
 * Strike

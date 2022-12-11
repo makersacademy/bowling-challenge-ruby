@@ -54,7 +54,7 @@ def check_strike_bonus
   @score.each_with_index do |frame, index|
     if frame[:is_strike?] == true && frame[:bonus_status] == true
       next_frame = @score[index + 1]
-      frame_after_next = [index + 2]
+      frame_after_next = @score[index + 2]
       if next_frame[:is_strike?] then 
         frame[:frame_total] += next_frame[:roll_one] + frame_after_next[:roll_one]
         frame[:bonus_status] = false
