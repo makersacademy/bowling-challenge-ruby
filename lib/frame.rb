@@ -1,5 +1,7 @@
 class Frame 
 
+  attr_reader :roll_one, :roll_two
+
   def initialize(roll_one, roll_two)
     @roll_one = roll_one
     @roll_two = roll_two
@@ -23,4 +25,18 @@ class Frame
     else return false
     end 
   end 
+
+  def frame_to_hash
+
+   frame_hash = {
+      roll_one: roll_one,
+      roll_two: roll_two,
+      frame_total: frame_total,
+      is_spare?: is_spare?,
+      is_strike?: is_strike?,
+   }
+
+    return frame_hash
+  end 
+
 end 
