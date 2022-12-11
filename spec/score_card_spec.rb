@@ -65,6 +65,24 @@ describe ScoreCard do
       expect(score_card.prev_frame.is_strike?).to eq true
     end
   end
+  context "where the previous round was a strike" do
+    it "adds the next two rolls to the previous frame bonus" do
+      score_card = ScoreCard.new
+      score_card.play_frame(10, 1)
+      score_card.play_frame(2, 2)
+
+      expect(score_card.frames[0].bonus).to eq 4
+    end
+  end
+  context "where the previous round was a spare" do
+    it "adds the first roll to the previous frame bonus" do
+      score_card = ScoreCard.new
+      score_card.play_frame(9, 1)
+      score_card.play_frame(2, 2)
+
+      expect(score_card.frames[0].bonus).to eq 2
+    end
+  end
   context "where the player hits a spare" do
     it "records two rolls in the frame" do
       score_card = ScoreCard.new
@@ -95,15 +113,7 @@ describe ScoreCard do
       expect(score_card.prev_frame.is_spare?).to eq false
       end
   end
-  # it "adds the next two rolls to the previous frame score if the previous frame scored a strike" do
-  #   score_card = ScoreCard.new
-  #   score_card.play_frame(10, 1)
-  #   score_card.play_frame(2, 2)
-
-  #   expect(score_card.frames[score_card.current_frame-2].bonus).to eq 4
-    
-    
-  # end
+ 
   # it "allows a second roll if the player does not get a strike" do
   #   score_card = ScoreCard.new
   # end

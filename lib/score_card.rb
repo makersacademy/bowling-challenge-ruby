@@ -38,9 +38,7 @@ class ScoreCard
   def play_frame(roll_1, roll_2)
 
     this_frame = Frame.new(@round)
-    if @round > 1
-      p "previous frame: #{self.prev_frame.frame}"
-    end
+    
   #   p "round minus 1 #{@round-1}"
   # #  roll 1 and 2 would usually be calculated as follows
   # #  but for testing purposes I need to unput them
@@ -52,21 +50,23 @@ class ScoreCard
       this_frame.strike
       this_frame.add_roll_1(roll_1)
       this_frame.add_roll_2(0)
-      @frames << this_frame
-    elsif roll_1 + roll_2 == 10
+    elsif (roll_1 + roll_2) == 10
       this_frame.spare
       this_frame.add_roll_1(roll_1)
       this_frame.add_roll_2(roll_2)
-      @frames << this_frame
     else
       this_frame.add_roll_1(roll_1)
       this_frame.add_roll_2(roll_2)
-      @frames << this_frame
     end
-   @round += 1
+    if @round > 1 && self.prev_frame.is_strike?
+      self.prev_frame.add_bonus(roll_1 + roll_2)
+    elsif @round > 1 && self.prev_frame.is_spare?
+      self.prev_frame.add_bonus(roll_1)
+    end
+    @frames << this_frame
+    @round += 1
   #  return ''
   end
-    
 end
 
 

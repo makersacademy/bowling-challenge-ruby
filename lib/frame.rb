@@ -6,7 +6,7 @@ class Frame
     @roll_2 = 0
     @strike = false
     @spare = false
-    @bonus_score = 0
+    @bonus = 0
   end
 
   def frame
@@ -51,6 +51,10 @@ class Frame
 
   def add_frame_total(num)
     @frame_score += num
+  end
+
+  def add_bonus(num)
+    @bonus = num
   end
 
   def bonus
