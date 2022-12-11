@@ -29,6 +29,9 @@ class Scorecard
       bonus(point_1, point_2)
     end
 
+    # If the player rolls a strike or spare in the 10th frame they can roll the additional balls
+    # for the bonus. But they can never roll more than 3 balls in the 10th frame. The additional
+    #rolls only count for the bonus not for the regular frame count
     tenth_frame = @frames[9]
     if tenth_frame[:status] == 'strike'
       @io.puts "Bonus round! Enter your score:"
@@ -93,6 +96,3 @@ class Scorecard
   end
 end
 
-
-#test = Scorecard.new(Kernel)
-#p test.run
