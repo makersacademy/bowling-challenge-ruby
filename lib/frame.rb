@@ -1,7 +1,6 @@
 class Frame
   def initialize(num)
     @frame_num = num
-    @frame_score = 0
     @roll_1 = 0
     @roll_2 = 0
     @strike = false
@@ -14,7 +13,7 @@ class Frame
   end
 
   def frame_score
-    @frame_score
+    @roll_1 + @roll_2 + @bonus
   end
 
   def add_roll_1(num)
@@ -49,9 +48,9 @@ class Frame
     @spare
   end
 
-  def add_frame_total(num)
-    @frame_score += num
-  end
+  # def add_frame_total(num)
+  #   @frame_score += num
+  # end
 
   def add_bonus(num)
     @bonus = num

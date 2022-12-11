@@ -111,12 +111,48 @@ describe ScoreCard do
   
       expect(score_card.prev_frame.is_strike?).to eq false
       expect(score_card.prev_frame.is_spare?).to eq false
-      end
+    end
   end
- 
-  # it "allows a second roll if the player does not get a strike" do
-  #   score_card = ScoreCard.new
-  # end
+  it "keeps a total score for all frames" do
+    score_card = ScoreCard.new
+    score_card.play_frame(3, 3)
+    score_card.play_frame(10, 0)
+    score_card.play_frame(2, 2)
+    score_card.play_frame(9, 1)
+    score_card.play_frame(2, 2)
+
+    expect(score_card.total_score).to eq 40
+  end
+  it "returns you got a gutter game if score is zero after ten frames" do
+    score_card = ScoreCard.new
+    score_card.play_frame(0, 0)
+    score_card.play_frame(0, 0)
+    score_card.play_frame(0, 0)
+    score_card.play_frame(0, 0)
+    score_card.play_frame(0, 0)
+    score_card.play_frame(0, 0)
+    score_card.play_frame(0, 0)
+    score_card.play_frame(0, 0)
+    score_card.play_frame(0, 0)
+    score_card.play_frame(0, 0)
+   
+    expect(score_card.result).to eq "You got a gutter game!"
+  end
+  it "returns 'you got a perfect game' if score is 300 after ten frames" do
+    score_card = ScoreCard.new
+    score_card.play_frame(10, 0)
+    score_card.play_frame(10, 0)
+    score_card.play_frame(10, 0)
+    score_card.play_frame(10, 0)
+    score_card.play_frame(10, 0)
+    score_card.play_frame(10, 0)
+    score_card.play_frame(10, 0)
+    score_card.play_frame(10, 0)
+    score_card.play_frame(10, 0)
+    score_card.play_frame(10, 0)
+   
+    expect(score_card.result).to eq "You got a perfect game!"
+  end
 end
 
 

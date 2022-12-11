@@ -14,8 +14,8 @@ describe Frame do
   end
   it "keeps a total for the current frame" do
     frame = Frame.new(1)
-    frame.add_frame_total(5)
-    frame.add_frame_total(4)
+    frame.add_roll_1(5)
+    frame.add_roll_2(4)
     expect(frame.frame_score).to eq 9
   end
   it "can record a strike" do

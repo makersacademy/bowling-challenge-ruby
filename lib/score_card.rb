@@ -20,7 +20,10 @@ class ScoreCard
   end
 
   def total_score
-    @total_score
+    @frames.each do |frame|
+      @total_score += frame.frame_score
+    end
+    return @total_score
   end
 
   def add_to_total(num)
@@ -38,15 +41,15 @@ class ScoreCard
   def play_frame(roll_1, roll_2)
 
     this_frame = Frame.new(@round)
-    
-  #   p "round minus 1 #{@round-1}"
-  # #  roll 1 and 2 would usually be calculated as follows
-  # #  but for testing purposes I need to unput them
-  # #  roll_1 = this_frame.add_frame_total(random(11))
-  # #  roll_2 = this_frame.add_frame_total(random(11))
-    
+   
+    # roll 1 and 2 would usually be calculated 
+    # as follows within the game logic
+    # but for testing purposes I need to input them:
+
+    # roll_1 = this_frame.add_frame_total(random(11))
+    # roll_2 = this_frame.add_frame_total(random(11))
+      
     if roll_1 == 10
-      this_frame.add_frame_total(roll_1)
       this_frame.strike
       this_frame.add_roll_1(roll_1)
       this_frame.add_roll_2(0)
@@ -65,7 +68,16 @@ class ScoreCard
     end
     @frames << this_frame
     @round += 1
+    
   #  return ''
+  end
+
+  def result
+    if @total_score == 0
+      "You got a gutter game!"
+    elsif @total_score == 300
+      "You got a perfect game!!"
+    end
   end
 end
 
