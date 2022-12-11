@@ -31,6 +31,24 @@ class Scorecard
       bonus(point_1, point_2)
     end
 
+    tenth_frame = @frames[9]
+    if tenth_frame[:status] == 'strike'
+      @io.puts "Bonus round! Enter your score:"
+      point_3 = @io.gets.chomp.to_i
+      tenth_frame[:score] += point_3
+      if point_3 == 10
+        @io.puts "Wow, extra bonus! Enter your score:"
+        point_4 = @io.gets.chomp.to_i
+        tenth_frame[:score] += point_4
+      end
+
+    elsif tenth_frame[:status] == 'spare'
+      @io.puts "Bonus round! Enter your score:"
+      point_3 = @io.gets.chomp.to_i
+      tenth_frame[:score] += point_3
+    else puts grand_total
+    end
+
     grand_total
   end
 
