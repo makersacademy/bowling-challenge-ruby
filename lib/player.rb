@@ -7,12 +7,18 @@ class Player
         @total = 0
     end
 
+    def scorecard
+        return @scorecard
+    end
+
     def addFrame(arr)
         @scorecard.push(arr)
     end
 
     def updatePrevFrame(roll, frameNum)
-        @scorecard[frameNum].push(roll)
+        @scorecard[frameNum - 1].push(roll)
+        p @scorecard
+        p frameNum
     end
 
     def calcTotal

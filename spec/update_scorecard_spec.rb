@@ -67,5 +67,59 @@ RSpec.describe UpdateScorecard do
         expect { scorecard.getFrameScore }.to raise_error "total input this frame must be 10 or under" # return error
     end
 
+    it "adds a spare bonus to the prev frame's score array" do
+        io = double :io
 
+        player = Player.new(io, 'test')
+        # get a score
+
+        scorecard = UpdateScorecard.new(io, player)
+
+        expect(io).to receive(:gets).and_return("1")
+        expect(io).to receive(:gets).and_return("9")
+
+        scorecard.getFrameScore
+
+        expect(io).to receive(:gets).and_return("6")
+        expect(io).to receive(:gets).and_return("2")
+
+        scorecard.getFrameScore
+
+        expect(io).to receive(:gets).and_return("6")
+        expect(io).to receive(:gets).and_return("2")
+
+        scorecard.getFrameScore
+
+        expect(player.scorecard).to eq [[1, 9, 6], [6, 2], [6, 2]]
+    end
+
+    it "adds a spare bonus to the prev frame's score array" do
+        io = double :io
+
+        player = Player.new(io, 'test')
+        # get a score
+
+        scorecard = UpdateScorecard.new(io, player)
+
+        expect(io).to receive(:gets).and_return("1")
+        expect(io).to receive(:gets).and_return("8")
+
+        scorecard.getFrameScore
+
+        expect(io).to receive(:gets).and_return("8")
+        expect(io).to receive(:gets).and_return("2")
+
+        scorecard.getFrameScore
+
+        expect(io).to receive(:gets).and_return("8")
+        expect(io).to receive(:gets).and_return("2")
+
+        scorecard.getFrameScore
+        expect(io).to receive(:gets).and_return("6")
+        expect(io).to receive(:gets).and_return("2")
+
+        scorecard.getFrameScore
+
+        expect(player.scorecard).to eq [[1, 8], [8, 2, 8], [8, 2, 6], [6, 2]]
+    end
 end

@@ -17,7 +17,12 @@ class UpdateScorecard
             fail 'must be under 10'
         end
 
-        
+        # adds spare bonus to previous frame equal to first
+        # roll of current frame
+        if @spare == true
+            @player.updatePrevFrame(roll1, @currentFrame)
+            @spare = false
+        end
 
         roll2 = @io.gets.chomp.to_i
 
@@ -29,7 +34,17 @@ class UpdateScorecard
             fail 'total input this frame must be 10 or under'
         end
 
+        # check for spare
+        if roll1 + roll2 == 10
+            @spare = true
+        end
+
         @player.addFrame([roll1, roll2])
+
+        # update frame to track scoring for spares and strikes
+
+        @currentFrame += 1
+
     end
 
 end
