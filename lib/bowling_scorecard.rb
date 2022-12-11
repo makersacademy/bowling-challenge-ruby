@@ -72,7 +72,13 @@ class Application
   end
 
   def calculate_bonus_rolls
+    if @frame < 11
+      @io.puts "Bonus rolls only take place after scoring a strike or spare in the 10th frame"
+    elsif @last_frame_bonus == "strike"
 
+    elsif @last_frame_bonus == "spare"
+
+    end
   end
 end
 

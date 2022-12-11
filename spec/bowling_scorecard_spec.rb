@@ -142,3 +142,15 @@ RSpec.describe "#calculate_score" do
     end
   end
 end
+
+RSpec.describe "#calculate_bonus_rolls" do
+  context "if less than 10 frames have taken place" do
+    it "returns error message" do
+      io = double :io
+      app = Application.new(io)
+      expect(io).to receive(:puts).with("Bonus rolls only take place after scoring a strike or spare in the 10th frame")
+      
+      app.calculate_bonus_rolls
+    end
+  end
+end
