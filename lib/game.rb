@@ -6,8 +6,6 @@ class Game
     10.times { @frames << frame_class.new }
 
     @frame = 1
-
-    return nil
   end
 
   def frames
@@ -26,13 +24,11 @@ class Game
     completed = @frames.all? do |frame|
       case frame.status
       when :strike
-        frame.rolls == 1
-      when :spare
-        frame.rolls == 2
-      when :done
-        frame.rolls == 2
-      else
+        frame.rolls.length == 1
+      when :active
         false
+      else
+        frame.rolls.length == 2
       end
     end
   end

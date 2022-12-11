@@ -1,6 +1,6 @@
 require "game"
 
-RSpec.describe "Integration" do
+RSpec.describe "Game Integration" do
   context "initialzed game" do
     it "shows a total score of 0" do
       game = Game.new
@@ -18,7 +18,7 @@ RSpec.describe "Integration" do
       expect(frames[0].status).to eq :done
       expect(frames[1].score).to eq 4
       expect(frames[1].status).to eq :active
-      expect(frames[1].rolls).to eq 1
+      expect(frames[1].rolls).to eq [4]
 
       expect(game.complete?).to be false
       expect(frames[2...10].all? { |frame| frame.status == :active }).to be true

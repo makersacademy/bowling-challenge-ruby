@@ -7,6 +7,7 @@ RSpec.describe Frame do
 
       expect(frame.score).to eq 0
       expect(frame.status).to eq :active
+      expect(frame.rolls).to eq []
     end
   end
   
@@ -15,6 +16,7 @@ RSpec.describe Frame do
       frame = Frame.new
       frame.add_roll(5)
       expect(frame.score).to eq 5
+      expect(frame.rolls).to eq [5]
     end
 
     it "fails unless the roll is an integer" do
@@ -44,6 +46,7 @@ RSpec.describe Frame do
       frame = Frame.new
       frame.add_roll(10)
       expect(frame.score).to eq 10
+      expect(frame.rolls).to eq [10]
       expect(frame.status).to eq :strike
     end
   end
@@ -54,9 +57,11 @@ RSpec.describe Frame do
       
       frame.add_roll(5)
       expect(frame.score).to eq 5
+      expect(frame.rolls).to eq [5]
       
       frame.add_roll(4)
       expect(frame.score).to eq 9
+      expect(frame.rolls).to eq [5, 4]
     end
 
     it "updates the status when getting a spare" do
@@ -64,9 +69,11 @@ RSpec.describe Frame do
 
       frame.add_roll(5)
       expect(frame.score).to eq 5
+      expect(frame.rolls).to eq [5]
       expect(frame.status).to eq :active
       frame.add_roll(5)
       expect(frame.score).to eq 10
+      expect(frame.rolls).to eq [5, 5]
       expect(frame.status).to eq :spare
     end
 
@@ -75,9 +82,11 @@ RSpec.describe Frame do
 
       frame.add_roll(5)
       expect(frame.score).to eq 5
+      expect(frame.rolls).to eq [5]
       expect(frame.status).to eq :active
       frame.add_roll(4)
       expect(frame.score).to eq 9
+      expect(frame.rolls).to eq [5,4]
       expect(frame.status).to eq :done
     end
 
@@ -103,7 +112,6 @@ RSpec.describe Frame do
       frame = Frame.new
 
       frame.add_roll(5)
-      expect(frame.score).to eq 5
 
       error_message = "Both rolls cannot add up to more than 10"
       expect { frame.add_roll(7) }.to raise_error error_message
@@ -124,10 +132,7 @@ RSpec.describe Frame do
       frame = Frame.new
       
       frame.add_roll(5)
-      expect(frame.score).to eq 5
-      
       frame.add_roll(4)
-      expect(frame.score).to eq 9
       
       error_message = "Can no longer add roll to this frame"
       expect { frame.add_roll(1) }.to raise_error error_message
