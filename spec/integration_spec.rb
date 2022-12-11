@@ -64,14 +64,6 @@ RSpec.describe "Integration" do
       expect(game.complete?).to be true
       expect(game.frames.sum(&:score)).to eq 0
     end
-
-    it "raises an error if too many rolls are inputted" do
-      game = Game.new
-      20.times { game.add_roll(0) }
-
-      error_message = "You cannot add any more rolls"
-      expect { game.add_roll(0) }.to raise_error error_message
-    end
   end
 
   context "game of all 4s" do
