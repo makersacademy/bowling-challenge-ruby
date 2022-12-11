@@ -27,6 +27,8 @@ class Game
 
       if @new_array.length == 10 && frame.scores[0] == 10
         @new_array << frame.scores[1..2].sum
+      elsif @new_array.length == 10 && frame.scores[0..1].sum == 10
+        @new_array << frame.scores[2]
       end
 
       if frame.strike?
