@@ -1,6 +1,15 @@
 require "frame"
 
 RSpec.describe Frame do
+  context "initialized frame" do
+    it "has an empty score and is active" do
+      frame = Frame.new
+
+      expect(frame.score).to eq 0
+      expect(frame.status).to eq :active
+    end
+  end
+  
   context "Adds 1 roll" do
     it "score updates when adding a roll of 5" do
       frame = Frame.new
