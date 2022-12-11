@@ -10,7 +10,7 @@ class BowlingGame
   def score
     total_score = 0
     frame_num = 1
-    10.times do 
+    10.times do
       if strike?
         total_score += 10 + strike_bonus
         @current_roll_index += 1
@@ -32,12 +32,12 @@ class BowlingGame
     frame_num = 1
     10.times do
       @io.puts "What was you score for Frame #{frame_num}?"
-      input = @io.gets.chomp
-      if input.include? ','
-        frame_array = input.split(',')
-        frame_array.each { |pins| roll(pins.to_i) }
+      pins_knocked_input = @io.gets.chomp
+      if pins_knocked_input.include? ','
+        frame_array = pins_knocked_input.split(',')
+        frame_array.each { |pins_knocked_down| roll(pins_knocked_down.to_i) }
       else
-        roll(input.to_i)
+        roll(pins_knocked_input.to_i)
       end
       frame_num += 1
     end
