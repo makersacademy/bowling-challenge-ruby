@@ -131,4 +131,132 @@ describe ScoreCard do
 
   end 
   
+  context 'the programme correctly handles the final frame' do 
+
+    it 'correctly handles a spare in the final frame' do
+      scorecard = ScoreCard.new
+      frame1 = Frame.new(0,0) 
+      frame2 = Frame.new(0,0) 
+      frame3 = Frame.new(0,0) 
+      frame4 = Frame.new(0,0)
+      frame5 = Frame.new(0,0) 
+      frame6 = Frame.new(0,0)
+      frame7 = Frame.new(0,0) 
+      frame8 = Frame.new(0,0)
+      frame9 = Frame.new(0,0) 
+      frame10 = Frame.new(0,10)
+      scorecard.add(frame1)
+      scorecard.add(frame2)
+      scorecard.add(frame3)
+      scorecard.add(frame4)
+      scorecard.add(frame5)
+      scorecard.add(frame6)
+      scorecard.add(frame7)
+      scorecard.add(frame8)
+      scorecard.add(frame9)
+      scorecard.add(frame10)
+      bonus_roll = BonusRoll.new(7,0)
+      scorecard.add_final_frame_bonus(bonus_roll)
+      expected_frame10 = {roll_one: 0, roll_two: 10, frame_total: 17, is_strike?: false, is_spare?: true, bonus_status: false}
+      expect(scorecard.total).to include(expected_frame10)
+    end 
+
+    it 'correctly handles a spare in the final frame' do
+      scorecard = ScoreCard.new
+      frame1 = Frame.new(0,0) 
+      frame2 = Frame.new(0,0) 
+      frame3 = Frame.new(0,0) 
+      frame4 = Frame.new(0,0)
+      frame5 = Frame.new(0,0) 
+      frame6 = Frame.new(0,0)
+      frame7 = Frame.new(0,0) 
+      frame8 = Frame.new(0,0)
+      frame9 = Frame.new(0,0) 
+      frame10 = Frame.new(10,0)
+      scorecard.add(frame1)
+      scorecard.add(frame2)
+      scorecard.add(frame3)
+      scorecard.add(frame4)
+      scorecard.add(frame5)
+      scorecard.add(frame6)
+      scorecard.add(frame7)
+      scorecard.add(frame8)
+      scorecard.add(frame9)
+      scorecard.add(frame10)
+      bonus_roll = BonusRoll.new(10,10)
+      scorecard.add_final_frame_bonus(bonus_roll)
+      expected_frame10 = {roll_one: 10, roll_two: 0, frame_total: 30, is_strike?: true, is_spare?: false, bonus_status: false}
+      expect(scorecard.total).to include(expected_frame10)
+    end 
+
+    it 'does not allow an early bonus to be added' do
+      scorecard = ScoreCard.new
+      frame1 = Frame.new(2,3) 
+      frame2 = Frame.new(3,4) 
+      frame3 = Frame.new(6,2) 
+      scorecard.add(frame1)
+      scorecard.add(frame2)
+      scorecard.add(frame3)
+      bonus_roll = BonusRoll.new(7,0)
+      expect{ scorecard.add_final_frame_bonus(bonus_roll) }.to raise_error ("bonus rolls can only be added to the 10th frame")
+      expected_frame10 = {roll_one: 0, roll_two: 10, frame_total: 17, is_strike?: false, is_spare?: true, bonus_status: false}
+    end 
+  end 
+
+  context 'it runs an entire game' do
+    it 'correctly calculates the score ' do
+      scorecard = ScoreCard.new
+      frame1 = Frame.new(3,4) 
+      frame2 = Frame.new(3,3) 
+      frame3 = Frame.new(7,2) 
+      frame4 = Frame.new(4,5)
+      frame5 = Frame.new(0,5) 
+      frame6 = Frame.new(0,9)
+      frame7 = Frame.new(5,4) 
+      frame8 = Frame.new(2,4)
+      frame9 = Frame.new(4,4) 
+      frame10 = Frame.new(8,0)
+      scorecard.add(frame1)
+      scorecard.add(frame2)
+      scorecard.add(frame3)
+      scorecard.add(frame4)
+      scorecard.add(frame5)
+      scorecard.add(frame6)
+      scorecard.add(frame7)
+      scorecard.add(frame8)
+      scorecard.add(frame9)
+      scorecard.add(frame10)
+      expect(scorecard.final_score). to eq 76
+    end
+
+    it 'correctly calculates a game with strikes and spares ' do
+      scorecard = ScoreCard.new
+      frame1 = Frame.new(10,0) 
+      frame2 = Frame.new(7,3) 
+      frame3 = Frame.new(10,0) 
+      frame4 = Frame.new(10,0)
+      frame5 = Frame.new(5,5) 
+      frame6 = Frame.new(3,6)
+      frame7 = Frame.new(7,3) 
+      frame8 = Frame.new(2,4)
+      frame9 = Frame.new(4,4) 
+      frame10 = Frame.new(10,0)
+      scorecard.add(frame1)
+      scorecard.add(frame2)
+      scorecard.add(frame3)
+      scorecard.add(frame4)
+      scorecard.add(frame5)
+      scorecard.add(frame6)
+      scorecard.add(frame7)
+      scorecard.add(frame8)
+      scorecard.add(frame9)
+      scorecard.add(frame10)
+      bonus_roll = BonusRoll.new(10,10)
+      scorecard.add_final_frame_bonus(bonus_roll)
+      scorecard.total
+      expect(scorecard.final_score). to eq 163
+    end
+
+
+  end 
 end 

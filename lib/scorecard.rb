@@ -1,4 +1,5 @@
 require_relative 'frame'
+require_relative 'bonus_roll'
 class ScoreCard
 
   def initialize
@@ -31,17 +32,37 @@ class ScoreCard
   def total
     calculate_bonuses
     return @score
-
   end
+
+  def final_score
+    @final_score = 0
+    @score.each do |frame|
+      @final_score += frame[:frame_total]
+    end 
+    return @final_score
+  end 
+
+  def add_final_frame_bonus(bonus_roll)
+  
+    if @score.length == 10 && @score[-1][:is_spare?] == true
+      @score[-1][:frame_total] += bonus_roll.roll_one
+      @score[-1][:bonus_status] = false
+    elsif @score.length == 10 && @score[-1][:is_strike?] == true
+      @score[-1][:frame_total] += bonus_roll.roll_one + bonus_roll.roll_two 
+      @score[-1][:bonus_status] = false
+    else raise ("bonus rolls can only be added to the 10th frame")
+    end 
+  end 
 
 end 
 
 private 
 
 def check_spare_bonus
-
   @score.each_with_index do |frame, index|
-    if frame[:is_spare?] == true && frame[:bonus_status] == true
+    if @score.length == 10 && frame == @score.last
+      return nil
+    elsif frame[:is_spare?] == true && frame[:bonus_status] == true
       next_frame = @score[index + 1]
       frame[:frame_total] += next_frame[:roll_one] 
       frame[:bonus_status] = false
@@ -52,7 +73,9 @@ end
 def check_strike_bonus
 
   @score.each_with_index do |frame, index|
-    if frame[:is_strike?] == true && frame[:bonus_status] == true
+    if @score.length == 10 && frame == @score.last
+      return nil
+    elsif frame[:is_strike?] == true && frame[:bonus_status] == true
       next_frame = @score[index + 1]
       frame_after_next = @score[index + 2]
       if next_frame[:is_strike?] then 
