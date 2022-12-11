@@ -5,7 +5,8 @@ class ScoreSheet
 
   def print
     raise "The game must be completed to print the scorecard" unless @game.complete?
-    puts "FRAME | ROLLS | TOTAL SCORE"
+    puts "| FRAME | ROLLS | TOTAL SCORE |"
+    puts "| ----- | ----- | ----------- |"
     @game.frames.each_with_index do |frame, index|
       print_frame(frame, index + 1)
     end
@@ -28,6 +29,6 @@ class ScoreSheet
 
   def print_frame(frame, number)
     current_total = @game.frames[0...number].sum(&:score)
-    puts " %2d.  | %5s | %3d" % [number, roll_string(frame), current_total]
+    puts "|  %2d.  | %5s | %3d         |" % [number, roll_string(frame), current_total]
   end
 end
