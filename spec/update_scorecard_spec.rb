@@ -2,23 +2,62 @@ require 'update_scorecard'
 require 'player'
 
 RSpec.describe UpdateScorecard do
-    it "updates scorecard and prints total with no strikes or spares" do
-    # create new player
-    player = Player.new('test')
-    # get a score
-    io = double :io
-    scorecard = UpdateScorecard.new(io, player)
 
-    expect(io).to receive(:gets).and_return("1")
-    expect(io).to receive(:gets).and_return("2")
+        it "updates scorecard and prints total with no strikes or spares" do
+        # create new player
+        player = Player.new('test')
+        # get a score
+        io = double :io
+        scorecard = UpdateScorecard.new(io, player)
 
-    scorecard.getFrameScore
+        expect(io).to receive(:gets).and_return("1")
+        expect(io).to receive(:gets).and_return("2")
 
-    expect(io).to receive(:gets).and_return("3")
-    expect(io).to receive(:gets).and_return("4")
+        scorecard.getFrameScore
 
-    scorecard.getFrameScore
+        expect(io).to receive(:gets).and_return("3")
+        expect(io).to receive(:gets).and_return("4")
 
-    expect(player.calcTotal).to eq 10
+        scorecard.getFrameScore
+
+        expect(player.calcTotal).to eq 10
+
     end
+
+    it 'fails' do
+        player = Player.new('test')
+        # get a score
+        io = double :io
+        scorecard = UpdateScorecard.new(io, player)
+
+        expect(io).to receive(:gets).and_return("11")
+
+        expect { scorecard.getFrameScore }.to raise_error "must be under 10" # return error
+    end
+
+    it 'fails' do
+        player = Player.new('test')
+        # get a score
+        io = double :io
+        scorecard = UpdateScorecard.new(io, player)
+
+        expect(io).to receive(:gets).and_return("1")
+        expect(io).to receive(:gets).and_return("10")
+
+        expect { scorecard.getFrameScore }.to raise_error "must be under 9" # return error
+    end
+
+    it 'fails' do
+        player = Player.new('test')
+        # get a score
+        io = double :io
+        scorecard = UpdateScorecard.new(io, player)
+
+        expect(io).to receive(:gets).and_return("6")
+        expect(io).to receive(:gets).and_return("6")
+
+        expect { scorecard.getFrameScore }.to raise_error "total input this frame must be 10 or under" # return error
+    end
+
+
 end
