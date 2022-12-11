@@ -36,6 +36,7 @@ class ScoreCard
   end
 
   def play_frame(roll_1, roll_2)
+
     this_frame = Frame.new(@round)
     if @round > 1
       p "previous frame: #{self.prev_frame.frame}"
@@ -45,17 +46,23 @@ class ScoreCard
   # #  but for testing purposes I need to unput them
   # #  roll_1 = this_frame.add_frame_total(random(11))
   # #  roll_2 = this_frame.add_frame_total(random(11))
-   if roll_1 >= 10
-    this_frame.add_frame_total(roll_1)
-    this_frame.strike
-    @frames << this_frame
     
-   end
-  #  elsif roll_1 + roll_2 == 10
-  #   this_frame.add_frame_total(roll_2)
-  #   this_frame.spare
-  #   @frames << this_frame
-  #  end
+    if roll_1 == 10
+      this_frame.add_frame_total(roll_1)
+      this_frame.strike
+      this_frame.add_roll_1(roll_1)
+      this_frame.add_roll_2(0)
+      @frames << this_frame
+    elsif roll_1 + roll_2 == 10
+      this_frame.spare
+      this_frame.add_roll_1(roll_1)
+      this_frame.add_roll_2(roll_2)
+      @frames << this_frame
+    else
+      this_frame.add_roll_1(roll_1)
+      this_frame.add_roll_2(roll_2)
+      @frames << this_frame
+    end
    @round += 1
   #  return ''
   end

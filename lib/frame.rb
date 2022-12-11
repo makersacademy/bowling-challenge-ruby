@@ -17,6 +17,22 @@ class Frame
     @frame_score
   end
 
+  def add_roll_1(num)
+    @roll_1 = num
+  end
+
+  def roll_1
+    @roll_1
+  end
+
+  def add_roll_2(num)
+    @roll_2 = num
+  end
+
+  def roll_2
+    @roll_2
+  end
+
   def strike
     @strike = true
   end
@@ -27,6 +43,10 @@ class Frame
 
   def spare
     @spare = true
+  end
+
+  def is_spare?
+    @spare
   end
 
   def add_frame_total(num)

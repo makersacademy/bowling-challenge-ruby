@@ -34,11 +34,20 @@ describe ScoreCard do
       expect(score_card.total_score).to eq 12
     end
   end
-  it "ends the frame if the player gets 10 on the first roll" do
-    score_card = ScoreCard.new
-    score_card.play_frame(10, 1)
+  context "where the player hits a strike" do
+    it "ends the frame if the player gets 10 on the first roll" do
+      score_card = ScoreCard.new
+      score_card.play_frame(10, 1)
 
-    expect(score_card.current_frame).to eq 2
+      expect(score_card.current_frame).to eq 2
+    end
+    it "records two rolls in the frame and the second roll is zero" do
+      score_card = ScoreCard.new
+      score_card.play_frame(10, 4)
+
+      expect(score_card.prev_frame.roll_1).to eq 10
+      expect(score_card.prev_frame.roll_2).to eq 0
+    end
   end
   context "where a previous frame exists" do
     it "returns the previous frame" do
@@ -52,9 +61,39 @@ describe ScoreCard do
     end
     it "can see that a previous frame was a strike" do
       score_card = ScoreCard.new
-      score_card.play_frame(10,0)
+      score_card.play_frame(10, 0)
       expect(score_card.prev_frame.is_strike?).to eq true
     end
+  end
+  context "where the player hits a spare" do
+    it "records two rolls in the frame" do
+      score_card = ScoreCard.new
+      score_card.play_frame(6, 4)
+
+      expect(score_card.prev_frame.roll_1).to eq 6
+      expect(score_card.prev_frame.roll_2).to eq 4
+    end
+    it "can see that a previous frame was a spare" do
+      score_card = ScoreCard.new
+      score_card.play_frame(6, 4)
+      expect(score_card.prev_frame.is_spare?).to eq true
+    end
+  end
+  context "where the player doesn't hit a strike or a spare" do
+    it "records two rolls in the frame" do
+    score_card = ScoreCard.new
+    score_card.play_frame(4, 3)
+
+    expect(score_card.prev_frame.roll_1).to eq 4
+    expect(score_card.prev_frame.roll_2).to eq 3
+    end
+    it "can see that the previous round was neither a strike nor a spare" do
+      score_card = ScoreCard.new
+      score_card.play_frame(4, 3)
+  
+      expect(score_card.prev_frame.is_strike?).to eq false
+      expect(score_card.prev_frame.is_spare?).to eq false
+      end
   end
   # it "adds the next two rolls to the previous frame score if the previous frame scored a strike" do
   #   score_card = ScoreCard.new
