@@ -75,4 +75,49 @@ RSpec.describe "Game Integration" do
       expect(game.frames.sum(&:score)).to eq 80
     end
   end
+
+  context "9 frames of strikes and a [1,2] frame" do
+    it "has a final score of 247" do
+      game = Game.new
+      9.times { game.add_roll(10) }
+      game.add_roll(1)
+      game.add_roll(2)
+
+      expect(game.complete?).to be true
+      expect(game.frames[0...7].sum(&:score)).to eq 210
+      expect(game.frames[0...8].sum(&:score)).to eq 231
+      expect(game.frames[0...9].sum(&:score)).to eq 244
+      expect(game.frames[0...10].sum(&:score)).to eq 247
+    end
+  end
+
+  context "9 frames of [5,5] spares and a [2,2] frame" do
+    it "has a final score of 134" do
+      game = Game.new
+      18.times { game.add_roll(5) }
+      game.add_roll(1)
+      game.add_roll(2)
+
+      expect(game.complete?).to be true
+      expect(game.frames[0...7].sum(&:score)).to eq 105
+      expect(game.frames[0...8].sum(&:score)).to eq 120
+      expect(game.frames[0...9].sum(&:score)).to eq 131
+      expect(game.frames[0...10].sum(&:score)).to eq 134
+    end
+  end
+  context "a strike, a [5,5] spare and a [3,1] frame" do
+    it "has a final score of 37" do
+      game = Game.new
+      game.add_roll(10)
+      2.times { game.add_roll(5) }
+      game.add_roll(3)
+      game.add_roll(1)
+      14.times { game.add_roll(0) }
+
+      expect(game.complete?).to be true
+      expect(game.frames[0].score).to eq 20
+      expect(game.frames[1].score).to eq 13
+      expect(game.frames[0...10].sum(&:score)).to eq 37
+    end
+  end
 end

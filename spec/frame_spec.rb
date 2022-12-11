@@ -138,4 +138,124 @@ RSpec.describe Frame do
       expect { frame.add_roll(1) }.to raise_error error_message
     end
   end
+
+  describe "#add_bonus" do
+    it "fails unless roll is between 0 and 10" do
+      frame = Frame.new
+
+      error_message = "A roll must be between 0 and 10"
+      expect { frame.add_bonus(-1) }.to raise_error ArgumentError, error_message
+      expect { frame.add_bonus(11) }.to raise_error ArgumentError, error_message
+    end
+
+    it "fails unless the roll is an integer" do
+      frame = Frame.new
+
+      error_message = "A roll must be an integer"
+      expect { frame.add_bonus(1.5) }.to raise_error ArgumentError, error_message
+      expect { frame.add_bonus("Hello world") }.to raise_error ArgumentError, error_message
+      
+      expect { frame.add_bonus(1) }.to_not raise_error
+
+      frame = Frame.new
+      expect { frame.add_bonus(1.0) }.to_not raise_error
+    end
+
+    context "when status is :active" do
+      it "doesn't update the score" do
+        frame = Frame.new
+        expect(frame).to have_attributes(
+          status: :active,
+          score: 0,
+          rolls: []
+        )
+
+        frame.add_bonus(5)
+        expect(frame).to have_attributes(
+          status: :active,
+          score: 0,
+          rolls: []
+        )
+      end
+    end
+
+    context "when status is :done" do
+      it "doesn't update the score" do
+        frame = Frame.new
+        2.times { frame.add_roll(3) }
+        expect(frame).to have_attributes(
+          status: :done,
+          score: 6,
+          rolls: [3,3]
+        )
+
+        frame.add_bonus(5)
+        expect(frame).to have_attributes(
+          status: :done,
+          score: 6,
+          rolls: [3,3]
+        )
+      end
+    end
+
+    context "when status is :strike" do
+      it "only updates twice" do
+        frame = Frame.new
+        frame.add_roll(10)
+        expect(frame).to have_attributes(
+          status: :strike,
+          score: 10,
+          rolls: [10]
+        )
+
+        frame.add_bonus(5)
+        expect(frame).to have_attributes(
+          status: :strike,
+          score: 15,
+          rolls: [10]
+        )
+
+        frame.add_bonus(5)
+        expect(frame).to have_attributes(
+          status: :strike,
+          score: 20,
+          rolls: [10]
+        )
+
+        frame.add_bonus(5)
+        expect(frame).to have_attributes(
+          status: :strike,
+          score: 20,
+          rolls: [10]
+        )
+      end
+    end
+
+    context "when status is :spare" do
+      it "only updates once" do
+        frame = Frame.new
+        frame.add_roll(9)
+        frame.add_roll(1)
+        expect(frame).to have_attributes(
+          status: :spare,
+          score: 10,
+          rolls: [9,1]
+        )
+
+        frame.add_bonus(5)
+        expect(frame).to have_attributes(
+          status: :spare,
+          score: 15,
+          rolls: [9,1]
+        )
+
+        frame.add_bonus(5)
+        expect(frame).to have_attributes(
+          status: :spare,
+          score: 15,
+          rolls: [9,1]
+        )
+      end
+    end
+  end
 end

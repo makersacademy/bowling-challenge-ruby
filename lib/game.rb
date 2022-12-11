@@ -17,6 +17,10 @@ class Game
 
     current_frame = @frames[@frame - 1]
     current_frame.add_roll(roll)
+
+    frames_to_update = @frames[([0, @frame - 3].max)...(@frame - 1)]
+    frames_to_update.each { |frame| frame.add_bonus(roll) }
+    
     @frame += 1 if current_frame.status != :active
   end
 
