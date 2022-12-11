@@ -24,14 +24,8 @@ class ScoreCard
 
 
   def calculate_bonuses
-    @score.each_with_index do |frame, index|
-      if frame[:is_spare?] == true && frame[:bonus_status] == true
-        next_frame = @score[index + 1]
-        frame[:frame_total] += next_frame[:roll_one] 
-        frame[:bonus_status] = false
-       
-      end
-    end 
+    check_spare_bonus
+    check_strike_bonus
   end   
 
   def total
@@ -42,10 +36,32 @@ class ScoreCard
 
 end 
 
-scorecard = ScoreCard.new
-      frame1 = Frame.new(6,4) 
-      frame2 = Frame.new(5,2) 
-      scorecard.add(frame1)
-      scorecard.add(frame2)
-      scorecard.calculate_bonuses
-      scorecard.total
+private 
+
+def check_spare_bonus
+
+  @score.each_with_index do |frame, index|
+    if frame[:is_spare?] == true && frame[:bonus_status] == true
+      next_frame = @score[index + 1]
+      frame[:frame_total] += next_frame[:roll_one] 
+      frame[:bonus_status] = false
+    end
+  end 
+end 
+
+def check_strike_bonus
+
+  @score.each_with_index do |frame, index|
+    if frame[:is_strike?] == true && frame[:bonus_status] == true
+      next_frame = @score[index + 1]
+      frame_after_next = [index + 2]
+      if next_frame[:is_strike?] then 
+        frame[:frame_total] += next_frame[:roll_one] + frame_after_next[:roll_one]
+        frame[:bonus_status] = false
+      else 
+        frame[:frame_total] += next_frame[:roll_one] + next_frame[:roll_two]
+        frame[:bonus_status] = false
+      end 
+    end
+  end 
+end 

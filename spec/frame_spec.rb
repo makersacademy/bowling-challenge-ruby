@@ -29,7 +29,7 @@ describe Frame do
 
   context 'player gets a strike' do 
 
-    it 'marks frame as a spare' do
+    it 'marks frame as a strike' do
       frame = Frame.new(10,0) 
       expect(frame.frame_total).to equal 10
       expect(frame.is_strike?).to equal true 
