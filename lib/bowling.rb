@@ -24,6 +24,7 @@ class Scorecard
       end
 
       frame[:score] = point_1 + point_2
+      fail "Error. Please try again" if frame[:score] > 10
       @frames.push frame
       bonus(point_1, point_2)
     end
@@ -32,6 +33,7 @@ class Scorecard
     if tenth_frame[:status] == 'strike'
       @io.puts "Bonus round! Enter your score:"
       point_3 = @io.gets.chomp.to_i
+      fail "Error. Please try again" if point_3 > 10
       tenth_frame[:score] += point_3
       if @frames[8][:status] == 'strike'
         @frames[8][:score] += point_3
@@ -39,12 +41,14 @@ class Scorecard
       if point_3 == 10
         @io.puts "Wow, extra bonus! Enter your score:"
         point_4 = @io.gets.chomp.to_i
+        fail "Error. Please try again" if point_4 > 10
         tenth_frame[:score] += point_4
       end
 
     elsif tenth_frame[:status] == 'spare'
       @io.puts "Bonus round! Enter your score:"
       point_3 = @io.gets.chomp.to_i
+      fail "Error. Please try again" if point_3 > 10
       tenth_frame[:score] += point_3
     end
 

@@ -110,6 +110,31 @@ describe Scorecard do
 
       expect(result.run).to eq 155
     end
+  end
 
+
+  context 'errors' do
+    it 'raises an error if player`s input is over 10' do
+      io = double :io
+
+      expect(io).to receive(:gets).and_return("11")
+      expect(io).to receive(:gets).and_return("0")
+
+      result = Scorecard.new(io)
+
+      expect{result.run}.to raise_error "Error. Please try again"
+    end
+
+    it 'raises an error if player`s input is over 10' do
+      io = double :io
+
+      20.times {expect(io).to receive(:gets).and_return("5")}
+      expect(io).to receive(:puts).with("Bonus round! Enter your score:")
+      expect(io).to receive(:gets).and_return("14")
+
+      result = Scorecard.new(io)
+
+      expect{result.run}.to raise_error "Error. Please try again"
+    end
   end
 end
