@@ -28,6 +28,7 @@ describe Scorecard do
     end
   end
 
+
   context 'bonuses' do
     it 'gives a bonus where player scores a strike' do
       io = double :io
@@ -38,7 +39,19 @@ describe Scorecard do
       result = Scorecard.new(io)
       result.run
 
-      expect(result.grand_total).to eq 170
+      expect(result.grand_total).to eq 240
+    end
+
+    it 'gives a bonus where player scores a spare' do
+      io = double :io
+
+      19.times {expect(io).to receive(:gets).and_return("5")}
+      expect(io).to receive(:gets).and_return("0")
+
+      result = Scorecard.new(io)
+      result.run
+
+      expect(result.grand_total).to eq 140
     end
   end
 

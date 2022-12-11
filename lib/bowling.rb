@@ -9,21 +9,29 @@ class Scorecard
   def run
 
     while @frames.length < 10 do
+      frame = Hash.new
+
       puts "Please enter the results from your frame"
       puts "Score 1:"
-      total = @io.gets.chomp.to_i
-      if total != 10
+      point_1 = @io.gets.chomp.to_i
+      point_2 = 0
+
+      if point_1 == 10
+        frame[:status] = 'strike'
+      else
         puts "Score 2:"
-        input_2 = @io.gets.chomp.to_i
-        total += input_2
+        point_2 += @io.gets.chomp.to_i
+        if point_1 + point_2 == 10
+          frame[:status] = 'spare'
+        end
       end
 
-      frame = Hash.new
-      frame[:score] = total
-
+      frame[:score] = point_1 + point_2
       @frames.push frame
+      bonus(point_1, point_2)
     end
 
+    grand_total
   end
 
 
@@ -38,8 +46,36 @@ class Scorecard
     return total
   end
 
+
+  def bonus(point_1, point_2)
+
+    # finding the index of the current and any previous frames (x = current frame).
+    x = @frames.length - 1
+    y = x - 1
+    z = y - 1
+
+    # if y exists, we have at least 2 frames. The bonus for y is the number of pins knocked down
+    # by the next two rolls (x) - unless the player rolls another strike.
+    if y >= 0
+      y_frame = @frames[y]
+      if y_frame[:status] == 'strike'
+        y_frame[:score] += (point_1 + point_2)
+      elsif y_frame[:status] == 'spare'
+        y_frame[:score] += point_1
+      end
+      
+      # if z exists, we have at least 3 frames. This only becomes relevant if y and z are strikes
+      # as we need the points from x to add as a bonus 
+      if y_frame[:status] == 'strike' && z >= 0
+        z_frame = @frames[z]
+        if z_frame[:status] == 'strike'
+          z_frame[:score] += point_1
+        end
+      end
+    end
+  end
 end
 
 
-#test = Scorecard.new
-#test.run
+#test = Scorecard.new(Kernel)
+#p test.run
