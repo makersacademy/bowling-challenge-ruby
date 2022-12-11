@@ -2,12 +2,9 @@ class Scorecard
   def initialize(io)
     @io = io
     @frames = []
-
   end
 
-
   def run
-
     while @frames.length < 10 do
       frame = Hash.new
 
@@ -36,6 +33,9 @@ class Scorecard
       @io.puts "Bonus round! Enter your score:"
       point_3 = @io.gets.chomp.to_i
       tenth_frame[:score] += point_3
+      if @frames[8][:status] == 'strike'
+        @frames[8][:score] += point_3
+      end
       if point_3 == 10
         @io.puts "Wow, extra bonus! Enter your score:"
         point_4 = @io.gets.chomp.to_i
@@ -46,7 +46,6 @@ class Scorecard
       @io.puts "Bonus round! Enter your score:"
       point_3 = @io.gets.chomp.to_i
       tenth_frame[:score] += point_3
-    else puts grand_total
     end
 
     grand_total
@@ -54,19 +53,15 @@ class Scorecard
 
 
   def grand_total
-
     total = 0
-
     @frames.each do |frame|
       total += frame[:score]
     end
-
     return total
   end
 
 
   def bonus(point_1, point_2)
-
     # finding the index of the current and any previous frames (x = current frame).
     x = @frames.length - 1
     y = x - 1

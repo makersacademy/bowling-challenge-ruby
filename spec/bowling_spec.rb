@@ -2,7 +2,7 @@ require 'bowling'
 
 describe Scorecard do
 
-  xcontext 'points' do
+  context 'points' do
     it 'shows zero points overall if player has not scored any points' do
       #gutter game
       io = double :io
@@ -14,7 +14,7 @@ describe Scorecard do
       expect(result.run).to eq 0
     end
 
-    it 'shows the grand total if player has scored points (without bonuses)' do
+    it 'shows the grand total' do
       io = double :io
 
       10.times {expect(io).to receive(:gets).and_return("4")
@@ -24,10 +24,26 @@ describe Scorecard do
 
       expect(result.run).to eq 90
     end
+
+    it 'shows the grand total' do
+      io = double :io
+
+      4.times {expect(io).to receive(:gets).and_return("3")}
+      expect(io).to receive(:gets).and_return("0")
+      expect(io).to receive(:gets).and_return("10")
+      expect(io).to receive(:gets).and_return("1")
+      expect(io).to receive(:gets).and_return("9")
+      4.times {expect(io).to receive(:gets).and_return("1")}
+      8.times {expect(io).to receive(:gets).and_return("4")}
+
+      result = Scorecard.new(io)
+
+      expect(result.run).to eq 70
+    end
   end
 
 
-  xcontext 'bonuses' do
+  context 'bonuses' do
     it 'gives a bonus where player scores a strike' do
       io = double :io
 
@@ -68,7 +84,7 @@ describe Scorecard do
       expect(result.run).to eq 300
     end
 
-    xit 'allows player to win extra turns if they get a strike' do
+    it 'allows player to win extra turns if they get a strike' do
       io = double :io
 
       18.times {expect(io).to receive(:gets).and_return("0")}
@@ -83,7 +99,7 @@ describe Scorecard do
       expect(result.run).to eq 30
     end
 
-    xit 'allows player to win extra turns if they get a spare' do
+    it 'allows player to win extra turns if they get a spare' do
       io = double :io
 
       20.times {expect(io).to receive(:gets).and_return("5")}
