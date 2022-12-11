@@ -1,7 +1,7 @@
 class Frame
   def initialize
     @score = 0
-    @rolls = 0
+    @rolls = []
     @status = :active
   end
 
@@ -12,7 +12,7 @@ class Frame
     raise "Both rolls cannot add up to more than 10" if @score + roll > 10
     
     @score += roll.to_i
-    @rolls += 1
+    @rolls << roll.to_i
 
     update_status
   end
@@ -36,11 +36,11 @@ class Frame
   end
 
   def update_status
-    if @score == 10 && @rolls == 1
+    if @score == 10 && @rolls.length == 1
       @status = :strike
-    elsif @score == 10 && @rolls == 2
+    elsif @score == 10 && @rolls.length == 2
       @status = :spare
-    elsif @rolls == 2
+    elsif @rolls.length == 2
       @status = :done
     end
   end

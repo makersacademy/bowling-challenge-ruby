@@ -26,11 +26,11 @@ class Game
     completed = @frames.all? do |frame|
       case frame.status
       when :strike
-        frame.rolls == 1
+        frame.rolls.length == 1
       when :spare
-        frame.rolls == 2
+        frame.rolls.length == 2
       when :done
-        frame.rolls == 2
+        frame.rolls.length == 2
       else
         false
       end
