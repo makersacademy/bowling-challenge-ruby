@@ -19,10 +19,11 @@ class Frame
 
   def add_bonus(roll)
     validate_roll(roll)
-    if @bonuses_left > 0
+    if @bonuses_left.positive?
       @score += roll
       @bonuses_left -= 1
     end
+    return nil
   end
 
   def score
