@@ -40,16 +40,11 @@ RSpec.describe Frame do
       expect { frame.add_roll(11) }.to raise_error ArgumentError, error_message
     end
 
-    it "sets the status to bonus for a strike" do
+    it "sets the status to :strike for a strike" do
       frame = Frame.new
       frame.add_roll(10)
       expect(frame.score).to eq 10
-      expect(frame.status).to eq :bonus
-
-      frame = Frame.new
-      frame.add_roll(5)
-      expect(frame.score).to eq 5
-      expect(frame.status).to eq :active
+      expect(frame.status).to eq :strike
     end
   end
   
@@ -72,7 +67,7 @@ RSpec.describe Frame do
       expect(frame.status).to eq :active
       frame.add_roll(5)
       expect(frame.score).to eq 10
-      expect(frame.status).to eq :bonus
+      expect(frame.status).to eq :spare
     end
 
     it "updates the status when getting below a spare" do

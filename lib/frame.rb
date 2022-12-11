@@ -32,10 +32,12 @@ class Frame
   end
 
   def update_status
-    if @score == 10
-      @status = :bonus if @score == 10
+    if @score == 10 && @rolls == 1
+      @status = :strike
+    elsif @score == 10 && @rolls == 2
+      @status = :spare
     elsif @rolls == 2
-      @status = :done if @rolls == 2
+      @status = :done
     end
   end
 end
