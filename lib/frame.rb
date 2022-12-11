@@ -25,6 +25,10 @@ class Frame
     return @status
   end
 
+  def rolls
+    return @rolls
+  end
+
   private
 
   def integer_roll?(roll)
