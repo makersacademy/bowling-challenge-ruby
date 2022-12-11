@@ -46,23 +46,28 @@ describe ScoreCard do
       score_card.play_frame(10, 0)
       score_card.play_frame(10, 0)
       score_card.play_frame(10, 0)
-      # since it automatically starts a new round/frame once a frame has been played, you only need to call play_frame once.
+      # since it automatically starts a new round/frame once a frame has been played, this counts as being in the 4th round.
 
       expect(score_card.prev_frame).to eq score_card.frames[2]
     end
+    it "can see that a previous frame was a strike" do
+      score_card = ScoreCard.new
+      score_card.play_frame(10,0)
+      expect(score_card.prev_frame.is_strike?).to eq true
+    end
   end
-  it "adds the next two rolls to the previous frame score if the previous frame scored a strike" do
-    score_card = ScoreCard.new
-    score_card.play_frame(10, 1)
-    # score_card.play_frame(2, 2)
+  # it "adds the next two rolls to the previous frame score if the previous frame scored a strike" do
+  #   score_card = ScoreCard.new
+  #   score_card.play_frame(10, 1)
+  #   score_card.play_frame(2, 2)
 
-    expect(score_card.frames[score_card.current_frame-2].bonus).to eq 4
+  #   expect(score_card.frames[score_card.current_frame-2].bonus).to eq 4
     
     
-  end
-  it "allows a second roll if the player does not get a strike" do
-    score_card = ScoreCard.new
-  end
+  # end
+  # it "allows a second roll if the player does not get a strike" do
+  #   score_card = ScoreCard.new
+  # end
 end
 
 
