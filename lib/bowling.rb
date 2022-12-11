@@ -2,7 +2,6 @@ class Bowling
   def initialize(io)
     @io = io
     @scores = Array.new(10) { [] }
-    @valid_inputs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   end
 
   def regular_frame(round)
@@ -83,6 +82,33 @@ class Bowling
     end
   end
 
+  def start_round(round)
+    @io.puts "Frame: #{round}" if round <= 10
+    final_round if round == 11
+  end
+
+  def final_round
+    if @scores[9] == [10] and @scores[8] == [10, 10]
+      @io.puts 'Bonus round'
+      final_score1 = retrieve_next_score
+      final_score2 = retrieve_next_score
+      @scores[8] << final_score1
+      @scores[9] << final_score1
+      @scores[9] << final_score2
+    elsif @scores[9] == [10] and @scores[8] != [10, 10]
+      @io.puts 'Bonus round'
+      final_score1 = retrieve_next_score
+      final_score2 = retrieve_next_score
+      @scores[9] << final_score1
+      @scores[9] << final_score2
+    elsif @scores[9].sum == 10
+      @io.puts 'Bonus round'
+      final_score = retrieve_next_score
+      @scores[9] << final_score
+    end
+    end_game
+  end
+
   def retrieve_score1
     valid_scores = (0..10).to_a
     @io.puts 'Enter the score of the first bowl'
@@ -104,34 +130,12 @@ class Bowling
     score
   end
 
-  def start_round(round)
-    @io.puts "Frame: #{round}" if round <= 10
-    check_if_final_round(round)
-  end
-
-  def check_if_final_round(round)
-    if round == 11
-      if @scores[9] == [10] and @scores[8] == [10, 10]
-        @io.puts 'Bonus round'
-        final_score1 = retrieve_next_score
-        final_score2 = retrieve_next_score
-        @scores[8] << final_score1
-        @scores[9] << final_score1
-        @scores[9] << final_score2
-      elsif @scores[9] == [10] and @scores[8] != [10, 10]
-        @io.puts 'Bonus round'
-        final_score1 = retrieve_next_score
-        final_score2 = retrieve_next_score
-        @scores[9] << final_score1
-        @scores[9] << final_score2
-      elsif @scores[9].sum == 10
-        @io.puts 'Bonus round'
-        final_score = retrieve_next_score
-        @scores[9] << final_score
-      end
-      @io.puts "Total Score: #{@scores.flatten.sum}"
-      exit
-    end
+  def end_game
+    total = @scores.flatten.sum
+    round_scores = @scores.map(&:sum)
+    @io.puts "Round by Round Scores: #{round_scores.join(', ')}"
+    @io.puts "Total Score: #{total}"
+    exit
   end
 
   def run
