@@ -193,6 +193,71 @@ end
     frame = Frame.new(10,5) 
     expect(frame).to raise_error "invalid score"
 
+# Scorecard integration tests 
+
+  # Spare functionality 
+
+    # 1 - Scorecard correctly calculates a spare into an open frame
+
+      scorecard = ScoreCard.new
+      frame1 = Frame.new(6,4) 
+      frame1_total = frame1.frame_total
+      frame2 = Frame.new(5,2) 
+      scorecard.add(frame1_total)
+      scorecard.add(frame2_total)
+
+      expected_scorecard = {
+        frame_one: 15
+        frame_two: 7
+      }
+      expect(scorecard.total).to include(expected_scoredcard)
+      expect(frame1.is_spare?).to eq true
+
+    # 2 - Scorecard correctly calculates a spare into a strike (in isolation)
+
+      scorecard = ScoreCard.new
+      frame1 = Frame.new(5,5) 
+      frame1_total = frame1.frame_total
+      frame2 = Frame.new(10,0) 
+      scorecard.add(frame1_total)
+      scorecard.add(frame2_total)
+
+      expected_scorecard = {
+        frame_one: 20
+        frame_two: 10
+      }
+      expect(scorecard.total).to include(expected_scoredcard)
+      expect(frame1.is_spare?).to eq true
+
+    # 3 - Scorecard correct counts spare into spare (does not care about second spare no.2)
+
+      scorecard = ScoreCard.new
+      frame1 = Frame.new(5,5) 
+      frame1_total = frame1.frame_total
+      frame2 = Frame.new(6,4) 
+      scorecard.add(frame1_total)
+      scorecard.add(frame2_total)
+      expected_scorecard = {
+        frame_one: 16
+        frame_two: 10
+      }
+      expect(scorecard.total).to include(expected_scoredcard)
+      expect(frame1.is_spare?).to eq true
+
+  # 4 - Spare into a gutter frame
+
+    scorecard = ScoreCard.new
+      frame1 = Frame.new(5,5) 
+      frame1_total = frame1.frame_total
+      frame2 = Frame.new(0,0) 
+      scorecard.add(frame1_total)
+      scorecard.add(frame2_total)
+      expected_scorecard = {
+        frame_one: 10
+        frame_two: 0
+      }
+      expect(scorecard.total).to include(expected_scoredcard)
+      expect(frame1.is_spare?).to eq true
 
 # 1 - Strike into open frame
 
