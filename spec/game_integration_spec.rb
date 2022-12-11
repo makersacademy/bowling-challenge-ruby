@@ -1,6 +1,6 @@
 require "game"
 
-RSpec.describe "Integration" do
+RSpec.describe "Game Integration" do
   context "initialzed game" do
     it "shows a total score of 0" do
       game = Game.new
