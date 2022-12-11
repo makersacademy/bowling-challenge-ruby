@@ -3,6 +3,7 @@ class Game
   def initialize
     @frames = []
     @strike = false
+    @spare = false
   end
 
   def add_frame(frame)
@@ -17,12 +18,17 @@ class Game
       if @strike == true
         new_array << frame.frame_score * 2
         @strike = false
+      elsif @spare == true
+        new_array << frame.frame_score + frame.scores[0]
+        @spare = false
       else
         new_array << frame.frame_score
       end
 
       if frame.strike?
         @strike = true
+      elsif frame.spare?
+        @spare = true
       end
 
     end
@@ -30,9 +36,4 @@ class Game
     new_array.sum
   end
 
-  private
-
-  def strike_check
-
-  end
 end
