@@ -10,8 +10,7 @@ class BowlingGame
   def score
     total_score = 0
     frame_num = 1
-
-    (1..10).each do |_frame|
+    10.times do 
       if strike?
         total_score += 10 + strike_bonus
         @current_roll_index += 1
@@ -30,7 +29,6 @@ class BowlingGame
 
   def input_score_for_frames
     intro_message
-
     frame_num = 1
     10.times do
       @io.puts "What was you score for Frame #{frame_num}?"
@@ -53,13 +51,15 @@ class BowlingGame
     @io.puts 'If you scored a strike simply input 10'
     @io.puts 'Otherwise input 2 numbers seperated by a comma'
     @io.puts 'Examples:'
-    @io.puts '4,3'
+    @io.puts '4,3 if you knocked 4 pins followed by 3'
     @io.puts 'or'
-    @io.puts '3,7'
-    @io.puts 'Final frame could be 1. if you get strikes or 2. if you get a spare:'
+    @io.puts '3,7 if you knocked 3 pins followed by 7'
+    @io.puts 'Final frame could be 1. if you get strikes or 2. if you get a spare or 3. if not a strike or a spare:'
     @io.puts '1. 10,10,10'
     @io.puts 'or'
     @io.puts '2. 3,7,5'
+    @io.puts 'or'
+    @io.puts '3. 4,3'
   end
 
   def roll(pins_knocked_down)
