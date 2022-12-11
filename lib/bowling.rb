@@ -8,12 +8,12 @@ class Bowling
     round += 1
     start_round(round)
     score1 = retrieve_score1
-    @scores[round - 1] << score1
+    add_to_current_frame_score(score1,round)
     if score1 == 10
       double_bonus_first_round(round)
     else
       score2 = retrieve_next_score(score1)
-      @scores[round - 1] << score2
+      add_to_current_frame_score(score2,round)
     end
     if score1 + score2 == 10
       single_bonus_round(round)
@@ -26,13 +26,12 @@ class Bowling
     round += 1
     start_round(round)
     score1 = retrieve_score1
-    @scores[round - 2] << score1
-    @scores[round - 1] << score1
+    add_to_last_two_frame_scores(score1,round)
     if score1 == 10
       double_bonus_first_round(round)
     else
       score2 = retrieve_next_score(score1)
-      @scores[round - 1] << score2
+      add_to_current_frame_score(score2,round)
     end
     if score1 + score2 == 10
       single_bonus_round(round)
@@ -45,14 +44,12 @@ class Bowling
     round += 1
     start_round(round)
     score1 = retrieve_score1
-    @scores[round - 1] << score1
-    @scores[round - 2] << score1
+    add_to_last_two_frame_scores(score1,round)
     if score1 == 10
       double_bonus_second_round(round)
     else
       score2 = retrieve_next_score(score1)
-      @scores[round - 1] << score2
-      @scores[round - 2] << score2
+      add_to_last_two_frame_scores(score2,round)
     end
     if score1 + score2 == 10
       single_bonus_round(round)
@@ -65,15 +62,12 @@ class Bowling
     round += 1
     start_round(round)
     score1 = retrieve_score1
-    @scores[round - 1] << score1
-    @scores[round - 2] << score1
-    @scores[round - 3] << score1
+    add_to_last_three_frame_scores(score1,round)
     if score1 == 10
       double_bonus_second_round(round)
     else
       score2 = retrieve_next_score(score1)
-      @scores[round - 1] << score2
-      @scores[round - 2] << score2
+      add_to_last_two_frame_scores(score2,round)
     end
     if score1 + score2 == 10
       single_bonus_round(round)
@@ -141,5 +135,20 @@ class Bowling
   def run
     game = Bowling.new(Kernel)
     game.regular_frame(0)
+  end
+
+  def add_to_current_frame_score(score,round)
+    @scores[round - 1] << score
+  end
+
+  def add_to_last_two_frame_scores(score,round)
+    @scores[round - 1] << score
+    @scores[round - 2] << score
+  end
+
+  def add_to_last_three_frame_scores(score,round)
+    @scores[round - 1] << score
+    @scores[round - 2] << score
+    @scores[round - 3] << score
   end
 end
