@@ -26,6 +26,10 @@ class Frame
     end 
   end 
 
+  def bonus_status
+    is_spare? || is_strike?
+  end 
+
   def frame_to_hash
 
    frame_hash = {
@@ -34,6 +38,7 @@ class Frame
       frame_total: frame_total,
       is_spare?: is_spare?,
       is_strike?: is_strike?,
+      bonus_status: bonus_status
    }
 
     return frame_hash
