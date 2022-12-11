@@ -58,4 +58,23 @@ RSpec.describe "ScoreSheet Integration" do
       )).to_stdout
     end
   end
+
+  context "9 frames of strikes and a [1,2] frame" do
+    it "has a final score of 247" do
+      game = Game.new
+      score_sheet = ScoreSheet.new(game)
+
+      9.times { game.add_roll(10) }
+      game.add_roll(1)
+      game.add_roll(2)
+
+      expect { score_sheet.print }.to output(include(
+        "  1.  | X     |  30",
+        "  2.  | X     |  60",
+        "  8.  | X     | 231",
+        "  9.  | X     | 244",
+        " 10.  | 1 , 2 | 247"
+      )).to_stdout
+    end
+  end
 end
