@@ -116,7 +116,7 @@ RSpec.describe "#calculate_score" do
   end
 
   context "at end of second frame with two strikes in a row" do
-    it "returns " do
+    it "returns 30" do
       io = double :io
       app = Application.new(io, 10, 0, 10, "strike", "strike", 2, 2)
 
@@ -125,7 +125,7 @@ RSpec.describe "#calculate_score" do
   end
 
   context "at end of third frame with three strikes in a row" do
-    it "returns " do
+    it "returns 60" do
       io = double :io
       app = Application.new(io, 10, 0, 30, "strike", "strike", 3, 3)
 
@@ -134,7 +134,7 @@ RSpec.describe "#calculate_score" do
   end
 
   context "at end of fourth frame with four strikes in a row" do
-    it "returns " do
+    it "returns 90" do
       io = double :io
       app = Application.new(io, 10, 0, 60, "strike", "strike", 4, 4)
 
@@ -151,6 +151,24 @@ RSpec.describe "#calculate_bonus_rolls" do
       expect(io).to receive(:puts).with("Bonus rolls only take place after scoring a strike or spare in the 10th frame")
       
       app.calculate_bonus_rolls
+    end
+  end
+
+  context "if a strike is rolled in tenth frame and two more rolls take place" do
+    it "adds the score of the bonus rolls to the total_score" do
+      io = double :io
+      app = Application.new(io, 4, 3, 100, "strike", "none", 1, 11)
+
+      expect(app.calculate_bonus_rolls).to eq(107)
+    end
+  end
+
+  context "if a spare is rolled in tenth frame and one more roll takes place" do
+    it "adds the score of the bonus roll to the total_score" do
+      io = double :io
+      app = Application.new(io, 6, 3, 120, "spare", "none", 0, 11)
+
+      expect(app.calculate_bonus_rolls).to eq(126)
     end
   end
 end

@@ -75,9 +75,9 @@ class Application
     if @frame < 11
       @io.puts "Bonus rolls only take place after scoring a strike or spare in the 10th frame"
     elsif @last_frame_bonus == "strike"
-
+      @total_score += (@first_bowl_score + @second_bowl_score)
     elsif @last_frame_bonus == "spare"
-
+      @total_score += @first_bowl_score
     end
   end
 end
