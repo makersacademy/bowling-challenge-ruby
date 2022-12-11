@@ -15,10 +15,10 @@ class Game
     @frames.each do |frame|
     
       if @strike == true
-        new_array << frame.scores + frame.scores
+        new_array << frame.frame_score * 2
         @strike = false
       else
-        new_array << frame.scores
+        new_array << frame.frame_score
       end
 
       if frame.strike?
@@ -27,7 +27,7 @@ class Game
 
     end
 
-    new_array.flatten.sum
+    new_array.sum
   end
 
   private

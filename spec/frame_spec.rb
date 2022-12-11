@@ -19,7 +19,7 @@ RSpec.describe Frame do
     frame.add_ball(score_1)
     frame.add_ball(score_2)
   
-    expect(frame.score_sum).to eq 8
+    expect(frame.frame_score).to eq 8
   end
 
   it "returns true if strike" do

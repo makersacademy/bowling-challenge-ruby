@@ -11,7 +11,7 @@ class Frame
     @scores
   end
 
-  def score_sum
+  def frame_score
     @scores.sum
   end
 
@@ -20,6 +20,6 @@ class Frame
   end
   
   def spare?
-    @scores.length == 2 && score_sum == 10 ? true : false
+    @scores.length == 2 && frame_score == 10 ? true : false
   end
 end
