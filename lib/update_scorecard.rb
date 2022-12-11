@@ -17,6 +17,8 @@ class UpdateScorecard
             fail 'must be under 10'
         end
 
+        
+
         roll2 = @io.gets.chomp.to_i
 
         if roll2 > 9
@@ -26,7 +28,7 @@ class UpdateScorecard
         if roll1 + roll2 > 10
             fail 'total input this frame must be 10 or under'
         end
-        
+
         @player.addFrame([roll1, roll2])
     end
 

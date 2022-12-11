@@ -4,10 +4,12 @@ require 'player'
 RSpec.describe UpdateScorecard do
 
         it "updates scorecard and prints total with no strikes or spares" do
-        # create new player
-        player = Player.new('test')
-        # get a score
+        
         io = double :io
+        # create new player
+        player = Player.new(io, 'test')
+        # get a score
+
         scorecard = UpdateScorecard.new(io, player)
 
         expect(io).to receive(:gets).and_return("1")
@@ -25,9 +27,11 @@ RSpec.describe UpdateScorecard do
     end
 
     it 'fails' do
-        player = Player.new('test')
-        # get a score
         io = double :io
+
+        player = Player.new(io, 'test')
+        # get a score
+
         scorecard = UpdateScorecard.new(io, player)
 
         expect(io).to receive(:gets).and_return("11")
@@ -36,9 +40,11 @@ RSpec.describe UpdateScorecard do
     end
 
     it 'fails' do
-        player = Player.new('test')
-        # get a score
         io = double :io
+
+        player = Player.new(io, 'test')
+        # get a score
+
         scorecard = UpdateScorecard.new(io, player)
 
         expect(io).to receive(:gets).and_return("1")
@@ -48,9 +54,11 @@ RSpec.describe UpdateScorecard do
     end
 
     it 'fails' do
-        player = Player.new('test')
-        # get a score
         io = double :io
+
+        player = Player.new(io, 'test')
+        # get a score
+
         scorecard = UpdateScorecard.new(io, player)
 
         expect(io).to receive(:gets).and_return("6")

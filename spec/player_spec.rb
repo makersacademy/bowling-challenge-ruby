@@ -1,9 +1,14 @@
-# require 'player'
+require 'player'
 
-# RSpec.describe Player do
-#     it "gets the player's scorecard total" do
-#         player = double :player, scorecard: [["1", "2"]], name: 'test', total: 0
-#         player.calcTotal
-#         expect(player.total).to eq 3
-#     end
-# end
+RSpec.describe Player do
+
+    it "putss the player's scorecard total" do
+        io = double :io
+        player = Player.new(io, 'test')
+        player.addFrame([1, 2])
+        player.calcTotal
+        expect(io).to receive(:puts).with("Your total is 3")
+        player.printTotal
+    end
+
+end
