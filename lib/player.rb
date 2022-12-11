@@ -11,14 +11,12 @@ class Player
         return @scorecard
     end
 
-    def addFrame(arr)
-        @scorecard.push(arr)
+    def addFrame(frame)
+        @scorecard.push(frame)
     end
 
     def updatePrevFrame(roll, frameNum)
         @scorecard[frameNum - 1].push(roll)
-        p @scorecard
-        p frameNum
     end
 
     def calcTotal
@@ -28,7 +26,7 @@ class Player
     end
 
     def printTotal
-        @io.puts "Your total is 3"
+        @io.puts "Your total is #{@total}"
     end
 
 end
