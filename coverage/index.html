@@ -1,0 +1,4813 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>Code coverage for Bowling-challenge-ruby</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <script src='./assets/0.12.3/application.js' type='text/javascript'></script>
+    <link href='./assets/0.12.3/application.css' media='screen, projection, print' rel='stylesheet' type='text/css' />
+    <link rel="shortcut icon" type="image/png" href="./assets/0.12.3/favicon_green.png" />
+    <link rel="icon" type="image/png" href="./assets/0.12.3/favicon.png" />
+  </head>
+
+  <body>
+    <div id="loading">
+      <img src="./assets/0.12.3/loading.gif" alt="loading"/>
+    </div>
+    <div id="wrapper" class="hide">
+      <div class="timestamp">Generated <abbr class="timeago" title="2022-12-11T23:59:53+00:00">2022-12-11T23:59:53+00:00</abbr></div>
+      <ul class="group_tabs"></ul>
+
+      <div id="content">
+        <div class="file_list_container" id="AllFiles">
+  <h2>
+    <span class="group_name">All Files</span>
+    (<span class="covered_percent">
+      <span class="green">
+  100.0%
+</span>
+
+     </span>
+     covered at
+     <span class="covered_strength">
+       <span class="green">
+         6.13
+       </span>
+    </span> hits/line
+    )
+  </h2>
+
+  <a name="AllFiles"></a>
+
+  <div>
+    <b>5</b> files in total.
+  </div>
+
+  <div class="t-line-summary">
+    <b>309</b> relevant lines,
+    <span class="green"><b>309</b> lines covered</span> and
+    <span class="red"><b>0</b> lines missed. </span>
+    (<span class="green">
+  100.0%
+</span>
+)
+  </div>
+
+  
+
+  <div class="file_list--responsive">
+    <table class="file_list">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th class="cell--number">% covered</th>
+          <th class="cell--number">Lines</th>
+          <th class="cell--number">Relevant Lines</th>
+          <th class="cell--number">Lines covered</th>
+          <th class="cell--number">Lines missed</th>
+          <th class="cell--number">Avg. Hits / Line</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#b0646bd9ab47f6e33dbf5bb536360570100dad5c" class="src_link" title="lib/bonus_roll.rb">lib/bonus_roll.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
+            <td class="cell--number">9</td>
+            <td class="cell--number">5</td>
+            <td class="cell--number">5</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">2.20</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#95295d563afc0dddcc90ef8923d37a79f66c66d0" class="src_link" title="lib/frame.rb">lib/frame.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
+            <td class="cell--number">42</td>
+            <td class="cell--number">19</td>
+            <td class="cell--number">19</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">48.74</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#d67e1ca7bfe86140f5fdc18c09a9332ac38bd199" class="src_link" title="lib/scorecard.rb">lib/scorecard.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
+            <td class="cell--number">72</td>
+            <td class="cell--number">45</td>
+            <td class="cell--number">45</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">15.87</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#5ee109aeb597b585509776bd16b9873f9246bccf" class="src_link" title="spec/frame_spec.rb">spec/frame_spec.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
+            <td class="cell--number">37</td>
+            <td class="cell--number">23</td>
+            <td class="cell--number">23</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">1.04</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#f49d701b93575866160fa0abb512920cef779852" class="src_link" title="spec/scorecard_spec.rb">spec/scorecard_spec.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
+            <td class="cell--number">250</td>
+            <td class="cell--number">217</td>
+            <td class="cell--number">217</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">1.00</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+        
+      </div>
+
+      <div id="footer">
+        Generated by <a href="https://github.com/simplecov-ruby/simplecov">simplecov</a> v0.21.2
+        and simplecov-html v0.12.3<br/>
+        using RSpec
+      </div>
+
+      <div class="source_files">
+      
+        <div class="source_table" id="b0646bd9ab47f6e33dbf5bb536360570100dad5c">
+  <div class="header">
+    <h3>lib/bonus_roll.rb</h3>
+    <h4>
+      <span class="green">
+  100.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>5</b> relevant lines.
+      <span class="green"><b>5</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">class BonusRoll</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="2">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  attr_reader :roll_one, :roll_two</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="3">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="4">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def initialize(roll_one, roll_two)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="4" data-linenumber="5">
+            <span class="hits">4</span>
+            
+
+            
+
+            <code class="ruby">    @roll_one = roll_one</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="4" data-linenumber="6">
+            <span class="hits">4</span>
+            
+
+            
+
+            <code class="ruby">    @roll_two = roll_two</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="7">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="8">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="9">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="95295d563afc0dddcc90ef8923d37a79f66c66d0">
+  <div class="header">
+    <h3>lib/frame.rb</h3>
+    <h4>
+      <span class="green">
+  100.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>19</b> relevant lines.
+      <span class="green"><b>19</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">class Frame </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="2">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  attr_reader :roll_one, :roll_two</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="3">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="4">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def initialize(roll_one, roll_two)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="67" data-linenumber="5">
+            <span class="hits">67</span>
+            
+
+            
+
+            <code class="ruby">    @roll_one = roll_one</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="67" data-linenumber="6">
+            <span class="hits">67</span>
+            
+
+            
+
+            <code class="ruby">    @roll_two = roll_two</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="7">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="8">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="9">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def frame_total</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="67" data-linenumber="10">
+            <span class="hits">67</span>
+            
+
+            
+
+            <code class="ruby">    if (@roll_one + @roll_two) &gt; 10 then raise ArgumentError.new(&quot;invalid score: more than 10 pins detected&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="66" data-linenumber="11">
+            <span class="hits">66</span>
+            
+
+            
+
+            <code class="ruby">    else return @roll_one + @roll_two</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="12">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="13">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="14">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="15">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def is_strike?</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="122" data-linenumber="16">
+            <span class="hits">122</span>
+            
+
+            
+
+            <code class="ruby">    if @roll_one == 10 then return true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="94" data-linenumber="17">
+            <span class="hits">94</span>
+            
+
+            
+
+            <code class="ruby">    else return false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="18">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="19">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="20">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="21">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def is_spare?</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="131" data-linenumber="22">
+            <span class="hits">131</span>
+            
+
+            
+
+            <code class="ruby">    if @roll_one + @roll_two == 10 &amp;&amp; @roll_one != 10 then return true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="113" data-linenumber="23">
+            <span class="hits">113</span>
+            
+
+            
+
+            <code class="ruby">    else return false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="24">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="25">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="26">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="27">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def bonus_status</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="65" data-linenumber="28">
+            <span class="hits">65</span>
+            
+
+            
+
+            <code class="ruby">    is_spare? || is_strike?</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="29">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="30">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="31">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def frame_to_hash</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="32">
+            
+            
+
+            
+
+            <code class="ruby">    frame_hash = {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="63" data-linenumber="33">
+            <span class="hits">63</span>
+            
+
+            
+
+            <code class="ruby">      roll_one: roll_one,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="34">
+            
+            
+
+            
+
+            <code class="ruby">      roll_two: roll_two,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="35">
+            
+            
+
+            
+
+            <code class="ruby">      frame_total: frame_total,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="36">
+            
+            
+
+            
+
+            <code class="ruby">      is_spare?: is_spare?,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="37">
+            
+            
+
+            
+
+            <code class="ruby">      is_strike?: is_strike?,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="38">
+            
+            
+
+            
+
+            <code class="ruby">      bonus_status: bonus_status</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="39">
+            
+            
+
+            
+
+            <code class="ruby">   }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="63" data-linenumber="40">
+            <span class="hits">63</span>
+            
+
+            
+
+            <code class="ruby">    return frame_hash</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="41">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="42">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="d67e1ca7bfe86140f5fdc18c09a9332ac38bd199">
+  <div class="header">
+    <h3>lib/scorecard.rb</h3>
+    <h4>
+      <span class="green">
+  100.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>45</b> relevant lines.
+      <span class="green"><b>45</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">require_relative &#39;frame&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="2">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">require_relative &#39;bonus_roll&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="3">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">class ScoreCard</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="4">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def initialize</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="13" data-linenumber="5">
+            <span class="hits">13</span>
+            
+
+            
+
+            <code class="ruby">    @score = []</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="6">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="7">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="8">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def add(frame)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="63" data-linenumber="9">
+            <span class="hits">63</span>
+            
+
+            
+
+            <code class="ruby">    @score &lt;&lt; frame.frame_to_hash</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="10">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="11">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="12">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="13">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def calculate_bonuses</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="26" data-linenumber="14">
+            <span class="hits">26</span>
+            
+
+            
+
+            <code class="ruby">    check_spare_bonus</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="26" data-linenumber="15">
+            <span class="hits">26</span>
+            
+
+            
+
+            <code class="ruby">    check_strike_bonus</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="16">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="17">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="18">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def display_score</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="20" data-linenumber="19">
+            <span class="hits">20</span>
+            
+
+            
+
+            <code class="ruby">    calculate_bonuses</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="20" data-linenumber="20">
+            <span class="hits">20</span>
+            
+
+            
+
+            <code class="ruby">    return @score</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="21">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="22">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="23">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def final_score</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="24">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">    @final_score = 0</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="25">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">    @score.each do |frame|</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="20" data-linenumber="26">
+            <span class="hits">20</span>
+            
+
+            
+
+            <code class="ruby">      @final_score += frame[:frame_total]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="27">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="28">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">    return @final_score</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="29">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="30">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="31">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def add_final_frame_bonus(bonus_roll)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="32">
+            
+            
+
+            
+
+            <code class="ruby">  </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="4" data-linenumber="33">
+            <span class="hits">4</span>
+            
+
+            
+
+            <code class="ruby">    if @score.length == 10 &amp;&amp; @score[-1][:is_spare?] == true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="34">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      @score[-1][:frame_total] += bonus_roll.roll_one</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="35">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      @score[-1][:bonus_status] = false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="3" data-linenumber="36">
+            <span class="hits">3</span>
+            
+
+            
+
+            <code class="ruby">    elsif @score.length == 10 &amp;&amp; @score[-1][:is_strike?] == true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="37">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">      @score[-1][:frame_total] += bonus_roll.roll_one + bonus_roll.roll_two </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="38">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">      @score[-1][:bonus_status] = false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="39">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    else raise (&quot;bonus rolls can only be added to the 10th frame&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="40">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="41">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="42">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="43">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="44">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">private</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="45">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="46">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">def check_spare_bonus</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="26" data-linenumber="47">
+            <span class="hits">26</span>
+            
+
+            
+
+            <code class="ruby">  @score.each_with_index do |frame, index|</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="93" data-linenumber="48">
+            <span class="hits">93</span>
+            
+
+            
+
+            <code class="ruby">    if @score.length == 10 &amp;&amp; frame == @score.last then return nil</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="90" data-linenumber="49">
+            <span class="hits">90</span>
+            
+
+            
+
+            <code class="ruby">    elsif frame[:is_spare?] == true &amp;&amp; frame[:bonus_status] == true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="7" data-linenumber="50">
+            <span class="hits">7</span>
+            
+
+            
+
+            <code class="ruby">      next_frame = @score[index + 1]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="7" data-linenumber="51">
+            <span class="hits">7</span>
+            
+
+            
+
+            <code class="ruby">      frame[:frame_total] += next_frame[:roll_one]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="7" data-linenumber="52">
+            <span class="hits">7</span>
+            
+
+            
+
+            <code class="ruby">      frame[:bonus_status] = false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="53">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="54">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="55">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="56">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="57">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">def check_strike_bonus</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="26" data-linenumber="58">
+            <span class="hits">26</span>
+            
+
+            
+
+            <code class="ruby">  @score.each_with_index do |frame, index|</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="93" data-linenumber="59">
+            <span class="hits">93</span>
+            
+
+            
+
+            <code class="ruby">    if @score.length == 10 &amp;&amp; frame == @score.last then return nil</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="90" data-linenumber="60">
+            <span class="hits">90</span>
+            
+
+            
+
+            <code class="ruby">    elsif frame[:is_strike?] == true &amp;&amp; frame[:bonus_status] == true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="11" data-linenumber="61">
+            <span class="hits">11</span>
+            
+
+            
+
+            <code class="ruby">      next_frame = @score[index + 1]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="11" data-linenumber="62">
+            <span class="hits">11</span>
+            
+
+            
+
+            <code class="ruby">      frame_after_next = @score[index + 2]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="11" data-linenumber="63">
+            <span class="hits">11</span>
+            
+
+            
+
+            <code class="ruby">      if next_frame[:is_strike?]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="4" data-linenumber="64">
+            <span class="hits">4</span>
+            
+
+            
+
+            <code class="ruby">        frame[:frame_total] += next_frame[:roll_one] + frame_after_next[:roll_one]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="4" data-linenumber="65">
+            <span class="hits">4</span>
+            
+
+            
+
+            <code class="ruby">        frame[:bonus_status] = false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="66">
+            
+            
+
+            
+
+            <code class="ruby">      else</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="7" data-linenumber="67">
+            <span class="hits">7</span>
+            
+
+            
+
+            <code class="ruby">        frame[:frame_total] += next_frame[:roll_one] + next_frame[:roll_two]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="7" data-linenumber="68">
+            <span class="hits">7</span>
+            
+
+            
+
+            <code class="ruby">        frame[:bonus_status] = false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="69">
+            
+            
+
+            
+
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="70">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="71">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="72">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="5ee109aeb597b585509776bd16b9873f9246bccf">
+  <div class="header">
+    <h3>spec/frame_spec.rb</h3>
+    <h4>
+      <span class="green">
+  100.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>23</b> relevant lines.
+      <span class="green"><b>23</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">require &#39;frame&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="2">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="3">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">describe Frame do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="4">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="5">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  context &quot;1 - Score must be between 0 - 10&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="6">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;returns the score of a valid entry&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="7">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame = Frame.new(1, 5)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="8">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(frame.frame_total).to equal 6</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="9">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(frame.is_strike?).to equal false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="10">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(frame.is_spare?).to equal false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="11">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="12">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="13">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;raises error for invalid frame inputs&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="14">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame = Frame.new(10, 5)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="15">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">      expect { frame.frame_total }.to raise_error(ArgumentError)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="16">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="17">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="18">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="19">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  context &#39;player gets a spare&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="20">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="21">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;marks frame as a spare&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="22">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame = Frame.new(6, 4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="23">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(frame.frame_total).to equal 10</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="24">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(frame.is_strike?).to equal false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="25">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(frame.is_spare?).to equal true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="26">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="27">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="28">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="29">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  context &#39;player gets a strike&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="30">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;marks frame as a strike&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="31">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame = Frame.new(10, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="32">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(frame.frame_total).to equal 10</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="33">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(frame.is_strike?).to equal true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="34">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(frame.is_spare?).to equal false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="35">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="36">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="37">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="f49d701b93575866160fa0abb512920cef779852">
+  <div class="header">
+    <h3>spec/scorecard_spec.rb</h3>
+    <h4>
+      <span class="green">
+  100.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>217</b> relevant lines.
+      <span class="green"><b>217</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">require &#39;scorecard&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="2">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="3">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">describe ScoreCard do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="4">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  context &#39;frame class objects are correctly added to the score array&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="5">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39; adds a frame to the array&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="6">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard = ScoreCard.new</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="7">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame = Frame.new(5, 3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="8">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="9">
+            
+            
+
+            
+
+            <code class="ruby">      expected_scorecard =</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="10">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        { roll_one: 5, roll_two: 3, frame_total: 8, is_strike?: false, is_spare?: false, bonus_status:false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="11">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include (expected_scorecard)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="12">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="13">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="14">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  context &quot;programme correctly handles scoring for spares&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="15">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &quot;corectly calculate a spare in the first frame&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="16">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard = ScoreCard.new</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="17">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame1 = Frame.new(6, 4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="18">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(frame1.bonus_status).to eq true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="19">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame2 = Frame.new(5, 2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="20">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="21">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="22">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.calculate_bonuses</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="23">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame1 = { roll_one: 6, roll_two: 4, frame_total: 15, is_strike?: false, is_spare?: true, bonus_status: false }  </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="24">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame2 = { roll_one: 5, roll_two: 2, frame_total: 7, is_strike?: false, is_spare?: false, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="25">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="26">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="27">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="28">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="29">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &quot;corectly calculate a spare into a strike&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="30">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard = ScoreCard.new</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="31">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame1 = Frame.new(5, 5)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="32">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame2 = Frame.new(10, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="33">
+            
+            
+
+            
+
+            <code class="ruby">      # to ensure unresolves strike bonus does not raise error</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="34">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame3 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="35">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="36">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="37">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="38">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.calculate_bonuses</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="39">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame1 = { roll_one: 5, roll_two: 5, frame_total: 20, is_strike?: false, is_spare?: true, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="40">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame2 = { roll_one: 10, roll_two: 0, frame_total: 10, is_strike?: true, is_spare?: false, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="41">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="42">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="43">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="44">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="45">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;adds no bonus to a gutter frame&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="46">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard = ScoreCard.new</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="47">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame1 = Frame.new(3, 7)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="48">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame2 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="49">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="50">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="51">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame1 = { roll_one: 3, roll_two: 7, frame_total: 10, is_strike?: false, is_spare?: true, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="52">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame2 = { roll_one: 0, roll_two: 0, frame_total: 0, is_strike?: false, is_spare?: false, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="53">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="54">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="55">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="56">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="57">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="58">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  context &#39;programmes correctly handles strikes&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="59">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;correctly handles a strike into an open frame&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="60">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard = ScoreCard.new</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="61">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame1 = Frame.new(10, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="62">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(frame1.bonus_status).to eq true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="63">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame2 = Frame.new(7, 2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="64">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="65">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="66">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.calculate_bonuses</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="67">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame1 = { roll_one: 10, roll_two: 0, frame_total: 19, is_strike?: true, is_spare?: false, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="68">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame2 = { roll_one: 7, roll_two: 2, frame_total: 9, is_strike?: false, is_spare?: false, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="69">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="70">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="71">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="72">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="73">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;correctly handles a strike into a spare&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="74">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard = ScoreCard.new</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="75">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame1 = Frame.new(10, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="76">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame2 = Frame.new(2, 8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="77">
+            
+            
+
+            
+
+            <code class="ruby">      # to not isolate spare score</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="78">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame3 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="79">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="80">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="81">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="82">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.calculate_bonuses</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="83">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame1 = { roll_one: 10, roll_two: 0, frame_total: 20, is_strike?: true, is_spare?: false, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="84">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame2 = { roll_one: 2, roll_two: 8, frame_total: 10, is_strike?: false, is_spare?: true, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="85">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="86">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="87">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="88">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="89">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;correctly scores a strike into a strike into an open frame&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="90">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard = ScoreCard.new</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="91">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame1 = Frame.new(10, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="92">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame2 = Frame.new(10, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="93">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame3 = Frame.new(3, 4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="94">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="95">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="96">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="97">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.calculate_bonuses</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="98">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame1 = { roll_one: 10, roll_two: 0, frame_total: 23, is_strike?: true, is_spare?: false, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="99">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame2 = { roll_one: 10, roll_two: 0, frame_total: 17, is_strike?: true, is_spare?: false, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="100">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame3 = { roll_one: 3, roll_two: 4, frame_total: 7, is_strike?: false, is_spare?: false, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="101">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="102">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="103">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="104">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="105">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="106">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;correctly handles 3 strikes in a row&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="107">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard = ScoreCard.new</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="108">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame1 = Frame.new(10, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="109">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame2 = Frame.new(10, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="110">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame3 = Frame.new(10, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="111">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame4 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="112">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="113">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="114">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="115">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="116">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.calculate_bonuses</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="117">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame1 = { roll_one: 10, roll_two: 0, frame_total: 30, is_strike?: true, is_spare?: false, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="118">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame2 = { roll_one: 10, roll_two: 0, frame_total: 20, is_strike?: true, is_spare?: false, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="119">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame3 = { roll_one: 10, roll_two: 0, frame_total: 10, is_strike?: true, is_spare?: false, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="120">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="121">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="122">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="123">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="124">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="125">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  context &#39;the programme correctly handles the final frame&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="126">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;correctly handles a spare in the final frame&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="127">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard = ScoreCard.new</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="128">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame1 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="129">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame2 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="130">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame3 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="131">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame4 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="132">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame5 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="133">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame6 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="134">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame7 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="135">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame8 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="136">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame9 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="137">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame10 = Frame.new(0, 10)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="138">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="139">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="140">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="141">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="142">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame5)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="143">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame6)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="144">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame7)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="145">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="146">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame9)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="147">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame10)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="148">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      bonus_roll = BonusRoll.new(7, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="149">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add_final_frame_bonus(bonus_roll)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="150">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame10 = { roll_one: 0, roll_two: 10, frame_total: 17, is_strike?: false, is_spare?: true, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="151">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame10)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="152">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="153">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="154">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;correctly handles a spare in the final frame&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="155">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard = ScoreCard.new</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="156">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame1 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="157">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame2 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="158">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame3 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="159">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame4 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="160">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame5 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="161">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame6 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="162">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame7 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="163">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame8 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="164">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame9 = Frame.new(0, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="165">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame10 = Frame.new(10, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="166">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="167">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="168">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="169">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="170">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame5)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="171">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame6)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="172">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame7)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="173">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="174">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame9)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="175">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame10)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="176">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      bonus_roll = BonusRoll.new(10, 10)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="177">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add_final_frame_bonus(bonus_roll)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="178">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expected_frame10 = { roll_one: 10, roll_two: 0, frame_total: 30, is_strike?: true, is_spare?: false, bonus_status: false }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="179">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.display_score).to include(expected_frame10)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="180">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="181">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="182">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;does not allow an early bonus to be added&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="183">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard = ScoreCard.new</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="184">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame1 = Frame.new(2, 3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="185">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame2 = Frame.new(3, 4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="186">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame3 = Frame.new(6, 2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="187">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="188">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="189">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="190">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      bonus_roll = BonusRoll.new(7, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="191">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">      expect { scorecard.add_final_frame_bonus(bonus_roll) }.to raise_error</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="192">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      &#39;bonus rolls can only be added to the 10th frame&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="193">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="194">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="195">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="196">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  context &#39;it runs an entire game&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="197">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;correctly calculates the score&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="198">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard = ScoreCard.new</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="199">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame1 = Frame.new(3, 4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="200">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame2 = Frame.new(3, 3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="201">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame3 = Frame.new(7, 2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="202">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame4 = Frame.new(4, 5)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="203">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame5 = Frame.new(0, 5)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="204">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame6 = Frame.new(0, 9)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="205">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame7 = Frame.new(5, 4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="206">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame8 = Frame.new(2, 4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="207">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame9 = Frame.new(4, 4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="208">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame10 = Frame.new(8, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="209">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="210">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="211">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="212">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="213">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame5)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="214">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame6)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="215">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame7)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="216">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="217">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame9)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="218">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame10)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="219">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.final_score).to eq 76</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="220">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="221">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="222">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &#39;correctly calculates a game with strikes and spares&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="223">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard = ScoreCard.new</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="224">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame1 = Frame.new(10, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="225">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame2 = Frame.new(7, 3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="226">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame3 = Frame.new(10, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="227">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame4 = Frame.new(10, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="228">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame5 = Frame.new(5, 5)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="229">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame6 = Frame.new(3, 6)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="230">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame7 = Frame.new(7, 3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="231">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame8 = Frame.new(2, 4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="232">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame9 = Frame.new(4, 4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="233">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame10 = Frame.new(10, 0)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="234">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="235">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="236">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="237">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="238">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame5)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="239">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame6)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="240">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame7)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="241">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame8)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="242">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame9)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="243">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add(frame10)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="244">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      bonus_roll = BonusRoll.new(10, 10)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="245">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add_final_frame_bonus(bonus_roll)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="246">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.display_score</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="247">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.final_score).to eq 163</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="248">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="249">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="250">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+      </div>
+    </div>
+  </body>
+</html>
