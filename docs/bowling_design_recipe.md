@@ -11,11 +11,7 @@ _Consider diagramming out the classes and their relationships. Take care to
 focus on the details you see as important, not everything. The diagram below
 uses asciiflow.com but you could also use excalidraw.com, draw.io, or miro.com_
 
-```
-
-
-
-```
+![Ten Pin Score Class System](class_diagram.png)
 
 _Also design the interface of each class in more detail._
 
