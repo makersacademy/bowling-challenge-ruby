@@ -9,6 +9,11 @@ class Scores
 
   def all
     @frames
-  end 
+  end
+
+  def final_score 
+    score = 0 
+    @frames.each_with_index do |frame, num|
+      if frame.strike
 end 
    
