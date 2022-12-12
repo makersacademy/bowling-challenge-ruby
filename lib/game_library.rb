@@ -1,6 +1,3 @@
-require 'roll'
-require 'frame_counter'
-
 class GameLibrary
   def initialize
     @game = []
@@ -8,12 +5,10 @@ class GameLibrary
   end
 
   def add(roll) 
-    frames = FrameCounter.new(@game)
-    
-    if frames.max_number_of_frame?
+    if max_number_of_frame?
       return nil
     else
-      add_roll_to_frame(frames, roll)
+      add_roll_to_frame(roll)
     end
 
     return nil
@@ -25,12 +20,12 @@ class GameLibrary
 
   private
 
-  def add_roll_to_frame(frames, roll)
+  def add_roll_to_frame(roll)
     frame_length = 2
-    @frame << roll.score
+    @frame << roll
 
     if @frame.sum >= 10
-      frames.total_number == 9 ? frame_length = 3 : frame_length = 1
+      total_number_of_frames == 9 ? frame_length = 3 : frame_length = 1
     end
 
     if @frame.length >= frame_length
@@ -38,5 +33,13 @@ class GameLibrary
       @frame = []
     end
   end
+
+  def total_number_of_frames
+    return @game.length
+  end
+  
+  def max_number_of_frame?
+    total_number_of_frames >= 10 ? true : false
+  end   
 
 end

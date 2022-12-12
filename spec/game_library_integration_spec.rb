@@ -48,7 +48,16 @@ RSpec.describe "game_library_integration" do
     end
   end
 
-  context "Returns total score" do
+  context "Returns total score when all frames complete" do
+    it "total equal 0 when gutter game " do
+      game = GameLibrary.new
+      20.times {gutter_roll(game)}
+      expect(game.rolls_by_frame).to eq [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]]
+      score = ScoreCalculator.new(game)
+      expect(score.score_by_frame).to eq [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] 
+      expect(score.total_score).to eq 0
+    end
+
     it "when no strikes or spares are scored" do
       game = GameLibrary.new
       10.times {standard_frame(game)}
@@ -131,36 +140,60 @@ RSpec.describe "game_library_integration" do
       expect(score.score_by_frame).to eq [3, 3, 3, 18, 20, 21, 13, 3, 3, 21] 
       expect(score.total_score).to eq 108
     end
+
+    context "Returns total score when partial game" do
+      it "when 5 frames completed and no strikes or spares are scored" do
+        game = GameLibrary.new
+        5.times {standard_frame(game)}
+        score = ScoreCalculator.new(game)
+        expect(score.score_by_frame).to eq [3, 3, 3, 3, 3] 
+        expect(score.total_score).to eq 15
+      end
+
+      it "when 8 frames are completed score a strike in frame 8" do
+        game = GameLibrary.new
+        7.times {standard_frame(game)}
+        strike_frame(game)
+        expect(game.rolls_by_frame).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[10]]
+        score = ScoreCalculator.new(game)
+        expect(score.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 10] 
+        expect(score.total_score).to eq 31
+      end
+
+      it  "when 8 frames are completed score a strike in frame 8" do
+        game = GameLibrary.new
+        7.times {standard_frame(game)}
+        spare_frame(game)
+        expect(game.rolls_by_frame).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[8, 2]]
+        score = ScoreCalculator.new(game)
+        expect(score.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 10] 
+        expect(score.total_score).to eq 31
+      end
+    end
   end
 
   private
 
   def standard_frame(game)
-    roll = Roll.new
-    roll.score = 1
-    game.add(roll)
-    roll.score = 2
-    game.add(roll)
+    game.add(1)
+    game.add(2)
   end
 
   def strike_frame(game)
-    roll = Roll.new
-    roll.score = 10
-    game.add(roll)
+    game.add(10)
   end
 
   def spare_frame(game)
-    roll = Roll.new
-    roll.score = 8
-    game.add(roll)
-    roll.score = 2
-    game.add(roll)
+    game.add(8)
+    game.add(2)
   end
 
   def extra_roll(game)
-    roll = Roll.new
-    roll.score = 1
-    game.add(roll)
+    game.add(1)
+  end
+
+  def gutter_roll(game)
+    game.add(0)
   end
 
 end
