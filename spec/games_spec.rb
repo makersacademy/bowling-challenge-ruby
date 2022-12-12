@@ -18,4 +18,23 @@ RSpec.describe Game do
       end
     end
   end
+
+  describe "#calculate_current_score" do
+    context "calculates the user's score so far when" do
+      it "one frame has been played" do
+        game = Game.new
+        game.add_frame(1,1)
+        expect(game.calculate_current_score).to eq 2
+      end
+
+      it "two frames have been played" do
+        game = Game.new
+        game.add_frame(1,1)
+        game.add_frame(1,1)
+        expect(game.calculate_current_score).to eq 4
+      end
+    end
+  end
+
+
 end
