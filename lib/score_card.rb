@@ -20,14 +20,11 @@ class ScoreCard
   end
 
   def total_score
+    @total_score = 0
     @frames.each do |frame|
       @total_score += frame.frame_score
     end
     return @total_score
-  end
-
-  def add_to_total(num)
-    @total_score += num
   end
 
   def prev_frame
@@ -38,8 +35,15 @@ class ScoreCard
     end
   end
 
-  def play_frame(roll_1, roll_2)
+  def prev_two_frames
+    if @round > 2
+    @frames[@round-3]
+    else
+    "There are no previous rounds"
+    end
+  end
 
+  def play_frame(roll_1, roll_2)
     this_frame = Frame.new(@round)
    
     # roll 1 and 2 would usually be calculated 
@@ -48,8 +52,18 @@ class ScoreCard
 
     # roll_1 = this_frame.add_frame_total(random(11))
     # roll_2 = this_frame.add_frame_total(random(11))
-      
-    if roll_1 == 10
+    if @round == 10 && roll_1 == 10
+      this_frame.strike
+      this_frame.add_roll_1(roll_1)
+      this_frame.add_bonus(10) #in reality num would be rand(11)
+      this_frame.add_bonus(10) #in reality num would be rand(11)
+      prev_frame.add_bonus(10) #in reality num would be rand(11)
+    elsif @round == 10 && (roll_1 + roll_2) == 10 
+      this_frame.spare
+      this_frame.add_roll_1(roll_1)
+      this_frame.add_roll_2(roll_2)
+      this_frame.add_bonus(rand(11))
+    elsif roll_1 == 10
       this_frame.strike
       this_frame.add_roll_1(roll_1)
       this_frame.add_roll_2(0)
@@ -61,24 +75,40 @@ class ScoreCard
       this_frame.add_roll_1(roll_1)
       this_frame.add_roll_2(roll_2)
     end
-    if @round > 1 && self.prev_frame.is_strike?
-      self.prev_frame.add_bonus(roll_1 + roll_2)
-    elsif @round > 1 && self.prev_frame.is_spare?
-      self.prev_frame.add_bonus(roll_1)
+
+    if @round > 1 && prev_frame.is_strike?
+      prev_frame.add_bonus(roll_1 + roll_2)
     end
+
+    if @round > 2 && prev_frame.is_strike? && prev_two_frames.is_strike?
+      prev_two_frames.add_bonus(roll_1)
+    end
+
+    if @round > 1 && prev_frame.is_spare?
+      prev_frame.add_bonus(roll_1)
+    end
+
     @frames << this_frame
     @round += 1
-    
   #  return ''
   end
 
   def result
-    if @total_score == 0
+    if self.total_score == 0
       "You got a gutter game!"
     elsif @total_score == 300
       "You got a perfect game!!"
+    else
+      "Well played, you scored: #{self.total_score}"
     end
   end
+
+  # def play_game(roll_1, roll_2)
+  #   while @round < 10 do
+  #     play_frame(roll_1, roll_2)
+  #   end
+    
+  # end
 end
 
 

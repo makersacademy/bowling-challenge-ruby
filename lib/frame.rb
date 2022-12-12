@@ -53,7 +53,7 @@ class Frame
   # end
 
   def add_bonus(num)
-    @bonus = num
+    @bonus += num
   end
 
   def bonus
