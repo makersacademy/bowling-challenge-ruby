@@ -1,7 +1,7 @@
-class GameLibrary
+class Game
   def initialize
-    @game = []
-    @frame = []
+    @completed_frames = []
+    @current_frame = []
   end
 
   def add(roll) 
@@ -15,27 +15,28 @@ class GameLibrary
   end
 
   def rolls_by_frame
-    return @game
+    return @completed_frames
   end
 
   private
 
   def add_roll_to_frame(roll)
     frame_length = 2
-    @frame << roll
+    @current_frame << roll
 
-    if @frame.sum >= 10
+    if @current_frame.sum >= 10
       total_number_of_frames == 9 ? frame_length = 3 : frame_length = 1
     end
 
-    if @frame.length >= frame_length
-      @game << @frame
-      @frame = []
+    if @current_frame.length >= frame_length
+      @completed_frames << @current_frame
+      @current_frame = []
     end
+
   end
 
   def total_number_of_frames
-    return @game.length
+    return @completed_frames.length
   end
   
   def max_number_of_frame?

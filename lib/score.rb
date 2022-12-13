@@ -1,7 +1,6 @@
-class ScoreCalculator
+class Score
   def initialize(game)
     @game = game.rolls_by_frame
-
     @score =[]
     @next_frame = 1
   end
