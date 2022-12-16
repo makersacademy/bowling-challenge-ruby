@@ -14,8 +14,12 @@ class Game
     return nil
   end
 
-  def rolls_by_frame
+  def completed_frames
     return @completed_frames
+  end
+
+  def current_frame
+    return @current_frame
   end
 
   private
