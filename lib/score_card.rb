@@ -4,7 +4,7 @@ class ScoreCard
   def initialize(game)
     @score_card =[]
     @frames = game.all_frames
-    @frames_with_scores = game.frames_with_scores
+    @frames_with_rolls = game.frames_with_rolls
   end
 
   def score_by_frame
@@ -36,11 +36,11 @@ class ScoreCard
   end
 
   def next_roll
-    return (@frames_with_scores.length) > @next_index ? @frames_with_scores[@next_index][0] : 0
+    return (@frames_with_rolls.length) > @next_index ? @frames_with_rolls[@next_index][0] : 0
   end
   
   def next_two_rolls
-    return @frames_with_scores[@next_index..@next_index+1].flatten[0..1].sum
+    return @frames_with_rolls[@next_index..@next_index+1].flatten[0..1].sum
   end
   
 end

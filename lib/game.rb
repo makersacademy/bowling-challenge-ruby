@@ -24,14 +24,14 @@ class Game
     return @current_frame
   end
   
-  def frames_with_scores
-    frames_with_scores = []
+  def frames_with_rolls
+    frames_with_rolls = []
     
     @all_frames.each do |frame|
-      frames_with_scores << frame.scores
+      frames_with_rolls << frame.scores
     end
 
-    return frames_with_scores
+    return frames_with_rolls
   end
 
   private
@@ -45,7 +45,7 @@ class Game
 
     current_frame = Frame.new(@current_frame)
     @all_frames << current_frame
-    
+
     if current_frame.complete?(frame_count)
       @current_frame = []
     end

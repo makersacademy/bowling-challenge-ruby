@@ -7,7 +7,7 @@ RSpec.describe "bowling_integration" do
     it "total equal 0 when gutter game " do
       game = Game.new
       20.times {gutter_roll(game)}
-      expect(game.frames_with_scores).to eq [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]]
+      expect(game.frames_with_rolls).to eq [[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0],[0, 0]]
       score_card = ScoreCard.new(game)
       expect(score_card.score_by_frame).to eq [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] 
       expect(score_card.total_score).to eq 0
@@ -25,7 +25,7 @@ RSpec.describe "bowling_integration" do
       8.times {standard_frame(game)}
       strike_frame(game)
       standard_frame(game)
-      expect(game.frames_with_scores).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[10],[1, 2]]
+      expect(game.frames_with_rolls).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[10],[1, 2]]
       score_card = ScoreCard.new(game)
       expect(score_card.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 3, 13, 3] 
       expect(score_card.total_score).to eq 40
@@ -35,7 +35,7 @@ RSpec.describe "bowling_integration" do
       7.times {standard_frame(game)}
       2.times {strike_frame(game)}
       standard_frame(game)
-      expect(game.frames_with_scores).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[10],[10],[1, 2]]
+      expect(game.frames_with_rolls).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[10],[10],[1, 2]]
       score_card = ScoreCard.new(game)
       expect(score_card.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 21, 13, 3] 
       expect(score_card.total_score).to eq 58
@@ -45,7 +45,7 @@ RSpec.describe "bowling_integration" do
       7.times {standard_frame(game)}
       3.times {strike_frame(game)}
       standard_frame(game)
-      expect(game.frames_with_scores).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[10],[10],[10, 1, 2]]
+      expect(game.frames_with_rolls).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[10],[10],[10, 1, 2]]
       score_card = ScoreCard.new(game)
       expect(score_card.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 30, 21, 13] 
       expect(score_card.total_score).to eq 85
@@ -54,7 +54,7 @@ RSpec.describe "bowling_integration" do
     it "total equal 300 when perfect score " do
       game = Game.new
       12.times {strike_frame(game)}
-      expect(game.frames_with_scores).to eq [[10],[10],[10],[10],[10],[10],[10],[10],[10],[10, 10, 10]]
+      expect(game.frames_with_rolls).to eq [[10],[10],[10],[10],[10],[10],[10],[10],[10],[10, 10, 10]]
       score_card = ScoreCard.new(game)
       expect(score_card.score_by_frame).to eq [30, 30, 30, 30, 30, 30, 30, 30, 30, 30] 
       expect(score_card.total_score).to eq 300
@@ -65,7 +65,7 @@ RSpec.describe "bowling_integration" do
       8.times {standard_frame(game)}
       spare_frame(game)
       standard_frame(game)
-      expect(game.frames_with_scores).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[8, 2],[1, 2]]
+      expect(game.frames_with_rolls).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[8, 2],[1, 2]]
       score_card = ScoreCard.new(game)
       expect(score_card.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 3, 11, 3] 
       expect(score_card.total_score).to eq 38
@@ -76,7 +76,7 @@ RSpec.describe "bowling_integration" do
       9.times {standard_frame(game)}
       spare_frame(game)
       extra_roll(game)
-      expect(game.frames_with_scores).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[8, 2, 1]]
+      expect(game.frames_with_rolls).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[8, 2, 1]]
       score_card = ScoreCard.new(game)
       expect(score_card.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 3, 3, 11] 
       expect(score_card.total_score).to eq 38
@@ -90,7 +90,7 @@ RSpec.describe "bowling_integration" do
       2.times {standard_frame(game)}
       2.times {strike_frame(game)}
       extra_roll(game)
-      expect(game.frames_with_scores).to eq [[1, 2],[1, 2],[1, 2],[8, 2],[8, 2],[10],[10],[1, 2],[1, 2],[10, 10, 1]]
+      expect(game.frames_with_rolls).to eq [[1, 2],[1, 2],[1, 2],[8, 2],[8, 2],[10],[10],[1, 2],[1, 2],[10, 10, 1]]
       score_card = ScoreCard.new(game)
       expect(score_card.score_by_frame).to eq [3, 3, 3, 18, 20, 21, 13, 3, 3, 21] 
       expect(score_card.total_score).to eq 108
@@ -109,7 +109,7 @@ RSpec.describe "bowling_integration" do
         game = Game.new
         7.times {standard_frame(game)}
         strike_frame(game)
-        expect(game.frames_with_scores).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[10]]
+        expect(game.frames_with_rolls).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[10]]
         score_card = ScoreCard.new(game)
         expect(score_card.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 10] 
         expect(score_card.total_score).to eq 31
@@ -119,7 +119,7 @@ RSpec.describe "bowling_integration" do
         game = Game.new
         7.times {standard_frame(game)}
         spare_frame(game)
-        expect(game.frames_with_scores).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[8, 2]]
+        expect(game.frames_with_rolls).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[8, 2]]
         score_card = ScoreCard.new(game)
         expect(score_card.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 10] 
         expect(score_card.total_score).to eq 31
@@ -130,7 +130,7 @@ RSpec.describe "bowling_integration" do
         7.times {standard_frame(game)}
         spare_frame(game)
         game.add(1)
-        expect(game.frames_with_scores).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[8, 2], [1]]
+        expect(game.frames_with_rolls).to eq [[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[1, 2],[8, 2], [1]]
         score_card = ScoreCard.new(game)
         expect(score_card.score_by_frame).to eq [3, 3, 3, 3, 3, 3, 3, 11, 1] 
         expect(score_card.total_score).to eq 33
