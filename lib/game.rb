@@ -2,7 +2,7 @@ require 'frame'
 
 class Game
   def initialize
-    @completed_frames = []
+    @all_frames = []
     @current_frame = []
   end
 
@@ -16,22 +16,22 @@ class Game
     return nil
   end
 
-  def completed_frames
-    return @completed_frames
+  def all_frames
+    return @all_frames
   end
 
   def current_frame
     return @current_frame
   end
   
-  def view_completed_frames
-    completed_frames = []
+  def frames_with_scores
+    frames_with_scores = []
     
-    @completed_frames.each do |frame|
-      completed_frames << frame.scores
+    @all_frames.each do |frame|
+      frames_with_scores << frame.scores
     end
 
-    return completed_frames
+    return frames_with_scores
   end
 
   private
@@ -40,18 +40,23 @@ class Game
     @current_frame << roll
     current_frame = Frame.new(@current_frame)
 
+    if @current_frame.length > 1
+      @all_frames.pop
+    end
+
+    @all_frames << current_frame
+
     if current_frame.complete?(frame_count)
-      @completed_frames << current_frame
       @current_frame = []
     end
   end
 
   def frame_count
-    return @completed_frames.length
+    return @all_frames.length
   end
   
   def max_number_of_frames?
-    return frame_count >= 10 ? true : false
+    return frame_count >= 10 && @current_frame == [] ? true : false
   end   
 
 end
