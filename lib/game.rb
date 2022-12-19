@@ -1,3 +1,5 @@
+require 'frame'
+
 class Game
   def initialize
     @completed_frames = []
@@ -5,7 +7,7 @@ class Game
   end
 
   def add(roll) 
-    if max_number_of_frame?
+    if max_number_of_frames?
       return nil
     else
       add_roll_to_frame(roll)
@@ -21,30 +23,35 @@ class Game
   def current_frame
     return @current_frame
   end
+  
+  def view_completed_frames
+    completed_frames = []
+    
+    @completed_frames.each do |frame|
+      completed_frames << frame.scores
+    end
+
+    return completed_frames
+  end
 
   private
 
   def add_roll_to_frame(roll)
-    frame_length = 2
     @current_frame << roll
+    current_frame = Frame.new(@current_frame)
 
-    if @current_frame.sum >= 10
-      total_number_of_frames == 9 ? frame_length = 3 : frame_length = 1
-    end
-
-    if @current_frame.length >= frame_length
-      @completed_frames << @current_frame
+    if current_frame.complete?(frame_count)
+      @completed_frames << current_frame
       @current_frame = []
     end
-
   end
 
-  def total_number_of_frames
+  def frame_count
     return @completed_frames.length
   end
   
-  def max_number_of_frame?
-    total_number_of_frames >= 10 ? true : false
+  def max_number_of_frames?
+    return frame_count >= 10 ? true : false
   end   
 
 end
