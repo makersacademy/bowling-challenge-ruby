@@ -38,14 +38,14 @@ class Game
 
   def add_roll_to_frame(roll)
     @current_frame << roll
-    current_frame = Frame.new(@current_frame)
 
     if @current_frame.length > 1
       @all_frames.pop
     end
 
+    current_frame = Frame.new(@current_frame)
     @all_frames << current_frame
-
+    
     if current_frame.complete?(frame_count)
       @current_frame = []
     end
