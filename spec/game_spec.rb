@@ -37,11 +37,10 @@ describe Game do
         end
     end
 
-    context 'player hits some pins without strike or spare for one' do
+    context 'player hits some pins without strike or spare' do
         it 'returns correct score after one frame and gutter roll' do
             frame.roll1 = 1
             frame.roll2 = 0
-            p frame
             game.add_frame(frame)
             expect(game.calculate_score).to eq 1
         end
@@ -51,6 +50,24 @@ describe Game do
             frame.roll2 = 2
             game.add_frame(frame)
             expect(game.calculate_score).to eq 9
+        end
+
+        it 'correct score after two frames' do
+            frame.roll1 = 6
+            frame.roll2 = 1
+            game.add_frame(frame)
+            frame = Frame.new
+            frame.roll1 = 4
+            frame.roll2 = 5
+            game.add_frame(frame)
+            expect(game.calculate_score).to eq 16
+        end
+        
+        it 'correct score when finished (10 frames)' do
+            frame.roll1 = 7
+            frame.roll2 = 2
+            10.times { game.add_frame(frame) }
+            expect(game.calculate_score).to eq 90
         end
     end
 end
