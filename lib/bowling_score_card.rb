@@ -11,17 +11,17 @@ class BowlingScoreCard
   # manages the logic in relation to whether a frame is normal, spare or strike
   def overall_score
     score = 0
-    frame = 0
+    roll_tally = 0
     10.times do
-      if is_a_strike?(frame)
-        score += 10 + strike_bonus_score(frame)
-        frame += 1
-      elsif is_a_spare?(frame)
-        score += 10 + spare_bonus_score(frame)
-        frame += 2
+      if is_a_strike?(roll_tally)
+        score += 10 + strike_bonus_score(roll_tally)
+        roll_tally += 1
+      elsif is_a_spare?(roll_tally)
+        score += 10 + spare_bonus_score(roll_tally)
+        roll_tally += 2
       else
-        score += sum_of_balls_in_frame(frame)
-        frame += 2
+        score += sum_pins_down_in_frame(roll_tally)
+        roll_tally += 2
       end
     end
     score
@@ -29,26 +29,26 @@ class BowlingScoreCard
 
   
   # adds the two rolls in a frame (called if not a strike)
-  def sum_of_balls_in_frame(frame)
-    @rolls_score_raw_count[frame] + @rolls_score_raw_count[frame + 1]
+  def sum_pins_down_in_frame(roll_tally)
+    @rolls_score_raw_count[roll_tally] + @rolls_score_raw_count[roll_tally + 1]
   end
 
   # handles the additional scoring following a spare frame
-  def spare_bonus_score(frame)
-    @rolls_score_raw_count[frame + 2]
+  def spare_bonus_score(roll_tally)
+    @rolls_score_raw_count[roll_tally + 2]
   end
 
   # calculates whether a frame is a spare frame
-  def is_a_spare?(frame)
-    @rolls_score_raw_count[frame] + @rolls_score_raw_count[frame + 1] == 10
+  def is_a_spare?(roll_tally)
+    @rolls_score_raw_count[roll_tally] + @rolls_score_raw_count[roll_tally + 1] == 10
   end
 
   # calculates whether a frame is a strike frame
-  def is_a_strike?(frame)
-    @rolls_score_raw_count[frame] == 10
+  def is_a_strike?(roll_tally)
+    @rolls_score_raw_count[roll_tally] == 10
   end
 
-  def strike_bonus_score(frame)
-    @rolls_score_raw_count[frame + 1] + @rolls_score_raw_count[frame + 2]
+  def strike_bonus_score(roll_tally)
+    @rolls_score_raw_count[roll_tally + 1] + @rolls_score_raw_count[roll_tally + 2]
   end
 end
