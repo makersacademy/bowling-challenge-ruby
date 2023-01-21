@@ -31,7 +31,7 @@ RSpec.describe BowlingGame do
         @game.roll(7)
         @game.roll(7)
         @game.roll(2)
-        17.times {@game.roll(0)}
+        16.times {@game.roll(0)}
         expect(@game.score).to eq(26)
     end
     it 'frame without spare or strike' do 
