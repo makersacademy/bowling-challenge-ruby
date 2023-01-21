@@ -8,6 +8,7 @@ describe Game do
             expect(status).to eq 'GUTTER'
             score = game.calculate_score
             expect(score).to eq 0
+            expect(game.frames_played).to eq 1
         end
 
         xit 'after 9 frames shows total points as zero' do
@@ -15,6 +16,7 @@ describe Game do
             9.times { game.add_frame([0, 0]) }
             score = game.calculate_score
             expect(score).to eq 0
+            expect(game.frames_played).to eq 9
         end
         
         xit 'after 10 frames shows total points as zero' do
@@ -22,6 +24,7 @@ describe Game do
             10.times { game.add_frame([0, 0]) }
             score = game.calculate_score
             expect(score).to eq 0
+            expect(game.frames_played).to eq 10
         end
 
         xit 'when trying to enter 11th frame shows a message' do
@@ -29,6 +32,7 @@ describe Game do
             10.times { game.add_frame([0, 0]) }
             status = game.add_frame([0, 0])
             expect(status).to eq 'GAME FINISHED'
+            expect(game.frames_played).to eq 10
         end
     end
 end
