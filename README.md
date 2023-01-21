@@ -20,7 +20,7 @@ def spare_bonus
 end 
 
 ```
-To play the game 
+
 
 
 Bowling Challenge in Ruby
