@@ -3,8 +3,8 @@ class BowlingScoreCard
     @rolls = []
   end
 
-  def roll(pins)
-    @rolls << pins
+  def roll(pins_down)
+    @rolls << pins_down
   end
 
   def score
