@@ -28,6 +28,17 @@ describe "bowling score card class" do
     end
   end
 
+  context 'user rolls one strike then a 4 and a 5 in the next two rolls' do
+    it "takes into account the strike bonus and gives a score of 28 at end of game" do
+      scorecard.roll 10
+      scorecard.roll 4
+      scorecard.roll 5
+      roll_n_times(16, 0)
+      expect(scorecard.overall_score).to eq 28
+    end
+  end
+
+
 # rspec helper method
   def roll_n_times(n, pins_down)
     n.times { scorecard.roll(pins_down) }
