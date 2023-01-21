@@ -6,14 +6,25 @@ describe "bowling score card class" do
   context "user rolls 0 for every roll in 10 frame game" do
     it "gives a score of 0 at the end of the game" do
       roll_n_times(20, 0)
-      expect(scorecard.score).to eq 0
+      expect(scorecard.overall_score).to eq 0
     end
   end
 
   context "user rolls 1 for every roll (20) in 10 frame game" do
     it "gives a score of 20 at the end of the game" do
       roll_n_times(20, 1)
-      expect(scorecard.score).to eq 20
+      expect(scorecard.overall_score).to eq 20
+    end
+  end
+
+  context 'user rolls one spare and then a five on next roll' do
+    it "gives of a score of 18 at the end of the game" do
+      scorecard.roll 5
+      scorecard.roll 5
+      scorecard.roll 4
+      roll_n_times(17, 0)
+      
+      expect(scorecard.overall_score).to eq 18
     end
   end
 
