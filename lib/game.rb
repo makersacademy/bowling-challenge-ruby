@@ -5,9 +5,10 @@ class Game
     end
 
     def add_frame(frame)
+        return 'START NEW GAME' if @frames_played == 10
         @score_card << frame
         @frames_played += 1
-        return 'GUTTER'
+        return nil
     end
 
     def calculate_score
@@ -15,6 +16,6 @@ class Game
     end
 
     def frames_played
-        return 1
+        return @frames_played
     end
 end
