@@ -13,26 +13,21 @@ class Scorecard
   private
 
   def calculate_strikes(scores)
-    flattened_scores = @scores.flatten
-    @scores = scores.each_with_index.map do |frame, index|
+    all_scores = @scores.flatten
+    @scores = scores.each_with_index.map { |frame, index|
       if frame.count == 1
         flattened_index = calculate_flattened_array(index)
-        frame = [flattened_scores[flattened_index] + flattened_scores[flattened_index+1] + flattened_scores[flattened_index+2]]
+        frame = [all_scores[flattened_index] + all_scores[flattened_index+1] + all_scores[flattened_index+2]]
       else
         frame
-      end
-    end
+      end }
     return @scores
   end
 
   def calculate_spares(scores)
     @scores = scores.each_with_index.map do |frame, index|
       if frame.count == 2
-        if frame.inject(:+) == 10
-          frame << @original_scores[index+1][0] 
-        else
-          frame
-        end
+        frame.inject(:+) == 10 ? frame << @original_scores[index+1][0] : frame
       else
         frame
       end   
