@@ -1,3 +1,5 @@
+require 'frame'
+
 class Game
     def initialize
         @score_card = []
