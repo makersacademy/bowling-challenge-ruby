@@ -1,3 +1,28 @@
+## Week 5 - Weekend challenge 
+
+```ruby
+#This method checks that that the roll has scored 10 pins 
+#with first throw of the bowl
+def strike 
+end
+
+#This method checks that there was spare in a frame
+def spare
+end
+
+#This method adds numbers of pins knocked in next two rolls if there 
+#was a strike
+def strike_bonus
+end 
+
+#This method adds the number of pins kocned in first roll of the next frame
+def spare_bonus
+end 
+
+```
+To play the game 
+
+
 Bowling Challenge in Ruby
 =================
 
