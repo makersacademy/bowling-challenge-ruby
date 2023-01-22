@@ -1,13 +1,9 @@
 @scores = []
 @spare = false
 @strike = false
-
-
 @frame = 1
 
 while @frame <= 10 do
-    
-
     puts "It is currently frame #{@frame}, enter your first score"
     @first_throw = gets.chomp.to_i
     @scores << @first_throw
@@ -36,16 +32,16 @@ while @frame <= 10 do
     end
     p @scores
 
-if @frame == 11 
-    puts "If you scored a spare/strike enter score now"
-    @first_throw = gets.chomp.to_i
-    @scores << @first_throw
-    puts "If you scored a strike enter second score now"
-    @second_throw = gets.chomp.to_i
-    @scores << @second_throw
-    puts "Here are your final scores"
-    p @scores
-    p @scores.sum
-else
-end
+    if @frame == 11 
+        puts "If you scored a spare/strike enter score now"
+        @first_throw = gets.chomp.to_i
+        @scores << @first_throw
+        puts "If you scored a strike enter second score now"
+        @second_throw = gets.chomp.to_i
+        @scores << @second_throw
+        puts "Here are your final scores"
+        p @scores
+        p @scores.sum
+        else
+    end
 end
