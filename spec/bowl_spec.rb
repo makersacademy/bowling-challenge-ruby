@@ -25,5 +25,17 @@ RSpec.describe Bowl do
     bowl = Bowl.new
     expect(bowl.score(arr)).to eq 24
   end
-  
+
+  it 'gives a score of 24 case one strike - 0 for the first 16 roll, a strike, 3 and 4 pins' do
+    arr = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [10], [3,4]]
+    bowl = Bowl.new
+    expect(bowl.score(arr)).to eq 24
+  end
+
+  it 'gives a score of 60 case 3 strikes - 3 stikes, then 0 for the next 14 rolls' do
+    arr = [[10],[10],[10],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]
+    bowl = Bowl.new
+    expect(bowl.score(arr)).to eq 60
+  end
+
 end
