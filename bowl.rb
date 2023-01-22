@@ -1,4 +1,8 @@
 class Bowl
+  def initialize(io)
+    @io = io
+  end
+
  " ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
 │ 1 │ 4 │ 4 │ 5 │ 6 │ / │ 5 │ / │   │ * │ 0 │ 1 │ 7 │ / │ 6 │ / │   │ * │ 2 │ / │ 6 │
 │   └───┤   └───┤   └───┤   └───┤   └───┤   └───┤   └───┤   └───┤   └───┤   └───┴───┤
@@ -7,30 +11,42 @@ class Bowl
 
   def score(frames)
     frames.map.with_index do |frame, index|
-      if (index <= frames.length - 2)
-        if strike?(frame)
-          if frames.fetch(index + 1)[1].nil? 
-            frame[0] + frames.fetch(index + 1)[0] + frames.fetch(index + 2)[0]        
-          else
-            frame[0] + frames.fetch(index + 1)[0] + frames.fetch(index + 1)[1]
-          end
-        elsif spare?(frame)
-          balls(frame) + frames.fetch(index+1)[0]
-        elsif open_frame?(frame)
-          balls(frame)
-        end
-      elsif index == frames.length - 1
-        if strike?(frame)
-          if frame[1] == 10
-            balls_last_frame?(frame)
-          elsif spare?(frame)
-            balls_last_frame?(frame)
-          end
-        elsif open_frame?(frame)
-           balls(frame)
-        end
-      end
+      calculate_frame_score(index, frames, frame)
     end.sum
+  end
+
+  def calculate_frame_score(index, frames, frame)
+    if (tenth_frame?(index, frames))
+      score_nineth_frame(index, frames, frame)
+    else
+      score_regular_frame(index, frames, frame)
+    end
+  end
+
+  def score_nineth_frame(index, frames, frame)
+    if strike?(frame)
+      if frames.fetch(index + 1)[1].nil? 
+        frame[0] + frames.fetch(index + 1)[0] + frames.fetch(index + 2)[0]        
+      else
+        frame[0] + frames.fetch(index + 1)[0] + frames.fetch(index + 1)[1]
+      end
+    elsif spare?(frame)
+      two_bowls(frame) + frames.fetch(index+1)[0]
+    elsif open_frame?(frame)
+      two_bowls(frame)
+    end
+  end
+
+  def score_regular_frame(index, frames, frame)
+    if strike?(frame)
+      if frame[1] == 10
+        balls_tenth_frame?(frame)
+      elsif spare?(frame)
+        balls_tenth_frame?(frame)
+      end
+    elsif open_frame?(frame)
+       two_bowls(frame)
+    end
   end
 
   def spare?(frame)
@@ -42,23 +58,27 @@ class Bowl
   end
 
   def open_frame?(frame)
-    frame[0] + frame[1] < 10
+    (frame[0] + frame[1]) < 10
   end
 
-  def balls_last_frame?(frame)
-    balls(frame) + frame[2]
+  def balls_tenth_frame?(frame)
+    two_bowls(frame) + frame[2]
   end
 
-  def balls(frame)
+  def two_bowls(frame)
     frame[0] + frame[1]
   end
 
-  def last_frame(frame)
+  def last_possible_throw(frame)
     frame[2].nil? == false
   end
 
+  def tenth_frame?(index, frames)
+    index <= frames.length - 2
+  end
+
   def draw_frame(frame)
-    if last_frame(frame)
+    if last_possible_throw(frame)
       if strike?(frame)
         if frame[1] == 10 && frame[2] != 10
           return " X, X, #{frame[2]}|"
@@ -83,11 +103,15 @@ class Bowl
     elsif open_frame?(frame)
       return " #{frame[0]} , #{frame[1]} |"
     end
-end
+  end
 
-  def draw_board(frames)
+  def draw_frames(frames)
     frames.map do |frame|
       draw_frame(frame)
-  end.join("")
-end
+    end.join("")
+  end
+
+  def draw_board(frames)
+    @io.puts "#{draw_frames(frames)} : #{score(frames)}"
+  end
 end
