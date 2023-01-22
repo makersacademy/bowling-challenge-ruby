@@ -7,19 +7,19 @@ class Application
   end
 
   def run
-    @io.puts "Welcome to the Bowling Calculator!"
+    @io.puts 'Welcome to the Bowling Calculator!'
     run_bowling_calculator
   end
-
+  
   private
 
   def run_bowling_calculator
     while @bowling_calculator.can_still_play? do
-      @io.puts "Insert the number of pins knocked out"
+      @io.puts 'Insert the number of pins knocked out'
       pins_knocked = @io.gets.chomp.to_i
-      total_score = @bowling_calculator.register_next_roll(pins_knocked)
+      @bowling_calculator.register_next_roll(pins_knocked)
     end
-    @io.puts "the very final total score is: #{total_score}"
+    @io.puts "The final total score is: #{@bowling_calculator.get_score}"
   end
 end
 
