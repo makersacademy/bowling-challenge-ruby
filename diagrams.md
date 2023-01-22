@@ -1,4 +1,9 @@
 # Spare Frame to Spare Frame
+This first conception of a frame got me to understand the way the numbers were working out.
+However at this current time I am getting confused in exactly how to implemented this without writiting 
+some sort of working code , which wouldnt be TDD. I would really like to understand what is going on here.
+Because I know what I am going to do now actually writing code then tests isn't TDD I don't understand the underlying 
+theme of what is going on.
 ```mermaid
 sequenceDiagram
 
@@ -17,13 +22,15 @@ fn1 ->> fn2: Roll 2: F(n+1)R1 + F(n+1)R2 + 2(F(n+2)R1)
 ```mermaid
 stateDiagram-v2
 direction LR
-state "Frame n, n <= 10" as fn
+state "Frame n, n < 10" as fn
 state "Frame (n+1), n < 10" as fn1
+state "Frame (10), n < 10" as fn10
 
 state "Roll_1" as r1
 state "Roll_2" as r2
 [*] --> r1
 r2 --> fn1
+fn1 --> fn10
 Strike --> fn1
 Hit1 --> Spare
 Hit1 --> Hit2
