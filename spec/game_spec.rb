@@ -219,4 +219,49 @@ describe Game do
             expect(game.calculate_score).to eq 280
         end
     end
+
+    context 'player plays a whole game' do
+        it 'example from readme' do
+            frame.roll1 = 1
+            frame.roll2 = 4
+            game.add_frame(frame)
+            frame2 = Frame.new
+            frame2.roll1 = 4
+            frame2.roll2 = 5
+            game.add_frame(frame2)
+            frame3 = Frame.new
+            frame3.roll1 = 6
+            frame3.roll2 = 4
+            game.add_frame(frame3)
+            frame4 = Frame.new
+            frame4.roll1 = 5
+            frame4.roll2 = 5
+            game.add_frame(frame4)
+            frame5 = Frame.new
+            frame5.roll1 = 10
+            game.add_frame(frame5)
+            frame6 = Frame.new
+            frame6.roll1 = 0
+            frame6.roll2 = 1
+            game.add_frame(frame6)
+            frame7 = Frame.new
+            frame7.roll1 = 7
+            frame7.roll2 = 3
+            game.add_frame(frame7)
+            frame8 = Frame.new
+            frame8.roll1 = 6
+            frame8.roll2 = 4
+            game.add_frame(frame8)
+            frame9 = Frame.new
+            frame9.roll1 = 10
+            game.add_frame(frame9)
+            frame10 = Frame.new
+            frame10.roll1 = 2
+            frame10.roll2 = 8
+            frame10.roll3 = 6
+            game.add_frame(frame10)
+            expect(game.cumulative_frame_totals).to eq [5, 14, 29, 49, 60, 61, 77, 97, 117, 133]
+            expect(game.calculate_score).to eq 133
+        end
+    end
 end

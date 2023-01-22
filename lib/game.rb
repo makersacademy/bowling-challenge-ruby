@@ -67,4 +67,13 @@ class Game
     def frames_played
         return @frames_played
     end
+
+    def frame_totals
+        return @frame_totals
+    end
+
+    def cumulative_frame_totals
+        sum = 0
+        frame_totals.map{|x| sum += x}
+    end
 end
