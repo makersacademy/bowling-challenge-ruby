@@ -71,8 +71,8 @@ describe Game do
         end
     end
 
-    context 'player hits a spare or a strike' do
-        it 'player hits a spare' do
+    context 'player hits all pins a frame' do
+        it 'they hit a spare' do
             frame.roll1 = 9
             frame.roll2 = 1
             game.add_frame(frame)
@@ -94,7 +94,7 @@ describe Game do
             expect(game.calculate_score).to eq 45
         end
 
-        it 'player hit a strike in a frame' do
+        it 'they hit a strike once' do
             frame.roll1 = 10
             frame.roll2 = 0
             game.add_frame(frame)
@@ -116,7 +116,7 @@ describe Game do
             expect(game.calculate_score).to eq 47
         end
 
-        it 'player hits two strikes in a row' do
+        it 'they hit a couple strikes in a row' do
             frame.roll1 = 10
             frame.roll2 = 0
             game.add_frame(frame)
@@ -125,7 +125,7 @@ describe Game do
             frame2.roll1 = 10
             frame2.roll2 = 0
             game.add_frame(frame2)
-            expect(game.calculate_score).to eq 20
+            expect(game.calculate_score).to eq 30
             frame3 = Frame.new
             frame3.roll1 = 4
             frame3.roll2 = 3
@@ -141,6 +141,27 @@ describe Game do
             frame5.roll2 = 1
             game.add_frame(frame5)
             expect(game.calculate_score).to eq 66
+        end
+
+        it 'they hit 9 strikes in a row' do
+            frame.roll1 = 10
+            frame.roll2 = 0
+            9.times { game.add_frame(frame) }
+            expect(game.calculate_score).to eq 240
+        end
+        
+        it 'they hit alternating strike/spare' do
+            frame.roll1 = 10
+            frame.roll2 = 0
+            frame2 = Frame.new
+            frame2.roll1 = 0
+            frame2.roll2 = 10
+            4.times do
+                game.add_frame(frame)
+                game.add_frame(frame2)
+            end
+            game.add_frame(frame)
+            expect(game.calculate_score).to eq 170
         end
     end
 end
