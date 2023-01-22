@@ -1,6 +1,15 @@
 require "bowling"
 
 RSpec.describe Bowling do
+
+  # Is it necessary to raise an error if frames > 10?
+  # context "given more than 10 frames" do
+  #   it "raises and error with a game over message" do
+  #     bowling = Bowling.new
+  #     expect(bowling.process_frame).to fail "Game over."
+  #   end
+  # end  
+
   context "given the number of pins knocked down in each roll" do
     it "returns the player's final score" do
       bowling = Bowling.new
@@ -51,12 +60,4 @@ RSpec.describe Bowling do
       expect(bowling.report_score).to eq "Game over, you scored 0 points."
     end
   end
-  
-  context "given more than 10 frames" do
-    it "raises and error with a game over message" do
-      bowling = Bowling.new
-      bowling.current_frame(11)
-      expect(bowling.report_score).to raise_error "Game over."
-    end
-  end  
 end

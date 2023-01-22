@@ -53,16 +53,16 @@ expect(bowling.report_score).to eq "You scored 133 points!"
 
 # 2
 bowling = Bowling.new
-bowling.process_frame([10]) # 10 + 2*extra_throw = 30
-bowling.process_frame([10]) # 30 + 10 + 2*extra_throw = 60
-bowling.process_frame([10]) # 60 + 10 + 2*extra_throw = 90
-bowling.process_frame([10]) # 90 + 10 + 2*extra_throw = 120
-bowling.process_frame([10]) # 120 + 10 + 2*extra_throw = 150
-bowling.process_frame([10]) # 150 + 10 + 2*extra_throw = 180
-bowling.process_frame([10]) # 180 + 10 + 2*extra_throw = 210
-bowling.process_frame([10]) # 210 + 10 + 2*extra_throw = 240
-bowling.process_frame([10]) # 240 + 10 + 2*extra_throw = 270
-bowling.process_frame([10, 10]) # 270 + 10 + 10 1*extra_throw = 300
+bowling.process_frame([10]) # 10 + 2*bonus_roll = 30
+bowling.process_frame([10]) # 30 + 10 + 2*bonus_roll = 60
+bowling.process_frame([10]) # 60 + 10 + 2*bonus_roll = 90
+bowling.process_frame([10]) # 90 + 10 + 2*bonus_roll = 120
+bowling.process_frame([10]) # 120 + 10 + 2*bonus_roll = 150
+bowling.process_frame([10]) # 150 + 10 + 2*bonus_roll = 180
+bowling.process_frame([10]) # 180 + 10 + 2*bonus_roll = 210
+bowling.process_frame([10]) # 210 + 10 + 2*bonus_roll = 240
+bowling.process_frame([10]) # 240 + 10 + 2*bonus_roll = 270
+bowling.process_frame([10, 10]) # 270 + 10 + 10 1*bonus_roll = 300
 expect(bowling.report_score).to eq "Congratulations on your perfect game! You scored 300 points!"
 
 # 3
