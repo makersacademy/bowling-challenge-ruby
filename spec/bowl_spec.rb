@@ -12,5 +12,11 @@ RSpec.describe Bowl do
     bowl = Bowl.new
     expect(bowl.score(arr)).to eq 20
   end
+
+  it 'gives a score of 16 case one spare - 5, 5 and 3 pins then 0 for the next 17 rolls' do
+    arr = [[5,5], [3,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
+    bowl = Bowl.new
+    expect(bowl.score(arr)).to eq 16
+  end
   
 end
