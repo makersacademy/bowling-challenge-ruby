@@ -71,8 +71,8 @@ describe Game do
         end
     end
 
-    context 'player hits a spare in one frame and then no spare/strike in next frame' do
-        it 'returns zero after one frame' do
+    context 'player hits a spare or a strike' do
+        it 'player hits a spare' do
             frame.roll1 = 9
             frame.roll2 = 1
             game.add_frame(frame)
@@ -92,6 +92,55 @@ describe Game do
             frame4.roll2 = 1
             game.add_frame(frame4)
             expect(game.calculate_score).to eq 45
+        end
+
+        it 'player hit a strike in a frame' do
+            frame.roll1 = 10
+            frame.roll2 = 0
+            game.add_frame(frame)
+            expect(game.calculate_score).to eq 10
+            frame2 = Frame.new
+            frame2.roll1 = 3
+            frame2.roll2 = 2
+            game.add_frame(frame2)
+            expect(game.calculate_score).to eq 20
+            frame3 = Frame.new
+            frame3.roll1 = 0
+            frame3.roll2 = 10
+            game.add_frame(frame3)
+            expect(game.calculate_score).to eq 30
+            frame4 = Frame.new
+            frame4.roll1 = 8
+            frame4.roll2 = 1
+            game.add_frame(frame4)
+            expect(game.calculate_score).to eq 47
+        end
+
+        it 'player hits two strikes in a row' do
+            frame.roll1 = 10
+            frame.roll2 = 0
+            game.add_frame(frame)
+            expect(game.calculate_score).to eq 10
+            frame2 = Frame.new
+            frame2.roll1 = 10
+            frame2.roll2 = 0
+            game.add_frame(frame2)
+            expect(game.calculate_score).to eq 20
+            frame3 = Frame.new
+            frame3.roll1 = 4
+            frame3.roll2 = 3
+            game.add_frame(frame3)
+            expect(game.calculate_score).to eq 48
+            frame4 = Frame.new
+            frame4.roll1 = 10
+            frame4.roll2 = 0
+            game.add_frame(frame4)
+            expect(game.calculate_score).to eq 58
+            frame5 = Frame.new
+            frame5.roll1 = 3
+            frame5.roll2 = 1
+            game.add_frame(frame5)
+            expect(game.calculate_score).to eq 66
         end
     end
 end

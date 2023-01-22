@@ -9,9 +9,12 @@ class Game
 
     def add_frame(frame)
         return 'START NEW GAME' if @frames_played == 10
-        @frame_totals[-1] += frame.roll1 if spare_check?
-        @frames << frame
         frame_total = sum_frame(frame)
+        
+        @frame_totals[-1] += frame.roll1 if spare_check?
+        @frame_totals[-1] += frame_total if strike_check?
+        
+        @frames << frame
         @frame_totals << frame_total
         @frames_played += 1
         
@@ -24,6 +27,13 @@ class Game
             last_frame_total = sum_frame(last_frame)
             return last_frame_total == 10 && last_frame.roll2 != 0
         end
+    end
+
+    def strike_check?
+        if @frames_played > 0
+            last_frame = @frames.last
+            return last_frame.roll1 == 10
+        end 
     end
 
     def sum_frame(frame)
