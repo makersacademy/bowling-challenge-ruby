@@ -64,17 +64,7 @@ class BowlingCalculator
       end
     end
 
-    last_frame = @frames[@frames.length - 2]
-    extra_frame = @frames[@frames.length - 1]
-
-    if extra_frame[0] == nil && last_frame[0] + last_frame[1] == 10
-      return true
-    end
-
-    if extra_frame[1] == nil && last_frame[0] == 10
-      return true
-    end
-
+    can_play_bonus_frame?
     return false
   end
 
@@ -89,6 +79,7 @@ class BowlingCalculator
   def get_strike_extra_points(i)
     counter = 0
     extra_score = 0
+
     for j in i + 1 ... @frames.length
       next_frame = @frames[j]
       for k in 0 ... next_frame.length
@@ -99,6 +90,7 @@ class BowlingCalculator
         end
       end
     end
+
     return extra_score
   end
 
@@ -106,10 +98,21 @@ class BowlingCalculator
     extra_score = 0
     next_frame = @frames[i + 1]
     next_roll = next_frame[0]
+
     if next_roll != nil
       extra_score += next_frame[0]
     end
 
     return extra_score
+  end
+
+  def can_play_bonus_frame?
+    last_frame = @frames[@frames.length - 2]
+    extra_frame = @frames[@frames.length - 1]
+    can_play_spare = extra_frame[0] == nil && last_frame[0] + last_frame[1] == 10
+    can_play_strike = extra_frame[1] == nil && last_frame[0] == 10
+
+    return true if can_play_spare
+    return true if can_play_strike
   end
 end
