@@ -15,7 +15,14 @@ class Game
     def add_bonus_score
         @board.each_with_index do |ind_frame, index|
             if ind_frame.sum == 10 && ind_frame[1] != 0
-                @bonus[index] += @board[index + 1][0]
+                @bonus[index] = @board[index + 1][0]
+            elsif ind_frame[0] == 10
+                case @board[index + 1][0]
+                when 10
+                    @bonus[index] = @board[index + 1][0] + @board[index + 2][0]
+                else
+                    @bonus[index] = (@board[index + 1][0] + @board[index + 1][1])
+                end
             end
         end
         @total_score += @bonus.sum
@@ -37,6 +44,8 @@ class Game
         end
         add_base_score
         add_bonus_score
+        p board
+        p bonus
     end
 
     def end
