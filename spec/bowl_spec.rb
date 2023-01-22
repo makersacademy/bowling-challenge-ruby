@@ -56,6 +56,14 @@ RSpec.describe Bowl do
       bowl = Bowl.new(io)
       expect(bowl.score(arr)).to eq 300
     end
+
+    it 'gives a score of 128 case all spares and one strike' do
+      io = double :io
+      arr_2 = [[2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8,10]]
+      bowl = Bowl.new(io)
+      expect(bowl.score(arr_2)).to eq 128
+    end
+
   end
 
   context "draw the frame" do
@@ -97,7 +105,7 @@ RSpec.describe Bowl do
     end
   end
 
-  context "draw result board" do
+  context "draw bowls for all frames" do
     it "draws the board for one bowling game" do
       io = double :io
       arr = [[1,4], [4,5], [6,4], [5,5], [10], [0,1], [7,3], [6,4], [10], [2,8,6]]
@@ -128,21 +136,26 @@ RSpec.describe Bowl do
   end
 
   context "draws the score after each frame" do
-    xit "draws the score" do
-      io = double :io
-      arr = [[2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8,10]]
-      bowl = Bowl.new(io)
-      expect(bowl.draw_score(arr)).to eq "12, 24, 26, 48, 60, 72, 84, 96, 108, 128"
+    it "draws the score" do
+  
     end
   end
 
-  context "" do
-    it "puts score" do
+  context "draws game board for all frames with total score" do
+    it "draws total score at the end" do
       io = double :io
       arr = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [10], [3,4]]
+      expect(io).to receive(:puts).with(" 0 , 0 | 0 , 0 | 0 , 0 | 0 , 0 | 0 , 0 | 0 , 0 | 0 , 0 | 0 , 0 | X | 3 , 4 | : 24")
       bowl = Bowl.new(io)
       bowl.draw_board(arr)
-      expect(io).to receive(:puts).and_return(" 0 , 0 | 0 , 0 | 0 , 0 | 0 , 0 | 0 , 0 | 0 , 0 | 0 , 0 | 0 , 0 | X | 3 , 4 | : 24")
+    end
+
+    it "draws total score at the end for another bowling game" do
+      io = double :io
+      arr = [[2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8,10]]
+      expect(io).to receive(:puts).with(" 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / , X| : 128")
+      bowl = Bowl.new(io)
+      bowl.draw_board(arr)
     end
   end
 end

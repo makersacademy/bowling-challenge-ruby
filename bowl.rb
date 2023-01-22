@@ -16,35 +16,33 @@ class Bowl
   end
 
   def calculate_frame_score(index, frames, frame)
-    if (tenth_frame?(index, frames))
-      score_nineth_frame(index, frames, frame)
-    else
+    if (regular_frame?(index, frames))
       score_regular_frame(index, frames, frame)
+    else
+      score_tenth_frame(index, frames, frame)
     end
   end
 
-  def score_nineth_frame(index, frames, frame)
+  def score_regular_frame(index, frames, frame)
     if strike?(frame)
-      if frames.fetch(index + 1)[1].nil? 
+      if frames.fetch(index + 1)[1].nil?
         frame[0] + frames.fetch(index + 1)[0] + frames.fetch(index + 2)[0]        
       else
         frame[0] + frames.fetch(index + 1)[0] + frames.fetch(index + 1)[1]
       end
     elsif spare?(frame)
       two_bowls(frame) + frames.fetch(index+1)[0]
-    elsif open_frame?(frame)
+    else
       two_bowls(frame)
     end
   end
 
-  def score_regular_frame(index, frames, frame)
+  def score_tenth_frame(index, frames, frame)
     if strike?(frame)
-      if frame[1] == 10
-        balls_tenth_frame?(frame)
-      elsif spare?(frame)
-        balls_tenth_frame?(frame)
-      end
-    elsif open_frame?(frame)
+      balls_tenth_frame?(frame)
+    elsif spare?(frame)
+      frame[0] + frame[1] + frame[2]
+    else
        two_bowls(frame)
     end
   end
@@ -73,7 +71,7 @@ class Bowl
     frame[2].nil? == false
   end
 
-  def tenth_frame?(index, frames)
+  def regular_frame?(index, frames)
     index <= frames.length - 2
   end
 
@@ -113,5 +111,12 @@ class Bowl
 
   def draw_board(frames)
     @io.puts "#{draw_frames(frames)} : #{score(frames)}"
+  end
+  def run
+    puts score([[2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8,10]])
+  end
+  if __FILE__ == $0
+    app = Bowl.new(Kernel)
+    app.run
   end
 end
