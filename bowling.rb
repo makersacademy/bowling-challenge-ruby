@@ -43,9 +43,3 @@ class Bowling
     app.run
   end
 end
-# if (i == frames.length - 1) && (frame[0] == 10) 
-#   if frames.fetch(i+1)[0] == 10
-#     frame[0] + frames.fetch(i+1)[0] + frames.fetch(i+1)[1]
-#   elsif (frames.fetch(i+1)[0] + frames.fetch(i+1)[1] == 10)
-#     frame[0] + frames.fetch(i+1)[0] + frames.fetch(i+1)[1]
-  # || (frame[0] + frame[1] == 10)
