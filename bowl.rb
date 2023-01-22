@@ -44,4 +44,12 @@ class Bowl
     frame[0] + frame[1]
   end
 
+  def draw_frame(frame)
+    if(frame.empty?) 
+      return " , |"
+    else 
+      return "#{frame[0]},#{frame[1]}|"
+    end
+  end
+
 end
