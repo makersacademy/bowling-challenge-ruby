@@ -38,4 +38,17 @@ RSpec.describe Bowl do
     expect(bowl.score(arr)).to eq 60
   end
 
+  it 'gives a score of 90 case 4 strikes - 4 stikes, then 0 for the next 14 rolls' do
+    arr = [[10],[10],[10],[10],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]
+    bowl = Bowl.new
+    expect(bowl.score(arr)).to eq 90
+  end
+
+  it 'gives a score of 300 case perfect game - 12 strikes of 10' do
+    arr = [[10], [10], [10], [10], [10], [10], [10], [10], [10], [10,10,10]]
+    bowl = Bowl.new
+    expect(bowl.score(arr)).to eq 300
+  end
+  
+
 end

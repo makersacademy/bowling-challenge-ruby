@@ -7,16 +7,27 @@ class Bowl
 
   def score(frames)
     frames.map.with_index do |frame, index|
-      if index <= frames.length - 2 && strike?(frame)
-        if frames.fetch(index + 1)[1].nil? 
-          frame[0] + frames.fetch(index + 1)[0] + frames.fetch(index + 2)[0]        
-        else 
-          frame[0] + frames.fetch(index + 1)[0] + frames.fetch(index + 1)[1]
+      if (index <= frames.length - 2)
+        if strike?(frame)
+          if frames.fetch(index + 1)[1].nil? 
+            frame[0] + frames.fetch(index + 1)[0] + frames.fetch(index + 2)[0]        
+          else
+            frame[0] + frames.fetch(index + 1)[0] + frames.fetch(index + 1)[1]
+          end
+        elsif spare?(frame)
+          balls(frame) + frames.fetch(index+1)[0]
+        else
+          balls(frame)
         end
-      elsif index <= frames.length - 2 && spare?(frame)
-        balls(frame) + frames.fetch(index+1)[0]
-      else
-        balls(frame)
+      elsif index == frames.length - 1
+        if strike?(frame)
+          if frame[1] == 10
+            balls(frame) + frame[2]
+          elsif spare?(frame)
+            balls(frame) + frame[2]
+          end
+        else balls(frame)
+        end
       end
     end.sum
   end
