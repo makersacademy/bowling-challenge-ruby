@@ -56,10 +56,10 @@ describe Game do
             frame.roll1 = 6
             frame.roll2 = 1
             game.add_frame(frame)
-            frame = Frame.new
-            frame.roll1 = 4
-            frame.roll2 = 5
-            game.add_frame(frame)
+            frame2 = Frame.new
+            frame2.roll1 = 4
+            frame2.roll2 = 5
+            game.add_frame(frame2)
             expect(game.calculate_score).to eq 16
         end
         
@@ -68,6 +68,30 @@ describe Game do
             frame.roll2 = 2
             10.times { game.add_frame(frame) }
             expect(game.calculate_score).to eq 90
+        end
+    end
+
+    context 'player hits a spare in one frame and then no spare/strike in next frame' do
+        it 'returns zero after one frame' do
+            frame.roll1 = 9
+            frame.roll2 = 1
+            game.add_frame(frame)
+            expect(game.calculate_score).to eq 10
+            frame2 = Frame.new
+            frame2.roll1 = 3
+            frame2.roll2 = 2
+            game.add_frame(frame2)
+            expect(game.calculate_score).to eq 18
+            frame3 = Frame.new
+            frame3.roll1 = 7
+            frame3.roll2 = 3
+            game.add_frame(frame3)
+            expect(game.calculate_score).to eq 28
+            frame4 = Frame.new
+            frame4.roll1 = 8
+            frame4.roll2 = 1
+            game.add_frame(frame4)
+            expect(game.calculate_score).to eq 45
         end
     end
 end
