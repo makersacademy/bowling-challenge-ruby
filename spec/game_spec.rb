@@ -96,7 +96,6 @@ describe Game do
 
         it 'they hit a strike once' do
             frame.roll1 = 10
-            frame.roll2 = 0
             game.add_frame(frame)
             expect(game.calculate_score).to eq 10
             frame2 = Frame.new
@@ -118,12 +117,10 @@ describe Game do
 
         it 'they hit a couple strikes in a row' do
             frame.roll1 = 10
-            frame.roll2 = 0
             game.add_frame(frame)
             expect(game.calculate_score).to eq 10
             frame2 = Frame.new
             frame2.roll1 = 10
-            frame2.roll2 = 0
             game.add_frame(frame2)
             expect(game.calculate_score).to eq 30
             frame3 = Frame.new
@@ -133,7 +130,6 @@ describe Game do
             expect(game.calculate_score).to eq 48
             frame4 = Frame.new
             frame4.roll1 = 10
-            frame4.roll2 = 0
             game.add_frame(frame4)
             expect(game.calculate_score).to eq 58
             frame5 = Frame.new
@@ -145,14 +141,12 @@ describe Game do
 
         it 'they hit 9 strikes in a row' do
             frame.roll1 = 10
-            frame.roll2 = 0
             9.times { game.add_frame(frame) }
             expect(game.calculate_score).to eq 240
         end
         
         it 'they hit alternating strike/spare' do
             frame.roll1 = 10
-            frame.roll2 = 0
             frame2 = Frame.new
             frame2.roll1 = 0
             frame2.roll2 = 10
@@ -162,6 +156,67 @@ describe Game do
             end
             game.add_frame(frame)
             expect(game.calculate_score).to eq 170
+        end
+    end
+
+    context 'player plays full game' do
+        it 'they hit a perfect game' do
+            frame.roll1 = 10
+            9.times { game.add_frame(frame) }
+            frame10 = Frame.new
+            frame10.roll1 = 10
+            frame10.roll2 = 10
+            frame10.roll3 = 10
+            game.add_frame(frame10)
+            expect(game.calculate_score).to eq 300
+        end
+
+        it 'they hit a perfect game except for a spare and strike in the 10th frame' do
+            frame.roll1 = 10
+            9.times { game.add_frame(frame) }
+            expect(game.calculate_score).to eq 240
+            frame10 = Frame.new
+            frame10.roll1 = 9
+            frame10.roll2 = 1
+            frame10.roll3 = 10
+            game.add_frame(frame10)
+            expect(game.calculate_score).to eq 279
+        end
+
+        it 'they hit a perfect game except for a spare and gutter in the 10th frame' do
+            frame.roll1 = 10
+            9.times { game.add_frame(frame) }
+            expect(game.calculate_score).to eq 240
+            frame10 = Frame.new
+            frame10.roll1 = 5
+            frame10.roll2 = 5
+            frame10.roll3 = 5
+            game.add_frame(frame10)
+            expect(game.calculate_score).to eq 270
+        end
+
+        it 'they hit a perfect game except for a spare and gutter in the 10th frame' do
+            frame.roll1 = 10
+            9.times { game.add_frame(frame) }
+            expect(game.calculate_score).to eq 240
+            frame10 = Frame.new
+            frame10.roll1 = 0
+            frame10.roll2 = 10
+            frame10.roll3 = 3
+            game.add_frame(frame10)
+            expect(game.calculate_score).to eq 263
+        end
+
+        it 'they hit a perfect game except for a spare and gutter in the 10th frame' do
+            frame.roll1 = 10
+            9.times { game.add_frame(frame) }
+            expect(game.calculate_score).to eq 240
+            frame10 = Frame.new
+            frame10.roll1 = 10
+            frame10.roll2 = 0
+            frame10.roll3 = 10
+            game.add_frame(frame10)
+            expect(game.calculate_score).to eq 280
         end
     end
 end
