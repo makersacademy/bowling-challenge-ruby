@@ -51,10 +51,36 @@ RSpec.describe Bowl do
   end
 
   context "draw the result board" do
-    it "draws an empty board for gutter frame" do
+    it "draws board for gutter frame" do
       arr = Array.new(10, [0, 0])
       bowl = Bowl.new
       expect(bowl.draw_frame(arr[0])).to eq "0,0|"
+    end
+
+    it "draws an empty board for empty frame" do
+      arr = []
+      bowl = Bowl.new
+      expect(bowl.draw_frame(arr)).to eq " , |"
+    end
+
+    it "draws board for strike frame" do
+      arr = [[10], [3,4], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
+      bowl = Bowl.new
+      expect(bowl.draw_frame(arr[0])).to eq " X |"
+    end
+
+    it "draws board for frame" do
+      arr = [[6,3], [3,4], [2,4], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
+      bowl = Bowl.new
+      expect(bowl.draw_frame(arr[0])).to eq "6,3|"
+      expect(bowl.draw_frame(arr[1])).to eq "3,4|"
+    end
+    
+    it "draws board for spare frame" do
+      arr = [[8,2], [3,4], [5,5], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
+      bowl = Bowl.new
+      expect(bowl.draw_frame(arr[0])).to eq "8, / |"
+      expect(bowl.draw_frame(arr[2])).to eq "5, / |"
     end
   end
 end

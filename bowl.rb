@@ -47,6 +47,10 @@ class Bowl
   def draw_frame(frame)
     if(frame.empty?) 
       return " , |"
+    elsif strike?(frame)
+      return " X |"
+    elsif spare?(frame)
+      return "#{frame[0]}, / |"
     else 
       return "#{frame[0]},#{frame[1]}|"
     end
