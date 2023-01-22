@@ -50,11 +50,11 @@ RSpec.describe Bowl do
     end
   end
 
-  context "draw the result board" do
+  context "draw the frame" do
     it "draws board for gutter frame" do
       arr = Array.new(10, [0, 0])
       bowl = Bowl.new
-      expect(bowl.draw_frame(arr[0])).to eq "0,0|"
+      expect(bowl.draw_frame(arr[0])).to eq " 0 , 0 |"
     end
 
     it "draws an empty board for empty frame" do
@@ -69,18 +69,50 @@ RSpec.describe Bowl do
       expect(bowl.draw_frame(arr[0])).to eq " X |"
     end
 
-    it "draws board for frame" do
+    it "draws board for open frame" do
       arr = [[6,3], [3,4], [2,4], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
       bowl = Bowl.new
-      expect(bowl.draw_frame(arr[0])).to eq "6,3|"
-      expect(bowl.draw_frame(arr[1])).to eq "3,4|"
+      expect(bowl.draw_frame(arr[0])).to eq " 6 , 3 |"
+      expect(bowl.draw_frame(arr[1])).to eq " 3 , 4 |"
     end
     
     it "draws board for spare frame" do
       arr = [[8,2], [3,4], [5,5], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
       bowl = Bowl.new
-      expect(bowl.draw_frame(arr[0])).to eq "8, / |"
-      expect(bowl.draw_frame(arr[2])).to eq "5, / |"
+      expect(bowl.draw_frame(arr[0])).to eq " 8, / |"
+      expect(bowl.draw_frame(arr[2])).to eq " 5, / |"
+    end
+  end
+
+  context "draw result board" do
+    it "draws the board for one bowling game" do
+      arr = [[1,4], [4,5], [6,4], [5,5], [10], [0,1], [7,3], [6,4], [10], [2,8,6]]
+      bowl = Bowl.new
+      expect(bowl.draw_board(arr)).to eq " 1 , 4 | 4 , 5 | 6, / | 5, / | X | 0 , 1 | 7, / | 6, / | X | 2, / , 6|"
+    end
+
+    it "draws another board for one bowling game" do
+      arr = [[1,4], [4,5], [6,4], [5,5], [10], [0,1], [7,3], [6,4], [10], [10,10,10]]
+      bowl = Bowl.new
+      expect(bowl.draw_board(arr)).to eq " 1 , 4 | 4 , 5 | 6, / | 5, / | X | 0 , 1 | 7, / | 6, / | X | X, X, X|"
+    end
+
+    it "draws one more board for one bowling game" do
+      arr = [[10], [10], [10], [10], [10], [10], [10], [1,1], [1,1], [2,8,10]]
+      bowl = Bowl.new
+      expect(bowl.draw_board(arr)).to eq " X | X | X | X | X | X | X | 1 , 1 | 1 , 1 | 2, / , X|"
+    end
+    
+    it "another board for one bowling game" do
+      arr = [[2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8,10]]
+      bowl = Bowl.new
+      expect(bowl.draw_board(arr)).to eq " 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / , X|"
     end
   end
 end
+
+" ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
+│ 1 │ 4 │ 4 │ 5 │ 6 │ / │ 5 │ / │   │ * │ 0 │ 1 │ 7 │ / │ 6 │ / │   │ * │ 2 │ / │ 6 │
+│   └───┤   └───┤   └───┤   └───┤   └───┤   └───┤   └───┤   └───┤   └───┤   └───┴───┤
+│   5   │   14  │  29   │  49   │  60   │   61  │   77  │   97  │  117  │    133    │
+└───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────────┘"
