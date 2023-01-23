@@ -3,6 +3,7 @@ class Bowling
     @io = io
     @player_names = []
     @scorecard = []
+    @one_player_score = []
   end
 
   def greeter
@@ -21,8 +22,8 @@ class Bowling
     return @player_names
   end
 
-  def scorecard_setup
-    @player_names.each do |player|
+  def scorecard_setup(player_names)
+    player_names.each do |player|
       @scorecard << {player => []}
     end
     return @scorecard
@@ -36,10 +37,23 @@ class Bowling
     num == 10 ? true : false
   end
 
-  def check_rolls(hash, player_name)
-    hash[player_name].length % 2 == 0 ? true : false
+  def check_rolls(scorecard, player_name)
+    scorecard[0][player_name].length % 2 == 0 ? true : false
   end
 
-
+  def run_game(scorecard)
+    while true do
+      @io.puts("Please enter your roll")
+      player_roll = @io.gets.chomp.to_i
+      @one_player_score << player_roll
+      if @one_player_score.length % 2 == 1 && check_strike(player_roll) == false
+        @io.puts("Please roll again")
+      else
+        @io.puts("Your turn is over")
+        break
+      end
+    end
+    return @one_player_score.sum
+  end
 end
 
