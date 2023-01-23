@@ -1,11 +1,11 @@
 I started the challenge by researching bowling to understand the scoring system. Below are images of my diagram, notes and scorecards in excel:
 
 
-![bowling diagram 1](bowling_diagram_1.png "Diagram 1")
+![alt text](bowling_diagram_1.png "Diagram 1")
 
-![bowling diagram 2](bowling_diagram_2.png "Diagram 2")
+![alt text](bowling_diagram_2.png "Diagram 2")
 
-![excel scoresheet](scorecard_excel.png "Excel scoresheet design to understand scoring system")
+![alt text](scorecard_excel.png "Excel scoresheet design to understand scoring system")
 
 Used Bowling Game Kata -- Ruby to solve Bowling Challenge as I found it extremely difficult.
 =================
