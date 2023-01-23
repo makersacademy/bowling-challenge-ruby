@@ -1,7 +1,8 @@
 I started the challenge by researching bowling to understand the scoring system. Below are images of my diagram, notes and scorecards in excel:
 
 
-![alt text](bowling_diagram_1.png "Diagram 1")
+![Diagram 1](./bowling_diagram_1.png)
+
 
 ![alt text](bowling_diagram_2.png "Diagram 2")
 
