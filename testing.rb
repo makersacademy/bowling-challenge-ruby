@@ -1,5 +1,5 @@
 # /bin/zsh -c "bash -c '/Users/murat/.rvm/bin/rvm ruby-3.2.0 do /Users/murat/.rvm/rubies/ruby-3.2.0/bin/ruby -x /Users/murat/.rvm/gems/ruby-3.2.0/bin/bundle exec /Users/murat/.rvm/rubies/ruby-3.2.0/bin/ruby -r '\"'\"'/Users/murat/Library/Application Support/JetBrains/Toolbox/apps/RubyMine/ch-0/223.8214.60/RubyMine.app/Contents/plugins/ruby/rb/consoles/irb_config.rb'\"'\"' /Users/murat/.rvm/rubies/ruby-3.2.0/bin/irb'"
- @current_frame = {frame_number:1, frame_type:"", final_score:0,bonus:0 ,rolls_taken:{roll_1:"",roll_2:""}}
+ @current_frame = { frame_number:1, frame_type:"", final_score:0, bonus:0 , rolls_tally:{ roll_1:"", roll_2:""}}
 
 # {:frame_number=>1, :frame_type=>"", :final_score=>0, :bonus=>0, :rolls_taken=>{:roll_1=>"", :roll_2=>""}}
  @frame_scores = [@current_frame]
@@ -12,7 +12,7 @@
 
 
 # :previous_frame
- @current_frame = {frame_number:2, frame_type:"Strike", final_score:0, bonus:0 ,rolls_taken:{roll_1:"",roll_2:""}}
+ @current_frame = { frame_number:2, frame_type:"Strike", final_score:0, bonus:0 , rolls_tally:{ roll_1:"", roll_2:""}}
 
 # {:frame_number=>2, :frame_type=>"Strike", :final_score=>0, :bonus=>0, :rolls_taken=>{:roll_1=>"", :roll_2=>""}}
  # frozen_string_literal: true
@@ -133,10 +133,10 @@ You got a Strike you now move onto your next Frame=> nil
  @frame_scores[0][:frame_number]
 
 # 1
- @frame_scores[0][:rolls_taken][:roll_1] = roll_1
+ @frame_scores[0][:rolls_tally][:roll_1] = roll_1
 
 # #<Roll:0x000000010c27dc58 @hit_type="Base", @pins_hit=4, @roll_count=1>
- @frame_scores[0][:rolls_taken][:roll_2] = roll_2
+ @frame_scores[0][:rolls_tally][:roll_2] = roll_2
 
 # #<Roll:0x000000010c27a378 @hit_type="Base", @pins_hit=3, @roll_count=1>
  @FRAME_SCORES
@@ -145,7 +145,7 @@ You got a Strike you now move onto your next Frame=> nil
  @frame_scores
 
 # [{:frame_number=>1, :frame_type=>"", :final_score=>0, :bonus=>0, :rolls_taken=>{:roll_1=>#<Roll:0x000000010c27dc58 @hit_type="Base", @pins_hit=4, @roll_count=1>, :roll_2=>#<Roll:0x000000010c27a378 @hit_type="Base", @pins_hit=3, @roll_count=1>}}]
- @frame_scores << {frame_number:1, frame_type:"Strike", final_score:0, bonus:0 ,rolls_taken:{roll_1:roll_3,roll_2:""}}
+ @frame_scores << { frame_number:1, frame_type:"Strike", final_score:0, bonus:0 , rolls_tally:{ roll_1:roll_3, roll_2:""}}
 
 # [{:frame_number=>1, :frame_type=>"", :final_score=>0, :bonus=>0, :rolls_taken=>{:roll_1=>#<Roll:0x000000010c27dc58 @hit_type="Base", @pins_hit=4, @roll_count=1>, :roll_2=>#<Roll:0x000000010c27a378 @hit_type="Base", @pins_hit=3, @roll_count=1>}}, {:frame_number=>1, :frame_type=>"Strike", :final_score=>0, :bonus=>0, :rolls_taken=>{:roll_1=>#<Roll:0x000000010c599518 @hit_type="Strike", @pins_hit=10, @roll_count=1>, :roll_2=>""}}]
  @frame_scores[0][:frame_number] = 2
@@ -154,7 +154,7 @@ You got a Strike you now move onto your next Frame=> nil
  @frame_scores.reverse
 
 # [{:frame_number=>1, :frame_type=>"Strike", :final_score=>0, :bonus=>0, :rolls_taken=>{:roll_1=>#<Roll:0x000000010c599518 @hit_type="Strike", @pins_hit=10, @roll_count=1>, :roll_2=>""}}, {:frame_number=>2, :frame_type=>"", :final_score=>0, :bonus=>0, :rolls_taken=>{:roll_1=>#<Roll:0x000000010c27dc58 @hit_type="Base", @pins_hit=4, @roll_count=1>, :roll_2=>#<Roll:0x000000010c27a378 @hit_type="Base", @pins_hit=3, @roll_count=1>}}]
- @frame_scores[0][:bonus] = @frame_scores[1][:rolls_taken][:roll_1].pins_hit + @frame_scores[1][:rolls_taken][:roll_2].pins_hit
+ @frame_scores[0][:bonus] = @frame_scores[1][:rolls_tally][:roll_1].pins_hit + @frame_scores[1][:rolls_tally][:roll_2].pins_hit
 
 # (irb):77:in `<main>': undefined method `pins_hit' for "":String (NoMethodError)
 # 	from /Users/murat/.rvm/rubies/ruby-3.2.0/lib/ruby/gems/3.2.0/gems/irb-1.6.2/exe/irb:11:in `<top (required)>'
@@ -181,10 +181,10 @@ You got a Strike you now move onto your next Frame=> nil
  @frame_scores.reverse
 
 # [{:frame_number=>1, :frame_type=>"Strike", :final_score=>0, :bonus=>0, :rolls_taken=>{:roll_1=>#<Roll:0x000000010c599518 @hit_type="Strike", @pins_hit=10, @roll_count=1>, :roll_2=>""}}, {:frame_number=>2, :frame_type=>"", :final_score=>0, :bonus=>0, :rolls_taken=>{:roll_1=>#<Roll:0x000000010c27dc58 @hit_type="Base", @pins_hit=4, @roll_count=1>, :roll_2=>#<Roll:0x000000010c27a378 @hit_type="Base", @pins_hit=3, @roll_count=1>}}]
- @frame_scores[1][:rolls_taken]
+ @frame_scores[1][:rolls_tally]
 
 # {:roll_1=>#<Roll:0x000000010c599518 @hit_type="Strike", @pins_hit=10, @roll_count=1>, :roll_2=>""}
- @frame_scores[0][:rolls_taken]
+ @frame_scores[0][:rolls_tally]
 
 # {:roll_1=>#<Roll:0x000000010c27dc58 @hit_type="Base", @pins_hit=4, @roll_count=1>, :roll_2=>#<Roll:0x000000010c27a378 @hit_type="Base", @pins_hit=3, @roll_count=1>}
  @frame_scores
@@ -193,19 +193,19 @@ You got a Strike you now move onto your next Frame=> nil
  @frame_scores = @frame_scores.reverse
 
 # [{:frame_number=>1, :frame_type=>"Strike", :final_score=>0, :bonus=>0, :rolls_taken=>{:roll_1=>#<Roll:0x000000010c599518 @hit_type="Strike", @pins_hit=10, @roll_count=1>, :roll_2=>""}}, {:frame_number=>2, :frame_type=>"", :final_score=>0, :bonus=>0, :rolls_taken=>{:roll_1=>#<Roll:0x000000010c27dc58 @hit_type="Base", @pins_hit=4, @roll_count=1>, :roll_2=>#<Roll:0x000000010c27a378 @hit_type="Base", @pins_hit=3, @roll_count=1>}}]
- @frame_scores[1][:rolls_taken]
+ @frame_scores[1][:rolls_tally]
 
 # {:roll_1=>#<Roll:0x000000010c27dc58 @hit_type="Base", @pins_hit=4, @roll_count=1>, :roll_2=>#<Roll:0x000000010c27a378 @hit_type="Base", @pins_hit=3, @roll_count=1>}
- @frame_scores[0][:bonus] = @frame_scores[1][:rolls_taken][:roll_1].pins_hit + @frame_scores[1][:rolls_taken][:roll_2].pins_hit
+ @frame_scores[0][:bonus] = @frame_scores[1][:rolls_tally][:roll_1].pins_hit + @frame_scores[1][:rolls_tally][:roll_2].pins_hit
 
 # 7
- @frame_scores[0][:frame_score] = @frame_scores[1][:rolls_taken][:roll_1].pins_hit + @frame_scores[1][:rolls_taken][:roll_2].pins_hit + @frame_scores[0][:rolls_taken][:roll_1].pins_hit
+ @frame_scores[0][:frame_score] = @frame_scores[1][:rolls_tally][:roll_1].pins_hit + @frame_scores[1][:rolls_tally][:roll_2].pins_hit + @frame_scores[0][:rolls_tally][:roll_1].pins_hit
 
 # 17
  @frame_scores
 
 # [{:frame_number=>1, :frame_type=>"Strike", :final_score=>0, :bonus=>7, :rolls_taken=>{:roll_1=>#<Roll:0x000000010c599518 @hit_type="Strike", @pins_hit=10, @roll_count=1>, :roll_2=>""}, :frame_score=>17}, {:frame_number=>2, :frame_type=>"", :final_score=>0, :bonus=>0, :rolls_taken=>{:roll_1=>#<Roll:0x000000010c27dc58 @hit_type="Base", @pins_hit=4, @roll_count=1>, :roll_2=>#<Roll:0x000000010c27a378 @hit_type="Base", @pins_hit=3, @roll_count=1>}}]
- @frame_scores[0][:final_score] = @frame_scores[1][:rolls_taken][:roll_1].pins_hit + @frame_scores[1][:rolls_taken][:roll_2].pins_hit + @frame_scores[0][:rolls_taken][:roll_1].pins_hit
+ @frame_scores[0][:final_score] = @frame_scores[1][:rolls_tally][:roll_1].pins_hit + @frame_scores[1][:rolls_tally][:roll_2].pins_hit + @frame_scores[0][:rolls_tally][:roll_1].pins_hit
 
 # 17
  @frame_scores
