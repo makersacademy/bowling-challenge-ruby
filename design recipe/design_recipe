@@ -119,6 +119,9 @@ newgame.frame # => (3, 6)
 newgame.strike # => (10)
 
 newgame.spare # => (5, 5)
+
+newgame.gutterball # => (0)
+
 Encode each example as a test. You can add to the above list as you go.
 
 5. Implement the Behaviour
