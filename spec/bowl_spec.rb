@@ -71,14 +71,14 @@ RSpec.describe Bowl do
       io = double :io
       arr = Array.new(10, [0, 0])
       bowl = Bowl.new(io)
-      expect(bowl.draw_frame(arr[0])).to eq " 0 , 0 |"
+      expect(bowl.draw_frame(arr[0])).to eq (" 0 , 0 |")
     end
 
     it "draws an empty board for empty frame" do
       io = double :io
       arr = []
       bowl = Bowl.new(io)
-      expect(bowl.draw_frame(arr)).to eq " , |"
+      expect(bowl.draw_frame(arr)).to eq (" , |")
     end
 
     it "draws board for strike frame" do
@@ -110,28 +110,28 @@ RSpec.describe Bowl do
       io = double :io
       arr = [[1,4], [4,5], [6,4], [5,5], [10], [0,1], [7,3], [6,4], [10], [2,8,6]]
       bowl = Bowl.new(io)
-      expect(bowl.draw_frames(arr)).to eq " 1 , 4 | 4 , 5 | 6, / | 5, / | X | 0 , 1 | 7, / | 6, / | X | 2, / , 6|"
+      expect(bowl.draw_frames(arr)).to eq " 1  4 | 4  5 | 6 / | 5 / | X | 0  1 | 7 / | 6 / | X | 2 /  6|"
     end
 
     it "draws another board for one bowling game" do
       io = double :io
       arr = [[1,4], [4,5], [6,4], [5,5], [10], [0,1], [7,3], [6,4], [10], [10,10,10]]
       bowl = Bowl.new(io)
-      expect(bowl.draw_frames(arr)).to eq " 1 , 4 | 4 , 5 | 6, / | 5, / | X | 0 , 1 | 7, / | 6, / | X | X, X, X|"
+      expect(bowl.draw_frames(arr)).to eq " 1  4 | 4  5 | 6 / | 5 / | X | 0  1 | 7 / | 6 / | X | X X X|"
     end
 
     it "draws one more board for one bowling game" do
       io = double :io
       arr = [[10], [10], [10], [10], [10], [10], [10], [1,1], [1,1], [2,8,10]]
       bowl = Bowl.new(io)
-      expect(bowl.draw_frames(arr)).to eq " X | X | X | X | X | X | X | 1 , 1 | 1 , 1 | 2, / , X|"
+      expect(bowl.draw_frames(arr)).to eq " X | X | X | X | X | X | X | 1  1 | 1  1 | 2 /  X|"
     end
     
     it "another board for one bowling game" do
       io = double :io
       arr = [[2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8,10]]
       bowl = Bowl.new(io)
-      expect(bowl.draw_frames(arr)).to eq " 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / , X|"
+      expect(bowl.draw_frames(arr)).to eq " 2 / | 2 / | 2 / | 2 / | 2 / | 2 / | 2 / | 2 / | 2 / | 2 /  X|"
     end
   end
 
@@ -145,7 +145,7 @@ RSpec.describe Bowl do
     it "draws total score at the end" do
       io = double :io
       arr = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0], [10], [3,4]]
-      expect(io).to receive(:puts).with(" 0 , 0 | 0 , 0 | 0 , 0 | 0 , 0 | 0 , 0 | 0 , 0 | 0 , 0 | 0 , 0 | X | 3 , 4 | : 24")
+      expect(io).to receive(:puts).with("|  0  0 | 0  0 | 0  0 | 0  0 | 0  0 | 0  0 | 0  0 | 0  0 | X | 3  4 | : 24")
       bowl = Bowl.new(io)
       bowl.draw_board(arr)
     end
@@ -153,7 +153,7 @@ RSpec.describe Bowl do
     it "draws total score at the end for another bowling game" do
       io = double :io
       arr = [[2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8,10]]
-      expect(io).to receive(:puts).with(" 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / | 2, / , X| : 128")
+      expect(io).to receive(:puts).with("|  2 / | 2 / | 2 / | 2 / | 2 / | 2 / | 2 / | 2 / | 2 / | 2 /  X| : 128")
       bowl = Bowl.new(io)
       bowl.draw_board(arr)
     end

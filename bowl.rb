@@ -103,17 +103,41 @@ class Bowl
     end
   end
 
+   def draw_score(frames)
+    scores_arr = []
+      frames.each.with_index do |frame, index|
+      scores_arr << calculate_frame_score(index, frames, frame)
+    end
+    puts "|    " + scores_arr.join("   |  ") + "     |"
+  end
+
   def draw_frames(frames)
     frames.map do |frame|
       draw_frame(frame)
-    end.join("")
+    end.join(" ").delete(",")
+  end
+
+  def draw_top 
+    puts  "┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐"
+  end
+
+  def draw_middle
+    puts "│   └───┤   └───┤   └───┤   └───┤   └───┤   └───┤   └───┤   └───┤   └───┤   └───┴───┤"
+  end
+
+  def draw_bottom
+    puts "└───────┴───────┴────────┴────────┴────────┴───────┴────────┴────────┴────────┴──────────┘"
   end
 
   def draw_board(frames)
-    @io.puts "#{draw_frames(frames)} : #{score(frames)}"
+    @io.puts "| "+"#{draw_frames(frames)} : #{score(frames)}"
   end
   def run
-    puts score([[2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8], [2,8,10]])
+    draw_top
+    draw_board([[1,4], [4,5], [6,4], [5,5], [10], [0,1], [7,3], [6,4], [10], [10,10,10]])
+    draw_middle
+    draw_score([[1,4], [4,5], [6,4], [5,5], [10], [0,1], [7,3], [6,4], [10], [10,10,10]])
+    draw_bottom
   end
   if __FILE__ == $0
     app = Bowl.new(Kernel)
