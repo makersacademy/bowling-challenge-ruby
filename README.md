@@ -1,3 +1,15 @@
+I started the challenge by researching bowling to understand the scoring system. Below are images of my diagram, notes and scorecards in excel:
+
+
+![Diagram 1](./images/bowling_diagram_1.png)
+
+
+![Diagram 2](./images/bowling_diagram_2.png)
+
+![Excel scoresheet design to understand scoring system](./images/scorecard_excel.png)
+
+Used Bowling Game Kata -- Ruby to solve Bowling Challenge as I found it extremely difficult.
+=================
 Bowling Challenge in Ruby
 =================
 
