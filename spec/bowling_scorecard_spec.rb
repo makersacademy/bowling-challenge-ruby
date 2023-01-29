@@ -24,4 +24,10 @@ RSpec.describe "BowlingScorecard" do
     scorecard.set_frames
     expect(scorecard.total).to eq([[10], [2, 3], [4, 2], [10], [6, 2], [5, 5], [3, 2], [3, 3], [1, 2], [3, 4]])
   end
+  it "adds strike bonuses to the frames" do
+    scorecard = BowlingScorecard.new([10, 2, 3, 4, 2, 10, 6, 2, 5, 5, 3, 2, 3, 3, 1, 2, 3, 4])
+    scorecard.set_frames
+    scorecard.apply_bonuses
+    expect(scorecard.total).to eq([[15], [2, 3], [4, 2], [18], [6, 2], [5, 5], [3, 2], [3, 3], [1, 2], [3, 4]])
+  end 
 end 
