@@ -2,17 +2,17 @@
 
 class FrameRepository
   def initialize
-      @roll_score= []
-    end
-  
-  def add(roll)
-  while true do
-  @roll_score << roll
-  break if @roll_score.length <= 20
-  end 
+      @frame_score= []
   end
   
-  def score_card
-  return @roll_score.sum
+  def add(roll)
+    while true do
+      @frame_score << roll
+      break if @frame_score.length <= 2
+   end 
+  end
+  
+  def frame_score
+    return @frame_score.sum
   end
 end
