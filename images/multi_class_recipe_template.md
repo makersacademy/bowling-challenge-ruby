@@ -66,7 +66,7 @@ uses asciiflow.com but you could also use excalidraw.com, draw.io, or miro.com_
 _Also design the interface of each class in more detail._
 
 ```ruby
-
+class Frame
 def initialize
     @rolls= []
   end
@@ -83,14 +83,19 @@ return @rolls.sum
 end
 
 
+# integration test for Frame_Repository
+library = MusicLibrary.new
+track_1 = Track.new("Carte Blanche", "Veracocha")
+track_2 = Track.new("Synaesthesia", "The Thrillseekers")
+library.add(track_1)
+library.add(track_2)
+library.all # => [track_1, track_2]
 
 
 
 
-class Frame
-  def initialize
-    roll_count = 
-  end
+
+d
 
   def add(track) # track is an instance of Track
     # Track gets added to the library
