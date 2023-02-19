@@ -20,8 +20,8 @@ RSpec.describe BowlingGame do
       allow(@frame).to receive(:add_score).with(5).exactly(20).times
       allow(@frame).to receive(:status).and_return("normal")
       allow(@frame).to receive(:total_score).and_return(10, 10, 10, 10, 10, 10, 10, 10, 10, 10)
-      Array.new(20, 5).each do |score|
-        @game.play(score)
+      Array.new(20, 5).each do |hits|
+        @game.play(hits)
       end
     end
   end

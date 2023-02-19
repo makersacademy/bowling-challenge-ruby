@@ -6,9 +6,8 @@ RSpec.describe Frame do
   end
 
   context "#initialize" do
-    it "should create a new Frame with empty scores and roll" do
+    it "should create a new Frame with empty scores" do
       expect(@frame.scores).to eq [0, 0]
-      expect(@frame.roll).to eq 0
     end
   end
 
