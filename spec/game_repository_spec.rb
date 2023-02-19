@@ -17,19 +17,32 @@ RSpec.describe GameRepository do
     score.add(1) 
     score.add(3) 
     score.add(5)
-    19.times{score.add(0)}
+    16.times{score.add(0)}
     expect(score.score_card).to eq(17)
   end
 
-context "introduces spare" do
+context "introduces spare 10 in two rolls" do
   it " adds spare bonus. Results added to scorecard." do
     score = GameRepository.new
     score.add(8)
     score.add(2) 
     score.add(3) 
     score.add(1)
-    19.times{score.add(0)}
+    16.times{score.add(0)}
     expect(score.score_card).to eq(17)
+  end
+end
+
+context "introduces strike to scoring" do
+  it " adds bonus points from following frame. Results added to scorecard." do
+    score = GameRepository.new
+    score.add(10)
+    score.add(1) 
+    score.add(3) 
+    score.add(1)
+    16.times{score.add(0)}
+    expect(score.score_card).to eq(19)
+    #strike not reflecting method = expected:19 got 15
   end
 end
 
