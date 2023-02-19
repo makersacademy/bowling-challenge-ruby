@@ -1,8 +1,9 @@
 class Frame
   attr_reader :scores, :roll
 
-  def initialize
-    @scores = [0, 0]
+  def initialize(is_tenth)
+    @is_tenth = is_tenth
+    @scores = @is_tenth ? [0, 0, 0] : [0, 0]
     @roll = 0
   end
 
@@ -12,19 +13,27 @@ class Frame
     @roll += 1
   end
 
-  def first_score
-    return @scores[0]
-  end
-
   def total_score
     return @scores.sum
   end
 
   def is_ended?
-    if @roll == 2
-      return true
+    # check if it's the 10th
+    if @is_tenth
+      # check if a strike or spare
+      if @roll == 2 && @scores[0] + @scores[1] < 10
+        return true
+      elsif @roll == 3
+        return true
+      end
+      return false
+      # if it's not the 10th
+    else
+      if @scores[0] == 10 || @roll == 2
+        return true
+      end
+      return false
     end
-    return false
   end
 
   def status

@@ -5,3 +5,5 @@ source "https://rubygems.org"
 # gem "rails"
 
 gem "rspec", "~> 3.12"
+gem 'simplecov', require: false
+gem 'simplecov-console', require: false

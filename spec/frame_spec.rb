@@ -2,7 +2,7 @@ require "frame"
 
 RSpec.describe Frame do
   before(:each) do
-    @frame = Frame.new
+    @frame = Frame.new(false)
   end
 
   context "#initialize" do
@@ -24,14 +24,6 @@ RSpec.describe Frame do
     end
   end
 
-  context "#first_score" do
-    it "should return the first score of the frame" do
-      @frame.add_score(4)
-      @frame.add_score(6)
-      expect(@frame.first_score).to eq 4
-    end
-  end
-
   context "#total_score" do
     it "should return the total score of the frame" do
       @frame.add_score(2)
@@ -46,6 +38,29 @@ RSpec.describe Frame do
       expect(@frame.is_ended?).to be false
       @frame.add_score(8)
       expect(@frame.is_ended?).to be true
+    end
+
+    it "should end the frame when the first score is 10" do
+      @frame.add_score(10)
+      expect(@frame.is_ended?).to be true
+    end
+
+    it "should end on the 3rd roll if the frame is the 10th" do
+      frame = Frame.new(true)
+      frame.add_score(10)
+      expect(frame.is_ended?).to be false
+      frame.add_score(10)
+      expect(frame.is_ended?).to be false
+      frame.add_score(10)
+      expect(frame.is_ended?).to be true
+    end
+
+    it "should end on the 2nd roll if the play can't play a strike or spare" do
+      frame = Frame.new(true)
+      frame.add_score(2)
+      expect(frame.is_ended?).to be false
+      frame.add_score(7)
+      expect(frame.is_ended?).to be true
     end
   end
 
