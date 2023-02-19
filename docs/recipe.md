@@ -73,7 +73,9 @@ class Frame
     return @score[0] + @score[1] == 10
   end
 end
+```
 
+```ruby
 class BowlingGame
   def initialize(io, frame)
     @score_board = Array.new[10, frame.new]
