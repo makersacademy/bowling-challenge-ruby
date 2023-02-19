@@ -15,12 +15,10 @@ class GameRepository
      10.times do
      if @rolls[roll_index] + @rolls[roll_index + 1] == 10 #spare
      score += @rolls[roll_index] + @rolls[roll_index + 1] + @rolls[roll_index + 2]
-     roll_index +=2
-   
-    else score += @rolls[roll_index] + @rolls[roll_index + 1]
-  
-     roll_index += 2
-    end
+     elsif @rolls[roll_index]
+      score += @rolls[roll_index] + @rolls[roll_index + 1] 
+   end
+    roll_index += 2
      end
      score
     end
