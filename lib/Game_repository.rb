@@ -17,8 +17,8 @@ class GameRepository
       score += @rolls[roll_index] + @rolls[roll_index + 1] + @rolls[roll_index + 2]
       elsif @rolls[roll_index]
       score += @rolls[roll_index] + @rolls[roll_index + 1] 
-    elsif @rolls[roll_index] == 10 # Strike
-      score_card += 10 + @rolls[roll_index + 1] + @rolls[roll_index + 2]
+      elsif @rolls[roll_index] == 10 # Strike failing- score count isn't calculating the bonus feature.
+      score += @rolls[roll_index] + @rolls[roll_index + 1] + @rolls[roll_index + 2]
       roll_index += 1
    end
       roll_index += 2
