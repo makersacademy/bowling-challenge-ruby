@@ -1,20 +1,27 @@
-#require 'game'
-require 'frame_repository'
-#require 'frame'
-
 class GameRepository
   def initialize
-    @game_score_card = []
+    @rolls = []
   end
   
-  def add(frame)
-    while true do
-      @game_score_card << frame
-      break if @game_score_card.length <= 20
-    end 
+  def add(roll)
+   @rolls << roll
   end
   
   def score_card
-    return @game_score_card.sum
-  end
-end
+    #@rolls.sum
+  
+    roll_index = 0
+    score = 0
+     10.times do
+     if @rolls[roll_index] + @rolls[roll_index + 1] == 10 #spare
+     score += @rolls[roll_index] + @rolls[roll_index + 1] + @rolls[roll_index + 2]
+     roll_index +=2
+   
+    else score += @rolls[roll_index] + @rolls[roll_index + 1]
+  
+     roll_index += 2
+    end
+     end
+     score
+    end
+ end

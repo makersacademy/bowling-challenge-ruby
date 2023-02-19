@@ -35,5 +35,6 @@ RSpec.describe FrameRepository do
     expect(score.frame_score).to eq(0)
   end
 
-
+# context " When the player scores a strike. A bonus feature is given" do
+# it " "
 end
