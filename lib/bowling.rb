@@ -31,20 +31,20 @@ def score_card
     bowl1 = gets.chomp
     @array << [bowl1.to_i, 0]
   end
-  pmj @array
+  p @array
   return score
 end
 
 def score
-  @array.each_with_index do |x,i|
-    if x[0].to_i == 10
+  @array.each_with_index do |el,i|
+    if el[0].to_i == 10
       @sum += 10
       if @array[i+1][0] == 10
         @sum += @array[i+1][0] + @array[i+2][0]
       else
         @sum += @array[i+1][0] + @array[i+1][1]
       end
-    elsif (x[0] + x[1]) == 10
+    elsif (el[0] + el[1]) == 10
       @sum += 10 + @array[i+1][0]
     else
       @sum += @array[i][0] + @array[i][1]
