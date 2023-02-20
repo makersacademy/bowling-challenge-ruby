@@ -38,6 +38,9 @@ context "introduces strike to scoring" do
     score = GameRepository.new
     score.add(10)
     score.add(1) 
+    #do i need to manually add the next two rolls to reflect scoring?
+    score.add(1)
+    score.add(3)
     score.add(3) 
     score.add(1)
     16.times{score.add(0)}

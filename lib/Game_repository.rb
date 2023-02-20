@@ -15,7 +15,7 @@ class GameRepository
      10.times do
      if @rolls[roll_index] + @rolls[roll_index + 1] == 10 #spare
       score += @rolls[roll_index] + @rolls[roll_index + 1] + @rolls[roll_index + 2]
-      elsif @rolls[roll_index]
+      elsif @rolls[roll_index] +@rolls[roll_index +1] != 10
       score += @rolls[roll_index] + @rolls[roll_index + 1] 
       elsif @rolls[roll_index] == 10 # Strike failing- score count isn't calculating the bonus feature.
       score += @rolls[roll_index] + @rolls[roll_index + 1] + @rolls[roll_index + 2]
