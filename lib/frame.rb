@@ -20,4 +20,8 @@ class Frame
     @rolls.length == 1 && @rolls.first == 10
   end 
 
+  def frame_complete?
+    strike? || @rolls.length == 2
+  end  
+
 end

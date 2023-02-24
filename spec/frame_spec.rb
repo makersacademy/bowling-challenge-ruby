@@ -38,4 +38,26 @@ describe Frame do
     end
   end  
 
+  context 'recognises frame is complete' do
+    it 'returns true when strike? true' do
+      frame = Frame.new
+      frame.add_roll(10)
+      frame.strike?
+      expect(frame.frame_complete?).to eq(true)
+    end  
+
+    it 'returns true when rolls == 2' do
+      frame = Frame.new
+      frame.add_roll(5)
+      frame.add_roll(3)
+      expect(frame.frame_complete?).to eq(true)
+    end  
+
+    it 'returns false when rolls < 2' do
+      frame = Frame.new
+      frame.add_roll(5)
+      expect(frame.frame_complete?).to eq(false)
+    end  
+  end  
+
 end  
