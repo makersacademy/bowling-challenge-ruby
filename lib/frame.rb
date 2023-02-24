@@ -12,4 +12,8 @@ class Frame
     @rolls.reduce(:+)
   end  
 
+  def spare?
+    @rolls.length == 2 && score == 10
+  end  
+
 end
