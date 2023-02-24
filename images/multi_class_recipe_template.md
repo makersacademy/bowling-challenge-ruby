@@ -47,8 +47,7 @@ uses asciiflow.com but you could also use excalidraw.com, draw.io, or miro.com_
 │                            │
 │ - add/count (rolls)         │
 │ - sum_scorecard (rolls)                     │
-| # search_by_title(keyword) │
-│   #=> [tracks...]           │
+| #        │
 └───────────┬────────────────┘
             │
             │ owns a list of
@@ -56,10 +55,11 @@ uses asciiflow.com but you could also use excalidraw.com, draw.io, or miro.com_
 ┌─────────────────────────┐
 │ Game(Frame,rolls)    │
 │                         │
-│ -                  │
-│ - artist                │
-│ - format                │
-│   => "TITLE by ARTIST"  │
+│ -  add rolls
+sum scores
+def strike
+def framescore
+def spare │
 └─────────────────────────┘
 ```
 

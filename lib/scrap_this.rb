@@ -37,19 +37,21 @@
             @rolls[roll_index] + @rolls[roll_index + 1] == 10
           end
       
-          def sparescore (roll_index)
-            @rolls[roll_index] + @rolls[roll_index + 1] + @rolls[roll_index + 2]
+          def Sparescore (roll_index)
+            framescore(roll_index) + @rolls[roll_index + 1]
+          end
           
-          def strike (roll_index)
+          def game_end (roll_index)
             @rolls[roll_index] == 10
           end
       
           def strikescore (roll_index)
-            @rolls[roll_index + 1] + @rolls[roll_index + 2]
+           framescore(roll_index) + @rolls[roll_index + 1] + @rolls[roll_index + 2]
+          end
       
             def framescore (roll_index)
               @rolls[roll_index] + @rolls[roll_index + 1]
             end
-          end
+      
       
         end

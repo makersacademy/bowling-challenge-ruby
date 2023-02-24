@@ -1,59 +1,13 @@
-require 'game_repository'
+require "Game_repository"
+require "frame"
 
-
-RSpec.describe GameRepository do
-  context "bowling commences" do
-    it "displays score from one frame to create to initialise running scorecard." do
-      score = GameRepository.new
-      score.add(8)
-      19.times { score.add(0) }
-      expect(score.score_card).to eq(8)
+RSpec.describe "GameRepository Integration Tests" do
+  it "should calculate the correct scores" do
+    game = GameRepository.new()
+    player_hits = [1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6]
+    player_hits.each do |pins|
+      game.add(pins)
     end
+    expect(game.score_card).to eq 133
   end
-
-  it "displays score with no bonus. Results added to scorecard." do
-    score = GameRepository.new
-    score.add(8)
-    score.add(1) 
-    score.add(3) 
-    score.add(5)
-    16.times{score.add(0)}
-    expect(score.score_card).to eq(17)
-  end
-
-context "introduces spare 10 in two rolls" do
-  it " adds spare bonus. Results added to scorecard." do
-    score = GameRepository.new
-    score.add(8)
-    score.add(2) 
-    score.add(3) 
-    score.add(1)
-    16.times{score.add(0)}
-    expect(score.score_card).to eq(17)
-  end
-end
-
-context "introduces strike to scoring" do
-  it " adds bonus points from following frame. Results added to scorecard." do
-    score = GameRepository.new
-    score.add(10)
-    score.add(1) 
-    #do i need to manually add the next two rolls to reflect scoring?
-    score.add(1)
-    score.add(3)
-    score.add(3) 
-    score.add(1)
-    16.times{score.add(0)}
-    expect(score.score_card).to eq(19)
-    #strike not reflecting method = expected:19 got 15
-  end
-end
-
-  it "displays a zero score when initial frame returns a score of zeros." do
-    score = GameRepository.new
-    score.add(0)
-    19.times { score.add(0) }
-    expect(score.score_card).to eq(0)
-  end
-  
 end
