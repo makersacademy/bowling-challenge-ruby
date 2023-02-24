@@ -28,6 +28,14 @@ describe Frame do
       frame.add_roll(3)
       expect(frame.spare?).to eq(false)
     end  
+  end
+  
+  context 'strike? method' do
+    it 'recognises a strike' do 
+      frame = Frame.new
+      frame.add_roll(10)
+      expect(frame.strike?).to eq(true)
+    end
   end  
 
 end  

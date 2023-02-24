@@ -16,4 +16,8 @@ class Frame
     @rolls.length == 2 && score == 10
   end  
 
+  def strike?
+    @rolls.length == 1 && @rolls.first == 10
+  end 
+
 end
