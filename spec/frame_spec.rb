@@ -42,21 +42,39 @@ describe Frame do
     it 'returns true when strike? true' do
       frame = Frame.new
       frame.add_roll(10)
-      frame.strike?
-      expect(frame.frame_complete?).to eq(true)
+      expect(frame.strike?).to be true
+      expect(frame.frame_complete?(0)).to eq(true)
     end  
 
-    it 'returns true when rolls == 2' do
+    it 'returns true when rolls == 2 + frame < 9' do
       frame = Frame.new
       frame.add_roll(5)
       frame.add_roll(3)
-      expect(frame.frame_complete?).to eq(true)
+      expect(frame.frame_complete?(0)).to eq(true)
     end  
 
-    it 'returns false when rolls < 2' do
+    it 'returns false when rolls < 2 + frame < 9' do
       frame = Frame.new
       frame.add_roll(5)
-      expect(frame.frame_complete?).to eq(false)
+      expect(frame.frame_complete?(0)).to eq(false)
+    end  
+
+    it 'returns true in 10th frame if strike/spare + rolls == 3' do
+      frame = Frame.new
+      pins = [6, 4, 3]
+      pins.each do |pin|
+        frame.add_roll(pin)
+      end
+      expect(frame.frame_complete?(9)).to eq(true)
+    end  
+
+    it 'returns false in 10th frame if strike/spare + rolls == 2' do
+      frame = Frame.new
+      pins = [6, 4]
+      pins.each do |pin|
+        frame.add_roll(pin)
+      end
+      expect(frame.frame_complete?(9)).to eq(false)
     end  
   end  
 
