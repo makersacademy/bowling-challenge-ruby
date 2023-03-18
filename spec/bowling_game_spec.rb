@@ -10,4 +10,10 @@ RSpec.describe BowlingGame do
     expect(player_1.score).to eq 0
   end 
 
+  it "can roll gutter game" do
+    player_1 = BowlingGame.new 
+    20.times {player_1.play(0)}
+   
+    expect(player_1.score).to eq 0
+  end 
 end  
