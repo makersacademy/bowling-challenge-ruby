@@ -1,6 +1,0 @@
-  class ScoreCard 
-    
-    
-  end 
-
-
