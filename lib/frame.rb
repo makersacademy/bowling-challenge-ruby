@@ -6,7 +6,7 @@ class Frame
 
 
   def roll_one(first_score) # first_score is integer
-    fail "you cannot knock down more than ten pins in a frame" if first_score < 0 || first_score > 10
+    fail "you cannot knock down a negative number or more than ten pins in a frame" if first_score < 0 || first_score > 10
     @first_score = first_score 
   
     # if first roll = 10, move to next frame and mark is_strike? as true
@@ -15,6 +15,9 @@ class Frame
   end
 
   def roll_two(second_score) # second_score is an integer 
+    fail "you cannot knock down a negative number or more than ten pins in a frame" if second_score < 0 || second_score > 10
+    fail "sum of roll_one and roll_two cannot exceed 10" if @first_score + second_score > 10
+
     @frame_score << second_score + @first_score
        
         # score is 10 plus first roll of following frame
