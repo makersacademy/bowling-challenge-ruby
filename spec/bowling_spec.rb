@@ -44,5 +44,9 @@ RSpec.describe Bowling do
       expect(repo.score).to eq(30)
     end
 
+    it 'can score a perfect game' do
+      roll_multiple(12, 10)
+      expect(repo.score).to eq(300)
+    end
   end
 end
