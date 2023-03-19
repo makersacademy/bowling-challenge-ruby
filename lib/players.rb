@@ -11,7 +11,7 @@ class Players
   end
 
   def count_players
-    # players_list << player
+    @players_list.length
   end
 
   def show_players_list

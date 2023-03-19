@@ -28,4 +28,19 @@ RSpec.describe Players do
     list = players.show_players_list
     expect(list).to eq ['Paul Lazar','Alice Jones','Frank Sinatra','Paul Mcarthy','Franz Liszt']
   end
+
+  it "Counts the number of players in a given game." do
+    players = Players.new
+    player1 = Player.new
+    players.add_player(player1.create_player('Paul','Lazar'))
+
+    player2 = Player.new
+    players.add_player(player2.create_player('Alice','Jones'))
+
+    player3 = Player.new
+    players.add_player(player3.create_player('Frank','Sinatra'))
+
+    #list = players.show_players_list
+    expect(players.count_players).to eq 3
+  end
 end
