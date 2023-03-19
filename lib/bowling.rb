@@ -14,14 +14,18 @@ class Bowling
     frame_index = 0
 
     (0..9).each do |single_frame|
-      total_points += sum_of_points_in_frame(frame_index)
-      frame_index += 2
+      if @rolls[frame_index] == 10 
+        total_points += (10 + @rolls[frame_index + 1] + @rolls[frame_index + 2])
+        frame_index += 1
+      elsif @rolls[frame_index] + @rolls[frame_index + 1] == 10
+        total_points += (10 + @rolls[frame_index + 2])
+        frame_index += 2
+      else
+        total_points += (@rolls[frame_index] + @rolls[frame_index + 1])
+        frame_index += 2
+      end
     end
 
     return total_points
-  end
-
-  def sum_of_points_in_frame(frame_index)
-    return @rolls[frame_index] + @rolls[frame_index + 1]
   end
 end
