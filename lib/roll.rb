@@ -10,7 +10,14 @@ class Roll
 
   def ask_for_pins
     @io.puts "Insert number of pins"
+  end
+
+  def get_pins
     input = @io.gets.chomp.to_i
+    if input < 1 || input > 10
+      fail "Invalid number"
+    end
+    return input
   end
 end
 
