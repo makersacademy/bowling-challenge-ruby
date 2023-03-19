@@ -8,19 +8,18 @@ RSpec.describe Frame do
 
   it "keeps a score for that frame" do 
     frame = Frame.new
-    expect(frame.play(1,2)).to eq 3
+    frame.roll_one(3)
+    frame.roll_two(4)
+    expect(frame.final_score).to eq 7
   end 
 
-  it "keeps a score for that frame" do 
+  it "recognises if strike" do 
     frame = Frame.new
-    expect(frame.play(3,2)).to eq 5
-  end 
-
-  xit "recognises if strike" do 
-    frame = Frame.new
-    frame.play(10)
+    frame.roll_one(10)
     expect(frame.is_strike?).to eq true 
   end 
+
+  #add a score if strike achieved
 
   xit "recognises if spare" do
     frame = Frame.new
