@@ -1,30 +1,102 @@
+#  Bowling Game Design 
+
+# SCORING SYSTEMS 
+
+A bowling game consists of ten 'frames'. Each frame consists of two rolls, apart form the final frame (10) which has three rolls.
+
+The score accumulates throughout the game. 
+A gutter roll is when no pins are knocked down in a roll. 
+
+For each frame, there can be three scoring scenarios: standard, strike and spare. 
+
+
+# 1. Standard scoring
+Standard scoring works as follows: 
+A player's score per frame is calculated by the number of pins they knock down across the two rolls of their frame. 
+
+eg. roll 1  = 4 pins knocked down 
+    roll 2  = 2 pins knocked down 
+
+    frame score = 6
+
+The score accumulates from frame to frame as the game progresses.
+
+eg. if frame 1 scores 6 and another 3 pins are knocked down in frame 2, the score at frame 2 will be 9. 
+
+# 2. Strike
+A strike occurs when all ten pins are knocked down in the FIRST roll of a frame. 
+When this happens, a player is give a base score of 10 PLUS a bonus score which is taken from the number of pins knocked down in the TWO rolls of the FOLLOWING frame. 
+
+The maximum score for a strike would be 30 (a strike in the first frame followed by two strikes in the second frame. 10 + 10 + 10 = 30 )
+
+The minimum score for a strike would be 10 (a strike in the first frame followed by two gutter rolls in the second frame. 10 + 0 + 0  = 10 )
+
+# 3. Spare 
+A spare is awarded when it takes two rolls to knock down all the pins in a frame. 
+When this happens, a player is given a base score of 10 PLUS a bonus score which is taken from the number of pins knocked down in the the FIRST roll of the FOLLOWING frame. 
+
+The maximum score for a spare is 20 (a spare in the first frame followed by a strike in the first roll of the second frame (10 + 10 = 20))
+ 
+# final frame (10th)
+For the final frame there are 3 rolls. Strike and spare bonus points still work - althought the bonus rolls all take place within the same frame. As usual there is a maximum score of 30 available. 
+
+
+--------------------------------------------------------
+
 # BowlingGame Class Design Recipe
 
-## 1. Describe the Problem
-
-_Put or write the user story here. Add any clarifying notes you might have._
 
 ## 2. Design the Class Interface
 
-_Include the initializer and public methods with all parameters and return values._
 
 ```ruby
-# EXAMPLE
 
-class BowlingGame
-  def initialize
-    # ...
+class Frame 
+ 
+
+  def roll(first, second)
+    
+    # score accumulator keeps track of rolls 
+
+    # play first roll 
+    # if first roll = 10, end frame and mark is_strike? as true
+      # score is 10 + the two scores from the following frame
+    # else add score to score accumulator 
+
+    # play second roll
+      # if sum first and second roll = 10, mark is_spare? as true 
+        # score is 10 plus first roll of following frame
+      # else add score to score accumulator  
+    
   end
 
-  def play 
-    # No return value
-  end
+  def is_strike? 
+    # marks if strike
+  end 
 
-  def score
-    # returns the score as an integer
-  end
+  def is_spare?
+    # marks if spare
+  end 
 
 end
+
+class ScoreCard
+
+  def initialize
+    total_score = [:frame_one, :frame_two, :frame_three, :frame_four, :frame_five, :frame_six, :frame_seven, :frame_eight, :frame_nine, :frame_ten]
+  end 
+
+  def score
+    # returns an integer of the total score from each frame that has been added
+  end 
+
+  def add(frame)
+    # takes one agument - and instance of Frame 
+    # adds the score of frame to a scorecard 
+    # returns nothing 
+  end 
+
+end 
 ```
 
 ## 3. Create Examples as Tests
