@@ -29,7 +29,29 @@ class Frame
     end
   end
 
-  def end_frame
+  def frame_ten_roll_two(x)
+    if x == 10
+      @stats[:roll_two] = 'X'
+      @stats[:score] += 10
+    else
+      @stats[:roll_two] += x
+      @stats[:score] += x
+    end
+  end
+
+  def frame_ten_roll_three(x)
+    @stats[:roll_three] = 0
+    if x == 10
+      @stats[:special] = 'STRIKE'
+      @stats[:roll_three] = 'X'
+      @stats[:score] += 10
+    else
+      @stats[:roll_three] += x
+      @stats[:score] += x
+    end
+  end
+
+  def stats
     return @stats
   end
 end

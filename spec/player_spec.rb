@@ -12,4 +12,12 @@ RSpec.describe Player do
       expect(player.roll(8)).to eq 8
     end
   end
+
+  context 'returns player final score' do
+    it 'when Josh scores zero' do
+      player = Player.new('Josh')
+      expect(player.final_score).to eq 0
+      expect(player.name).to eq 'Josh'
+    end
+  end
 end
