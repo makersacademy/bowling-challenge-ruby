@@ -169,7 +169,7 @@ class Frames
     frame = 0
   end
 
-  def current_frame
+  def increment_frame
     frame += 1
   end
 

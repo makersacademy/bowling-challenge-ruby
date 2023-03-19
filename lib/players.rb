@@ -15,7 +15,6 @@ class Players
   end
 
   def show_players_list
-    # displays the list of players for a specific game
     @players_list
   end
 

@@ -5,4 +5,7 @@ RSpec.describe Game do
     game1 = Game.new
     expect(game1.show_final_board).to eq [0,0,0,0,0]
   end
+
+  xit 'Returns score board for a game with three players.' do
+  end
 end

@@ -40,7 +40,6 @@ RSpec.describe Players do
     player3 = Player.new
     players.add_player(player3.create_player('Frank','Sinatra'))
 
-    #list = players.show_players_list
     expect(players.count_players).to eq 3
   end
 end
