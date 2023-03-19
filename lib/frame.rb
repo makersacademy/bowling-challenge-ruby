@@ -35,6 +35,11 @@ class Frame
   end 
 
   def is_spare?
+    if @frame_score.sum == 10 
+      return true 
+    else 
+      return false
+    end 
     # marks if spare
   end 
 

@@ -21,11 +21,12 @@ RSpec.describe Frame do
 
   #add a score if strike achieved
 
-  xit "recognises if spare" do
+  it "recognises if spare" do
     frame = Frame.new
-    frame.play(1,9)
+    frame.roll_one(1)
+    frame.roll_two(9)
     expect(frame.is_strike?).to eq false 
-    expect(frame.spare).to eq true 
+    expect(frame.is_spare?).to eq true 
   end 
 
   xit "raises error if rolls do not sit within range 0 - 10" do
