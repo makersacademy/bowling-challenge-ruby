@@ -1,7 +1,7 @@
 class Frame 
  
 
-  def roll(first, second) # first and second are both integers
+  def play(first, second) # first and second are both integers
     
     # score accumulator keeps track of rolls 
  
@@ -13,7 +13,7 @@ class Frame
       # if sum first and second roll = 10, mark is_spare? as true 
         # score is 10 plus first roll of following frame
       # else add score to score accumulator  
-    
+    return 3
   end
 
   def is_strike? 

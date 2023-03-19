@@ -6,7 +6,7 @@ RSpec.describe Frame do
     frame = Frame.new
   end 
 
-  xit "keeps a score for that frame" do 
+  it "keeps a score for that frame" do 
     frame = Frame.new
     expect(frame.play(1,2)).to eq 3
   end 
