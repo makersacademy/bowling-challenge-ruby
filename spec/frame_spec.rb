@@ -11,6 +11,11 @@ RSpec.describe Frame do
     expect(frame.play(1,2)).to eq 3
   end 
 
+  it "keeps a score for that frame" do 
+    frame = Frame.new
+    expect(frame.play(3,2)).to eq 5
+  end 
+
   xit "recognises if strike" do 
     frame = Frame.new
     frame.play(10)
