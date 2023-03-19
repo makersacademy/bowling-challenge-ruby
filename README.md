@@ -1,7 +1,7 @@
 Game Scorecount
 ===============
 
-![Diagram for Scorecount](images/Diagram%20Scorecount.png)
+![Diagram for Scorecount](documents/images/Diagram Scorecount.png)
 
 # Content
 
