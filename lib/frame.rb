@@ -6,6 +6,7 @@ class Frame
 
 
   def roll_one(first_score) # first_score is integer
+    fail "you cannot knock down more than ten pins in a frame" if first_score < 0 || first_score > 10
     @first_score = first_score 
   
     # if first roll = 10, move to next frame and mark is_strike? as true

@@ -29,9 +29,9 @@ RSpec.describe Frame do
     expect(frame.is_spare?).to eq true 
   end 
 
-  xit "raises error if rolls do not sit within range 0 - 10" do
+  it "raises error if rolls do not sit within range 0 - 10" do
     frame = Frame.new
-    expect { frame.play(1,10) }.to raise_error "you cannot knock down more than ten pins in a frame"
+    expect { frame.roll_one(11) }.to raise_error "you cannot knock down more than ten pins in a frame"
   end 
 
   xit "raises error if first roll < 10 and second roll is empty" do
