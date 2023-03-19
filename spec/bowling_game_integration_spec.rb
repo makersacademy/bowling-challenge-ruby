@@ -2,13 +2,14 @@ require 'score_card'
 require 'frame'
 
 RSpec.describe 'integeration' do 
-  xit "adds a frame to the scorecard" do 
+  it "adds a frame to the scorecard" do 
     score = ScoreCard.new
     frame_1 = Frame.new
-    frame_1.roll(3,4)
+    frame_1.roll_one(3)
+    frame_1.roll_two(1)
 
-    score.add(frame_1)
-    expect(score.total).to eq 7
+    score.add(frame_1.final_score)
+    expect(score.total).to eq 4
   end 
 
   xit  "adds multiple frames to the scorecard" do 
