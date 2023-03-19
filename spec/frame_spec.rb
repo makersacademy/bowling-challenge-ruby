@@ -18,4 +18,9 @@ RSpec.describe Frame do
    expect(subject.spare?).to eq true
   end
 
+  it "returns true if game complete" do
+    subject.add_roll(10)
+    expect(subject.complete?).to eq true
+  end
 end
+
