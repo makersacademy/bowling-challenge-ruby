@@ -45,20 +45,39 @@ For the final frame there are 3 rolls. Strike and spare bonus points still work 
 
 # BowlingGame Class Design Recipe
 
+```
+┌────────────────────────────┐
+│ Scorecard                  │
+│                            │
+│ - add(frame)               │
+│ - score                    │
+└───────────┬────────────────┘
+            │
+            │ owns a list of
+            ▼
+┌─────────────────────────┐
+│ Frame                   │
+│                         │
+│ - play(first,second)    │
+│ - is_strike?            │
+│ - is_spare?             │
+│                         │
+└─────────────────────────┘
+```
+
+
 
 ## 2. Design the Class Interface
-
 
 ```ruby
 
 class Frame 
  
 
-  def roll(first, second)
+  def roll(first, second) # first and second are both integers
     
     # score accumulator keeps track of rolls 
-
-    # play first roll 
+ 
     # if first roll = 10, end frame and mark is_strike? as true
       # score is 10 + the two scores from the following frame
     # else add score to score accumulator 
@@ -86,11 +105,11 @@ class ScoreCard
     total_score = [:frame_one, :frame_two, :frame_three, :frame_four, :frame_five, :frame_six, :frame_seven, :frame_eight, :frame_nine, :frame_ten]
   end 
 
-  def score
+  def total
     # returns an integer of the total score from each frame that has been added
   end 
 
-  def add(frame)
+  def add(frame) # frame is a string
     # takes one agument - and instance of Frame 
     # adds the score of frame to a scorecard 
     # returns nothing 
@@ -99,51 +118,126 @@ class ScoreCard
 end 
 ```
 
-## 3. Create Examples as Tests
 
-_Make a list of examples of how the class will behave in different situations._
+## 3. Create Examples as Integration Tests
+
+_Create examples of the classes being used together in different situations and
+combinations that reflect the ways in which the system will be used._
 
 ```ruby
 # EXAMPLE
 
-# 1 
-it "creates a new instance of the game" do 
-  player_1 = BowlingGame.new
-end 
+# 1. adds a frame to the scorecard
+score = ScoreCard.new
+frame_1 = Frame.new
+frame_1.roll(3,4)
 
-# 2 
-it "initially returns an empty score" do 
-  player_1 = BowlingGame.new  
-  player_1.score #=> 0
-end 
+score.add(frame_1)
+expect(score.total).to eq 7
 
-#3 
-it "returns a score of 21 if 
+# 2. adds multiple frames to the scorecard
+score = Scorecard.new
+frame_1 = Frame.new
+frame_2 = Frame.new
+frame_1.roll(3,4)
+frame_2.roll(1,3)
+
+score.add(frame_1)
+score.add(frame_2)
+expect(score.total).to eq 11
+
+# 3. adds a strike to the scorecard
+score = Scorecard.new
+frame_1 = Frame.new
+frame_2 = Frame.new
+frame_1.roll(10)
+frame_2.roll(1,3)
+
+score.add(frame_1)
+expect(score.total).to eq 14
+
+# 4. adds multiple scores including a spare to the scorecard
+score = Scorecard.new
+frame_1 = Frame.new
+frame_2 = Frame.new
+frame_1.roll(3,7)
+frame_2.roll(1,7)
+
+score.add(frame_1)
+score.add(frame_2)
+expect(score.total).to eq 19
+
+# 5. returns error if score total requested but full number of rolls required have not been played 
+score = Scorecard.new
+frame_1 = Frame.new
+frame_1.roll(10)
+
+expect { score.add(frame_1) }.to raise_error "strike requires two more rolls for your bonus"
+
+
+
+```
+
+## 4. Create Examples as Unit Tests
+
+_Create examples, where appropriate, of the behaviour of each relevant class at
+a more granular level of detail._
+
+```ruby
+
+# For Frame
+
+# 1. it initiates a new instance of frame 
+frame = Frame.new
+
+# 2. it keeps a score for that frame 
+frame = Frame.new
+expect(frame.play(1,2)).to eq 3
+
+# 3. it recognises if strike
+frame = Frame.new
+frame.play(10)
+expect(frame.is_strike?).to eq true 
+
+# 4. it recognises if spare
+frame = Frame.new
+frame.play(1,9)
+expect(frame.is_strike?).to eq false 
+expect(frame.spare).to eq true 
+
+# 5. it raises error if rolls do not sit within range 0 - 10 
+frame = Frame.new
+expect { frame.play(1,10) }.to raise_error "you cannot knock down more than ten pins in a frame"
+
+# 6. it raises error if first roll < 10 and second roll is empty
+frame = Frame.new
+expect { frame.play(6) }.to raise_error "need to enter a second roll value"
+
+# for Scorecard
+
+# 1. it initially returns a score of 0 
+score = Scorecard.new
+expect(score.total).to eq 0 
+
+# 2. it returns error if frame added that does not exist
+score = Scorecard.new
+expect { score.add(frame) }.to raise_error "frame does not exist"
 
 
 
 
 
-# 1
-reminder = Reminder("Kay")
-reminder.remind_me_to("Walk the dog")
-reminder.remind() # => "Walk the dog, Kay!"
-
-# 2
-reminder = Reminder("Kay")
-reminder.remind() # fails with "No task set."
-
-# 3
-reminder = Reminder("Kay")
-reminder.remind_me_to("")
-reminder.remind() # => ", Kay!"
+# Constructs a track
+track = Track.new("Carte Blanche", "Veracocha")
+track.title # => "Carte Blanche"
 ```
 
 _Encode each example as a test. You can add to the above list as you go._
 
-## 4. Implement the Behaviour
+## 5. Implement the Behaviour
 
-_After each test you write, follow the test-driving process of red, green, refactor to implement the behaviour._
+_After each test you write, follow the test-driving process of red, green,
+refactor to implement the behaviour._
 
 
 <!-- BEGIN GENERATED SECTION DO NOT EDIT -->
@@ -151,7 +245,7 @@ _After each test you write, follow the test-driving process of red, green, refac
 ---
 
 **How was this resource?**  
-[😫](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fgolden-square&prefill_File=resources%2Fsingle_class_recipe_template.md&prefill_Sentiment=😫) [😕](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fgolden-square&prefill_File=resources%2Fsingle_class_recipe_template.md&prefill_Sentiment=😕) [😐](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fgolden-square&prefill_File=resources%2Fsingle_class_recipe_template.md&prefill_Sentiment=😐) [🙂](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fgolden-square&prefill_File=resources%2Fsingle_class_recipe_template.md&prefill_Sentiment=🙂) [😀](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fgolden-square&prefill_File=resources%2Fsingle_class_recipe_template.md&prefill_Sentiment=😀)  
+[😫](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fgolden-square&prefill_File=resources%2Fmulti_class_recipe_template.md&prefill_Sentiment=😫) [😕](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fgolden-square&prefill_File=resources%2Fmulti_class_recipe_template.md&prefill_Sentiment=😕) [😐](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fgolden-square&prefill_File=resources%2Fmulti_class_recipe_template.md&prefill_Sentiment=😐) [🙂](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fgolden-square&prefill_File=resources%2Fmulti_class_recipe_template.md&prefill_Sentiment=🙂) [😀](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fgolden-square&prefill_File=resources%2Fmulti_class_recipe_template.md&prefill_Sentiment=😀)  
 Click an emoji to tell us.
 
 <!-- END GENERATED SECTION DO NOT EDIT -->
