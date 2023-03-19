@@ -23,11 +23,11 @@ describe Roll do
     expect(roll.get_pins).to eq(2)
   end
 
-  xit 'fails with invalid input' do
+  it 'fails with invalid input' do
     io = double :io
     roll = Roll.new(1, io)
     expect(io).to receive(:gets).and_return("11")
-    expect { roll.ask_for_pins }.to raise_error "Invalid number"
+    expect { roll.get_pins }.to raise_error "Invalid number"
 
   end
 end
