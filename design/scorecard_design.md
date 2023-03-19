@@ -225,13 +225,6 @@ expect { score.add(frame) }.to raise_error "frame does not exist"
 
 
 
-
-
-# Constructs a track
-track = Track.new("Carte Blanche", "Veracocha")
-track.title # => "Carte Blanche"
-```
-
 _Encode each example as a test. You can add to the above list as you go._
 
 ## 5. Implement the Behaviour
