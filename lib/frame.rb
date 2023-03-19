@@ -1,7 +1,4 @@
-require 'player'
-
 class Frame
-
   def initialize(player)
     @stats = {roll_one: 0, roll_two: 0, special: 'none', score: 0}
     @player = player
@@ -29,6 +26,7 @@ class Frame
     end
   end
 
+  # METHODS FOR TENTH FRAME SPARE OR STRIKE
   def frame_ten_roll_two(x)
     if x == 10
       @stats[:roll_two] = 'X'

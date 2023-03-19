@@ -1,6 +1,4 @@
-require 'player'
-
-class Game
+class Scoreboard
   def initialize(player_name, io)
     @player = Player.new(player_name)
     @scorecard = []
@@ -16,6 +14,7 @@ class Game
     return @scorecard
   end
 
+  # ONE FRAME OF A PLAYER'S GAME
   def play_frame
     frame = Frame.new(@player)
     @io.puts 'roll one'
@@ -32,8 +31,7 @@ class Game
 
     @scorecard << frame.stats
 
-    # spare and strike conditions
-    
+    # SPARE AND STRIKE CONDITIONS
     if @scorecard[@scorecard.size-2][:special] == 'SPARE'
       @scorecard[@scorecard.size-2][:score] += x
     end
@@ -52,8 +50,8 @@ class Game
         @scorecard[@scorecard.size-3][:score] += x
       end
     end
-    
-    # tenth frame conditions
+
+    # TENTH FRAME CONDITIONS
     if @frame_number == 10 && frame.stats[:special] == 'SPARE' 
       @io.puts 'roll three'
       @io.puts 'enter the number of pins knocked down'
@@ -70,8 +68,6 @@ class Game
         @scorecard[@scorecard.size-2][:score] += y
       end
       
-
-
       @io.puts 'roll three'
       @io.puts 'enter the number of pins knocked down'
       z = @io.gets.chomp.to_i
@@ -84,7 +80,6 @@ class Game
       @frame_number += 1
       play_frame 
     end
-    p @scorecard
     return 
   end
 
