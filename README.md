@@ -63,3 +63,6 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+<!-- case coverage -->
+<!-- roll_1 = 0 and roll_2 = 10 is a spare -->
