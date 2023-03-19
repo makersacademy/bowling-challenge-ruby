@@ -10,5 +10,5 @@ class Frame
 end
 
 
-frame = Frame.new(2, Kernel)
-frame.print_number
+#frame = Frame.new(2, Kernel)
+#frame.print_number

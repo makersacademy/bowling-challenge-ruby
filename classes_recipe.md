@@ -19,9 +19,11 @@ class Frame
   end
 
 class Roll
-  def initialize
+  def initialize(number, io)
   end
 
+  def ask_for_input
+  end
   
 end
 3. Create Examples as Integration Tests
