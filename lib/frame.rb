@@ -7,12 +7,6 @@ class Frame
     @player = player
   end
 
-  def play(x, y)
-    roll_one(x)
-    roll_two(y) if @stats[:special] != 'STRIKE'
-    end_frame
-  end
-
   def roll_one(x)
     if x == 10
       @stats[:special] = 'STRIKE'
