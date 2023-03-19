@@ -19,7 +19,7 @@ Strikes - the player has a strike if he knocks down all 10 pins with one hit (ro
 
 scenario 1:
     frame1 - player strikes -> gets 10 points and frame ends
-            - total score for this frame is 10 and bonus F1 < 2 will be frame2
+            - total score for this frame is 10 and bonus F1 < (from) 2 will be frame2
             - accumulated score: 10 + 10 = 20
 
     frame2 - player strikes again -> gets 10 points and frame ends
@@ -60,16 +60,16 @@ GUTTER GAME - when player never hits a pin (zero points)
 PERFECT GAME - 12 strikes (one strike per frame 10 x 10) and 2 strikes for the bonus in the 10th frame (so 20 in the 11th frame). Perfect game scores 300 points!
 
 F1 = 10 + F2
-F2 = 10 + F1 + F3bonus
-F3 = 10 + F2 + F4bonus
-F4 = 10 + F3 + F5bonus
-F5 = 10 + F4 + F6bonus
-F6 = 10 + F5 + F7bonus
-F7 = 10 + F6 + F8bonus
-F8 = 10 + F7 + F9bonus
-F9 = 10 + F8 + F10bonus
-F10 = 10 + F11bonus
-    F11bonus = 10 + 10
+F2 = 10 + F1 + F3_bonus
+F3 = 10 + F2 + F4_bonus
+F4 = 10 + F3 + F5_bonus
+F5 = 10 + F4 + F6_bonus
+F6 = 10 + F5 + F7_bonus
+F7 = 10 + F6 + F8_bonus
+F8 = 10 + F7 + F9_bonus
+F9 = 10 + F8 + F10_bonus
+F10 = 10 + F11_bonus
+    F11_bonus = 10 + 10
 
     Actual Points for that Frame
     Bonus for that Frame (obtain from upcoming frame)
@@ -91,22 +91,107 @@ F11 = 10 + 10 --> 20 (accumulated = 300)
 TOTAL = 300
 
 NOT A PERFECT GAME:
-     R1  R2   B  AC  
-F1 = 6 + 4 + 8      --> 10 (accumulated = 18)
-F2 = 8 + 1 + 7 + 18 --> 9 (accumulated = 34)
-F3 = 7 + 3 + 6 + 34 --> 10 (accumulated = 50)
-F4 = 6 + 2 + 10 + 50 --> 8 (accumulated = 68)
-F5 = 10 + ST + 10 + 68 --> 10 (accumulated = 88)
-F6 = 6 + 4 + 7 + 88 --> 10 (accumulated = 104)
-F7 = 7 + 2 + 3 + 104 --> 9 (accumulated = 116)
-F8 = 3 + 5 + 10 + 116 --> 8 (accumulated = 134)
-F9 = 10 + ST + 9 + 134 --> 10 (accumulated = 153)
-F10 = 8 + 1 + NONE + 153 --> 9 (accumulated = 162)
+     R1   R2   B      AC  
+F1 = 6 +  4 +  8 +    0     --> 10 (accumulated = 18)
+F2 = 8 +  1 +  7 +    18    --> 9 (accumulated = 34)
+F3 = 7 +  3 +  6 +    34    --> 10 (accumulated = 50)
+F4 = 6 +  2 +  10 +   50    --> 8 (accumulated = 68)
+F5 = 10 + ST + 10 +   68    --> 10 (accumulated = 88)
+F6 = 6 +  4 +  7 +    88    --> 10 (accumulated = 104)
+F7 = 7 +  2 +  3 +    104   --> 9 (accumulated = 116)
+F8 = 3 +  5 +  10 +   116   --> 8 (accumulated = 134)
+F9 = 10 + ST + 9 +    134   --> 10 (accumulated = 153)
+F10 = 8 + 1 +  NONE + 153   --> 9 (accumulated = 162)
 - if player hits a strike or knocks down all 10 pins in two hits --> F11 (with one or two rolls)
-F11 = 0 + 0 --> 0 (accumulated = 162)
-TOTAL = 162
+F11 = 0 + 0                 --> 0 (accumulated = 162)
+                            TOTAL = 162
 
 so you do F1R1, F1R2 X ACC
 F2R1 F2R2 X ACC
 F3R1 F3R2 X ACC
 ...
+
+5 players max
+Repository class where each instance is a game
+Repository class where each instance is a player
+Repository class where each instance is a frame
+
+class Game
+  def initialize
+    # @score_board = [0,0,0,0,0]
+  end
+
+  def show_final_board(player, frames, score)
+    @score_board.each do score
+    # shows the final score board with players' names
+    # from players
+    # from frames
+  end
+end
+
+class Players
+  def initialize
+    player_accumulated_score = []
+    players_list = []
+  end
+    
+  def create_player
+    # puts "What is your first name?"
+    # first_name = gets.chomp
+    # puts "What is your last name?"
+    # last_name = gets.chomp
+    # player name and surname
+    # Welcome! You are player 1 (count players as they are inserted)
+    # player1 = first_name, last_name
+  end
+
+  def count_players
+    # players_list << player
+  end
+
+  def show_player_stats
+    # displays player's name and score per frame
+  end
+end
+
+class Frames
+  def initialize
+    frame = 0
+  end
+
+  def current_frame
+    frame += 1
+  end
+
+  def roll_1(player)
+    # gets.chomp pins knocked down from user
+    pins_knocked - gets.chomp
+    returns int (pins)
+  end
+
+  def roll_2(player)
+    # gets.chomp pins knocked down from user
+    pins_knocked - gets.chomp
+    returns int (pins)
+  end
+
+  def bonus(player, current_frame)
+    # calculates the bonus based on the next frame rolls (F+1 R1 and R2)
+  end
+
+  def accumulated_score(player)
+    # calculates the accumulated score
+  end
+end
+
+run game in app.rb
+    - input player name, ask if to add another player
+    - after no more players added (max 5) start game
+    - start frame 1, loop through players to roll
+    - calculate accumulated score
+    - loop through frames
+    - calculate accumulated score
+    - 10th frame, see if bonus frame
+    - return all scores
+    - display final score
+    - ask if play again
