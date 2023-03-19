@@ -13,8 +13,7 @@ describe Roll do
     io = double :io
     roll = Roll.new(1, io)
     expect(io).to receive(:puts).with("Insert number of pins")
-    #expect(io).to receive(:gets).and_return("2")
-    roll.ask_for_pins
-
+    expect(io).to receive(:gets).and_return("2")
+    expect(roll.ask_for_pins).to eq(2)
   end
 end

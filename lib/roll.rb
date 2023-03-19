@@ -10,6 +10,7 @@ class Roll
 
   def ask_for_pins
     @io.puts "Insert number of pins"
+    input = @io.gets.chomp.to_i
   end
 end
 
