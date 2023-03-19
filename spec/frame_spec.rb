@@ -46,9 +46,10 @@ RSpec.describe Frame do
     
   end 
 
-  xit "raises error if first roll < 10 and second roll is empty" do
+  it "raises error if first_score < 10 and final score is called before second score is played" do
     frame = Frame.new
-    expect { frame.play(6) }.to raise_error "need to enter a second roll value"
+    frame.roll_one(6)
+    expect { frame.final_score }.to raise_error "you need to take another roll before final score can be calculated"
   end 
 
 end 

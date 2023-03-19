@@ -11,21 +11,26 @@ class Frame
   
     # if first roll = 10, move to next frame and mark is_strike? as true
       # score to push to @frame_score is 10 + the two scores from the following frame
+    @frame_score << first_score
+      #returns nothing 
+
     
   end
 
   def roll_two(second_score) # second_score is an integer 
+    @second_score = second_score
     fail "you cannot knock down a negative number or more than ten pins in a frame" if second_score < 0 || second_score > 10
     fail "sum of roll_one and roll_two cannot exceed 10" if @first_score + second_score > 10
 
-    @frame_score << second_score + @first_score
+    @frame_score << second_score
        
         # score is 10 plus first roll of following frame
       # else add score to score accumulator
   end 
 
   def final_score
-    @frame_score.sum 
+    fail "you need to take another roll before final score can be calculated" unless @frame_score.include?(@first_score) && @frame_score.include?(@second_score)
+    return @frame_score.sum
     # if sum first and second roll = 10, mark is_spare? as true
   end 
 
