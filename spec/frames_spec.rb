@@ -10,6 +10,9 @@ RSpec.describe Frames do
     expect(current).to eq 3
   end
 
-  xit '.' do
+  it 'Returns the score for roll 1.' do
+    frame = Frames.new
+    frame.roll_1(3)
+    expect(frame.roll_1(3)).to eq 3
   end
 end

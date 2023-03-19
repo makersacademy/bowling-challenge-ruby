@@ -173,13 +173,13 @@ class Frames
     frame += 1
   end
 
-  def roll_1(player)
+  def roll_1(roll)
     # gets.chomp pins knocked down from user
     pins_knocked - gets.chomp
     returns int (pins)
   end
 
-  def roll_2(player)
+  def roll_2(roll)
     # gets.chomp pins knocked down from user
     pins_knocked - gets.chomp
     returns int (pins)

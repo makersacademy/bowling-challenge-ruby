@@ -12,4 +12,8 @@ class Game
     # from players
     # from frames
   end
+
+  def run_game
+    # runs the game
+  end
 end
