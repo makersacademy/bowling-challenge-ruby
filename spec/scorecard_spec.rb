@@ -34,20 +34,49 @@ describe ScoreCard do
 
   describe ".run method" do
     it "should give the index number incremented by one to the first hash" do
-      allow(kernel).to receive(:gets) { "5" }
-      allow(kernel).to receive(:gets) { "4" }
+      allow(kernel).to receive(:gets).at_least(1).times { "5" }
       subject.run
       result = subject.score_card[0]
       expect(result[:number]).to eq 1
     end
 
-    # context "valid inputs" do
-    #   it "should be between 0 and 10" do
-    #     expect(kernel).to receive(:gets).at_least(1).times { "11" }
-    #     result = subject.score_card[0]
-    #     expect(result[:rolls]).to eq []
-    #   end
-    # end
+    context "valid inputs" do
+      it "should be between 0 and 10 - test 1" do
+        expect(kernel).to receive(:gets).once { "11" }
+        expect(kernel).to receive(:gets).at_least(1).times { "10" }
+        subject.run
+        result = subject.score_card[0]
+        expect(result[:rolls]).not_to eq [11]
+        expect(result[:rolls]).to eq [10]
+      end
+      it "should be between 0 and 10 - test 2" do
+        expect(kernel).to receive(:gets).once { "11" }
+        expect(kernel).to receive(:gets).at_least(2).times { "4" }
+        subject.run
+        result = subject.score_card[0]
+        expect(result[:rolls]).not_to eq [11]
+        expect(result[:rolls]).to eq [4,4]
+      end
+      it "should not be more than 10 after two rolls - test 1" do
+        expect(kernel).to receive(:gets).once { "5" }
+        expect(kernel).to receive(:gets).once { "6" }
+        expect(kernel).to receive(:gets).at_least(1).times { "4" }
+        subject.run
+        result = subject.score_card[0]
+        expect(result[:rolls]).not_to eq [5,6]
+        expect(result[:rolls]).to eq [5,4]
+      end
+      it "should not be more than 10 after two rolls - test 2" do
+        expect(kernel).to receive(:gets).once { "11" }
+        expect(kernel).to receive(:gets).once { "6" }
+        expect(kernel).to receive(:gets).once { "7" }
+        expect(kernel).to receive(:gets).at_least(1).times { "4" }
+        subject.run
+        result = subject.score_card[0]
+        expect(result[:rolls]).not_to eq [5,6]
+        expect(result[:rolls]).to eq [6,4]
+      end
+    end
 
 
     context "first frame" do

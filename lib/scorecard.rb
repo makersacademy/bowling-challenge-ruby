@@ -10,11 +10,13 @@ class ScoreCard
 
     @score_card.each_with_index do |frame, index|
       _game_setup(frame, index)
-      
+
       @rolls.each do |roll|
     #--------------------------------------------
         
-        input = @io.gets.chomp.to_i
+        input = _get_user_input(frame, roll)
+
+        
         frame[:rolls] << input
 
         if roll == 1 && input == 10
@@ -47,4 +49,18 @@ class ScoreCard
     frame[:number] = @frame_number
     @rolls = [1, 2]
   end
+
+  # -----------------
+  # USER INPUT METHODS 
+  # -----------------
+
+  def _get_user_input(frame, roll)
+    while true
+      input = @io.gets.chomp.to_i
+      return input if roll == 1 && input.between?(0, 10)
+      return input if roll == 2 && input <= (10 - frame[:rolls][0])
+    end
+  end
+
+
 end
