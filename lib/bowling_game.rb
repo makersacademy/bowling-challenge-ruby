@@ -24,7 +24,7 @@ class BowlingGame
         total_score += spare_score(roll_index)
         roll_index += 2
       else
-        total_score += @rolls[roll_index] + @rolls[roll_index + 1] 
+        total_score += frame_score(roll_index)
         roll_index += 2
       end
     end
@@ -49,6 +49,9 @@ class BowlingGame
   def strike_score(roll_index)
     10 + @rolls[roll_index + 1] + @rolls[roll_index + 2]
   end
-  
 
+  def frame_score(roll_index)
+    @rolls[roll_index] + @rolls[roll_index + 1] 
+  end
+  
 end
