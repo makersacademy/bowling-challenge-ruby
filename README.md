@@ -1,7 +1,7 @@
 Game Scorecount
 ===============
 
-![Diagram for Scorecount](images/Diagram%20Scorecount.png)
+![Diagram for Scorecount](https://github.com/francescoGuglielmi/bowling-challenge-ruby/blob/454472c0f2d718b5b780cda132a3b4f0a9f869aa/documents/images/Diagram%20Scorecount.png)
 
 # Content
 
