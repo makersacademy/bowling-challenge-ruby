@@ -22,10 +22,34 @@ class Roll
   def initialize(number, io)
   end
 
-  def ask_for_input
+  def print_number
+    # prints frame number
   end
-  
+
+  def ask_for_pins
+    # makes a puts
+  end
+
+  def get_pins
+    # asks for input
+  end
 end
+
+class Game
+  def initialize
+  end
+
+  def run_game
+    # runs the game
+  end
+end
+
+class Frame10
+  def initialize
+    # child of Frame
+  end
+end
+
 3. Create Examples as Integration Tests
 Create examples of the classes being used together in different situations and combinations that reflect the ways in which the system will be used.
 
