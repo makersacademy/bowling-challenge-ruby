@@ -17,8 +17,8 @@ class BowlingGame
 
     # Loops through frame 10 times to cover a full game
     10.times do |frame|
-      if @rolls[roll_index] == 10
-        total_score += 10 + @rolls[roll_index + 1] + @rolls[roll_index + 2]
+      if strike?(roll_index)
+        total_score += strike_score(roll_index)
         roll_index += 1
       elsif spare?(roll_index)
         total_score += spare_score(roll_index)
@@ -40,6 +40,14 @@ class BowlingGame
 
   def spare_score(roll_index)
     10 + @rolls[roll_index + 2]
+  end
+
+  def strike?(roll_index)
+    @rolls[roll_index] == 10
+  end
+
+  def strike_score(roll_index)
+    10 + @rolls[roll_index + 1] + @rolls[roll_index + 2]
   end
   
 
