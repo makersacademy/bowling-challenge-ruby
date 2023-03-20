@@ -11,11 +11,9 @@ class BowlingScoreCard
       _game_setup(frame, index)
 
       puts "FRAME #{frame[:frame]}"
-
       @rolls.each do |roll|
 
         puts "ROLL #{roll}"
-
         input = _get_user_input(frame, roll)
         if roll == 1 && input == 10
           _strike_game_logic(frame, index, input)
@@ -45,11 +43,17 @@ class BowlingScoreCard
     return @score_card
   end
 
+  def _game_setup(hash, index)
+    @frame_number = index + 1 
+    hash[:frame] = @frame_number
+    @rolls = [1, 2]
+  end
+
   def _get_user_input(frame, roll)
     while true
       input = @io.gets.chomp.to_i
       return input if roll == 1 && input.between?(0, 10)
-      return input if roll == 2 && input <= (10 - frame[:rolls][0])
+      return input if roll == 2 && input <= (10 - frame[:rolls][0]) # diff between 10 and score roll 1
     end
   end
 
@@ -63,12 +67,6 @@ class BowlingScoreCard
   # ---------------------------------
   # GAME MAIN LOGIC
   # ---------------------------------
-
-  def _game_setup(hash, index)
-    @frame_number = index + 1 
-    hash[:frame] = @frame_number
-    @rolls = [1, 2]
-  end
 
   def _strike_game_logic(frame, index, input)
     _update_score_board(frame, index, input)
@@ -123,7 +121,7 @@ class BowlingScoreCard
     @rolls.each do |bonus_roll|
       puts "BONUS ROLL #{bonus_roll}/2"
       input = _get_input_for_bonus_rolls
-      _populate_bonus(@score_card[8], input) if bonus_roll == 1
+      _populate_bonus(@score_card[8], input) if bonus_roll == 1 # frame 9 can still get bonus from extra roll 1
       _add_score_to(frame[:bonus], input)
     end 
   end
@@ -140,13 +138,14 @@ class BowlingScoreCard
 
   def _display_scores_until_current(index)
     @score_card[0..index].each_with_index do |frame, index|
-      bonus_status = _defining_total_bonus_status(frame)
-      _define_total(frame, bonus_status, index)
+      bonus_total = _get_bonus_total(frame) # if not ready, returns 'X' or '/'
+      _calculate_frame_total(frame, bonus_total, index)
+
       puts frame
     end
   end
 
-  def _defining_total_bonus_status(frame)
+  def _get_bonus_total(frame)
     if frame[:status] == "STRIKE" 
       total_bonus = frame[:bonus].length == 2 ? frame[:bonus].sum : "X"
     elsif frame[:status] == "SPARE"
@@ -156,13 +155,13 @@ class BowlingScoreCard
     end
   end
 
-  def _define_total(frame, bonus_status, index)
-    total_rolls = frame[:rolls].sum
+  def _calculate_frame_total(frame, bonus_total, index)
+    rolls_total = frame[:rolls].sum
     previous_total = @score_card[index - 1][:total] ||= 0
 
-    total = [previous_total, total_rolls, bonus_status] 
-    is_total_ready = total.all?(Numeric)
-    frame[:total] = is_total_ready ? total.sum : bonus_status # either the total or "X" or "/" if not ready
+    total = [previous_total, rolls_total, bonus_total] 
+    is_total_ready = total.all?(Integer)
+    frame[:total] = is_total_ready ? total.sum : bonus_total # "X" or "/"
   end
 end
 
