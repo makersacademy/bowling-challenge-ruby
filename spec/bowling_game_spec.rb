@@ -53,4 +53,13 @@ RSpec.describe BowlingGame do
     end
   end
 
+  context "when a player rolls all strikes" do
+    it "scores a perfect game" do
+      12.times do
+        @game.roll(10)
+      end
+      expect(@game.score).to eq 300
+    end
+  end
+
 end
