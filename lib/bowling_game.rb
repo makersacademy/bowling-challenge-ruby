@@ -11,7 +11,20 @@ class BowlingGame
   end
 
   def score
-    return @rolls.sum
+    total_score = 0
+    roll_index = 0
+
+    10.times do |frame|
+      if @rolls[roll_index] + @rolls[roll_index + 1] == 10
+        total_score += 10 + @rolls[roll_index + 2]
+        roll_index += 2
+      else
+        total_score += @rolls[roll_index] + @rolls[roll_index + 1] 
+        roll_index += 2
+      end
+    end
+
+    return total_score
   end
 
 end
