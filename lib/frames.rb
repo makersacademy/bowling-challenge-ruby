@@ -4,11 +4,11 @@ class Frames
     @bonus = 0
   end
 
-  def increment_frame
+  def increment_frame # Not in use anymore
     @frame += 1
   end
 
-  def current_frame
+  def current_frame # Not in use anymore
     @frame
   end
 
@@ -43,9 +43,5 @@ class Frames
            return @bonus = @pins_knocked_down_r1
         end
     end
-  end
-
-  def accumulated_score(frame_number)
-    # calculates the accumulated score
   end
 end

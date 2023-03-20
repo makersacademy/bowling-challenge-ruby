@@ -118,7 +118,13 @@ Repository class where each instance is a frame
 
 class Game
   def initialize
+    # starts with rolls empty array
+    # sets current roll at 0
     # @score_board = [0,0,0,0,0]
+  end
+
+  def score
+    # loops 10 times and if roll == 10 or sum of both rolls == 10 accumulates the score accordingly
   end
 
   def show_final_board(player, frames, score)
@@ -185,23 +191,20 @@ class Frames
     returns int (pins)
   end
 
-  def bonus(player, current_frame)
+  def bonus(current_frame)
     # calculates the bonus based on the next frame rolls (F+1 R1 and R2)
   end
 
-  def accumulated_score(player)
-    # calculates the accumulated score
-  end
 end
 
 run game in app.rb
-    - input player name, ask if to add another player
-    - after no more players added (max 5) start game
-    - start frame 1, loop through players to roll
+    - input player name, ask if to add another player - to be implemented at a later time
+    - after no more players added (max 5) start game - to be implemented at a later time
+    - start frame 1, loop through players to roll - to be implemented at a later time
     - calculate accumulated score
     - loop through frames
     - calculate accumulated score
     - 10th frame, see if bonus frame
     - return all scores
     - display final score
-    - ask if play again
+    - ask if play again - to be implemented at a later time

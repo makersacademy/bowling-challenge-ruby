@@ -2,7 +2,7 @@ class Game
   def initialize
     @rolls = []
     @current_roll = 0
-    @score_board = [0,0,0,0,0]
+    @score_board = [0,0,0,0,0] # To be used when more than one players allowed
   end
 
   def roll(pins_knocked)
@@ -28,7 +28,7 @@ class Game
     return accumulated_score.to_i
   end
 
-  def show_final_board
+  def show_final_board # To be used when more than one players allowed
   #def show_final_board(player, frames, score)
     @score_board.each do |score|
       score

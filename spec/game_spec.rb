@@ -7,5 +7,6 @@ RSpec.describe Game do
   end
 
   xit 'Returns score board for a game with three players.' do
+    # After multiplayer functionality added
   end
 end
