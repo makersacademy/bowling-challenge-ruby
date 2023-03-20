@@ -17,11 +17,11 @@ class Frame
   end
 
   def strike?
-    @frame[0] == 10 && @frame.size == 1
+    true if @frame[0] == 10 && @frame.size == 1
   end
 
   def spare?
-    @frame.sum == 10 && @frame.size == 2
+    true if @frame.size == 2 && @frame.sum == 10
   end
 
   def run
@@ -29,6 +29,22 @@ class Frame
     return @frame = ['X'] if strike? 
     roll
     @frame[1] = '/' if spare?
+    return @frame
+  end
+
+  def tenth
+    @pins = @io.gets.to_i
+    @pins = 'X' if @pins == 10
+    @frame << @pins
+    @pins = @io.gets.to_i
+    @frame << @pins
+    if (!@frame.include? 'X') && @frame.sum == 10
+      @frame[1] = '/'
+    end
+    if (@frame.include? '/') || (@frame.include? 'X')
+      @pins = @io.gets.to_i
+      @frame << @pins
+    end
     return @frame
   end
 

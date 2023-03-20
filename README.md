@@ -16,4 +16,3 @@ It runs each frame of a game and returns the sum of their scores.
 
 
 
-

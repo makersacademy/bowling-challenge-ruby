@@ -72,7 +72,4 @@ describe Frame do
       expect(frame.run).to eq [9, '/']
     end
   end
-
-
-
 end
