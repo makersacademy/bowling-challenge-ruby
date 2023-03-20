@@ -20,22 +20,22 @@ He will be prompt with the context of the game in which he currently is and a sc
 The program will automatically detect strikes and spares and calculate totals and bonuses following the ten-pin bowling rules.
 
 Player scored a STRIKES in frame 1. The game jump to frame 2
-![](images/picture_1.jpg)
+![picture_1](images/picture_1.jpg)
 
 Player scored STRIKES in frame 2 and 3. The total score from the frame will not be shown until it has collected all the bonuses it is waiting for.
-![](images/picture_2.jpg)
+![picture_2](images/picture_2.jpg)
 
 Player has scored 5 and 4 in frame 4. His strike streak is over and each total scores are ready to be evaluated. Note that they are cumulated from a frame to the next one.
-![](images/picture_3.jpg)
+![picture_3](images/picture_3.jpg)
 
 Player has scored SPARES from frame 5 to 10. Same mechanic as strikes, total score is waiting for its bonus point before it is displayed.
-![](images/picture_4.jpg)
+![picture_4](images/picture_4.jpg)
 
 Player scores STRIKES from in frame 10. Different prompts will be shown to the player to indicate that he is entitled extra rolls.
-![](images/picture_5.jpg)
+![picture_5](images/picture_5.jpg)
 
 A ten-pin bowling perfect game!
-![](images/picture_6.jpg)
+![picture_6](images/picture_6.jpg)
 
 ## The Task
 
