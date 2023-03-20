@@ -1,7 +1,6 @@
 class Frame 
   def initialize 
     @frame_score = [] # score accumulator keeps track of score
-    
   end 
 
 
@@ -13,8 +12,6 @@ class Frame
       # score to push to @frame_score is 10 + the two scores from the following frame
     @frame_score << first_score
       #returns nothing 
-
-    
   end
 
   def roll_two(second_score) # second_score is an integer 
