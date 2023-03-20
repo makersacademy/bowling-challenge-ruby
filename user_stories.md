@@ -7,5 +7,3 @@ If I do not knock down all ten pins on a frame, I want the program to record an 
 When I reach the 10th frame, I want the program to allow me to make up to three throws if necessary, and to correctly calculate my score based on the number of pins knocked down in each throw.
 
 At the end of the game, I want the program to display my total score and ask me if I want to start a new game or exit the program.
-
-Overall, I want the program to be easy to use and accurately track my score so that I can focus on playing the game without worrying about keeping score manually.
