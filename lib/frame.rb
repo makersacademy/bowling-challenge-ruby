@@ -25,9 +25,9 @@ class Frame
       # else add score to score accumulator
   end 
 
-  def final_score
+  def frame_scores
     fail "you need to take another roll before final score can be calculated" unless @frame_score.include?(@first_score) && @frame_score.include?(@second_score)
-    return @frame_score.sum
+    return @frame_score
     # if sum first and second roll = 10, mark is_spare? as true
   end 
 

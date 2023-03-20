@@ -6,11 +6,11 @@ RSpec.describe Frame do
     frame = Frame.new
   end 
 
-  it "keeps a score for that frame" do 
+  it "keeps a score for that frame as an array of scores" do 
     frame = Frame.new
     frame.roll_one(3)
     frame.roll_two(4)
-    expect(frame.final_score).to eq 7
+    expect(frame.frame_scores).to eq [3, 4]
   end 
 
   it "recognises if strike" do 
@@ -49,7 +49,7 @@ RSpec.describe Frame do
   it "raises error if first_score < 10 and final score is called before second score is played" do
     frame = Frame.new
     frame.roll_one(6)
-    expect { frame.final_score }.to raise_error "you need to take another roll before final score can be calculated"
+    expect { frame.frame_scores }.to raise_error "you need to take another roll before final score can be calculated"
   end 
 
 end 

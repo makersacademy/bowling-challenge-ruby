@@ -8,7 +8,7 @@ RSpec.describe 'integeration' do
     frame_1.roll_one(3)
     frame_1.roll_two(1)
 
-    score.add(frame_1.final_score)
+    score.add(frame_1.frame_scores)
     expect(score.total).to eq 4
   end 
 

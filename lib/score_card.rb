@@ -8,16 +8,17 @@ class ScoreCard
     @score = []
 
     @completed_frames.each do |frame|
-      @score << frame
+      p "this is frame: #{frame}"
+      
+      @score << frame.sum
     end 
     return @score.sum # returns an integer of the total score from each frame that has been added
   end 
 
-  def add(frame) 
+  def add(frame) #frame is an instance of Frame
     @completed_frames << frame
-    # frame is a string
-    # takes one agument - and instance of Frame 
-    # adds the score of frame to a scorecard 
+    p "this is the @completed_frame : #{@completed_frames}"
+    # adds the frame to the completed frames array
     # returns nothing 
   end 
 
