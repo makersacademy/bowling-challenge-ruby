@@ -111,7 +111,7 @@ F2R1 F2R2 X ACC
 F3R1 F3R2 X ACC
 ...
 
-5 players max
+5 players max (to be implemented at a later time)
 Repository class where each instance is a game
 Repository class where each instance is a player
 Repository class where each instance is a frame
