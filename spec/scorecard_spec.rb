@@ -1,6 +1,6 @@
-require "scorecard"
+require "bowling_scorecard"
 
-describe ScoreCard do
+describe BowlingScoreCard do
 
   let(:kernel) { spy(double :Kernel) }
   let(:subject) { described_class.new(kernel) }
@@ -36,7 +36,7 @@ describe ScoreCard do
       allow(kernel).to receive(:gets).at_least(1).times { "5" }
       subject.run
       result = subject.score_card[0]
-      expect(result[:number]).to eq 1
+      expect(result[:frame]).to eq 1
     end
 
     context "valid inputs" do
@@ -56,7 +56,7 @@ describe ScoreCard do
         expect(result[:rolls]).not_to eq [11]
         expect(result[:rolls]).to eq [4,4]
       end
-      it "should not be more than 10 after two rolls - test 1" do
+      it "a frame should not total to more than 10 - test 1" do
         expect(kernel).to receive(:gets).once { "5" }
         expect(kernel).to receive(:gets).once { "6" }
         expect(kernel).to receive(:gets).at_least(1).times { "4" }
@@ -65,7 +65,7 @@ describe ScoreCard do
         expect(result[:rolls]).not_to eq [5,6]
         expect(result[:rolls]).to eq [5,4]
       end
-      it "should not be more than 10 after two rolls - test 2" do
+      it "a frame should not total to more than 10 - test 2" do
         expect(kernel).to receive(:gets).once { "11" }
         expect(kernel).to receive(:gets).once { "6" }
         expect(kernel).to receive(:gets).once { "7" }
@@ -83,14 +83,14 @@ describe ScoreCard do
         expect(kernel).to receive(:gets).at_least(2).times { "4" }
         subject.run
       end
-      it "should save both rolls into the :rolls key" do
+      it "should save both rolls into the :rolls key - test 1" do
         expect(kernel).to receive(:gets) { "5" }
         expect(kernel).to receive(:gets).at_least(1).times { "4" }
         subject.run
         result = subject.score_card[0]
         expect(result[:rolls]).to eq [5, 4]
       end
-      it "should save both rolls into the :rolls key" do
+      it "should save both rolls into the :rolls key - test 2" do
         expect(kernel).to receive(:gets) { "6" }
         expect(kernel).to receive(:gets).at_least(1).times { "3" }
         subject.run
@@ -217,6 +217,89 @@ describe ScoreCard do
         expect(result[:status]).to eq "STRIKE"
         expect(result[:rolls]).to eq [10]
         expect(result[:bonus].length).to eq 2
+      end
+    end
+
+    context "the 10th frame" do
+
+      context "STRIKE test examples" do
+        it "should allow the player two extra rolls if roll 1 is a STRIKE - test 1" do
+          expect(kernel).to receive(:gets).exactly(10).times { "10" }
+          expect(kernel).to receive(:gets) { "10" }
+          expect(kernel).to receive(:gets) { "10" }
+          subject.run
+          result = subject.score_card[9]
+          expect(result[:status]).to eq "STRIKE"
+          expect(result[:rolls]).to eq [10]
+          expect(result[:bonus]).to eq [10,10]
+        end
+        it "should allow the player two extra rolls if roll 1 is a STRIKE - test 2" do
+          expect(kernel).to receive(:gets).exactly(10).times { "10" }
+          expect(kernel).to receive(:gets) { "5" }
+          expect(kernel).to receive(:gets) { "5" }
+          subject.run
+          result = subject.score_card[9]
+          expect(result[:status]).to eq "STRIKE"
+          expect(result[:rolls]).to eq [10]
+          expect(result[:bonus]).to eq [5,5]
+        end
+        it "should allow the player two extra rolls if roll 1 is a STRIKE - test 3" do
+          expect(kernel).to receive(:gets).exactly(10).times { "10" }
+          expect(kernel).to receive(:gets) { "0" }
+          expect(kernel).to receive(:gets) { "0" }
+          subject.run
+          result = subject.score_card[9]
+          expect(result[:status]).to eq "STRIKE"
+          expect(result[:rolls]).to eq [10]
+          expect(result[:bonus]).to eq [0,0]
+        end
+      end
+
+      context "SPARE test examples" do
+        it "should allow the player one extra rolls if frame 10 is a SPARE - test 1" do
+          expect(kernel).to receive(:gets).exactly(9).times { "10" }
+          expect(kernel).to receive(:gets) { "5" }
+          expect(kernel).to receive(:gets) { "5" }
+          expect(kernel).to receive(:gets) { "10" }
+          subject.run
+          result = subject.score_card[9]
+          expect(result[:status]).to eq "SPARE"
+          expect(result[:rolls]).to eq [5,5]
+          expect(result[:bonus]).to eq [10]
+        end
+        it "should allow the player one extra rolls if frame 10 is a SPARE - test 2" do
+          expect(kernel).to receive(:gets).exactly(9).times { "10" }
+          expect(kernel).to receive(:gets) { "1" }
+          expect(kernel).to receive(:gets) { "9" }
+          expect(kernel).to receive(:gets) { "5" }
+          subject.run
+          result = subject.score_card[9]
+          expect(result[:status]).to eq "SPARE"
+          expect(result[:rolls]).to eq [1,9]
+          expect(result[:bonus]).to eq [5]
+        end
+        it "should allow the player one extra rolls if frame 10 is a SPARE - test 3" do
+          expect(kernel).to receive(:gets).exactly(9).times { "10" }
+          expect(kernel).to receive(:gets) { "0" }
+          expect(kernel).to receive(:gets) { "10" }
+          expect(kernel).to receive(:gets) { "10" }
+          subject.run
+          result = subject.score_card[9]
+          expect(result[:status]).to eq "SPARE"
+          expect(result[:rolls]).to eq [0,10]
+          expect(result[:bonus]).to eq [10]
+        end
+      end
+
+      context "Neither STRIKE nor SPARE test examples" do
+        it "should end after 2 rolls - no extra rolls" do
+          expect(kernel).to receive(:gets).exactly(9).times { "10" }
+          expect(kernel).to receive(:gets).twice { "4" }
+          subject.run
+          result = subject.score_card[9]
+          expect(result[:rolls]).to eq [4,4]
+          expect(result[:bonus]).to eq []
+        end
       end
     end
   end

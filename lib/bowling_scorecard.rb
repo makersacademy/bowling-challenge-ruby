@@ -1,4 +1,4 @@
-class ScoreCard
+class BowlingScoreCard
   attr_accessor :score_card
 
   def initialize(io = Kernel)
@@ -19,30 +19,25 @@ class ScoreCard
           _non_strike_game_logic(frame, index, input)
         end
       end
-      #--------------------------------------------
+      _check_if_extra_rolls(frame) if @frame_number == 10
     end
   end
 
   private
 
-  # ---------------------------------
-  # GAME SETUPS
-  # ---------------------------------
+  # ----------------------------------
+  # GAME SETUPS AND USER INTERACTIONS
+  # ----------------------------------
 
-  # POPULATE @SCORE_CARD WITH STARTER HASHES
-
-  def _create_frames
-    return unless @score_card.nil? # prevent reset scorecard when method is called again
+  def _create_frames 
+    return unless @score_card.nil? # prevent scorecard reset when method is called again
 
     @score_card = []
     (0..9).each do |index| 
-      @score_card[index] = {number: nil, status: "", rolls: [], bonus: []}
+      @score_card[index] = { frame: nil, status: "", rolls: [], bonus: [] }
     end
-
     return @score_card
   end
-
-  # USER INPUT METHODS 
 
   def _get_user_input(frame, roll)
     while true
@@ -52,13 +47,20 @@ class ScoreCard
     end
   end
 
+  def _get_input_for_bonus_rolls
+    while true
+    input = @io.gets.chomp.to_i
+    return input if input.between?(0, 10)
+    end
+  end
+
   # ---------------------------------
   # GAME MAIN LOGIC
   # ---------------------------------
 
-  def _game_setup(frame, index)
+  def _game_setup(hash, index)
     @frame_number = index + 1 
-    frame[:number] = @frame_number
+    hash[:frame] = @frame_number
     @rolls = [1, 2]
   end
 
@@ -71,6 +73,16 @@ class ScoreCard
     _update_score_board(frame, index, input)
     _assign_status_to(frame, "SPARE") if _frame_is_a_spare(frame)
   end
+
+  def _assign_status_to(frame, status)
+    frame[:status] = status
+  end
+
+  def _frame_is_a_spare(frame)
+    has_rolled_twice = frame[:rolls].length == 2
+    total_points_10 = frame[:rolls].sum == 10
+    return true if has_rolled_twice && total_points_10 
+  end # 'true if' is not necessary here but it gives more sence to the sentence
 
   def _update_score_board(frame, index, input)
     _add_score_to(frame[:rolls], input)
@@ -85,22 +97,39 @@ class ScoreCard
   def _populate_bonus(frame, bonus)
     is_a_strike = frame[:status] == "STRIKE"
     is_a_spare = frame[:status] == "SPARE"
-    can_accept_bonuses =  frame[:bonus].length < 2
+    can_accept_bonuses = frame[:bonus].length < 2
     can_accept_bonus = frame[:bonus].length < 1
 
     frame[:bonus] << bonus if is_a_strike and can_accept_bonuses
     frame[:bonus] << bonus if is_a_spare and can_accept_bonus
   end
 
-  # STRIKE OR SPARE STATUS ASSIGNMENT
+  # ---------------------
+  # EXTRA ROLLS MECHANIC
+  # ---------------------
 
-  def _assign_status_to(frame, status)
-    frame[:status] = status
+  def _check_if_extra_rolls(frame)
+    _give_2_extra_rolls(frame) if frame[:status] == "STRIKE"
+    _give_1_extra_roll(frame) if frame[:status] == "SPARE"
   end
 
-  def _frame_is_a_spare(frame)
-    has_rolled_twice = frame[:rolls].length == 2
-    total_points_10 = frame[:rolls].sum == 10
-    return true if has_rolled_twice && total_points_10 
-  end # 'true if' is not necessary here but it gives more sence to the sentence
+  def _give_2_extra_rolls(frame)
+    @rolls.each do |bonus_roll|
+      input = _get_input_for_bonus_rolls
+      _populate_bonus(@score_card[8], input) if bonus_roll == 1
+      _add_score_to(frame[:bonus], input)
+    end 
+  end
+
+  def _give_1_extra_roll(frame)
+    bonus_roll = _get_input_for_bonus_rolls
+    _add_score_to(frame[:bonus], bonus_roll)
+  end
 end
+
+if __FILE__ == $0
+  new_game = BowlingScoreCard.new
+  new_game.run
+end
+
+new_game.score_card.each { |frame| puts frame } 
