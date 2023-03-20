@@ -32,11 +32,24 @@ RSpec.describe BowlingGame do
     it "adds the score of the next roll on to the 10 from the spare" do
       @game.roll(5)
       @game.roll(5)
-      @game.roll(5) 
-      17.times do
+      @game.roll(5)
+      @game.roll(3) 
+      16.times do
         @game.roll(0)
       end
-      expect(@game.score).to eq 20
+      expect(@game.score).to eq 23
+    end
+  end
+
+  context "when a player rolls a strike" do
+    it "adds the score of the next two rolls on to the 10 from the strike" do
+      @game.roll(10)
+      @game.roll(5)
+      @game.roll(2)
+      16.times do 
+        @game.roll(0)
+      end
+      expect(@game.score).to eq 24 
     end
   end
 
