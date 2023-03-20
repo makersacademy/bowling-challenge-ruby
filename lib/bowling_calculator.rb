@@ -69,12 +69,6 @@ class BowlingCalculator
   end
 
   private
-  
-  def print_frames
-    for i in 0 ... @frames.length
-      frame = @frames[i]
-    end
-  end
 
   def get_strike_extra_points(i)
     counter = 0
@@ -100,7 +94,7 @@ class BowlingCalculator
     next_roll = next_frame[0]
 
     if next_roll != nil
-      extra_score += next_frame[0]
+      extra_score += next_roll
     end
 
     return extra_score
