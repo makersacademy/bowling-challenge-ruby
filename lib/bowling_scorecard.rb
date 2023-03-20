@@ -10,7 +10,12 @@ class BowlingScoreCard
     @score_card.each_with_index do |frame, index|
       _game_setup(frame, index)
 
+      puts "FRAME #{frame[:frame]}"
+
       @rolls.each do |roll|
+
+        puts "ROLL #{roll}"
+
         input = _get_user_input(frame, roll)
         if roll == 1 && input == 10
           _strike_game_logic(frame, index, input)
@@ -20,6 +25,7 @@ class BowlingScoreCard
         end
       end
       _check_if_extra_rolls(frame) if @frame_number == 10
+      _display_scores_until_current(index)
     end
   end
 
@@ -115,6 +121,7 @@ class BowlingScoreCard
 
   def _give_2_extra_rolls(frame)
     @rolls.each do |bonus_roll|
+      puts "BONUS ROLL #{bonus_roll}/2"
       input = _get_input_for_bonus_rolls
       _populate_bonus(@score_card[8], input) if bonus_roll == 1
       _add_score_to(frame[:bonus], input)
@@ -122,8 +129,40 @@ class BowlingScoreCard
   end
 
   def _give_1_extra_roll(frame)
+    puts "BONUS ROLL"
     bonus_roll = _get_input_for_bonus_rolls
     _add_score_to(frame[:bonus], bonus_roll)
+  end
+
+  # ---------------------
+  # OUTPUT METHODS
+  # ---------------------
+
+  def _display_scores_until_current(index)
+    @score_card[0..index].each_with_index do |frame, index|
+      bonus_status = _defining_total_bonus_status(frame)
+      _define_total(frame, bonus_status, index)
+      puts frame
+    end
+  end
+
+  def _defining_total_bonus_status(frame)
+    if frame[:status] == "STRIKE" 
+      total_bonus = frame[:bonus].length == 2 ? frame[:bonus].sum : "X"
+    elsif frame[:status] == "SPARE"
+      total_bonus = frame[:bonus].length == 1 ? frame[:bonus].sum : "/"
+    else
+      total_bonus = frame[:bonus].sum
+    end
+  end
+
+  def _define_total(frame, bonus_status, index)
+    total_rolls = frame[:rolls].sum
+    previous_total = @score_card[index - 1][:total] ||= 0
+
+    total = [previous_total, total_rolls, bonus_status] 
+    is_total_ready = total.all?(Numeric)
+    frame[:total] = is_total_ready ? total.sum : bonus_status # either the total or "X" or "/" if not ready
   end
 end
 
@@ -131,5 +170,3 @@ if __FILE__ == $0
   new_game = BowlingScoreCard.new
   new_game.run
 end
-
-new_game.score_card.each { |frame| puts frame } 
