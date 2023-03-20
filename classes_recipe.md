@@ -17,7 +17,7 @@ class Frame
   def print_number
     # prints frame number
   end
-
+end
 class Roll
   def initialize(number, io)
   end
@@ -49,6 +49,18 @@ class Frame10
     # child of Frame
   end
 end
+
+class Score
+  def initialize(score)
+    # score is an int
+  end
+  def calculate_score
+  end
+  def print_score
+  end
+end
+
+
 
 3. Create Examples as Integration Tests
 Create examples of the classes being used together in different situations and combinations that reflect the ways in which the system will be used.
