@@ -26,8 +26,24 @@ describe BowlingScorer do
   end
 
   context "check_for_spares method" do
-    it "returns normal if the input doesnt eq 10" do
+    it "returns normal if the total input is <10 and >0" do
       expect(bowl.check_for_specials([1,4])).to eq "normal"
+    end
+
+    it "returns gutter if the total input is 0" do
+      expect(bowl.check_for_specials([0,0])).to eq "gutter"
+    end
+
+    it "returns strike if the first shot is 10" do
+      expect(bowl.check_for_specials([10,0])).to eq "strike"
+    end
+
+    it "returns spare if the total input is 10" do
+      expect(bowl.check_for_specials([3,7])).to eq "spare"
+    end
+
+    it "returns spare if the total input is 10" do
+      expect(bowl.check_for_specials([0,10])).to eq "spare"
     end
   end
 end
