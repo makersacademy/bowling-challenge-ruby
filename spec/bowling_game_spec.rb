@@ -14,4 +14,10 @@ it 'rolls a gutter game, 20 rolls with no pins knocked over' do
     expect(game.score).to eq 0
 end
 
+it 'can roll and knock just 1 pin 20 times' do
+game = BowlingGame.new
+    20.times{game.roll 1}
+    expect(game.score).to eq 20
+end
+
 end

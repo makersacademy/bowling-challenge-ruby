@@ -1,11 +1,23 @@
 class BowlingGame
 
-    def roll (pin)
+def initialize
+@rolls = []
+end 
 
-    end
-     
-    def score
-        0
-    end
 
+  def roll(pins)
+    @rolls.push pins
+  end
+
+
+
+  def score
+    result = 0
+    rolls_count = 0
+    20.times do
+        result += @rolls[rolls_count]
+        rolls_count =+ 1
+  end
+  result
+end
 end
