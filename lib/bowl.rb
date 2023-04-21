@@ -28,11 +28,14 @@ class BowlingScorer
     return message
   end
 
-  def add_bonus_frame(shot1=0, shot2=0, shot3=0)
-    current_frame, shots = [], [shot1, shot2, shot3]
-    shots.each {|shot| current_frame << shot if shot > 0}
-    @frames << current_frame
-    return current_frame
+  def add_bonus_frame(*args)
+    @frames << [*args]
+    return [*args]
+  end
+
+  def count_player_bonus_scores
+    fail "Player has not scored any bonuses!" if @frames.length <= 10
+    @player_score += @frames[-1].flatten.sum
   end
 
   def count_frame_score(index)
@@ -50,10 +53,12 @@ class BowlingScorer
   def count_player_score
     i = 1
     @player_score += @frames[0].sum
-    while i < @frames.length
+    frames = [@frames.length, 10].min
+    while i < frames
       @player_score += count_frame_score(i)
       i += 1
     end
+    count_player_bonus_scores if @frames.length > 10
     return @player_score
   end
 

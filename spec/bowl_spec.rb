@@ -152,8 +152,8 @@ describe BowlingScorer do
     end
   end
 
-  ## There is no UI, so we assume allowing player to take additional shots will be handled
-  ## by the UI and not these methods.
+  ## There is no UI, so we assume validations to check if player is allowed
+  ## to take additional shots will be handled by the UI and not these methods.
   context "add bonus frame method" do
     it "adds an array of one element if player gets one bonus shot" do
       bowl.add_bonus_frame(5)
@@ -176,18 +176,71 @@ describe BowlingScorer do
     end
   end
 
-  context "evaluating the 10th frame" do
-    it "counts the game regularly if the player fails to score any spare or strikes" do
+  context "count_player_bonus_scores method" do
+    it "fails if player does not have any bonus points" do
       simulate_a_game_until_last_shot
-      bowl.add_frame(4,3)
-      expect(bowl.count_player_score).to eq 91
+      bowl.add_frame(6,3)
+      expect{bowl.count_player_bonus_scores}.to raise_error "Player has not scored any bonuses!"
     end
-   
-    it "counts the extra roll points if the player ends with spare end gets one extra shot" do
+
+    it "counts the total number of points player collected after 10th frame" do
       simulate_a_game_until_last_shot
-      bowl.add_frame(7,3)
-      expect(bowl.count_player_score).to eq 94
-      expect(bowl.add_bonus_frame(6))
+      bowl.add_frame(6,4)
+      bowl.add_bonus_frame(10,5,4)
+      expect(bowl.count_player_bonus_scores).to eq 19
+    end
+  end
+
+  context "frames method" do
+    it "lists the shots user has made in an array of integer pairs" do
+      simulate_a_game_until_last_shot
+      bowl.add_frame(6,3)
+      expect(bowl.frames).to eq [[5, 5], [3, 5], [7, 0], [2, 5], [10, 0], [3, 5], [7, 0], [2, 5], [7, 2], [6, 3]]
+    end
+
+    it "lists the shots user has made in an array of integer pairs, also includes tenth special frame if it exists" do
+      simulate_a_game_until_last_shot
+      bowl.add_frame(6,4)
+      bowl.add_bonus_frame(10,5,4)
+      expect(bowl.frames).to eq [[5, 5], [3, 5], [7, 0], [2, 5], [10, 0], [3, 5], [7, 0], [2, 5], [7, 2], [6, 4], [10, 5, 4]]
+    end
+  end
+
+  describe "when evaluating the 10th frame" do
+    context "count_player_score method" do
+      it "counts the game regularly if the player fails to score any spare or strikes" do
+        simulate_a_game_until_last_shot
+        bowl.add_frame(4,3)
+        expect(bowl.count_player_score).to eq 91
+      end
+    
+      it "if player ends with spare / fails to score strike" do
+        simulate_a_game_until_last_shot
+        bowl.add_frame(7,3)
+        expect(bowl.add_bonus_frame(6))
+        expect(bowl.count_player_score).to eq 100
+      end
+
+      it "if player ends with spare / scores a strike and two randoms" do
+        simulate_a_game_until_last_shot
+        bowl.add_frame(7,3)
+        expect(bowl.add_bonus_frame(10,4,5))
+        expect(bowl.count_player_score).to eq 113
+      end
+
+      it "if player ends with spare / scores a strike and two randoms" do
+        simulate_a_game_until_last_shot
+        bowl.add_frame(7,3)
+        expect(bowl.add_bonus_frame(10,4,5))
+        expect(bowl.count_player_score).to eq 113
+      end
+
+      it "if player ends with a strike / scores three consecutive strikes" do
+        simulate_a_game_until_last_shot
+        bowl.add_frame(10,0)
+        expect(bowl.add_bonus_frame(10,10,10))
+        expect(bowl.count_player_score).to eq 124
+      end
     end
   end
 end
