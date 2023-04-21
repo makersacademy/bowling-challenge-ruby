@@ -1,8 +1,16 @@
-require './frame'
+require 'frame_repo'
 
 class Scorecard
   def initialize 
     @total_score = 0
+  end
+
+  def add_score(score)
+    @total_score += score
+  end
+
+  def total_score
+    return @total_score
   end
 
   def score_card
@@ -32,4 +40,3 @@ class Scorecard
     end
   end
 end
-return score_card
