@@ -24,4 +24,12 @@ describe BowlingGame do
     expect(@game.score).to eq 20
   end
 
+it 'can roll a spare' do
+    @game.roll 6
+    @game.roll 4
+    @game.roll 5
+    17.times { @game.roll 0 }
+    expect(@game.score).to eq 15
+end
+
 end

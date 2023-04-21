@@ -1,5 +1,5 @@
 class BowlingGame
-    
+
   def initialize
     @rolls = []
   end
@@ -13,8 +13,9 @@ class BowlingGame
     rolls_count = 0
     20.times do
       result += @rolls[rolls_count]
-      rolls_count = + 1
-    end
+      rolls_count += 1
+      end
     result
   end
+  
 end
