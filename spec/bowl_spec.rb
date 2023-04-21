@@ -44,14 +44,6 @@ describe BowlingScorer do
   end
 
   context "check_for_spares method" do
-    it "returns normal if the total input is <10 and >0" do
-      expect(bowl.check_for_specials([1,4])).to eq "normal"
-    end
-
-    it "returns gutter if the total input is 0" do
-      expect(bowl.check_for_specials([0,0])).to eq "gutter"
-    end
-
     it "returns strike if the first shot is 10" do
       expect(bowl.check_for_specials([10,0])).to eq "strike"
     end
@@ -241,6 +233,23 @@ describe BowlingScorer do
         expect(bowl.add_bonus_frame(10,10,10))
         expect(bowl.count_player_score).to eq 124
       end
+    end
+  end
+
+  context "cross checking with readme gameplay for validating scores" do
+    it "returns 133" do
+      bowl.add_frame(1,4)
+      bowl.add_frame(4,5)
+      bowl.add_frame(6,4)
+      bowl.add_frame(5,5)
+      bowl.add_frame(10,0)
+      bowl.add_frame(0,1)
+      bowl.add_frame(7,3)
+      bowl.add_frame(6,4)
+      bowl.add_frame(10,0)
+      bowl.add_frame(2,8)
+      bowl.add_bonus_frame(6)
+      expect(bowl.count_player_score).to eq 133
     end
   end
 end

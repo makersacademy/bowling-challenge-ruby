@@ -20,10 +20,6 @@ class BowlingScorer
       message = "strike"
     elsif frame.sum == 10
       message = "spare"
-    elsif frame.sum == 0
-      message = "gutter"
-    else
-      message = "normal"
     end
     return message
   end
@@ -53,8 +49,9 @@ class BowlingScorer
   def count_player_score
     i = 1
     @player_score += @frames[0].sum
-    frames = [@frames.length, 10].min
-    while i < frames
+    ### The line below is added to be able to test small chunks of frames
+    frame_count = [@frames.length, 10].min
+    while i < frame_count
       @player_score += count_frame_score(i)
       i += 1
     end
