@@ -7,6 +7,8 @@ class BowlingScorer
   def add_frame(shot1, shot2)
     fail "Looks like you hit the next lane or something, cant knock more than 10" if shot1 + shot2 > 10
     fail "Smells like invalid input" if shot1 < 0 || shot2 < 0
+    ## Line below is irrelevant for the current specs, but this is done assuming when UI is developed
+    ## the user will input their shots sequentially as opposed to passing them in together
     shot1 == 10 ? current_frame = [10,0] : current_frame = [shot1, shot2]
     @frames << current_frame
     return current_frame

@@ -7,6 +7,20 @@ describe BowlingScorer do
     bowl.reset_scores_and_frames
   end
 
+  def simulate_a_game_until_last_shot
+    bowl.add_frame(5,5)
+    bowl.add_frame(3,5)
+    bowl.add_frame(7,0)
+    bowl.add_frame(2,5)
+    bowl.add_frame(10,0)
+    bowl.add_frame(3,5)
+    bowl.add_frame(7,0)
+    bowl.add_frame(2,5)
+    bowl.add_frame(7,2)
+    ## By the end of round 9, player has 84 points scored.
+    ## All subsequent endgame tests are based on this one
+  end
+
   context "add_frame method" do  
     it "fails if user tries to knock more than 10 in one frame" do
       expect{bowl.add_frame(6,5)}.to raise_error "Looks like you hit the next lane or something, cant knock more than 10"
@@ -60,7 +74,7 @@ describe BowlingScorer do
     end
   end
 
-  context "count scores method" do
+  context "count frame score method" do
     it "counts the score of the given frame as is if no special events happened" do
       bowl.add_frame(1,2)
       bowl.add_frame(4,5)
@@ -80,7 +94,7 @@ describe BowlingScorer do
     end
   end
 
-  context "count total scores method" do
+  context "count player score method" do
     it "returns the total score if there are no additionals strikes or spares" do
       bowl.add_frame(4,5)
       bowl.add_frame(4,5)
@@ -111,6 +125,44 @@ describe BowlingScorer do
       bowl.add_frame(7,3)
       bowl.add_frame(2,5)
       expect(bowl.count_player_score).to eq 38
+    end
+
+    it "returns the total score including strike points" do
+      bowl.add_frame(10,0)
+      bowl.add_frame(3,5)
+      bowl.add_frame(7,0)
+      bowl.add_frame(2,5)
+      expect(bowl.count_player_score).to eq 40
+    end
+
+    it "returns the total score including consecutive strike points" do
+      bowl.add_frame(10,0)
+      bowl.add_frame(10,0)
+      bowl.add_frame(7,0)
+      bowl.add_frame(2,5)
+      expect(bowl.count_player_score).to eq 51
+    end
+
+    it "returns the total score including zigzagged strike points" do
+      bowl.add_frame(10,0)
+      bowl.add_frame(5,4)
+      bowl.add_frame(10,0)
+      bowl.add_frame(2,5)
+      expect(bowl.count_player_score).to eq 52
+    end
+  end
+
+  context "evaluating the 10th frame" do
+    it "counts the game regularly if the player fails to score any spare or strikes" do
+      simulate_a_game_until_last_shot
+      bowl.add_frame(4,3)
+      expect(bowl.count_player_score).to eq 91
+    end
+
+    it "counts the game regularly if the player fails to score any spare or strikes" do
+      simulate_a_game_until_last_shot
+      bowl.add_frame(7,3)
+      expect(bowl.count_player_score).to eq 94
     end
   end
 end
