@@ -28,6 +28,13 @@ class BowlingScorer
     return message
   end
 
+  def add_bonus_frame(shot1=0, shot2=0, shot3=0)
+    current_frame, shots = [], [shot1, shot2, shot3]
+    shots.each {|shot| current_frame << shot if shot > 0}
+    @frames << current_frame
+    return current_frame
+  end
+
   def count_frame_score(index)
     current_frame = @frames[index]
     previous_frame = @frames[index-1]

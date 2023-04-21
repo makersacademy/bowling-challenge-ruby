@@ -152,17 +152,42 @@ describe BowlingScorer do
     end
   end
 
+  ## There is no UI, so we assume allowing player to take additional shots will be handled
+  ## by the UI and not these methods.
+  context "add bonus frame method" do
+    it "adds an array of one element if player gets one bonus shot" do
+      bowl.add_bonus_frame(5)
+      expect(bowl.frames[-1]).to eq [5]
+    end
+
+    it "adds an array of two elements if player gets two bonus shots" do
+      bowl.add_bonus_frame(10,7)
+      expect(bowl.frames[-1]).to eq [10,7]
+    end
+
+    it "adds an array of three elements if player gets three bonus shots" do
+      bowl.add_bonus_frame(10,5,5)
+      expect(bowl.frames[-1]).to eq [10,5,5]
+    end
+
+    it "adds an array of three elements if player gets three bonus shots" do
+      bowl.add_bonus_frame(10,10,10)
+      expect(bowl.frames[-1]).to eq [10,10,10]
+    end
+  end
+
   context "evaluating the 10th frame" do
     it "counts the game regularly if the player fails to score any spare or strikes" do
       simulate_a_game_until_last_shot
       bowl.add_frame(4,3)
       expect(bowl.count_player_score).to eq 91
     end
-
-    it "counts the game regularly if the player fails to score any spare or strikes" do
+   
+    it "counts the extra roll points if the player ends with spare end gets one extra shot" do
       simulate_a_game_until_last_shot
       bowl.add_frame(7,3)
       expect(bowl.count_player_score).to eq 94
+      expect(bowl.add_bonus_frame(6))
     end
   end
 end
