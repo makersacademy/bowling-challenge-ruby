@@ -1,12 +1,11 @@
 require 'bowling_game'
 
 describe BowlingGame do
+  # reafctoring: to avoid initializing 'game' via BowlingGame.new, we can call it with @ via:
 
-    # reafctoring: to avoid initializing 'game' via BowlingGame.new, we can call it with @ via:
-    
-    before do
-        @game = BowlingGame.new
-    end
+  before do
+    @game = BowlingGame.new
+  end
 
   context 'creates and plays a bowling game with 1 player' do
     it 'creates game' do
@@ -24,12 +23,18 @@ describe BowlingGame do
     expect(@game.score).to eq 20
   end
 
-it 'can roll a spare' do
+  it 'add two rolls in a frame if under 10 pins' do
+    @game.roll 1
+    @game.roll 4
+    18.times { @game.roll 0 }
+    expect(@game.score).to eq 5
+  end
+
+  it 'can roll a spare' do
     @game.roll 6
     @game.roll 4
     @game.roll 5
     17.times { @game.roll 0 }
-    expect(@game.score).to eq 15
-end
-
+    expect(@game.score).to eq 20
+  end
 end
