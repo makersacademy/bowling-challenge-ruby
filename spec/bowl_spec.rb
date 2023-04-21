@@ -79,4 +79,38 @@ describe BowlingScorer do
       expect(bowl.count_frame_score(1)).to eq 18
     end
   end
+
+  context "count total scores method" do
+    it "returns the total score if there are no additionals strikes or spares" do
+      bowl.add_frame(4,5)
+      bowl.add_frame(4,5)
+      bowl.add_frame(4,5)
+      bowl.add_frame(4,5)
+      expect(bowl.count_player_score).to eq 36
+    end
+
+    it "returns the total score including spare points" do
+      bowl.add_frame(5,5)
+      bowl.add_frame(3,5)
+      bowl.add_frame(7,0)
+      bowl.add_frame(2,5)
+      expect(bowl.count_player_score).to eq 35
+    end
+
+    it "returns the total score including consecutive spare points" do
+      bowl.add_frame(3,1)
+      bowl.add_frame(3,7)
+      bowl.add_frame(7,3)
+      bowl.add_frame(2,5)
+      expect(bowl.count_player_score).to eq 40
+    end
+
+    it "returns the total score including zigzagged spare points" do
+      bowl.add_frame(3,7)
+      bowl.add_frame(2,5)
+      bowl.add_frame(7,3)
+      bowl.add_frame(2,5)
+      expect(bowl.count_player_score).to eq 38
+    end
+  end
 end

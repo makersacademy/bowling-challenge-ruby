@@ -1,6 +1,6 @@
 class BowlingScorer
   def initialize
-    @current_score = 0
+    @player_score = 0
     @frames = []
   end
 
@@ -38,12 +38,23 @@ class BowlingScorer
     return frame_score
   end
 
+  def count_player_score
+    i = 1
+    @player_score += @frames[0].sum
+    while i < @frames.length
+      @player_score += count_frame_score(i)
+      i += 1
+    end
+    return @player_score
+  end
+
+  ## Helper methods - Used in testing and not relevant to gameplay ##
   def frames
     @frames
   end
 
   def reset_scores_and_frames
-    @current_score = 0
+    @player_score = 0
     @frames = []
   end
 end
