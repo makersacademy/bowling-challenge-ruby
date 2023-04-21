@@ -7,7 +7,7 @@ class BowlingScorer
   def add_frame(shot1, shot2)
     fail "Looks like you hit the next lane or something, cant knock more than 10" if shot1 + shot2 > 10
     fail "Smells like invalid input" if shot1 < 0 || shot2 < 0
-    current_frame = [shot1, shot2]
+    shot1 == 10 ? current_frame = [10,0] : current_frame = [shot1, shot2]
     @frames << current_frame
     return current_frame
   end
@@ -24,6 +24,10 @@ class BowlingScorer
       message = "normal"
     end
     return message
+  end
+
+  def count_current_score
+    @frames.flatten.sum
   end
 
   def reset_scores_and_frames

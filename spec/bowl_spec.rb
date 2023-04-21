@@ -23,6 +23,10 @@ describe BowlingScorer do
     it "returns the current frame in an array of numbers" do
       expect(bowl.add_frame(4,3)).to eq [4,3]
     end
+
+    it "returns [10,0] if the user strikes on the first shot" do
+      expect(bowl.add_frame(10,0)).to eq [10,0]
+    end
   end
 
   context "check_for_spares method" do
@@ -44,6 +48,14 @@ describe BowlingScorer do
 
     it "returns spare if the total input is 10" do
       expect(bowl.check_for_specials([0,10])).to eq "spare"
+    end
+  end
+
+  context "count scores method" do
+    it "counts the total number player has scored so far" do
+      bowl.add_frame(4,3)
+      bowl.add_frame(2,5)
+      expect(bowl.count_current_score).to eq 14
     end
   end
 end
