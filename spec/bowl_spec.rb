@@ -51,11 +51,32 @@ describe BowlingScorer do
     end
   end
 
+  context "frames method" do
+    it "shows all the shots user took as an array of arrays" do
+      bowl.add_frame(1,2)
+      bowl.add_frame(4,5)
+      bowl.add_frame(5,3)
+      expect(bowl.frames).to eq [[1,2],[4,5],[5,3]]
+    end
+  end
+
   context "count scores method" do
-    it "counts the total number player has scored so far" do
-      bowl.add_frame(4,3)
-      bowl.add_frame(2,5)
-      expect(bowl.count_current_score).to eq 14
+    it "counts the score of the given frame as is if no special events happened" do
+      bowl.add_frame(1,2)
+      bowl.add_frame(4,5)
+      expect(bowl.count_frame_score(1)).to eq 9
+    end
+
+    it "includes the bonus points awarded by a spare" do
+      bowl.add_frame(4,6)
+      bowl.add_frame(4,5)
+      expect(bowl.count_frame_score(1)).to eq 13
+    end
+
+    it "includes the bonus points awarded by a strike" do
+      bowl.add_frame(10,0)
+      bowl.add_frame(4,5)
+      expect(bowl.count_frame_score(1)).to eq 18
     end
   end
 end

@@ -26,8 +26,20 @@ class BowlingScorer
     return message
   end
 
-  def count_current_score
-    @frames.flatten.sum
+  def count_frame_score(index)
+    current_frame = @frames[index]
+    previous_frame = @frames[index-1]
+    frame_score = current_frame.flatten.sum
+    if check_for_specials(previous_frame) == "spare"
+      frame_score += current_frame[0]
+    elsif check_for_specials(previous_frame) == "strike"
+      frame_score += current_frame.sum
+    end
+    return frame_score
+  end
+
+  def frames
+    @frames
   end
 
   def reset_scores_and_frames
