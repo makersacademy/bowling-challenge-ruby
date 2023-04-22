@@ -1,0 +1,2 @@
+No examples found.
+Coverage report generated for RSpec to /Users/sidraiqbal/Documents/bowling-challenge-ruby/coverage. 0 / 0 LOC (100.0%) covered.
