@@ -46,12 +46,12 @@ describe BowlingGame do
     expect(@game.score).to eq 20
   end
 
-  it 'can roll a perfect game' do 
-    12.times { @game.roll 10}
+  it 'can roll a perfect game' do
+    12.times { @game.roll 10 }
     expect(@game.score).to eq 300
-end
+  end
 
-it 'creates the example score of the exercise' do
+  it 'creates the example score of the exercise' do
     @game.roll 1
     @game.roll 4
     @game.roll 4
@@ -72,5 +72,5 @@ it 'creates the example score of the exercise' do
     @game.roll 8
     @game.roll 6
     expect(@game.score).to eq 133
-end
+  end
 end
