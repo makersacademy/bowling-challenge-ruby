@@ -63,4 +63,21 @@ RSpec.describe Scorecard do
       expect(scorecard.total_score).to eq("Gutter Ball!")
     end
   end
+
+  context "add score method with roll three" do
+    it "gives an extra roll on 10th frame if logic" do
+      scorecard = Scorecard.new
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(10, 0, 4)
+      expect(scorecard.total_score).to eq("Final score is: 59")
+    end
+  end
 end
