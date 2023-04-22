@@ -47,22 +47,22 @@ RSpec.describe Scorecard do
     end
   end
 
-  # context "score_card method" do
-  #   xit "returns a final_score_message correctly" do
-  #     scorecard = Scorecard.new
-  #     scorecard.add_score(0, 0)
-  #     scorecard.add_score(0, 0)
-  #     scorecard.add_score(0, 0)
-  #     scorecard.add_score(0, 0)
-  #     scorecard.add_score(0, 0)
-  #     scorecard.add_score(0, 0)
-  #     scorecard.add_score(0, 0)
-  #     scorecard.add_score(0, 0)
-  #     scorecard.add_score(0, 0)
-  #     scorecard.add_score(0, 0)
-  #     expect(scorecard.total_score).to eq("Gutter Ball!")
-  #   end
-  # end
+  context "score_card method" do
+    it "returns a final_score_message correctly" do
+      scorecard = Scorecard.new
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      expect(scorecard.total_score).to eq("Gutter Ball!")
+    end
+  end
 
   context "add score method with roll three" do
     it "gives an extra roll on 10th frame if roll_one == 10" do

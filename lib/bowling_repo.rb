@@ -20,6 +20,10 @@ class Scorecard
   end
   
   def total_score
-    @total_score
+    if @total_score == 0
+      return "Gutter Ball!"
+    else
+      return @total_score
+    end
   end
 end
