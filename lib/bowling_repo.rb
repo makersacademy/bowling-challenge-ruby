@@ -6,12 +6,23 @@ class Scorecard
     @frame = 0
   end
 
-  def add_score(roll_one, roll_two)
+  def add_score(roll_one, roll_two, roll_three = nil)
     if @frame < 10
       @total_score += roll_one + roll_two
       @frame += 1
     end
   end
+
+  # def tenth_frame(roll_three)
+  #   if roll_one == 10 || (roll_one + roll_two == 10)
+  #     @total_score += roll_one + roll_two + roll_three
+  #   end
+  # end
+
+  # def strike
+  #   if roll_one == 10
+  #     @total_score += roll_one + roll_two + ()
+  # end
 
   def total_score
     if @frame != 10
@@ -31,15 +42,3 @@ class Scorecard
     end
   end
 end
-
-#   def strike_or_spare
-#       if roll_one != 10 && (roll_one + roll_two == 10)
-#       total_score += frame -1
-#       spare_points == true
-#     elsif roll_one == 0
-#       strike_points == true
-#     end
-#   end
-
-
-# end
