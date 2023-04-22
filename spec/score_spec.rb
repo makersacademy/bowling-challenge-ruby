@@ -8,12 +8,12 @@ RSpec.describe Score do
   end
 
   context "players score less than 10 in single frame" do
-    it "adds the score to counter" do
+    it "adds the score 3 to counter which is at 0" do
       score = Score.new
       score.score_count(3)
       expect(score.score_count(3)).to eq (3)
-
-
     end
   end
+
+  
 end
