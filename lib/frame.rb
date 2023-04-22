@@ -1,9 +1,21 @@
+class Frame
+  def initialize
+    @rolls = []
+  end
 
+  def roll_one(pins)
+    @rolls << pins
+  end
 
-# if spare_points == true
-#   # add the roll_one for next round of points * 2
-# end
+  def roll_two(pins)
+    @rolls << pins
+  end
 
-# if strike_points == true
-#   # add the roll_one and roll_two for next round of points
-# end
+  def strike?
+    @rolls.first == 10
+  end
+
+  def spare?
+    @rolls.sum == 10 && @rolls.size == 2
+  end
+end

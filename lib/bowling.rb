@@ -1,8 +1,12 @@
 class Scorecard
   def initialize 
+    @frames = [Frame.new]
+    @current_frame = 1
     @total_score = 0
-    @frame = 1
   end
+
+  def add_roll(pins)
+    current_frame.add_roll(pins)
 
   def add_score(roll_one, roll_two, roll_three = 0)
     if @frame <= 10
