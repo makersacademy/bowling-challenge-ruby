@@ -37,4 +37,40 @@ describe BowlingGame do
     17.times { @game.roll 0 }
     expect(@game.score).to eq 20
   end
+
+  it 'can roll a strike' do
+    @game.roll 10
+    @game.roll 2
+    @game.roll 3
+    16.times { @game.roll 0 }
+    expect(@game.score).to eq 20
+  end
+
+  it 'can roll a perfect game' do 
+    12.times { @game.roll 10}
+    expect(@game.score).to eq 300
+end
+
+it 'creates the example score of the exercise' do
+    @game.roll 1
+    @game.roll 4
+    @game.roll 4
+    @game.roll 5
+    @game.roll 6
+    @game.roll 4
+    @game.roll 5
+    @game.roll 5
+    @game.roll 10
+    @game.roll 0
+    @game.roll 1
+    @game.roll 7
+    @game.roll 3
+    @game.roll 6
+    @game.roll 4
+    @game.roll 10
+    @game.roll 2
+    @game.roll 8
+    @game.roll 6
+    expect(@game.score).to eq 133
+end
 end
