@@ -14,7 +14,21 @@ class Scorecard
   end
 
   def total_score
-    @total_score
+    if @frame != 10
+     return @total_score
+    else 
+      return final_score_comment(@total_score)
+    end
+  end
+
+  def final_score_comment(total_score)
+    if @total_score == 300
+      return "Perfect score!"
+    elsif @total_score == 0
+      return "Gutter Ball!"
+    else
+      return "Final score is: #{@total_score}"
+    end
   end
 end
 
@@ -27,12 +41,5 @@ end
 #     end
 #   end
 
-#   def final_score_comment(total_score)
-#     if @total_score == 300
-#       return "Perfect score!"
-#     elsif @total_score == 0
-#       return "Gutter Ball!"
-#     else
-#       return "Final score is: #{total_score}"
-#     end
+
 # end

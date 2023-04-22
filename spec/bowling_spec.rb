@@ -24,7 +24,7 @@ RSpec.describe Scorecard do
       scorecard.add_score(3, 3)
       scorecard.add_score(4, 3)
       scorecard.add_score(5, 3)
-      expect(scorecard.total_score).to eq(59)
+      expect(scorecard.total_score).to eq("Final score is: 59")
     end
   end
 
@@ -43,7 +43,24 @@ RSpec.describe Scorecard do
       scorecard.add_score(5, 3)
       scorecard.add_score(6, 3)
       scorecard.add_score(6, 3)
-      expect(scorecard.total_score).to eq(59)
+      expect(scorecard.total_score).to eq("Final score is: 59")
+    end
+  end
+
+  context "score_card method" do
+    it "returns a final_score_message correctly" do
+      scorecard = Scorecard.new
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      scorecard.add_score(0, 0)
+      expect(scorecard.total_score).to eq("Gutter Ball!")
     end
   end
 end
