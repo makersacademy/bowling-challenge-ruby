@@ -9,12 +9,16 @@ class Scorecard
       if @frame < 10
         @total_score += roll_one + roll_two
       else
-        @total_score += roll_one + roll_two + roll_three
+        if @frame == 10 && (roll_one == 10 || roll_one + roll_two == 10)
+          @total_score += roll_one + roll_two + roll_three
+        elsif @frame == 10 && (roll_one != 10 || roll_one + roll_two != 10)
+          @total_score += roll_one + roll_two
+        end
       end
       @frame += 1
     end
   end
-
+  
   def total_score
     @total_score
   end

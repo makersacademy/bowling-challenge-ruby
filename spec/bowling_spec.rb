@@ -65,7 +65,7 @@ RSpec.describe Scorecard do
   # end
 
   context "add score method with roll three" do
-    it "gives an extra roll on 10th frame if logic" do
+    it "gives an extra roll on 10th frame if roll_one == 10" do
       scorecard = Scorecard.new
       scorecard.add_score(2, 3)
       scorecard.add_score(2, 3)
@@ -77,6 +77,23 @@ RSpec.describe Scorecard do
       scorecard.add_score(2, 3)
       scorecard.add_score(2, 3)
       scorecard.add_score(10, 0, 4)
+      expect(scorecard.total_score).to eq(59)
+    end
+  end
+
+  context "add score method with roll three" do
+    it "gives an extra roll on 10th frame if roll_one + roll_two == 10" do
+      scorecard = Scorecard.new
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(2, 3)
+      scorecard.add_score(5, 5, 4)
       expect(scorecard.total_score).to eq(59)
     end
   end
