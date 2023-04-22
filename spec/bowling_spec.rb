@@ -1,4 +1,4 @@
-require 'bowling_repo'
+require 'bowling'
 require_relative 'spec_helper'
 
 
