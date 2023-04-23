@@ -3,12 +3,11 @@ class Frame
     @frame_points = []
   end
 
-  def roll_one(pins)
-    @frame_points << pins
-  end
-
-  def roll_two(pins)
-    @frame_points << pins
+  def roll_points(roll_one, roll_two)
+    @frame_points << roll_one
+    if roll_one != 10
+      @frame_points << roll_two
+    end
   end
 
   def frame_points
@@ -16,10 +15,10 @@ class Frame
   end
 
   def strike?
-    return true if @frame_points[0] == 10
+    @frame_points[0] == 10
   end
 
   def spare?
-    return true if @frame_points.sum == 10
+    @frame_points[0] != 10 && @frame_points.sum == 10
   end
 end

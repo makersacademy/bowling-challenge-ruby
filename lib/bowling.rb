@@ -2,7 +2,7 @@ require 'frame'
 
 class Scorecard
   def initialize
-    @frames = [Frame.new]
+    @frames = []
     @current_frame = 1
     @total_score = 0
   end
