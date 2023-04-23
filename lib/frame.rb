@@ -15,15 +15,11 @@ class Frame
     @frame_points.sum
   end
 
-  def strike
-    if frame_points[0] == 10
-      strike == true
-    end
+  def strike?
+    return true if @frame_points[0] == 10
   end
 
-  def spare
-    if frame_points.sum == 10
-      spare == true
-    end
+  def spare?
+    return true if @frame_points.sum == 10
   end
 end
