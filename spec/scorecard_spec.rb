@@ -2,7 +2,6 @@ require 'scorecard'
 require 'frame'
 require 'roll'
 
-
 RSpec.describe Scorecard do
   describe '#update' do
     it 'updates the scorecard with the score for a frame' do
@@ -14,14 +13,9 @@ RSpec.describe Scorecard do
       scorecard.update(frame, frames)
 
       # puts statement is to see what the scorecard looks like as I build it
-      # puts scorecard.to_s
+      puts scorecard.to_s
 
-      # \t is a tab character and \n is a newline character
-      expected_scorecard = "FRAME\t\t\t\t1\n"
-      expected_scorecard += "  ROLL 1\t3\n"
-      expected_scorecard += "  ROLL 2\t5\n"
-      expected_scorecard += "  TOTAL\t8\n"
-      expected_scorecard += "  SCORE\t8\n"
+      expected_scorecard = "FRAME 1: ROLL 1: 3 ROLL 2: 5 | TOTAL: 8 | SCORE: 8\n"
 
       expect(scorecard.to_s).to eq(expected_scorecard)
     end

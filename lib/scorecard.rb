@@ -17,12 +17,12 @@ class Scorecard
     score = 0
     @frames.each_with_index do |frame, index|
       score += frame.total
-      scorecard_str += "FRAME\t\t\t\t#{index + 1}\n"
+      scorecard_str += "FRAME #{index + 1}:"
       frame.rolls.each_with_index do |roll, r_index|
-        scorecard_str += "  ROLL #{r_index + 1}\t#{roll.score}\n"
+        scorecard_str += " ROLL #{r_index + 1}: #{roll.score}"
       end
-      scorecard_str += "  TOTAL\t#{frame.total}\n"
-      scorecard_str += "  SCORE\t#{score}\n"
+      scorecard_str += " | TOTAL: #{frame.total}"
+      scorecard_str += " | SCORE: #{score}\n"
     end
     scorecard_str
   end
