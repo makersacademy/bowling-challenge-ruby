@@ -13,25 +13,46 @@ RSpec.describe 'Scorecard behaviour' do
     end
   end
 
-  context "given a strike occurs on roll one" do
-    it "relays a strike as true in the scorecard" do
+  context "given a full 10 frame without strike or spare is completed" do
+    it "adds the frame points to the scorecard and returns points" do
       scorecard = Scorecard.new
-      frame_one = Frame.new
-      frame_one.roll_points(10, 4)
-      strike = frame_one.strike?
-      scorecard.add_frame_points_to_total_score(frame_one)
-      expect(scorecard.frame_strike).to eq(true)
+      frame = Frame.new
+      10.times do
+        frame.roll_points(5, 3)
+      end
+
+      scorecard.add_frame_points_to_total_score(frame)
+      expect(scorecard.score_so_far).to eq(80)
     end
   end
 
-  context "given a spare occurs on current frame" do
-    it "relays a spare as true in the scorecard" do
+  context "given a strike occurs on roll_one" do
+    it "skips second roll and returns a total score in current frame as 10" do
       scorecard = Scorecard.new
       frame_one = Frame.new
-      frame_one.roll_points(6, 4)
-      spare = frame_one.spare?
+      frame_one.roll_points(10, 4)
       scorecard.add_frame_points_to_total_score(frame_one)
-      expect(scorecard.frame_spare).to eq(true)
+      expect(scorecard.score_so_far).to eq(10)
+    end
+  end
+
+  context "given a full game with a strike on first roll" do
+    xit "returns the correct amount of points" do
+      scorecard = Scorecard.new
+      frame_one = Frame.new
+      frame_one.roll_points(10, 4)
+      scorecard.add_frame_points_to_total_score(frame_one)
+
+      frame_two = Frame.new
+      frame_two.roll_points(4, 4)
+      scorecard.add_frame_points_to_total_score(frame_two)
+
+      frame = Frame.new
+      8.times do
+        frame.roll_points(3, 3)
+      end
+      scorecard.add_frame_points_to_total_score(frame)
+      expect(scorecard.score_so_far).to eq(98)
     end
   end
 
