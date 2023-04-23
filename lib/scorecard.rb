@@ -1,4 +1,6 @@
 class Scorecard
+  attr_reader :frames
+
   def initialize
     @frames = []
   end

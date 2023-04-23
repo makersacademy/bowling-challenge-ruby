@@ -14,7 +14,7 @@ RSpec.describe Scorecard do
       scorecard.update(frame, frames)
 
       # puts statement is to see what the scorecard looks like as I build it
-      puts scorecard.to_s
+      # puts scorecard.to_s
 
       # \t is a tab character and \n is a newline character
       expected_scorecard = "FRAME\t\t\t\t1\n"
