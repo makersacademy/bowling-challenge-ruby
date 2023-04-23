@@ -7,7 +7,9 @@ class Scorecard
 
   def update(frame, frames)
     frame.total = frame.rolls.sum(&:score)
-    @frames << frame
+    if frame.rolls.size == 2 || frame.rolls.map(&:score).sum >= 10
+      @frames << frame
+    end
   end
 
   def to_s

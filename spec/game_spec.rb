@@ -23,8 +23,10 @@ RSpec.describe Game do
     it 'updates the scorecard' do
       game = Game.new
       game.roll(5)
+      game.roll(1)
 
       expect(game.scorecard.frames[0].rolls[0].score).to eq(5)
+      expect(game.scorecard.frames[0].rolls[1].score).to eq(1)
     end
 
     it 'updates the roll count' do
