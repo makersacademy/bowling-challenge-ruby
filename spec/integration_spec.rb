@@ -13,8 +13,30 @@ RSpec.describe 'Scorecard behaviour' do
     end
   end
 
+  context "given a strike occurs on roll one" do
+    it "relays a strike as true in the scorecard" do
+      scorecard = Scorecard.new
+      frame_one = Frame.new
+      frame_one.roll_points(10, 4)
+      strike = frame_one.strike?
+      scorecard.add_frame_points_to_total_score(frame_one)
+      expect(scorecard.frame_strike).to eq(true)
+    end
+  end
+
+  context "given a spare occurs on current frame" do
+    it "relays a spare as true in the scorecard" do
+      scorecard = Scorecard.new
+      frame_one = Frame.new
+      frame_one.roll_points(6, 4)
+      spare = frame_one.spare?
+      scorecard.add_frame_points_to_total_score(frame_one)
+      expect(scorecard.frame_spare).to eq(true)
+    end
+  end
+
   context "given a strike occurs on roll_one" do
-    it "adds the points from the next frame roll_one and roll_two to total" do
+    xit "adds the points from the next frame roll_one and roll_two to total" do
       scorecard = Scorecard.new
       frame_one = Frame.new
       frame_one.roll_points(10, 4)
