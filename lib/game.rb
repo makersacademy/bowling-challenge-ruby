@@ -43,6 +43,8 @@ class Game
     award_bonus_points
     award_bonus_points_in_penultimate_frame
     sum_all_points
+    @gutter_game = true if @grand_total == 0
+    @perfect_game = true if @grand_total == 300
   end
 
   def award_bonus_points
