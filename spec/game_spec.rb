@@ -35,6 +35,22 @@ describe Game do
     expect(game.perfect_game?).to eq true
   end
 
+  it "scores a gutter game 0" do
+    io = double(:io)
+    for i in 1..10
+      expect(io).to receive(:puts).with("Frame #{i}:")
+      expect(io).to receive(:puts).with("Roll first ball:")
+      expect(io).to receive(:gets).and_return('0')  
+      expect(io).to receive(:puts).with("Roll second ball:")
+      expect(io).to receive(:gets).and_return('0') 
+    end
+    game = Game.new(io)
+    game.run_game
+    game.calculate_score
+    expect(game.grand_total).to eq 0
+    expect(game.perfect_game?).to eq false
+    expect(game.gutter_game?).to eq true
+  end
 
   it "scores an example game correctly" do
     io = double(:io)
