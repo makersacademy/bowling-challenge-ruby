@@ -30,62 +30,29 @@ end
 
 class Frame
   def initialize(
-    frame = 1)
+    @frame_points = [])
   end
 
-end
+  def roll_one(pins)
+    @frame_points << pins
+  end
 
-def score_card(frame)
-  frame = 1
-    while frame < 10 do
-      puts "Please roll and I will output the scores so far"
-      puts "What is roll one?"
-      roll_one = gets.chomp_to_i
-        total_score += roll_one
-      puts "What is roll two?"
-      roll_two = gets.chomp_to_i
-        total_score += roll_two
-      puts "Your score so far is: #{total_score}"
-      frame += 1
+  def roll_two(pins)
+    @frame_points << pins
+  end
+
+  def strike
+    if @frame_points[0] == 10
+      strike == true
     end
- end
+  end
 
-if roll_one != 10 && (roll_one + roll_two = 10)
-  puts "You got a spare! Your first roll on frame(frame+1) will be added to total score"
-elsif roll_one == 0
-  puts "You got a strike! Your next two rolls on frame(frame+1) will be added to total score"
-
-=begin
-Welcome to Scorecard! Please roll and I will output the scores so far
-
-frame(1)
-what is roll one?
-8
-what is roll two?
-1
-
-Your score so far is: 9
-
-frame(2)
-what is roll one?
-5
-what is roll two?
-5
-
-You got a spare! Your first roll on frame(3) will be added to total score
-
-frame(3)
-what is roll one?
-4
-
-frame(3)
-what is roll two?
-4
-
-Your score so far is 32 (bonus of 4 points from frame(2) spare for roll one of frame(3))
-
-
-=end
+  def spare
+    if @frame_points.sum == 10
+      spare == true
+    end
+  end
+end
 
 ```
 
