@@ -12,7 +12,7 @@ class Frame
   end
 
   def frame_points
-    @frame_points.sum
+    return @frame_points.sum
   end
 
   def strike?
