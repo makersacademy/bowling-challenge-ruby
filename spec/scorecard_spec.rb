@@ -20,4 +20,22 @@ RSpec.describe Scorecard do
       expect(scorecard.to_s).to eq(expected_scorecard)
     end
   end
+
+  describe 'strike bonus' do
+    it 'calculates the strike bonus correctly' do
+      game = Game.new
+
+      # Roll a strike
+      game.roll(10)
+
+      # Roll two more rolls
+      game.roll(3)
+      game.roll(4)
+
+      expected_scorecard = "FRAME 1: ROLL 1: 10 | TOTAL: 17 | SCORE: 17\n" \
+                           "FRAME 2: ROLL 1: 3 ROLL 2: 4 | TOTAL: 7 | SCORE: 24\n"
+
+      expect(game.scorecard.to_s).to eq(expected_scorecard)
+    end
+  end
 end
