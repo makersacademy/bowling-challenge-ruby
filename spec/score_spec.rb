@@ -24,9 +24,12 @@ RSpec.describe Score do
   context "players scores a spare" do
     it "score is 10 plus first roll of next frame, which is 4" do
       score = Score.new
-      roll_one = 4
-      score.score_count(10 + roll_one)
-      expect(score.spare(14)).to eq (14)
+      expect(score.spare(4)).to eq(14)
+    end
+    it "score is 10 plus first roll of next frame, which is 7" do
+      score = Score.new
+      #shots = 7
+      expect(score.spare(7)).to eq(17)
     end
   end
 
