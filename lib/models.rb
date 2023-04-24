@@ -7,10 +7,6 @@ class Frame
     @message = ""
   end
 
-  def get_score
-    return @score
-  end
-
   def add_roll(roll_score)
     @score.push(roll_score)
   end
@@ -42,19 +38,20 @@ class ScoreCard
   def current_score
     frames_total = 0
     @frames.each { |frame| frames_total += frame.score.sum }
-    self.calc_bonuses
+    self.gen_bonuses
     return frames_total + @frame_bonuses.sum
   end
 
-  def calc_bonuses
-    for i in 0...@frames.length
+  def gen_bonuses
+    @frame_bonuses = []
+    for i in 0...9
       if @frames[i].score[0] == 10
         if @frames[i+1] == nil and @frames[i].frame_num != 9
           return nil
         elsif @frames[i].frame_num == 9
           @frame_bonuses.push(@frames[i+1].score[0..1].sum)
           return nil
-        elsif @frames[i+1].score[0] == 10
+        elsif @frames[i+1].score[0] == 10 && @frames[i+2] != nil
           @frame_bonuses.push(10+@frames[i+2].score[0])
         else
           @frame_bonuses.push(@frames[i+1].score.sum)
@@ -63,7 +60,7 @@ class ScoreCard
         frame_bonuses.push(@frames[i+1].score[0])
       else
         frame_bonuses.push(0)
-      end 
+      end
     end  
   end 
 end
