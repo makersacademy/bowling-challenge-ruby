@@ -1,17 +1,18 @@
 class Frame
-  def initialize
+  def initialize(roll_one, roll_two)
     @frame_points = []
+    @roll_two = nil
+    @roll_three = nil
+    add_points(roll_one, roll_two)
   end
 
-  def roll_points(roll_one, roll_two)
+  def add_points(roll_one, roll_two)
     @frame_points << roll_one
-    if roll_one != 10
-      @frame_points << roll_two
-    end
+    @frame_points << roll_two
   end
 
   def frame_points
-    return @frame_points.sum
+    return @frame_points
   end
 
   def strike?
