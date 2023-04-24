@@ -26,11 +26,10 @@ class Scorecard
   end
 
   def strike_points
+    @total_score += 10
     next_frame = @frames[@current_frame+1]
     if next_frame == nil
-      @total_score += 10
     else
-      @total_score += 10
       @total_score += next_frame.frame_point
     end
   end

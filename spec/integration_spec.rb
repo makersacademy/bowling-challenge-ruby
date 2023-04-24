@@ -37,7 +37,7 @@ RSpec.describe 'Scorecard behaviour' do
   end
 
   context "given a full game with a strike on first roll" do
-    xit "returns the correct amount of points" do
+    it "returns the correct amount of points" do
       scorecard = Scorecard.new
       frame_one = Frame.new
       frame_one.roll_points(10, 4)
