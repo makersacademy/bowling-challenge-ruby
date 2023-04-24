@@ -13,26 +13,32 @@ class Game
     end
   end
 
-  def frame_scores
+  def frame_scores # array of arrays
     return @frames.map(&:frame_points)
   end
-# ' [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3]])'
 
-
-  def total_score
-    return @total_score
+  def total_score # takes array of arrays and just returns the total score
+    @frames.map(&:frame_points).flatten.sum
   end
 
-  def strike_points
-    @total_score += 10
-    # We have a full array of arrays 
-    # We want to check if Frame_1 roll_one contains a 10
-    # If it does, we want to add the points from frame_2 (roll_one and roll_two)*2
-    # If frame_2 also has a roll_one == 10, then add frame_three [roll_one]
-    next_frame = @frames[@current_frame+1]
-    if next_frame == nil
-    else
-      @total_score += next_frame.frame_point
+  def calculate_score
+    @total_score = 0
+    @frames.each_with_index do |frame, index|
+      if index == 9 # Handle the last frame separately
+        @total_score += frame.frame_points.sum
+        break
+      elsif frame.strike? # Strike
+        if index == 2 # Special case for frame 3
+          @total_score += frames[3].frame_points[0] + frames[3].frame_points[1] + 10
+        else
+          @total_score += frames[index+1].frame_points[0] + frames[index+1].frame_points[1].to_i + 10
+        end
+      elsif frame.spare? # Spare
+        @total_score += frames[index+1].frame_points[0] + 10
+      else # Open frame
+        @total_score += frame.frame_points.sum
+      end
     end
-  end
+    @total_score
+  end  
 end
