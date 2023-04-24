@@ -1,3 +1,19 @@
+# J Pillay Implementation and Design Phylosophy
+
+Each of the objects has a separate function and the models reflect
+real world (RW) objects. The data in score card and frame reflect the data
+that make up their RW counterparts - any extra data can be extrapolated from 
+base data eg, messages and bonuses which also need to be reflexive. No base data
+recorded is ever mutated or deleted as it may be called upon later and also means
+that the score card has persistence and can be used for historical comparison. Integrety
+of data is essential to the system.
+
+With this design the system is very malleable. Print Card (when implemented) can be changed
+with different formats without the worry of affecting the underlying program. The same going for
+Score Game, which can be changed to accommodate extra players. The program could be changed
+to randomise games and throws - thus it may on day even help us answer the age old question...
+who is more lucky? Player 1, or 2? A question which will have to wait, for now...
+
 Bowling Challenge in Ruby
 =================
 

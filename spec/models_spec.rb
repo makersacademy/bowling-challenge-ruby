@@ -82,7 +82,7 @@ RSpec.describe ScoreCard do
       expect(result).to eq 187
     end
   end
-  context "ScoreCard scores SGactive example with player not making last strike/spare (no bonus)" do
+  context "ScoreCard scores SGactive example with player not making last 9th frame strike/spare (no bonus)" do
     it "returns a score of 177" do
       frame_1 = Frame.new(1, [10])
       frame_2 = Frame.new(2, [9, 1])  
