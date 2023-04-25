@@ -18,33 +18,32 @@ class Scorecard
     # @frames.map(&:frame_points).flatten.sum <- totals the score in array of arrays
   end
 
-  def strike_score
+  def strike_score(frame, index)
     if frame.frame_points[0] == 10
-      @total_score += frame[index].(frame_pointsframe[index+1])*2
-    end
-  end
-
-  def frame_strike_checker
-    @frames.each_with_index do |frame, index|
-      if frame.strike? == true
-        return 'strike'
-      end
-    end
-  end
-
-
-  def frame_spare_checker
-    @frames.each_with_index do |frame, index|
-      if frame.spare? == true
-        return 'spare'
-      end
+      @total_score += frame[frame_points][index+1].sum * 2
     end
   end
 
   def calculate_score
-    @total_score = 0
     @frames.each_with_index do |frame, index|
-      if frame.strike?
+      if strike_or_spare_checker(frame) == 'strike'
+        strike_score(frame, index)
+      else
+        @total_score += frame.frame_points.sum
+      end
+    end
+    return @total_score
+  end
+
+  private
+
+  def strike_or_spare_checker
+    @frames.each_with_index do |frame, index|
+      if frame.strike? == true
+        return 'strike'
+      elsif
+        frame.spare? == true
+        return 'spare'
       end
     end
   end

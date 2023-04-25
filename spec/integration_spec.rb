@@ -3,18 +3,18 @@ require 'frame'
 
 RSpec.describe 'Scorecard behaviour' do
   context "given 10 frames are completed" do
-    xit "adds the frame points to the scorecard and returns points" do
+    it "adds the frame points to the scorecard and returns points" do
       scorecard = Scorecard.new
       10.times do
         frame = Frame.new(5, 3)
         scorecard.add_frame(frame)
       end
-      expect(scorecard.total_score).to eq(80)
+      expect(scorecard.calculate_score).to eq(80)
     end
   end
 
   context "given 10 frames are completed" do
-    xit "maps the frames scores to an array of arrays" do
+    it "maps the frames scores to an array of arrays" do
       scorecard = Scorecard.new
       10.times do
         frame = Frame.new(5, 3)
@@ -38,26 +38,8 @@ RSpec.describe 'Scorecard behaviour' do
     end
   end
 
-  context "strike checker" do
-    it "checks if the strike method pulls in from frame" do
-      scorecard = Scorecard.new
-      frame = Frame.new(10, 0) # strike on the first frame
-      scorecard.add_frame(frame)
-      expect(scorecard.frame_strike_checker).to eq("strike")
-    end
-  end
-
-  context "spare checker" do
-    it "checks if the spare method pulls in from frame" do
-      scorecard = Scorecard.new
-      frame = Frame.new(5, 5) # spare on the first frame
-      scorecard.add_frame(frame)
-      expect(scorecard.frame_spare_checker).to eq("spare")
-    end
-  end
-
-  context "given frames are added" do
-    xit "prints the frame" do
+  context "given frames are added TESTER P TEST" do
+    it "prints the frame" do
       scorecard = Scorecard.new
       10.times do
         frame = Frame.new(5, 3)
