@@ -19,18 +19,22 @@ class Scorecard
 
   def collect_scores_from_user
     x = 1
+    game_scores = []
     10.times do
       y = 1
-      puts ":::Frame #{x}:::"
+      @io.puts ":::Frame #{x}:::"
+      frame_score = []
       2.times do
-        puts "Enter score #{y}:"
+        @io.puts "Enter score #{y}:"
+        score = @io.gets
+        frame_score << score 
         y += 1
       end
+      game_scores << Frame.new(frame_score)
       x += 1
-      puts " "
     end
   end
 end
 
-scorecard = Scorecard.new
-scorecard.collect_scores_from_user
+# scorecard = Scorecard.new
+# scorecard.collect_scores_from_user
