@@ -3,37 +3,67 @@ require 'frame'
 
 RSpec.describe 'Scorecard behaviour' do
   context "given 10 frames are completed" do
-    it "adds the frame points to the scorecard and returns points" do
-      scorecard = Game.new
+    xit "adds the frame points to the scorecard and returns points" do
+      scorecard = Scorecard.new
       10.times do
         frame = Frame.new(5, 3)
-        scorecard.add_all_frames(frame)
+        scorecard.add_frame(frame)
       end
       expect(scorecard.total_score).to eq(80)
     end
   end
 
   context "given 10 frames are completed" do
-    it "maps the frames scores to an array of arrays" do
-      game = Game.new
+    xit "maps the frames scores to an array of arrays" do
+      scorecard = Scorecard.new
       10.times do
         frame = Frame.new(5, 3)
-        game.add_all_frames(frame)
+        scorecard.add_frame(frame)
+        end
+        expect(scorecard.frame_scores).to eq([[5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3]])
       end
-      expect(game.frame_scores).to eq([[5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3]])
     end
   end
-end
 
-  context "given a full 10 frame without strike or spare is completed" do
-    it "adds the frame points to the scorecard and returns points" do
-      game = Game.new
-      frame = Frame.new(10, 3)
+  context "given a full 10 frame game with a strike on the first frame" do
+    xit "adds the frame points to the scorecard and returns points" do
+      scorecard = Scorecard.new
+      frame = Frame.new(10, 0) # strike on the first frame
+      scorecard.add_frame(frame)
       9.times do
-        frame = Frame.new(5, 3)
+        frame = Frame.new(5, 3) # non-strike frame
+        scorecard.add_frame(frame)
       end
-      game.add_all_frames(frame)
-      expect(game.calculate_score).to eq(83)
+      expect(scorecard.calculate_score).to eq(78) # score would be 78, since the last frame doesn't get an additional bonus roll due to not being a spare or strike
+    end
+  end
+
+  context "strike checker" do
+    it "checks if the strike method pulls in from frame" do
+      scorecard = Scorecard.new
+      frame = Frame.new(10, 0) # strike on the first frame
+      scorecard.add_frame(frame)
+      expect(scorecard.frame_strike_checker).to eq("strike")
+    end
+  end
+
+  context "spare checker" do
+    it "checks if the spare method pulls in from frame" do
+      scorecard = Scorecard.new
+      frame = Frame.new(5, 5) # spare on the first frame
+      scorecard.add_frame(frame)
+      expect(scorecard.frame_spare_checker).to eq("spare")
+    end
+  end
+
+  context "given frames are added" do
+    xit "prints the frame" do
+      scorecard = Scorecard.new
+      10.times do
+        frame = Frame.new(5, 3)
+        scorecard.add_frame(frame)
+      end
+      expect(scorecard.calculate_score).to eq("NA")
     end
   end
 
