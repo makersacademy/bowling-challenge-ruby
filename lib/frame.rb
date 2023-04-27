@@ -1,14 +1,13 @@
 class Frame
-  def initialize(roll_one, roll_two)
+  def initialize(roll_one, roll_two, roll_three)
     @frame_points = []
-    @roll_two = nil
-    @roll_three = nil
-    add_points(roll_one, roll_two)
+    add_points(roll_one, roll_two, roll_three)
   end
 
-  def add_points(roll_one, roll_two)
+  def add_points(roll_one, roll_two, roll_three)
     @frame_points << roll_one
     @frame_points << roll_two
+    @frame_points << roll_three
   end
 
   def frame_points

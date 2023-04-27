@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-04-25T14:42:30+01:00">2023-04-25T14:42:30+01:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-04-27T17:32:42+01:00">2023-04-27T17:32:42+01:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="yellow">
-  87.76%
+  80.25%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         13.23
+         2.1
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>98</b> relevant lines,
-    <span class="green"><b>86</b> lines covered</span> and
-    <span class="red"><b>12</b> lines missed. </span>
+    <b>81</b> relevant lines,
+    <span class="green"><b>65</b> lines covered</span> and
+    <span class="red"><b>16</b> lines missed. </span>
     (<span class="yellow">
-  87.76%
+  80.25%
 </span>
 )
   </div>
@@ -73,22 +73,22 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#072e6a2d8bae330958e34462a8ca5adae99ad561" class="src_link" title="lib/frame.rb">lib/frame.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">25</td>
-            <td class="cell--number">15</td>
-            <td class="cell--number">15</td>
+            <td class="cell--number">24</td>
+            <td class="cell--number">14</td>
+            <td class="cell--number">14</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">43.40</td>
+            <td class="cell--number">6.86</td>
             
           </tr>
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#a2129eb3616b79456ace62183ea597be0448225d" class="src_link" title="lib/game.rb">lib/game.rb</a></td>
-            <td class="yellow strong cell--number t-file__coverage">81.48 %</td>
-            <td class="cell--number">50</td>
-            <td class="cell--number">27</td>
-            <td class="cell--number">22</td>
-            <td class="cell--number">5</td>
-            <td class="cell--number">20.11</td>
+            <td class="red strong cell--number t-file__coverage">52.17 %</td>
+            <td class="cell--number">61</td>
+            <td class="cell--number">23</td>
+            <td class="cell--number">12</td>
+            <td class="cell--number">11</td>
+            <td class="cell--number">0.91</td>
             
           </tr>
         
@@ -116,12 +116,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#b6b7a634368aff543968ff43260ea61d5f42d0f5" class="src_link" title="spec/integration_spec.rb">spec/integration_spec.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">78.79 %</td>
-            <td class="cell--number">95</td>
-            <td class="cell--number">33</td>
-            <td class="cell--number">26</td>
-            <td class="cell--number">7</td>
-            <td class="cell--number">2.42</td>
+            <td class="red strong cell--number t-file__coverage">76.19 %</td>
+            <td class="cell--number">100</td>
+            <td class="cell--number">21</td>
+            <td class="cell--number">16</td>
+            <td class="cell--number">5</td>
+            <td class="cell--number">1.43</td>
             
           </tr>
         
@@ -156,8 +156,8 @@
     
 
     <div class="t-line-summary">
-      <b>15</b> relevant lines.
-      <span class="green"><b>15</b> lines covered</span> and
+      <b>14</b> relevant lines.
+      <span class="green"><b>14</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -186,13 +186,13 @@
 
             
 
-            <code class="ruby">  def initialize(roll_one, roll_two)</code>
+            <code class="ruby">  def initialize(roll_one, roll_two, roll_three)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="35" data-linenumber="3">
-            <span class="hits">35</span>
+          <li class="covered" data-hits="15" data-linenumber="3">
+            <span class="hits">15</span>
             
 
             
@@ -202,40 +202,18 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="35" data-linenumber="4">
-            <span class="hits">35</span>
+          <li class="covered" data-hits="15" data-linenumber="4">
+            <span class="hits">15</span>
             
 
             
 
-            <code class="ruby">    @roll_two = nil</code>
+            <code class="ruby">    add_points(roll_one, roll_two, roll_three)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="35" data-linenumber="5">
-            <span class="hits">35</span>
-            
-
-            
-
-            <code class="ruby">    @roll_three = nil</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="35" data-linenumber="6">
-            <span class="hits">35</span>
-            
-
-            
-
-            <code class="ruby">    add_points(roll_one, roll_two)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="7">
+          <li class="never" data-hits="" data-linenumber="5">
             
             
 
@@ -246,7 +224,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="8">
+          <li class="never" data-hits="" data-linenumber="6">
             
             
 
@@ -257,19 +235,19 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="9">
+          <li class="covered" data-hits="1" data-linenumber="7">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  def add_points(roll_one, roll_two)</code>
+            <code class="ruby">  def add_points(roll_one, roll_two, roll_three)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="35" data-linenumber="10">
-            <span class="hits">35</span>
+          <li class="covered" data-hits="15" data-linenumber="8">
+            <span class="hits">15</span>
             
 
             
@@ -279,13 +257,35 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="35" data-linenumber="11">
-            <span class="hits">35</span>
+          <li class="covered" data-hits="15" data-linenumber="9">
+            <span class="hits">15</span>
             
 
             
 
             <code class="ruby">    @frame_points &lt;&lt; roll_two</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="15" data-linenumber="10">
+            <span class="hits">15</span>
+            
+
+            
+
+            <code class="ruby">    @frame_points &lt;&lt; roll_three</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="11">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -296,23 +296,12 @@
 
             
 
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="13">
-            
-            
-
-            
-
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="14">
+          <li class="covered" data-hits="1" data-linenumber="13">
             <span class="hits">1</span>
             
 
@@ -323,13 +312,24 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="32" data-linenumber="15">
-            <span class="hits">32</span>
+          <li class="covered" data-hits="12" data-linenumber="14">
+            <span class="hits">12</span>
             
 
             
 
             <code class="ruby">    return @frame_points</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="15">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -340,23 +340,12 @@
 
             
 
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="17">
-            
-            
-
-            
-
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="18">
+          <li class="covered" data-hits="1" data-linenumber="17">
             <span class="hits">1</span>
             
 
@@ -367,13 +356,24 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="201" data-linenumber="19">
-            <span class="hits">201</span>
+          <li class="covered" data-hits="1" data-linenumber="18">
+            <span class="hits">1</span>
             
 
             
 
             <code class="ruby">    @frame_points[0] == 10</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="19">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -384,23 +384,12 @@
 
             
 
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="21">
-            
-            
-
-            
-
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="22">
+          <li class="covered" data-hits="1" data-linenumber="21">
             <span class="hits">1</span>
             
 
@@ -411,8 +400,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="202" data-linenumber="23">
-            <span class="hits">202</span>
+          <li class="covered" data-hits="2" data-linenumber="22">
+            <span class="hits">2</span>
             
 
             
@@ -422,7 +411,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="24">
+          <li class="never" data-hits="" data-linenumber="23">
             
             
 
@@ -433,7 +422,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="25">
+          <li class="never" data-hits="" data-linenumber="24">
             
             
 
@@ -452,8 +441,8 @@
   <div class="header">
     <h3>lib/game.rb</h3>
     <h4>
-      <span class="yellow">
-  81.48%
+      <span class="red">
+  52.17%
 </span>
 
       lines covered
@@ -462,9 +451,9 @@
     
 
     <div class="t-line-summary">
-      <b>27</b> relevant lines.
-      <span class="green"><b>22</b> lines covered</span> and
-      <span class="red"><b>5</b> lines missed.</span>
+      <b>23</b> relevant lines.
+      <span class="green"><b>12</b> lines covered</span> and
+      <span class="red"><b>11</b> lines missed.</span>
     </div>
 
     
@@ -519,8 +508,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="5">
-            <span class="hits">3</span>
+          <li class="covered" data-hits="1" data-linenumber="5">
+            <span class="hits">1</span>
             
 
             
@@ -530,8 +519,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="6">
-            <span class="hits">3</span>
+          <li class="covered" data-hits="1" data-linenumber="6">
+            <span class="hits">1</span>
             
 
             
@@ -541,8 +530,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="7">
-            <span class="hits">3</span>
+          <li class="covered" data-hits="1" data-linenumber="7">
+            <span class="hits">1</span>
             
 
             
@@ -585,24 +574,24 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="30" data-linenumber="11">
-            <span class="hits">30</span>
-            
-
-            
-
-            <code class="ruby">    while @frames.length &lt; 10</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="30" data-linenumber="12">
-            <span class="hits">30</span>
+          <li class="covered" data-hits="10" data-linenumber="11">
+            <span class="hits">10</span>
             
 
             
 
             <code class="ruby">      @frames &lt;&lt; frame</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="12">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -613,34 +602,12 @@
 
             
 
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="14">
-            
-            
-
-            
-
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="15">
-            
-            
-
-            
-
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="16">
+          <li class="covered" data-hits="1" data-linenumber="14">
             <span class="hits">1</span>
             
 
@@ -651,7 +618,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="17">
+          <li class="covered" data-hits="1" data-linenumber="15">
             <span class="hits">1</span>
             
 
@@ -662,7 +629,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="18">
+          <li class="never" data-hits="" data-linenumber="16">
             
             
 
@@ -673,13 +640,35 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="19">
+          <li class="never" data-hits="" data-linenumber="17">
             
             
 
             
 
             <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="18">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="19">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def strike_or_spare(frame, index)</code>
           </li>
         </div>
       
@@ -690,29 +679,29 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    # Below deals with first ball bonus</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="21">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="21">
+            
             
 
             
 
-            <code class="ruby">  def strike_score(frame, index)</code>
+            <code class="ruby">    @total_score += frame.frame_points[index+1][0] </code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="22">
+          <li class="never" data-hits="" data-linenumber="22">
             
             
 
             
 
-            <code class="ruby">    if frame.frame_points[0] == 10</code>
+            <code class="ruby">    # We now want to check if the first ball is a strike</code>
           </li>
         </div>
       
@@ -723,29 +712,29 @@
 
             
 
-            <code class="ruby">      @total_score += frame[frame_points][index+1].sum * 2</code>
+            <code class="ruby">    if frame.strike?</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="24">
+          <li class="missed" data-hits="0" data-linenumber="24">
             
             
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">      if frame.frame_points[index+1][0].strike?</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="25">
+          <li class="missed" data-hits="0" data-linenumber="25">
             
             
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">        @total_score += frame.frame_points[index+2][0]</code>
           </li>
         </div>
       
@@ -756,51 +745,51 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">      else</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="27">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="27">
+            
             
 
             
 
-            <code class="ruby">  def calculate_score</code>
+            <code class="ruby">        @total_score += frame.frame_points[index+1][1]</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="28">
-            <span class="hits">2</span>
+          <li class="never" data-hits="" data-linenumber="28">
+            
             
 
             
 
-            <code class="ruby">    @frames.each_with_index do |frame, index|</code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="20" data-linenumber="29">
-            <span class="hits">20</span>
+          <li class="never" data-hits="" data-linenumber="29">
+            
             
 
             
 
-            <code class="ruby">      if strike_or_spare_checker == &#39;strike&#39;</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="30">
+          <li class="never" data-hits="" data-linenumber="30">
             
             
 
             
 
-            <code class="ruby">        strike_score(frame, index)</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -811,84 +800,84 @@
 
             
 
-            <code class="ruby">      else</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="20" data-linenumber="32">
-            <span class="hits">20</span>
-            
-
-            
-
-            <code class="ruby">        @total_score += frame.frame_points.sum</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="33">
-            
-            
-
-            
-
-            <code class="ruby">      end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="34">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="35">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">    return @total_score</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="36">
-            
-            
-
-            
-
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="37">
-            
-            
-
-            
-
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="38">
+          <li class="covered" data-hits="1" data-linenumber="32">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  private</code>
+            <code class="ruby">  def calculate_score</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="33">
+            
+            
+
+            
+
+            <code class="ruby">    @total_score += @frames.map(&amp;:frame_points).flatten.sum</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="34">
+            
+            
+
+            
+
+            <code class="ruby">    @frames.each_with_index do |frame, index|</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="35">
+            
+            
+
+            
+
+            <code class="ruby">      while frame.index &lt; 9 do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="36">
+            
+            
+
+            
+
+            <code class="ruby">        if frame.strike? || frame.spare?</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="37">
+            
+            
+
+            
+
+            <code class="ruby">          strike_or_spare(frame, index)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="38">
+            
+            
+
+            
+
+            <code class="ruby">        end</code>
           </li>
         </div>
       
@@ -899,100 +888,12 @@
 
             
 
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="40">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  def strike_or_spare_checker</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="20" data-linenumber="41">
-            <span class="hits">20</span>
-            
-
-            
-
-            <code class="ruby">    @frames.each_with_index do |frame, index|</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="200" data-linenumber="42">
-            <span class="hits">200</span>
-            
-
-            
-
-            <code class="ruby">      if frame.strike? == true</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="43">
-            
-            
-
-            
-
-            <code class="ruby">        return &#39;strike&#39;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="44">
-            
-            
-
-            
-
-            <code class="ruby">      elsif</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="200" data-linenumber="45">
-            <span class="hits">200</span>
-            
-
-            
-
-            <code class="ruby">        frame.spare? == true</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="46">
-            
-            
-
-            
-
-            <code class="ruby">        return &#39;spare&#39;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="47">
-            
-            
-
-            
-
             <code class="ruby">      end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="48">
+          <li class="never" data-hits="" data-linenumber="40">
             
             
 
@@ -1003,7 +904,18 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="49">
+          <li class="missed" data-hits="0" data-linenumber="41">
+            
+            
+
+            
+
+            <code class="ruby">    return @total_score</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="42">
             
             
 
@@ -1014,7 +926,205 @@
         </div>
       
         <div>
+          <li class="never" data-hits="" data-linenumber="43">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="44">
+            
+            
+
+            
+
+            <code class="ruby">#   # If frame strike or spare only until the 10th frame</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="45">
+            
+            
+
+            
+
+            <code class="ruby">#   def tenth_frame</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="46">
+            
+            
+
+            
+
+            <code class="ruby">#     if frame[9].frame_points[0] == 10 #10th frame is strike</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="47">
+            
+            
+
+            
+
+            <code class="ruby">#       @total_score += frame[9].frame_points.sum</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="48">
+            
+            
+
+            
+
+            <code class="ruby">#       if frame[9].frame_points.sum == 10 # bonus roll is a strike</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="49">
+            
+            
+
+            
+
+            <code class="ruby">#         @total_score += 10</code>
+          </li>
+        </div>
+      
+        <div>
           <li class="never" data-hits="" data-linenumber="50">
+            
+            
+
+            
+
+            <code class="ruby">#       else</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="51">
+            
+            
+
+            
+
+            <code class="ruby">#         @total_score += frame[9].frame_points[2] # add on the second roll if pins remaining</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="52">
+            
+            
+
+            
+
+            <code class="ruby">#       end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="53">
+            
+            
+
+            
+
+            <code class="ruby">#     elsif frame[9].frame_points.sum == 10 # 10th frame is a spare</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="54">
+            
+            
+
+            
+
+            <code class="ruby">#       @total_score += frame[9].frame_points.sum</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="55">
+            
+            
+
+            
+
+            <code class="ruby">#       @total_score += frame[9].roll_three</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="56">
+            
+            
+
+            
+
+            <code class="ruby">#     else # 10th frame is neither strike/spare</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="57">
+            
+            
+
+            
+
+            <code class="ruby">#       @total_score += frame[9].frame_points.sum</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="58">
+            
+            
+
+            
+
+            <code class="ruby">#     end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="59">
+            
+            
+
+            
+
+            <code class="ruby">#     return @total_score</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="60">
+            
+            
+
+            
+
+            <code class="ruby">#   end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="61">
             
             
 
@@ -1128,7 +1238,7 @@
 
             
 
-            <code class="ruby">      frame_one = Frame.new(5, 3)</code>
+            <code class="ruby">      frame_one = Frame.new(5, 3, 0)</code>
           </li>
         </div>
       
@@ -1139,7 +1249,7 @@
 
             
 
-            <code class="ruby">      expect(frame_one.frame_points).to eq([5, 3])</code>
+            <code class="ruby">      expect(frame_one.frame_points).to eq([5, 3, 0])</code>
           </li>
         </div>
       
@@ -1205,7 +1315,7 @@
 
             
 
-            <code class="ruby">      frame_one = Frame.new(10, 3)</code>
+            <code class="ruby">      frame_one = Frame.new(10, 3, 0)</code>
           </li>
         </div>
       
@@ -1216,7 +1326,7 @@
 
             
 
-            <code class="ruby">      expect(frame_one.frame_points).to eq([10, 3])</code>
+            <code class="ruby">      expect(frame_one.frame_points).to eq([10, 3, 0])</code>
           </li>
         </div>
       
@@ -1282,7 +1392,7 @@
 
             
 
-            <code class="ruby">      frame_one = Frame.new(10, 3)</code>
+            <code class="ruby">      frame_one = Frame.new(10, 3, 0)</code>
           </li>
         </div>
       
@@ -1359,7 +1469,7 @@
 
             
 
-            <code class="ruby">      frame_one = Frame.new(10, 3)</code>
+            <code class="ruby">      frame_one = Frame.new(10, 3, 0)</code>
           </li>
         </div>
       
@@ -1436,7 +1546,7 @@
 
             
 
-            <code class="ruby">      frame_one = Frame.new(7, 3)</code>
+            <code class="ruby">      frame_one = Frame.new(7, 3, 0)</code>
           </li>
         </div>
       
@@ -1613,7 +1723,7 @@
     <h3>spec/integration_spec.rb</h3>
     <h4>
       <span class="red">
-  78.79%
+  76.19%
 </span>
 
       lines covered
@@ -1622,9 +1732,9 @@
     
 
     <div class="t-line-summary">
-      <b>33</b> relevant lines.
-      <span class="green"><b>26</b> lines covered</span> and
-      <span class="red"><b>7</b> lines missed.</span>
+      <b>21</b> relevant lines.
+      <span class="green"><b>16</b> lines covered</span> and
+      <span class="red"><b>5</b> lines missed.</span>
     </div>
 
     
@@ -1696,13 +1806,13 @@
 
             
 
-            <code class="ruby">    it &quot;adds the frame points to the scorecard and returns points&quot; do</code>
+            <code class="ruby">    xit &quot;adds the frame points to the scorecard and returns points&quot; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="7">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="7">
+            
             
 
             
@@ -1712,8 +1822,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="8">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="8">
+            
             
 
             
@@ -1723,8 +1833,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="10" data-linenumber="9">
-            <span class="hits">10</span>
+          <li class="missed" data-hits="0" data-linenumber="9">
+            
             
 
             
@@ -1734,8 +1844,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="10" data-linenumber="10">
-            <span class="hits">10</span>
+          <li class="missed" data-hits="0" data-linenumber="10">
+            
             
 
             
@@ -1756,8 +1866,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="12">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="12">
+            
             
 
             
@@ -1839,24 +1949,24 @@
 
             
 
-            <code class="ruby">      10.times do</code>
+            <code class="ruby">      8.times do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="10" data-linenumber="20">
-            <span class="hits">10</span>
+          <li class="covered" data-hits="8" data-linenumber="20">
+            <span class="hits">8</span>
             
 
             
 
-            <code class="ruby">        frame = Frame.new(5, 3)</code>
+            <code class="ruby">        frame = Frame.new(5, 3, 0)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="10" data-linenumber="21">
-            <span class="hits">10</span>
+          <li class="covered" data-hits="8" data-linenumber="21">
+            <span class="hits">8</span>
             
 
             
@@ -1872,7 +1982,7 @@
 
             
 
-            <code class="ruby">        end</code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
@@ -1883,12 +1993,56 @@
 
             
 
-            <code class="ruby">        expect(scorecard.frame_scores).to eq([[5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3]])</code>
+            <code class="ruby">      frame2 = Frame.new(10, 0, 0)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="24">
+          <li class="covered" data-hits="1" data-linenumber="24">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add_frame(frame2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="25">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      frame3 = Frame.new(10, 10, 10)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="26">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      scorecard.add_frame(frame3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="27">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(scorecard.frame_scores).to eq([[5, 3, 0], [5, 3, 0], [5, 3, 0], [5, 3, 0], [5, 3, 0], [5, 3, 0], [5, 3, 0], [5, 3, 0], [10, 0, 0], [10, 10, 10]])</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="28">
             
             
 
@@ -1899,18 +2053,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="25">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="26">
+          <li class="never" data-hits="" data-linenumber="29">
             
             
 
@@ -1921,7 +2064,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="27">
+          <li class="never" data-hits="" data-linenumber="30">
             
             
 
@@ -1932,90 +2075,57 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="28">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="31">
+            
             
 
             
 
-            <code class="ruby">  context &quot;given a full 10 frame game with a strike on the first frame&quot; do</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="29">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="32">
+            
             
 
             
 
-            <code class="ruby">    xit &quot;adds the frame points to the scorecard and returns points&quot; do</code>
+            <code class="ruby">  # context &quot;given 10 frames are completed&quot; do</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="30">
+          <li class="never" data-hits="" data-linenumber="33">
             
             
 
             
 
-            <code class="ruby">      scorecard = Scorecard.new</code>
+            <code class="ruby">  #   it &quot;maps the frames scores to an array of arrays&quot; do</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="31">
+          <li class="never" data-hits="" data-linenumber="34">
             
             
 
             
 
-            <code class="ruby">      frame = Frame.new(10, 0) # strike on the first frame</code>
+            <code class="ruby">  #     scorecard = Scorecard.new</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="32">
+          <li class="never" data-hits="" data-linenumber="35">
             
             
 
             
 
-            <code class="ruby">      scorecard.add_frame(frame)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="33">
-            
-            
-
-            
-
-            <code class="ruby">      9.times do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="34">
-            
-            
-
-            
-
-            <code class="ruby">        frame = Frame.new(5, 3) # non-strike frame</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="35">
-            
-            
-
-            
-
-            <code class="ruby">        scorecard.add_frame(frame)</code>
+            <code class="ruby">  #     10.times do</code>
           </li>
         </div>
       
@@ -2026,18 +2136,18 @@
 
             
 
-            <code class="ruby">      end</code>
+            <code class="ruby">  #       frame = Frame.new(5, 3)</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="37">
+          <li class="never" data-hits="" data-linenumber="37">
             
             
 
             
 
-            <code class="ruby">      expect(scorecard.calculate_score).to eq(78) # score would be 78, since the last frame doesn&#39;t get an additional bonus roll due to not being a spare or strike</code>
+            <code class="ruby">  #       scorecard.add_frame(frame)</code>
           </li>
         </div>
       
@@ -2048,7 +2158,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">  #       end</code>
           </li>
         </div>
       
@@ -2059,7 +2169,7 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">  #       expect(scorecard.frame_scores).to eq([[5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3], [5, 3]])</code>
           </li>
         </div>
       
@@ -2070,73 +2180,73 @@
 
             
 
+            <code class="ruby">  #     end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="41">
+            
+            
+
+            
+
+            <code class="ruby">  #   end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="42">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="41">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="43">
+            
             
 
             
 
-            <code class="ruby">  context &quot;given frames are added TESTER P TEST&quot; do</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="42">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="44">
+            
             
 
             
 
-            <code class="ruby">    it &quot;prints the frame&quot; do</code>
+            <code class="ruby">  # context &quot;given a full 10 frame game with a strike on the first frame&quot; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="43">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="45">
+            
             
 
             
 
-            <code class="ruby">      scorecard = Scorecard.new</code>
+            <code class="ruby">  #   xit &quot;adds the frame points to the scorecard and returns points&quot; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="44">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="46">
+            
             
 
             
 
-            <code class="ruby">      10.times do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="10" data-linenumber="45">
-            <span class="hits">10</span>
-            
-
-            
-
-            <code class="ruby">        frame = Frame.new(5, 3)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="10" data-linenumber="46">
-            <span class="hits">10</span>
-            
-
-            
-
-            <code class="ruby">        scorecard.add_frame(frame)</code>
+            <code class="ruby">  #     scorecard = Scorecard.new</code>
           </li>
         </div>
       
@@ -2147,18 +2257,18 @@
 
             
 
-            <code class="ruby">      end</code>
+            <code class="ruby">  #     frame = Frame.new(10, 0) # strike on the first frame</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="48">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="48">
+            
             
 
             
 
-            <code class="ruby">      expect(scorecard.calculate_score).to eq(&quot;NA&quot;)</code>
+            <code class="ruby">  #     scorecard.add_frame(frame)</code>
           </li>
         </div>
       
@@ -2169,7 +2279,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">  #     9.times do</code>
           </li>
         </div>
       
@@ -2180,7 +2290,7 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">  #       frame = Frame.new(5, 3) # non-strike frame</code>
           </li>
         </div>
       
@@ -2191,7 +2301,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  #       scorecard.add_frame(frame)</code>
           </li>
         </div>
       
@@ -2202,7 +2312,7 @@
 
             
 
-            <code class="ruby">#   context &quot;given a strike occurs on roll_one&quot; do</code>
+            <code class="ruby">  #     end</code>
           </li>
         </div>
       
@@ -2213,7 +2323,7 @@
 
             
 
-            <code class="ruby">#     it &quot;skips second roll and returns a total score in current frame as 10&quot; do</code>
+            <code class="ruby">  #     expect(scorecard.calculate_score).to eq(78) # score would be 78, since the last frame doesn&#39;t get an additional bonus roll due to not being a spare or strike</code>
           </li>
         </div>
       
@@ -2224,7 +2334,7 @@
 
             
 
-            <code class="ruby">#       scorecard = Scorecard.new</code>
+            <code class="ruby">  #   end</code>
           </li>
         </div>
       
@@ -2235,7 +2345,7 @@
 
             
 
-            <code class="ruby">#       frame_one = Frame.new</code>
+            <code class="ruby">  # end</code>
           </li>
         </div>
       
@@ -2246,7 +2356,7 @@
 
             
 
-            <code class="ruby">#       frame_one.roll_points(10, 4)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -2257,7 +2367,7 @@
 
             
 
-            <code class="ruby">#       scorecard.add_frame_points_to_total_score(frame_one)</code>
+            <code class="ruby">#   context &quot;given a strike occurs on roll_one&quot; do</code>
           </li>
         </div>
       
@@ -2268,7 +2378,7 @@
 
             
 
-            <code class="ruby">#       expect(scorecard.score_so_far).to eq(10)</code>
+            <code class="ruby">#     it &quot;skips second roll and returns a total score in current frame as 10&quot; do</code>
           </li>
         </div>
       
@@ -2279,7 +2389,7 @@
 
             
 
-            <code class="ruby">#     end</code>
+            <code class="ruby">#       scorecard = Scorecard.new</code>
           </li>
         </div>
       
@@ -2290,7 +2400,7 @@
 
             
 
-            <code class="ruby">#   end</code>
+            <code class="ruby">#       frame_one = Frame.new</code>
           </li>
         </div>
       
@@ -2301,7 +2411,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">#       frame_one.roll_points(10, 4)</code>
           </li>
         </div>
       
@@ -2312,7 +2422,7 @@
 
             
 
-            <code class="ruby">#   context &quot;given a full game with a strike on first roll&quot; do</code>
+            <code class="ruby">#       scorecard.add_frame_points_to_total_score(frame_one)</code>
           </li>
         </div>
       
@@ -2323,7 +2433,7 @@
 
             
 
-            <code class="ruby">#     it &quot;returns the correct amount of points&quot; do</code>
+            <code class="ruby">#       expect(scorecard.score_so_far).to eq(10)</code>
           </li>
         </div>
       
@@ -2334,7 +2444,7 @@
 
             
 
-            <code class="ruby">#       scorecard = Scorecard.new</code>
+            <code class="ruby">#     end</code>
           </li>
         </div>
       
@@ -2345,7 +2455,7 @@
 
             
 
-            <code class="ruby">#       frame_one = Frame.new</code>
+            <code class="ruby">#   end</code>
           </li>
         </div>
       
@@ -2356,7 +2466,7 @@
 
             
 
-            <code class="ruby">#       frame_one.roll_points(10, 4)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -2367,7 +2477,7 @@
 
             
 
-            <code class="ruby">#       scorecard.add_frame_points_to_total_score(frame_one)</code>
+            <code class="ruby">#   context &quot;given a full game with a strike on first roll&quot; do</code>
           </li>
         </div>
       
@@ -2378,7 +2488,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">#     it &quot;returns the correct amount of points&quot; do</code>
           </li>
         </div>
       
@@ -2389,7 +2499,7 @@
 
             
 
-            <code class="ruby">#       frame_two = Frame.new</code>
+            <code class="ruby">#       scorecard = Scorecard.new</code>
           </li>
         </div>
       
@@ -2400,7 +2510,7 @@
 
             
 
-            <code class="ruby">#       frame_two.roll_points(4, 4)</code>
+            <code class="ruby">#       frame_one = Frame.new</code>
           </li>
         </div>
       
@@ -2411,7 +2521,7 @@
 
             
 
-            <code class="ruby">#       scorecard.add_frame_points_to_total_score(frame_two)</code>
+            <code class="ruby">#       frame_one.roll_points(10, 4)</code>
           </li>
         </div>
       
@@ -2422,7 +2532,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">#       scorecard.add_frame_points_to_total_score(frame_one)</code>
           </li>
         </div>
       
@@ -2433,7 +2543,7 @@
 
             
 
-            <code class="ruby">#       frame = Frame.new</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -2444,7 +2554,7 @@
 
             
 
-            <code class="ruby">#       8.times do</code>
+            <code class="ruby">#       frame_two = Frame.new</code>
           </li>
         </div>
       
@@ -2455,7 +2565,7 @@
 
             
 
-            <code class="ruby">#         frame.roll_points(3, 3)</code>
+            <code class="ruby">#       frame_two.roll_points(4, 4)</code>
           </li>
         </div>
       
@@ -2466,7 +2576,7 @@
 
             
 
-            <code class="ruby">#       end</code>
+            <code class="ruby">#       scorecard.add_frame_points_to_total_score(frame_two)</code>
           </li>
         </div>
       
@@ -2477,7 +2587,7 @@
 
             
 
-            <code class="ruby">#       scorecard.add_frame_points_to_total_score(frame)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -2488,7 +2598,7 @@
 
             
 
-            <code class="ruby">#       expect(scorecard.score_so_far).to eq(98)</code>
+            <code class="ruby">#       frame = Frame.new</code>
           </li>
         </div>
       
@@ -2499,7 +2609,7 @@
 
             
 
-            <code class="ruby">#     end</code>
+            <code class="ruby">#       8.times do</code>
           </li>
         </div>
       
@@ -2510,7 +2620,7 @@
 
             
 
-            <code class="ruby">#   end</code>
+            <code class="ruby">#         frame.roll_points(3, 3)</code>
           </li>
         </div>
       
@@ -2521,7 +2631,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">#       end</code>
           </li>
         </div>
       
@@ -2532,7 +2642,7 @@
 
             
 
-            <code class="ruby">#   context &quot;given a strike occurs on roll_one&quot; do</code>
+            <code class="ruby">#       scorecard.add_frame_points_to_total_score(frame)</code>
           </li>
         </div>
       
@@ -2543,7 +2653,7 @@
 
             
 
-            <code class="ruby">#     xit &quot;adds the points from the next frame roll_one and roll_two to total&quot; do</code>
+            <code class="ruby">#       expect(scorecard.score_so_far).to eq(98)</code>
           </li>
         </div>
       
@@ -2554,7 +2664,7 @@
 
             
 
-            <code class="ruby">#       scorecard = Scorecard.new</code>
+            <code class="ruby">#     end</code>
           </li>
         </div>
       
@@ -2565,7 +2675,7 @@
 
             
 
-            <code class="ruby">#       frame_one = Frame.new</code>
+            <code class="ruby">#   end</code>
           </li>
         </div>
       
@@ -2576,7 +2686,7 @@
 
             
 
-            <code class="ruby">#       frame_one.roll_points(10, 4)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -2587,7 +2697,7 @@
 
             
 
-            <code class="ruby">#       scorecard.add_frame_points_to_total_score(frame_one)</code>
+            <code class="ruby">#   context &quot;given a strike occurs on roll_one&quot; do</code>
           </li>
         </div>
       
@@ -2598,7 +2708,7 @@
 
             
 
-            <code class="ruby">#       expect(scorecard.score_so_far).to eq(10)</code>
+            <code class="ruby">#     xit &quot;adds the points from the next frame roll_one and roll_two to total&quot; do</code>
           </li>
         </div>
       
@@ -2609,7 +2719,7 @@
 
             
 
-            <code class="ruby">#       frame_two = Frame.new</code>
+            <code class="ruby">#       scorecard = Scorecard.new</code>
           </li>
         </div>
       
@@ -2620,7 +2730,7 @@
 
             
 
-            <code class="ruby">#       frame_two.roll_points(4, 3)</code>
+            <code class="ruby">#       frame_one = Frame.new</code>
           </li>
         </div>
       
@@ -2631,7 +2741,7 @@
 
             
 
-            <code class="ruby">#       scorecard.add_frame_points_to_total_score(frame_two)</code>
+            <code class="ruby">#       frame_one.roll_points(10, 4)</code>
           </li>
         </div>
       
@@ -2642,7 +2752,7 @@
 
             
 
-            <code class="ruby">#       expect(scorecard.score_so_far).to eq(24)</code>
+            <code class="ruby">#       scorecard.add_frame_points_to_total_score(frame_one)</code>
           </li>
         </div>
       
@@ -2653,7 +2763,7 @@
 
             
 
-            <code class="ruby">#     end</code>
+            <code class="ruby">#       expect(scorecard.score_so_far).to eq(10)</code>
           </li>
         </div>
       
@@ -2664,7 +2774,7 @@
 
             
 
-            <code class="ruby">#   end</code>
+            <code class="ruby">#       frame_two = Frame.new</code>
           </li>
         </div>
       
@@ -2675,7 +2785,62 @@
 
             
 
-            <code class="ruby"># end</code>
+            <code class="ruby">#       frame_two.roll_points(4, 3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="96">
+            
+            
+
+            
+
+            <code class="ruby">#       scorecard.add_frame_points_to_total_score(frame_two)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="97">
+            
+            
+
+            
+
+            <code class="ruby">#       expect(scorecard.score_so_far).to eq(24)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="98">
+            
+            
+
+            
+
+            <code class="ruby">#     end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="99">
+            
+            
+
+            
+
+            <code class="ruby">#   end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="100">
+            
+            
+
+            
+
+            <code class="ruby">end</code>
           </li>
         </div>
       
