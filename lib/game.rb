@@ -36,26 +36,18 @@ class Scorecard
         if frame.strike? || frame.spare?
           strike_or_spare(frame, index)
         end
+        if if frame[index+8][0] == 10
+          bonus_third_roll
+        end
       end
     end
     return @total_score
   end
 
-#   # If frame strike or spare only until the 10th frame
-#   def tenth_frame
-#     if frame[9].frame_points[0] == 10 #10th frame is strike
-#       @total_score += frame[9].frame_points.sum
-#       if frame[9].frame_points.sum == 10 # bonus roll is a strike
-#         @total_score += 10
-#       else
-#         @total_score += frame[9].frame_points[2] # add on the second roll if pins remaining
-#       end
-#     elsif frame[9].frame_points.sum == 10 # 10th frame is a spare
-#       @total_score += frame[9].frame_points.sum
-#       @total_score += frame[9].roll_three
-#     else # 10th frame is neither strike/spare
-#       @total_score += frame[9].frame_points.sum
-#     end
-#     return @total_score
-#   end
+  def bonus_third_roll(frame, index)
+      @total_score += frame[index+9][0]
+      @total_score += frame[index+9][1]
+    end
+  end
+
 end
