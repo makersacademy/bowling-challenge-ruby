@@ -20,7 +20,7 @@ class Scorecard
     @total_score += frame.frame_points[index+1][0] 
     # We now want to check if the first ball is a strike
     if frame.strike?
-      if frame.frame_points[index+1][0].strike?
+      if frame.frame_points[index+1][0] == 10
         @total_score += frame.frame_points[index+2][0]
       else
         @total_score += frame.frame_points[index+1][1]
@@ -31,22 +31,19 @@ class Scorecard
   def calculate_score
     @total_score += @frames.map(&:frame_points).flatten.sum
     @frames.each_with_index do |frame, index|
-      while frame.index < 9 do
         if frame.strike? || frame.spare?
           strike_or_spare(frame, index)
         end
-        if frame[index+8][0] == 10
-          bonus_third_roll
+        if index == 8 && frame.strike?
+          bonus_third_roll(frame, index)
         end
       end
-    end
     return @total_score
   end
 
   def bonus_third_roll(frame, index)
     # If the 9th frame roll one has a 10, add the 10th frame roll 1 + roll two
-      @total_score += frame[index+1][0]
-      @total_score += frame[index+1][1]
-    end
+      @total_score += frame.frame_points[index+1][0]
+      @total_score += frame.frame_points[index+1][1]
   end
 end
