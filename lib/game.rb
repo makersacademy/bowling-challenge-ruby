@@ -8,12 +8,11 @@ class Scorecard
   end
    
   def add_frame(frame)
-      @frames << frame
+    @frames << frame
   end
 
   def frame_scores # array of arrays
     return @frames.map(&:frame_points)
-    # @frames.map(&:frame_points).flatten.sum <- totals the score in array of arrays
   end
 
   def strike_or_spare(frame, index)
@@ -36,7 +35,7 @@ class Scorecard
         if frame.strike? || frame.spare?
           strike_or_spare(frame, index)
         end
-        if if frame[index+8][0] == 10
+        if frame[index+8][0] == 10
           bonus_third_roll
         end
       end
@@ -45,9 +44,9 @@ class Scorecard
   end
 
   def bonus_third_roll(frame, index)
-      @total_score += frame[index+9][0]
-      @total_score += frame[index+9][1]
+    # If the 9th frame roll one has a 10, add the 10th frame roll 1 + roll two
+      @total_score += frame[index+1][0]
+      @total_score += frame[index+1][1]
     end
   end
-
 end
