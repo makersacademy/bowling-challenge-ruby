@@ -7,7 +7,10 @@ class BowlingScorecard
   end
 
   def calculate_frame_scores(rolls)
-    frame = rolls.sum
-    @frame_scores << frame
+    @frame_scores = rolls.each_slice(2).map do |first_roll, second_roll| 
+      first_roll + second_roll
+    end
+    
   end
 end
+
