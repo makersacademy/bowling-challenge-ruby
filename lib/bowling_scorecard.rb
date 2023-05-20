@@ -5,4 +5,9 @@ class BowlingScorecard
   def initialize
     @frame_scores = []
   end
+
+  def calculate_frame_scores(rolls)
+    frame = rolls.sum
+    @frame_scores << frame
+  end
 end

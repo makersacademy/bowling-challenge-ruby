@@ -6,4 +6,26 @@ RSpec.describe BowlingScorecard do
   it 'constructs' do
     expect(scorecard.frame_scores).to eq []
   end
+
+  describe '#calculate_frame_scores' do
+    context 'given one frame' do
+      it 'returns [0] for an empty frame (two gutterballs)' do
+        rolls = [0, 0]
+        result = scorecard.calculate_frame_scores(rolls)
+        expect(result).to eq [0]
+      end
+
+      it 'returns the result of an open frame (pins left standing)' do
+        rolls = [0, 1]
+        result = scorecard.calculate_frame_scores(rolls)
+        expect(result).to eq [1]        
+      end
+
+      it 'returns the result of a different open frame (pins left standing)' do
+        rolls = [5, 3]
+        result = scorecard.calculate_frame_scores(rolls)
+        expect(result).to eq [8]        
+      end
+    end
+  end
 end
