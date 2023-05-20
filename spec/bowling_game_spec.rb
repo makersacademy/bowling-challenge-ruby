@@ -30,7 +30,7 @@ RSpec.describe BowlingGame do
   describe '#total_score' do
     it 'returns the total score of a regular bowling game with no strikes or spares' do
 
-      expect(scorecard).to receive(:calculate_total_score)
+      expect(scorecard).to receive(:calculate_frame_scores)
         .and_return(55)
         
       game.roll(3)
