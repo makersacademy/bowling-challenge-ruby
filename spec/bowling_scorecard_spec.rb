@@ -26,6 +26,19 @@ RSpec.describe BowlingScorecard do
         result = scorecard.calculate_frame_scores(rolls)
         expect(result).to eq [8]        
       end
+
+      it 'returns 10 for a strike' do
+        rolls = [10]
+        result = scorecard.calculate_frame_scores(rolls)
+        expect(result).to eq [10]        
+      end
+      
+      it 'returns 10 for a spare' do
+        rolls = [3, 7]
+        result = scorecard.calculate_frame_scores(rolls)
+        expect(result).to eq [10]        
+      end
+
     end
   end
 end
