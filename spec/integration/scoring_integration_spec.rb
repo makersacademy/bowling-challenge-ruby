@@ -1,7 +1,7 @@
 require 'bowling_game'
 require 'bowling_scorecard'
 
-RSpec.describe "scoring integration" do
+RSpec.describe 'scoring integration' do
   it 'calculates the score of a regular bowling game with no strikes or spare' do
     game = BowlingGame.new
 
