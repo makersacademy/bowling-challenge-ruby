@@ -13,6 +13,6 @@ class BowlingGame
   end
 
   def total_score
-    @scorecard.calculate_frame_scores
+    @scorecard.calculate_frame_scores(@rolls)
   end
 end
