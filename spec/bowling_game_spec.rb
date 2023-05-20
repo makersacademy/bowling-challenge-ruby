@@ -32,7 +32,7 @@ RSpec.describe BowlingGame do
 
       expect(scorecard).to receive(:calculate_frame_scores)
         .with([3, 4, 1, 7, 0, 3, 2, 6, 8, 0, 1, 0, 0, 0, 1, 5, 7, 2, 4, 1])
-        .and_return(55)
+        .and_return([7, 8, 3, 8, 8, 1, 0, 6, 9, 5])
         
       game.roll(3)
       game.roll(4)
@@ -59,3 +59,5 @@ RSpec.describe BowlingGame do
     end
   end
 end
+
+
