@@ -1,10 +1,14 @@
 class Frame
-  attr_reader :total_score, :rolls, :pins_down
+  attr_reader :score, :rolls, :pins_down
 
   def initialize(rolls)
     @rolls = rolls
-    @total_score = 0
+    @score = 0
     @pins_down = rolls.sum
+  end
+
+  def score
+    return @pins_down
   end
 
   def strike?
