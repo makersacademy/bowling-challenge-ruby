@@ -24,12 +24,11 @@ class Scores
       roll_2 = self.roll
       rolls << roll_2
     else
-
+      
     end
     @total_score += @frame_score
 
-    @frame = [rolls, @total_score]
-    @scoreboard << @frame
+    score(rolls)
 
     @io.puts "Frame score: #{@frame_score}"
   end
@@ -51,11 +50,15 @@ class Scores
       rolls << roll_3
     end
 
-    @frame = [rolls, @total_score]
-    @scoreboard << @frame
+    score(rolls)
 
     @total_score += @frame_score
     @io.puts "Frame score: #{@frame_score}"
+  end
+
+  def score(rolls)
+    @frame = [rolls, @total_score]
+    @scoreboard << @frame
   end
 
   def run

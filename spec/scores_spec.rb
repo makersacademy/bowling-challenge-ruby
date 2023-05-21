@@ -116,9 +116,7 @@ RSpec.describe Scores do
     expect(io).to receive(:gets).and_return('2').ordered
     expect(io).to receive(:puts).with('Enter score:').ordered
     expect(io).to receive(:gets).and_return('3').ordered
-    expect(io).to receive(:puts).with('Frame score: 10').ordered
-
-    expect(@scoreboard[])
+    expect(io).to receive(:puts).with('Frame score: 5').ordered
 
     game = Scores.new(io)
     game.run
