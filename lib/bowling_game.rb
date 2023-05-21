@@ -9,11 +9,7 @@ class BowlingGame
 
   def add_frame(frame)
     @frames << frame
-    @frames.each_with_index do |frame, i|
-      if frame.score.nil?
-        update_score(frame, i)
-      end
-    end
+    update_all_scores(@frames)
   end
 
   def current_total_score
@@ -21,15 +17,10 @@ class BowlingGame
     frame_scores = @frames.map { |frame|
       frame.score.nil? ? 0 : frame.score
     }
-    p frame_scores
-    return frame_scores.sum
+    frame_scores.sum
   end
 
   private
-
-  def score_to_i(score)
-    return score.nil? ? 0 : score
-  end
 
   def update_score(frame, i)
     return if @frames[-1] == frame
@@ -37,6 +28,14 @@ class BowlingGame
       frame.add_spare_bonus(@frames[i + 1])
     elsif frame.strike?
       frame.add_strike_bonus(@frames[i + 1], @frames[i + 2])
+    end
+  end
+
+  def update_all_scores(frames)
+    frames.each_with_index do |frame, i|
+      if frame.score.nil?
+        update_score(frame, i)
+      end
     end
   end
 end

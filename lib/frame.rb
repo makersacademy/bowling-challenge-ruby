@@ -10,10 +10,8 @@ class Frame
   def score
     if rolls.length == 3
       rolls.sum
-    elsif spare? || strike?
-      @score
-    else
-      @pins_down
+    else spare? || strike?
+      spare? || strike? ? @score : @pins_down
     end
   end
 
