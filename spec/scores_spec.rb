@@ -103,7 +103,7 @@ RSpec.describe Scores do
     game.last_frame
   end
 
-  xit 'Spare in a frame' do
+  xit 'Spare in a previous frame adds to previous frame score from current first roll' do
     io = double(:io)
 
     expect(io).to receive(:puts).with('Enter score:').ordered
@@ -111,6 +111,14 @@ RSpec.describe Scores do
     expect(io).to receive(:puts).with('Enter score:').ordered
     expect(io).to receive(:gets).and_return('1').ordered
     expect(io).to receive(:puts).with('Frame score: 10').ordered
+
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('2').ordered
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('3').ordered
+    expect(io).to receive(:puts).with('Frame score: 10').ordered
+
+    expect(@scoreboard[])
 
     game = Scores.new(io)
     game.run
