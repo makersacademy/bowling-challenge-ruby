@@ -129,5 +129,20 @@ RSpec.describe BowlingGame do
 
       expect(bowling_game.current_total_score).to eq 18
     end
+
+    it 'calculates total when strike in middle of game' do
+      bowling_game = BowlingGame.new
+      frame1 = Frame.new([10])
+      frame2 = Frame.new([2, 2])
+      5.times do
+        bowling_game.add_frame(frame2)
+      end
+      bowling_game.add_frame(frame1)
+      4.times do
+        bowling_game.add_frame(frame2)
+      end
+
+      expect(bowling_game.current_total_score).to eq 50
+    end
   end
 end
