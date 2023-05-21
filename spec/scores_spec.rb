@@ -103,7 +103,7 @@ RSpec.describe Scores do
     game.last_frame
   end
 
-  xit 'Spare adds bonus points from first roll' do
+  it 'Spare adds bonus points from first roll' do
     io = double(:io)
 
     expect(io).to receive(:puts).with('Enter score:').ordered
@@ -119,7 +119,8 @@ RSpec.describe Scores do
     expect(io).to receive(:puts).with('Frame score: 5').ordered
 
     game = Scores.new(io)
-    game.run
+    game.frame
+    game.frame
   end
 
   xit 'Strike in a frame' do

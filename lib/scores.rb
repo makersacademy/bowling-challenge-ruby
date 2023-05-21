@@ -59,12 +59,17 @@ class Scores
   def score(rolls)
     @frame = [rolls, @total_score]
     @scoreboard << @frame
+    return @scoreboard
+  end
+
+  def total
+    @io.puts "Total score: #{@total_score}"
   end
 
   def run
     9.times{self.frame}
     self.last_frame
-    @io.puts "Total score: #{@total_score}"
+    self.total
   end
 end
 
