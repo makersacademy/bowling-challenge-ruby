@@ -7,4 +7,8 @@ class BowlingGame
     @frames = []
     @total_score = 0
   end
+
+  def add_frame(frame)
+    @frames << frame
+  end
 end
