@@ -42,74 +42,97 @@ RSpec.describe BowlingScorecard do
   end
 
   context 'given two consecutive frames' do
-    it 'returns an array of the frame scores of two open frames' do
+    it 'returns an array of the results of two open frames' do
       rolls = [3, 6, 2, 0]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [9, 2]        
     end
 
-    it 'returns an array of the frame scores of a spare followed by a gutterball' do
+    it 'returns an array of the results of a spare followed by a gutterball' do
       rolls = [5, 5, 0, 3]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [10, 3]    
     end
     
-    it 'returns an array of the frame scores of a spare followed by a gutterball' do
+    it 'returns an array of the results of a spare followed by a gutterball' do
       rolls = [5, 5, 0, 3]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [10, 3]    
     end
 
-    it 'returns an array of the frame scores of a spare followed by an open frame' do
+    it 'returns an array of the results of a spare followed by an open frame' do
       rolls = [5, 5, 3, 2]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [13, 5]    
     end
 
-    it 'returns an array of the frame scores of a strike followed by gutterballs' do
+    it 'returns an array of the results of a strike followed by gutterballs' do
       rolls = [10, 0, 0]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [10, 0]    
     end
 
-    it 'returns an array of the frame scores of a strike followed by a gutterball then a regular roll' do
+    it 'returns an array of the results of a strike followed by a gutterball then a regular roll' do
       rolls = [10, 0, 4]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [14, 4]    
     end
 
-    it 'returns an array of the frame scores of a strike followed by a regular roll then a gutterball' do
+    it 'returns an array of the results of a strike followed by a regular roll then a gutterball' do
       rolls = [10, 2, 0]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [12, 2]    
     end
 
-    it 'returns an array of the frame scores of a strike followed by an open frame' do
+    it 'returns an array of the results of a strike followed by an open frame' do
       rolls = [10, 3, 4]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [17, 7]    
     end
 
-    it 'returns an array of the frame scores of a spare followed by a strike' do
+    it 'returns an array of the results of a spare followed by a strike' do
       rolls = [2, 8, 10]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [20, 10]    
     end
 
-    it 'returns an array of the frame scores of a strike followed by a spare' do
+    it 'returns an array of the results of a strike followed by a spare' do
       rolls = [10, 2, 8]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [20, 10]    
     end
 
-    it 'returns an array of the frame scores of a spare followed by a spare' do
+    it 'returns an array of the results of a spare followed by a spare' do
       rolls = [4, 6, 2, 8]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [12, 10]    
     end
   end
 
-  # need three consecutive frame cases? strike strike strike?
+  context 'given three consecutive frames' do
+    it 'returns an array of the results of a turkey (three strikes in a row)' do
+      rolls = [10, 10, 10]
+      result = scorecard.calculate_frame_scores(rolls)
+      expect(result).to eq [30, 20, 10]        
+    end
+ 
+    it 'returns an array of the results of a chicken (spare, spare, spare)' do
+      rolls = [3, 7, 4, 6, 2, 8]
+      result = scorecard.calculate_frame_scores(rolls)
+      expect(result).to eq [14, 12, 10]        
+    end
+
+    it 'returns an array of the results of strike, spare, strike' do
+      rolls = [10, 4, 6, 10]
+      result = scorecard.calculate_frame_scores(rolls)
+      expect(result).to eq [20, 20, 10]        
+    end
+    it 'returns an array of the results of spare, strike, spare' do
+      rolls = [3, 7, 10, 2, 8]
+      result = scorecard.calculate_frame_scores(rolls)
+      expect(result).to eq [20, 20, 10]        
+    end
+  end
 
   # final frame cases
 end
