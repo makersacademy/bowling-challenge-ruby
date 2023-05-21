@@ -15,19 +15,19 @@ RSpec.describe Frame do
     end
 
     it 'counts number of pins knocked down' do
-      frame_1 = Frame.new([1, 2])
-      frame_2 = Frame.new([3, 4])
+      frame1 = Frame.new([1, 2])
+      frame2 = Frame.new([3, 4])
 
-      expect(frame_1.pins_down).to eq 3
-      expect(frame_2.pins_down).to eq 7
+      expect(frame1.pins_down).to eq 3
+      expect(frame2.pins_down).to eq 7
     end
 
     it 'recognises a spare' do
-      frame_1 = Frame.new([5, 5])
-      frame_2 = Frame.new([5, 3])
+      frame1 = Frame.new([5, 5])
+      frame2 = Frame.new([5, 3])
 
-      expect(frame_1.spare?).to eq true
-      expect(frame_2.spare?).to eq false
+      expect(frame1.spare?).to eq true
+      expect(frame2.spare?).to eq false
     end
 
     it 'recognises a strike' do
@@ -39,22 +39,37 @@ RSpec.describe Frame do
 
   context 'scoring a frame' do
     it 'finds the score for frame without spare or strike' do
-      frame_1 = Frame.new([4, 4])
-      frame_2 = Frame.new([2, 4])
+      frame1 = Frame.new([4, 4])
+      frame2 = Frame.new([2, 4])
 
-      expect(frame_1.score).to eq 8
-      expect(frame_2.score).to eq 6
+      expect(frame1.score).to eq 8
+      expect(frame2.score).to eq 6
     end
+  end
 
-    it 'no spare score until another roll throws' do
-      frame_1 = Frame.new([4, 6])
-      frame_2 = Frame.new([2, 8])
+  context 'scoring a spare' do
+    it 'no spare score until another roll is thrown' do
+      frame1 = Frame.new([4, 6])
+      frame2 = Frame.new([2, 8])
 
-      expect(expect(frame_1.score).to eq nil)
+      expect(expect(frame1.score).to eq nil)
 
-      frame_1.add_spare_bonus(frame_2)
+      frame1.add_spare_bonus(frame2)
 
-      expect(frame_1.score).to eq 12
+      expect(frame1.score).to eq 12
+    end
+  end
+
+  context 'scoring a strike' do
+    it 'no strike score until another 2 rolls are thrown' do
+      frame1 = Frame.new([10])
+      frame2 = Frame.new([1, 2])
+
+      expect(expect(frame1.score).to eq nil)
+
+      frame1.add_strike_bonus(frame2)
+
+      expect(frame1.score).to eq 13
     end
   end
 end

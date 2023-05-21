@@ -9,7 +9,7 @@ class Frame
   end
 
   def score
-    if spare? 
+    if spare? || strike?
       @score
     else
       @pins_down
@@ -22,6 +22,10 @@ class Frame
 
   def spare?
     @rolls.length == 2 && @rolls.sum == 10
+  end
+
+  def add_strike_bonus(frame1, frame2=nil)
+    @score = 10 + frame1.rolls.sum
   end
 
   def add_spare_bonus(frame)
