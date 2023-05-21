@@ -31,5 +31,16 @@ RSpec.describe BowlingGame do
 
       expect(bowling_game.total_score).to eq 0
     end
+
+    it ' calculates total for gutter game' do
+      bowling_game = BowlingGame.new
+      frame = Frame.new([0, 0])
+      10.times do
+        bowling_game.add_frame(frame)
+      end
+
+      expect(bowling_game.frames.length).to eq 10
+      expect(bowling_game.total_score).to eq 0
+    end
   end
 end
