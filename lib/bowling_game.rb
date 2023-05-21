@@ -1,4 +1,4 @@
-require 'frame'
+require_relative './frame'
 
 class BowlingGame
   attr_reader :frames
@@ -39,3 +39,19 @@ class BowlingGame
     end
   end
 end
+
+
+# bowling_game = BowlingGame.new
+# frame1 = Frame.new([10])
+# frame2 = Frame.new([2, 2])
+
+# 5.times do
+#   bowling_game.add_frame(frame1)
+#   puts "frame rolls: #{frame1.rolls}"
+#   puts "running total: #{bowling_game.current_total_score}"
+#   puts ""
+#   bowling_game.add_frame(frame2)
+#   puts "frame rolls: #{frame2.rolls}"
+#   puts "running total: #{bowling_game.current_total_score}"
+#   puts ""
+# end
