@@ -29,7 +29,7 @@ RSpec.describe 'scoring integration' do
     expect(game.total_score).to eq 55
   end
 
-  xit 'calculates the score of a regular bowling game with spares but no strikes' do
+  it 'calculates the score of a regular bowling game with spares but no strikes' do
     game = BowlingGame.new
 
     game.roll(3)

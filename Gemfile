@@ -7,3 +7,5 @@ source "https://rubygems.org"
 gem "rspec", "~> 3.12"
 
 gem "rubocop", "~> 1.51"
+
+gem "rspec-simplecov", "~> 0.2.2"
