@@ -25,7 +25,11 @@ class Frame
   end
 
   def add_strike_bonus(frame1, frame2=nil)
-    @score = 10 + frame1.rolls.sum
+    if !frame1.strike?
+      @score = 10 + frame1.rolls.sum
+    elsif frame2 == nil && frame1.strike?
+      @score = nil
+    end
   end
 
   def add_spare_bonus(frame)

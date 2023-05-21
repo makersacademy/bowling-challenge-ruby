@@ -52,10 +52,9 @@ RSpec.describe Frame do
       frame1 = Frame.new([4, 6])
       frame2 = Frame.new([2, 8])
 
-      expect(expect(frame1.score).to eq nil)
+      expect(frame1.score).to eq nil
 
       frame1.add_spare_bonus(frame2)
-
       expect(frame1.score).to eq 12
     end
   end
@@ -65,11 +64,18 @@ RSpec.describe Frame do
       frame1 = Frame.new([10])
       frame2 = Frame.new([1, 2])
 
-      expect(expect(frame1.score).to eq nil)
+      expect(frame1.score).to eq nil
 
       frame1.add_strike_bonus(frame2)
-
       expect(frame1.score).to eq 13
+    end
+
+    it 'adds scores nil when adding a bonus frame which is also a strike' do
+      frame1 = Frame.new([10])
+      frame2 = Frame.new([10])
+      
+      frame1.add_strike_bonus(frame2)
+      expect(frame1.score).to eq nil
     end
   end
 end
