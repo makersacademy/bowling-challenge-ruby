@@ -4,13 +4,13 @@ class Frame
   def initialize(rolls)
     fail 'rolls must be between 1 and 10' if invalid_input(rolls)
     @rolls = rolls
-    @score = 0
+    @score = nil
     @pins_down = rolls.sum
   end
 
   def score
     if spare?
-      return 12
+      @score
     else
       return @pins_down
     end
@@ -22,6 +22,10 @@ class Frame
 
   def spare?
     return @rolls.length == 2 && @rolls.sum == 10
+  end
+
+  def add_spare_bonus(frame)
+    return @score = 10 + frame.rolls.first
   end
 
   private
