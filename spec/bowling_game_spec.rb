@@ -144,5 +144,31 @@ RSpec.describe BowlingGame do
 
       expect(bowling_game.current_total_score).to eq 50
     end
+
+    it 'calculates total with 5 strikes' do
+      bowling_game = BowlingGame.new
+      frame1 = Frame.new([10])
+      frame2 = Frame.new([2, 2])
+      5.times do
+        bowling_game.add_frame(frame1)
+        bowling_game.add_frame(frame2)
+      end
+
+      expect(bowling_game.current_total_score).to eq 90
+    end
+
+    it 'calculates for all strike game' do
+      bowling_game = BowlingGame.new
+      frame1 = Frame.new([10])
+      last_frame = [10, 10, 10]
+      9.times do
+        bowling_game.add_frame(frame1)
+      end
+
+      bowling_game.add_frame(last_frame)
+
+
+      expect(bowling_game.current_total_score).to eq 90
+    end
   end
 end
