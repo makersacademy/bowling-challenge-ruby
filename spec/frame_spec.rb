@@ -11,8 +11,8 @@ RSpec.describe Frame do
       frame1 = Frame.new([5, 5])
       frame2 = Frame.new([5, 3])
 
-      expect(frame.spare?).to eq true
-      expect(frame.spare?).to eq false
+      expect(frame1.spare?).to eq true
+      expect(frame2.spare?).to eq false
     end
   end
 end

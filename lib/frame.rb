@@ -4,11 +4,11 @@ class Frame
     @total_score = 0
   end
 
-  def rolls
-    @rolls
-  end
-
   def total_score
     @total_score
+  end
+
+  def spare?
+    return @rolls.length == 2 && @rolls.sum == 10
   end
 end
