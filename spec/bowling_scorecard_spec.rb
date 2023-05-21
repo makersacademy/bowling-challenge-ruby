@@ -78,31 +78,31 @@ RSpec.describe BowlingScorecard do
       expect(result).to eq [14, 4]    
     end
 
-    xit 'returns an array of the frame scores of a strike followed by a regular roll then a gutterball' do
+    it 'returns an array of the frame scores of a strike followed by a regular roll then a gutterball' do
       rolls = [10, 2, 0]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [12, 2]    
     end
 
-    xit 'returns an array of the frame scores of a strike followed by an open frame' do
+    it 'returns an array of the frame scores of a strike followed by an open frame' do
       rolls = [10, 3, 4]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [17, 7]    
     end
 
-    xit 'returns an array of the frame scores of a spare followed by a strike' do
+    it 'returns an array of the frame scores of a spare followed by a strike' do
       rolls = [2, 8, 10]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [20, 10]    
     end
 
-    xit 'returns an array of the frame scores of a strike followed by a spare' do
+    it 'returns an array of the frame scores of a strike followed by a spare' do
       rolls = [10, 2, 8]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [20, 10]    
     end
 
-    xit 'returns an array of the frame scores of a spare followed by a spare' do
+    it 'returns an array of the frame scores of a spare followed by a spare' do
       rolls = [4, 6, 2, 8]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [12, 10]    

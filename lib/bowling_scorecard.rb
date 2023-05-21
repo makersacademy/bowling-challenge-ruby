@@ -21,16 +21,12 @@ class BowlingScorecard
   end
 
   private
-
+  # uses the second roll to determine if the rolls is a strike or spare 
+  # (strikes will be followed by 0 due to #clean(rolls)) then applies the appropriate bonus
   def calculate_bonus(frame_score, next_frame, second_roll)
     return frame_score if next_frame.nil? || (0..9).cover?(frame_score)
-    case second_roll
-    when 0
-      frame_score + next_frame.sum
-    else
-      frame_score + next_frame[0]
-    end
-    
+
+    second_roll == 0 ? frame_score + next_frame.sum : frame_score + next_frame[0]
   end
 
   # returns an array of ten arrays that represent frames with two rolls each
