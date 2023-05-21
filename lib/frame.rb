@@ -4,12 +4,13 @@ class Frame
   def initialize(rolls)
     fail 'rolls must be between 1 and 10' if invalid_input(rolls)
     @rolls = rolls
-    # @score = nil
     @pins_down = rolls.sum
   end
 
   def score
-    if spare? || strike?
+    if rolls.length == 3
+      rolls.sum
+    elsif spare? || strike?
       @score
     else
       @pins_down

@@ -118,4 +118,16 @@ RSpec.describe Frame do
       expect(frame2.score).to eq 21
     end
   end
+
+  context 'on tenth frame' do
+    it 'scores a spare' do
+      frame = Frame.new([5, 5, 1])
+      expect(frame.score).to eq 11
+    end
+
+    it 'scores a strike' do
+      frame = Frame.new([10, 4, 4])
+      expect(frame.score).to eq 18
+    end
+  end
 end
