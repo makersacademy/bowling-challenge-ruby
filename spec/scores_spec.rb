@@ -103,7 +103,7 @@ RSpec.describe Scores do
     game.last_frame
   end
 
-  xit 'Spare in a previous frame adds to previous frame score from current first roll' do
+  xit 'Spare adds bonus points from first roll' do
     io = double(:io)
 
     expect(io).to receive(:puts).with('Enter score:').ordered
