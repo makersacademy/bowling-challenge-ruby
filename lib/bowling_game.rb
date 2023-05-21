@@ -10,5 +10,12 @@ class BowlingGame
 
   def add_frame(frame)
     @frames << frame
+    update_total
+  end
+
+  def update_total
+    @frames.each do |frame|
+      @total_score += frame.score
+    end
   end
 end

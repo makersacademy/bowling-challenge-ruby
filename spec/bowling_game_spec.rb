@@ -43,4 +43,15 @@ RSpec.describe BowlingGame do
       expect(bowling_game.total_score).to eq 0
     end
   end
+
+  context 'scores when adding simple frames' do
+    it 'finds running total for one frame' do
+      bowling_game = BowlingGame.new
+      frame1 = Frame.new([1, 2])
+
+      bowling_game.add_frame(frame1)
+
+      expect(bowling_game.total_score).to eq 3
+    end
+  end
 end
