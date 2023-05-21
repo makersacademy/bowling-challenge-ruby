@@ -110,4 +110,24 @@ RSpec.describe BowlingGame do
       expect(bowling_game.current_total_score).to eq 57
     end
   end
+
+  context 'when a game contains strikes' do
+    it 'does not add a total when first and only frame is a strike' do
+      bowling_game = BowlingGame.new
+      frame = Frame.new([10])
+      bowling_game.add_frame(frame)
+
+      expect(bowling_game.current_total_score).to eq 0
+    end
+
+    it 'calculates total after one strike and one simple frame' do
+      bowling_game = BowlingGame.new
+      frame1 = Frame.new([10])
+      frame2 = Frame.new([2, 2])
+      bowling_game.add_frame(frame1)
+      bowling_game.add_frame(frame2)
+
+      expect(bowling_game.current_total_score).to eq 18
+    end
+  end
 end

@@ -33,6 +33,8 @@ class BowlingGame
     return if @frames[-1] == frame
     if frame.spare?
       frame.add_spare_bonus(@frames[i + 1])
+    elsif frame.strike?
+      frame.add_strike_bonus(@frames[i + 1])
     end
   end
 
