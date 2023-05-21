@@ -15,6 +15,8 @@ class BowlingGame
   end
 
   def update_total(frame)
+    return if frame.score.nil?
+    
     @total_score += frame.score
   end
 end

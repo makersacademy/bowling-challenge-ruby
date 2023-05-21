@@ -71,8 +71,18 @@ RSpec.describe BowlingGame do
       10.times do
         bowling_game.add_frame(frame)
       end
-      
+
       expect(bowling_game.total_score).to eq 40
+    end
+  end
+
+  context 'when a game contains spares' do
+    it 'does not add the spare frame before next frame played' do
+      bowling_game = BowlingGame.new
+      frame = Frame.new([2, 8])
+      
+      bowling_game.add_frame(frame)
+      expect(bowling_game.total_score).to eq 0
     end
   end
 end
