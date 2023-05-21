@@ -8,6 +8,12 @@ RSpec.describe Frame do
       expect(frame.total_score).to eq 0
     end
 
+    it 'counts number of pins knocked down' do
+      frame = Frame.new([1, 2])
+
+      expect(frame.pins_down).to eq 3
+    end
+
     it 'recognises a spare' do
       frame1 = Frame.new([5, 5])
       frame2 = Frame.new([5, 3])
