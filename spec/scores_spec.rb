@@ -131,8 +131,6 @@ RSpec.describe Scores do
 
     expect(io).to receive(:puts).with('Enter score:').ordered
     expect(io).to receive(:gets).and_return('10').ordered
-
-    
     expect(io).to receive(:puts).with('Frame score: 10').ordered
 
     expect(io).to receive(:puts).with('Enter score:').ordered
@@ -142,6 +140,33 @@ RSpec.describe Scores do
     expect(io).to receive(:puts).with('Frame score: 9').ordered
 
     expect(io).to receive(:puts).with('Total score: 28').ordered
+
+    game = Scores.new(io)
+    game.frame
+    game.frame
+    game.total
+  end
+
+  it 'Multiples spares and strikes in a row' do
+    io = double(:io)
+
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('3').ordered
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('7').ordered
+    expect(io).to receive(:puts).with('Frame score: 10').ordered
+
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('10').ordered
+    expect(io).to receive(:puts).with('Frame score: 10').ordered
+
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('3').ordered
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('4').ordered
+    expect(io).to receive(:puts).with('Frame score: 7').ordered
+
+    expect(io).to receive(:puts).with('Total score: 44').ordered
 
     game = Scores.new(io)
     game.frame
