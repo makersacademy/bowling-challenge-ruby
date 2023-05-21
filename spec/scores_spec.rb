@@ -75,6 +75,19 @@ RSpec.describe Scores do
     game.run
   end
 
+  xit 'Last frame' do
+    io = double(:io)
+
+    expect(io).to receive(:puts).with('Enter score:')
+    expect(io).to receive(:gets).and_return('9')
+    expect(io).to receive(:puts).with('Enter score:')
+    expect(io).to receive(:gets).and_return('1')
+    expect(io).to receive(:puts).with('Frame score: 10')
+
+    game = Scores.new(io)
+    game.run
+  end
+
   xit 'Spare in a frame' do
     io = double(:io)
 

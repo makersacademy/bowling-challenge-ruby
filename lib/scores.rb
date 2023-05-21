@@ -9,7 +9,7 @@ class Scores
   def roll
     @io.puts 'Enter score:'
     input = @io.gets.chomp.to_i
-    if input < 10
+    if (@frame_score + input) < 10
       @frame_score += input
       return input
     end
@@ -27,11 +27,12 @@ class Scores
 
   def last_frame
     @frame_score = 0
-    self.roll
-    self.roll
-    if @frame_score == 10
-      self.roll
+    rolls = [self.roll, self.roll]
+    if @frame_score >= 10
+      rolls << self.roll
     end
+    @frame = [rolls, @total_score]
+    @scoreboard << @frame
     @total_score += @frame_score
     @io.puts "Frame score: #{@frame_score}"
   end
@@ -43,5 +44,5 @@ class Scores
   end
 end
 
-game = Scores.new(Kernel)
-game.run
+# game = Scores.new(Kernel)
+# game.last_frame
