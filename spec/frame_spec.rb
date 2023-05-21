@@ -72,10 +72,16 @@ RSpec.describe Frame do
       frame1 = Frame.new([10])
       frame2 = Frame.new([1, 2])
 
+      frame3 = Frame.new([10])
+      frame4 = Frame.new([0, 4])
+
       expect(frame1.score).to eq nil
 
       frame1.add_strike_bonus(frame2)
       expect(frame1.score).to eq 13
+
+      frame3.add_strike_bonus(frame4)
+      expect(frame3.score).to eq 14
     end
 
     it 'scores nil when adding a bonus frame which is also a strike' do
@@ -97,7 +103,7 @@ RSpec.describe Frame do
       expect(frame1.score).to eq 21
     end
 
-    it 'scores with bonus when thee strikes in a row' do
+    it 'scores with bonus when three strikes in a row' do
       frame1 = Frame.new([10])
       frame2 = Frame.new([10])
       frame3 = Frame.new([10])
