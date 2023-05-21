@@ -92,13 +92,23 @@ RSpec.describe Frame do
       expect(frame1.score).to eq nil
     end
 
+    it 'scores nil when next frame is a strike' do
+      frame1 = Frame.new([10])
+      frame2 = Frame.new([10])
+
+      expect(frame1.score).to eq nil
+
+      frame1.add_strike_bonus(frame2)
+      expect(frame1.score).to eq nil
+    end
+
     it 'scores with bonus when next frame a strike and another frame added' do
       frame1 = Frame.new([10])
       frame2 = Frame.new([10])
       frame3 = Frame.new([1, 2])
 
       expect(frame1.score).to eq nil
-      
+
       frame1.add_strike_bonus(frame2, frame3)
       expect(frame1.score).to eq 21
     end
