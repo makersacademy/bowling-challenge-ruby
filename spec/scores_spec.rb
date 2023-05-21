@@ -118,9 +118,12 @@ RSpec.describe Scores do
     expect(io).to receive(:gets).and_return('3').ordered
     expect(io).to receive(:puts).with('Frame score: 5').ordered
 
+    expect(io).to receive(:puts).with('Total score: 17').ordered
+
     game = Scores.new(io)
     game.frame
     game.frame
+    game.total
   end
 
   xit 'Strike in a frame' do
