@@ -18,24 +18,15 @@ class BowlingGame
       if frame.spare? && @frames[-1] != frame
         frame.add_spare_bonus(@frames[i + 1])
       end
-
-      if frame.score.nil?
-        sum += 0
-      else
-        sum += frame.score
-      end
+      sum += score_to_i(frame.score)
     end
-
     sum
   end
 
   private
 
-  # def add_to_total(score)
-  #   if score.nil?
-  #     sum += 0
-  #   else
-  #     sum += score
-  #   end
-  # end
+  def score_to_i(score)
+    return score.nil? ? 0 : score
+  end
+
 end
