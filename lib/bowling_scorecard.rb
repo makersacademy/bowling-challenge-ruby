@@ -30,15 +30,12 @@ class BowlingScorecard
 
     return frame_score if (0..9).cover?(frame_score) || next_frame.nil?
 
-    if second_roll.zero?
-      if next_frame[0] == 10
-        two_consecutive_strikes = 20
-        return two_consecutive_strikes if frame_after_next.nil?
+    if second_roll.zero? && next_frame[0] == 10
+      return 20 if frame_after_next.nil?
 
-        two_consecutive_strikes + frame_after_next[0]
-      else
-        frame_score + next_frame.sum
-      end
+      20 + frame_after_next[0]
+    elsif second_roll.zero?
+      frame_score + next_frame.sum
     else
       frame_score + next_frame[0]
     end
