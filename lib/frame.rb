@@ -4,7 +4,7 @@ class Frame
   def initialize(rolls)
     fail 'rolls must be between 1 and 10' if invalid_input(rolls)
     @rolls = rolls
-    @score = nil
+    # @score = nil
     @pins_down = rolls.sum
   end
 

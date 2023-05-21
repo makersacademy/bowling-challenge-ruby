@@ -57,6 +57,14 @@ RSpec.describe Frame do
       frame1.add_spare_bonus(frame2)
       expect(frame1.score).to eq 12
     end
+
+    it 'adds 10 to spare when followed by a strike' do
+      frame1 = Frame.new([4, 6])
+      frame2 = Frame.new([10])
+
+      frame1.add_spare_bonus(frame2)
+      expect(frame1.score).to eq 20
+    end
   end
 
   context 'scoring a strike' do
