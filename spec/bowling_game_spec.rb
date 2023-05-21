@@ -84,5 +84,16 @@ RSpec.describe BowlingGame do
       bowling_game.add_frame(frame)
       expect(bowling_game.total_score).to eq 0
     end
+
+    it 'does adds the spare with bonus when next frame played' do
+      bowling_game = BowlingGame.new
+      frame1 = Frame.new([2, 8])
+      frame2 = Frame.new([1, 1])
+      
+      bowling_game.add_frame(frame1)
+      bowling_game.add_frame(frame2)
+
+      expect(bowling_game.total_score).to eq 11
+    end
   end
 end

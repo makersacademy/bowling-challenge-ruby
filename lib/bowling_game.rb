@@ -1,22 +1,22 @@
 require 'frame'
 
 class BowlingGame
-  attr_reader :frames, :total_score
+  attr_reader :frames
 
   def initialize
     @frames = []
-    @total_score = 0
-    @frame_scores = {}
   end
 
   def add_frame(frame)
     @frames << frame
-    update_total(frame)
   end
 
-  def update_total(frame)
-    return if frame.score.nil?
-    
-    @total_score += frame.score
+  def total_score
+    return 0 if @frames == []
+    sum = 0
+    @frames.each do |frame|
+      sum += frame.score unless frame.score.nil?
+    end
+    sum
   end
 end
