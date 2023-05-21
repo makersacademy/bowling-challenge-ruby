@@ -12,7 +12,7 @@ class BowlingGame
     update_all_scores(@frames)
   end
 
-  def current_total_score
+  def total_up_to(i)
     return 0 if @frames == []
     frame_scores = @frames.map { |frame|
       frame.score.nil? ? 0 : frame.score
@@ -41,17 +41,20 @@ class BowlingGame
 end
 
 
-# bowling_game = BowlingGame.new
-# frame1 = Frame.new([10])
-# frame2 = Frame.new([2, 2])
+bowling_game = BowlingGame.new
+frame1 = Frame.new([10])
+frame2 = Frame.new([2, 2])
 
-# 5.times do
-#   bowling_game.add_frame(frame1)
-#   puts "frame rolls: #{frame1.rolls}"
-#   puts "running total: #{bowling_game.current_total_score}"
-#   puts ""
-#   bowling_game.add_frame(frame2)
-#   puts "frame rolls: #{frame2.rolls}"
-#   puts "running total: #{bowling_game.current_total_score}"
-#   puts ""
-# end
+
+# bowling_game.add_frame(frame1)
+# puts "frame rolls: #{frame1.rolls}"
+# puts "running total: #{bowling_game.current_total_score}"
+# puts ""
+# bowling_game.add_frame(frame2)
+# puts "frame rolls: #{frame2.rolls}"
+# puts "running total: #{bowling_game.current_total_score}"
+# puts ""
+
+# puts "frame rolls: #{frame1.rolls}"
+# puts "running total: #{bowling_game.current_total_score}"
+# puts ""
