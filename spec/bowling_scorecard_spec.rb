@@ -66,7 +66,7 @@ RSpec.describe BowlingScorecard do
       expect(result).to eq [13, 5]    
     end
 
-    xit 'returns an array of the frame scores of a strike followed by gutterballs' do
+    it 'returns an array of the frame scores of a strike followed by gutterballs' do
       rolls = [10, 0, 0]
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [10, 0]    
