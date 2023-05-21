@@ -9,6 +9,11 @@ RSpec.describe Frame do
       expect(frame.pins_down).to eq 0
     end
 
+    it 'does not allow invalid inputs' do
+      expect{ Frame.new([-1, 2]) }.
+      to raise_error 'rolls must be between 1 and 10'
+    end
+
     it 'counts number of pins knocked down' do
       frame_1 = Frame.new([1, 2])
       frame_2 = Frame.new([3, 4])
@@ -40,5 +45,6 @@ RSpec.describe Frame do
       expect(frame_1.score).to eq 8
       expect(frame_2.score).to eq 6
     end
+
   end
 end
