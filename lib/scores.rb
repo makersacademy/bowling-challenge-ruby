@@ -43,5 +43,5 @@ class Scores
   end
 end
 
-# game = Scores.new(Kernel)
-# game.run
+game = Scores.new(Kernel)
+game.run
