@@ -9,23 +9,23 @@ class Frame
   end
 
   def score
-    if spare?
+    if spare? 
       @score
     else
-      return @pins_down
+      @pins_down
     end
   end
 
   def strike?
-    return @rolls == [10]
+    @rolls == [10]
   end
 
   def spare?
-    return @rolls.length == 2 && @rolls.sum == 10
+    @rolls.length == 2 && @rolls.sum == 10
   end
 
   def add_spare_bonus(frame)
-    return @score = 10 + frame.rolls.first
+    @score = 10 + frame.rolls.first
   end
 
   private
