@@ -121,8 +121,8 @@ RSpec.describe Frame do
 
   context 'on tenth frame' do
     it 'scores a spare' do
-      frame = Frame.new([5, 5, 1])
-      expect(frame.score).to eq 11
+      frame = Frame.new([5, 5, 4])
+      expect(frame.score).to eq 14
     end
 
     it 'scores a strike' do

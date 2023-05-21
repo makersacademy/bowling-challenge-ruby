@@ -6,7 +6,7 @@ RSpec.describe BowlingGame do
       bowling_game = BowlingGame.new
 
       expect(bowling_game.frames).to eq []
-      expect(bowling_game.total_score).to eq 0
+      expect(bowling_game.current_total_score).to eq 0
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe BowlingGame do
       frame = Frame.new([0, 0])
       bowling_game.add_frame(frame)
 
-      expect(bowling_game.total_score).to eq 0
+      expect(bowling_game.current_total_score).to eq 0
     end
 
     it ' calculates total for gutter game' do
@@ -40,7 +40,7 @@ RSpec.describe BowlingGame do
       end
 
       expect(bowling_game.frames.length).to eq 10
-      expect(bowling_game.total_score).to eq 0
+      expect(bowling_game.current_total_score).to eq 0
     end
   end
 
@@ -50,7 +50,7 @@ RSpec.describe BowlingGame do
       frame1 = Frame.new([1, 2])
       bowling_game.add_frame(frame1)
 
-      expect(bowling_game.total_score).to eq 3
+      expect(bowling_game.current_total_score).to eq 3
     end
 
     it 'finds total score when 2 frames added' do
@@ -61,7 +61,7 @@ RSpec.describe BowlingGame do
       bowling_game.add_frame(frame1)
       bowling_game.add_frame(frame2)
 
-      expect(bowling_game.total_score).to eq 10
+      expect(bowling_game.current_total_score).to eq 10
     end
 
     it 'finds total score when 10 frames added' do
@@ -72,7 +72,7 @@ RSpec.describe BowlingGame do
         bowling_game.add_frame(frame)
       end
 
-      expect(bowling_game.total_score).to eq 40
+      expect(bowling_game.current_total_score).to eq 40
     end
   end
 
@@ -82,7 +82,7 @@ RSpec.describe BowlingGame do
       frame = Frame.new([2, 8])
       
       bowling_game.add_frame(frame)
-      expect(bowling_game.total_score).to eq 0
+      expect(bowling_game.current_total_score).to eq 0
     end
 
     it 'does adds the spare with bonus when next frame played' do
@@ -93,7 +93,7 @@ RSpec.describe BowlingGame do
       bowling_game.add_frame(frame1)
       bowling_game.add_frame(frame2)
 
-      expect(bowling_game.total_score).to eq 11
+      expect(bowling_game.current_total_score).to eq 13
     end
   end
 end
