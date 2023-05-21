@@ -13,8 +13,10 @@ class BowlingGame
   end
 
   def total_up_to(i)
-    return 0 if @frames == []
-    frame_scores = @frames.map { |frame|
+    return nil if frames == [] || 
+    (frames[i].score.nil? || frames[i].score.nil?)
+
+    frame_scores = @frames[0..i].map { |frame|
       frame.score.nil? ? 0 : frame.score
     }
     frame_scores.sum
@@ -46,15 +48,15 @@ frame1 = Frame.new([10])
 frame2 = Frame.new([2, 2])
 
 
-# bowling_game.add_frame(frame1)
-# puts "frame rolls: #{frame1.rolls}"
-# puts "running total: #{bowling_game.current_total_score}"
-# puts ""
-# bowling_game.add_frame(frame2)
-# puts "frame rolls: #{frame2.rolls}"
-# puts "running total: #{bowling_game.current_total_score}"
-# puts ""
+bowling_game.add_frame(frame1)
+puts "frame rolls: #{frame1.rolls}"
+puts "running total: #{bowling_game.total_up_to(0)}"
+puts ""
+bowling_game.add_frame(frame2)
+puts "frame rolls: #{frame2.rolls}"
+puts "running total: #{bowling_game.total_up_to(1)}"
+puts ""
 
-# puts "frame rolls: #{frame1.rolls}"
-# puts "running total: #{bowling_game.current_total_score}"
-# puts ""
+puts "frame rolls: #{frame1.rolls}"
+puts "running total: #{bowling_game.total_up_to(0)}"
+puts ""
