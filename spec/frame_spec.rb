@@ -133,6 +133,19 @@ RSpec.describe Frame do
       frame2.add_strike_bonus(frame3, frame4)
       expect(frame2.score).to eq 21
     end
+    
+    it 'finds frame scores when repeated strikes' do
+      frame1 = Frame.new([10])
+      frame2 = Frame.new([10])
+      frame3 = Frame.new([10])
+      frame4 = Frame.new([10])
+
+      frame1.add_strike_bonus(frame2, frame3)
+      expect(frame1.score).to eq 30
+
+      frame2.add_strike_bonus(frame3, frame4)
+      expect(frame1.score).to eq 30
+    end
   end
 
   context 'on tenth frame' do
