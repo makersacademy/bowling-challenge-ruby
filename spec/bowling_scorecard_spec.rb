@@ -115,6 +115,12 @@ RSpec.describe BowlingScorecard do
       result = scorecard.calculate_frame_scores(rolls)
       expect(result).to eq [30, 20, 10]        
     end
+
+    it 'returns an array of the results of a strike, strike, open frame' do
+      rolls = [10, 10, 3, 4]
+      result = scorecard.calculate_frame_scores(rolls)
+      expect(result).to eq [23, 17, 7]        
+    end
  
     it 'returns an array of the results of a chicken (spare, spare, spare)' do
       rolls = [3, 7, 4, 6, 2, 8]

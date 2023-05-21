@@ -10,10 +10,10 @@ class BowlingScorecard
     rolls_by_frame = clean(rolls)
 
     rolls_by_frame.each_with_index do |(first_roll, second_roll), frame|
-      next_frame = rolls_by_frame[frame + 1]
+      next_two_frames = [rolls_by_frame[frame + 1], rolls_by_frame[frame + 2]]
 
       base_frame_score = first_roll + second_roll
-      frame_score_with_bonus = calculate_bonus(base_frame_score, next_frame, second_roll)
+      frame_score_with_bonus = calculate_bonus(base_frame_score, next_two_frames, second_roll)
 
       @frame_scores << frame_score_with_bonus
     end
@@ -24,10 +24,24 @@ class BowlingScorecard
 
   # uses the second roll to determine if the rolls is a strike or spare
   # (strikes will be followed by 0 due to #clean(rolls)) then applies the appropriate bonus
-  def calculate_bonus(frame_score, next_frame, second_roll)
-    return frame_score if next_frame.nil? || (0..9).cover?(frame_score)
+  def calculate_bonus(frame_score, next_two_frames, second_roll)
+    next_frame = next_two_frames[0]
+    frame_after_next = next_two_frames[1]
 
-    second_roll.zero? ? frame_score + next_frame.sum : frame_score + next_frame[0]
+    return frame_score if (0..9).cover?(frame_score) || next_frame.nil?
+
+    if second_roll.zero?
+      if next_frame[0] == 10
+        two_consecutive_strikes = 20
+        return two_consecutive_strikes if frame_after_next.nil?
+
+        two_consecutive_strikes + frame_after_next[0]
+      else
+        frame_score + next_frame.sum
+      end
+    else
+      frame_score + next_frame[0]
+    end
   end
 
   # returns an array of ten arrays that represent frames with two rolls each
