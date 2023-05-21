@@ -9,7 +9,11 @@ class Frame
   end
 
   def score
-    return @pins_down
+    if spare?
+      return 12
+    else
+      return @pins_down
+    end
   end
 
   def strike?

@@ -46,5 +46,11 @@ RSpec.describe Frame do
       expect(frame_2.score).to eq 6
     end
 
+    it 'calculates spare total score when another roll is done' do
+      frame_1 = Frame.new([4, 6])
+      frame_2 = Frame.new([2, 4])
+
+      expect(frame_1.score).to eq 12
+    end
   end
 end
