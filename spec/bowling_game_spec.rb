@@ -48,10 +48,20 @@ RSpec.describe BowlingGame do
     it 'finds running total for one frame' do
       bowling_game = BowlingGame.new
       frame1 = Frame.new([1, 2])
-
       bowling_game.add_frame(frame1)
 
       expect(bowling_game.total_score).to eq 3
+    end
+
+    it 'finds total score when 2 frames added' do
+      bowling_game = BowlingGame.new
+      frame1 = Frame.new([1, 2])
+      frame2 = Frame.new([3, 4])
+
+      bowling_game.add_frame(frame1)
+      bowling_game.add_frame(frame2)
+
+      expect(bowling_game.total_score).to eq 10
     end
   end
 end
