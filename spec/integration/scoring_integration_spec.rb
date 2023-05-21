@@ -94,4 +94,38 @@ RSpec.describe 'scoring integration' do
       expect(game.total_score).to eq 95
     end
   end
+
+  context 'end game strikes/spares' do
+    before(:each) do
+      18.times do
+        game.roll(0)
+      end
+    end
+
+    xit 'correctly scores an end game strike' do
+      game.roll(10)
+      game.roll(4)
+      game.roll(3)
+
+      expect(game.total_score).to eq 17
+    end
+
+    xit 'correctly scores an end game spare' do
+      game.roll(9)
+      game.roll(1)
+      game.roll(4)
+
+      expect(game.total_score).to eq 14     
+    end
+  end
+
+  context 'a perfect game' do
+    xit 'correctly scores a perfect game' do
+      12.times do
+        game.roll(10)
+      end
+      
+      expect(game.total_score).to eq 300
+    end
+  end
 end
