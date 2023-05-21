@@ -37,7 +37,7 @@ RSpec.describe Frame do
     end
   end
 
-  context 'scoring a frame' do
+  context 'scoring a basic frame' do
     it 'finds the score for frame without spare or strike' do
       frame1 = Frame.new([4, 4])
       frame2 = Frame.new([2, 4])
@@ -95,6 +95,27 @@ RSpec.describe Frame do
       
       frame1.add_strike_bonus(frame2, frame3)
       expect(frame1.score).to eq 21
+    end
+
+    it 'scores with bonus when thee strikes in a row' do
+      frame1 = Frame.new([10])
+      frame2 = Frame.new([10])
+      frame3 = Frame.new([10])
+      frame4 = Frame.new([1, 2])
+
+      expect(frame1.score).to eq nil
+
+      frame1.add_strike_bonus(frame2)
+      expect(frame1.score).to eq nil
+
+      frame1.add_strike_bonus(frame2, frame3)
+      expect(frame1.score).to eq 30
+      
+      frame2.add_strike_bonus(frame3)
+      expect(frame2.score).to eq nil
+
+      frame2.add_strike_bonus(frame3, frame4)
+      expect(frame2.score).to eq 21
     end
   end
 end
