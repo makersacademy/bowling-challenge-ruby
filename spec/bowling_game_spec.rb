@@ -23,7 +23,7 @@ RSpec.describe BowlingGame do
     end
   end
 
-  context 'finds running total score when one frame added' do
+  context 'finds running total score when no pins knocked' do
     it ' calculates total for zero frame' do
       bowling_game = BowlingGame.new
       frame = Frame.new([0, 0])
