@@ -126,16 +126,26 @@ RSpec.describe Scores do
     game.total
   end
 
-  xit 'Strike in a frame' do
+  it 'Strike adds bonus points from first and second roll' do
     io = double(:io)
 
     expect(io).to receive(:puts).with('Enter score:').ordered
-    expect(io).to receive(:gets).and_return('1').ordered
+    expect(io).to receive(:gets).and_return('10').ordered
+
+    
+    expect(io).to receive(:puts).with('Frame score: 10').ordered
+
     expect(io).to receive(:puts).with('Enter score:').ordered
-    expect(io).to receive(:gets).and_return('2').ordered
-    expect(io).to receive(:puts).with('Frame score: 3').ordered
+    expect(io).to receive(:gets).and_return('4').ordered
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('5').ordered
+    expect(io).to receive(:puts).with('Frame score: 9').ordered
+
+    expect(io).to receive(:puts).with('Total score: 28').ordered
 
     game = Scores.new(io)
-    game.run
+    game.frame
+    game.frame
+    game.total
   end
 end

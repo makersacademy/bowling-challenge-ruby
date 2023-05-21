@@ -13,7 +13,7 @@ class Scores
     @io.puts 'Enter score:'
     input = @io.gets.chomp.to_i
     @frame_score += input
-    @total_score += input * @spare
+    @total_score += input * @spare * @strike
     return input
   end
 
@@ -26,9 +26,10 @@ class Scores
     rolls << roll_1
     @spare = 1
     
-    if @frame_score < 10
+    if roll_1 < 10
       roll_2 = self.roll
       rolls << roll_2
+      @strike = 1
     end
 
     score(rolls)
@@ -38,6 +39,7 @@ class Scores
   end
 
   def last_frame
+    #refactor to count bonus
     @frame_score = 0
     
     rolls = []
