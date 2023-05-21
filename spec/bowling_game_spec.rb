@@ -63,5 +63,16 @@ RSpec.describe BowlingGame do
 
       expect(bowling_game.total_score).to eq 10
     end
+
+    it 'finds total score when 10 frames added' do
+      bowling_game = BowlingGame.new
+      frame = Frame.new([2, 2])
+
+      10.times do
+        bowling_game.add_frame(frame)
+      end
+      
+      expect(bowling_game.total_score).to eq 40
+    end
   end
 end

@@ -6,6 +6,7 @@ class BowlingGame
   def initialize
     @frames = []
     @total_score = 0
+    @frame_scores = {}
   end
 
   def add_frame(frame)
