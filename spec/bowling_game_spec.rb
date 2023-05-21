@@ -61,7 +61,7 @@ RSpec.describe BowlingGame do
     it 'calculates the score of a regular bowling game with spares but no strikes' do
 
       expect(scorecard).to receive(:calculate_frame_scores)
-        .with([3, 4, 1, 7, 0, 3, 2, 6, 0, 10, 1, 0, 0, 0, 1, 9, 7, 2, 4, 1])
+        .with([3, 4, 1, 7, 0, 3, 2, 6, 1, 9, 1, 0, 0, 0, 1, 9, 7, 2, 4, 1])
         .and_return([7, 8, 3, 11, 8, 1, 0, 17, 9, 5])
 
       game.roll(3)
@@ -73,8 +73,8 @@ RSpec.describe BowlingGame do
       game.roll(2)
       game.roll(6)
       # first spare
-      game.roll(0)
-      game.roll(10)
+      game.roll(1)
+      game.roll(9)
       # next roll doubled
       game.roll(1)
       game.roll(0)

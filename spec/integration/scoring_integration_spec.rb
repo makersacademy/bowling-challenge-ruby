@@ -41,8 +41,8 @@ RSpec.describe 'scoring integration' do
     game.roll(2)
     game.roll(6)
     # first spare
-    game.roll(0)
-    game.roll(10)
+    game.roll(1)
+    game.roll(9)
     # next roll doubled
     game.roll(1)
     game.roll(0)
