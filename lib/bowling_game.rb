@@ -15,8 +15,8 @@ class BowlingGame
     return 0 if @frames == []
     sum = 0
     @frames.each_with_index do |frame, i|
-      if frame.spare? && @frames[-1] != frame
-        frame.add_spare_bonus(@frames[i + 1])
+      if frame.score.nil?
+        update_frame_score(frame, i)
       end
       sum += score_to_i(frame.score)
     end
@@ -27,6 +27,13 @@ class BowlingGame
 
   def score_to_i(score)
     return score.nil? ? 0 : score
+  end
+
+  def update_frame_score(frame, i)
+    return if @frames[-1] == frame
+    if frame.spare?
+      frame.add_spare_bonus(@frames[i + 1])
+    end
   end
 
 end
