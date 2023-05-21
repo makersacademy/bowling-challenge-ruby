@@ -9,10 +9,8 @@ class Scores
   def roll
     @io.puts 'Enter score:'
     input = @io.gets.chomp.to_i
-    if (@frame_score + input) < 10
-      @frame_score += input
-      return input
-    end
+    @frame_score += input
+    return input
   end
 
   def frame

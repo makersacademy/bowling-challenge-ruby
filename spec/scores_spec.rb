@@ -78,11 +78,26 @@ RSpec.describe Scores do
   it 'Last frame - 2 rolls if no spare or strike' do
     io = double(:io)
 
-    expect(io).to receive(:puts).with('Enter score:')
-    expect(io).to receive(:gets).and_return('1')
-    expect(io).to receive(:puts).with('Enter score:')
-    expect(io).to receive(:gets).and_return('2')
-    expect(io).to receive(:puts).with('Frame score: 3')
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('1').ordered
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('2').ordered
+    expect(io).to receive(:puts).with('Frame score: 3').ordered
+
+    game = Scores.new(io)
+    game.last_frame
+  end
+
+  it 'Last frame - 3 rolls if there is a spare or strike' do
+    io = double(:io)
+
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('3').ordered
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('7').ordered
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('3').ordered
+    expect(io).to receive(:puts).with('Frame score: 13').ordered
 
     game = Scores.new(io)
     game.last_frame
@@ -91,11 +106,11 @@ RSpec.describe Scores do
   xit 'Spare in a frame' do
     io = double(:io)
 
-    expect(io).to receive(:puts).with('Enter score:')
-    expect(io).to receive(:gets).and_return('9')
-    expect(io).to receive(:puts).with('Enter score:')
-    expect(io).to receive(:gets).and_return('1')
-    expect(io).to receive(:puts).with('Frame score: 10')
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('9').ordered
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('1').ordered
+    expect(io).to receive(:puts).with('Frame score: 10').ordered
 
     game = Scores.new(io)
     game.run
@@ -104,11 +119,11 @@ RSpec.describe Scores do
   xit 'Strike in a frame' do
     io = double(:io)
 
-    expect(io).to receive(:puts).with('Enter score:')
-    expect(io).to receive(:gets).and_return('1')
-    expect(io).to receive(:puts).with('Enter score:')
-    expect(io).to receive(:gets).and_return('2')
-    expect(io).to receive(:puts).with('Frame score: 3')
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('1').ordered
+    expect(io).to receive(:puts).with('Enter score:').ordered
+    expect(io).to receive(:gets).and_return('2').ordered
+    expect(io).to receive(:puts).with('Frame score: 3').ordered
 
     game = Scores.new(io)
     game.run
