@@ -1,5 +1,5 @@
 class Frame
-  attr_reader :score, :rolls
+  attr_reader :rolls
 
   def initialize(rolls)
     fail 'rolls must be between 1 and 10' if invalid_input(rolls)
