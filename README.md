@@ -1,10 +1,15 @@
-Bowling Challenge in Ruby
-=================
+# Bowling Challenge in Ruby
 
-* Feel free to use google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or student, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit a pull request to this repo with your code by 9am Monday week
+Initially I struggled to understand what was being asked in this task, and what the inputs and outputs should be. The Scorecard class works alone but I have added a Bowling class and Application class as this helped me better understand the functionality of the Scorecard.
+
+I found this link useful to understand what should happen step by step: [How Is Bowling Scored?](https://bowlingforbeginners.com/how-is-bowling-scored/)
+
+I wanted my challenge to reflect a real life bowling situation to produce a scorecard that could look something like this:
+![bowling scorecard](images/example-scorecard.png)
+
+This was my initial design of the steps. I have decided to create a running total for each frame, and if there is a bonus updates once the next balls have been played.
+
+![my design](images/bowling-design.jpg)
 
 ## The Task
 
@@ -16,22 +21,24 @@ A bowling game consists of 10 frames in which the player tries to knock down the
 
 As usual please start by
 
-* Forking this repo
+- Forking this repo
 
-* Finally submit a pull request before Monday week at 9am with your solution or partial solution.  However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am. 
+- Finally submit a pull request before Monday week at 9am with your solution or partial solution. However much or little amount of code you wrote please please please submit a pull request before Monday week at 9am.
 
-___STRONG HINT, IGNORE AT YOUR PERIL:___ Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
+**STRONG HINT, IGNORE AT YOUR PERIL:** Bowling is a deceptively complex game. Careful thought and thorough diagramming — both before and throughout — will save you literal hours of your life.
 
 ## Focus for this challenge
+
 The focus for this challenge is to write high-quality code.
 
 In order to do this, you may pay particular attention to the following:
-* Using diagramming to plan your approach to the challenge
-* TDD your code
-* Focus on testing behaviour rather than state
-* Commit often, with good commit messages
-* Single Responsibility Principle and encapsulation
-* Clear and readable code
+
+- Using diagramming to plan your approach to the challenge
+- TDD your code
+- Focus on testing behaviour rather than state
+- Commit often, with good commit messages
+- Single Responsibility Principle and encapsulation
+- Clear and readable code
 
 ## Bowling — how does it work?
 
@@ -60,6 +67,6 @@ A Perfect Game is when the player rolls 12 strikes (10 regular strikes and 2 str
 
 In the image below you can find some score examples.
 
-More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
+More about ten pin bowling here: [http://en.wikipedia.org/wiki/Ten-pin_bowling](http://en.wikipedia.org/wiki/Ten-pin_bowling)
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)

@@ -7,40 +7,60 @@ class Scorecard
     @scores
   end
 
-  def add_frame(rolls)
-    calculate_bonus(rolls) 
-    
-    return @scores << { rolls: rolls } if rolls.sum == 10
+  def add_frame(pins_down)
+    calculate_bonus(pins_down) unless @scores.empty? || @scores.last[:rolls].sum != 10
 
-    if @scores.empty?
-      total = rolls.sum
-    else
-      total = @scores.last[:score] + rolls.sum
+    return @scores << { rolls: pins_down } if pins_down.sum == 10
+  
+    # Not a spare or strike
+    total = @scores.empty? ? pins_down.sum : @scores.last[:score] + pins_down.sum
+    @scores << { rolls: pins_down, score: total }
+  end
+
+  def add_final_frame(pins_down)
+    
+    if @scores[-2][:rolls].include?(10)
+      get_prev = @scores[-3][:score]
+      @scores[-2][:score] = get_prev + 20 + pins_down[0]
     end
-    @scores << { rolls: rolls, score: total }
+    
+    if @scores[-1][:rolls].include?(10)
+      add_strike_bonus(pins_down.slice(0, 2))
+    elsif @scores[-1][:rolls].sum == 10
+      add_spare_bonus(pins_down[0])
+    end
+   
+    total = @scores.last[:score] + pins_down.sum
+    @scores << { rolls: pins_down, score: total }
   end
 
   private
 
-  def calculate_bonus(rolls)
-    return if @scores.empty?
+  def calculate_bonus(pins_down)
+    # last roll was spare
+    if !@scores.last[:rolls].include?(10)
+      add_spare_bonus(pins_down[0])
+    else
+      # last roll was strike
+        # check if previous was also strike
+        if @scores[-2] && @scores[-2][:rolls].include?(10)
+          get_prev = @scores[-3] ? @scores[-3][:score] : 0
+          @scores[-2][:score] = get_prev + 20 + pins_down[0]
+        end
 
-    if @scores.last[:rolls].include?(10)
-      strike_bonus(rolls)
-    elsif @scores.last[:rolls].sum == 10
-      spare_bonus(rolls)
-    end
+        add_strike_bonus(pins_down) if !pins_down.include?(10)      
+    end   
   end
 
-  def strike_bonus(rolls)
-    @scores.last[:score] = prev_score + 10 + rolls.sum
+  def add_spare_bonus(bonus_1)
+    @scores.last[:score] = previous_score + 10 + bonus_1
   end
 
-  def spare_bonus(rolls)
-    @scores.last[:score] = prev_score + 10 + rolls[0]
+  def add_strike_bonus(bonus_2)
+    @scores.last[:score] = previous_score + 10 + bonus_2.sum
   end
-
-  def prev_score
+  
+  def previous_score
     return @scores[-2] ? @scores[-2][:score] : 0
   end
 end
