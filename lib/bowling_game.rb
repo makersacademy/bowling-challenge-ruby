@@ -26,8 +26,9 @@ class BowlingGame
   end
 
   def update_score(frame)
-    i = @frames.index(frame)
     return if @frames[-1] == frame || !frame.score.nil?
+    i = @frames.index(frame)
+
     if frame.spare?
       frame.add_spare_bonus(@frames[i + 1])
     elsif frame.strike?
