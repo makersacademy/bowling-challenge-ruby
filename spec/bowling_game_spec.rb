@@ -1,6 +1,8 @@
 require 'bowling_game'
 
 RSpec.describe BowlingGame do
+  let(:bowling_game) { BowlingGame.new }
+  
   context 'initially' do
     it 'constructs empty game' do
       bowling_game = BowlingGame.new
