@@ -14,6 +14,18 @@ class BowlingScoreSheet
     @frames
   end
 
+  def complete
+    frame_10 = @frames.filter { |frame| frame.round == 10}
+    if frame_10 == []
+      false
+    elsif frame_10[0].complete == true && frame_10[0].bonuses == 0
+      true
+    else 
+      false
+    end
+  end
+
+
   private
 
   def add_bonus_to_previous_frames(pins)

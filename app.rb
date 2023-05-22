@@ -7,8 +7,14 @@ class BowlingApp
   end
 
   def run
-    self.roll('1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,9,2')
-    p self.score
+    while @score_sheet.complete == false
+      @io.puts "Enter number of knocked down pins separated by commas (eg 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1):"
+      user_input = @io.gets.chomp
+      self.roll(user_input)
+      print_score_sheet
+      @io.puts "Total: #{self.score}"
+    end
+
   end
 
   def roll(string_of_pins)
@@ -23,6 +29,14 @@ class BowlingApp
   def score
     @score_sheet.all_frames.sum do |frame|
       frame.round <= 10 ? frame.total_score : 0
+    end
+  end
+
+  def print_score_sheet
+    @score_sheet.all_frames.each do |frame|
+      if frame.round > 0 && frame.round <= 10
+        @io.puts "Frame: #{frame.round}, scores: #{frame.score}, total score: #{frame.total_score}, notes: #{frame.status}"
+      end
     end
   end
 
