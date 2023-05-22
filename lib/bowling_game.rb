@@ -42,21 +42,3 @@ class BowlingGame
   end
 end
 
-
-bowling_game = BowlingGame.new
-frame1 = Frame.new([10])
-frame2 = Frame.new([2, 2])
-
-
-bowling_game.add_frame(frame1)
-puts "frame rolls: #{frame1.rolls}"
-puts "running total: #{bowling_game.total_up_to(0)}"
-puts ""
-bowling_game.add_frame(frame2)
-puts "frame rolls: #{frame2.rolls}"
-puts "running total: #{bowling_game.total_up_to(1)}"
-puts ""
-
-puts "frame rolls: #{frame1.rolls}"
-puts "running total: #{bowling_game.total_up_to(0)}"
-puts ""
