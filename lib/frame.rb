@@ -21,10 +21,8 @@ class Frame
   def add_strike_bonus(frame1, frame2=nil)
     if !frame1.strike?
       @score = 10 + frame1.rolls[0..1].sum
-    elsif frame2 == nil
-      @score = nil
     else
-      @score = 20 + frame2.rolls.first
+      @score = 20 + frame2.rolls.first unless frame2.nil?
     end
   end
 
