@@ -25,8 +25,9 @@ class BowlingGame
     }
   end
 
-  def update_score(frame, i)
-    return if @frames[-1] == frame
+  def update_score(frame)
+    i = @frames.index(frame)
+    return if @frames[-1] == frame || !frame.score.nil?
     if frame.spare?
       frame.add_spare_bonus(@frames[i + 1])
     elsif frame.strike?
@@ -38,10 +39,8 @@ class BowlingGame
   end
 
   def update_all_scores(frames)
-    frames.each_with_index do |frame, i|
-      if frame.score.nil?
-        update_score(frame, i)
-      end
+    frames.each do |frame|
+      update_score(frame)
     end
   end
 end
