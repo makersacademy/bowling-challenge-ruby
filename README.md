@@ -63,3 +63,10 @@ In the image below you can find some score examples.
 More about ten pin bowling here: http://en.wikipedia.org/wiki/Ten-pin_bowling
 
 ![Ten Pin Score Example](images/example_ten_pin_scoring.png)
+
+
+If spare: 
+    Add the next roll to the turn you scored the spare
+
+If strike:
+    Add the next 2 rolls to the turn you scored the strike
