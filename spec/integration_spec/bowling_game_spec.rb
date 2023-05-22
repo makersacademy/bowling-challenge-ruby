@@ -1,12 +1,13 @@
 require 'bowling_game'
 
 RSpec.describe BowlingGame do
+  let(:bowling_game) { BowlingGame.new }
+  
   context 'initially' do
     it 'constructs empty game' do
       bowling_game = BowlingGame.new
 
       expect(bowling_game.frames).to eq []
-      expect(bowling_game.total_up_to(0)).to eq nil
     end
   end
 

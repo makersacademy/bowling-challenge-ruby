@@ -13,31 +13,40 @@ class BowlingGame
   end
 
   def total_up_to(i)
-    return nil if frames == [] || 
-    (frames[i].score.nil? || frames[i].score.nil?)
-
-    frame_scores = @frames[0..i].map { |frame|
-      frame.score.nil? ? 0 : frame.score
-    }
-    frame_scores.sum
+    return nil if frames[i].score.nil?
+    return score_sum(@frames, i)
   end
 
   private
 
-  def update_score(frame, i)
-    return if @frames[-1] == frame
+  # We require methods to:
+  # - sum all the scores up to ith index,
+  # - update the score of a frame based on the following frames (if a spare or strike)
+  # - update all the frame scores in the frames array
+
+  def score_sum(frames, i)
+    frames[0..i].reduce(0) { |sum, frame|
+      sum + frame.score.to_i
+    }
+  end
+
+  def update_score(frame)
+    return if @frames[-1] == frame || !frame.score.nil?
+    i = @frames.index(frame)
+
     if frame.spare?
       frame.add_spare_bonus(@frames[i + 1])
     elsif frame.strike?
-      frame.add_strike_bonus(@frames[i + 1], @frames[i + 2])
+      frame.add_strike_bonus(
+      @frames[i + 1],
+      @frames[i + 2]
+    )
     end
   end
 
   def update_all_scores(frames)
-    frames.each_with_index do |frame, i|
-      if frame.score.nil?
-        update_score(frame, i)
-      end
+    frames.each do |frame|
+      update_score(frame)
     end
   end
 end
