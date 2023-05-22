@@ -30,7 +30,10 @@ class BowlingGame
     if frame.spare?
       frame.add_spare_bonus(@frames[i + 1])
     elsif frame.strike?
-      frame.add_strike_bonus(@frames[i + 1], @frames[i + 2])
+      frame.add_strike_bonus(
+      @frames[i + 1],
+      @frames[i + 2]
+    )
     end
   end
 
