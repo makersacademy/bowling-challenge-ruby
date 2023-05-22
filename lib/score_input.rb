@@ -6,8 +6,8 @@ class ScoreInput
         @score = Array.new(10, 0)
     end
 
-    def check_score
-        return @score
+    def check_score(pos)
+        return @score[pos]
     end
 
     def total
@@ -23,18 +23,20 @@ class ScoreInput
             @score[@turn] = total
             call_strike_or_spare(@turn, total, roll_1)
             p @score
-            return "Strike!"
+            puts "Strike!"
 
         when 10 
             @spare[@turn] = 1
             @score[@turn] = total
             call_strike_or_spare(@turn, total, roll_1)
             p @score
-            return "Spare!"
+            puts "Spare!"
+
         else
             @score[@turn] = total
             call_strike_or_spare(@turn, total, roll_1)
-            return "You missed a spot"
+            puts "You missed a spot"
+            
         end
     end
 
@@ -46,6 +48,7 @@ class ScoreInput
             @score[current_turn] = @score[current_turn] + total
         
         else 
+
         end
     end
 
