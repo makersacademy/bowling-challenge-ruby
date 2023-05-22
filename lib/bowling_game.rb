@@ -13,15 +13,18 @@ class BowlingGame
   end
 
   def total_up_to(i)
-    return nil if frames == [] || frames[i].score.nil?
+    return nil if frames[i].score.nil?
 
-    frame_scores = @frames[0..i].map { |frame|
-      frame.score.nil? ? 0 : frame.score
-    }
-    frame_scores.sum
+    return score_sum(@frames, i)
   end
 
   private
+
+  def score_sum(frames, i)
+    frames[0..i].map { |frame|
+      frame.score.nil? ? 0 : frame.score
+    }.sum
+  end
 
   def update_score(frame, i)
     return if @frames[-1] == frame
