@@ -19,6 +19,11 @@ class BowlingGame
 
   private
 
+  # We require methods to:
+  # - sum all the scores up to ith index,
+  # - update the score of a frame based on the following frames (if a spare or strike)
+  # - update all the frame scores in the frames array
+
   def score_sum(frames, i)
     frames[0..i].reduce(0) { |sum, frame|
       sum + frame.score.to_i
