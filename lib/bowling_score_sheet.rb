@@ -10,6 +10,12 @@ class BowlingScoreSheet
     add_score_to_current_frame(pins)
   end
 
+  def all_frames
+    @frames
+  end
+
+  private
+
   def add_bonus_to_previous_frames(pins)
     @frames.each {|frame|
       if frame.bonuses > 0 && frame.complete
@@ -37,12 +43,6 @@ class BowlingScoreSheet
       end
   end
 
-  def all_frames
-    @frames
-  end
-
-  private
-
   def set_frame_status(frame)
     if frame.total_score == 10 
       if frame.score[0] == 10
@@ -55,9 +55,5 @@ class BowlingScoreSheet
     end
 
   end
-
-  
-
-    
 
 end
