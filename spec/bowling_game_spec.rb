@@ -25,19 +25,15 @@ RSpec.describe BowlingGame do
 
   context 'finds running total score when no pins knocked' do
     it ' calculates total for zero frame' do
-      bowling_game = BowlingGame.new
-      frame = Frame.new([0, 0])
-      bowling_game.add_frame(frame)
+      bowling_game = simulate_game([0, 0])
 
       expect(bowling_game.total_up_to(0)).to eq 0
     end
 
     it ' calculates total for gutter game' do
-      bowling_game = BowlingGame.new
-      frame = Frame.new([0, 0])
-      10.times do
-        bowling_game.add_frame(frame)
-      end
+      bowling_game = simulate_game(
+        [0, 0], [0, 0], [0, 0], [0, 0], [0, 0],
+        [0, 0], [0, 0], [0, 0], [0, 0], [0, 0])
 
       expect(bowling_game.frames.length).to eq 10
       expect(bowling_game.total_up_to(9)).to eq 0
@@ -46,9 +42,7 @@ RSpec.describe BowlingGame do
 
   context 'scores when adding simple frames' do
     it 'finds running total for one frame' do
-      bowling_game = BowlingGame.new
-      frame1 = Frame.new([1, 2])
-      bowling_game.add_frame(frame1)
+      bowling_game = simulate_game([1, 2])
 
       expect(bowling_game.total_up_to(0)).to eq 3
     end
