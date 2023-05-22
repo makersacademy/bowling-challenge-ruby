@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Frame
   attr_accessor :round, :score, :total_score, :status, :complete, :bonuses
 
