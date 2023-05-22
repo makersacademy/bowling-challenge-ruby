@@ -25,14 +25,7 @@ class Frame
 
   def add_strike_bonus(frame1, frame2=nil)
     if !frame1.strike?
-      if frame1.rolls.length == 3
-        puts "we are looking at frame: #{self.rolls}"
-        puts "And next one is: #{frame1.rolls}"
-        puts "adding on: #{frame1.rolls[0..1]}"
-        @score = 10 + frame1.rolls[0..1].sum
-      else
-        @score = 10 + frame1.rolls.sum
-      end
+      @score = 10 + frame1.rolls[0..1].sum
     elsif frame2 == nil
       @score = nil
     else
