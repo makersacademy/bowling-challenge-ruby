@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'frame_spec'
 require 'scorecard'
 
@@ -74,8 +76,9 @@ RSpec.describe 'ScoreCard and Frame Integration' do
       scorecard.frame_input(frame_five)
       frame_six = Frame.new
       frame_six.result(3, 5)
+      scorecard.frame_input(frame_six)
 
-      expect(scorecard.frame_input(frame_six)).to eq "Current Total: 61 - 4 frames left\n[[3, 5], [7, 1], [17, 0], [4, 3], [13, 0], [3, 5]]"
+      expect(scorecard.calculate_total).to eq "Current Total: 61 - 4 frames left\n[[3, 5], [7, 1], [17, 0], [4, 3], [13, 0], [3, 5]]"
     end
   end
 end
