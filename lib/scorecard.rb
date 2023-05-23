@@ -10,7 +10,6 @@ class ScoreCard
 
   def frame_input(frame)
     @frame_count -= 1
-    return tenth_frame if @frame_count.zero?
 
     if @all_frames.empty?
       @all_frames << frame
@@ -37,7 +36,9 @@ class ScoreCard
     "Current Total: #{total} - #{@frame_count} frames left\n#{total_frames}"
   end
 
-  def tenth_frame; end
+  def tenth_frame 
+    return 
+  end
 
   def final_format
     return "Your game isn't over yet! You have #{@frame_count} frames left" if @frame_count.positive?
