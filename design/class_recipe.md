@@ -56,27 +56,18 @@ frame, scorecard, points, rolls, strike, spare, tenth frame, bonus points
 ```ruby
 
 class Frame
-  def initialize(io)
-    @io = io
+  def initialize
     @final = []
   end
 
-  def start_frame
-    first_roll = roll(1)
+  def result(first_roll, second_roll)
     if first_roll == 10
       @final << first_roll, 'X'
       return @final
     else
-      second_roll = roll(2)
       @final << first_roll, second_roll
       return @final
     end
-  end
-
-  def roll(roll_number)
-    @io.puts "Roll #{roll_number} - enter number of pins knocked down"
-    pins_knocked_down = @io.gets.chomp.to_i
-    return pins_knocked_down
   end
 
   def strike?
@@ -105,7 +96,7 @@ class ScoreCard
     else
       @all_frames << frame.final
       @frame_count += 1
-      return "#{10 - @frame_count} frames left"
+      return "#{all_frames} - #{10 - @frame_count} frames left"
     end
   end
 
@@ -139,7 +130,11 @@ end
 RSpec.describe 'integration' do
   context 'Inputting a Frame' do
     it 'correctly inputs one Frame object into the total array' do
-    
+      scorecard = Scorecard.new
+      frame_one = Frame.new
+      frame_one.result(3, 5)
+
+      expect(scorecard..frame_input(frame_one)).to eq "[3, 5] - 9 frames left"
     end
   end
 end
