@@ -8,7 +8,6 @@ class Frame
     @total_score = 0
   end
 
-  # Methods for frame-specific behavior, such as calculating frame score, tracking strikes/spares, etc.
   def add_roll(pins)
     fail "A frame may only contain up to three rolls" if @rolls.length == 3
     
@@ -34,6 +33,6 @@ class Frame
   end
 
   def is_spare?
-    (@rolls[0] + @rolls[1]) == 10
+    (@rolls.length == 2) && (@rolls[0] + @rolls[1] == 10)
   end
 end

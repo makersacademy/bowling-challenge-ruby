@@ -87,10 +87,31 @@ RSpec.describe Frame do
     it 'returns true when sum of first two rolls = 10' do
       frame = Frame.new
 
+      frame.add_roll(5)
+      frame.add_roll(5)
+
+      expect(frame.calculate_total_score).to eq 10
+      expect(frame.is_spare?).to eq true
+    end
+
+    it 'returns false when sum correct but only one roll' do
+      frame = Frame.new
+
+      frame.add_roll(10)
+
+      expect(frame.calculate_total_score).to eq 10
+      expect(frame.is_spare?).to eq false
+    end
+
+    it 'returns false when sum correct but three rolls' do
+      frame = Frame.new
+
       frame.add_roll(9)
       frame.add_roll(1)
+      frame.add_roll(0)
 
-      expect(frame.is_strike?).to eq true
+      expect(frame.calculate_total_score).to eq 10
+      expect(frame.is_spare?).to eq false
     end
   end
 end
