@@ -1,11 +1,14 @@
 class Frame
-  attr_accessor :rolls, :bonus_score
+  attr_reader :rolls, :frame_score
+  attr_accessor :frame_number, :bonus_score, :complete
 
   def initialize
+    @frame_number = 0
     @rolls = []
     @frame_score = 0
     @bonus_score = 0
     @total_score = 0
+    @complete = false
   end
 
   def add_roll(pins)
