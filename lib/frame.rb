@@ -12,7 +12,8 @@ class Frame
   end
 
   def add_roll(pins)
-    fail "A frame may only contain up to three rolls" if @rolls.length == 3
+    fail 'Only the tenth frame may consist of more than two rolls' if @frame_number < 10 && @rolls.length == 2
+    fail 'The tenth frame may consist of no more than three rolls' if @frame_number == 10 && @rolls.length == 3
     
     @rolls << pins
   end
@@ -32,7 +33,7 @@ class Frame
   end
 
   def is_strike?
-    @rolls[0] == 10
+    @rolls[0] == 10  
   end
 
   def is_spare?

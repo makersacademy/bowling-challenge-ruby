@@ -10,24 +10,34 @@ RSpec.describe Frame do
   end
     
   context '#add_rolls' do
-    it 'adds up to three rolls to the array' do
+    it 'adds rolls to the array' do
       frame = Frame.new
 
       frame.add_roll(1)
       frame.add_roll(1)
-      frame.add_roll(1)
 
-      expect(frame.rolls).to eq [1, 1, 1]
+      expect(frame.rolls).to eq [1, 1]
     end
 
-    it 'throws error when a fourth add_roll attempted' do
+    it 'fails when adding a third roll to a non-tenth frame' do
       frame = Frame.new
+      
+      frame.frame_number = 1
+      frame.add_roll(1)
+      frame.add_roll(1)
 
+      expect{frame.add_roll(1)}.to raise_error 'Only the tenth frame may consist of more than two rolls' 
+    end
+
+    it 'fails when a fourth add_roll attempted on tenth frame' do
+      frame = Frame.new
+      
+      frame.frame_number = 10
       frame.add_roll(1)
       frame.add_roll(1)
       frame.add_roll(1)
 
-      expect{frame.add_roll(1)}.to raise_error "A frame may only contain up to three rolls"
+      expect{frame.add_roll(1)}.to raise_error 'The tenth frame may consist of no more than three rolls'
     end
   end
 
@@ -77,6 +87,7 @@ RSpec.describe Frame do
     it 'returns true when first roll = 10' do
       frame = Frame.new
 
+      frame.frame_number = 2
       frame.add_roll(10)
 
       expect(frame.is_strike?).to eq true
@@ -98,17 +109,6 @@ RSpec.describe Frame do
       frame = Frame.new
 
       frame.add_roll(10)
-
-      expect(frame.calculate_total_score).to eq 10
-      expect(frame.is_spare?).to eq false
-    end
-
-    it 'returns false when sum correct but three rolls' do
-      frame = Frame.new
-
-      frame.add_roll(9)
-      frame.add_roll(1)
-      frame.add_roll(0)
 
       expect(frame.calculate_total_score).to eq 10
       expect(frame.is_spare?).to eq false
