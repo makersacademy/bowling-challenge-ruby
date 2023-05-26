@@ -80,5 +80,40 @@ RSpec.describe 'ScoreCard and Frame Integration' do
 
       expect(scorecard.calculate_total).to eq "Current Total: 61 - 4 frames left\n[[3, 5], [7, 1], [17, 0], [4, 3], [13, 0], [3, 5]]"
     end
+
+    it 'should return the tenth frame method' do
+      scorecard = ScoreCard.new
+      frame_one = Frame.new
+      frame_one.result(3, 5)
+      scorecard.frame_input(frame_one)
+      frame_two = Frame.new
+      frame_two.result(7, 1)
+      scorecard.frame_input(frame_two)
+      frame_three = Frame.new
+      frame_three.result(10, 0)
+      scorecard.frame_input(frame_three)
+      frame_four = Frame.new
+      frame_four.result(4, 3)
+      scorecard.frame_input(frame_four)
+      frame_five = Frame.new
+      frame_five.result(2, 8)
+      scorecard.frame_input(frame_five)
+      frame_six = Frame.new
+      frame_six.result(3, 5)
+      scorecard.frame_input(frame_six)
+      frame_seven = Frame.new
+      frame_seven.result(10, 0)
+      scorecard.frame_input(frame_seven)
+      frame_eight = Frame.new
+      frame_eight.result(4, 3)
+      scorecard.frame_input(frame_eight)
+      frame_nine = Frame.new
+      frame_nine.result(2, 8)
+      scorecard.frame_input(frame_nine)
+      frame_ten = Frame.new
+      frame_ten.result(3, 5)
+
+      expect(scorecard.frame_input(frame_ten)).to eq "Final Total: 106 - Frames:\n[[3, 5], [7, 1], [17, 0], [4, 3], [13, 0], [3, 5], [17, 0], [4, 3], [13, 0], [3, 5]]"
+    end
   end
 end
