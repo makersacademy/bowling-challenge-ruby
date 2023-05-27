@@ -104,6 +104,31 @@ RSpec.describe 'integration' do
     expect(score_card.frames[0].total_score).to eq 11
   end
 
+  it 'calculates the bonus score for a ninth spare frame' do
+    score_card = ScoreCard.new
+
+    # 8 frames of zeros 
+    16.times do
+      score_card.roll_current_frame(0)
+    end
+
+    # ninth frame is a spare
+    score_card.roll_current_frame(5)
+    score_card.roll_current_frame(5)
+    expect(score_card.frames[8].is_spare?).to eq true
+
+    #rolls of tenth frame
+    score_card.roll_current_frame(1)
+    score_card.roll_current_frame(1)
+
+    score_card.calculate_bonus_scores
+    expect(score_card.frames[8].bonus_score).to eq 1
+
+    score_card.frames[8].calculate_total_score
+    expect(score_card.frames[8].frame_score).to eq 10
+    expect(score_card.frames[8].total_score).to eq 11
+  end
+
   xit 'calculates the bonus score for a regular strike frame' do
     
   end 
