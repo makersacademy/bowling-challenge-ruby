@@ -1,5 +1,5 @@
 class Frame
-  attr_reader :rolls, :frame_score
+  attr_reader :rolls, :frame_score, :total_score
   attr_accessor :frame_number, :bonus_score, :complete
 
   def initialize
@@ -23,13 +23,15 @@ class Frame
       @frame_score += roll
     end
 
-    return @frame_score
+    # return @frame_score
   end
 
   def calculate_total_score
-    @total_score = calculate_frame_score + @bonus_score
+    calculate_frame_score
 
-    return @total_score
+    @total_score = (@frame_score + @bonus_score)
+
+    # return @total_score
   end
 
   def is_strike?

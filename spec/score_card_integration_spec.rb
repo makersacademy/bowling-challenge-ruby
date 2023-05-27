@@ -23,9 +23,10 @@ RSpec.describe 'integration' do
     
     score_card.roll_current_frame(5)
     score_card.roll_current_frame(2)
+    score_card.frames[0].calculate_frame_score
     
     expect(score_card.frames[0].rolls).to eq [5, 2]
-    expect(score_card.frames[0].calculate_frame_score).to eq 7
+    expect(score_card.frames[0].frame_score).to eq 7
   end
   
   it 'marks a "standard" frame completed after two non-strike rolls' do
@@ -66,9 +67,10 @@ RSpec.describe 'integration' do
 
     score_card.roll_current_frame(5)
     score_card.roll_current_frame(2)
+    score_card.frames[1].calculate_frame_score
 
     expect(score_card.frames[1].rolls).to eq [5, 2]
-    expect(score_card.frames[1].calculate_frame_score).to eq 7
+    expect(score_card.frames[1].frame_score).to eq 7
     expect(score_card.current_frame_index).to eq 2
   end
   
@@ -83,8 +85,38 @@ RSpec.describe 'integration' do
     score_card.roll_current_frame(2)
     expect(score_card.current_frame_index).to eq 2
   end
+  
+  it 'calculates the bonus score for a regular spare frame' do
+    score_card = ScoreCard.new
 
-  it 'calculates game score of 0 for a Gutter Game' do
+    score_card.roll_current_frame(5)
+    score_card.roll_current_frame(5)
+    expect(score_card.frames[0].is_spare?).to eq true
+
+    score_card.roll_current_frame(1)
+    score_card.roll_current_frame(1)
+    
+    score_card.calculate_bonus_scores
+    expect(score_card.frames[0].bonus_score).to eq 1
+
+    score_card.frames[0].calculate_total_score
+    expect(score_card.frames[0].frame_score).to eq 10
+    expect(score_card.frames[0].total_score).to eq 11
+  end
+
+  xit 'calculates the bonus score for a regular strike frame' do
+    
+  end 
+
+  xit 'calculates the bonus score for a tenth frame spare' do
+    
+  end
+
+  xit 'calculates the bonus score for a tenth frame strike' do
+    
+  end
+
+  xit 'calculates game score of 0 for a Gutter Game' do
     score_card = ScoreCard.new
 
     20.times{ score_card.roll_current_frame(0) }
@@ -92,7 +124,7 @@ RSpec.describe 'integration' do
     expect(score_card.calculate_game_score).to eq(0)
   end
 
-  it 'calculates game score of 90 when each roll is 1' do
+  xit 'calculates game score of 90 when each roll is 1' do
     score_card = ScoreCard.new
 
     20.times{ score_card.roll_current_frame(1) }

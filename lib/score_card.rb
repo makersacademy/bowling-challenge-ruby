@@ -25,6 +25,18 @@ class ScoreCard
     @current_frame_index += 1 if @frames[@current_frame_index].complete == true 
   end
 
+  def calculate_bonus_scores
+    # for spares on regular frames
+    @frames.each_with_index do |frame, index|
+      next_frame = @frames[index + 1]
+      
+      if frame.is_spare?
+        
+        frame.bonus_score = next_frame.rolls[1]
+      end
+    end
+  end
+
   def calculate_game_score
     @frames.each do |frame|
       @game_score += frame.calculate_frame_score

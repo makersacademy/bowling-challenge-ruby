@@ -42,44 +42,49 @@ RSpec.describe Frame do
   end
 
   context '#calculate_frame_score' do
-    it 'returns 0 when rolls = [0, 0]' do
+    it 'sets frame_score to 0 when rolls = [0, 0]' do
       frame = Frame.new
 
       frame.add_roll(0)
       frame.add_roll(0)
+      frame.calculate_frame_score
 
-      expect(frame.calculate_frame_score).to eq 0
+      expect(frame.frame_score).to eq 0
     end
 
-    it 'returns 5 when rolls = [2, 3]' do
+    it 'sets frame_score to 5 when rolls = [2, 3]' do
       frame = Frame.new
 
       frame.add_roll(2)
       frame.add_roll(3)
+      frame.calculate_frame_score
 
-      expect(frame.calculate_frame_score).to eq 5
+      expect(frame.frame_score).to eq 5
     end
   end
 
   context '#calculate_total_score' do
-    it 'returns 0 when calculate_frame_score and bonus_score are 0' do
+    it 'sets total_score to 0 when frame_score and bonus_score are 0' do
       frame = Frame.new
 
       frame.add_roll(0)
       frame.add_roll(0)
+      frame.calculate_frame_score
+      frame.calculate_total_score
 
-      expect(frame.calculate_total_score).to eq 0
+      expect(frame.total_score).to eq 0
     end
 
-    it 'returns 10 when calculate_frame_score is 9 and bonus_score is 1' do
+    it 'sets total_score to 10 when frame_score is 9 and bonus_score is 1' do
       frame = Frame.new
 
       frame.add_roll(8)
       frame.add_roll(1)
 
       frame.bonus_score = 1
+      frame.calculate_total_score
 
-      expect(frame.calculate_total_score).to eq 10
+      expect(frame.total_score).to eq 10
     end
   end
 
@@ -100,8 +105,9 @@ RSpec.describe Frame do
 
       frame.add_roll(5)
       frame.add_roll(5)
+      frame.calculate_frame_score
 
-      expect(frame.calculate_total_score).to eq 10
+      expect(frame.frame_score).to eq 10
       expect(frame.is_spare?).to eq true
     end
 
@@ -109,8 +115,9 @@ RSpec.describe Frame do
       frame = Frame.new
 
       frame.add_roll(10)
+      frame.calculate_frame_score
 
-      expect(frame.calculate_total_score).to eq 10
+      expect(frame.frame_score).to eq 10
       expect(frame.is_spare?).to eq false
     end
   end
