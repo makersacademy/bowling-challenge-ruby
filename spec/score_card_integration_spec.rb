@@ -94,7 +94,7 @@ RSpec.describe 'integration' do
     expect(score_card.frames[0].is_spare?).to eq true
 
     score_card.roll_current_frame(1)
-    score_card.roll_current_frame(1)
+    score_card.roll_current_frame(2)
     
     score_card.calculate_bonus_scores
     expect(score_card.frames[0].bonus_score).to eq 1
@@ -129,7 +129,19 @@ RSpec.describe 'integration' do
     expect(score_card.frames[8].total_score).to eq 11
   end
 
-  xit 'calculates the bonus score for a regular strike frame' do
+  xit 'calculates the bonus score for a regular strike frame (when next roll not a strike)' do
+    score_card = ScoreCard.new
+    # frame 1 strike
+    score_card.roll_current_frame(10)
+    # frame 2 regular rolls
+    score_card.roll_current_frame(2)
+    score_card.roll_current_frame(3)
+
+
+
+  end 
+
+  xit 'calculates the bonus score for a regular strike frame (when next roll is a strike)' do
     
   end 
 

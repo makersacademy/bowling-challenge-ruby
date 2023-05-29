@@ -18,21 +18,27 @@ class ScoreCard
   def roll_current_frame(pins)
     @frames[@current_frame_index].add_roll(pins)
 
+    # handling completion 
+    # TODO case when tenth frame
     if @frames[@current_frame_index].rolls.length == 2 || @frames[@current_frame_index].rolls[0] == 10
       @frames[@current_frame_index].complete = true 
     end
-
+    # incrementing current_frame_index if completed
     @current_frame_index += 1 if @frames[@current_frame_index].complete == true 
   end
 
   def calculate_bonus_scores
     # for spares on regular frames
+    # TODO spares on tenth
+    # TODO strikes on regular when next not strike
+    # TODO strikes on regular when next strike
+    # TODO strikes on tenth
     @frames.each_with_index do |frame, index|
       next_frame = @frames[index + 1]
       
       if frame.is_spare?
         
-        frame.bonus_score = next_frame.rolls[1]
+        frame.bonus_score = next_frame.rolls[0]
       end
     end
   end
