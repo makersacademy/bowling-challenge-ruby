@@ -18,7 +18,7 @@ RSpec.describe 'integration' do
     expect(score_card.frames[9].frame_number).to eq(10)
   end
   
-  it 'can enter "standard" rolls into the first frame' do
+  it 'can enter "regular" rolls into the first frame' do
     score_card = ScoreCard.new
     
     score_card.roll_current_frame(5)
@@ -29,7 +29,7 @@ RSpec.describe 'integration' do
     expect(score_card.frames[0].frame_score).to eq 7
   end
   
-  it 'marks a "standard" frame completed after two non-strike rolls' do
+  it 'marks a "regular" frame completed after two non-strike rolls' do
     score_card = ScoreCard.new
 
     score_card.roll_current_frame(5)
@@ -40,7 +40,16 @@ RSpec.describe 'integration' do
     expect(score_card.frames[0].complete).to eq true
   end
 
-  it 'marks a "standard" frame complete after a single strike' do
+  it 'marks a "regular" frame complete after a single strike' do
+    score_card = ScoreCard.new
+
+    score_card.roll_current_frame(10)
+
+    expect(score_card.frames[0].is_strike?).to eq true
+    expect(score_card.frames[0].complete).to eq true
+  end
+  
+  it 'marks a "regular" frame complete after a single strike' do
     score_card = ScoreCard.new
 
     score_card.roll_current_frame(10)
@@ -129,24 +138,58 @@ RSpec.describe 'integration' do
     expect(score_card.frames[8].total_score).to eq 11
   end
 
-  xit 'calculates the bonus score for a regular strike frame (when next roll not a strike)' do
+  it 'calculates the bonus score for a regular strike frame (when next roll not a strike)' do
     score_card = ScoreCard.new
-    # frame 1 strike
+    # frame 1: strike
     score_card.roll_current_frame(10)
-    # frame 2 regular rolls
+    # frame 2: two regular rolls scoring 5
     score_card.roll_current_frame(2)
     score_card.roll_current_frame(3)
 
+    score_card.calculate_bonus_scores
+    # frame 1: bonus score of 5
+    expect(score_card.frames[0].bonus_score).to eq 5
 
-
+    score_card.frames[0].calculate_total_score
+    expect(score_card.frames[0].frame_score).to eq 10
+    expect(score_card.frames[0].total_score).to eq 15
   end 
 
-  xit 'calculates the bonus score for a regular strike frame (when next roll is a strike)' do
-    
+  it 'calculates the bonus score for a regular strike frame (when next roll is a strike)' do
+    score_card = ScoreCard.new
+    # frame 1 strike
+    score_card.roll_current_frame(10)
+    # frame 2 strike
+    score_card.roll_current_frame(10)
+    # frame 3 regular rolls
+    score_card.roll_current_frame(1)
+    score_card.roll_current_frame(1)
+
+    score_card.calculate_bonus_scores
+
+    expect(score_card.frames[0].bonus_score).to eq 11
+    expect(score_card.frames[1].bonus_score).to eq 2
+
+    score_card.frames[0].calculate_total_score
+    expect(score_card.frames[0].frame_score).to eq 10
+    expect(score_card.frames[0].total_score).to eq 21
+
+    score_card.frames[1].calculate_total_score
+    expect(score_card.frames[1].frame_score).to eq 10
+    expect(score_card.frames[1].total_score).to eq 12
   end 
 
   xit 'calculates the bonus score for a tenth frame spare' do
-    
+    score_card = ScoreCard.new
+
+    # 9 frames of zeros 
+    16.times do
+      score_card.roll_current_frame(0)
+    end
+
+    score_card.roll_current_frame(10)
+
+    expect(score_card)
   end
 
   xit 'calculates the bonus score for a tenth frame strike' do

@@ -29,17 +29,22 @@ class ScoreCard
 
   def calculate_bonus_scores
     # for spares on regular frames
+    # for strikes on regular when next not strike
+    # for strikes on regular when next strike
     # TODO spares on tenth
-    # TODO strikes on regular when next not strike
-    # TODO strikes on regular when next strike
     # TODO strikes on tenth
     @frames.each_with_index do |frame, index|
       next_frame = @frames[index + 1]
+      subsequent_frame = @frames[index + 2]
       
       if frame.is_spare?
-        
         frame.bonus_score = next_frame.rolls[0]
+      elsif frame.is_strike? && next_frame.is_strike?
+        frame.bonus_score = next_frame.rolls[0] + subsequent_frame.rolls[0]
+      elsif frame.is_strike?
+        frame.bonus_score = next_frame.rolls[0] + next_frame.rolls[1]
       end
+
     end
   end
 
