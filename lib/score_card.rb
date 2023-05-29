@@ -27,36 +27,46 @@ class ScoreCard
   end
 
   def calculate_bonus_scores
-    # for spares on regular frames
-    # for strikes on regular when next not strike
-    # for strikes on regular when next strike
-    # TODO spares on tenth
-    # TODO strikes on tenth
     @frames.each_with_index do |frame, index|
       next_frame = @frames[index + 1]
       subsequent_frame = @frames[index + 2]
       
-      if frame.is_spare?
-        frame.bonus_score = next_frame.rolls[0]
-      elsif frame.is_strike? && next_frame.is_strike?
-        frame.bonus_score = next_frame.rolls[0] + subsequent_frame.rolls[0]
-      elsif frame.is_strike?
-        frame.bonus_score = next_frame.rolls[0] + next_frame.rolls[1]
+      case frame.frame_number
+      when 10
+        if frame.is_spare?
+          frame.bonus_score = frame.rolls[2]
+        elsif frame.is_strike?
+          frame.bonus_score = frame.rolls[1] + frame.rolls[2]
+        end
+      when 9
+        if frame.is_spare?
+          frame.bonus_score = next_frame.rolls[0]
+        elsif frame.is_strike?
+          frame.bonus_score = next_frame.rolls[0] + next_frame.rolls[1]
+        end
+      else
+        if frame.is_spare?
+          frame.bonus_score = next_frame.rolls[0]
+        elsif frame.is_strike? && next_frame.is_strike?
+          frame.bonus_score = next_frame.rolls[0] + subsequent_frame.rolls[0]
+        elsif frame.is_strike?
+          frame.bonus_score = next_frame.rolls[0] + next_frame.rolls[1]
+        end
       end
-
     end
   end
 
   def calculate_game_score
+    calculate_bonus_scores
+
     @frames.each do |frame|
-      @game_score += frame.calculate_frame_score
+      frame.calculate_frame_score
     end
 
     return @game_score
   end
 
   def mark_complete_on_conditions
-    # handling completion
     case @current_frame_index
     when 9
       frame = @frames[@current_frame_index]

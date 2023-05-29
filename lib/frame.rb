@@ -19,7 +19,6 @@ class Frame
   end
 
   def calculate_frame_score
-
     if is_strike?
       @frame_score = @rolls[0]
     else

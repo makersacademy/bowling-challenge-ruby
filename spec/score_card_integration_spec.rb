@@ -283,28 +283,118 @@ RSpec.describe 'integration' do
     expect(score_card.frames[1].total_score).to eq 12
   end 
 
-  xit 'calculates the bonus score for a tenth frame spare' do
+  it 'calculates the bonus score for a ninth frame spare' do
+    score_card = ScoreCard.new
+
+    # 8 frames of zeros 
+    16.times do
+      score_card.roll_current_frame(0)
+    end
+    # 9th frame spare
+    score_card.roll_current_frame(9)
+    score_card.roll_current_frame(1)
+    # 10th frame rolls
+    score_card.roll_current_frame(1)
+    score_card.roll_current_frame(1)
+    score_card.roll_current_frame(1)
+
+    score_card.calculate_bonus_scores
+
+    expect(score_card.frames[8].bonus_score).to eq 1
+  end
+
+  it 'calculates the bonus score for a ninth frame strike' do
+    score_card = ScoreCard.new
+
+    # 8 frames of zeros 
+    16.times do
+      score_card.roll_current_frame(0)
+    end
+    # 9th frame strike
+    score_card.roll_current_frame(10)
+    # 10th frame rolls
+    score_card.roll_current_frame(1)
+    score_card.roll_current_frame(1)
+
+    score_card.calculate_bonus_scores
+
+    expect(score_card.frames[8].bonus_score).to eq 2
+  end
+
+
+  it 'calculates the bonus score for a tenth frame spare' do
     score_card = ScoreCard.new
 
     # 9 frames of zeros 
     18.times do
       score_card.roll_current_frame(0)
     end
+    # 10th frame spare
+    score_card.roll_current_frame(9)
+    score_card.roll_current_frame(1)
+    # bonus roll
+    score_card.roll_current_frame(1)
 
+    score_card.calculate_bonus_scores
+
+    expect(score_card.frames[9].bonus_score).to eq 1
+  end
+
+  it 'calculates the bonus score for a tenth frame strike (regular bonus rolls)' do
+    score_card = ScoreCard.new
+
+    # 9 frames of zeros 
+    18.times do
+      score_card.roll_current_frame(0)
+    end
+    # 10th frame strike
+    score_card.roll_current_frame(10)
+    # bonus rolls
+    score_card.roll_current_frame(1)
+    score_card.roll_current_frame(1)
+
+    score_card.calculate_bonus_scores
+
+    expect(score_card.frames[9].bonus_score).to eq 2
+  end
+
+  it 'calculates the bonus score for a tenth frame strike (bonus: one strike, one regular)' do
+    score_card = ScoreCard.new
+
+    # 9 frames of zeros 
+    18.times do
+      score_card.roll_current_frame(0)
+    end
+    # 10th frame strike
+    score_card.roll_current_frame(10)
+    # bonus rolls
+    score_card.roll_current_frame(10)
+    score_card.roll_current_frame(1)
+
+    score_card.calculate_bonus_scores
+
+    expect(score_card.frames[9].bonus_score).to eq 11
+  end
+
+  it 'calculates the bonus score for a tenth frame strike (two bonus strikes)' do
+    score_card = ScoreCard.new
+
+    # 9 frames of zeros 
+    18.times do
+      score_card.roll_current_frame(0)
+    end
+    # 10th frame strike
+    score_card.roll_current_frame(10)
+    # bonus rolls
+    score_card.roll_current_frame(10)
     score_card.roll_current_frame(10)
 
-    expect(score_card)
+    score_card.calculate_bonus_scores
+
+    expect(score_card.frames[9].bonus_score).to eq 20
   end
 
-  xit 'calculates the bonus score for a single tenth frame strike' do
-    
-  end
-
-  xit 'calculates the bonus score for two tenth frame strikes' do
-    
-  end
-
-  xit 'calculates game score of 0 for a Gutter Game' do
+  it 'calculates game score of 0 for a Gutter Game' do
     score_card = ScoreCard.new
 
     20.times{ score_card.roll_current_frame(0) }
@@ -312,7 +402,7 @@ RSpec.describe 'integration' do
     expect(score_card.calculate_game_score).to eq(0)
   end
 
-  xit 'calculates game score of 90 when each roll is 1' do
+  it 'calculates game score of 90 when each roll is 1' do
     score_card = ScoreCard.new
 
     20.times{ score_card.roll_current_frame(1) }
@@ -320,10 +410,10 @@ RSpec.describe 'integration' do
     expect(score_card.calculate_game_score).to eq(20)
   end
 
-  xit 'returns game score of 300 for a Perfect Game' do
+  it 'returns game score of 300 for a Perfect Game' do
     score_card = ScoreCard.new
 
-    21.times{ score_card.roll_current_frame(10) }
+    12.times{ score_card.roll_current_frame(10) }
 
     expect(score_card.calculate_game_score).to eq(300)
   end
