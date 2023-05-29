@@ -24,16 +24,12 @@ class Frame
     else
       @frame_score = @rolls[0] + @rolls[1]
     end
-
-    # return @frame_score
   end
 
   def calculate_total_score
     calculate_frame_score
 
     @total_score = (@frame_score + @bonus_score)
-
-    # return @total_score
   end
 
   def is_strike?
