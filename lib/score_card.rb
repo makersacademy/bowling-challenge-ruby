@@ -16,14 +16,21 @@ class ScoreCard
   end
 
   def roll_current_frame(pins)
-    @frames[@current_frame_index].add_roll(pins)
-    
-    mark_complete_on_conditions
+    frame = @frames[@current_frame_index]
 
-    # incrementing current_frame_index if completed
-    if @current_frame_index < 9 && @frames[@current_frame_index].complete == true 
-      @current_frame_index += 1 
+    frame.add_roll(pins)
+    
+    if @current_frame_index == 9
+      if frame.is_strike? || frame.is_spare?
+        frame.complete = frame.rolls.length == 3
+      else
+        frame.complete = frame.rolls.length == 2
+      end
+    else
+      frame.complete = frame.rolls.length == 2 || frame.is_strike?
     end
+
+    @current_frame_index += 1 if @current_frame_index < 9 && frame.complete
   end
 
   def calculate_bonus_scores
@@ -33,25 +40,11 @@ class ScoreCard
       
       case frame.frame_number
       when 10
-        if frame.is_spare?
-          frame.bonus_score = frame.rolls[2]
-        elsif frame.is_strike?
-          frame.bonus_score = frame.rolls[1] + frame.rolls[2]
-        end
+        calculate_bonus_for_frame_10(frame)
       when 9
-        if frame.is_spare?
-          frame.bonus_score = next_frame.rolls[0]
-        elsif frame.is_strike?
-          frame.bonus_score = next_frame.rolls[0] + next_frame.rolls[1]
-        end
+        calculate_bonus_for_frame_9(frame, next_frame)
       else
-        if frame.is_spare?
-          frame.bonus_score = next_frame.rolls[0]
-        elsif frame.is_strike? && next_frame.is_strike?
-          frame.bonus_score = next_frame.rolls[0] + subsequent_frame.rolls[0]
-        elsif frame.is_strike?
-          frame.bonus_score = next_frame.rolls[0] + next_frame.rolls[1]
-        end
+        calculate_bonus_for_other_frames(frame, next_frame, subsequent_frame)
       end
     end
   end
@@ -66,24 +59,31 @@ class ScoreCard
     return @game_score
   end
 
-  def mark_complete_on_conditions
-    case @current_frame_index
-    when 9
-      frame = @frames[@current_frame_index]
+  private
+
+  def calculate_bonus_for_frame_10(frame)
+    if frame.is_spare?
+      frame.bonus_score = frame.rolls[2]
+    elsif frame.is_strike?
+      frame.bonus_score = frame.rolls[1] + frame.rolls[2]
+    end
+  end
   
-      if frame.is_strike? || frame.is_spare?
-        if frame.rolls.length == 3
-          frame.complete = true
-        end
-      else
-        if frame.rolls.length == 2
-          frame.complete = true
-        end
-      end
-    else
-      if @frames[@current_frame_index].rolls.length == 2 || @frames[@current_frame_index].is_strike?
-        @frames[@current_frame_index].complete = true
-      end
+  def calculate_bonus_for_frame_9(frame, next_frame)
+    if frame.is_spare?
+      frame.bonus_score = next_frame.rolls[0]
+    elsif frame.is_strike?
+      frame.bonus_score = next_frame.rolls[0] + next_frame.rolls[1]
+    end
+  end
+  
+  def calculate_bonus_for_other_frames(frame, next_frame, subsequent_frame)
+    if frame.is_spare?
+      frame.bonus_score = next_frame.rolls[0]
+    elsif frame.is_strike? && next_frame.is_strike?
+      frame.bonus_score = next_frame.rolls[0] + subsequent_frame.rolls[0]
+    elsif frame.is_strike?
+      frame.bonus_score = next_frame.rolls[0] + next_frame.rolls[1]
     end
   end
 end
