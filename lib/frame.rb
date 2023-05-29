@@ -19,8 +19,11 @@ class Frame
   end
 
   def calculate_frame_score
-    @rolls.each do |roll|
-      @frame_score += roll
+
+    if is_strike?
+      @frame_score = @rolls[0]
+    else
+      @frame_score = @rolls[0] + @rolls[1]
     end
 
     # return @frame_score

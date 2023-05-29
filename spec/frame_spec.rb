@@ -61,6 +61,30 @@ RSpec.describe Frame do
 
       expect(frame.frame_score).to eq 5
     end
+
+    it 'sets frame_score to 10 when rolls = [1, 9, 5] (tenth frame issue)' do
+      frame = Frame.new
+      frame.frame_number = 10
+
+      frame.add_roll(1)
+      frame.add_roll(9)
+      frame.add_roll(5)
+      frame.calculate_frame_score
+
+      expect(frame.frame_score).to eq 10
+    end
+
+    it 'sets frame_score to 10 when rolls = [10, 10, 10] (tenth frame issue)' do
+      frame = Frame.new
+      frame.frame_number = 10
+
+      frame.add_roll(10)
+      frame.add_roll(10)
+      frame.add_roll(10)
+      frame.calculate_frame_score
+
+      expect(frame.frame_score).to eq 10
+    end
   end
 
   context '#calculate_total_score' do
