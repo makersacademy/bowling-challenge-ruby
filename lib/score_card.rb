@@ -52,11 +52,15 @@ class ScoreCard
   def calculate_game_score
     calculate_bonus_scores
 
+    frame_totals = 0
     @frames.each do |frame|
       frame.calculate_frame_score
+      frame.calculate_total_score
+
+      frame_totals += frame.total_score
     end
 
-    return @game_score
+    return @game_score = frame_totals
   end
 
   private

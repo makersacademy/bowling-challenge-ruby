@@ -410,6 +410,42 @@ RSpec.describe 'integration' do
     expect(score_card.calculate_game_score).to eq(20)
   end
 
+  it 'calculates correct game score when an "average" game' do
+    score_card = ScoreCard.new
+
+    score_card.roll_current_frame(5)
+    score_card.roll_current_frame(4)
+
+    score_card.roll_current_frame(5)
+    score_card.roll_current_frame(4)
+
+    score_card.roll_current_frame(5)
+    score_card.roll_current_frame(5)
+
+    score_card.roll_current_frame(10)
+
+    score_card.roll_current_frame(5)
+    score_card.roll_current_frame(5)
+
+    score_card.roll_current_frame(3)
+    score_card.roll_current_frame(5)
+
+    score_card.roll_current_frame(5)
+    score_card.roll_current_frame(5)
+
+    score_card.roll_current_frame(5)
+    score_card.roll_current_frame(4)
+
+    score_card.roll_current_frame(5)
+    score_card.roll_current_frame(4)
+
+    score_card.roll_current_frame(5)
+    score_card.roll_current_frame(5)
+    score_card.roll_current_frame(5)
+
+    expect(score_card.calculate_game_score).to eq(127)
+  end
+
   it 'returns game score of 300 for a Perfect Game' do
     score_card = ScoreCard.new
 
