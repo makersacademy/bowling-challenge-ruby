@@ -35,7 +35,6 @@ RSpec.describe 'integration' do
     score_card.roll_current_frame(5)
     expect(score_card.frames[0].complete).to eq false
 
-
     score_card.roll_current_frame(2)
     expect(score_card.frames[0].complete).to eq true
   end
@@ -48,14 +47,45 @@ RSpec.describe 'integration' do
     expect(score_card.frames[0].is_strike?).to eq true
     expect(score_card.frames[0].complete).to eq true
   end
-  
-  it 'marks a "regular" frame complete after a single strike' do
+
+  it 'does not mark tenth frame complete after a spare' do
     score_card = ScoreCard.new
 
-    score_card.roll_current_frame(10)
+    # 9 frames of zeros 
+    18.times do
+      score_card.roll_current_frame(0)
+    end
 
-    expect(score_card.frames[0].is_strike?).to eq true
-    expect(score_card.frames[0].complete).to eq true
+    score_card.roll_current_frame(9)
+    score_card.roll_current_frame(1)
+    expect(score_card.frames[9].complete).to eq false
+  end
+
+  it 'marks tenth frame spare complete after bonus roll' do
+    score_card = ScoreCard.new
+
+    # 9 frames of zeros 
+    18.times do
+      score_card.roll_current_frame(0)
+    end
+
+    score_card.roll_current_frame(9)
+    score_card.roll_current_frame(1)
+    expect(score_card.frames[9].complete).to eq false
+    score_card.roll_current_frame(1)
+    expect(score_card.frames[9].complete).to eq true
+  end
+
+  xit 'does not mark tenth frame complete after a single strike' do
+  end
+  
+  xit 'does not mark tenth frame complete after two strikes' do
+    score_card = ScoreCard.new
+
+   
+  end
+
+  xit 'marks tenth frame strike complete after two bonus rolls' do
   end
 
   it 'updates the current frame index correctly after frame is completed' do
@@ -183,7 +213,7 @@ RSpec.describe 'integration' do
     score_card = ScoreCard.new
 
     # 9 frames of zeros 
-    16.times do
+    18.times do
       score_card.roll_current_frame(0)
     end
 
@@ -192,7 +222,11 @@ RSpec.describe 'integration' do
     expect(score_card)
   end
 
-  xit 'calculates the bonus score for a tenth frame strike' do
+  xit 'calculates the bonus score for a single tenth frame strike' do
+    
+  end
+
+  xit 'calculates the bonus score for two tenth frame strikes' do
     
   end
 

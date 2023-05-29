@@ -20,9 +20,20 @@ class ScoreCard
 
     # handling completion 
     # TODO case when tenth frame
-    if @frames[@current_frame_index].rolls.length == 2 || @frames[@current_frame_index].rolls[0] == 10
-      @frames[@current_frame_index].complete = true 
+    case @frames[@current_frame_index].frame_number
+    when 10
+      if @frames[@current_frame_index].is_spare?
+        
+      else
+        
+      end
+      
+    else
+      if @frames[@current_frame_index].rolls.length == 2 || @frames[@current_frame_index].rolls[0] == 10
+        @frames[@current_frame_index].complete = true 
+      end
     end
+    
     # incrementing current_frame_index if completed
     @current_frame_index += 1 if @frames[@current_frame_index].complete == true 
   end

@@ -120,5 +120,16 @@ RSpec.describe Frame do
       expect(frame.frame_score).to eq 10
       expect(frame.is_spare?).to eq false
     end
+
+    it 'returns false when first roll 10 and second roll 0' do
+      frame = Frame.new
+
+      frame.add_roll(10)
+      frame.add_roll(0)
+      frame.calculate_frame_score
+
+      expect(frame.frame_score).to eq 10
+      expect(frame.is_spare?).to eq false
+    end
   end
 end

@@ -39,6 +39,6 @@ class Frame
   end
 
   def is_spare?
-    (@rolls.length == 2) && (@rolls[0] + @rolls[1] == 10)
+    (@rolls.length == 2) && (@rolls[0] + @rolls[1] == 10) && @rolls[0] != 10 
   end
 end
