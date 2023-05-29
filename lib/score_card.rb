@@ -17,25 +17,13 @@ class ScoreCard
 
   def roll_current_frame(pins)
     @frames[@current_frame_index].add_roll(pins)
-
-    # handling completion 
-    # TODO case when tenth frame
-    case @frames[@current_frame_index].frame_number
-    when 10
-      if @frames[@current_frame_index].is_spare?
-        
-      else
-        
-      end
-      
-    else
-      if @frames[@current_frame_index].rolls.length == 2 || @frames[@current_frame_index].rolls[0] == 10
-        @frames[@current_frame_index].complete = true 
-      end
-    end
     
+    mark_complete_on_conditions
+
     # incrementing current_frame_index if completed
-    @current_frame_index += 1 if @frames[@current_frame_index].complete == true 
+    if @current_frame_index < 9 && @frames[@current_frame_index].complete == true 
+      @current_frame_index += 1 
+    end
   end
 
   def calculate_bonus_scores
@@ -67,5 +55,25 @@ class ScoreCard
     return @game_score
   end
 
-
+  def mark_complete_on_conditions
+    # handling completion
+    case @current_frame_index
+    when 9
+      frame = @frames[@current_frame_index]
+  
+      if frame.is_strike? || frame.is_spare?
+        if frame.rolls.length == 3
+          frame.complete = true
+        end
+      else
+        if frame.rolls.length == 2
+          frame.complete = true
+        end
+      end
+    else
+      if @frames[@current_frame_index].rolls.length == 2 || @frames[@current_frame_index].is_strike?
+        @frames[@current_frame_index].complete = true
+      end
+    end
+  end
 end

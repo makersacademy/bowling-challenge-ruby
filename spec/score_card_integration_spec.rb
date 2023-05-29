@@ -55,9 +55,15 @@ RSpec.describe 'integration' do
     18.times do
       score_card.roll_current_frame(0)
     end
+    expect(score_card.current_frame_index).to eq 9
 
     score_card.roll_current_frame(9)
     score_card.roll_current_frame(1)
+    expect(score_card.current_frame_index).to eq 9
+    expect(score_card.frames[score_card.current_frame_index].frame_number).to eq 10
+
+    expect(score_card.frames[9].is_spare?).to eq true
+    expect(score_card.frames[9].rolls.length).to eq 2
     expect(score_card.frames[9].complete).to eq false
   end
 
@@ -69,31 +75,99 @@ RSpec.describe 'integration' do
       score_card.roll_current_frame(0)
     end
 
+    # tenth frame spare
     score_card.roll_current_frame(9)
     score_card.roll_current_frame(1)
+    expect(score_card.current_frame_index).to eq 9
+    expect(score_card.frames[score_card.current_frame_index].frame_number).to eq 10
+    expect(score_card.frames[9].is_spare?).to eq true
     expect(score_card.frames[9].complete).to eq false
+
+    # tenth frame bonus roll
     score_card.roll_current_frame(1)
+    expect(score_card.current_frame_index).to eq 9
+    expect(score_card.frames[score_card.current_frame_index].frame_number).to eq 10
+    expect(score_card.frames[9].is_spare?).to eq true
+    expect(score_card.frames[9].rolls.length).to eq 3
     expect(score_card.frames[9].complete).to eq true
   end
 
-  xit 'does not mark tenth frame complete after a single strike' do
-  end
-  
-  xit 'does not mark tenth frame complete after two strikes' do
+  it 'does not mark tenth frame complete after a single strike' do
     score_card = ScoreCard.new
 
-   
+    # 9 frames of zeros 
+    18.times do
+      score_card.roll_current_frame(0)
+    end
+
+    # tenth frame strike
+    score_card.roll_current_frame(10)
+    expect(score_card.current_frame_index).to eq 9
+    expect(score_card.frames[score_card.current_frame_index].frame_number).to eq 10
+    expect(score_card.frames[9].is_strike?).to eq true
+    expect(score_card.frames[9].is_spare?).to eq false
+    expect(score_card.frames[9].complete).to eq false
+  end
+  
+  it 'does not mark tenth frame complete after two strikes' do
+    score_card = ScoreCard.new
+
+    # 9 frames of zeros 
+    18.times do
+      score_card.roll_current_frame(0)
+    end
+
+    # tenth frame strikes
+    score_card.roll_current_frame(10)
+    # one bonus roll
+    score_card.roll_current_frame(10)
+    expect(score_card.current_frame_index).to eq 9
+    expect(score_card.frames[score_card.current_frame_index].frame_number).to eq 10
+    expect(score_card.frames[9].is_strike?).to eq true
+    expect(score_card.frames[9].is_spare?).to eq false
+    expect(score_card.frames[9].complete).to eq false
   end
 
-  xit 'marks tenth frame strike complete after two bonus rolls' do
+  it 'marks tenth frame strike complete after two bonus rolls' do
+    score_card = ScoreCard.new
+
+    # 9 frames of zeros 
+    18.times do
+      score_card.roll_current_frame(0)
+    end
+
+    # tenth frame strike
+    score_card.roll_current_frame(10)
+    # two bonus rolls
+    score_card.roll_current_frame(2)
+    score_card.roll_current_frame(3)
+    expect(score_card.current_frame_index).to eq 9
+    expect(score_card.frames[score_card.current_frame_index].frame_number).to eq 10
+    expect(score_card.frames[9].is_strike?).to eq true
+    expect(score_card.frames[9].is_spare?).to eq false
+    expect(score_card.frames[9].complete).to eq true
   end
 
   it 'updates the current frame index correctly after frame is completed' do
     score_card = ScoreCard.new
-
+    
     score_card.roll_current_frame(10)
 
     expect(score_card.current_frame_index).to eq 1
+  end
+
+  it 'will not update the current frame index after tenth frame is completed' do
+    score_card = ScoreCard.new
+    # 9 frames of zeros 
+    18.times do
+      score_card.roll_current_frame(0)
+    end
+
+    score_card.roll_current_frame(10)
+    score_card.roll_current_frame(10)
+    score_card.roll_current_frame(10)
+
+    expect(score_card.current_frame_index).to eq 9
   end
 
   it 'can enter subsequent rolls into correct "regular" frames' do
