@@ -2,7 +2,6 @@ class Frame
   def initialize(frame_number)
     @frame_number = frame_number
     @ball_scores = [0, 0, 0]
-    @frame_score = 0
     @bonus_score = 0
   end
 
@@ -14,11 +13,36 @@ class Frame
     return @ball_scores[ball - 1]
   end
 
+  def update_bonus_score(score)
+    @bonus_score = score
+  end
+
+  def bonus_score
+    return @bonus_score
+  end
+
+  # Returns true if this is a complete frame with no strike
+  def two_bowls?
+    return true if get_ball_score(1) != 0 && get_ball_score(2) != 0
+  end
+
+  def strike?
+    return true if get_ball_score(1) == 'X'
+  end
+
+  def spare?
+    return true if get_ball_score(2) == '/'
+  end
+
   def frame_number
     return @frame_number
   end
 
   def score
-    return @ball_scores.sum + @bonus_score
+    scores = @ball_scores
+    scores[0] = 10 if scores[0] == 'X'
+    scores[1] = 10 - scores[0] if scores[1] == '/'
+
+    return scores.sum + @bonus_score
   end
 end

@@ -25,4 +25,12 @@ RSpec.describe Frame do
       expect(frame.score).to eq 7
     end
   end
+
+  context ".update_bonus_score" do
+    it "updates the bonus score for the frame" do
+      frame = Frame.new(1)
+      frame.update_bonus_score(5)
+      expect(frame.bonus_score).to eq 5
+    end
+  end
 end
