@@ -9,8 +9,8 @@ class Application
   end
 
   def create_frames
-    10.times do
-      frame = Frame.new
+    10.times do |i|
+      frame = Frame.new(i + 1)
       @frames.push(frame)
     end
   end
