@@ -33,4 +33,30 @@ RSpec.describe Frame do
       expect(frame.bonus_score).to eq 5
     end
   end
+
+  context ".strike?" do
+    it "returns true if the frame has a strike" do
+      frame = Frame.new(1)
+      frame.add_ball_score(1, 'X')
+      expect(frame.strike?).to eq true
+    end
+  end
+
+  context ".two_bowls?" do
+    it "returns true if the frame has two two_bowls" do
+      frame = Frame.new(1)
+      frame.add_ball_score(1, 2)
+      frame.add_ball_score(2, 3)
+      expect(frame.two_bowls?).to eq true
+    end
+  end
+
+  context ".spare?" do
+    it "returns true if the frame has a spare" do
+      frame = Frame.new(1)
+      frame.add_ball_score(1, '3')
+      frame.add_ball_score(2, '/')
+      expect(frame.spare?).to eq true
+    end
+  end
 end
