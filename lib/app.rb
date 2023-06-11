@@ -26,10 +26,6 @@ class Application
       @frames[i + 1] = frame
     end
   end
-
-  def return_frames
-    return @frames
-  end
 end
 
 unless ENV['ENV'] == 'test'

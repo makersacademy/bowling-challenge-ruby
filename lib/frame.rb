@@ -51,7 +51,7 @@ class Frame
   def frame_score
     return @ball_scores.sum
   end
-
+  
   def total_frame_score
     return @ball_scores.sum + @bonus_score
   end
