@@ -72,7 +72,7 @@ class Gameplay
   def validate_input(input, frames)
     return false if input == ""
     return false if input == "/" && @current_ball == 1
-    return false if input == "X" && @current_ball == 2
+    return false if input == "X" && @current_ball == 2 && @current_frame != 10
     return false if /[X\/1-9]/.match(input) == nil
   end
 end
