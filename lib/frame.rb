@@ -27,13 +27,14 @@ class Frame
     return true if (get_ball_score(1) != 0 && get_ball_score(2) != 0)
   end
   
-  def strike
+  def strike(ball)
     @strike = true
-    add_ball_score(1, 10)
+    add_ball_score(ball, 10)
   end
 
   def strike?
     return true if @strike == true
+    return false
   end
   
   def spare
@@ -44,13 +45,14 @@ class Frame
 
   def spare?
     return true if @spare == true
+    return false
+  end
+  
+  def frame_score
+    return @ball_scores.sum
   end
 
-  def frame_number
-    return @frame_number
-  end
-
-  def score
+  def total_frame_score
     return @ball_scores.sum + @bonus_score
   end
 end
