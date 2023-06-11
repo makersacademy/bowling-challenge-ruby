@@ -4,8 +4,10 @@ require 'frame'
 RSpec.describe Gameplay do
   context ".continue?" do
     it "returns true if the game should continue" do
+      frame_1 = Frame.new
+      frames = { 1 => frame_1 }
       game = Gameplay.new
-      expect(game.continue?).to eq true
+      expect(game.continue?(frames)).to eq true
     end
   end
 
@@ -16,7 +18,7 @@ RSpec.describe Gameplay do
       frame_1.add_ball_score(2, '4')
       
       frame_2 = Frame.new
-      frame_2.strike
+      frame_2.strike(1)
       
       frame_3 = Frame.new
       frame_3.add_ball_score(1, '2')

@@ -22,7 +22,7 @@ RSpec.describe Frame do
       frame = Frame.new
       frame.add_ball_score(1, 4)
       frame.add_ball_score(2, 3)
-      expect(frame.score).to eq 7
+      expect(frame.frame_score).to eq 7
     end
   end
 
@@ -37,7 +37,7 @@ RSpec.describe Frame do
   context ".strike?" do
     it "returns true if the frame has a strike" do
       frame = Frame.new
-      frame.strike
+      frame.strike(1)
       expect(frame.strike?).to eq true
     end
   end
