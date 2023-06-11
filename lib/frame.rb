@@ -22,8 +22,8 @@ class Frame
   end
 
   # Returns true if this is a complete frame with no strike
-  def two_bowls?
-    return true if get_ball_score(1) != 0 && get_ball_score(2) != 0
+  def two_balls?
+    return true if (get_ball_score(1) != 0 && get_ball_score(2) != 0)
   end
 
   def strike?
@@ -41,6 +41,8 @@ class Frame
   def score
     scores = @ball_scores
     scores[0] = 10 if scores[0] == 'X'
+    scores[1] = 10 if scores[1] == 'X'
+    scores[2] = 10 if scores[2] == 'X'
     scores[1] = 10 - scores[0] if scores[1] == '/'
 
     return scores.sum + @bonus_score

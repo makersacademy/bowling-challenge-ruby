@@ -42,12 +42,12 @@ RSpec.describe Frame do
     end
   end
 
-  context ".two_bowls?" do
-    it "returns true if the frame has two two_bowls" do
+  context ".two_balls?" do
+    it "returns true if the frame has two two balls bowled" do
       frame = Frame.new(1)
       frame.add_ball_score(1, 2)
       frame.add_ball_score(2, 3)
-      expect(frame.two_bowls?).to eq true
+      expect(frame.two_balls?).to eq true
     end
   end
 

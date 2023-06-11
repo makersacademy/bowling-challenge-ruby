@@ -1,5 +1,6 @@
 require_relative 'frame'
 require_relative 'gameplay'
+require_relative 'scorecard'
 
 class Application
   def initialize
@@ -11,12 +12,14 @@ class Application
   def run
     loopy = true
     while loopy do
-      @gameplay.score_prompt
-      @gameplay.next_ball
+      @gameplay.score_prompt(@frames)
+      @gameplay.next_ball(@frames)
+      
       loopy = @gameplay.continue?
     end
 
     @gameplay.final_score(@frames)
+    puts @frames
     return
   end
 
@@ -32,5 +35,7 @@ class Application
   end
 end
 
-app = Application.new
-app.run
+unless ENV['ENV'] == 'test'
+  app = Application.new
+  app.run
+end
