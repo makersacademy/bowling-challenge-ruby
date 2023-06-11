@@ -12,9 +12,8 @@ class Application
   def run
     loopy = true
     while loopy do
-      @gameplay.score_prompt(@frames)
-      @gameplay.next_ball(@frames)
-      
+      success = @gameplay.score_prompt(@frames)
+      @gameplay.next_ball(@frames) if success == true
       loopy = @gameplay.continue?(@frames)
     end
     @gameplay.final_score(@frames)

@@ -12,10 +12,13 @@ class Gameplay
   def score_prompt(frames)
     puts "Enter score for frame #{current_frame}, ball #{current_ball}:"
     input = gets.chomp
+    input = input.upcase if input.is_a? String
+    return false if validate_input(input, frames) == false
     input = input.to_i if input != "X" && input != "/"
     frame = frames[@current_frame]
     process_current_ball(frame, input)
     @scorecard.show_scorecard(frames)
+    return true
   end
   
   def process_current_ball(frame, input)
@@ -62,5 +65,14 @@ class Gameplay
       score = score + frame.total_frame_score
     end
     puts "\nYour final score is: #{score}"
+  end
+  
+  private
+  
+  def validate_input(input, frames)
+    return false if input == ""
+    return false if input == "/" && @current_ball == 1
+    return false if input == "X" && @current_ball == 2
+    return false if /[X\/1-9]/.match(input) == nil
   end
 end
