@@ -15,17 +15,15 @@ class Application
       @gameplay.score_prompt(@frames)
       @gameplay.next_ball(@frames)
       
-      loopy = @gameplay.continue?
+      loopy = @gameplay.continue?(@frames)
     end
-
     @gameplay.final_score(@frames)
-    puts @frames
     return
   end
 
   def create_frames
     10.times do |i|
-      frame = Frame.new(i + 1)
+      frame = Frame.new
       @frames[i + 1] = frame
     end
   end

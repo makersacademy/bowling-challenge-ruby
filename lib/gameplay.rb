@@ -15,7 +15,7 @@ class Gameplay
     input = input.to_i if input != "X" && input != "/"
     frame = frames[@current_frame]
     process_current_ball(frame, input)
-    
+    @scorecard.show_scorecard(frames)
   end
   
   def process_current_ball(frame, input)
