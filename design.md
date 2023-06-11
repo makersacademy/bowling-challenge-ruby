@@ -43,60 +43,50 @@ flowchart TD
 classDiagram
     Application <|-- Frame
     Application <|-- ScoreCard
+    Application <|-- Gameplay
     Application : +array frames
-    Application : +int current_frame
-    Application : +int current_ball
+    Application : +object gameplay
     Application : +run()
     Application : +create_frames()
     class Frame{
-      +int frame_number
-      +int ball1
-      +int ball2
-      +int ball3
+      +array ball_scores
+      +int bonus_score
+      +bool strike
+      +bool spare
+      +add_ball_score(ball, ball_score)
+      +get_ball_score(ball)
+      +update_bonus_score(score)
+      +bonus_score()
+      +two_balls?()
+      +strike(ball)
+      +strike?()
+      +spare()
+      +spare?()
+      +frame_score()
+      +total_frame_score()
     }
     class ScoreCard{
-      -int game_score
-      +TotalScore()
+      +update_pending_bonuses(frames, current_frame)
+      +show_scorecard(frames)
+      -update_pending_strikes(frames, current_frame)
+      -update_pending_spares(frames, current_frame)
+      -scorecard_segment(frame, frame_number)
+      -scorecard_segment_frame_10(frame)
+    }
+    class Gameplay{
+      +int current_frame
+      +int current_ball
+      +object scorecard
+      +score_prompt(frames)
+      +process_current_ball(frame, input)
+      +next_ball(frames)
+      +continue?(frames)
+      +final_score(frames)
+      -validate_input(input, frames)
     }
 ```
 
-```ruby
-class Application
-  def initialize
-    @frames = []
-    @current_frame = 1
-    @current_frame_ball = 1
-    create_frames
-  end
-
-  def run
-    # Runs an IO loop and calls the other classes
-  end
-
-  def create_frames
-    # Runs once when .run starts to create the `@frames` array of frame objects
-  end
-
-  def return_frames
-    # Returns the `@frames` array
-  end
-end
-
-class Frame
-  # A model class with attributes:
-  # :frame_number, :ball_1, :ball_2, :ball_3
-end
-
-class ScoreCard
-  def GameScore
-  end
-
-  def FrameScore
-  end
-end
-```
-
-## 3. Create Examples as Integration Tests
+<!-- ## 3. Create Examples as Integration Tests
 
 _Create examples of the classes being used together in different situations and
 combinations that reflect the ways in which the system will be used._
@@ -127,4 +117,4 @@ _Encode each example as a test. You can add to the above list as you go._
 ## 5. Implement the Behaviour
 
 _After each test you write, follow the test-driving process of red, green,
-refactor to implement the behaviour._
+refactor to implement the behaviour._ -->
