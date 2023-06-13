@@ -17,6 +17,7 @@ class Gameplay
     input = input.to_i if input != "X" && input != "/"
     frame = frames[@current_frame]
     process_current_ball(frame, input)
+    @scorecard.update_pending_bonuses(frames, @current_frame)
     @scorecard.show_scorecard(frames)
     return true
   end
@@ -33,8 +34,6 @@ class Gameplay
   end
 
   def next_ball(frames)
-    @scorecard.update_pending_bonuses(frames, @current_frame)
-    
     if @current_frame < 10
       if @current_ball == 1 && frames[@current_frame].strike? != true
         @current_ball = 2
